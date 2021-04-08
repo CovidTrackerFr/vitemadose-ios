@@ -61,7 +61,7 @@ class CountySelectionViewModel {
     }
 }
 
-// MARK: - HomeViewModelProvider
+// MARK: - CountySelectionViewModelProvider
 
 extension CountySelectionViewModel: CountySelectionViewModelProvider {
     public func fetchCounties() {
