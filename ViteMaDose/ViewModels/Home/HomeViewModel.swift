@@ -103,7 +103,7 @@ extension HomeViewModel: HomeViewModelProvider {
 		guard !isLoading else { return }
 		isLoading = true
 
-		guard let countyCode = county.codeRegion else {
+		guard let countyCode = county.codeDepartement else {
 			delegate?.displayError(withMessage: "County code missing")
 			return
 		}
