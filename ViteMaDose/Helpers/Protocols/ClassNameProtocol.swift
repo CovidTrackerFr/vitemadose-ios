@@ -8,14 +8,14 @@
 import Foundation
 
 protocol ClassNameProtocol {
-	static var className: String { get }
+    static var className: String { get }
 }
 
 /// Get a string from the object name
 extension ClassNameProtocol {
-	static var className: String {
-		return String(describing: self)
-	}
+    static var className: String {
+        return String(describing: self)
+    }
 }
 
 /// Apply the protocol to any NSObject

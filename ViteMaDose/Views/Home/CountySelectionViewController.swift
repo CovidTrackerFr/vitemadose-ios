@@ -11,13 +11,13 @@ import UIKit
 class CountySelectionViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     var delegate: HomeViewModelDelegate!
-
+    
     lazy var viewModel: CountySelectionViewModelProvider = {
         let viewModel = CountySelectionViewModel()
         viewModel.delegate = self
         return viewModel
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -32,7 +32,7 @@ extension CountySelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         let cellViewModel = viewModel.cellViewModel(at: indexPath)!
@@ -57,18 +57,18 @@ extension CountySelectionViewController: CountySelectionViewModelDelegate {
     func updateLoadingState(isLoading: Bool) {
         print("loading state")
     }
-
+    
     func reloadTableView(with counties: Counties) {
         tableView.reloadData()
     }
-
+    
     func displayError(withMessage message: String) {
         let errorAlert = UIAlertController(title: "Oops, Something Went Wrong :(", message: message, preferredStyle: .alert)
-
+        
         errorAlert.addAction(UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
             self?.viewModel.fetchCounties()
         })
-
+        
         present(errorAlert, animated: true)
     }
 }

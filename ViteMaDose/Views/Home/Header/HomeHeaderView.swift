@@ -8,11 +8,11 @@
 import UIKit
 
 protocol HomeHeaderViewDelegate: class {
-	func didSelect()
+    func didSelect()
 }
 
 class HomeHeaderView: UIView {
-	@IBOutlet private var searchBar: UISearchBar!
+    @IBOutlet private var searchBar: UISearchBar!
     weak var delegate: HomeHeaderViewDelegate?
 
     func configure() {
