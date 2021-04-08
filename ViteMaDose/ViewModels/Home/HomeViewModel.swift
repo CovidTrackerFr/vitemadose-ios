@@ -8,7 +8,6 @@
 import Foundation
 
 protocol HomeViewModelProvider {
-	func fetchCounties()
 	func fetchVaccinationCentre(for county: County)
 	func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre?
 	func bookingLink(at indexPath: IndexPath) -> URL?
@@ -16,9 +15,9 @@ protocol HomeViewModelProvider {
 }
 
 protocol HomeViewModelDelegate: class {
+    func countySelected(_ county: County)
 	func updateLoadingState(isLoading: Bool)
 	func reloadTableView(isEmpty: Bool)
-	func reloadTableViewHeader(with counties: Counties)
 	func displayError(withMessage message: String)
 }
 
@@ -62,10 +61,6 @@ class HomeViewModel {
 
 	// MARK: Handle API result
 
-	private func didFetchCounties(_ counties: Counties) {
-		delegate?.reloadTableViewHeader(with: counties)
-	}
-
 	private func didFetchVaccinationCentres(_ vaccinationCentres: VaccinationCentres) {
 		let isEmpty = vaccinationCentres.centresDisponibles.isEmpty && vaccinationCentres.centresIndisponibles.isEmpty
 		allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
@@ -75,35 +70,16 @@ class HomeViewModel {
 	private func handleError(_ error: APIEndpoint.APIError) {
 		delegate?.displayError(withMessage: error.localizedDescription)
 	}
-
 }
 
 // MARK: - HomeViewModelProvider
 
 extension HomeViewModel: HomeViewModelProvider {
-	public func fetchCounties() {
-		guard !isLoading else { return }
-		isLoading = true
-
-		let countiesEndpoint = APIEndpoint.counties
-
-		apiService.fetchCounties(countiesEndpoint) { [weak self] result in
-			self?.isLoading = false
-
-			switch result {
-				case let .success(counties):
-					self?.didFetchCounties(counties)
-				case .failure(let error):
-					self?.handleError(error)
-			}
-		}
-	}
-
 	public func fetchVaccinationCentre(for county: County) {
 		guard !isLoading else { return }
 		isLoading = true
 
-		guard let countyCode = county.codeRegion else {
+		guard let countyCode = county.codeDepartement else {
 			delegate?.displayError(withMessage: "County code missing")
 			return
 		}

@@ -14,7 +14,7 @@ protocol EndpointType {
 
 enum APIEndpoint {
 	case counties
-	case vaccinationCentres(county: Int)
+	case vaccinationCentres(county: String)
 }
 
 extension APIEndpoint: EndpointType {

@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, Storyboarded {
 	lazy var homeHeaderView: HomeHeaderView = {
 		let view: HomeHeaderView = HomeHeaderView.instanceFromNib()
 		view.delegate = self
+        view.configure()
 		return view
 	}()
 
@@ -27,7 +28,14 @@ class HomeViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-		viewModel.fetchCounties()
+    }
+
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        tableView.tableHeaderView = homeHeaderView
+        tableView.tableHeaderView?.layoutIfNeeded()
     }
 }
 
@@ -42,34 +50,28 @@ extension HomeViewController: HomeViewModelDelegate {
 		tableView.reloadData()
 	}
 
-	func reloadTableViewHeader(with counties: Counties) {
-		tableView.tableHeaderView = homeHeaderView
-		tableView.tableHeaderView?.layoutIfNeeded()
-
-		let viewData = HomeHeaderView.ViewData(counties: counties)
-		homeHeaderView.configure(with: viewData)
-	}
-
 	func displayError(withMessage message: String) {
 		let errorAlert = UIAlertController(title: "Oops, Something Went Wrong :(", message: message, preferredStyle: .alert)
-
-		errorAlert.addAction(UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
-			self?.viewModel.fetchCounties()
-		})
-
 		present(errorAlert, animated: true)
 	}
+
+    func countySelected(_ county: County) {
+        homeHeaderView.countySelected(county)
+        viewModel.fetchVaccinationCentre(for: county)
+    }
 }
 
 // MARK: - HomeHeaderViewDelegate
 
 extension HomeViewController: HomeHeaderViewDelegate {
-	func didSelect(_ county: County?) {
-		guard let county = county else {
-			// TODO: Display error
-			return
-		}
-		viewModel.fetchVaccinationCentre(for: county)
+	func didSelect() {
+
+        let storyboard = UIStoryboard(name: "HomeViewController", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CountySelectionViewController") as! CountySelectionViewController
+        vc.delegate = self
+        self.present(vc, animated: true)
+
+//		viewModel.fetchVaccinationCentre(for: county)
 	}
 }
 

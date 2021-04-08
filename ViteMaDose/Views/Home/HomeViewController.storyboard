@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u8L-Ja-9UJ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,10 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-N6-zzO">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-N6-zzO">
+                                <rect key="frame" x="0.0" y="114" width="414" height="782"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="VUk-gW-J2h">
+                                <rect key="frame" x="0.0" y="44" width="185" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="Xc5-aS-B1c"/>
+                                    <constraint firstAttribute="width" constant="185" id="oW0-BF-0AT"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WAy-Cw-2dh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -27,7 +35,9 @@
                             <constraint firstItem="WAy-Cw-2dh" firstAttribute="trailing" secondItem="cr4-N6-zzO" secondAttribute="trailing" id="6km-An-v9D"/>
                             <constraint firstAttribute="bottom" secondItem="cr4-N6-zzO" secondAttribute="bottom" id="IeU-gk-vkh"/>
                             <constraint firstItem="cr4-N6-zzO" firstAttribute="leading" secondItem="WAy-Cw-2dh" secondAttribute="leading" id="Mdm-rn-ni7"/>
-                            <constraint firstItem="cr4-N6-zzO" firstAttribute="top" secondItem="WAy-Cw-2dh" secondAttribute="top" id="W5n-DD-l29"/>
+                            <constraint firstItem="cr4-N6-zzO" firstAttribute="top" secondItem="VUk-gW-J2h" secondAttribute="bottom" id="NwJ-W9-Ast"/>
+                            <constraint firstItem="VUk-gW-J2h" firstAttribute="leading" secondItem="WAy-Cw-2dh" secondAttribute="leading" id="e5k-yw-gVR"/>
+                            <constraint firstItem="VUk-gW-J2h" firstAttribute="top" secondItem="WAy-Cw-2dh" secondAttribute="top" id="giC-Tv-aG1"/>
                         </constraints>
                     </view>
                     <connections>
@@ -36,10 +46,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iC3-u2-x1B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-896" y="9"/>
+            <point key="canvasLocation" x="-897.10144927536237" y="8.7053571428571423"/>
+        </scene>
+        <!--County Selection View Controller-->
+        <scene sceneID="GlT-od-PjE">
+            <objects>
+                <viewController storyboardIdentifier="CountySelectionViewController" id="GSb-a6-Sxu" customClass="CountySelectionViewController" customModule="ViteMaDose" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pkA-xs-zhU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z4p-KV-g5o">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="T3v-T0-uHT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="z4p-KV-g5o" firstAttribute="top" secondItem="T3v-T0-uHT" secondAttribute="top" id="Oco-CO-Obe"/>
+                            <constraint firstItem="z4p-KV-g5o" firstAttribute="leading" secondItem="T3v-T0-uHT" secondAttribute="leading" id="jLo-8A-AUa"/>
+                            <constraint firstItem="T3v-T0-uHT" firstAttribute="trailing" secondItem="z4p-KV-g5o" secondAttribute="trailing" id="jaf-5U-owJ"/>
+                            <constraint firstItem="T3v-T0-uHT" firstAttribute="bottom" secondItem="z4p-KV-g5o" secondAttribute="bottom" id="w0V-Dr-8nt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="z4p-KV-g5o" id="9NR-uX-npe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ljy-Qe-u5d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-46" y="9"/>
         </scene>
     </scenes>
     <resources>
+        <image name="logo" width="284" height="107"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
