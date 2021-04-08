@@ -8,45 +8,28 @@
 import UIKit
 
 protocol HomeHeaderViewDelegate: class {
-	func didSelect(_ county: County?)
+	func didSelect()
 }
 
 class HomeHeaderView: UIView {
-	@IBOutlet private var countiesPickerView: UIPickerView!
-	private(set) var counties: Counties?
-	weak var delegate: HomeHeaderViewDelegate?
+	@IBOutlet private var searchBar: UISearchBar!
+    weak var delegate: HomeHeaderViewDelegate?
 
-	func configure(with viewData: ViewData) {
-		countiesPickerView.dataSource = self
-		countiesPickerView.delegate = self
+    func configure() {
+        // Needed to get rid of the 1px solid grey lines around the search bar
+        // See https://stackoverflow.com/questions/7620564/customize-uisearchbar-trying-to-get-rid-of-the-1px-black-line-underneath-the-se
+        searchBar.backgroundImage = UIImage.init()
+    }
 
-		counties = viewData.counties
-		countiesPickerView.reloadAllComponents()
-	}
+    func countySelected(_ county: County) {
+        searchBar.text = "\(county.nomDepartement ?? "") (\(county.codeDepartement ?? ""))"
+    }
 }
 
-extension HomeHeaderView: UIPickerViewDataSource {
-	struct ViewData {
-		let counties: Counties
-	}
-}
+extension HomeHeaderView: UISearchBarDelegate {
 
-extension HomeHeaderView {
-	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		1
-	}
-
-	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		counties?.count ?? 0
-	}
-
-	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		counties?[safe: row]?.nomDepartement ?? ""
-	}
-}
-
-extension HomeHeaderView: UIPickerViewDelegate {
-	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		delegate?.didSelect(counties?[safe: row])
-	}
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        delegate?.didSelect()
+        return false;
+    }
 }
