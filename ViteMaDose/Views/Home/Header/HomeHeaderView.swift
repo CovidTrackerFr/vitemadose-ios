@@ -74,11 +74,8 @@ class HomeHeaderView: UIView {
         searchBarTitle.text = viewData.searchBarText
         searchBarView.backgroundColor = .white
         searchBarView.layer.cornerRadius = Constant.searchBarViewCornerRadius
-        searchBarView.dropShadow(
-            color: .black,
-            opacity: 0.15,
-            radius: 10.0
-        )
+        let shadow = UIView.Shadow(color: .black, opacity: 0.15)
+        searchBarView.setCornerRadius(10.0, withShadow: shadow)
     }
 
     @objc func didTapSearchBarView() -> Bool {
