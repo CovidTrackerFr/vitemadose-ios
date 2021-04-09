@@ -50,8 +50,9 @@ extension CountySelectionViewController: UITableViewDelegate {
         guard let county = viewModel.cellViewModel(at: indexPath) else {
             fatalError("Unexpected indexPath for county selection: \(indexPath)")
         }
-        delegate?.didSelect(county: county)
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate?.didSelect(county: county)
+        }
     }
 }
 

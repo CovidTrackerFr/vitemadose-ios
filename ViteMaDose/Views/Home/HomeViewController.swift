@@ -25,15 +25,12 @@ class HomeViewController: UIViewController, Storyboarded {
     }()
 
     private lazy var countySelectionViewController: CountySelectionViewController = {
-        guard let storyboard = self.storyboard else {
-            fatalError("Could not find HomeViewController storyboard")
-        }
-        let viewController: CountySelectionViewController = storyboard.instantiateViewController(
-            identifier: CountySelectionViewController.className
-        )
+        let viewController = CountySelectionViewController.instantiate()
         viewController.delegate = self
         return viewController
     }()
+
+    private lazy var vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
 
     // MARK: - Overrides
 
@@ -55,7 +52,6 @@ class HomeViewController: UIViewController, Storyboarded {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         tableView.tableHeaderView = homeHeaderView
         tableView.tableHeaderView?.layoutIfNeeded()
     }
@@ -98,7 +94,7 @@ extension HomeViewController: HomeViewModelDelegate {
 extension HomeViewController: HomeHeaderViewDelegate {
     func didTapSearchBarView(_ searchBarView: UIView) {
         countySelectionViewController.viewModel = CountySelectionViewModel(counties: viewModel.counties)
-        present(countySelectionViewController, animated: true)
+        present(countySelectionViewController.embedInNavigationController, animated: true)
     }
 }
 
@@ -110,12 +106,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        let cellViewModel = viewModel.cellViewModel(at: indexPath)
-        cell.backgroundColor = .clear
-        cell.textLabel?.text = cellViewModel?.nom
-        cell.detailTextLabel?.text = cellViewModel?.plateforme
-        return cell
+        return UITableViewCell()
     }
 }
 
@@ -123,14 +114,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let bookingUrl = viewModel.bookingLink(at: indexPath) else {
-            // TODO: Error
-            return
-        }
-
-        let safariViewControllerConfig = SFSafariViewController.Configuration()
-        let safariViewController = SFSafariViewController(url: bookingUrl, configuration: safariViewControllerConfig)
-        present(safariViewController, animated: true)
+        
     }
 }
 
@@ -138,7 +122,8 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: CountySelectionViewControllerDelegate {
     func didSelect(county: County) {
-        viewModel.fetchVaccinationCentre(for: county)
-        homeHeaderView.updateTitle(for: county)
+        // TODO: Create ViewModel with County
+        vaccinationCentresViewController.title = county.nomDepartement
+        navigationController?.show(vaccinationCentresViewController, sender: self)
     }
 }

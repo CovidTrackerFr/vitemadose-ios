@@ -9,9 +9,7 @@ import UIKit
 
 protocol HomeViewModelProvider {
     func fetchCounties()
-    func fetchVaccinationCentre(for county: County)
     func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre?
-    func bookingLink(at indexPath: IndexPath) -> URL?
     var numberOfRows: Int { get }
     var counties: Counties { get }
 }
@@ -26,7 +24,6 @@ class HomeViewModel {
     private let apiService: APIServiceProvider
     weak var delegate: HomeViewModelDelegate?
 
-    private var allVaccinationCentres: [VaccinationCentre] = []
     private var allCounties: Counties = []
 
     private var isLoading = false {
@@ -36,7 +33,7 @@ class HomeViewModel {
     }
 
     var numberOfRows: Int {
-        allVaccinationCentres.count
+        0
     }
 
     var counties: Counties {
@@ -44,15 +41,7 @@ class HomeViewModel {
     }
 
     func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre? {
-        allVaccinationCentres[safe: indexPath.row]
-    }
-
-    func bookingLink(at indexPath: IndexPath) -> URL? {
-        if let bookingUrlString = allVaccinationCentres[safe: indexPath.row]?.url {
-            return URL(string: bookingUrlString)
-        } else {
-            return nil
-        }
+        nil
     }
 
     // MARK: init
@@ -67,12 +56,6 @@ class HomeViewModel {
 
     // MARK: Handle API result
 
-    private func didFetchVaccinationCentres(_ vaccinationCentres: VaccinationCentres) {
-        let isEmpty = vaccinationCentres.centresDisponibles.isEmpty && vaccinationCentres.centresIndisponibles.isEmpty
-        allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
-        delegate?.reloadTableView(isEmpty: isEmpty)
-    }
-
     private func didFetchCounties(_ counties: Counties) {
         allCounties = counties
     }
@@ -85,29 +68,6 @@ class HomeViewModel {
 // MARK: - HomeViewModelProvider
 
 extension HomeViewModel: HomeViewModelProvider {
-    public func fetchVaccinationCentre(for county: County) {
-        guard !isLoading else { return }
-        isLoading = true
-
-        guard let countyCode = county.codeDepartement else {
-            delegate?.displayError(withMessage: "County code missing")
-            return
-        }
-
-        let vaccinationCentresEndpoint = APIEndpoint.vaccinationCentres(county: countyCode)
-
-        apiService.fetchVaccinationCentres(vaccinationCentresEndpoint) { [weak self] result in
-            self?.isLoading = false
-
-            switch result {
-                case let .success(vaccinationCentres):
-                    self?.didFetchVaccinationCentres(vaccinationCentres)
-                case .failure(let error):
-                    self?.handleError(error)
-            }
-        }
-    }
-
     public func fetchCounties() {
         guard !isLoading else { return }
         isLoading = true

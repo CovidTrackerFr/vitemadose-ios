@@ -43,11 +43,6 @@ class HomeHeaderView: UIView {
         configureSearchBarView()
     }
 
-    func updateTitle(for county: County) {
-        searchBarTitle.text = "\(county.nomDepartement ?? "") (\(county.codeDepartement ?? ""))"
-        searchBarTitle.textColor = .label
-    }
-
     private func configureTitle() {
         let font: UIFont
         if let descriptor = Constant.titleFont.fontDescriptor.withDesign(.rounded) {
