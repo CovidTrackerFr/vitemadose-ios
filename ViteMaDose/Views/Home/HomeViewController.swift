@@ -35,10 +35,22 @@ class HomeViewController: UIViewController, Storyboarded {
         return viewController
     }()
 
+    // MARK: - Overrides
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         viewModel.fetchCounties()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     override func viewDidLayoutSubviews() {
@@ -51,7 +63,8 @@ class HomeViewController: UIViewController, Storyboarded {
     private func configureViewController() {
         tableView.delegate = self
         tableView.dataSource = self
-        view.backgroundColor = .mercury
+        tableView.backgroundColor = .wildSand
+        view.backgroundColor = .wildSand
     }
 
     @IBAction func settingsButtonTapped(_ sender: Any) {
@@ -99,6 +112,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let cellViewModel = viewModel.cellViewModel(at: indexPath)
+        cell.backgroundColor = .clear
         cell.textLabel?.text = cellViewModel?.nom
         cell.detailTextLabel?.text = cellViewModel?.plateforme
         return cell

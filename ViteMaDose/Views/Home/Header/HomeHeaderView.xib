@@ -11,38 +11,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeHeaderView" customModule="ViteMaDose" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="334"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="243"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="Eas-SE-KaO">
-                    <rect key="frame" x="24" y="24" width="366" height="285"/>
+                    <rect key="frame" x="24" y="24" width="366" height="194"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVD-pA-fv6">
-                            <rect key="frame" x="0.0" y="0.0" width="366" height="70"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="VHH-Bb-zS2">
-                                    <rect key="frame" x="0.0" y="0.0" width="264" height="70"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="VHH-Bb-zS2" secondAttribute="height" multiplier="166:44" id="AG5-nu-XsP"/>
-                                    </constraints>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstItem="VHH-Bb-zS2" firstAttribute="leading" secondItem="iVD-pA-fv6" secondAttribute="leading" id="32d-nc-Ew2"/>
-                                <constraint firstAttribute="bottom" secondItem="VHH-Bb-zS2" secondAttribute="bottom" id="6cD-Ve-rwe"/>
-                                <constraint firstItem="VHH-Bb-zS2" firstAttribute="top" secondItem="iVD-pA-fv6" secondAttribute="top" id="99s-hU-deV"/>
-                                <constraint firstAttribute="height" constant="70" id="ear-PS-U4k"/>
-                            </constraints>
-                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trouvez une dose de vaccin facilement et rapidement" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ja2-SB-7bh">
-                            <rect key="frame" x="0.0" y="91" width="366" height="123"/>
+                            <rect key="frame" x="0.0" y="0.0" width="366" height="123"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YhH-bU-K35">
-                            <rect key="frame" x="0.0" y="235" width="366" height="50"/>
+                            <rect key="frame" x="0.0" y="144" width="366" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nk4-1s-UVO">
                                     <rect key="frame" x="20" y="0.0" width="326" height="50"/>
@@ -88,20 +70,16 @@
                 <outlet property="searchBarView" destination="YhH-bU-K35" id="sXd-wt-8fB"/>
                 <outlet property="titleLabel" destination="ja2-SB-7bh" id="HsS-VO-jTz"/>
             </connections>
-            <point key="canvasLocation" x="134.78260869565219" y="42.857142857142854"/>
+            <point key="canvasLocation" x="134.78260869565219" y="12.388392857142856"/>
         </view>
     </objects>
     <resources>
-        <image name="logo" width="166" height="44"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

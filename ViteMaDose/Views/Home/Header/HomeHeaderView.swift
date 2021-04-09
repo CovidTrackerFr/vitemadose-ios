@@ -38,6 +38,7 @@ class HomeHeaderView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .wildSand
         configureTitle()
         configureSearchBarView()
     }
