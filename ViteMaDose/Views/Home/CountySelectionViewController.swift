@@ -15,9 +15,9 @@ protocol CountySelectionViewControllerDelegate: class {
 class CountySelectionViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     weak var delegate: CountySelectionViewControllerDelegate?
-
+    
     var viewModel: CountySelectionViewModelProvider!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard viewModel != nil else {
