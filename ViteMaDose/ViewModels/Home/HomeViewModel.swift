@@ -5,17 +5,18 @@
 //  Created by Victor Sarda on 07/04/2021.
 //
 
-import Foundation
+import UIKit
 
 protocol HomeViewModelProvider {
+    func fetchCounties()
 	func fetchVaccinationCentre(for county: County)
 	func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre?
 	func bookingLink(at indexPath: IndexPath) -> URL?
 	var numberOfRows: Int { get }
+    var counties: Counties { get }
 }
 
 protocol HomeViewModelDelegate: class {
-    func countySelected(_ county: County)
 	func updateLoadingState(isLoading: Bool)
 	func reloadTableView(isEmpty: Bool)
 	func displayError(withMessage message: String)
@@ -26,6 +27,7 @@ class HomeViewModel {
 	weak var delegate: HomeViewModelDelegate?
 
 	private var allVaccinationCentres: [VaccinationCentre] = []
+    private var allCounties: Counties = []
 
 	private var isLoading = false {
 		didSet {
@@ -37,12 +39,16 @@ class HomeViewModel {
 		allVaccinationCentres.count
 	}
 
+    var counties: Counties {
+        return allCounties
+    }
+
 	func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre? {
-		self.allVaccinationCentres[safe: indexPath.row]
+		allVaccinationCentres[safe: indexPath.row]
 	}
 
 	func bookingLink(at indexPath: IndexPath) -> URL? {
-		if let bookingUrlString = self.allVaccinationCentres[safe: indexPath.row]?.url {
+		if let bookingUrlString = allVaccinationCentres[safe: indexPath.row]?.url {
 			return URL(string: bookingUrlString)
 		} else {
 			return nil
@@ -66,6 +72,10 @@ class HomeViewModel {
 		allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
 		delegate?.reloadTableView(isEmpty: isEmpty)
 	}
+
+    private func didFetchCounties(_ counties: Counties) {
+        allCounties = counties
+    }
 
 	private func handleError(_ error: APIEndpoint.APIError) {
 		delegate?.displayError(withMessage: error.localizedDescription)
@@ -97,4 +107,22 @@ extension HomeViewModel: HomeViewModelProvider {
 			}
 		}
 	}
+
+    public func fetchCounties() {
+        guard !isLoading else { return }
+        isLoading = true
+
+        let countiesEndpoint = APIEndpoint.counties
+
+        apiService.fetchCounties(countiesEndpoint) { [weak self] result in
+            self?.isLoading = false
+
+            switch result {
+                case let .success(counties):
+                    self?.didFetchCounties(counties)
+                case .failure(let error):
+                    self?.handleError(error)
+            }
+        }
+    }
 }
