@@ -77,9 +77,7 @@ class HomeHeaderView: UIView {
         searchBarView.dropShadow(
             color: .black,
             opacity: 0.15,
-            offSet: CGSize(width: 0, height: 0),
-            radius: 10.0,
-            scale: true
+            radius: 10.0
         )
     }
 
