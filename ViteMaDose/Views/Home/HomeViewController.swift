@@ -52,15 +52,16 @@ class HomeViewController: UIViewController, Storyboarded {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.tableHeaderView = homeHeaderView
-        tableView.tableHeaderView?.layoutIfNeeded()
+        tableView.updateHeaderViewHeight()
     }
 
     private func configureViewController() {
         tableView.delegate = self
         tableView.dataSource = self
+
         tableView.backgroundColor = .wildSand
         view.backgroundColor = .wildSand
+        tableView.tableHeaderView = homeHeaderView
     }
 
     @IBAction func settingsButtonTapped(_ sender: Any) {
