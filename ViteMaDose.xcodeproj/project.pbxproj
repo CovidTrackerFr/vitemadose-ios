@@ -205,8 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				5767392E261E3BB2004A700D /* Home */,
-				57AD21E22621067D00ED2B95 /* County Selection */,
-				57AD21D4262103F000ED2B95 /* Vaccination Centres */,
+				57AD21E22621067D00ED2B95 /* CountySelection */,
+				57AD21D4262103F000ED2B95 /* VaccinationCentres */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -225,8 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				5767393D261E3C10004A700D /* Home */,
-				57AD21E9262106E100ED2B95 /* County Selection */,
-				57AD21FA2621098500ED2B95 /* Vaccination Centres */,
+				57AD21E9262106E100ED2B95 /* CountySelection */,
+				57AD21FA2621098500ED2B95 /* VaccinationCentres */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -291,38 +291,38 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
-		57AD21D4262103F000ED2B95 /* Vaccination Centres */ = {
+		57AD21D4262103F000ED2B95 /* VaccinationCentres */ = {
 			isa = PBXGroup;
 			children = (
 				57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */,
 				57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */,
 			);
-			path = "Vaccination Centres";
+			path = VaccinationCentres;
 			sourceTree = "<group>";
 		};
-		57AD21E22621067D00ED2B95 /* County Selection */ = {
+		57AD21E22621067D00ED2B95 /* CountySelection */ = {
 			isa = PBXGroup;
 			children = (
 				DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */,
 				57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */,
 			);
-			path = "County Selection";
+			path = CountySelection;
 			sourceTree = "<group>";
 		};
-		57AD21E9262106E100ED2B95 /* County Selection */ = {
+		57AD21E9262106E100ED2B95 /* CountySelection */ = {
 			isa = PBXGroup;
 			children = (
 				DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */,
 			);
-			path = "County Selection";
+			path = CountySelection;
 			sourceTree = "<group>";
 		};
-		57AD21FA2621098500ED2B95 /* Vaccination Centres */ = {
+		57AD21FA2621098500ED2B95 /* VaccinationCentres */ = {
 			isa = PBXGroup;
 			children = (
 				57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */,
 			);
-			path = "Vaccination Centres";
+			path = VaccinationCentres;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
