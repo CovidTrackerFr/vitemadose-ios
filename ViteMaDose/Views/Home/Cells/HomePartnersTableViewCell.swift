@@ -21,6 +21,10 @@ class HomePartnersTableViewCell: UITableViewCell {
     @IBOutlet private var logo3ImageView: UIImageView!
     @IBOutlet private var logo4ImageView: UIImageView!
 
+    private enum Constant {
+        static let titleText = "Trouvez vos rendez-vous avec"
+    }
+
     private lazy var allLogos: [UIImageView] = [
         logo1ImageView,
         logo2ImageView,
@@ -29,6 +33,7 @@ class HomePartnersTableViewCell: UITableViewCell {
     ]
 
     func configure() {
+        titleLabel.text = Constant.titleText
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel
     }
