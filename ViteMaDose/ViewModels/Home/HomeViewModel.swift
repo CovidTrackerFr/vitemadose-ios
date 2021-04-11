@@ -77,7 +77,6 @@ class HomeViewModel {
 
     private func didFetchCounties(_ counties: Counties) {
         allCounties = counties
-        delegate?.reloadTableView(isEmpty: false)
     }
 
     private func didFetchStats(_ stats: Stats) {
@@ -106,7 +105,6 @@ class HomeViewModel {
         }
 
         cellViewModels.append(HomeCellPartnersViewModel(cellType: .logos))
-
         delegate?.reloadTableView(isEmpty: !cellViewModels.isEmpty)
     }
 
@@ -119,9 +117,6 @@ class HomeViewModel {
 
 extension HomeViewModel: HomeViewModelProvider {
     public func fetchCounties() {
-        guard !isLoading else { return }
-        isLoading = true
-
         let countiesEndpoint = APIEndpoint.counties
 
         apiService.fetchCounties(countiesEndpoint) { [weak self] result in
@@ -136,9 +131,14 @@ extension HomeViewModel: HomeViewModelProvider {
     }
 
     func fetchStats() {
+        guard !isLoading else { return }
+        isLoading = true
+
         let statsEndpoint = APIEndpoint.stats
 
         apiService.fetchStats(statsEndpoint) { [weak self] result in
+            self?.isLoading = false
+
             switch result {
                 case let .success(stats):
                     self?.didFetchStats(stats)
