@@ -10,6 +10,7 @@ import Foundation
 protocol APIServiceProvider {
     func fetchCounties(_ endPoint: APIEndpoint, completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ())
     func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ())
+    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ())
     func cancelRequest()
 }
 
@@ -21,6 +22,10 @@ struct APIService: APIServiceProvider {
     }
     
     func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ()) {
+        createRequest(endPoint.path, completion: completion)
+    }
+
+    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ()) {
         createRequest(endPoint.path, completion: completion)
     }
     

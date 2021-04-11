@@ -15,6 +15,7 @@ protocol EndpointType {
 enum APIEndpoint {
     case counties
     case vaccinationCentres(county: String)
+    case stats
 }
 
 extension APIEndpoint: EndpointType {
@@ -28,6 +29,8 @@ extension APIEndpoint: EndpointType {
                 return baseURL.appendingPathComponent("departements.json")
             case let .vaccinationCentres(county):
                 return baseURL.appendingPathComponent("\(county).json")
+            case .stats:
+                return baseURL.appendingPathComponent("stats.json")
         }
     }
 }
