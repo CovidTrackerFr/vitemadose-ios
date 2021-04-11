@@ -10,7 +10,7 @@ import UIKit
 private enum AssetsColor: String {
     case royalBlue
     case mandy
-    case wildSand
+    case athensGray
 }
 
 extension UIColor {
@@ -28,8 +28,8 @@ extension UIColor {
         return color
     }
 
-    class var wildSand: UIColor {
-        guard let color = UIColor(named: AssetsColor.wildSand.rawValue) else {
+    class var athensGray: UIColor {
+        guard let color = UIColor(named: AssetsColor.athensGray.rawValue) else {
             fatalError("Could not find color")
         }
         return color
