@@ -94,14 +94,13 @@ class HomeViewController: UIViewController, Storyboarded {
 extension HomeViewController: HomeViewModelDelegate {
     func reloadTableView(isEmpty: Bool) {
         tableView.reloadData()
-        refreshControl.endRefreshing()
     }
 
     func updateLoadingState(isLoading: Bool) {
         tableView.tableHeaderView?.isHidden = isLoading
-        tableView.tableFooterView?.isHidden = isLoading
         tableView.updateHeaderViewHeight()
         activityIndicator.stopAnimating()
+        refreshControl.endRefreshing()
     }
 
     // TODO: Better error handling
