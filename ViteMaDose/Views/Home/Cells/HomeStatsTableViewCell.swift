@@ -7,6 +7,22 @@
 
 import UIKit
 
+enum StatsDataType {
+    case allCentres(Int)
+    case centresWithAvailabilities(Int)
+    case allAvailabilities(Int)
+    case externalMap
+}
+
+protocol HomeCellStatsViewModelProvider: HomeCellViewModelProvider {
+    var viewData: HomeStatsTableViewCell.ViewData? { get }
+}
+
+struct HomeCellStatsViewModel: HomeCellStatsViewModelProvider {
+    var cellType: HomeCellType = .stats
+    var viewData: HomeStatsTableViewCell.ViewData?
+}
+
 class HomeStatsTableViewCell: UITableViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
@@ -15,9 +31,9 @@ class HomeStatsTableViewCell: UITableViewCell {
     @IBOutlet var cellContentView: UIView!
 
     private enum Constant {
-        static let titleFont = UIFont.rounded(ofSize: 28, weight: .bold)
+        static let titleFont = UIFont.rounded(ofSize: 26, weight: .bold)
         static let titleColor = UIColor.label
-        static let descriptionFont = UIFont.systemFont(ofSize: 14, weight: .bold)
+        static let descriptionFont = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let descriptionColor = UIColor.secondaryLabel
         static let searchBarViewCornerRadius: CGFloat = 15
         static let iconConfiguration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
@@ -50,6 +66,7 @@ class HomeStatsTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+
         titleLabel.text = nil
         descriptionLabel.text = nil
         iconImageView.image = nil
@@ -62,8 +79,11 @@ extension HomeStatsTableViewCell {
         let description: String?
         let icon: UIImage?
         let iconContainerColor: UIColor
+        let dataType: StatsDataType
 
         init(_ dataType: StatsDataType) {
+            self.dataType = dataType
+
             switch dataType {
                 case let .allCentres(count):
                     title = NSMutableAttributedString(string: String(count))
