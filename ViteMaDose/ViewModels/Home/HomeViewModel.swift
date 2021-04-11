@@ -69,10 +69,6 @@ class HomeViewModel {
         self.apiService = apiService
     }
 
-    deinit {
-        apiService.cancelRequest()
-    }
-
     // MARK: Handle API result
 
     private func didFetchCounties(_ counties: Counties) {

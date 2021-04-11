@@ -47,10 +47,6 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
         self.allCounties = counties
     }
 
-    deinit {
-        apiService.cancelRequest()
-    }
-
     func cellViewModel(at indexPath: IndexPath) -> CountyCellViewModel? {
         guard let county = allCounties[safe: indexPath.row] else {
             assertionFailure("No county found at IndexPath \(indexPath)")
