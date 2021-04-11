@@ -20,7 +20,7 @@ enum APIEndpoint {
 
 extension APIEndpoint: EndpointType {
     var baseURL: URL {
-        return URL(staticString: "https://raw.githubusercontent.com/CovidTrackerFr/vitemadose/data-auto/data/output/")
+        return URL(staticString: "https://vitemadose.gitlab.io/vitemadose/")
     }
     
     var path: URL {
