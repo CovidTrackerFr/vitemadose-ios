@@ -17,7 +17,9 @@ class CountySelectionViewController: UIViewController, Storyboarded {
     weak var delegate: CountySelectionViewControllerDelegate?
     
     var viewModel: CountySelectionViewModelProvider!
-    
+
+    private lazy var countySelectionHeaderView: CountySelectionHeaderView = CountySelectionHeaderView.instanceFromNib()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard viewModel != nil else {
@@ -25,6 +27,17 @@ class CountySelectionViewController: UIViewController, Storyboarded {
         }
         tableView.delegate = self
         tableView.dataSource = self
+        view.backgroundColor = .athensGray
+        tableView.backgroundColor = .athensGray
+        tableView.tableHeaderView = countySelectionHeaderView
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(cellType: CountyCellTableViewCell.self)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.updateHeaderViewHeight()
     }
 }
 
@@ -36,9 +49,13 @@ extension CountySelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let cellViewModel = viewModel.cellViewModel(at: indexPath)!
-        cell.textLabel?.text = "\(cellViewModel.codeDepartement!) - \(cellViewModel.nomDepartement!)"
+        let cell = tableView.dequeueReusableCell(with: CountyCellTableViewCell.self, for: indexPath)
+        guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
+            assertionFailure("Cell view model missing at \(indexPath)")
+            return UITableViewCell()
+        }
+        
+        cell.configure(with: cellViewModel)
         return cell
     }
 }
@@ -47,7 +64,7 @@ extension CountySelectionViewController: UITableViewDataSource {
 
 extension CountySelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let county = viewModel.cellViewModel(at: indexPath) else {
+        guard let county = viewModel.county(at: indexPath) else {
             fatalError("Unexpected indexPath for county selection: \(indexPath)")
         }
         dismiss(animated: true) { [weak self] in

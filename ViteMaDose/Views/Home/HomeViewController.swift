@@ -24,12 +24,6 @@ class HomeViewController: UIViewController, Storyboarded {
         return viewModel
     }()
 
-    private lazy var countySelectionViewController: CountySelectionViewController = {
-        let viewController = CountySelectionViewController.instantiate()
-        viewController.delegate = self
-        return viewController
-    }()
-
     private lazy var vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
 
     private lazy var refreshControl: UIRefreshControl = {
@@ -127,8 +121,14 @@ extension HomeViewController: HomeViewModelDelegate {
 
 extension HomeViewController: HomeHeaderViewDelegate {
     func didTapSearchBarView(_ searchBarView: UIView) {
+        let countySelectionViewController = CountySelectionViewController.instantiate()
+        countySelectionViewController.delegate = self
         countySelectionViewController.viewModel = CountySelectionViewModel(counties: viewModel.counties)
-        present(countySelectionViewController.embedInNavigationController, animated: true)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.present(countySelectionViewController, animated: true)
+        }
     }
 }
 
