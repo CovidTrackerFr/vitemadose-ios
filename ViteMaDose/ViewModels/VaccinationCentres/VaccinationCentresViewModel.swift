@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftDate
+import UIKit
 
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
