@@ -29,6 +29,13 @@
 		57673950261E3D5F004A700D /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5767394F261E3D5F004A700D /* HomeHeaderView.xib */; };
 		57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673954261E4145004A700D /* ClassNameProtocol.swift */; };
 		5767397F261E5ABC004A700D /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767397E261E5ABC004A700D /* APIEndpoint.swift */; };
+		57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */; };
+		57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */; };
+		57AD21D62621041200ED2B95 /* VaccinationCentresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */; };
+		57AD21DE2621042700ED2B95 /* VaccinationCentresViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */; };
+		57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */; };
+		57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */; };
+		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
 		DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */; };
 		DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +86,13 @@
 		5767394F261E3D5F004A700D /* HomeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderView.xib; sourceTree = "<group>"; };
 		57673954261E4145004A700D /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		5767397E261E5ABC004A700D /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Commons.swift"; sourceTree = "<group>"; };
+		57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerController+Commons.swift"; sourceTree = "<group>"; };
+		57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresViewController.swift; sourceTree = "<group>"; };
+		57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VaccinationCentresViewController.storyboard; sourceTree = "<group>"; };
+		57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CountySelectionViewController.storyboard; sourceTree = "<group>"; };
+		57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresViewModel.swift; sourceTree = "<group>"; };
+		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
 		DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				5767392E261E3BB2004A700D /* Home */,
+				57AD21E22621067D00ED2B95 /* CountySelection */,
+				57AD21D4262103F000ED2B95 /* VaccinationCentres */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				57673946261E3D00004A700D /* Header */,
-				DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */,
 				5767392F261E3BC5004A700D /* HomeViewController.swift */,
 				57673937261E3BDE004A700D /* HomeViewController.storyboard */,
 			);
@@ -210,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				5767393D261E3C10004A700D /* Home */,
+				57AD21E9262106E100ED2B95 /* CountySelection */,
+				57AD21FA2621098500ED2B95 /* VaccinationCentres */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -218,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				5767393E261E3C1F004A700D /* HomeViewModel.swift */,
-				DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -249,6 +265,9 @@
 				5767391B261E3B40004A700D /* Storyboard+Common.swift */,
 				57673920261E3B59004A700D /* Collection+Commons.swift */,
 				57673925261E3B6C004A700D /* UIView+Common.swift */,
+				57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */,
+				57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */,
+				57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +289,40 @@
 				576738CD261E32A2004A700D /* Info.plist */,
 			);
 			name = Application;
+			sourceTree = "<group>";
+		};
+		57AD21D4262103F000ED2B95 /* VaccinationCentres */ = {
+			isa = PBXGroup;
+			children = (
+				57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */,
+				57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */,
+			);
+			path = VaccinationCentres;
+			sourceTree = "<group>";
+		};
+		57AD21E22621067D00ED2B95 /* CountySelection */ = {
+			isa = PBXGroup;
+			children = (
+				DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */,
+				57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */,
+			);
+			path = CountySelection;
+			sourceTree = "<group>";
+		};
+		57AD21E9262106E100ED2B95 /* CountySelection */ = {
+			isa = PBXGroup;
+			children = (
+				DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */,
+			);
+			path = CountySelection;
+			sourceTree = "<group>";
+		};
+		57AD21FA2621098500ED2B95 /* VaccinationCentres */ = {
+			isa = PBXGroup;
+			children = (
+				57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */,
+			);
+			path = VaccinationCentres;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,7 +428,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57AD21DE2621042700ED2B95 /* VaccinationCentresViewController.storyboard in Resources */,
 				57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */,
+				57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */,
 				57673950261E3D5F004A700D /* HomeHeaderView.xib in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
 				576738C9261E32A2004A700D /* Assets.xcassets in Resources */,
@@ -407,18 +462,23 @@
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,
 				57673921261E3B59004A700D /* Collection+Commons.swift in Sources */,
+				57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */,
 				57673912261E3962004A700D /* VaccinationCentre.swift in Sources */,
 				57673948261E3D1A004A700D /* HomeHeaderView.swift in Sources */,
 				5767390A261E3875004A700D /* County.swift in Sources */,
+				57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */,
 				5767397F261E5ABC004A700D /* APIEndpoint.swift in Sources */,
+				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
 				57673903261E3783004A700D /* Data+Commons.swift in Sources */,
 				576738C0261E329C004A700D /* AppDelegate.swift in Sources */,
 				DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */,
 				DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,
 				57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */,
+				57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */,
 				576738F3261E353E004A700D /* APIService.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
+				57AD21D62621041200ED2B95 /* VaccinationCentresViewController.swift in Sources */,
 				57673930261E3BC5004A700D /* HomeViewController.swift in Sources */,
 				57673926261E3B6C004A700D /* UIView+Common.swift in Sources */,
 			);
@@ -589,6 +649,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 86VX52L29V;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,6 +668,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 86VX52L29V;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

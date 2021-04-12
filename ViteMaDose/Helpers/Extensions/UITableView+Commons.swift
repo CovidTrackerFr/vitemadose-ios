@@ -17,4 +17,12 @@ extension UITableView {
     func dequeueReusableCell<T: UITableViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withIdentifier: type.className, for: indexPath) as! T
     }
+
+    func updateHeaderViewHeight() {
+        guard let header = tableHeaderView else {
+            return
+        }
+        let newSize = header.systemLayoutSizeFitting(CGSize(width: self.bounds.width, height: 0))
+        header.frame.size.height = newSize.height
+    }
 }

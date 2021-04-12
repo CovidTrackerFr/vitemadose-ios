@@ -8,28 +8,89 @@
 import UIKit
 
 protocol HomeHeaderViewDelegate: class {
-    func didSelect()
+    func didTapSearchBarView(_ searchBarView: UIView)
 }
 
 class HomeHeaderView: UIView {
-    @IBOutlet private var searchBar: UISearchBar!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var searchBarView: UIView!
+    @IBOutlet private var searchBarTitle: UILabel!
     weak var delegate: HomeHeaderViewDelegate?
 
-    func configure() {
-        // Needed to get rid of the 1px solid grey lines around the search bar
-        // See https://stackoverflow.com/questions/7620564/customize-uisearchbar-trying-to-get-rid-of-the-1px-black-line-underneath-the-se
-        searchBar.backgroundImage = UIImage.init()
+    private enum Constant {
+        static let titleFont = UIFont.systemFont(ofSize: 34, weight: .bold)
+        static let searchBarViewCornerRadius: CGFloat = 10.0
     }
 
-    func countySelected(_ county: County) {
-        searchBar.text = "\(county.nomDepartement ?? "") (\(county.codeDepartement ?? ""))"
+    private lazy var searchBarTapGesture = UITapGestureRecognizer(
+        target: self,
+        action: #selector(didTapSearchBarView)
+    )
+
+    private lazy var viewData = ViewData(
+        titleText: "Trouvez une dose de vaccin facilement et rapidement",
+        titleFirstHighlightedText: "facilement",
+        titleSecondHighlightedText: "rapidement",
+        titleFirstHighlightedTextColor: .royalBlue,
+        titleSecondHighlightedTextColor: .mandy,
+        searchBarText: "Séléctionner un département..."
+    )
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = .wildSand
+        configureTitle()
+        configureSearchBarView()
+    }
+
+    private func configureTitle() {
+        let font: UIFont
+        if let descriptor = Constant.titleFont.fontDescriptor.withDesign(.rounded) {
+            font = UIFont(descriptor: descriptor, size: Constant.titleFont.pointSize)
+        } else {
+            font = Constant.titleFont
+        }
+
+        let attributedText = NSMutableAttributedString(
+            string: viewData.titleText,
+            attributes: [
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: UIColor.label,
+            ]
+        )
+        attributedText.setColorForText(
+            textForAttribute: viewData.titleFirstHighlightedText,
+            withColor: viewData.titleFirstHighlightedTextColor
+        )
+        attributedText.setColorForText(
+            textForAttribute: viewData.titleSecondHighlightedText,
+            withColor: viewData.titleSecondHighlightedTextColor
+        )
+        titleLabel.attributedText = attributedText
+    }
+
+    private func configureSearchBarView() {
+        searchBarView.addGestureRecognizer(searchBarTapGesture)
+        searchBarTitle.text = viewData.searchBarText
+        searchBarView.backgroundColor = .white
+        searchBarView.layer.cornerRadius = Constant.searchBarViewCornerRadius
+        let shadow = UIView.Shadow(color: .black, opacity: 0.15)
+        searchBarView.setCornerRadius(10.0, withShadow: shadow)
+    }
+
+    @objc func didTapSearchBarView() -> Bool {
+        delegate?.didTapSearchBarView(searchBarView)
+        return false
     }
 }
 
-extension HomeHeaderView: UISearchBarDelegate {
-
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        delegate?.didSelect()
-        return false;
+extension HomeHeaderView {
+    struct ViewData {
+        let titleText: String
+        let titleFirstHighlightedText: String
+        let titleSecondHighlightedText: String
+        let titleFirstHighlightedTextColor: UIColor
+        let titleSecondHighlightedTextColor: UIColor
+        let searchBarText: String
     }
 }

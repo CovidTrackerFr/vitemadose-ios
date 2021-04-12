@@ -8,21 +8,23 @@
 import Foundation
 import UIKit
 
+protocol CountySelectionViewControllerDelegate: class {
+    func didSelect(county: County)
+}
+
 class CountySelectionViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
-    var delegate: HomeViewModelDelegate!
+    weak var delegate: CountySelectionViewControllerDelegate?
     
-    lazy var viewModel: CountySelectionViewModelProvider = {
-        let viewModel = CountySelectionViewModel()
-        viewModel.delegate = self
-        return viewModel
-    }()
+    var viewModel: CountySelectionViewModelProvider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard viewModel != nil else {
+            preconditionFailure("ViewModel was not set for CountySelectionViewController")
+        }
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.fetchCounties()
     }
 }
 
@@ -48,28 +50,15 @@ extension CountySelectionViewController: UITableViewDelegate {
         guard let county = viewModel.cellViewModel(at: indexPath) else {
             fatalError("Unexpected indexPath for county selection: \(indexPath)")
         }
-        delegate.countySelected(county)
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate?.didSelect(county: county)
+        }
     }
 }
 
 extension CountySelectionViewController: CountySelectionViewModelDelegate {
-    func updateLoadingState(isLoading: Bool) {
-        print("loading state")
-    }
-    
     func reloadTableView(with counties: Counties) {
         tableView.reloadData()
-    }
-    
-    func displayError(withMessage message: String) {
-        let errorAlert = UIAlertController(title: "Oops, Something Went Wrong :(", message: message, preferredStyle: .alert)
-        
-        errorAlert.addAction(UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
-            self?.viewModel.fetchCounties()
-        })
-        
-        present(errorAlert, animated: true)
     }
 }
 
