@@ -101,7 +101,7 @@ class HomeViewModel {
         }
 
         cellViewModels.append(HomeCellPartnersViewModel(cellType: .logos))
-        delegate?.reloadTableView(isEmpty: !cellViewModels.isEmpty)
+        delegate?.reloadTableView(isEmpty: cellViewModels.isEmpty)
     }
 
     private func handleError(_ error: APIEndpoint.APIError) {

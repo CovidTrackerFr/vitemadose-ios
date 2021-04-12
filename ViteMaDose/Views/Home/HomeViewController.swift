@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, Storyboarded {
 
     private lazy var homeHeaderView: HomeHeaderView = {
         let view: HomeHeaderView = HomeHeaderView.instanceFromNib()
+        view.isHidden = true
         view.delegate = self
         return view
     }()
@@ -34,7 +35,6 @@ class HomeViewController: UIViewController, Storyboarded {
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -95,14 +95,17 @@ class HomeViewController: UIViewController, Storyboarded {
 
 extension HomeViewController: HomeViewModelDelegate {
     func reloadTableView(isEmpty: Bool) {
+        tableView.tableHeaderView?.isHidden = isEmpty
         tableView.reloadData()
     }
 
     func updateLoadingState(isLoading: Bool) {
-        tableView.tableHeaderView?.isHidden = isLoading
         tableView.updateHeaderViewHeight()
-        activityIndicator.stopAnimating()
-        refreshControl.endRefreshing()
+        activityIndicator.isHidden = !isLoading
+        if !isLoading {
+            activityIndicator.stopAnimating()
+            refreshControl.endRefreshing()
+        }
     }
 
     // TODO: Better error handling
