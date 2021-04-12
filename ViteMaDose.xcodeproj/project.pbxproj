@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57613EE6262505B600AB6F2F /* UIImageViewAligned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */; };
+		57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFC2625085000AB6F2F /* SwiftDate */; };
+		57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFE2625085000AB6F2F /* SwiftDateStatic */; };
 		576738C0261E329C004A700D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738BF261E329C004A700D /* AppDelegate.swift */; };
 		576738C2261E329C004A700D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738C1261E329C004A700D /* SceneDelegate.swift */; };
 		576738C9261E32A2004A700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 576738C8261E32A2004A700D /* Assets.xcassets */; };
@@ -71,7 +74,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		57613EF8262507C800AB6F2F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewAligned.swift; sourceTree = "<group>"; };
 		576738BC261E329C004A700D /* ViteMaDose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViteMaDose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738BF261E329C004A700D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		576738C1261E329C004A700D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +147,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */,
+				57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +320,7 @@
 				57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */,
 				57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */,
 				57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */,
+				57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,12 +429,17 @@
 				576738B8261E329C004A700D /* Sources */,
 				576738B9261E329C004A700D /* Frameworks */,
 				576738BA261E329C004A700D /* Resources */,
+				57613EF8262507C800AB6F2F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ViteMaDose;
+			packageProductDependencies = (
+				57613EFC2625085000AB6F2F /* SwiftDate */,
+				57613EFE2625085000AB6F2F /* SwiftDateStatic */,
+			);
 			productName = ViteMaDose;
 			productReference = 576738BC261E329C004A700D /* ViteMaDose.app */;
 			productType = "com.apple.product-type.application";
@@ -486,6 +511,9 @@
 				Base,
 			);
 			mainGroup = 576738B3261E329C004A700D;
+			packageReferences = (
+				57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */,
+			);
 			productRefGroup = 576738BD261E329C004A700D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -548,6 +576,7 @@
 				57673948261E3D1A004A700D /* HomeHeaderView.swift in Sources */,
 				57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */,
 				5767390A261E3875004A700D /* County.swift in Sources */,
+				57613EE6262505B600AB6F2F /* UIImageViewAligned.swift in Sources */,
 				57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */,
 				5767397F261E5ABC004A700D /* APIEndpoint.swift in Sources */,
 				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
@@ -889,6 +918,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		57613EFC2625085000AB6F2F /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		57613EFE2625085000AB6F2F /* SwiftDateStatic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDateStatic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 576738B4261E329C004A700D /* Project object */;
 }
