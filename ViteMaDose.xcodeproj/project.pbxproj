@@ -10,6 +10,7 @@
 		57613EE6262505B600AB6F2F /* UIImageViewAligned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */; };
 		57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFC2625085000AB6F2F /* SwiftDate */; };
 		57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFE2625085000AB6F2F /* SwiftDateStatic */; };
+		57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613F02262510D700AB6F2F /* PartnerLogo.swift */; };
 		576738C0261E329C004A700D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738BF261E329C004A700D /* AppDelegate.swift */; };
 		576738C2261E329C004A700D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738C1261E329C004A700D /* SceneDelegate.swift */; };
 		576738C9261E32A2004A700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 576738C8261E32A2004A700D /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 
 /* Begin PBXFileReference section */
 		57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewAligned.swift; sourceTree = "<group>"; };
+		57613F02262510D700AB6F2F /* PartnerLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerLogo.swift; sourceTree = "<group>"; };
 		576738BC261E329C004A700D /* ViteMaDose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViteMaDose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738BF261E329C004A700D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		576738C1261E329C004A700D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				57673909261E3875004A700D /* County.swift */,
 				57673911261E3962004A700D /* VaccinationCentre.swift */,
 				5793484B262241B900F8A4A0 /* Stats.swift */,
+				57613F02262510D700AB6F2F /* PartnerLogo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,
+				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsTableViewCell.swift in Sources */,
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,

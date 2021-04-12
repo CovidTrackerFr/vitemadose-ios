@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftDate
 
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
@@ -48,18 +48,53 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             return nil
         }
 
-        let url: URL?
+        var url: URL?
         if let urlString = vaccincationCentre.url {
             url = URL(string: urlString)
-        } else {
-            url = nil
         }
 
+        var dosesText: String?
+        if let dosesCount = vaccincationCentre.appointmentCount {
+            dosesText = "\(String(dosesCount)) dose(s)"
+        }
+
+        let isAvailable = vaccincationCentre.prochainRdv != nil
+        let date = vaccincationCentre.prochainRdv?.toDate()
+        let dateString = date?.toString(.dateTimeMixed(dateStyle: .long, timeStyle: .short))
+
+        var partnerLogo: UIImage?
+        if let platform = vaccincationCentre.plateforme {
+            partnerLogo =  PartnerLogo(rawValue: platform)?.image
+        }
+
+        let bookingButtonText = isAvailable ? "Prendre Rendez-Vous" : "Vérifier Ce Centre"
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(
+            systemName: "arrow.up.right",
+            withConfiguration:UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
+        )?.withTintColor(.white, renderingMode: .alwaysOriginal)
+
+        let bookingButtonAttributedText = NSMutableAttributedString(
+            string: bookingButtonText + " ",
+            attributes: [
+                NSAttributedString.Key.foregroundColor : UIColor.white,
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold),
+            ]
+        )
+
+        bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
+
         return VaccinationBookingCellViewModel(
-            dateText: vaccincationCentre.prochainRdv,
-            addressText: vaccincationCentre.nom,
-            isAvailable: vaccincationCentre.prochainRdv != nil,
-            url: url
+            dateText: isAvailable ? dateString ?? "Date Indisponible" : "Aucun rendez-vous disponible",
+            addressNameText: vaccincationCentre.nom ?? "Nom du centre indisponible",
+            addressText: vaccincationCentre.metadata?.address ?? "Addresse indisponible",
+            phoneText: vaccincationCentre.metadata?.phoneNumber,
+            bookingButtonText: bookingButtonAttributedText,
+            vaccineTypesText: vaccincationCentre.vaccineType?.joined(separator: ", "),
+            dosesText: dosesText,
+            isAvailable: isAvailable,
+            url: url,
+            partnerLogo: partnerLogo
         )
     }
 
@@ -104,3 +139,14 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         }
     }
 }
+
+private extension Date {
+    var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm E, d MMM y"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+        return dateFormatter.string(from: self)
+    }
+}
+

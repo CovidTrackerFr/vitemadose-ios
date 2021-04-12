@@ -18,6 +18,12 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         return refreshControl
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.county.nomDepartement
@@ -30,6 +36,7 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.refreshControl = refreshControl
+        tableView.backgroundView = activityIndicator
         tableView.register(cellType: VaccinationBookingTableViewCell.self)
 
         viewModel.delegate = self
@@ -49,12 +56,14 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
 extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate {
     func reloadTableView(isEmpty: Bool) {
-        refreshControl.endRefreshing()
         tableView.reloadData()
     }
 
     func updateLoadingState(isLoading: Bool) {
-
+        if !isLoading {
+            activityIndicator.stopAnimating()
+            refreshControl.endRefreshing()
+        }
     }
 
     func displayError(withMessage message: String) {
