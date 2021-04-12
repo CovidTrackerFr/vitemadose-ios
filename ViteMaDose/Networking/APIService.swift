@@ -34,7 +34,12 @@ struct APIService: APIServiceProvider {
     }
     
     private func createRequest<T: Codable>(_ url: URL, completion: @escaping (Result<T, APIEndpoint.APIError>) -> ()) {
-        urlSession.dataTask(with: url) { (data, urlResponse, error) in
+        let request = URLRequest(
+            url: url,
+            cachePolicy: .reloadIgnoringCacheData,
+            timeoutInterval: 10
+        )
+        urlSession.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
                 if let error = error {
                     // Error code -1009: Offline connection
