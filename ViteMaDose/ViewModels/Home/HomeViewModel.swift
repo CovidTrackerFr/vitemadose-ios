@@ -7,9 +7,27 @@
 
 import UIKit
 
+// MARK: - Home Cell ViewModel
+
+enum HomeCellType {
+    case stats
+    case logos
+}
+
+protocol HomeCellViewModelProvider {
+    var cellType: HomeCellType { get }
+}
+
+protocol HomeCellProvider {
+    func configure(with viewModel: HomeCellViewModelProvider)
+}
+
+// MARK: - Home ViewModel
+
 protocol HomeViewModelProvider {
     func fetchCounties()
-    func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre?
+    func fetchStats()
+    func cellViewModel(at indexPath: IndexPath) -> HomeCellViewModelProvider?
     var numberOfRows: Int { get }
     var counties: Counties { get }
 }
@@ -25,6 +43,7 @@ class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
 
     private var allCounties: Counties = []
+    private var cellViewModels: [HomeCellViewModelProvider] = []
 
     private var isLoading = false {
         didSet {
@@ -33,15 +52,15 @@ class HomeViewModel {
     }
 
     var numberOfRows: Int {
-        0
+        cellViewModels.count
     }
 
     var counties: Counties {
         return allCounties
     }
 
-    func cellViewModel(at indexPath: IndexPath) -> VaccinationCentre? {
-        nil
+    func cellViewModel(at indexPath: IndexPath) -> HomeCellViewModelProvider? {
+        return cellViewModels[safe: indexPath.row]
     }
 
     // MARK: init
@@ -50,14 +69,39 @@ class HomeViewModel {
         self.apiService = apiService
     }
 
-    deinit {
-        apiService.cancelRequest()
-    }
-
     // MARK: Handle API result
 
     private func didFetchCounties(_ counties: Counties) {
         allCounties = counties
+    }
+
+    private func didFetchStats(_ stats: Stats) {
+        cellViewModels.removeAll()
+
+        if let allCountiesStats = stats[StatsKey.allCounties.rawValue] {
+            let statsViewModels = [
+                HomeCellStatsViewModel(
+                    cellType: .stats,
+                    viewData: HomeStatsTableViewCell.ViewData(.allCentres(allCountiesStats.total))
+                ),
+                HomeCellStatsViewModel(
+                    cellType: .stats,
+                    viewData: HomeStatsTableViewCell.ViewData(.centresWithAvailabilities(allCountiesStats.disponibles))
+                ),
+                HomeCellStatsViewModel(
+                    cellType: .stats,
+                    viewData: HomeStatsTableViewCell.ViewData(.allAvailabilities(allCountiesStats.creneaux))
+                ),
+                HomeCellStatsViewModel(
+                    cellType: .stats,
+                    viewData: HomeStatsTableViewCell.ViewData(.externalMap)
+                )
+            ]
+            cellViewModels.append(contentsOf: statsViewModels)
+        }
+
+        cellViewModels.append(HomeCellPartnersViewModel(cellType: .logos))
+        delegate?.reloadTableView(isEmpty: cellViewModels.isEmpty)
     }
 
     private func handleError(_ error: APIEndpoint.APIError) {
@@ -69,17 +113,31 @@ class HomeViewModel {
 
 extension HomeViewModel: HomeViewModelProvider {
     public func fetchCounties() {
-        guard !isLoading else { return }
-        isLoading = true
-
         let countiesEndpoint = APIEndpoint.counties
 
         apiService.fetchCounties(countiesEndpoint) { [weak self] result in
             self?.isLoading = false
-
             switch result {
                 case let .success(counties):
                     self?.didFetchCounties(counties)
+                case .failure(let error):
+                    self?.handleError(error)
+            }
+        }
+    }
+
+    func fetchStats() {
+        guard !isLoading else { return }
+        isLoading = true
+
+        let statsEndpoint = APIEndpoint.stats
+
+        apiService.fetchStats(statsEndpoint) { [weak self] result in
+            self?.isLoading = false
+
+            switch result {
+                case let .success(stats):
+                    self?.didFetchStats(stats)
                 case .failure(let error):
                     self?.handleError(error)
             }

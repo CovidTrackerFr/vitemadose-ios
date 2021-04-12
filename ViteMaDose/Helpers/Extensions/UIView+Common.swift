@@ -12,21 +12,16 @@ extension UIView {
 		return bundle.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
 	}
 
-    func setCornerRadius(_ cornerRadius: CGFloat, withShadow shadow: Shadow? = Shadow()) {
+    func setCornerRadius(_ cornerRadius: CGFloat, withShadow shadow: Shadow? = nil) {
+        layer.cornerRadius = cornerRadius
         guard let shadow = shadow else {
-            layer.cornerRadius = cornerRadius
             return
         }
+
         layer.shadowColor = shadow.color
         layer.shadowOffset = shadow.offset
         layer.shadowOpacity = shadow.opacity
         layer.shadowRadius = shadow.radius ?? cornerRadius
-
-        let borderView = UIView()
-        borderView.frame = bounds
-        borderView.layer.cornerRadius = cornerRadius
-        borderView.layer.masksToBounds = true
-        addSubview(borderView)
     }
 
     func dropShadow(

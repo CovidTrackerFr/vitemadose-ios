@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="424" id="y2u-AE-h3I" customClass="HomeStatsTableViewCell" customModule="ViteMaDose" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="402" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y2u-AE-h3I" id="rQ0-o0-egb">
+                <rect key="frame" x="0.0" y="0.0" width="402" height="180"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpq-dy-GsR">
+                        <rect key="frame" x="24" y="12" width="354" height="156"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="g4G-a0-67y">
+                                <rect key="frame" x="20" y="20" width="314" height="116"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yMG-HU-3lW">
+                                        <rect key="frame" x="0.0" y="0.0" width="245" height="116"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Ouvrir la carte des centres" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9VB-T9-xhP">
+                                                <rect key="frame" x="0.0" y="0.0" width="245" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Centres avec des rendez-vous disponibles" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jil-go-r7k">
+                                                <rect key="frame" x="0.0" y="82.5" width="245" height="33.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRq-se-PUX">
+                                        <rect key="frame" x="269" y="0.0" width="45" height="116"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-IG-jfH">
+                                                <rect key="frame" x="0.0" y="35.5" width="45" height="45"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1SE-Ue-LxH">
+                                                        <rect key="frame" x="10" y="8.5" width="25" height="28"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="25" id="XlY-kX-hcd"/>
+                                                            <constraint firstAttribute="height" constant="30" id="cvF-qv-6el"/>
+                                                            <constraint firstAttribute="height" constant="30" id="dY7-Ox-FZk"/>
+                                                            <constraint firstAttribute="width" constant="25" id="sbq-DV-PNW"/>
+                                                        </constraints>
+                                                        <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="default"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="1SE-Ue-LxH" firstAttribute="centerX" secondItem="Qfk-IG-jfH" secondAttribute="centerX" id="H8t-5l-R5d"/>
+                                                    <constraint firstAttribute="height" constant="45" id="TGU-wA-zS7"/>
+                                                    <constraint firstItem="1SE-Ue-LxH" firstAttribute="centerY" secondItem="Qfk-IG-jfH" secondAttribute="centerY" id="eCI-Ij-AD5"/>
+                                                    <constraint firstAttribute="width" constant="45" id="j4S-pr-n41"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="byX-cX-rkP"/>
+                                            <constraint firstItem="Qfk-IG-jfH" firstAttribute="centerY" secondItem="dRq-se-PUX" secondAttribute="centerY" id="ldU-wW-lsf"/>
+                                            <constraint firstItem="Qfk-IG-jfH" firstAttribute="centerX" secondItem="dRq-se-PUX" secondAttribute="centerX" id="mcR-RC-Gr2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="g4G-a0-67y" firstAttribute="leading" secondItem="cpq-dy-GsR" secondAttribute="leading" constant="20" symbolic="YES" id="NpY-Rw-wTa"/>
+                            <constraint firstAttribute="trailing" secondItem="g4G-a0-67y" secondAttribute="trailing" constant="20" symbolic="YES" id="cz0-c4-81z"/>
+                            <constraint firstAttribute="bottom" secondItem="g4G-a0-67y" secondAttribute="bottom" constant="20" symbolic="YES" id="dVM-HO-h86"/>
+                            <constraint firstItem="g4G-a0-67y" firstAttribute="top" secondItem="cpq-dy-GsR" secondAttribute="top" constant="20" symbolic="YES" id="nt7-9v-9Ks"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="cpq-dy-GsR" secondAttribute="trailing" constant="24" id="CFP-gh-cwg"/>
+                    <constraint firstItem="cpq-dy-GsR" firstAttribute="leading" secondItem="rQ0-o0-egb" secondAttribute="leading" constant="24" id="ERl-hh-uM9"/>
+                    <constraint firstItem="cpq-dy-GsR" firstAttribute="top" secondItem="rQ0-o0-egb" secondAttribute="top" constant="12" id="NWe-4D-Efc"/>
+                    <constraint firstAttribute="bottom" secondItem="cpq-dy-GsR" secondAttribute="bottom" constant="12" id="nK4-c8-Zv4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cellContentView" destination="cpq-dy-GsR" id="vS5-5S-UVI"/>
+                <outlet property="descriptionLabel" destination="Jil-go-r7k" id="Boq-OT-jLo"/>
+                <outlet property="iconContainerView" destination="Qfk-IG-jfH" id="M1F-W2-uo8"/>
+                <outlet property="iconImageView" destination="1SE-Ue-LxH" id="jTo-iq-XXc"/>
+                <outlet property="titleLabel" destination="9VB-T9-xhP" id="4h4-AD-dAs"/>
+            </connections>
+            <point key="canvasLocation" x="92.753623188405811" y="12.053571428571429"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

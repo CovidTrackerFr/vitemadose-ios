@@ -10,6 +10,7 @@ import Foundation
 protocol APIServiceProvider {
     func fetchCounties(_ endPoint: APIEndpoint, completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ())
     func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ())
+    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ())
     func cancelRequest()
 }
 
@@ -23,13 +24,22 @@ struct APIService: APIServiceProvider {
     func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ()) {
         createRequest(endPoint.path, completion: completion)
     }
+
+    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ()) {
+        createRequest(endPoint.path, completion: completion)
+    }
     
     func cancelRequest() {
         urlSession.invalidateAndCancel()
     }
     
     private func createRequest<T: Codable>(_ url: URL, completion: @escaping (Result<T, APIEndpoint.APIError>) -> ()) {
-        urlSession.dataTask(with: url) { (data, urlResponse, error) in
+        let request = URLRequest(
+            url: url,
+            cachePolicy: .reloadIgnoringCacheData,
+            timeoutInterval: 10
+        )
+        urlSession.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
                 if let error = error {
                     // Error code -1009: Offline connection

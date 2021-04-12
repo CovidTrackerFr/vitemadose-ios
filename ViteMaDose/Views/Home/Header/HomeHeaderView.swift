@@ -15,10 +15,13 @@ class HomeHeaderView: UIView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var searchBarView: UIView!
     @IBOutlet private var searchBarTitle: UILabel!
+    @IBOutlet private var statsTitle: UILabel!
+
     weak var delegate: HomeHeaderViewDelegate?
 
     private enum Constant {
-        static let titleFont = UIFont.systemFont(ofSize: 34, weight: .bold)
+        static let titleFont = UIFont.rounded(ofSize: 26, weight: .bold)
+        static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
         static let searchBarViewCornerRadius: CGFloat = 10.0
     }
 
@@ -38,23 +41,16 @@ class HomeHeaderView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .wildSand
+        backgroundColor = .athensGray
         configureTitle()
         configureSearchBarView()
     }
 
     private func configureTitle() {
-        let font: UIFont
-        if let descriptor = Constant.titleFont.fontDescriptor.withDesign(.rounded) {
-            font = UIFont(descriptor: descriptor, size: Constant.titleFont.pointSize)
-        } else {
-            font = Constant.titleFont
-        }
-
         let attributedText = NSMutableAttributedString(
             string: viewData.titleText,
             attributes: [
-                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.font: Constant.titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label,
             ]
         )
@@ -66,16 +62,24 @@ class HomeHeaderView: UIView {
             textForAttribute: viewData.titleSecondHighlightedText,
             withColor: viewData.titleSecondHighlightedTextColor
         )
+
         titleLabel.attributedText = attributedText
+        statsTitle.font = Constant.titleFont
+        statsTitle.textColor = .label
     }
 
     private func configureSearchBarView() {
         searchBarView.addGestureRecognizer(searchBarTapGesture)
         searchBarTitle.text = viewData.searchBarText
-        searchBarView.backgroundColor = .white
-        searchBarView.layer.cornerRadius = Constant.searchBarViewCornerRadius
-        let shadow = UIView.Shadow(color: .black, opacity: 0.15)
-        searchBarView.setCornerRadius(10.0, withShadow: shadow)
+        searchBarTitle.font = Constant.searchBarFont
+        searchBarView.backgroundColor = .tertiarySystemBackground
+        let shadow = UIView.Shadow(
+            color: .label,
+            opacity: 0.05,
+            offset: CGSize(width: 0, height: 5),
+            radius: 5
+        )
+        searchBarView.setCornerRadius(15, withShadow: shadow)
     }
 
     @objc func didTapSearchBarView() -> Bool {

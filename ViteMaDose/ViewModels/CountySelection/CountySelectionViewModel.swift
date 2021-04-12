@@ -7,9 +7,20 @@
 
 import Foundation
 
+protocol CountyCellViewModelProvider {
+    var countyName: String { get }
+    var countyCode: String { get }
+}
+
+struct CountyCellViewModel: CountyCellViewModelProvider {
+    var countyName: String
+    var countyCode: String
+}
+
 protocol CountySelectionViewModelProvider {
-    func cellViewModel(at indexPath: IndexPath) -> County?
     var numberOfRows: Int { get }
+    func cellViewModel(at indexPath: IndexPath) -> CountyCellViewModel?
+    func county(at indexPath: IndexPath) -> County?
 }
 
 protocol CountySelectionViewModelDelegate: class {
@@ -26,10 +37,6 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
         allCounties.count
     }
 
-    func cellViewModel(at indexPath: IndexPath) -> County? {
-        self.allCounties[safe: indexPath.row]
-    }
-
     // MARK: init
 
     required init(
@@ -40,7 +47,25 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
         self.allCounties = counties
     }
 
-    deinit {
-        apiService.cancelRequest()
+    func cellViewModel(at indexPath: IndexPath) -> CountyCellViewModel? {
+        guard let county = allCounties[safe: indexPath.row] else {
+            assertionFailure("No county found at IndexPath \(indexPath)")
+            return nil
+        }
+
+        guard let countyName = county.nomDepartement,
+              let countyCode = county.codeDepartement
+        else {
+            return nil
+        }
+
+        return CountyCellViewModel(
+            countyName: countyName,
+            countyCode: String(countyCode)
+        )
+    }
+
+    func county(at indexPath: IndexPath) -> County? {
+        return allCounties[safe: indexPath.row]
     }
 }

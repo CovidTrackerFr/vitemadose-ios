@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, Storyboarded {
 
     private lazy var homeHeaderView: HomeHeaderView = {
         let view: HomeHeaderView = HomeHeaderView.instanceFromNib()
+        view.isHidden = true
         view.delegate = self
         return view
     }()
@@ -24,13 +25,19 @@ class HomeViewController: UIViewController, Storyboarded {
         return viewModel
     }()
 
-    private lazy var countySelectionViewController: CountySelectionViewController = {
-        let viewController = CountySelectionViewController.instantiate()
-        viewController.delegate = self
-        return viewController
+    private lazy var vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        return refreshControl
     }()
 
-    private lazy var vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
 
     // MARK: - Overrides
 
@@ -38,6 +45,7 @@ class HomeViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         configureViewController()
         viewModel.fetchCounties()
+        viewModel.fetchStats()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,16 +64,30 @@ class HomeViewController: UIViewController, Storyboarded {
     }
 
     private func configureViewController() {
+        view.backgroundColor = .athensGray
+
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .athensGray
+        tableView.alwaysBounceVertical = false
 
-        tableView.backgroundColor = .wildSand
-        view.backgroundColor = .wildSand
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+
         tableView.tableHeaderView = homeHeaderView
+        tableView.refreshControl = refreshControl
+        tableView.backgroundView = activityIndicator
+
+        tableView.register(cellType: HomeStatsTableViewCell.self)
+        tableView.register(cellType: HomePartnersTableViewCell.self)
     }
 
     @IBAction func settingsButtonTapped(_ sender: Any) {
         // TODO: Settings VC
+    }
+
+    @objc func didPullToRefresh() {
+        viewModel.fetchStats()
     }
 }
 
@@ -73,13 +95,20 @@ class HomeViewController: UIViewController, Storyboarded {
 
 extension HomeViewController: HomeViewModelDelegate {
     func reloadTableView(isEmpty: Bool) {
+        tableView.tableHeaderView?.isHidden = isEmpty
         tableView.reloadData()
     }
 
     func updateLoadingState(isLoading: Bool) {
-        // TODO: Loader
+        tableView.updateHeaderViewHeight()
+        activityIndicator.isHidden = !isLoading
+        if !isLoading {
+            activityIndicator.stopAnimating()
+            refreshControl.endRefreshing()
+        }
     }
 
+    // TODO: Better error handling
     func displayError(withMessage message: String) {
         let errorAlert = UIAlertController(
             title: "Oops, Something Went Wrong :(",
@@ -94,8 +123,14 @@ extension HomeViewController: HomeViewModelDelegate {
 
 extension HomeViewController: HomeHeaderViewDelegate {
     func didTapSearchBarView(_ searchBarView: UIView) {
+        let countySelectionViewController = CountySelectionViewController.instantiate()
+        countySelectionViewController.delegate = self
         countySelectionViewController.viewModel = CountySelectionViewModel(counties: viewModel.counties)
-        present(countySelectionViewController.embedInNavigationController, animated: true)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.present(countySelectionViewController, animated: true)
+        }
     }
 }
 
@@ -107,7 +142,19 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cellViewModel = viewModel.cellViewModel(at: indexPath)
+        switch cellViewModel?.cellType {
+            case .stats:
+                let cell = tableView.dequeueReusableCell(with: HomeStatsTableViewCell.self, for: indexPath)
+                cell.configure(with: cellViewModel as? HomeCellStatsViewModelProvider)
+                return cell
+            case .logos:
+                let cell = tableView.dequeueReusableCell(with: HomePartnersTableViewCell.self, for: indexPath)
+                cell.configure()
+                return cell
+            case .none:
+                fatalError("Cell should always have a type")
+        }
     }
 }
 
@@ -115,7 +162,22 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        // TODO: Refactor & confirm URL
+        let cellViewModel = viewModel.cellViewModel(at: indexPath)
+        switch cellViewModel?.cellType {
+            case .stats:
+                guard let viewModel = cellViewModel as? HomeCellStatsViewModelProvider else {
+                    return
+                }
+                if case .externalMap = viewModel.viewData?.dataType {
+                    let url = URL(staticString: "https://vitemadose.covidtracker.fr/centres")
+                    let config = SFSafariViewController.Configuration()
+                    let safariViewController = SFSafariViewController(url: url, configuration: config)
+                    present(safariViewController, animated: true)
+                }
+            default:
+                return
+        }
     }
 }
 
