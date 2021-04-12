@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, Storyboarded {
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -99,7 +100,6 @@ extension HomeViewController: HomeViewModelDelegate {
 
     func updateLoadingState(isLoading: Bool) {
         tableView.updateHeaderViewHeight()
-        activityIndicator.isHidden = !isLoading
         if !isLoading {
             activityIndicator.stopAnimating()
             refreshControl.endRefreshing()

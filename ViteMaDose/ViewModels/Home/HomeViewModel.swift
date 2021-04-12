@@ -116,7 +116,6 @@ extension HomeViewModel: HomeViewModelProvider {
         let countiesEndpoint = APIEndpoint.counties
 
         apiService.fetchCounties(countiesEndpoint) { [weak self] result in
-            self?.isLoading = false
             switch result {
                 case let .success(counties):
                     self?.didFetchCounties(counties)

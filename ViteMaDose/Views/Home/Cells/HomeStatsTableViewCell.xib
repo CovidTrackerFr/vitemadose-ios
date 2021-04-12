@@ -53,8 +53,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="XlY-kX-hcd"/>
                                                             <constraint firstAttribute="height" constant="30" id="cvF-qv-6el"/>
-                                                            <constraint firstAttribute="height" constant="30" id="dY7-Ox-FZk"/>
-                                                            <constraint firstAttribute="width" constant="25" id="sbq-DV-PNW"/>
                                                         </constraints>
                                                         <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="default"/>
                                                     </imageView>
