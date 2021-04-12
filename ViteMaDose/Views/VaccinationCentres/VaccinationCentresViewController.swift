@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class VaccinationCentresViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
@@ -29,7 +30,7 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.refreshControl = refreshControl
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "centre")
+        tableView.register(cellType: VaccinationBookingTableViewCell.self)
 
         viewModel.delegate = self
         viewModel.fetchVaccinationCentres()
@@ -37,6 +38,12 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
     @objc func didPullToRefresh() {
         viewModel.fetchVaccinationCentres()
+    }
+
+    private func openBookingUrl(_ url: URL) {
+        let config = SFSafariViewController.Configuration()
+        let safariViewController = SFSafariViewController(url: url, configuration: config)
+        present(safariViewController, animated: true)
     }
 }
 
@@ -61,9 +68,18 @@ extension VaccinationCentresViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "centre")!
-        cell.textLabel?.text = viewModel.cellViewModel(at: indexPath)
-        cell.textLabel?.numberOfLines = 0
+        let cell = tableView.dequeueReusableCell(
+            with: VaccinationBookingTableViewCell.self,
+            for: indexPath
+        )
+        let cellViewModel = viewModel.cellViewModel(at: indexPath)
+        cell.bookingButtonTapHandler = { [weak self] in
+            guard let bookingURL = self?.viewModel.bookingLink(at: indexPath) else {
+                return
+            }
+            self?.openBookingUrl(bookingURL)
+        }
+        cell.configure(with: cellViewModel)
         return cell
     }
 }

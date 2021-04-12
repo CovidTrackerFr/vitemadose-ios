@@ -12,7 +12,7 @@ protocol VaccinationCentresViewModelProvider {
     var county: County { get }
     var numberOfRows: Int { get }
     func fetchVaccinationCentres()
-    func cellViewModel(at indexPath: IndexPath) -> String?
+    func cellViewModel(at indexPath: IndexPath) -> VaccinationBookingCellViewModelProvider?
     func bookingLink(at indexPath: IndexPath) -> URL?
 }
 
@@ -43,8 +43,24 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         self.county = county
     }
 
-    func cellViewModel(at indexPath: IndexPath) -> String? {
-        return allVaccinationCentres[safe: indexPath.row]?.nom
+    func cellViewModel(at indexPath: IndexPath) -> VaccinationBookingCellViewModelProvider? {
+        guard let vaccincationCentre = allVaccinationCentres[safe: indexPath.row] else {
+            return nil
+        }
+
+        let url: URL?
+        if let urlString = vaccincationCentre.url {
+            url = URL(string: urlString)
+        } else {
+            url = nil
+        }
+
+        return VaccinationBookingCellViewModel(
+            dateText: vaccincationCentre.prochainRdv,
+            addressText: vaccincationCentre.nom,
+            isAvailable: vaccincationCentre.prochainRdv != nil,
+            url: url
+        )
     }
 
     func bookingLink(at indexPath: IndexPath) -> URL? {
