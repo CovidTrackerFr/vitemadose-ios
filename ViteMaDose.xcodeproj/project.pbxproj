@@ -57,6 +57,9 @@
 		57C401AB262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib */; };
 		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
 		DA1240D4262510B8008EBF4F /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = DA1240D3262510B8008EBF4F /* FirebaseRemoteConfig */; };
+		DA1240EE26251DBE008EBF4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA1240ED26251DBE008EBF4F /* GoogleService-Info.plist */; };
+		DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA234DC22626494600D6F71C /* remote-configuration.plist */; };
+		DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA234DD02626506600D6F71C /* RemoteConfig.swift */; };
 		DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */; };
 		DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -145,6 +148,9 @@
 		57C401A8262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationBookingTableViewCell.swift; sourceTree = "<group>"; };
 		57C401A9262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaccinationBookingTableViewCell.xib; sourceTree = "<group>"; };
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
+		DA1240ED26251DBE008EBF4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
+		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
 		DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -251,6 +257,7 @@
 			children = (
 				576738F2261E353D004A700D /* APIService.swift */,
 				5767397E261E5ABC004A700D /* APIEndpoint.swift */,
+				DA234DD02626506600D6F71C /* RemoteConfig.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -353,10 +360,12 @@
 		57673986261E5AF3004A700D /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				DA1240ED26251DBE008EBF4F /* GoogleService-Info.plist */,
 				576738BF261E329C004A700D /* AppDelegate.swift */,
 				576738C1261E329C004A700D /* SceneDelegate.swift */,
 				576738CA261E32A2004A700D /* LaunchScreen.storyboard */,
 				576738CD261E32A2004A700D /* Info.plist */,
+				DA234DC22626494600D6F71C /* remote-configuration.plist */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -553,11 +562,13 @@
 				57C4017726235B6200EFFCA3 /* HomePartnersTableViewCell.xib in Resources */,
 				57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */,
 				57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */,
+				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
 				57C401972623929800EFFCA3 /* CountyCellTableViewCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib in Resources */,
 				57673950261E3D5F004A700D /* HomeHeaderView.xib in Resources */,
 				575C5FC3262610CE00A53F23 /* VaccinationCentresHeaderView.xib in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
+				DA1240EE26251DBE008EBF4F /* GoogleService-Info.plist in Resources */,
 				5793482F2621E1E200F8A4A0 /* HomeStatsTableViewCell.xib in Resources */,
 				576738C9261E32A2004A700D /* Assets.xcassets in Resources */,
 			);
@@ -601,6 +612,7 @@
 				5767397F261E5ABC004A700D /* APIEndpoint.swift in Sources */,
 				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
 				57673903261E3783004A700D /* Data+Commons.swift in Sources */,
+				DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */,
 				576738C0261E329C004A700D /* AppDelegate.swift in Sources */,
 				57C4018726238E4900EFFCA3 /* CountySelectionHeaderView.swift in Sources */,
 				DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */,

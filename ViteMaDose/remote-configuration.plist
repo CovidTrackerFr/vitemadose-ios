@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>url_base</key>
+	<string>https://raw.githubusercontent.com/CovidTrackerFr/vitemadose/data-auto/data/output</string>
+	<key>path_stats</key>
+	<string>stats.json</string>
+	<key>path_list_departments</key>
+	<string>departements.json</string>
+	<key>path_data_department</key>
+	<string>{code}.json</string>
+</dict>
+</plist>
