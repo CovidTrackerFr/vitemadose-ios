@@ -56,6 +56,7 @@
 		57C401AA262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401A8262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift */; };
 		57C401AB262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib */; };
 		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
+		DA1240D4262510B8008EBF4F /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = DA1240D3262510B8008EBF4F /* FirebaseRemoteConfig */; };
 		DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */; };
 		DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */; };
 /* End PBXBuildFile section */
