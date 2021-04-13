@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension URL {
     /// Append a parameter to an URL
@@ -29,5 +30,9 @@ extension URL {
             preconditionFailure("Invalid static URL string: \(string)")
         }
         self = url
+    }
+
+    var isValid: Bool {
+       return UIApplication.shared.canOpenURL(self)
     }
 }

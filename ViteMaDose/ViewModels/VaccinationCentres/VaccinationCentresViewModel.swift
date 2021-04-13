@@ -117,11 +117,14 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
     }
 
     func bookingLink(at indexPath: IndexPath) -> URL? {
-        if let bookingUrlString = allVaccinationCentres[safe: indexPath.row]?.url {
-            return URL(string: bookingUrlString)
-        } else {
+        guard
+            let bookingUrlString = allVaccinationCentres[safe: indexPath.row]?.url,
+            let bookingUrl = URL(string: bookingUrlString),
+            bookingUrl.isValid
+        else {
             return nil
         }
+        return bookingUrl
     }
 
     private func didFetchVaccinationCentres(_ vaccinationCentres: VaccinationCentres) {
