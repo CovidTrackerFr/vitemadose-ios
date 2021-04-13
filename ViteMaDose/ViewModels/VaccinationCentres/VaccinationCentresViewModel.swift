@@ -45,26 +45,42 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
     }
 
     func cellViewModel(at indexPath: IndexPath) -> VaccinationBookingCellViewModelProvider? {
-        guard let vaccincationCentre = allVaccinationCentres[safe: indexPath.row] else {
+        guard let vaccinationCentre = allVaccinationCentres[safe: indexPath.row] else {
             return nil
         }
 
         var url: URL?
-        if let urlString = vaccincationCentre.url {
+        if let urlString = vaccinationCentre.url {
             url = URL(string: urlString)
         }
 
         var dosesText: String?
-        if let dosesCount = vaccincationCentre.appointmentCount {
+        if let dosesCount = vaccinationCentre.appointmentCount {
             dosesText = "\(String(dosesCount)) dose(s)"
         }
 
-        let isAvailable = vaccincationCentre.prochainRdv != nil
-        let date = vaccincationCentre.prochainRdv?.toDate()
-        let dateString = date?.toString(.dateTimeMixed(dateStyle: .long, timeStyle: .short))
+        let isAvailable = vaccinationCentre.prochainRdv != nil
+
+        var formattedDate: NSMutableAttributedString?
+        let region = Region(
+            calendar: Calendar.current,
+            zone: Zones.current,
+            locale: Locale(identifier: "fr_FR")
+        )
+
+        var dayString: String?
+        var timeString: String?
+
+        if
+            let dateString = vaccinationCentre.prochainRdv,
+            let date = dateString.toDate(nil, region: region)
+        {
+            dayString = date.toString(.date(.long))
+            timeString = date.toString(.time(.short))
+        }
 
         var partnerLogo: UIImage?
-        if let platform = vaccincationCentre.plateforme {
+        if let platform = vaccinationCentre.plateforme {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
@@ -86,12 +102,13 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
         return VaccinationBookingCellViewModel(
-            dateText: isAvailable ? dateString ?? "Date Indisponible" : "Aucun rendez-vous disponible",
-            addressNameText: vaccincationCentre.nom ?? "Nom du centre indisponible",
-            addressText: vaccincationCentre.metadata?.address ?? "Addresse indisponible",
-            phoneText: vaccincationCentre.metadata?.phoneNumber,
+            dayText: dayString,
+            timeText: timeString,
+            addressNameText: vaccinationCentre.nom ?? "Nom du centre indisponible",
+            addressText: vaccinationCentre.metadata?.address ?? "Addresse indisponible",
+            phoneText: vaccinationCentre.metadata?.phoneNumber,
             bookingButtonText: bookingButtonAttributedText,
-            vaccineTypesText: vaccincationCentre.vaccineType?.joined(separator: ", "),
+            vaccineTypesText: vaccinationCentre.vaccineType?.joined(separator: ", "),
             dosesText: dosesText,
             isAvailable: isAvailable,
             url: url,

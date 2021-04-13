@@ -8,7 +8,8 @@
 import UIKit
 
 protocol VaccinationBookingCellViewModelProvider {
-    var dateText: String? { get }
+    var dayText: String? { get}
+    var timeText: String? { get }
     var addressNameText: String? { get }
     var addressText: String? { get }
     var phoneText: String? { get }
@@ -21,7 +22,8 @@ protocol VaccinationBookingCellViewModelProvider {
 }
 
 struct VaccinationBookingCellViewModel: VaccinationBookingCellViewModelProvider {
-    var dateText: String?
+    var dayText: String?
+    var timeText: String?
     var addressNameText: String?
     var addressText: String?
     var phoneText: String?
@@ -72,11 +74,11 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         static let bookingButtonCornerRadius: CGFloat = 8
         static let iconContainersCornerRadius: CGFloat = 5
 
-        static let labelPrimaryFont: UIFont = .systemFont(ofSize: 16, weight: .bold)
-        static let labelSecondaryFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        static let dateFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        static let dateHighlightedFont: UIFont = .systemFont(ofSize: 16, weight: .heavy)
+        static let labelPrimaryFont: UIFont = .systemFont(ofSize: 16, weight: .medium)
         static let labelPrimaryColor: UIColor = .label
-        static let labelSecondaryColor: UIColor = .label
-        static let labelTertiaryColor: UIColor = .secondaryLabel
+        static let labelSecondaryColor: UIColor = .secondaryLabel
     }
 
     override func awakeFromNib() {
@@ -92,29 +94,33 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         guard let viewModel = viewModel else {
             preconditionFailure("ViewModel is required")
         }
-        dateLabel.text = viewModel.dateText
-        dateLabel.font = Constant.labelPrimaryFont
+
+        dateLabel.attributedText = createDateText(
+            dayText: viewModel.dayText,
+            timeText: viewModel.timeText,
+            isAvailable: viewModel.isAvailable
+        )
 
         nameLabel.text = viewModel.addressNameText
-        nameLabel.font = Constant.labelSecondaryFont
-        nameLabel.textColor = Constant.labelSecondaryColor
+        nameLabel.font = Constant.labelPrimaryFont
+        nameLabel.textColor = Constant.labelPrimaryColor
 
         addressLabel.text = viewModel.addressText
-        addressLabel.textColor = Constant.labelTertiaryColor
+        addressLabel.textColor = Constant.labelSecondaryColor
 
         phoneNumberContrainer.isHidden = viewModel.phoneText == nil
         phoneLabel.text = viewModel.phoneText
-        phoneLabel.font = Constant.labelSecondaryFont
-        phoneLabel.textColor = Constant.labelSecondaryColor
+        phoneLabel.font = Constant.labelPrimaryFont
+        phoneLabel.textColor = Constant.labelPrimaryColor
 
         vaccineTypesContainer.isHidden = viewModel.vaccineTypesText == nil
         vaccineTypesLabel.text = viewModel.vaccineTypesText
-        vaccineTypesLabel.font = Constant.labelSecondaryFont
-        vaccineTypesLabel.textColor = Constant.labelSecondaryColor
+        vaccineTypesLabel.font = Constant.labelPrimaryFont
+        vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
         dosesLabel.text = viewModel.dosesText
-        dosesLabel.font = Constant.labelSecondaryFont
-        dosesLabel.textColor = Constant.labelSecondaryColor
+        dosesLabel.font = Constant.labelPrimaryFont
+        dosesLabel.textColor = Constant.labelPrimaryColor
 
         bookingbutton.backgroundColor = viewModel.isAvailable ? .royalBlue : .darkGray
         bookingbutton.setTitleColor(.white, for: .normal)
@@ -151,6 +157,42 @@ class VaccinationBookingTableViewCell: UITableViewCell {
             dosesLabel
         ])
         bookingbutton.setTitle(nil, for: .normal)
+    }
+
+    private func createDateText(
+        dayText: String?,
+        timeText: String?,
+        isAvailable: Bool
+    ) -> NSMutableAttributedString {
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: Constant.labelPrimaryColor,
+            NSAttributedString.Key.font: Constant.labelPrimaryFont,
+        ]
+
+        guard isAvailable else {
+            return NSMutableAttributedString(
+                string: "Aucun rendez-vous",
+                attributes: attributes
+            )
+        }
+
+        guard let dayText = dayText, let timeText = timeText else {
+            return NSMutableAttributedString.init(
+                string: "Date Indisponible",
+                attributes: attributes
+            )
+        }
+
+        let dateString = "Le \(dayText) à partir de \(timeText)"
+        let dateText = NSMutableAttributedString(
+            string: dateString,
+            attributes: attributes
+        )
+
+        dateText.setFontForText(textForAttribute: dayText, withFont: .systemFont(ofSize: 16, weight: .heavy))
+        dateText.setFontForText(textForAttribute: timeText, withFont: .systemFont(ofSize: 16, weight: .heavy))
+
+        return dateText
     }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {
