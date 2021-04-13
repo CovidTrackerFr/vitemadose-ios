@@ -43,8 +43,11 @@ class HomeViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        viewModel.fetchCounties()
-        viewModel.fetchStats()
+
+        RemoteConfiguration.shared.synchronize { [unowned self] _ in
+            self.viewModel.fetchCounties()
+            self.viewModel.fetchStats()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
