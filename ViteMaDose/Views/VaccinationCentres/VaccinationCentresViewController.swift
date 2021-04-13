@@ -12,6 +12,12 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     var viewModel: VaccinationCentresViewModel!
 
+    private lazy var vaccinationCentresHeaderView: VaccinationCentresHeaderView = {
+        let view: VaccinationCentresHeaderView = VaccinationCentresHeaderView.instanceFromNib()
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
@@ -26,7 +32,9 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.county.nomDepartement
+        guard viewModel != nil else {
+            preconditionFailure("VaccinationCentresViewController should have a ViewModel!")
+        }
         view.backgroundColor = .athensGray
 
         tableView.delegate = self
@@ -35,12 +43,18 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         tableView.backgroundColor = .athensGray
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.tableHeaderView = vaccinationCentresHeaderView
         tableView.refreshControl = refreshControl
         tableView.backgroundView = activityIndicator
         tableView.register(cellType: VaccinationBookingTableViewCell.self)
 
         viewModel.delegate = self
         viewModel.fetchVaccinationCentres()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.updateHeaderViewHeight()
     }
 
     @objc func didPullToRefresh() {
@@ -55,6 +69,12 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 }
 
 extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate {
+    func reloadTableViewHeader(with viewModel: VaccinationCentresHeaderViewModelProvider) {
+        vaccinationCentresHeaderView.configure(with: viewModel)
+        vaccinationCentresHeaderView.isHidden = false
+        tableView.updateHeaderViewHeight()
+    }
+
     func reloadTableView(isEmpty: Bool) {
         tableView.reloadData()
     }
@@ -67,7 +87,7 @@ extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate 
     }
 
     func displayError(withMessage message: String) {
-
+        // TODO: Error Popup
     }
 }
 
@@ -94,5 +114,10 @@ extension VaccinationCentresViewController: UITableViewDataSource {
 }
 
 extension VaccinationCentresViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Show details
+    }
+}
 
+extension VaccinationCentresViewController {
 }

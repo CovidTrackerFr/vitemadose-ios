@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		575C5FBD262610C100A53F23 /* VaccinationCentresHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */; };
+		575C5FC3262610CE00A53F23 /* VaccinationCentresHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */; };
 		57613EE6262505B600AB6F2F /* UIImageViewAligned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */; };
 		57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFC2625085000AB6F2F /* SwiftDate */; };
 		57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFE2625085000AB6F2F /* SwiftDateStatic */; };
@@ -89,6 +91,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresHeaderView.swift; sourceTree = "<group>"; };
+		575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaccinationCentresHeaderView.xib; sourceTree = "<group>"; };
 		57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewAligned.swift; sourceTree = "<group>"; };
 		57613F02262510D700AB6F2F /* PartnerLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerLogo.swift; sourceTree = "<group>"; };
 		576738BC261E329C004A700D /* ViteMaDose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViteMaDose.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +175,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		575C5FBB2626108A00A53F23 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */,
+				575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		576738B3261E329C004A700D = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +374,7 @@
 		57AD21D4262103F000ED2B95 /* VaccinationCentres */ = {
 			isa = PBXGroup;
 			children = (
+				575C5FBB2626108A00A53F23 /* Header */,
 				57C401A72624266800EFFCA3 /* Cells */,
 				57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */,
 				57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */,
@@ -541,6 +555,7 @@
 				57C401972623929800EFFCA3 /* CountyCellTableViewCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib in Resources */,
 				57673950261E3D5F004A700D /* HomeHeaderView.xib in Resources */,
+				575C5FC3262610CE00A53F23 /* VaccinationCentresHeaderView.xib in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
 				5793482F2621E1E200F8A4A0 /* HomeStatsTableViewCell.xib in Resources */,
 				576738C9261E32A2004A700D /* Assets.xcassets in Resources */,
@@ -594,6 +609,7 @@
 				5793484C262241B900F8A4A0 /* Stats.swift in Sources */,
 				57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */,
 				57C4017626235B6200EFFCA3 /* HomePartnersTableViewCell.swift in Sources */,
+				575C5FBD262610C100A53F23 /* VaccinationCentresHeaderView.swift in Sources */,
 				576738F3261E353E004A700D /* APIService.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
 				57AD21D62621041200ED2B95 /* VaccinationCentresViewController.swift in Sources */,

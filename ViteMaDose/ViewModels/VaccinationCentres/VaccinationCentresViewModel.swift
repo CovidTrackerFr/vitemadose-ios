@@ -18,6 +18,7 @@ protocol VaccinationCentresViewModelProvider {
 }
 
 protocol VaccinationCentresViewModelDelegate: class {
+    func reloadTableViewHeader(with viewModel: VaccinationCentresHeaderViewModelProvider)
     func reloadTableView(isEmpty: Bool)
     func updateLoadingState(isLoading: Bool)
     func displayError(withMessage message: String)
@@ -61,7 +62,6 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
 
         let isAvailable = vaccinationCentre.prochainRdv != nil
 
-        var formattedDate: NSMutableAttributedString?
         let region = Region(
             calendar: Calendar.current,
             zone: Zones.current,
@@ -130,6 +130,16 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
     private func didFetchVaccinationCentres(_ vaccinationCentres: VaccinationCentres) {
         let isEmpty = vaccinationCentres.centresDisponibles.isEmpty && vaccinationCentres.centresIndisponibles.isEmpty
         allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
+
+        let dosesCount = vaccinationCentres.centresDisponibles.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        let headerViewModel = VaccinationCentresHeaderViewModel(
+            dosesCount: dosesCount,
+            countyName: county.nomDepartement ?? "",
+            availableCentresCount: vaccinationCentres.centresDisponibles.count,
+            allCentresCount: allVaccinationCentres.count
+        )
+
+        delegate?.reloadTableViewHeader(with: headerViewModel)
         delegate?.reloadTableView(isEmpty: isEmpty)
     }
 
