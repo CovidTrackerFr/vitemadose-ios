@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>url_base</key>
-	<string>https://raw.githubusercontent.com/CovidTrackerFr/vitemadose/data-auto/data/output</string>
+	<string>https://vitemadose.gitlab.io</string>
 	<key>path_stats</key>
-	<string>stats.json</string>
+	<string>/vitemadose/stats.json</string>
 	<key>path_list_departments</key>
-	<string>departements.json</string>
+	<string>/vitemadose/departements.json</string>
 	<key>path_data_department</key>
-	<string>{code}.json</string>
+	<string>/vitemadose/{code}.json</string>
 </dict>
 </plist>
