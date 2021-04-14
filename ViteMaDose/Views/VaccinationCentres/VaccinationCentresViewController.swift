@@ -51,7 +51,7 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         viewModel.delegate = self
         viewModel.fetchVaccinationCentres()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.updateHeaderViewHeight()
@@ -92,6 +92,9 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         navigationItem.setLeftBarButton(backBarButtonItem, animated: false)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
 
     private func configureTableView() {
@@ -169,6 +172,9 @@ extension VaccinationCentresViewController: UITableViewDelegate {
     }
 }
 
-extension VaccinationCentresViewController {
-
+// TODO: Base View Controller
+extension VaccinationCentresViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
