@@ -92,14 +92,14 @@ class VaccinationCentresHeaderView: UIView {
             return title
         }
 
-        let dosesCountString = String(dosesCount)
-        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleSecondPartText) \(Constant.titleThirdText) \(countyName)"
+        let dosesCountString = "\(String(dosesCount)) \(Constant.titleSecondPartText)"
+        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleThirdText) \(countyName)"
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
         )
-        title.setColorForText(textForAttribute: dosesCountString, withColor: .systemGreen)
-        title.setColorForText(textForAttribute: countyName, withColor: .mandy)
+        title.setColorForText(textForAttribute: dosesCountString, withColor: .mandy)
+        title.setColorForText(textForAttribute: countyName, withColor: .royalBlue)
 
         return title
     }

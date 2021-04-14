@@ -183,7 +183,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRS-H0-agD" userLabel="Spacer">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="15"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="QnF-Wt-U7f"/>
                                                 </constraints>
