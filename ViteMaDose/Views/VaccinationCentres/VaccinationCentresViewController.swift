@@ -18,6 +18,14 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         return view
     }()
 
+    private lazy var footerView: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .tertiaryLabel
+        label.textAlignment = .center
+        return label
+    }()
+
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
@@ -96,6 +104,7 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableHeaderView = vaccinationCentresHeaderView
+        tableView.tableFooterView = footerView
 
         tableView.refreshControl = refreshControl
         tableView.backgroundView = activityIndicator
@@ -113,6 +122,11 @@ extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate 
 
     func reloadTableView(isEmpty: Bool) {
         tableView.reloadData()
+    }
+
+    func reloadTableViewFooter(with text: String?) {
+        footerView.text = text
+        footerView.sizeToFit()
     }
 
     func updateLoadingState(isLoading: Bool) {

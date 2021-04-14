@@ -20,6 +20,7 @@ protocol VaccinationCentresViewModelProvider {
 protocol VaccinationCentresViewModelDelegate: class {
     func reloadTableViewHeader(with viewModel: VaccinationCentresHeaderViewModelProvider)
     func reloadTableView(isEmpty: Bool)
+    func reloadTableViewFooter(with text: String?)
     func updateLoadingState(isLoading: Bool)
     func displayError(withMessage message: String)
 }
@@ -79,7 +80,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable ? "Prendre Rendez-Vous" : "Vérifier Ce Centre"
+        let bookingButtonText = isAvailable ? "Prendre rendez-vous" : "Vérifier ce centre"
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(
             systemName: "arrow.up.right",
@@ -134,7 +135,15 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             allCentresCount: allVaccinationCentres.count
         )
 
+        var footerText: String?
+        if let lastUpdate = vaccinationCentres.lastUpdated?.toDate() {
+            let lastUpdateDay = lastUpdate.toString(.date(.short))
+            let lastUpdateTime = lastUpdate.toString(.time(.short))
+            footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
+        }
+
         delegate?.reloadTableViewHeader(with: headerViewModel)
+        delegate?.reloadTableViewFooter(with: footerText)
         delegate?.reloadTableView(isEmpty: isEmpty)
     }
 
