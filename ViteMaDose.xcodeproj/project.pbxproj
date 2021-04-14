@@ -46,6 +46,8 @@
 		57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */; };
 		57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */; };
 		57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */; };
+		57C38B672627901C00FE63B0 /* PhoneNumberKit-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 57C38B662627901C00FE63B0 /* PhoneNumberKit-Static */; };
+		57C38B692627901C00FE63B0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 57C38B682627901C00FE63B0 /* PhoneNumberKit */; };
 		57C4017626235B6200EFFCA3 /* HomePartnersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017426235B6200EFFCA3 /* HomePartnersTableViewCell.swift */; };
 		57C4017726235B6200EFFCA3 /* HomePartnersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4017526235B6200EFFCA3 /* HomePartnersTableViewCell.xib */; };
 		57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */; };
@@ -156,7 +158,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */,
+				57C38B692627901C00FE63B0 /* PhoneNumberKit in Frameworks */,
 				57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */,
+				57C38B672627901C00FE63B0 /* PhoneNumberKit-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +463,8 @@
 			packageProductDependencies = (
 				57613EFC2625085000AB6F2F /* SwiftDate */,
 				57613EFE2625085000AB6F2F /* SwiftDateStatic */,
+				57C38B662627901C00FE63B0 /* PhoneNumberKit-Static */,
+				57C38B682627901C00FE63B0 /* PhoneNumberKit */,
 			);
 			productName = ViteMaDose;
 			productReference = 576738BC261E329C004A700D /* ViteMaDose.app */;
@@ -533,6 +539,7 @@
 			mainGroup = 576738B3261E329C004A700D;
 			packageReferences = (
 				57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			productRefGroup = 576738BD261E329C004A700D /* Products */;
 			projectDirPath = "";
@@ -797,7 +804,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.covidtracker.vmd;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -817,7 +824,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.covidtracker.vmd;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -954,6 +961,14 @@
 				minimumVersion = 6.3.1;
 			};
 		};
+		57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -966,6 +981,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDateStatic;
+		};
+		57C38B662627901C00FE63B0 /* PhoneNumberKit-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = "PhoneNumberKit-Static";
+		};
+		57C38B682627901C00FE63B0 /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

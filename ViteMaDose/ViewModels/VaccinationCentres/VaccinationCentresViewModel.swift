@@ -8,6 +8,7 @@
 import Foundation
 import SwiftDate
 import UIKit
+import PhoneNumberKit
 
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
@@ -27,6 +28,8 @@ protocol VaccinationCentresViewModelDelegate: class {
 
 class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
     private let apiService: APIService
+    private let phoneNumberKit = PhoneNumberKit()
+
     private var allVaccinationCentres: [VaccinationCentre] = []
     private var isLoading = false {
         didSet {
@@ -97,12 +100,27 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
 
         bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
+        var phoneText: String?
+        if let phoneNumber = vaccinationCentre.metadata?.phoneNumber {
+            do {
+                let parsedPhoneNumber = try phoneNumberKit.parse(
+                    phoneNumber,
+                    withRegion: "FR",
+                    ignoreType: true
+                )
+                phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
+            }
+            catch {
+                phoneText = phoneNumber
+            }
+        }
+
         return VaccinationBookingCellViewModel(
             dayText: dayString,
             timeText: timeString,
             addressNameText: vaccinationCentre.nom ?? "Nom du centre indisponible",
             addressText: vaccinationCentre.metadata?.address ?? "Addresse indisponible",
-            phoneText: vaccinationCentre.metadata?.phoneNumber,
+            phoneText: phoneText,
             bookingButtonText: bookingButtonAttributedText,
             vaccineTypesText: vaccinationCentre.vaccineType?.joined(separator: ", "),
             dosesCount: vaccinationCentre.appointmentCount,
