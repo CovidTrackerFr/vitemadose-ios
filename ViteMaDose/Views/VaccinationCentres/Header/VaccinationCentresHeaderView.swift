@@ -51,7 +51,7 @@ class VaccinationCentresHeaderView: UIView {
         static let titleSecondPartText = "doses"
         static let titleThirdText = "pour le département"
         static let titleNoDoseText = "Nous n'avons pas trouvé de doses pour le département"
-        static let subtitleText = "Liste des Centres"
+        static let subtitleText = "Liste des centres"
 
         static let availableCentresText = "Centres avec rendez-vous"
         static let allCentresText = "Centres trouvés au total"

@@ -55,11 +55,6 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             url = URL(string: urlString)
         }
 
-        var dosesText: String?
-        if let dosesCount = vaccinationCentre.appointmentCount {
-            dosesText = "\(String(dosesCount)) dose(s)"
-        }
-
         let isAvailable = vaccinationCentre.prochainRdv != nil
 
         let region = Region(
@@ -109,7 +104,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             phoneText: vaccinationCentre.metadata?.phoneNumber,
             bookingButtonText: bookingButtonAttributedText,
             vaccineTypesText: vaccinationCentre.vaccineType?.joined(separator: ", "),
-            dosesText: dosesText,
+            dosesCount: vaccinationCentre.appointmentCount,
             isAvailable: isAvailable,
             url: url,
             partnerLogo: partnerLogo
