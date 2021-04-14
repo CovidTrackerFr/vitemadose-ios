@@ -12,6 +12,7 @@ enum PartnerLogo: String, CaseIterable {
     case maiia = "Maiia"
     case ordoclic = "Ordoclic"
     case keldoc = "Keldoc"
+    case maPharma = "Mapharma"
 
     var image: UIImage? {
         switch self {
@@ -23,6 +24,8 @@ enum PartnerLogo: String, CaseIterable {
                 return UIImage(named: PartnerLogo.ordoclic.rawValue)
             case .keldoc:
                 return UIImage(named: PartnerLogo.keldoc.rawValue)
+            case .maPharma:
+                return UIImage(named: PartnerLogo.maPharma.rawValue)
         }
     }
 
@@ -36,6 +39,8 @@ enum PartnerLogo: String, CaseIterable {
                 self = .ordoclic
             case PartnerLogo.keldoc.rawValue:
                 self = .keldoc
+            case PartnerLogo.maPharma.rawValue:
+                self = .maPharma
             default:
                 return nil
         }
