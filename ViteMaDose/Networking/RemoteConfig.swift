@@ -26,13 +26,13 @@ struct RemoteConfiguration {
         configuration.fetch(withExpirationDuration: 0) { (status, error) in
             guard error == nil else {
                 print("Error while fetching remote configuration (\(error.debugDescription)).")
-                completion(Result.failure(APIEndpoint.APIError.apiError))
+                completion(.failure(APIEndpoint.APIError.apiError))
                 return
             }
 
             configuration.activate()
             print("[RemoteConfiguration] Successfully fetched remote configuration.")
-            completion(Result.success(()))
+            completion(.success(()))
         }
     }
 }
