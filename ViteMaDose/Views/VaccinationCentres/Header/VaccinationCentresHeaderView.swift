@@ -69,6 +69,7 @@ class VaccinationCentresHeaderView: UIView {
 
         subtitleLabel.text = Constant.subtitleText
         subtitleLabel.font = Constant.titleFont
+        subtitleLabel.isHidden = viewModel.allCentresCount == 0
 
         configureAvailableCentresView(viewModel)
         configureAllCentresView(viewModel)
