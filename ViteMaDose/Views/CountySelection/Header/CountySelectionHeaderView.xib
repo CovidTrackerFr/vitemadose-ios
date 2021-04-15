@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trouvez une dose de vaccin facilement et rapidement" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bs8-Sg-IF1">
-                    <rect key="frame" x="24" y="35" width="366" height="162"/>
+                    <rect key="frame" x="24" y="25" width="366" height="182"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -24,9 +24,9 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Bs8-Sg-IF1" secondAttribute="trailing" constant="24" id="6Te-p1-5v2"/>
-                <constraint firstItem="Bs8-Sg-IF1" firstAttribute="top" secondItem="sla-vE-A3Q" secondAttribute="top" constant="35" id="HiQ-Vs-nGn"/>
+                <constraint firstItem="Bs8-Sg-IF1" firstAttribute="top" secondItem="sla-vE-A3Q" secondAttribute="top" constant="25" id="HiQ-Vs-nGn"/>
                 <constraint firstItem="Bs8-Sg-IF1" firstAttribute="leading" secondItem="sla-vE-A3Q" secondAttribute="leading" constant="24" id="Oji-7F-CfN"/>
-                <constraint firstAttribute="bottom" secondItem="Bs8-Sg-IF1" secondAttribute="bottom" constant="25" id="jI1-rI-MfJ"/>
+                <constraint firstAttribute="bottom" secondItem="Bs8-Sg-IF1" secondAttribute="bottom" constant="15" id="jI1-rI-MfJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

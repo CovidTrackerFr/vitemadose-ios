@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIY-wm-y41">
-                        <rect key="frame" x="24" y="10" width="354" height="78"/>
+                        <rect key="frame" x="24" y="5" width="354" height="88"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FXR-Mr-A1u">
-                                <rect key="frame" x="8" y="20" width="338" height="38"/>
+                                <rect key="frame" x="8" y="20" width="338" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWU-de-Qen">
-                                        <rect key="frame" x="0.0" y="0.0" width="45" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGd-ou-sVd">
-                                                <rect key="frame" x="0.0" y="-3.5" width="45" height="45"/>
+                                                <rect key="frame" x="0.0" y="1.5" width="45" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="66" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWA-oC-MrX">
                                                         <rect key="frame" x="5" y="5" width="35" height="35"/>
@@ -54,10 +54,10 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cYR-ds-Nza">
-                                        <rect key="frame" x="60" y="0.0" width="278" height="38"/>
+                                        <rect key="frame" x="60" y="0.0" width="278" height="48"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Pyrénées-Orientales" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="jRu-Kn-5WZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="278" height="38"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -80,8 +80,8 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="mIY-wm-y41" secondAttribute="trailing" constant="24" id="27P-LI-dAf"/>
                     <constraint firstItem="mIY-wm-y41" firstAttribute="leading" secondItem="u1P-IH-Qip" secondAttribute="leading" constant="24" id="Ed7-Nr-Zje"/>
-                    <constraint firstAttribute="bottom" secondItem="mIY-wm-y41" secondAttribute="bottom" constant="10" id="WX3-jp-Tk7"/>
-                    <constraint firstItem="mIY-wm-y41" firstAttribute="top" secondItem="u1P-IH-Qip" secondAttribute="top" constant="10" id="kUW-AP-poI"/>
+                    <constraint firstAttribute="bottom" secondItem="mIY-wm-y41" secondAttribute="bottom" constant="5" id="WX3-jp-Tk7"/>
+                    <constraint firstItem="mIY-wm-y41" firstAttribute="top" secondItem="u1P-IH-Qip" secondAttribute="top" constant="5" id="kUW-AP-poI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
