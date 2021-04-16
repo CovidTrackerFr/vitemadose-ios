@@ -28,26 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "576738D1261E32A3004A700D"
-               BuildableName = "ViteMaDoseTests.xctest"
-               BlueprintName = "ViteMaDoseTests"
-               ReferencedContainer = "container:ViteMaDose.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "576738DC261E32A3004A700D"
-               BuildableName = "ViteMaDoseUITests.xctest"
-               BlueprintName = "ViteMaDoseUITests"
-               ReferencedContainer = "container:ViteMaDose.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

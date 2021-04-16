@@ -11,10 +11,10 @@ class CountySelectionHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
 
     private enum Constant {
-        static let titleText = "Séléctionnez Votre Département"
+        static let titleText = "Séléctionnez votre département"
         static let highlightedText = "Département"
         static let highlightedTextColor = UIColor.mandy
-        static let titleFont = UIFont.rounded(ofSize: 34, weight: .bold)
+        static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
         static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
         static let searchBarViewCornerRadius: CGFloat = 10.0
     }
