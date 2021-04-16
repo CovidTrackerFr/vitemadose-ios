@@ -95,7 +95,7 @@ extension HomeStatsTableViewCell {
                     iconContainerColor = .systemOrange
                 case let .centresWithAvailabilities(count):
                     title = NSMutableAttributedString(string: String(count))
-                    description = "Centres avec rendez vous disponibles"
+                    description = "Centres avec rendez-vous disponibles"
                     icon = UIImage(
                         systemName: "checkmark",
                         withConfiguration: Constant.iconConfiguration

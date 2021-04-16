@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "PhoneNumberKit",
+        "repositoryURL": "https://github.com/marmelroy/PhoneNumberKit.git",
+        "state": {
+          "branch": null,
+          "revision": "1ef0431b971f69c48ca5eb4cdba07f2c5da54c35",
+          "version": "3.3.3"
+        }
+      },
+      {
+        "package": "SwiftDate",
+        "repositoryURL": "https://github.com/malcommac/SwiftDate.git",
+        "state": {
+          "branch": null,
+          "revision": "6190d0cefff3013e77ed567e6b074f324e5c5bf5",
+          "version": "6.3.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

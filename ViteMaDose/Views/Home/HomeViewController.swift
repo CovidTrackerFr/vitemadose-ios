@@ -25,8 +25,6 @@ class HomeViewController: UIViewController, Storyboarded {
         return viewModel
     }()
 
-    private lazy var vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
-
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
@@ -35,6 +33,7 @@ class HomeViewController: UIViewController, Storyboarded {
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         return activityIndicator
     }()
@@ -101,7 +100,6 @@ extension HomeViewController: HomeViewModelDelegate {
 
     func updateLoadingState(isLoading: Bool) {
         tableView.updateHeaderViewHeight()
-        activityIndicator.isHidden = !isLoading
         if !isLoading {
             activityIndicator.stopAnimating()
             refreshControl.endRefreshing()
@@ -185,8 +183,8 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: CountySelectionViewControllerDelegate {
     func didSelect(county: County) {
-        // TODO: Create ViewModel with County
-        vaccinationCentresViewController.title = county.nomDepartement
+        let vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
+        vaccinationCentresViewController.viewModel = VaccinationCentresViewModel(county: county)
         navigationController?.show(vaccinationCentresViewController, sender: self)
     }
 }

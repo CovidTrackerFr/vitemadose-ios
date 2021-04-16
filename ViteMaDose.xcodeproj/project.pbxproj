@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		575C5FBD262610C100A53F23 /* VaccinationCentresHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */; };
+		575C5FC3262610CE00A53F23 /* VaccinationCentresHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */; };
+		57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFC2625085000AB6F2F /* SwiftDate */; };
+		57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFE2625085000AB6F2F /* SwiftDateStatic */; };
+		57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613F02262510D700AB6F2F /* PartnerLogo.swift */; };
 		576738C0261E329C004A700D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738BF261E329C004A700D /* AppDelegate.swift */; };
 		576738C2261E329C004A700D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738C1261E329C004A700D /* SceneDelegate.swift */; };
 		576738C9261E32A2004A700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 576738C8261E32A2004A700D /* Assets.xcassets */; };
@@ -39,6 +44,9 @@
 		57AD21DE2621042700ED2B95 /* VaccinationCentresViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */; };
 		57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */; };
 		57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */; };
+		57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */; };
+		57C38B672627901C00FE63B0 /* PhoneNumberKit-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 57C38B662627901C00FE63B0 /* PhoneNumberKit-Static */; };
+		57C38B692627901C00FE63B0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 57C38B682627901C00FE63B0 /* PhoneNumberKit */; };
 		57C4017626235B6200EFFCA3 /* HomePartnersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017426235B6200EFFCA3 /* HomePartnersTableViewCell.swift */; };
 		57C4017726235B6200EFFCA3 /* HomePartnersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4017526235B6200EFFCA3 /* HomePartnersTableViewCell.xib */; };
 		57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */; };
@@ -47,6 +55,8 @@
 		57C4018F26238E5300EFFCA3 /* CountySelectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4018E26238E5300EFFCA3 /* CountySelectionHeaderView.xib */; };
 		57C401962623929800EFFCA3 /* CountyCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401942623929800EFFCA3 /* CountyCellTableViewCell.swift */; };
 		57C401972623929800EFFCA3 /* CountyCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401952623929800EFFCA3 /* CountyCellTableViewCell.xib */; };
+		57C401AA262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401A8262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift */; };
+		57C401AB262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib */; };
 		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
 		DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */; };
 		DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */; };
@@ -69,7 +79,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		57613EF8262507C800AB6F2F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresHeaderView.swift; sourceTree = "<group>"; };
+		575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaccinationCentresHeaderView.xib; sourceTree = "<group>"; };
+		57613F02262510D700AB6F2F /* PartnerLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerLogo.swift; sourceTree = "<group>"; };
 		576738BC261E329C004A700D /* ViteMaDose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViteMaDose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738BF261E329C004A700D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		576738C1261E329C004A700D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +134,7 @@
 		57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VaccinationCentresViewController.storyboard; sourceTree = "<group>"; };
 		57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CountySelectionViewController.storyboard; sourceTree = "<group>"; };
 		57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresViewModel.swift; sourceTree = "<group>"; };
+		57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Commons.swift"; sourceTree = "<group>"; };
 		57C4017426235B6200EFFCA3 /* HomePartnersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePartnersTableViewCell.swift; sourceTree = "<group>"; };
 		57C4017526235B6200EFFCA3 /* HomePartnersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePartnersTableViewCell.xib; sourceTree = "<group>"; };
 		57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Commons.swift"; sourceTree = "<group>"; };
@@ -116,6 +143,8 @@
 		57C4018E26238E5300EFFCA3 /* CountySelectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountySelectionHeaderView.xib; sourceTree = "<group>"; };
 		57C401942623929800EFFCA3 /* CountyCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountyCellTableViewCell.swift; sourceTree = "<group>"; };
 		57C401952623929800EFFCA3 /* CountyCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountyCellTableViewCell.xib; sourceTree = "<group>"; };
+		57C401A8262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationBookingTableViewCell.swift; sourceTree = "<group>"; };
+		57C401A9262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaccinationBookingTableViewCell.xib; sourceTree = "<group>"; };
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
 		DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewModel.swift; sourceTree = "<group>"; };
@@ -126,6 +155,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */,
+				57C38B692627901C00FE63B0 /* PhoneNumberKit in Frameworks */,
+				57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */,
+				57C38B672627901C00FE63B0 /* PhoneNumberKit-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +179,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		575C5FBB2626108A00A53F23 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */,
+				575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		576738B3261E329C004A700D = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +264,7 @@
 				57673909261E3875004A700D /* County.swift */,
 				57673911261E3962004A700D /* VaccinationCentre.swift */,
 				5793484B262241B900F8A4A0 /* Stats.swift */,
+				57613F02262510D700AB6F2F /* PartnerLogo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +340,7 @@
 				57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */,
 				57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */,
 				57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */,
+				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -334,6 +378,8 @@
 		57AD21D4262103F000ED2B95 /* VaccinationCentres */ = {
 			isa = PBXGroup;
 			children = (
+				575C5FBB2626108A00A53F23 /* Header */,
+				57C401A72624266800EFFCA3 /* Cells */,
 				57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */,
 				57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */,
 			);
@@ -385,6 +431,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		57C401A72624266800EFFCA3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				57C401A8262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift */,
+				57C401A9262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -395,12 +450,19 @@
 				576738B8261E329C004A700D /* Sources */,
 				576738B9261E329C004A700D /* Frameworks */,
 				576738BA261E329C004A700D /* Resources */,
+				57613EF8262507C800AB6F2F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ViteMaDose;
+			packageProductDependencies = (
+				57613EFC2625085000AB6F2F /* SwiftDate */,
+				57613EFE2625085000AB6F2F /* SwiftDateStatic */,
+				57C38B662627901C00FE63B0 /* PhoneNumberKit-Static */,
+				57C38B682627901C00FE63B0 /* PhoneNumberKit */,
+			);
 			productName = ViteMaDose;
 			productReference = 576738BC261E329C004A700D /* ViteMaDose.app */;
 			productType = "com.apple.product-type.application";
@@ -472,6 +534,10 @@
 				Base,
 			);
 			mainGroup = 576738B3261E329C004A700D;
+			packageReferences = (
+				57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
+			);
 			productRefGroup = 576738BD261E329C004A700D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -494,7 +560,9 @@
 				57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */,
 				57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */,
 				57C401972623929800EFFCA3 /* CountyCellTableViewCell.xib in Resources */,
+				57C401AB262426B100EFFCA3 /* VaccinationBookingTableViewCell.xib in Resources */,
 				57673950261E3D5F004A700D /* HomeHeaderView.xib in Resources */,
+				575C5FC3262610CE00A53F23 /* VaccinationCentresHeaderView.xib in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
 				5793482F2621E1E200F8A4A0 /* HomeStatsTableViewCell.xib in Resources */,
 				576738C9261E32A2004A700D /* Assets.xcassets in Resources */,
@@ -523,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,
+				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsTableViewCell.swift in Sources */,
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,
@@ -543,12 +612,15 @@
 				DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,
 				57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */,
+				57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */,
 				5793484C262241B900F8A4A0 /* Stats.swift in Sources */,
 				57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */,
 				57C4017626235B6200EFFCA3 /* HomePartnersTableViewCell.swift in Sources */,
+				575C5FBD262610C100A53F23 /* VaccinationCentresHeaderView.swift in Sources */,
 				576738F3261E353E004A700D /* APIService.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
 				57AD21D62621041200ED2B95 /* VaccinationCentresViewController.swift in Sources */,
+				57C401AA262426B100EFFCA3 /* VaccinationBookingTableViewCell.swift in Sources */,
 				57C401962623929800EFFCA3 /* CountyCellTableViewCell.swift in Sources */,
 				579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */,
 				57673930261E3BC5004A700D /* HomeViewController.swift in Sources */,
@@ -721,13 +793,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2021.04.14.1;
 				DEVELOPMENT_TEAM = 86VX52L29V;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.ViteMaDose;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -740,13 +813,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2021.04.14.1;
 				DEVELOPMENT_TEAM = 86VX52L29V;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.ViteMaDose;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -873,6 +947,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.1;
+			};
+		};
+		57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		57613EFC2625085000AB6F2F /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		57613EFE2625085000AB6F2F /* SwiftDateStatic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDateStatic;
+		};
+		57C38B662627901C00FE63B0 /* PhoneNumberKit-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = "PhoneNumberKit-Static";
+		};
+		57C38B682627901C00FE63B0 /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57C38B652627901C00FE63B0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 576738B4261E329C004A700D /* Project object */;
 }

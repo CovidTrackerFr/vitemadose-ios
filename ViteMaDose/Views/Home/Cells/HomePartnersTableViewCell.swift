@@ -20,6 +20,7 @@ class HomePartnersTableViewCell: UITableViewCell {
     @IBOutlet private var logo2ImageView: UIImageView!
     @IBOutlet private var logo3ImageView: UIImageView!
     @IBOutlet private var logo4ImageView: UIImageView!
+    @IBOutlet var logoImageView5: UIImageView!
 
     private enum Constant {
         static let titleText = "Trouvez vos rendez-vous avec"
@@ -30,6 +31,7 @@ class HomePartnersTableViewCell: UITableViewCell {
         logo2ImageView,
         logo3ImageView,
         logo4ImageView,
+        logoImageView5,
     ]
 
     func configure() {
