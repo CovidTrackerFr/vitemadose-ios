@@ -10,16 +10,34 @@ import UIKit
 protocol HomeTitleCellViewDataProvider: HomeCellViewDataProvider {
     var titleText: NSMutableAttributedString { get }
     var subTitleText: NSMutableAttributedString? { get }
+    var topMargin: CGFloat { get }
+    var bottomMargin: CGFloat { get }
 }
 
 struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable {
     let titleText: NSMutableAttributedString
-    let subTitleText: NSMutableAttributedString? = nil
+    let subTitleText: NSMutableAttributedString?
+    let topMargin: CGFloat
+    let bottomMargin: CGFloat
+
+    init(
+        titleText: NSMutableAttributedString,
+        subTitleText: NSMutableAttributedString? = nil,
+        topMargin: CGFloat = 10,
+        bottomMargin: CGFloat = 10
+    ) {
+        self.titleText = titleText
+        self.subTitleText = subTitleText
+        self.topMargin = topMargin
+        self.bottomMargin = bottomMargin
+    }
 }
 
 class HomeTitleCell: UITableViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
+    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
 
     func configure(with viewData: HomeTitleCellViewDataProvider) {
         backgroundColor = .clear
@@ -34,5 +52,8 @@ class HomeTitleCell: UITableViewCell {
 
         titleLabel?.numberOfLines = 0
         descriptionLabel?.numberOfLines = 0
+
+        topConstraint.constant = viewData.topMargin
+        bottomConstraint.constant = viewData.bottomMargin
     }
 }

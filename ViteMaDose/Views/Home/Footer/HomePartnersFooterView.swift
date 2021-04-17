@@ -30,7 +30,8 @@ class HomePartnersFooterView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        backgroundColor = .athensGray
+        
         titleLabel.text = Constant.titleText
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel

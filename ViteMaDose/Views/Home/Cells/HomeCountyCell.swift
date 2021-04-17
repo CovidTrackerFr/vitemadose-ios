@@ -25,7 +25,7 @@ class HomeCountyCell: CountyCell {
 
         titleLabel.isHidden = viewData.titleText == nil
         titleLabel.text = viewData.titleText
-        titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        titleLabel.font = .rounded(ofSize: 14, weight: .semibold)
         titleLabel.textColor = .secondaryLabel
 
     }

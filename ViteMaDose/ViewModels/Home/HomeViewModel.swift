@@ -119,7 +119,7 @@ class HomeViewModel {
             return
         }
 
-        let statsTitleViewModel = HomeTitleCellViewData(titleText: lastStatsAttributedText)
+        let statsTitleViewModel = HomeTitleCellViewData(titleText: lastStatsAttributedText, topMargin: 15, bottomMargin: 5)
         let allCentresViewModel = HomeCellStatsViewData(.allCentres(allCountiesStats.total))
         let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(allCountiesStats.disponibles))
         let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(allCountiesStats.creneaux))
