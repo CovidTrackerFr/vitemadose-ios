@@ -1,17 +1,27 @@
 //
-//  CountyCellTableViewCell.swift
+//  CountyCell.swift
 //  ViteMaDose
 //
-//  Created by Victor Sarda on 11/04/2021.
+//  Created by Victor Sarda on 17/04/2021.
 //
 
 import UIKit
 
-class CountyCellTableViewCell: UITableViewCell {
+protocol CountyCellViewDataProvider {
+    var countyName: String { get }
+    var countyCode: String { get }
+}
 
+struct CountyCellViewData: CountyCellViewDataProvider, Hashable {
+    var titleText: String?
+    var countyName: String
+    var countyCode: String
+}
+
+class CountyCell: UITableViewCell {
     @IBOutlet private var countyCodeLabel: UILabel!
     @IBOutlet private var countyNameLabel: UILabel!
-    @IBOutlet private var cellContainerView: UIView!
+    @IBOutlet private var countyContainerView: UIView!
     @IBOutlet private var countyCodeContainerView: UIView!
 
     private enum Constant {
@@ -23,16 +33,17 @@ class CountyCellTableViewCell: UITableViewCell {
         static let viewsCornerRadius: CGFloat = 15
     }
 
-    func configure(with viewModel: CountyCellViewModelProvider) {
+    func configure(with viewData: CountyCellViewDataProvider) {
         contentView.backgroundColor = .athensGray
+
         countyCodeContainerView.backgroundColor = Constant.countyCodeBackgroundColor
-        cellContainerView.backgroundColor = Constant.cellBackgrounColor
+        countyContainerView.backgroundColor = Constant.cellBackgrounColor
 
         countyCodeContainerView.setCornerRadius(Constant.viewsCornerRadius)
-        cellContainerView.setCornerRadius(Constant.viewsCornerRadius)
+        countyContainerView.setCornerRadius(Constant.viewsCornerRadius)
 
-        countyCodeLabel.text = viewModel.countyCode
-        countyNameLabel.text = viewModel.countyName
+        countyCodeLabel.text = viewData.countyCode
+        countyNameLabel.text = viewData.countyName
 
         countyCodeLabel.textColor = Constant.countyCodeTextColor
         countyNameLabel.textColor = Constant.countyNameTextColor

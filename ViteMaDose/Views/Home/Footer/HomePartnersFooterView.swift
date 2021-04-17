@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol HomeCellPartnersViewModelProvider: HomeCellViewModelProvider { }
-
-struct HomeCellPartnersViewModel: HomeCellPartnersViewModelProvider {
-    var cellType: HomeCellType = .logos
-}
-
-class HomePartnersTableViewCell: UITableViewCell {
+class HomePartnersFooterView: UIView {
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var logo1ImageView: UIImageView!
@@ -34,17 +28,15 @@ class HomePartnersTableViewCell: UITableViewCell {
         logoImageView5,
     ]
 
-    func configure() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
         titleLabel.text = Constant.titleText
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel
-    }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
         for logoImageView in allLogos {
             logoImageView.image = logoImageView.image?.tint(with: .systemGray)
         }
     }
-    
 }

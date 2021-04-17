@@ -7,24 +7,15 @@
 
 import Foundation
 
-protocol CountyCellViewModelProvider {
-    var countyName: String { get }
-    var countyCode: String { get }
-}
-
-struct CountyCellViewModel: CountyCellViewModelProvider {
-    var countyName: String
-    var countyCode: String
-}
-
 protocol CountySelectionViewModelProvider {
     var numberOfRows: Int { get }
-    func cellViewModel(at indexPath: IndexPath) -> CountyCellViewModel?
-    func county(at indexPath: IndexPath) -> County?
+    func cellViewModel(at indexPath: IndexPath) -> CountyCellViewDataProvider?
+    func didSelectCell(at indexPath: IndexPath)
 }
 
 protocol CountySelectionViewModelDelegate: class {
     func reloadTableView(with counties: Counties)
+    func dismissViewController(with county: County)
 }
 
 class CountySelectionViewModel: CountySelectionViewModelProvider {
@@ -45,9 +36,11 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
     ) {
         self.apiService = apiService
         self.allCounties = counties
+
+        delegate?.reloadTableView(with: counties)
     }
 
-    func cellViewModel(at indexPath: IndexPath) -> CountyCellViewModel? {
+    func cellViewModel(at indexPath: IndexPath) -> CountyCellViewDataProvider? {
         guard let county = allCounties[safe: indexPath.row] else {
             assertionFailure("No county found at IndexPath \(indexPath)")
             return nil
@@ -59,13 +52,19 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
             return nil
         }
 
-        return CountyCellViewModel(
+        return CountyCellViewData(
             countyName: countyName,
-            countyCode: String(countyCode)
+            countyCode: countyCode
         )
     }
 
-    func county(at indexPath: IndexPath) -> County? {
-        return allCounties[safe: indexPath.row]
+    func didSelectCell(at indexPath: IndexPath) {
+        guard let county = allCounties[safe: indexPath.row] else {
+            assertionFailure("County not found at indexPath \(indexPath)")
+            return
+        }
+
+        UserDefaults.lastSelectedCountyCode = county.codeDepartement
+        delegate?.dismissViewController(with: county)
     }
 }

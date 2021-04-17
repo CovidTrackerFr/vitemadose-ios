@@ -15,8 +15,8 @@ protocol CountySelectionViewControllerDelegate: class {
 class CountySelectionViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     weak var delegate: CountySelectionViewControllerDelegate?
-    
-    var viewModel: CountySelectionViewModelProvider!
+
+    var viewModel: CountySelectionViewModel!
 
     private lazy var countySelectionHeaderView: CountySelectionHeaderView = CountySelectionHeaderView.instanceFromNib()
 
@@ -27,12 +27,13 @@ class CountySelectionViewController: UIViewController, Storyboarded {
         }
         tableView.delegate = self
         tableView.dataSource = self
+        viewModel.delegate = self
         view.backgroundColor = .athensGray
         tableView.backgroundColor = .athensGray
         tableView.tableHeaderView = countySelectionHeaderView
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(cellType: CountyCellTableViewCell.self)
+        tableView.register(cellType: CountyCell.self)
     }
 
     override func viewDidLayoutSubviews() {
@@ -49,7 +50,7 @@ extension CountySelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(with: CountyCellTableViewCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(with: CountyCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
             assertionFailure("Cell view model missing at \(indexPath)")
             return UITableViewCell()
@@ -64,18 +65,19 @@ extension CountySelectionViewController: UITableViewDataSource {
 
 extension CountySelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let county = viewModel.county(at: indexPath) else {
-            fatalError("Unexpected indexPath for county selection: \(indexPath)")
-        }
-        dismiss(animated: true) { [weak self] in
-            self?.delegate?.didSelect(county: county)
-        }
+        viewModel.didSelectCell(at: indexPath)
     }
 }
 
 extension CountySelectionViewController: CountySelectionViewModelDelegate {
     func reloadTableView(with counties: Counties) {
         tableView.reloadData()
+    }
+
+    func dismissViewController(with county: County) {
+        dismiss(animated: true) { [weak self] in
+            self?.delegate?.didSelect(county: county)
+        }
     }
 }
 
