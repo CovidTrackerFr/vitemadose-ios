@@ -1,0 +1,59 @@
+//
+//  RemoteConfig.swift
+//  ViteMaDose
+//
+//  Created by Paul on 14/04/2021.
+//
+
+import Foundation
+import FirebaseRemoteConfig
+
+struct RemoteConfiguration {
+    static let shared = RemoteConfiguration()
+
+    let configuration: RemoteConfig
+
+    private init() {
+        configuration = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+
+        configuration.setDefaults(fromPlist: "remote-configuration")
+        settings.minimumFetchInterval = 3600
+        configuration.configSettings = settings
+    }
+
+    func synchronize(completion: @escaping (Result<Void, APIEndpoint.APIError>) -> ()) {
+        configuration.fetch(withExpirationDuration: 0) { (status, error) in
+            guard error == nil else {
+                print("Error while fetching remote configuration (\(error.debugDescription)).")
+                completion(.failure(APIEndpoint.APIError.apiError))
+                return
+            }
+
+            configuration.activate()
+            print("[RemoteConfiguration] Successfully fetched remote configuration.")
+            completion(.success(()))
+        }
+    }
+}
+
+// MARK: - Defaults values
+
+extension RemoteConfiguration {
+    var baseUrl: String {
+        return configuration.configValue(forKey: "url_base").stringValue!
+    }
+
+    var statsPath: String {
+        return configuration.configValue(forKey: "path_stats").stringValue!
+    }
+
+    var countiesListPath: String {
+        return configuration.configValue(forKey: "path_list_departments").stringValue!
+    }
+
+    func countyDataPath(for county: String) -> String {
+        let path = configuration.configValue(forKey: "path_data_department").stringValue!
+        return path.replacingOccurrences(of: "{code}", with: county)
+    }
+}

@@ -132,12 +132,16 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
 
     func bookingLink(at indexPath: IndexPath) -> URL? {
         guard
-            let bookingUrlString = allVaccinationCentres[safe: indexPath.row]?.url,
+            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
+            let bookingUrlString = vaccinationCentre.url,
             let bookingUrl = URL(string: bookingUrlString),
             bookingUrl.isValid
         else {
             return nil
         }
+
+        AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
+
         return bookingUrl
     }
 

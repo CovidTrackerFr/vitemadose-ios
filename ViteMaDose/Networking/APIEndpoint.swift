@@ -20,17 +20,17 @@ enum APIEndpoint {
 
 extension APIEndpoint: EndpointType {
     var baseURL: URL {
-        return URL(staticString: "https://vitemadose.gitlab.io/vitemadose/")
+        return URL(string: RemoteConfiguration.shared.baseUrl)!
     }
-    
+
     var path: URL {
         switch self {
             case .counties:
-                return baseURL.appendingPathComponent("departements.json")
+                return baseURL.appendingPathComponent(RemoteConfiguration.shared.countiesListPath)
             case let .vaccinationCentres(county):
-                return baseURL.appendingPathComponent("\(county).json")
+                return baseURL.appendingPathComponent(RemoteConfiguration.shared.countyDataPath(for: county))
             case .stats:
-                return baseURL.appendingPathComponent("stats.json")
+                return baseURL.appendingPathComponent(RemoteConfiguration.shared.statsPath)
         }
     }
 }
@@ -44,7 +44,7 @@ extension APIEndpoint {
         case noData
         case decodeError
         case unknown
-        
+
         var localizedDescription: String {
             switch self {
                 case .apiError, .invalidEndpoint:

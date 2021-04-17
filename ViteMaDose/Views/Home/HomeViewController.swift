@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import FirebaseAnalytics
 
 class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
@@ -43,8 +44,11 @@ class HomeViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        viewModel.fetchCounties()
-        viewModel.fetchStats()
+
+        RemoteConfiguration.shared.synchronize { [unowned self] _ in
+            self.viewModel.fetchCounties()
+            self.viewModel.fetchStats()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -129,6 +133,8 @@ extension HomeViewController: HomeHeaderViewDelegate {
             guard let self = self else { return }
             self.present(countySelectionViewController, animated: true)
         }
+
+        AppAnalytics.didTapSearchBar()
     }
 }
 
@@ -172,6 +178,7 @@ extension HomeViewController: UITableViewDelegate {
                     let config = SFSafariViewController.Configuration()
                     let safariViewController = SFSafariViewController(url: url, configuration: config)
                     present(safariViewController, animated: true)
+                    AppAnalytics.didOpenVaccinationCentresMap()
                 }
             default:
                 return
@@ -186,5 +193,6 @@ extension HomeViewController: CountySelectionViewControllerDelegate {
         let vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
         vaccinationCentresViewController.viewModel = VaccinationCentresViewModel(county: county)
         navigationController?.show(vaccinationCentresViewController, sender: self)
+        AppAnalytics.didSelectCounty(county)
     }
 }
