@@ -475,7 +475,8 @@
 				576738B9261E329C004A700D /* Frameworks */,
 				576738BA261E329C004A700D /* Resources */,
 				57613EF8262507C800AB6F2F /* Embed Frameworks */,
-				DA68646626276624005B2AC2 /* ShellScript */,
+				DA68646626276624005B2AC2 /* Crashlytics */,
+				577A7F2B262B8AB600B1D03C /* Firebase SPM  */,
 			);
 			buildRules = (
 			);
@@ -616,7 +617,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DA68646626276624005B2AC2 /* ShellScript */ = {
+		577A7F2B262B8AB600B1D03C /* Firebase SPM  */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase SPM ";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Fixes binary framework bug, see:\n# https://developer.apple.com/documentation/xcode-release-notes/xcode-12_4-release-notes#Swift-Packages\n# https://github.com/firebase/firebase-ios-sdk/issues/6472\n#\n\necho \"Removing static frameworks from ${TARGET_NAME}.app\"\nfind \"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/\" -name '*.framework' -print0 | while IFS= read -r -d '' fm; do\n    name=$(basename \"${fm}\" .framework)\n    target=\"${fm}/${name}\"\n    echo \"Checking: ${fm}\"\n    if file \"${target}\" | grep -q \"current ar archive\"; then\n        rm -rf \"${fm}\"\n        echo \"Removed static framework: ${fm}\"\n    fi\ndone\n";
+		};
+		DA68646626276624005B2AC2 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 12;
@@ -626,13 +645,14 @@
 			);
 			inputPaths = (
 			);
+			name = Crashlytics;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+			shellScript = "${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
