@@ -51,7 +51,7 @@ class VaccinationCentresHeaderView: UIView {
         static let titleSecondPartText = "doses"
         static let titleThirdText = "pour le département"
         static let titleNoDoseText = "Nous n'avons pas trouvé de doses pour le département"
-        static let subtitleText = "Liste des Centres"
+        static let subtitleText = "Liste des centres"
 
         static let availableCentresText = "Centres avec rendez-vous"
         static let allCentresText = "Centres trouvés au total"
@@ -69,6 +69,7 @@ class VaccinationCentresHeaderView: UIView {
 
         subtitleLabel.text = Constant.subtitleText
         subtitleLabel.font = Constant.titleFont
+        subtitleLabel.isHidden = viewModel.allCentresCount == 0
 
         configureAvailableCentresView(viewModel)
         configureAllCentresView(viewModel)
@@ -92,14 +93,14 @@ class VaccinationCentresHeaderView: UIView {
             return title
         }
 
-        let dosesCountString = String(dosesCount)
-        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleSecondPartText) \(Constant.titleThirdText) \(countyName)"
+        let dosesCountString = "\(String(dosesCount)) \(Constant.titleSecondPartText)"
+        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleThirdText) \(countyName)"
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
         )
-        title.setColorForText(textForAttribute: dosesCountString, withColor: .systemGreen)
-        title.setColorForText(textForAttribute: countyName, withColor: .mandy)
+        title.setColorForText(textForAttribute: dosesCountString, withColor: .mandy)
+        title.setColorForText(textForAttribute: countyName, withColor: .royalBlue)
 
         return title
     }

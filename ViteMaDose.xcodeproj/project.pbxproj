@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		575C5FBD262610C100A53F23 /* VaccinationCentresHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */; };
 		575C5FC3262610CE00A53F23 /* VaccinationCentresHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */; };
-		57613EE6262505B600AB6F2F /* UIImageViewAligned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */; };
+		575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC210262AD8F7008D1869 /* PhoneNumberKit */; };
+		575CC218262ADA0D008D1869 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC217262ADA0D008D1869 /* FirebaseRemoteConfig */; };
+		575CC21A262ADA0D008D1869 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC219262ADA0D008D1869 /* FirebaseAnalytics */; };
+		575CC21C262ADA0D008D1869 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC21B262ADA0D008D1869 /* FirebaseCrashlytics */; };
 		57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFC2625085000AB6F2F /* SwiftDate */; };
 		57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFE2625085000AB6F2F /* SwiftDateStatic */; };
 		57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613F02262510D700AB6F2F /* PartnerLogo.swift */; };
@@ -45,6 +48,7 @@
 		57AD21DE2621042700ED2B95 /* VaccinationCentresViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */; };
 		57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */; };
 		57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */; };
+		57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */; };
 		57C4017626235B6200EFFCA3 /* HomePartnersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017426235B6200EFFCA3 /* HomePartnersTableViewCell.swift */; };
 		57C4017726235B6200EFFCA3 /* HomePartnersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4017526235B6200EFFCA3 /* HomePartnersTableViewCell.xib */; };
 		57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */; };
@@ -61,9 +65,6 @@
 		DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA234DD02626506600D6F71C /* RemoteConfig.swift */; };
 		DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */; };
 		DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* CountySelectionViewModel.swift */; };
-		DA68645C262765C9005B2AC2 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = DA68645B262765C9005B2AC2 /* FirebaseAnalyticsSwift-Beta */; };
-		DA68645E262765C9005B2AC2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = DA68645D262765C9005B2AC2 /* FirebaseRemoteConfig */; };
-		DA686460262765C9005B2AC2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA68645F262765C9005B2AC2 /* FirebaseCrashlytics */; };
 		DA68647B2627A1CA005B2AC2 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68647A2627A1CA005B2AC2 /* AppAnalytics.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,7 +101,6 @@
 /* Begin PBXFileReference section */
 		575C5FBC262610C000A53F23 /* VaccinationCentresHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresHeaderView.swift; sourceTree = "<group>"; };
 		575C5FC2262610CE00A53F23 /* VaccinationCentresHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaccinationCentresHeaderView.xib; sourceTree = "<group>"; };
-		57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewAligned.swift; sourceTree = "<group>"; };
 		57613F02262510D700AB6F2F /* PartnerLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerLogo.swift; sourceTree = "<group>"; };
 		576738BC261E329C004A700D /* ViteMaDose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViteMaDose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738BF261E329C004A700D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +140,7 @@
 		57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VaccinationCentresViewController.storyboard; sourceTree = "<group>"; };
 		57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CountySelectionViewController.storyboard; sourceTree = "<group>"; };
 		57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresViewModel.swift; sourceTree = "<group>"; };
+		57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Commons.swift"; sourceTree = "<group>"; };
 		57C4017426235B6200EFFCA3 /* HomePartnersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePartnersTableViewCell.swift; sourceTree = "<group>"; };
 		57C4017526235B6200EFFCA3 /* HomePartnersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePartnersTableViewCell.xib; sourceTree = "<group>"; };
 		57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Commons.swift"; sourceTree = "<group>"; };
@@ -164,11 +165,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA68645C262765C9005B2AC2 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */,
-				DA686460262765C9005B2AC2 /* FirebaseCrashlytics in Frameworks */,
+				575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */,
 				57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */,
-				DA68645E262765C9005B2AC2 /* FirebaseRemoteConfig in Frameworks */,
+				575CC21C262ADA0D008D1869 /* FirebaseCrashlytics in Frameworks */,
+				575CC21A262ADA0D008D1869 /* FirebaseAnalytics in Frameworks */,
+				575CC218262ADA0D008D1869 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +354,7 @@
 				57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */,
 				57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */,
 				57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */,
-				57613EE5262505B600AB6F2F /* UIImageViewAligned.swift */,
+				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -483,9 +485,10 @@
 			packageProductDependencies = (
 				57613EFC2625085000AB6F2F /* SwiftDate */,
 				57613EFE2625085000AB6F2F /* SwiftDateStatic */,
-				DA68645B262765C9005B2AC2 /* FirebaseAnalyticsSwift-Beta */,
-				DA68645D262765C9005B2AC2 /* FirebaseRemoteConfig */,
-				DA68645F262765C9005B2AC2 /* FirebaseCrashlytics */,
+				575CC210262AD8F7008D1869 /* PhoneNumberKit */,
+				575CC217262ADA0D008D1869 /* FirebaseRemoteConfig */,
+				575CC219262ADA0D008D1869 /* FirebaseAnalytics */,
+				575CC21B262ADA0D008D1869 /* FirebaseCrashlytics */,
 			);
 			productName = ViteMaDose;
 			productReference = 576738BC261E329C004A700D /* ViteMaDose.app */;
@@ -560,7 +563,8 @@
 			mainGroup = 576738B3261E329C004A700D;
 			packageReferences = (
 				57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */,
-				DA68645A262765C9005B2AC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
+				575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 576738BD261E329C004A700D /* Products */;
 			projectDirPath = "";
@@ -649,7 +653,6 @@
 				57673948261E3D1A004A700D /* HomeHeaderView.swift in Sources */,
 				57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */,
 				5767390A261E3875004A700D /* County.swift in Sources */,
-				57613EE6262505B600AB6F2F /* UIImageViewAligned.swift in Sources */,
 				57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */,
 				5767397F261E5ABC004A700D /* APIEndpoint.swift in Sources */,
 				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
@@ -661,6 +664,7 @@
 				DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,
 				57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */,
+				57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */,
 				5793484C262241B900F8A4A0 /* Stats.swift in Sources */,
 				57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */,
 				DA68647B2627A1CA005B2AC2 /* AppAnalytics.swift in Sources */,
@@ -852,7 +856,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.covidtracker.vmd;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -872,7 +876,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.covidtracker.vmd;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1001,6 +1005,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.3;
+			};
+		};
+		575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
 		57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/malcommac/SwiftDate.git";
@@ -1009,17 +1029,29 @@
 				minimumVersion = 6.3.1;
 			};
 		};
-		DA68645A262765C9005B2AC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		575CC210262AD8F7008D1869 /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
+		};
+		575CC217262ADA0D008D1869 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		575CC219262ADA0D008D1869 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		575CC21B262ADA0D008D1869 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		57613EFC2625085000AB6F2F /* SwiftDate */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
@@ -1029,21 +1061,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDateStatic;
-		};
-		DA68645B262765C9005B2AC2 /* FirebaseAnalyticsSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA68645A262765C9005B2AC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAnalyticsSwift-Beta";
-		};
-		DA68645D262765C9005B2AC2 /* FirebaseRemoteConfig */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA68645A262765C9005B2AC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfig;
-		};
-		DA68645F262765C9005B2AC2 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA68645A262765C9005B2AC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

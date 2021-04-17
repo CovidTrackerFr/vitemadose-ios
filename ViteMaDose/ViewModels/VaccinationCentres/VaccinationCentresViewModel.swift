@@ -8,6 +8,7 @@
 import Foundation
 import SwiftDate
 import UIKit
+import PhoneNumberKit
 
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
@@ -20,12 +21,15 @@ protocol VaccinationCentresViewModelProvider {
 protocol VaccinationCentresViewModelDelegate: class {
     func reloadTableViewHeader(with viewModel: VaccinationCentresHeaderViewModelProvider)
     func reloadTableView(isEmpty: Bool)
+    func reloadTableViewFooter(with text: String?)
     func updateLoadingState(isLoading: Bool)
     func displayError(withMessage message: String)
 }
 
 class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
     private let apiService: APIService
+    private let phoneNumberKit = PhoneNumberKit()
+
     private var allVaccinationCentres: [VaccinationCentre] = []
     private var isLoading = false {
         didSet {
@@ -55,11 +59,6 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             url = URL(string: urlString)
         }
 
-        var dosesText: String?
-        if let dosesCount = vaccinationCentre.appointmentCount {
-            dosesText = "\(String(dosesCount)) dose(s)"
-        }
-
         let isAvailable = vaccinationCentre.prochainRdv != nil
 
         let region = Region(
@@ -84,7 +83,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable ? "Prendre Rendez-Vous" : "Vérifier Ce Centre"
+        let bookingButtonText = isAvailable ? "Prendre rendez-vous" : "Vérifier ce centre"
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(
             systemName: "arrow.up.right",
@@ -101,15 +100,30 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
 
         bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
+        var phoneText: String?
+        if let phoneNumber = vaccinationCentre.metadata?.phoneNumber {
+            do {
+                let parsedPhoneNumber = try phoneNumberKit.parse(
+                    phoneNumber,
+                    withRegion: "FR",
+                    ignoreType: true
+                )
+                phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
+            }
+            catch {
+                phoneText = phoneNumber
+            }
+        }
+
         return VaccinationBookingCellViewModel(
             dayText: dayString,
             timeText: timeString,
             addressNameText: vaccinationCentre.nom ?? "Nom du centre indisponible",
             addressText: vaccinationCentre.metadata?.address ?? "Addresse indisponible",
-            phoneText: vaccinationCentre.metadata?.phoneNumber,
+            phoneText: phoneText,
             bookingButtonText: bookingButtonAttributedText,
             vaccineTypesText: vaccinationCentre.vaccineType?.joined(separator: ", "),
-            dosesText: dosesText,
+            dosesCount: vaccinationCentre.appointmentCount,
             isAvailable: isAvailable,
             url: url,
             partnerLogo: partnerLogo
@@ -143,7 +157,15 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             allCentresCount: allVaccinationCentres.count
         )
 
+        var footerText: String?
+        if let lastUpdate = vaccinationCentres.lastUpdated?.toDate() {
+            let lastUpdateDay = lastUpdate.toString(.date(.short))
+            let lastUpdateTime = lastUpdate.toString(.time(.short))
+            footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
+        }
+
         delegate?.reloadTableViewHeader(with: headerViewModel)
+        delegate?.reloadTableViewFooter(with: footerText)
         delegate?.reloadTableView(isEmpty: isEmpty)
     }
 

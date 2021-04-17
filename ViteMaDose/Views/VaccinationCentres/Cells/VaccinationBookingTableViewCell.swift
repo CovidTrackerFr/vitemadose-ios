@@ -15,7 +15,7 @@ protocol VaccinationBookingCellViewModelProvider {
     var phoneText: String? { get }
     var bookingButtonText: NSMutableAttributedString { get }
     var vaccineTypesText: String? { get }
-    var dosesText: String? { get }
+    var dosesCount: Int? { get }
     var isAvailable: Bool { get }
     var url: URL? { get }
     var partnerLogo: UIImage? { get }
@@ -29,7 +29,7 @@ struct VaccinationBookingCellViewModel: VaccinationBookingCellViewModelProvider 
     var phoneText: String?
     var bookingButtonText: NSMutableAttributedString
     var vaccineTypesText: String?
-    var dosesText: String?
+    var dosesCount: Int?
     var isAvailable: Bool
     var url: URL?
     var partnerLogo: UIImage?
@@ -52,10 +52,8 @@ class VaccinationBookingTableViewCell: UITableViewCell {
     @IBOutlet var vaccineTypesContainer: UIStackView!
     @IBOutlet private var vaccineTypesLabel: UILabel!
 
-    @IBOutlet var dosesContainer: UIStackView!
     @IBOutlet var vaccineTypesIconContainer: UIView!
     @IBOutlet var dosesLabel: UILabel!
-    @IBOutlet var partnerLogoImageView: UIImageView!
 
     @IBOutlet private var bookingbutton: UIButton!
     @IBOutlet private var cellContentView: UIView!
@@ -79,6 +77,7 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         static let labelPrimaryFont: UIFont = .systemFont(ofSize: 16, weight: .medium)
         static let labelPrimaryColor: UIColor = .label
         static let labelSecondaryColor: UIColor = .secondaryLabel
+        static let dosesLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
     }
 
     override func awakeFromNib() {
@@ -118,10 +117,6 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
-        dosesLabel.text = viewModel.dosesText
-        dosesLabel.font = Constant.labelPrimaryFont
-        dosesLabel.textColor = Constant.labelPrimaryColor
-
         bookingbutton.backgroundColor = viewModel.isAvailable ? .royalBlue : .darkGray
         bookingbutton.setTitleColor(.white, for: .normal)
         bookingbutton.setAttributedTitle(viewModel.bookingButtonText, for: .normal)
@@ -131,15 +126,8 @@ class VaccinationBookingTableViewCell: UITableViewCell {
             for: .touchUpInside
         )
 
-        dosesLabel.textAlignment = .center
-        partnerLogoImageView.isHidden = viewModel.partnerLogo == nil
-        if let partnerLogo = viewModel.partnerLogo {
-            let tintedLogo = partnerLogo.tint(with: .systemGray)
-            partnerLogoImageView.image = tintedLogo
-            dosesLabel.textAlignment = .right
-        }
-
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
+        configureDosesLabel(dosesCount: viewModel.dosesCount, partnerLogo: viewModel.partnerLogo)
     }
 
     @objc private func didTapBookButton() {
@@ -194,6 +182,37 @@ class VaccinationBookingTableViewCell: UITableViewCell {
 
         return dateText
     }
+
+    private func configureDosesLabel(
+        dosesCount: Int?,
+        partnerLogo: UIImage?
+    ) {
+        let attributes = [
+            NSAttributedString.Key.font: Constant.dosesLabelFont,
+            NSAttributedString.Key.foregroundColor: Constant.labelSecondaryColor,
+        ]
+
+        guard let dosesCount = dosesCount, dosesCount > 0 else {
+            dosesLabel.isHidden = true
+            return
+        }
+
+        dosesLabel.isHidden = false
+        let dosesText: String = dosesCount > 1 ? String("\(dosesCount) doses ") : String("\(dosesCount) dose ")
+
+        guard let logo = partnerLogo?.tint(with: .systemGray) else {
+            dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)
+            return
+        }
+
+        let attachmentLogo = NSTextAttachment(rightImage: logo, height: 20, offset: 10)
+        let logoString = NSAttributedString(attachment: attachmentLogo)
+        let dosesAndLogoString = NSMutableAttributedString(string: dosesText, attributes: attributes)
+        dosesAndLogoString.append(logoString)
+
+        dosesLabel.attributedText = dosesAndLogoString
+    }
+
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {
         views.forEach{ $0.setCornerRadius(radius) }

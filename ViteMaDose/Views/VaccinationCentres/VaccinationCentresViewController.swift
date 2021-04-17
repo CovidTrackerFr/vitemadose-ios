@@ -18,6 +18,14 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         return view
     }()
 
+    private lazy var footerView: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .tertiaryLabel
+        label.textAlignment = .center
+        return label
+    }()
+
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
@@ -35,36 +43,76 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         guard viewModel != nil else {
             preconditionFailure("VaccinationCentresViewController should have a ViewModel!")
         }
+
+        configureTableView()
+        configureNavigationBar()
+
         view.backgroundColor = .athensGray
-
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.backgroundColor = .athensGray
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.tableHeaderView = vaccinationCentresHeaderView
-        tableView.refreshControl = refreshControl
-        tableView.backgroundView = activityIndicator
-        tableView.register(cellType: VaccinationBookingTableViewCell.self)
-
         viewModel.delegate = self
         viewModel.fetchVaccinationCentres()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.updateHeaderViewHeight()
     }
 
-    @objc func didPullToRefresh() {
+    @objc private func didPullToRefresh() {
         viewModel.fetchVaccinationCentres()
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 
     private func openBookingUrl(_ url: URL) {
         let config = SFSafariViewController.Configuration()
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
+    }
+
+    private func configureNavigationBar() {
+        let backButtonImageConfiguration = UIImage.SymbolConfiguration.init(
+            pointSize: 24,
+            weight: .semibold,
+            scale: .medium
+        )
+        let backButtonImage = UIImage(
+            systemName: "arrow.left",
+            withConfiguration: backButtonImageConfiguration
+        )?.withTintColor(.label, renderingMode: .alwaysOriginal)
+
+        let backButton = UIButton(type: .custom)
+        backButton.setImage(backButtonImage, for: .normal)
+        backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+
+        navigationItem.setLeftBarButton(backBarButtonItem, animated: false)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.backgroundColor = .athensGray
+        tableView.contentInset.top = -10
+
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.tableHeaderView = vaccinationCentresHeaderView
+        tableView.tableFooterView = footerView
+
+        tableView.refreshControl = refreshControl
+        tableView.backgroundView = activityIndicator
+
+        tableView.register(cellType: VaccinationBookingTableViewCell.self)
     }
 }
 
@@ -77,6 +125,11 @@ extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate 
 
     func reloadTableView(isEmpty: Bool) {
         tableView.reloadData()
+    }
+
+    func reloadTableViewFooter(with text: String?) {
+        footerView.text = text
+        footerView.sizeToFit()
     }
 
     func updateLoadingState(isLoading: Bool) {
@@ -119,5 +172,9 @@ extension VaccinationCentresViewController: UITableViewDelegate {
     }
 }
 
-extension VaccinationCentresViewController {
+// TODO: Base View Controller
+extension VaccinationCentresViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
