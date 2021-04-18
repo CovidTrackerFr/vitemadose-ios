@@ -11,20 +11,31 @@ import UIKit
 import PhoneNumberKit
 import APIRequest
 
+// MARK: - Vaccination Centres Cell ViewModel
+
+enum VaccinationCentresSection: CaseIterable {
+    case centres
+}
+
+enum VaccinationCentresCell: Hashable {
+    case title(HomeTitleCellViewData)
+    case stats(CentresStatsCellViewData)
+    case centre(CentreViewData)
+}
+
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
-    var numberOfRows: Int { get }
-    func fetchVaccinationCentres()
-    func cellViewModel(at indexPath: IndexPath) -> VaccinationBookingCellViewModelProvider?
+    var vaccinationCentres: VaccinationCentres? { get }
+    func load()
     func bookingLink(at indexPath: IndexPath) -> URL?
 }
 
 protocol VaccinationCentresViewModelDelegate: class {
-    func reloadTableViewHeader(with viewModel: VaccinationCentresHeaderViewModelProvider)
-    func reloadTableView(isEmpty: Bool)
+    func updateLoadingState(isLoading: Bool, isEmpty: Bool)
+
+    func presentLoadError(_ error: Error)
+    func reloadTableView(with cells: [VaccinationCentresCell])
     func reloadTableViewFooter(with text: String?)
-    func updateLoadingState(isLoading: Bool)
-    func displayError(withMessage message: String)
 }
 
 class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
@@ -34,7 +45,8 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
     private var allVaccinationCentres: [VaccinationCentre] = []
     private var isLoading = false {
         didSet {
-            delegate?.updateLoadingState(isLoading: isLoading)
+            let isEmpty = vaccinationCentres == nil
+            delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
         }
     }
 
@@ -44,35 +56,107 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         locale: Locale(identifier: "fr_FR")
     )
 
+    private var cells: [VaccinationCentresCell] = []
+    private var footerText: String?
+
     var county: County
+    var vaccinationCentres: VaccinationCentres?
+
     weak var delegate: VaccinationCentresViewModelDelegate?
 
     var numberOfRows: Int {
         return allVaccinationCentres.count
     }
 
-    init(apiService: APIServiceProvider = APIService(), county: County) {
+    init(
+        apiService: APIServiceProvider = APIService(),
+        county: County
+    ) {
         self.apiService = apiService
         self.county = county
     }
 
-    func cellViewModel(at indexPath: IndexPath) -> VaccinationBookingCellViewModelProvider? {
-        guard let vaccinationCentre = allVaccinationCentres[safe: indexPath.row] else {
-            return nil
+    private func handleLoad(with vaccinationCentres: VaccinationCentres) {
+        self.vaccinationCentres = vaccinationCentres
+
+        updateCells()
+        updateFooterText()
+
+        delegate?.reloadTableView(with: cells)
+        delegate?.reloadTableViewFooter(with: footerText)
+    }
+
+    private func updateCells() {
+        guard let vaccinationCentres = vaccinationCentres else {
+            cells.removeAll()
+            return
         }
 
+        let isEmpty = vaccinationCentres.centresDisponibles.isEmpty && vaccinationCentres.centresIndisponibles.isEmpty
+        allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
+
+        let dosesCount = vaccinationCentres.centresDisponibles.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        let vaccinationCentreCellsViewData = allVaccinationCentres.map({ getVaccinationCentreViewData($0) })
+
+        let mainTitleViewData = HomeTitleCellViewData(
+            titleText: CentresTitleCell.mainTitleAttributedText(
+                withDoses: dosesCount,
+                andCountyName: county.nomDepartement ?? ""
+            ),
+            topMargin: 25,
+            bottomMargin: 0
+        )
+
+        let statsCellViewData = CentresStatsCellViewData(
+            dosesCount: dosesCount,
+            availableCentresCount: vaccinationCentres.centresDisponibles.count,
+            allCentresCount: allVaccinationCentres.count
+        )
+
+        cells = [
+            .title(mainTitleViewData),
+            .stats(statsCellViewData),
+        ]
+
+        guard !isEmpty else { return }
+
+        let centresListTitleViewData = HomeTitleCellViewData(
+            titleText: CentresTitleCell.centresListTitle,
+            bottomMargin: 5
+        )
+        let vaccinationCentresViewData = vaccinationCentreCellsViewData.map({
+            VaccinationCentresCell.centre($0)
+        })
+
+        cells.append(.title(centresListTitleViewData))
+        cells.append(contentsOf: vaccinationCentresViewData)
+    }
+
+    private func updateFooterText() {
+        guard let lastUpdate = vaccinationCentres?.lastUpdated?.toDate(nil, region: region) else {
+            footerText = nil
+            return
+        }
+
+        let lastUpdateDay = lastUpdate.toString(.date(.short))
+        let lastUpdateTime = lastUpdate.toString(.time(.short))
+        footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
+    }
+
+
+    func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var url: URL?
-        if let urlString = vaccinationCentre.url {
+        if let urlString = centre.url {
             url = URL(string: urlString)
         }
 
-        let isAvailable = vaccinationCentre.prochainRdv != nil
+        let isAvailable = centre.prochainRdv != nil
 
         var dayString: String?
         var timeString: String?
 
         if
-            let dateString = vaccinationCentre.prochainRdv,
+            let dateString = centre.prochainRdv,
             let date = dateString.toDate(nil, region: region)
         {
             dayString = date.toString(.date(.long))
@@ -80,7 +164,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         }
 
         var partnerLogo: UIImage?
-        if let platform = vaccinationCentre.plateforme {
+        if let platform = centre.plateforme {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
@@ -102,7 +186,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
         var phoneText: String?
-        if let phoneNumber = vaccinationCentre.metadata?.phoneNumber {
+        if let phoneNumber = centre.metadata?.phoneNumber {
             do {
                 let parsedPhoneNumber = try phoneNumberKit.parse(
                     phoneNumber,
@@ -116,15 +200,15 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             }
         }
 
-        return VaccinationBookingCellViewModel(
+        return CentreViewData(
             dayText: dayString,
             timeText: timeString,
-            addressNameText: vaccinationCentre.nom ?? "Nom du centre indisponible",
-            addressText: vaccinationCentre.metadata?.address ?? "Addresse indisponible",
+            addressNameText: centre.nom ?? "Nom du centre indisponible",
+            addressText: centre.metadata?.address ?? "Addresse indisponible",
             phoneText: phoneText,
             bookingButtonText: bookingButtonAttributedText,
-            vaccineTypesText: vaccinationCentre.vaccineType?.joined(separator: ", "),
-            dosesCount: vaccinationCentre.appointmentCount,
+            vaccineTypesText: centre.vaccineType?.joined(separator: ", "),
+            dosesCount: centre.appointmentCount,
             isAvailable: isAvailable,
             url: url,
             partnerLogo: partnerLogo
@@ -140,46 +224,23 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         else {
             return nil
         }
-
+        
         AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
 
         return bookingUrl
     }
 
-    private func didFetchVaccinationCentres(_ vaccinationCentres: VaccinationCentres) {
-        let isEmpty = vaccinationCentres.centresDisponibles.isEmpty && vaccinationCentres.centresIndisponibles.isEmpty
-        allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
-
-        let dosesCount = vaccinationCentres.centresDisponibles.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
-        let headerViewModel = VaccinationCentresHeaderViewModel(
-            dosesCount: dosesCount,
-            countyName: county.nomDepartement ?? "",
-            availableCentresCount: vaccinationCentres.centresDisponibles.count,
-            allCentresCount: allVaccinationCentres.count
-        )
-
-        var footerText: String?
-        if let lastUpdate = vaccinationCentres.lastUpdated?.toDate(nil, region: region) {
-            let lastUpdateDay = lastUpdate.toString(.date(.short))
-            let lastUpdateTime = lastUpdate.toString(.time(.short))
-            footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
-        }
-
-        delegate?.reloadTableViewHeader(with: headerViewModel)
-        delegate?.reloadTableViewFooter(with: footerText)
-        delegate?.reloadTableView(isEmpty: isEmpty)
-    }
-
     private func handleError(_ error: APIResponseStatus) {
-
+        delegate?.presentLoadError(error)
     }
 
-    public func fetchVaccinationCentres() {
+    public func load() {
         guard !isLoading else { return }
         isLoading = true
 
         guard let countyCode = county.codeDepartement else {
-            delegate?.displayError(withMessage: "County code missing")
+            isLoading = false
+            handleError(APIResponseStatus.preconditionRequired)
             return
         }
 
@@ -187,21 +248,10 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             self?.isLoading = false
 
             if let vaccinationCentres = data {
-                self?.didFetchVaccinationCentres(vaccinationCentres)
+                self?.handleLoad(with: vaccinationCentres)
             } else {
                 self?.handleError(status)
             }
         }
     }
 }
-
-private extension Date {
-    var formattedDate: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm E, d MMM y"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-        return dateFormatter.string(from: self)
-    }
-}
-

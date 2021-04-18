@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="333" id="9OQ-na-8CL" customClass="VaccinationBookingTableViewCell" customModule="ViteMaDose" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="333" id="9OQ-na-8CL" customClass="CentreCell" customModule="ViteMaDose" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="333"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9OQ-na-8CL" id="Grl-Pb-9R8">
@@ -222,7 +222,7 @@
                 <constraints>
                     <constraint firstItem="7fb-IB-1V4" firstAttribute="leading" secondItem="Grl-Pb-9R8" secondAttribute="leading" constant="24" id="IRC-56-WSD"/>
                     <constraint firstAttribute="trailing" secondItem="7fb-IB-1V4" secondAttribute="trailing" constant="24" id="Iaz-JT-XxR"/>
-                    <constraint firstAttribute="bottom" secondItem="7fb-IB-1V4" secondAttribute="bottom" constant="12" id="JhH-op-ULt"/>
+                    <constraint firstAttribute="bottom" secondItem="7fb-IB-1V4" secondAttribute="bottom" priority="999" constant="12" id="JhH-op-ULt"/>
                     <constraint firstItem="7fb-IB-1V4" firstAttribute="top" secondItem="Grl-Pb-9R8" secondAttribute="top" constant="12" id="PsK-b1-TS8"/>
                 </constraints>
             </tableViewCellContentView>

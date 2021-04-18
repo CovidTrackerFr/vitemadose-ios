@@ -1,5 +1,5 @@
 //
-//  VaccinationBookingTableViewCell.swift
+//  CentreCell.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 12/04/2021.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol VaccinationBookingCellViewModelProvider {
-    var dayText: String? { get}
+protocol CentreViewDataProvider {
+    var dayText: String? { get }
     var timeText: String? { get }
     var addressNameText: String? { get }
     var addressText: String? { get }
@@ -21,21 +21,21 @@ protocol VaccinationBookingCellViewModelProvider {
     var partnerLogo: UIImage? { get }
 }
 
-struct VaccinationBookingCellViewModel: VaccinationBookingCellViewModelProvider {
-    var dayText: String?
-    var timeText: String?
-    var addressNameText: String?
-    var addressText: String?
-    var phoneText: String?
-    var bookingButtonText: NSMutableAttributedString
-    var vaccineTypesText: String?
-    var dosesCount: Int?
-    var isAvailable: Bool
-    var url: URL?
-    var partnerLogo: UIImage?
+struct CentreViewData: CentreViewDataProvider, Hashable {
+    let dayText: String?
+    let timeText: String?
+    let addressNameText: String?
+    let addressText: String?
+    let phoneText: String?
+    let bookingButtonText: NSMutableAttributedString
+    let vaccineTypesText: String?
+    let dosesCount: Int?
+    let isAvailable: Bool
+    let url: URL?
+    let partnerLogo: UIImage?
 }
 
-class VaccinationBookingTableViewCell: UITableViewCell {
+class CentreCell: UITableViewCell {
     @IBOutlet var dateContainer: UIStackView!
     @IBOutlet var dateIconContainer: UIView!
     @IBOutlet private var dateLabel: UILabel!
@@ -89,37 +89,33 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         cellContentView.setCornerRadius(Constant.cellContentViewCornerRadius)
     }
 
-    func configure(with viewModel: VaccinationBookingCellViewModelProvider?) {
-        guard let viewModel = viewModel else {
-            preconditionFailure("ViewModel is required")
-        }
-
+    func configure(with viewData: CentreViewData) {
         dateLabel.attributedText = createDateText(
-            dayText: viewModel.dayText,
-            timeText: viewModel.timeText,
-            isAvailable: viewModel.isAvailable
+            dayText: viewData.dayText,
+            timeText: viewData.timeText,
+            isAvailable: viewData.isAvailable
         )
 
-        nameLabel.text = viewModel.addressNameText
+        nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor
 
-        addressLabel.text = viewModel.addressText
+        addressLabel.text = viewData.addressText
         addressLabel.textColor = Constant.labelSecondaryColor
 
-        phoneNumberContrainer.isHidden = viewModel.phoneText == nil
-        phoneLabel.text = viewModel.phoneText
+        phoneNumberContrainer.isHidden = viewData.phoneText == nil
+        phoneLabel.text = viewData.phoneText
         phoneLabel.font = Constant.labelPrimaryFont
         phoneLabel.textColor = Constant.labelPrimaryColor
 
-        vaccineTypesContainer.isHidden = viewModel.vaccineTypesText == nil
-        vaccineTypesLabel.text = viewModel.vaccineTypesText
+        vaccineTypesContainer.isHidden = viewData.vaccineTypesText == nil
+        vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
-        bookingbutton.backgroundColor = viewModel.isAvailable ? .royalBlue : .darkGray
+        bookingbutton.backgroundColor = viewData.isAvailable ? .royalBlue : .darkGray
         bookingbutton.setTitleColor(.white, for: .normal)
-        bookingbutton.setAttributedTitle(viewModel.bookingButtonText, for: .normal)
+        bookingbutton.setAttributedTitle(viewData.bookingButtonText, for: .normal)
         bookingbutton.addTarget(
             self,
             action: #selector(didTapBookButton),
@@ -127,7 +123,7 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         )
 
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureDosesLabel(dosesCount: viewModel.dosesCount, partnerLogo: viewModel.partnerLogo)
+        configureDosesLabel(dosesCount: viewData.dosesCount, partnerLogo: viewData.partnerLogo)
     }
 
     @objc private func didTapBookButton() {
