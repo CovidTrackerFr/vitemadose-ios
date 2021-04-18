@@ -166,9 +166,9 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        let _ = apiService.fetchCounties { [weak self] data, status in
+        apiService.fetchCounties { [weak self] data, status in
             if let counties = data {
-                let _ = self?.apiService.fetchStats { data, status in
+                self?.apiService.fetchStats { data, status in
                     if let stats = data {
                         self?.handleInitialLoad(counties: counties, stats: stats)
                         self?.isLoading = false
@@ -188,7 +188,7 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        let _ = apiService.fetchStats { [weak self] data, status in
+        apiService.fetchStats { [weak self] data, status in
             self?.isLoading = false
 
             if let stats = data {

@@ -28,7 +28,7 @@ protocol VaccinationCentresViewModelDelegate: class {
 }
 
 class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
-    private let apiService: APIService
+    private let apiService: APIServiceProvider
     private let phoneNumberKit = PhoneNumberKit()
 
     private var allVaccinationCentres: [VaccinationCentre] = []
@@ -51,7 +51,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         return allVaccinationCentres.count
     }
 
-    init(apiService: APIService = APIService(), county: County) {
+    init(apiService: APIServiceProvider = APIService(), county: County) {
         self.apiService = apiService
         self.county = county
     }
@@ -183,7 +183,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             return
         }
 
-        let _ = apiService.fetchVaccinationCentres(country: countyCode) { [weak self] data, status in
+        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] data, status in
             self?.isLoading = false
 
             if let vaccinationCentres = data {

@@ -9,25 +9,36 @@ import Foundation
 import APIRequest
 
 protocol APIServiceProvider {
-    
+    @discardableResult
     func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest
+    @discardableResult
     func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest
+    @discardableResult
     func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest
-    
 }
 
 struct APIService: APIServiceProvider {
-    
+
     func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest {
-        return APIRequest("GET", path: RemoteConfiguration.shared.countiesListPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Counties.self) { data, status in
+        let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
+        return APIRequest(
+            "GET",
+            path: RemoteConfiguration.shared.countiesListPath,
+            configuration: configuration
+        ).execute(Counties.self) { data, status in
             DispatchQueue.main.async {
                 completion(data, status)
             }
         }
     }
-    
+
     func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest {
-        return APIRequest("GET", path: RemoteConfiguration.shared.countyDataPath(for: country), configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(VaccinationCentres.self) { data, status in
+        let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
+        return APIRequest(
+            "GET",
+            path: RemoteConfiguration.shared.countyDataPath(for: country),
+            configuration: configuration
+        ).execute(VaccinationCentres.self) { data, status in
             DispatchQueue.main.async {
                 completion(data, status)
             }
@@ -35,13 +46,18 @@ struct APIService: APIServiceProvider {
     }
 
     func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest {
-        return APIRequest("GET", path: RemoteConfiguration.shared.statsPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Stats.self) { data, status in
+        let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
+        return APIRequest(
+            "GET",
+            path: RemoteConfiguration.shared.statsPath,
+            configuration: configuration
+        ).execute(Stats.self) { data, status in
             DispatchQueue.main.async {
                 completion(data, status)
             }
         }
     }
-    
+
 }
 
 extension APIResponseStatus: LocalizedError {
