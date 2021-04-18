@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>304644690082-39sltnnigu6perensg3gijmq3jqio8l8.apps.googleusercontent.com</string>
+	<string>304644690082-gsenqm35i0188ik184umvfi07kac0ugb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.304644690082-39sltnnigu6perensg3gijmq3jqio8l8</string>
+	<string>com.googleusercontent.apps.304644690082-gsenqm35i0188ik184umvfi07kac0ugb</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>304644690082-0s11tqu1scargr5g0s0ui1dr3vfhe1m0.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>fr.covidtracker.vmd</string>
+	<string>app.vitemadose</string>
 	<key>PROJECT_ID</key>
 	<string>vite-ma-dose</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:304644690082:ios:767cd5f98797ddb425c7fb</string>
+	<string>1:304644690082:ios:5696ea2b90c567cf25c7fb</string>
 </dict>
 </plist>
