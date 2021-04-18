@@ -6,74 +6,55 @@
 //
 
 import Foundation
+import APIRequest
 
 protocol APIServiceProvider {
-    func fetchCounties(_ endPoint: APIEndpoint, completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ())
-    func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ())
-    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ())
-    func cancelRequest()
+    
+    func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest
+    func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest
+    func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest
+    
 }
 
 struct APIService: APIServiceProvider {
-    let urlSession = URLSession.shared
     
-    func fetchCounties(_ endPoint: APIEndpoint, completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ()) {
-        createRequest(endPoint.path, completion: completion)
+    func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest {
+        return APIRequest("GET", path: RemoteConfiguration.shared.countiesListPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Counties.self) { data, status in
+            DispatchQueue.main.async {
+                completion(data, status)
+            }
+        }
     }
     
-    func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ()) {
-        createRequest(endPoint.path, completion: completion)
+    func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest {
+        return APIRequest("GET", path: RemoteConfiguration.shared.countyDataPath(for: country), configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(VaccinationCentres.self) { data, status in
+            DispatchQueue.main.async {
+                completion(data, status)
+            }
+        }
     }
 
-    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ()) {
-        createRequest(endPoint.path, completion: completion)
-    }
-    
-    func cancelRequest() {
-        urlSession.invalidateAndCancel()
-    }
-    
-    private func createRequest<T: Codable>(_ url: URL, completion: @escaping (Result<T, APIEndpoint.APIError>) -> ()) {
-        let request = URLRequest(
-            url: url,
-            cachePolicy: .reloadIgnoringCacheData,
-            timeoutInterval: 10
-        )
-        urlSession.dataTask(with: request) { (data, urlResponse, error) in
+    func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest {
+        return APIRequest("GET", path: RemoteConfiguration.shared.statsPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Stats.self) { data, status in
             DispatchQueue.main.async {
-                if let error = error {
-                    // Error code -1009: Offline connection
-                    if (error as NSError).code == -1009 {
-                        completion(.failure(.noConnection))
-                        return
-                    }
-                    completion(.failure(.apiError))
-                    return
-                }
-                
-                // Check if the response code is valid
-                // 304: Request resource has not been modified
-                if
-                    let httpResponse = urlResponse as? HTTPURLResponse,
-                    !(200...299).contains(httpResponse.statusCode) && !(httpResponse.statusCode == 304)
-                {
-                    completion(.failure(.invalidResponse))
-                    return
-                }
-                
-                guard let data = data else {
-                    completion(.failure(.noData))
-                    return
-                }
-                
-                guard let decoded = data.decode(T.self) else {
-                    completion(.failure(.decodeError))
-                    return
-                }
-                
-                completion(.success(decoded))
+                completion(data, status)
             }
-        }.resume()
+        }
+    }
+    
+}
+
+extension APIResponseStatus: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+            case .error:
+                return "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard."
+            case .offline:
+                return "Il semblerait que vous soyez hors ligne."
+            default:
+                return "Une erreur est survenue, veuillez réessayer plus tard."
+        }
     }
     
 }
