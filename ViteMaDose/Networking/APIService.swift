@@ -8,7 +8,15 @@
 import Foundation
 import APIRequest
 
-struct APIService {
+protocol APIServiceProvider {
+    
+    func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest
+    func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest
+    func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest
+    
+}
+
+struct APIService: APIServiceProvider {
     
     func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest {
         return APIRequest("GET", path: RemoteConfiguration.shared.countiesListPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Counties.self) { data, status in
@@ -36,16 +44,16 @@ struct APIService {
     
 }
 
-extension APIResponseStatus: Error {
+extension APIResponseStatus: LocalizedError {
     
-    var localizedDescription: String {
+    public var errorDescription: String? {
         switch self {
             case .error:
-                return "We are having troubles with our server right now. Please try again later"
+                return "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard."
             case .offline:
-                return "Your Internet connection appears to be offline."
+                return "Il semblerait que vous soyez hors ligne."
             default:
-                return "An error occurred, please try again"
+                return "Une erreur est survenue, veuillez réessayer plus tard."
         }
     }
     
