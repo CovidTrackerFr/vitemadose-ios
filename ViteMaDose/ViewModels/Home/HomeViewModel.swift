@@ -50,7 +50,7 @@ protocol HomeViewModelDelegate: class {
 }
 
 class HomeViewModel {
-    private let apiService: APIService
+    private let apiService: APIServiceProvider
     weak var delegate: HomeViewModelDelegate?
 
     var counties: Counties = []
@@ -70,7 +70,7 @@ class HomeViewModel {
 
     // MARK: init
 
-    required init(apiService: APIService = APIService()) {
+    required init(apiService: APIServiceProvider = APIService()) {
         self.apiService = apiService
     }
 

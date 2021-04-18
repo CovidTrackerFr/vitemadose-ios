@@ -19,7 +19,7 @@ protocol CountySelectionViewModelDelegate: class {
 }
 
 class CountySelectionViewModel: CountySelectionViewModelProvider {
-    private let apiService: APIService
+    private let apiService: APIServiceProvider
     weak var delegate: CountySelectionViewModelDelegate?
 
     private var allCounties: [County] = []
@@ -31,7 +31,7 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
     // MARK: init
 
     required init(
-        apiService: APIService = APIService(),
+        apiService: APIServiceProvider = APIService(),
         counties: Counties
     ) {
         self.apiService = apiService
