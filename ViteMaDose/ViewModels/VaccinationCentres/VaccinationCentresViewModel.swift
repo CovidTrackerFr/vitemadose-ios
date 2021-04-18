@@ -9,6 +9,7 @@ import Foundation
 import SwiftDate
 import UIKit
 import PhoneNumberKit
+import APIRequest
 
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
@@ -169,7 +170,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         delegate?.reloadTableView(isEmpty: isEmpty)
     }
 
-    private func handleError(_ error: APIEndpoint.APIError) {
+    private func handleError(_ error: APIResponseStatus) {
 
     }
 
@@ -182,16 +183,13 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             return
         }
 
-        let vaccinationCentresEndpoint = APIEndpoint.vaccinationCentres(county: countyCode)
-
-        apiService.fetchVaccinationCentres(vaccinationCentresEndpoint) { [weak self] result in
+        let _ = apiService.fetchVaccinationCentres(country: countyCode) { [weak self] data, status in
             self?.isLoading = false
 
-            switch result {
-                case let .success(vaccinationCentres):
-                    self?.didFetchVaccinationCentres(vaccinationCentres)
-                case .failure(let error):
-                    self?.handleError(error)
+            if let vaccinationCentres = data {
+                self?.didFetchVaccinationCentres(vaccinationCentres)
+            } else {
+                self?.handleError(status)
             }
         }
     }

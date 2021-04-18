@@ -6,74 +6,47 @@
 //
 
 import Foundation
+import APIRequest
 
-protocol APIServiceProvider {
-    func fetchCounties(_ endPoint: APIEndpoint, completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ())
-    func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ())
-    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ())
-    func cancelRequest()
+struct APIService {
+    
+    func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> ()) -> APIRequest {
+        return APIRequest("GET", path: RemoteConfiguration.shared.countiesListPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Counties.self) { data, status in
+            DispatchQueue.main.async {
+                completion(data, status)
+            }
+        }
+    }
+    
+    func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest {
+        return APIRequest("GET", path: RemoteConfiguration.shared.countyDataPath(for: country), configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(VaccinationCentres.self) { data, status in
+            DispatchQueue.main.async {
+                completion(data, status)
+            }
+        }
+    }
+
+    func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest {
+        return APIRequest("GET", path: RemoteConfiguration.shared.statsPath, configuration: APIConfiguration(host: RemoteConfiguration.shared.host)).execute(Stats.self) { data, status in
+            DispatchQueue.main.async {
+                completion(data, status)
+            }
+        }
+    }
+    
 }
 
-struct APIService: APIServiceProvider {
-    let urlSession = URLSession.shared
+extension APIResponseStatus: Error {
     
-    func fetchCounties(_ endPoint: APIEndpoint, completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ()) {
-        createRequest(endPoint.path, completion: completion)
-    }
-    
-    func fetchVaccinationCentres(_ endPoint: APIEndpoint, completion: @escaping (Result<VaccinationCentres, APIEndpoint.APIError>) -> ()) {
-        createRequest(endPoint.path, completion: completion)
-    }
-
-    func fetchStats(_ endPoint: APIEndpoint, completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ()) {
-        createRequest(endPoint.path, completion: completion)
-    }
-    
-    func cancelRequest() {
-        urlSession.invalidateAndCancel()
-    }
-    
-    private func createRequest<T: Codable>(_ url: URL, completion: @escaping (Result<T, APIEndpoint.APIError>) -> ()) {
-        let request = URLRequest(
-            url: url,
-            cachePolicy: .reloadIgnoringCacheData,
-            timeoutInterval: 10
-        )
-        urlSession.dataTask(with: request) { (data, urlResponse, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    // Error code -1009: Offline connection
-                    if (error as NSError).code == -1009 {
-                        completion(.failure(.noConnection))
-                        return
-                    }
-                    completion(.failure(.apiError))
-                    return
-                }
-                
-                // Check if the response code is valid
-                // 304: Request resource has not been modified
-                if
-                    let httpResponse = urlResponse as? HTTPURLResponse,
-                    !(200...299).contains(httpResponse.statusCode) && !(httpResponse.statusCode == 304)
-                {
-                    completion(.failure(.invalidResponse))
-                    return
-                }
-                
-                guard let data = data else {
-                    completion(.failure(.noData))
-                    return
-                }
-                
-                guard let decoded = data.decode(T.self) else {
-                    completion(.failure(.decodeError))
-                    return
-                }
-                
-                completion(.success(decoded))
-            }
-        }.resume()
+    var localizedDescription: String {
+        switch self {
+            case .error:
+                return "We are having troubles with our server right now. Please try again later"
+            case .offline:
+                return "Your Internet connection appears to be offline."
+            default:
+                return "An error occurred, please try again"
+        }
     }
     
 }

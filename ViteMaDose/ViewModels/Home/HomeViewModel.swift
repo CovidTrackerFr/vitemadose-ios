@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import APIRequest
 
 // MARK: - Home Cell ViewModel
 
@@ -49,7 +50,7 @@ protocol HomeViewModelDelegate: class {
 }
 
 class HomeViewModel {
-    private let apiService: APIServiceProvider
+    private let apiService: APIService
     weak var delegate: HomeViewModelDelegate?
 
     var counties: Counties = []
@@ -69,7 +70,7 @@ class HomeViewModel {
 
     // MARK: init
 
-    required init(apiService: APIServiceProvider = APIService()) {
+    required init(apiService: APIService = APIService()) {
         self.apiService = apiService
     }
 
@@ -148,11 +149,11 @@ class HomeViewModel {
         )
     }
 
-    private func handleInitialLoadError(_ error: APIEndpoint.APIError) {
+    private func handleInitialLoadError(_ error: APIResponseStatus) {
         delegate?.presentInitialLoadError(error)
     }
 
-    private func handleStatsError(_ error: APIEndpoint.APIError) {
+    private func handleStatsError(_ error: APIResponseStatus) {
         delegate?.presentFetchStatsError(error)
     }
 }
@@ -165,39 +166,21 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        fetchCounties { [weak self] countiesResult in
-            switch countiesResult {
-                case let .success(counties):
-                    self?.fetchStats { statsResult in
-                        switch statsResult {
-                            case let .success(stats):
-                                self?.handleInitialLoad(counties: counties, stats: stats)
-                                self?.isLoading = false
-                            case let .failure(error):
-                                self?.handleInitialLoadError(error)
-                                self?.isLoading = false
-                        }
+        let _ = apiService.fetchCounties { [weak self] data, status in
+            if let counties = data {
+                let _ = self?.apiService.fetchStats { data, status in
+                    if let stats = data {
+                        self?.handleInitialLoad(counties: counties, stats: stats)
+                        self?.isLoading = false
+                    } else {
+                        self?.handleInitialLoadError(status)
+                        self?.isLoading = false
                     }
-                case let .failure(error):
-                    self?.handleInitialLoadError(error)
-                    self?.isLoading = false
+                }
+            } else {
+                self?.handleInitialLoadError(status)
+                self?.isLoading = false
             }
-        }
-    }
-
-    private func fetchCounties(completion: @escaping (Result<Counties, APIEndpoint.APIError>) -> ()) {
-        let countiesEndpoint = APIEndpoint.counties
-
-        apiService.fetchCounties(countiesEndpoint) { result in
-            completion(result)
-        }
-    }
-
-    private func fetchStats(completion: @escaping (Result<Stats, APIEndpoint.APIError>) -> ()) {
-        let statsEndpoint = APIEndpoint.stats
-
-        apiService.fetchStats(statsEndpoint) { result in
-            completion(result)
         }
     }
 
@@ -205,16 +188,13 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        let statsEndpoint = APIEndpoint.stats
-
-        apiService.fetchStats(statsEndpoint) { [weak self] result in
+        let _ = apiService.fetchStats { [weak self] data, status in
             self?.isLoading = false
 
-            switch result {
-                case let .success(stats):
-                    self?.handleStatsReload(with: stats)
-                case .failure(let error):
-                    self?.handleStatsError(error)
+            if let stats = data {
+                self?.handleStatsReload(with: stats)
+            } else {
+                self?.handleStatsError(status)
             }
         }
     }
