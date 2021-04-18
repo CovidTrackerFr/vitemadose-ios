@@ -57,3 +57,44 @@ class HomeTitleCell: UITableViewCell {
         bottomConstraint.constant = viewData.bottomMargin
     }
 }
+
+extension HomeTitleCell {
+    static var mainTitleAttributedText: NSMutableAttributedString {
+        let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
+        let titleText = "Trouvez une dose de vaccin facilement et rapidement"
+        let titleFirstHighlightedText = "facilement"
+        let titleSecondHighlightedText = "rapidement"
+
+        let attributedText = NSMutableAttributedString(
+            string: titleText,
+            attributes: [
+                NSAttributedString.Key.font: titleFont,
+                NSAttributedString.Key.foregroundColor: UIColor.label,
+            ]
+        )
+
+        attributedText.setColorForText(
+            textForAttribute: titleFirstHighlightedText,
+            withColor: .royalBlue
+        )
+        attributedText.setColorForText(
+            textForAttribute: titleSecondHighlightedText,
+            withColor: .mandy
+        )
+
+        return attributedText
+    }
+
+    static var lastStatsAttributedText: NSMutableAttributedString {
+        let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
+        let titleText = "Dernières statistiques"
+
+        return NSMutableAttributedString(
+            string: titleText,
+            attributes: [
+                NSAttributedString.Key.font: titleFont,
+                NSAttributedString.Key.foregroundColor: UIColor.label,
+            ]
+        )
+    }
+}
