@@ -66,58 +66,66 @@ class HomeStatsCell: UITableViewCell {
 }
 
 struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
+
     var title: NSMutableAttributedString
     var description: String?
     var icon: UIImage?
     var iconContainerColor: UIColor
     var dataType: StatsDataType
 
-    private let iconConfiguration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
-
     init(_ dataType: StatsDataType) {
         self.dataType = dataType
+        icon = dataType.iconImage
 
         switch dataType {
             case let .allCentres(count):
                 title = NSMutableAttributedString(string: String(count))
                 description = "Centres trouvés en France"
-                icon = UIImage(
-                    systemName: "magnifyingglass",
-                    withConfiguration: iconConfiguration
-                )?.withTintColor(.white, renderingMode: .alwaysOriginal)
                 iconContainerColor = .systemOrange
             case let .centresWithAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
                 description = "Centres avec rendez-vous disponibles"
-                icon = UIImage(
-                    systemName: "checkmark",
-                    withConfiguration: iconConfiguration
-                )?.withTintColor(.white, renderingMode: .alwaysOriginal)
                 iconContainerColor = .systemGreen
             case let .allAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
                 description = "Créneaux disponibles"
-                icon = UIImage(
-                    systemName: "calendar",
-                    withConfiguration: iconConfiguration
-                )?.withTintColor(.white, renderingMode: .alwaysOriginal)
                 iconContainerColor = .systemBlue
             case .externalMap:
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.image = UIImage(
                     systemName: "arrow.up.right",
-                    withConfiguration:UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+                    withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
                 )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
                 let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
                 fullString.append(NSAttributedString(attachment: imageAttachment))
                 title = fullString
                 description = nil
-                icon = UIImage(
-                    systemName: "mappin",
-                    withConfiguration: iconConfiguration
-                )?.withTintColor(.white, renderingMode: .alwaysOriginal)
                 iconContainerColor = .systemRed
         }
     }
+
+}
+
+private extension StatsDataType {
+
+    var iconImage: UIImage? {
+        let imageName: String
+        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
+
+        switch self {
+            case .allCentres:
+                imageName = "magnifyingglass"
+            case .centresWithAvailabilities:
+                imageName = "checkmark"
+            case .allAvailabilities:
+                imageName = "calendar"
+            case .externalMap:
+                imageName = "mappin"
+        }
+
+        let image = UIImage(systemName: imageName, withConfiguration: configuration)
+        return image?.withTintColor(.white, renderingMode: .alwaysOriginal)
+    }
+
 }
