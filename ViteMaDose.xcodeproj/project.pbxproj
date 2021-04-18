@@ -481,6 +481,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				577A7F39262B900200B1D03C /* PBXTargetDependency */,
+				577A7F3B262B900200B1D03C /* PBXTargetDependency */,
+				577A7F33262B8FF200B1D03C /* PBXTargetDependency */,
+				577A7F35262B8FF200B1D03C /* PBXTargetDependency */,
+				577A7F37262B8FF200B1D03C /* PBXTargetDependency */,
 			);
 			name = ViteMaDose;
 			packageProductDependencies = (
@@ -633,7 +638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Fixes binary framework bug, see:\n# https://developer.apple.com/documentation/xcode-release-notes/xcode-12_4-release-notes#Swift-Packages\n# https://github.com/firebase/firebase-ios-sdk/issues/6472\n#\n\necho \"Removing static frameworks from ${TARGET_NAME}.app\"\nfind \"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/\" -name '*.framework' -print0 | while IFS= read -r -d '' fm; do\n    name=$(basename \"${fm}\" .framework)\n    target=\"${fm}/${name}\"\n    echo \"Checking: ${fm}\"\n    if file \"${target}\" | grep -q \"current ar archive\"; then\n        rm -rf \"${fm}\"\n        echo \"Removed static framework: ${fm}\"\n    fi\ndone\n";
+			shellScript = "# Fixes binary framework bug, see:\n# https://developer.apple.com/documentation/xcode-release-notes/xcode-12_4-release-notes#Swift-Packages\n# https://github.com/firebase/firebase-ios-sdk/issues/6472\n#\n\n";
 		};
 		DA68646626276624005B2AC2 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -729,6 +734,26 @@
 			isa = PBXTargetDependency;
 			target = 576738BB261E329C004A700D /* ViteMaDose */;
 			targetProxy = 576738DE261E32A3004A700D /* PBXContainerItemProxy */;
+		};
+		577A7F33262B8FF200B1D03C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 577A7F32262B8FF200B1D03C /* FirebaseAnalytics */;
+		};
+		577A7F35262B8FF200B1D03C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 577A7F34262B8FF200B1D03C /* FirebaseCrashlytics */;
+		};
+		577A7F37262B8FF200B1D03C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 577A7F36262B8FF200B1D03C /* FirebaseRemoteConfig */;
+		};
+		577A7F39262B900200B1D03C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 577A7F38262B900200B1D03C /* SwiftDate */;
+		};
+		577A7F3B262B900200B1D03C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 577A7F3A262B900200B1D03C /* PhoneNumberKit */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1081,6 +1106,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDateStatic;
+		};
+		577A7F32262B8FF200B1D03C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		577A7F34262B8FF200B1D03C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		577A7F36262B8FF200B1D03C /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		577A7F38262B900200B1D03C /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57613EFB2625085000AB6F2F /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		577A7F3A262B900200B1D03C /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
