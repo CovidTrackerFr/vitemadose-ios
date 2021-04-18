@@ -94,6 +94,7 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
         tableView.refreshControl = refreshControl
         tableView.backgroundView = activityIndicator
+        tableView.contentInset.bottom = 10
 
         tableView.register(cellType: CentresTitleCell.self)
         tableView.register(cellType: CentreCell.self)

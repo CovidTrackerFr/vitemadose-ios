@@ -11,7 +11,7 @@ class CountySelectionHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
 
     private enum Constant {
-        static let titleText = "Séléctionnez votre département"
+        static let titleText = "Sélectionnez votre département"
         static let highlightedText = "Département"
         static let highlightedTextColor = UIColor.mandy
         static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
