@@ -10,8 +10,6 @@ import APIRequest
 
 // MARK: - Home Cell ViewModel
 
-protocol HomeCellViewDataProvider { }
-
 enum HomeSection: CaseIterable {
     case heading
     case stats

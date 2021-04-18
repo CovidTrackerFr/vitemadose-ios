@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HomeTitleCellViewDataProvider: HomeCellViewDataProvider {
+protocol HomeTitleCellViewDataProvider {
     var titleText: NSMutableAttributedString { get }
     var subTitleText: NSMutableAttributedString? { get }
     var topMargin: CGFloat { get }

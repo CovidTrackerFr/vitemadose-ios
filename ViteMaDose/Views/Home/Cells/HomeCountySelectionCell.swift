@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HomeCountySelectionCellViewDataProvider: HomeCellViewDataProvider {
+protocol HomeCountySelectionCellViewDataProvider {
     var searchBarText: String { get }
 }
 

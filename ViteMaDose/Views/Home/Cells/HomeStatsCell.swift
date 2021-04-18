@@ -14,7 +14,7 @@ enum StatsDataType: Hashable {
     case externalMap
 }
 
-protocol HomeStatsCellViewDataProvider: HomeCellViewDataProvider {
+protocol HomeStatsCellViewDataProvider {
     var title: NSMutableAttributedString { get }
     var description: String? { get }
     var icon: UIImage? { get }
