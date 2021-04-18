@@ -37,6 +37,12 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         }
     }
 
+    private lazy var region = Region(
+        calendar: Calendar.current,
+        zone: Zones.current,
+        locale: Locale(identifier: "fr_FR")
+    )
+
     var county: County
     weak var delegate: VaccinationCentresViewModelDelegate?
 
@@ -60,12 +66,6 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         }
 
         let isAvailable = vaccinationCentre.prochainRdv != nil
-
-        let region = Region(
-            calendar: Calendar.current,
-            zone: Zones.current,
-            locale: Locale(identifier: "fr_FR")
-        )
 
         var dayString: String?
         var timeString: String?
@@ -158,7 +158,7 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         )
 
         var footerText: String?
-        if let lastUpdate = vaccinationCentres.lastUpdated?.toDate() {
+        if let lastUpdate = vaccinationCentres.lastUpdated?.toDate(nil, region: region) {
             let lastUpdateDay = lastUpdate.toString(.date(.short))
             let lastUpdateTime = lastUpdate.toString(.time(.short))
             footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
