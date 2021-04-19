@@ -8,6 +8,7 @@
 import UIKit
 import SafariServices
 import FirebaseAnalytics
+import Haptica
 
 class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
@@ -57,6 +58,11 @@ class HomeViewController: UIViewController, Storyboarded {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AppAnalytics.logScreen(.home, screenClass: Self.className)
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -104,7 +110,6 @@ class HomeViewController: UIViewController, Storyboarded {
         let config = SFSafariViewController.Configuration()
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
-        AppAnalytics.didOpenVaccinationCentresMap()
     }
 }
 
@@ -212,6 +217,7 @@ extension HomeViewController: UITableViewDelegate {
                 presentCountySelectionViewController()
             case .county:
                 viewModel.didSelectLastCounty()
+                Haptic.impact(.light).generate()
             case let .stats(viewData):
                 guard viewData.dataType == .externalMap else {
                     return

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Haptica
 
 protocol CountySelectionViewControllerDelegate: class {
     func didSelect(county: County)
@@ -34,6 +35,11 @@ class CountySelectionViewController: UIViewController, Storyboarded {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(cellType: CountyCell.self)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AppAnalytics.logScreen(.departmentSelect, screenClass: Self.className)
     }
 
     override func viewDidLayoutSubviews() {
@@ -66,6 +72,7 @@ extension CountySelectionViewController: UITableViewDataSource {
 extension CountySelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectCell(at: indexPath)
+        Haptic.impact(.light).generate()
     }
 }
 
