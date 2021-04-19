@@ -26,7 +26,7 @@ enum VaccinationCentresCell: Hashable {
 protocol VaccinationCentresViewModelProvider {
     var county: County { get }
     var vaccinationCentres: VaccinationCentres? { get }
-    func load()
+    func load(animated: Bool)
     func bookingLink(at indexPath: IndexPath) -> URL?
 }
 
@@ -34,11 +34,11 @@ protocol VaccinationCentresViewModelDelegate: class {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentLoadError(_ error: Error)
-    func reloadTableView(with cells: [VaccinationCentresCell])
+    func reloadTableView(with cells: [VaccinationCentresCell], animated: Bool)
     func reloadTableViewFooter(with text: String?)
 }
 
-class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
+class VaccinationCentresViewModel {
     private let apiService: APIServiceProvider
     private let phoneNumberKit = PhoneNumberKit()
 
@@ -76,14 +76,18 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         self.county = county
     }
 
-    private func handleLoad(with vaccinationCentres: VaccinationCentres) {
+    private func handleLoad(with vaccinationCentres: VaccinationCentres, animated: Bool) {
         self.vaccinationCentres = vaccinationCentres
 
         updateCells()
         updateFooterText()
 
-        delegate?.reloadTableView(with: cells)
+        delegate?.reloadTableView(with: cells, animated: animated)
         delegate?.reloadTableViewFooter(with: footerText)
+    }
+
+    private func handleReload(with vaccinationCentres: VaccinationCentres) {
+        handleLoad(with: vaccinationCentres, animated: true)
     }
 
     private func updateCells() {
@@ -215,26 +219,16 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         )
     }
 
-    func bookingLink(at indexPath: IndexPath) -> URL? {
-        guard
-            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
-            let bookingUrlString = vaccinationCentre.url,
-            let bookingUrl = URL(string: bookingUrlString),
-            bookingUrl.isValid
-        else {
-            return nil
-        }
-        
-        AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
-
-        return bookingUrl
-    }
-
     private func handleError(_ error: APIResponseStatus) {
         delegate?.presentLoadError(error)
     }
+}
 
-    public func load() {
+// MARK: - VaccinationCentresViewModelProvider
+
+extension VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
+
+    func load(animated: Bool) {
         guard !isLoading else { return }
         isLoading = true
 
@@ -248,10 +242,26 @@ class VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
             self?.isLoading = false
 
             if let vaccinationCentres = data {
-                self?.handleLoad(with: vaccinationCentres)
+                self?.handleLoad(with: vaccinationCentres, animated: animated)
             } else {
                 self?.handleError(status)
             }
         }
     }
+
+    func bookingLink(at indexPath: IndexPath) -> URL? {
+        guard
+            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
+            let bookingUrlString = vaccinationCentre.url,
+            let bookingUrl = URL(string: bookingUrlString),
+            bookingUrl.isValid
+        else {
+            return nil
+        }
+
+        AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
+
+        return bookingUrl
+    }
+
 }

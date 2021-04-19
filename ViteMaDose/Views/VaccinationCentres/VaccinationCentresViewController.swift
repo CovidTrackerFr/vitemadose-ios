@@ -9,6 +9,7 @@ import UIKit
 import SafariServices
 
 class VaccinationCentresViewController: UIViewController, Storyboarded {
+
     @IBOutlet private var tableView: UITableView!
     var viewModel: VaccinationCentresViewModel!
 
@@ -39,11 +40,11 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
         view.backgroundColor = .athensGray
         viewModel.delegate = self
-        viewModel.load()
+        viewModel.load(animated: false)
     }
 
     @objc private func didPullToRefresh() {
-        viewModel.load()
+        viewModel.load(animated: true)
     }
 
     @objc private func backButtonTapped() {
@@ -100,16 +101,18 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         tableView.register(cellType: CentreCell.self)
         tableView.register(cellType: CentresStatsCell.self)
     }
+
 }
 
 extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate {
-    func reloadTableView(with cells: [VaccinationCentresCell]) {
+
+    func reloadTableView(with cells: [VaccinationCentresCell], animated: Bool) {
         var snapshot = Snapshot()
         snapshot.appendSections(VaccinationCentresSection.allCases)
         snapshot.appendItems(cells, toSection: .centres)
 
         dataSource.defaultRowAnimation = .fade
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
     func reloadTableViewFooter(with text: String?) {
@@ -140,7 +143,7 @@ extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate 
         presentRetryableAndCancellableError(
             error: error,
             retryHandler: { [unowned self] _ in
-                self.viewModel.load()
+                self.viewModel.load(animated: false)
             },
             cancelHandler: { [unowned self] _ in
                 self.navigationController?.popViewController(animated: true)
@@ -148,12 +151,15 @@ extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate 
             completionHandler: nil
         )
     }
+
 }
 
 extension VaccinationCentresViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: Show details
     }
+
 }
 
 // MARK: - DataSource
@@ -191,12 +197,15 @@ extension VaccinationCentresViewController {
                 return cell
         }
     }
+
 }
 
 
 extension VaccinationCentresViewController: UIGestureRecognizerDelegate {
+
     /// Enable swipe to go back
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+
 }
