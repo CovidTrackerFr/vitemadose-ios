@@ -26,8 +26,9 @@ protocol CentresListViewModelProvider {
     var county: County { get }
     var vaccinationCentres: VaccinationCentres? { get }
     func load(animated: Bool)
-    func bookingLink(at indexPath: IndexPath) -> URL?
+    func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)?
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
+    func bookingLink(at indexPath: IndexPath) -> URL?
 }
 
 protocol CentresListViewModelDelegate: class {
@@ -241,19 +242,16 @@ extension CentresListViewModel: CentresListViewModelProvider {
         }
     }
 
-    func bookingLink(at indexPath: IndexPath) -> URL? {
+    func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)? {
         guard
-            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
-            let bookingUrlString = vaccinationCentre.url,
-            let bookingUrl = URL(string: bookingUrlString),
-            bookingUrl.isValid
+            let centre = allVaccinationCentres[safe: indexPath.row],
+            let name = centre.nom,
+            let lat = centre.location?.latitude,
+            let long = centre.location?.longitude
         else {
             return nil
         }
-
-        AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
-
-        return bookingUrl
+        return (name, centre.metadata?.address, lat,  long)
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
@@ -265,7 +263,20 @@ extension CentresListViewModel: CentresListViewModelProvider {
         else {
             return nil
         }
-
         return phoneNumberUrl
+    }
+
+    func bookingLink(at indexPath: IndexPath) -> URL? {
+        guard
+            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
+            let bookingUrlString = vaccinationCentre.url,
+            let bookingUrl = URL(string: bookingUrlString),
+            bookingUrl.isValid
+        else {
+            return nil
+        }
+
+        AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
+        return bookingUrl
     }
 }

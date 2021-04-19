@@ -55,6 +55,7 @@
 		57AF504B262CDB3D0085E3C1 /* CentresStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AF5049262CDB3D0085E3C1 /* CentresStatsCell.xib */; };
 		57AF504F262CDD5A0085E3C1 /* CentresTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AF504E262CDD5A0085E3C1 /* CentresTitleCell.swift */; };
 		57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AF5054262CE28E0085E3C1 /* CentresTitleCell.xib */; };
+		57B7CD50262E28460065DD80 /* Haptica in Frameworks */ = {isa = PBXBuildFile; productRef = 57B7CD4F262E28460065DD80 /* Haptica */; };
 		57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */; };
 		57C4017626235B6200EFFCA3 /* HomePartnersFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017426235B6200EFFCA3 /* HomePartnersFooterView.swift */; };
 		57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4017526235B6200EFFCA3 /* HomePartnersFooterView.xib */; };
@@ -184,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */,
+				57B7CD50262E28460065DD80 /* Haptica in Frameworks */,
 				6A0FA1A0262CAB6C002D3AA8 /* APIRequest in Frameworks */,
 				575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */,
 				57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */,
@@ -497,6 +499,7 @@
 				57613EF8262507C800AB6F2F /* Embed Frameworks */,
 				DA68646626276624005B2AC2 /* Crashlytics */,
 				577A7F2B262B8AB600B1D03C /* Firebase SPM  */,
+				57B7CD53262E36A60065DD80 /* Build Number */,
 			);
 			buildRules = (
 			);
@@ -516,6 +519,7 @@
 				575CC219262ADA0D008D1869 /* FirebaseAnalytics */,
 				575CC21B262ADA0D008D1869 /* FirebaseCrashlytics */,
 				6A0FA19F262CAB6C002D3AA8 /* APIRequest */,
+				57B7CD4F262E28460065DD80 /* Haptica */,
 			);
 			productName = ViteMaDose;
 			productReference = 576738BC261E329C004A700D /* ViteMaDose.app */;
@@ -593,6 +597,7 @@
 				575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 				575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6A0FA19E262CAB6C002D3AA8 /* XCRemoteSwiftPackageReference "APIRequest.swift" */,
+				57B7CD4E262E28460065DD80 /* XCRemoteSwiftPackageReference "Haptica" */,
 			);
 			productRefGroup = 576738BD261E329C004A700D /* Products */;
 			projectDirPath = "";
@@ -664,6 +669,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Fixes binary framework bug, see:\n# https://developer.apple.com/documentation/xcode-release-notes/xcode-12_4-release-notes#Swift-Packages\n# https://github.com/firebase/firebase-ios-sdk/issues/6472\n#\n\necho \"Removing static frameworks from ${TARGET_NAME}.app\"\nfind \"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/\" -name '*.framework' -print0 | while IFS= read -r -d '' fm; do\n    name=$(basename \"${fm}\" .framework)\n    target=\"${fm}/${name}\"\n    echo \"Checking: ${fm}\"\n    if file \"${target}\" | grep -q \"current ar archive\"; then\n        rm -rf \"${fm}\"\n        echo \"Removed static framework: ${fm}\"\n    fi\ndone\n";
+		};
+		57B7CD53262E36A60065DD80 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbranch=${1:-'master'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nif [ -f \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist\"\nfi\n";
 		};
 		DA68646626276624005B2AC2 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -924,15 +947,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2021.04.14.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 86VX52L29V;
+				DEVELOPMENT_TEAM = ZL9396WK65;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -946,14 +969,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2021.04.14.1;
-				DEVELOPMENT_TEAM = 86VX52L29V;
+				DEVELOPMENT_TEAM = ZL9396WK65;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.vmd;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1106,6 +1129,14 @@
 				minimumVersion = 6.3.1;
 			};
 		};
+		57B7CD4E262E28460065DD80 /* XCRemoteSwiftPackageReference "Haptica" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/efremidze/Haptica.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
 		6A0FA19E262CAB6C002D3AA8 /* XCRemoteSwiftPackageReference "APIRequest.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/GroupeMINASTE/APIRequest.swift.git";
@@ -1171,6 +1202,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
 			productName = PhoneNumberKit;
+		};
+		57B7CD4F262E28460065DD80 /* Haptica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57B7CD4E262E28460065DD80 /* XCRemoteSwiftPackageReference "Haptica" */;
+			productName = Haptica;
 		};
 		6A0FA19F262CAB6C002D3AA8 /* APIRequest */ = {
 			isa = XCSwiftPackageProductDependency;

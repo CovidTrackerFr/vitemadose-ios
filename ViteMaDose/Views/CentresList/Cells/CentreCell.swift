@@ -65,8 +65,9 @@ class CentreCell: UITableViewCell {
         vaccineTypesIconContainer,
     ]
 
-    var bookingButtonTapHandler: (() -> Void)?
+    var addressTapHandler: (() -> Void)?
     var phoneNumberTapHandler: (() -> Void)?
+    var bookingButtonTapHandler: (() -> Void)?
 
     private enum Constant {
         static let cellContentViewCornerRadius: CGFloat = 15
@@ -108,6 +109,12 @@ class CentreCell: UITableViewCell {
         addressLabel.text = viewData.addressText
         addressLabel.textColor = Constant.labelSecondaryColor
 
+        let addressTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(didTapAddress)
+        )
+        addressNameContainer.addGestureRecognizer(addressTapGesture)
+
         vaccineTypesContainer.isHidden = viewData.vaccineTypesText == nil
         vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
@@ -117,12 +124,16 @@ class CentreCell: UITableViewCell {
         configureDosesLabel(dosesCount: viewData.dosesCount, partnerLogo: viewData.partnerLogo)
     }
 
-    @objc private func didTapBookButton() {
-        bookingButtonTapHandler?()
+    @objc private func didTapAddress() {
+        addressTapHandler?()
     }
 
     @objc private func didTapPhoneNumber() {
         phoneNumberTapHandler?()
+    }
+
+    @objc private func didTapBookButton() {
+        bookingButtonTapHandler?()
     }
 
     override func prepareForReuse() {

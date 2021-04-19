@@ -40,10 +40,16 @@ class CentresStatsCell: UITableViewCell {
         static let descriptionFont: UIFont = .rounded(ofSize: 14, weight: .bold)
         static let descriptionColor: UIColor = .secondaryLabel
 
-        static let availableCentresText = "Centres avec rendez-vous"
-        static let allCentresText = "Centres trouvés au total"
-
         static let detailViewsCornerRadius: CGFloat = 15
+
+        // TODO: Localisation
+        static func availableCentresText(_ count: Int) -> String {
+            "\(count > 1 ? "Centres" : "Centre") avec rendez-vous"
+        }
+        // TODO: Localisation
+        static func allCentresText(_ count: Int) -> String {
+            "\(count > 1 ? "Centres trouvés" : "Centre trouvé") au total"
+        }
     }
 
     override func awakeFromNib() {
@@ -71,7 +77,7 @@ class CentresStatsCell: UITableViewCell {
         availableCentresCountView.setCornerRadius(Constant.detailViewsCornerRadius)
 
         availableCentresCountLabel.text = String(viewData.availableCentresCount)
-        availableCentresDescriptionLabel.text = Constant.availableCentresText
+        availableCentresDescriptionLabel.text = Constant.availableCentresText(viewData.availableCentresCount)
 
         availableCentresCountLabel.font = Constant.titleFont
         availableCentresCountLabel.textColor = Constant.titleColor
@@ -85,7 +91,7 @@ class CentresStatsCell: UITableViewCell {
         allCentresCountView.setCornerRadius(Constant.detailViewsCornerRadius)
 
         allCentresCountLabel.text = String(viewData.allCentresCount)
-        allCentresDescriptionLabel.text = Constant.allCentresText
+        allCentresDescriptionLabel.text = Constant.allCentresText(viewData.allCentresCount)
 
         allCentresCountLabel.font = Constant.titleFont
         allCentresDescriptionLabel.textColor = Constant.titleColor

@@ -7,6 +7,8 @@
 
 import UIKit
 import SafariServices
+import MapKit
+import Haptica
 
 class CentresListViewController: UIViewController, Storyboarded {
 
@@ -43,6 +45,11 @@ class CentresListViewController: UIViewController, Storyboarded {
         viewModel.load(animated: false)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AppAnalytics.logScreen(.searchResults, screenClass: Self.className)
+    }
+
     @objc private func didPullToRefresh() {
         viewModel.load(animated: true)
     }
@@ -55,6 +62,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         guard let url = url else { return }
         let config = SFSafariViewController.Configuration()
         let safariViewController = SFSafariViewController(url: url, configuration: config)
+        Haptic.impact(.light).generate()
         present(safariViewController, animated: true)
     }
 
@@ -204,19 +212,60 @@ extension CentresListViewController {
                 return cell
             case let .centre(cellViewData):
                 let cell = tableView.dequeueReusableCell(with: CentreCell.self, for: indexPath)
-                cell.bookingButtonTapHandler = { [weak self] in
-                    let bookingURL = self?.viewModel.bookingLink(at: indexPath)
-                    self?.openBookingUrl(bookingURL)
-                }
-                cell.phoneNumberTapHandler = { [weak self] in
-                    let phoneUrl = self?.viewModel.phoneNumberLink(at: indexPath)
-                    self?.openPhoneNumberUrl(phoneUrl)
-                }
+                configureHandlers(for: cell, at: indexPath)
                 cell.configure(with: cellViewData)
                 return cell
         }
     }
 
+    private func configureHandlers(for cell: CentreCell, at indexPath: IndexPath) {
+        // Address button tap
+        cell.addressTapHandler = { [weak self] in
+            guard let centreInfo = self?.viewModel.centreLocation(at: indexPath) else {
+                return
+            }
+            let location = CLLocationCoordinate2D(latitude: centreInfo.lat, longitude: centreInfo.long)
+            let placemark =  MKPlacemark(coordinate: location)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = centreInfo.name
+
+            self?.presentOpenMapAlert(address: centreInfo.address, mapItem: mapItem)
+        }
+        // Phone number tap
+        cell.phoneNumberTapHandler = { [weak self] in
+            let phoneUrl = self?.viewModel.phoneNumberLink(at: indexPath)
+            self?.openPhoneNumberUrl(phoneUrl)
+        }
+        // Booking button tap
+        cell.bookingButtonTapHandler = { [weak self] in
+            let bookingURL = self?.viewModel.bookingLink(at: indexPath)
+            self?.openBookingUrl(bookingURL)
+        }
+    }
+
+    private func presentOpenMapAlert(address: String?, mapItem: MKMapItem) {
+        let actionSheet = UIAlertController(
+            title: mapItem.name,
+            message: address,
+            preferredStyle: .actionSheet
+        )
+
+        let openAction = UIAlertAction(title: "Ouvrir l'itinéraire", style: .default) { _ in
+            MKMapItem.openMaps(
+                with: [mapItem],
+                launchOptions: [
+                    MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault,
+                ]
+            )
+        }
+
+        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+
+        actionSheet.addAction(openAction)
+        actionSheet.addAction(cancelAction)
+        actionSheet.preferredAction = openAction
+        present(actionSheet, animated: true)
+    }
 }
 
 
