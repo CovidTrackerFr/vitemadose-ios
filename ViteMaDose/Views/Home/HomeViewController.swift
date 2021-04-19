@@ -7,102 +7,269 @@
 
 import UIKit
 import SafariServices
+import FirebaseAnalytics
+import Haptica
 
 class HomeViewController: UIViewController, Storyboarded {
-	@IBOutlet private var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
 
-	lazy var homeHeaderView: HomeHeaderView = {
-		let view: HomeHeaderView = HomeHeaderView.instanceFromNib()
-		view.delegate = self
-        view.configure()
-		return view
-	}()
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
-	lazy var viewModel: HomeViewModelProvider = {
-		let viewModel = HomeViewModel()
-		viewModel.delegate = self
-		return viewModel
-	}()
+    private lazy var viewModel: HomeViewModelProvider = {
+        let viewModel = HomeViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        return refreshControl
+    }()
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+
+    private lazy var footerView: HomePartnersFooterView = {
+        let view: HomePartnersFooterView = HomePartnersFooterView.instanceFromNib()
+        view.isHidden = true
+        return view
+    }()
+
+    private lazy var dataSource = makeDataSource()
+
+    // MARK: - Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		tableView.delegate = self
-		tableView.dataSource = self
+        configureViewController()
+
+        RemoteConfiguration.shared.synchronize { [unowned self] _ in
+            self.viewModel.load()
+        }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AppAnalytics.logScreen(.home, screenClass: Self.className)
+    }
 
-        tableView.tableHeaderView = homeHeaderView
-        tableView.tableHeaderView?.layoutIfNeeded()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
+    private func configureViewController() {
+        view.backgroundColor = .athensGray
+
+        tableView.delegate = self
+        tableView.dataSource = dataSource
+        tableView.backgroundColor = .athensGray
+        tableView.alwaysBounceVertical = false
+
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+
+        tableView.refreshControl = refreshControl
+        tableView.backgroundView = activityIndicator
+        tableView.tableFooterView = footerView
+
+        tableView.register(cellType: HomeTitleCell.self)
+        tableView.register(cellType: HomeCountySelectionCell.self)
+        tableView.register(cellType: HomeCountyCell.self)
+        tableView.register(cellType: HomeStatsCell.self)
+    }
+
+    @objc func didPullToRefresh() {
+        viewModel.reloadStats()
+    }
+
+    private func presentCountySelectionViewController() {
+        AppAnalytics.didTapSearchBar()
+
+        let countySelectionViewController = CountySelectionViewController.instantiate()
+        countySelectionViewController.delegate = self
+        countySelectionViewController.viewModel = CountySelectionViewModel(counties: viewModel.counties)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.present(countySelectionViewController, animated: true)
+        }
+    }
+
+    private func presentVaccinationCentresMap() {
+        let url = URL(staticString: "https://vitemadose.covidtracker.fr/centres")
+        let config = SFSafariViewController.Configuration()
+        let safariViewController = SFSafariViewController(url: url, configuration: config)
+        present(safariViewController, animated: true)
     }
 }
 
 // MARK: - HomeViewModelDelegate
 
 extension HomeViewController: HomeViewModelDelegate {
-	func updateLoadingState(isLoading: Bool) {
 
-	}
+    // MARK: Table View Updates
 
-	func reloadTableView(isEmpty: Bool) {
-		tableView.reloadData()
-	}
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells: [HomeCell]) {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendSections(HomeSection.allCases)
+        snapshot.appendItems(headingCells, toSection: .heading)
+        snapshot.appendItems(andStatsCells, toSection: .stats)
 
-	func displayError(withMessage message: String) {
-		let errorAlert = UIAlertController(title: "Oops, Something Went Wrong :(", message: message, preferredStyle: .alert)
-		present(errorAlert, animated: true)
-	}
-
-    func countySelected(_ county: County) {
-        homeHeaderView.countySelected(county)
-        viewModel.fetchVaccinationCentre(for: county)
+        dataSource.defaultRowAnimation = .fade
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
-}
 
-// MARK: - HomeHeaderViewDelegate
+    func reloadHeadingSection(with headingCells: [HomeCell]) {
+        let snapshot = dataSource.snapshot()
 
-extension HomeViewController: HomeHeaderViewDelegate {
-	func didSelect() {
+        // Create a new snapshot with current stats cells
+        // Apply heading changes
+        var update = Snapshot()
+        update.appendSections(HomeSection.allCases)
+        update.appendItems(snapshot.itemIdentifiers(inSection: .stats), toSection: .stats)
+        update.appendItems(headingCells, toSection: .heading)
 
-        let storyboard = UIStoryboard(name: "HomeViewController", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "CountySelectionViewController") as! CountySelectionViewController
-        vc.delegate = self
-        self.present(vc, animated: true)
+        dataSource.apply(update, animatingDifferences: true)
+    }
 
-//		viewModel.fetchVaccinationCentre(for: county)
-	}
-}
+    func reloadStatsSection(with statsCells: [HomeCell]) {
+        let snapshot = dataSource.snapshot()
 
-// MARK: - UITableViewDataSource
+        // Create a new snapshot with current heading cells
+        // Apply stats changes
+        var update = Snapshot()
+        update.appendSections(HomeSection.allCases)
+        update.appendItems(snapshot.itemIdentifiers(inSection: .heading), toSection: .heading)
+        update.appendItems(statsCells, toSection: .stats)
 
-extension HomeViewController: UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		viewModel.numberOfRows
-	}
+        dataSource.apply(update, animatingDifferences: true)
+    }
 
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-		let cellViewModel = viewModel.cellViewModel(at: indexPath)
-		cell.textLabel?.text = cellViewModel?.nom
-		cell.detailTextLabel?.text = cellViewModel?.plateforme
-		return cell
-	}
+    // MARK: Present
+
+    func presentVaccinationCentres(for county: County) {
+        viewModel.updateLastSelectedCountyIfNeeded(county.codeDepartement)
+
+        let vaccinationCentresViewController = CentresListViewController.instantiate()
+        vaccinationCentresViewController.viewModel = CentresListViewModel(county: county)
+        navigationController?.show(vaccinationCentresViewController, sender: self)
+        AppAnalytics.didSelectCounty(county)
+    }
+
+    func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
+        tableView.tableFooterView?.isHidden = isLoading
+        if !isLoading {
+            activityIndicator.stopAnimating()
+            refreshControl.endRefreshing()
+        } else {
+            guard isEmpty else { return }
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        }
+    }
+
+    func presentFetchStatsError(_ error: Error) {
+        presentRetryableAndCancellableError(
+            error: error,
+            retryHandler: { [unowned self] _ in
+                self.viewModel.reloadStats()
+            },
+            cancelHandler: { [unowned self] _ in
+                self.refreshControl.endRefreshing()
+            },
+            completionHandler: nil
+        )
+    }
+
+    func presentInitialLoadError(_ error: Error) {
+        presentRetryableError(
+            error: error,
+            retryHandler: { [unowned self] _ in
+                self.viewModel.load()
+            },
+            completionHandler: nil
+        )
+    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let bookingUrl = viewModel.bookingLink(at: indexPath) else {
-			// TODO: Error
-			return
-		}
 
-		let safariViewControllerConfig = SFSafariViewController.Configuration()
-		let safariViewController = SFSafariViewController(url: bookingUrl, configuration: safariViewControllerConfig)
-		present(safariViewController, animated: true)
-	}
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let homeCell = dataSource.itemIdentifier(for: indexPath) else {
+            assertionFailure("HomeCell not found at \(indexPath)")
+            return
+        }
+
+        switch homeCell {
+            case .countySelection:
+                presentCountySelectionViewController()
+            case .county:
+                viewModel.didSelectLastCounty()
+                Haptic.impact(.light).generate()
+            case let .stats(viewData):
+                guard viewData.dataType == .externalMap else {
+                    return
+                }
+                presentVaccinationCentresMap()
+            default:
+                return
+        }
+    }
 }
 
+// MARK: - DataSource
+
+extension HomeViewController {
+
+    private func makeDataSource() -> UITableViewDiffableDataSource<HomeSection, HomeCell> {
+        return UITableViewDiffableDataSource(
+            tableView: tableView,
+            cellProvider: { [weak self] tableView, indexPath, homeCell in
+                return self?.dequeueAndConfigure(cell: homeCell, at: indexPath)
+            }
+        )
+    }
+
+    private func dequeueAndConfigure(cell: HomeCell, at indexPath: IndexPath) -> UITableViewCell {
+        switch cell {
+            case let .title(cellViewModel):
+                let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
+                cell.configure(with: cellViewModel)
+                return cell
+            case let .countySelection(cellViewModel):
+                let cell = tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
+                cell.configure(with: cellViewModel)
+                return cell
+            case let .county(cellViewModel):
+                let cell = tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
+                cell.configure(with: cellViewModel)
+                return cell
+            case let .stats(cellViewModel):
+                let cell = tableView.dequeueReusableCell(with: HomeStatsCell.self, for: indexPath)
+                cell.configure(with: cellViewModel)
+                return cell
+        }
+    }
+}
+
+// MARK: - CountySelectionViewControllerDelegate
+
+extension HomeViewController: CountySelectionViewControllerDelegate {
+
+    func didSelect(county: County) {
+        viewModel.didSelect(county)
+    }
+
+}

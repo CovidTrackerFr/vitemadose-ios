@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>304644690082-gsenqm35i0188ik184umvfi07kac0ugb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.304644690082-gsenqm35i0188ik184umvfi07kac0ugb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>304644690082-0s11tqu1scargr5g0s0ui1dr3vfhe1m0.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBVPfZDoCUMilMxAx5ed7aStczvNIa3E7g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>304644690082</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.vitemadose</string>
+	<key>PROJECT_ID</key>
+	<string>vite-ma-dose</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vite-ma-dose.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:304644690082:ios:5696ea2b90c567cf25c7fb</string>
+</dict>
+</plist>

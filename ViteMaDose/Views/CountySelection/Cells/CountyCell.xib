@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="322" id="6oK-Dz-Q8T" customClass="CountyCell" customModule="ViteMaDose" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="402" height="78"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6oK-Dz-Q8T" id="j5w-8X-A2y">
+                <rect key="frame" x="0.0" y="0.0" width="402" height="78"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFm-F6-pGf">
+                        <rect key="frame" x="24" y="5" width="354" height="68"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yn7-42-KlF">
+                                <rect key="frame" x="8" y="8" width="338" height="52"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZP-zD-Fe1">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="52"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyD-n8-eeV">
+                                                <rect key="frame" x="0.0" y="6" width="40" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FaY-M5-Vug">
+                                                        <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="FaY-M5-Vug" firstAttribute="leading" secondItem="SyD-n8-eeV" secondAttribute="leading" constant="5" id="4s3-8e-EvQ"/>
+                                                    <constraint firstAttribute="height" constant="40" id="BCY-rs-wx6"/>
+                                                    <constraint firstAttribute="width" constant="40" id="BDV-1z-FSP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="FaY-M5-Vug" secondAttribute="trailing" constant="5" id="BVD-y6-4wD"/>
+                                                    <constraint firstAttribute="bottom" secondItem="FaY-M5-Vug" secondAttribute="bottom" constant="5" id="ioC-Zd-61y"/>
+                                                    <constraint firstItem="FaY-M5-Vug" firstAttribute="top" secondItem="SyD-n8-eeV" secondAttribute="top" constant="5" id="rtI-yq-Cwq"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="2Fe-rO-nVq"/>
+                                            <constraint firstItem="SyD-n8-eeV" firstAttribute="centerY" secondItem="ZZP-zD-Fe1" secondAttribute="centerY" id="951-q9-GVv"/>
+                                            <constraint firstItem="SyD-n8-eeV" firstAttribute="centerX" secondItem="ZZP-zD-Fe1" secondAttribute="centerX" id="s4a-av-Rsf"/>
+                                            <constraint firstAttribute="width" constant="40" id="s5W-GX-oZZ"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZXs-sh-754">
+                                        <rect key="frame" x="55" y="0.0" width="283" height="52"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="County name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Arf-tf-NyD">
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="52"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yn7-42-KlF" firstAttribute="leading" secondItem="CFm-F6-pGf" secondAttribute="leading" constant="8" id="byf-V1-2vJ"/>
+                            <constraint firstAttribute="bottom" secondItem="yn7-42-KlF" secondAttribute="bottom" constant="8" id="fXf-6R-Fio"/>
+                            <constraint firstItem="yn7-42-KlF" firstAttribute="top" secondItem="CFm-F6-pGf" secondAttribute="top" constant="8" id="gsq-pU-TY5"/>
+                            <constraint firstAttribute="trailing" secondItem="yn7-42-KlF" secondAttribute="trailing" constant="8" id="wLB-gl-z6x"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="CFm-F6-pGf" firstAttribute="top" secondItem="j5w-8X-A2y" secondAttribute="top" constant="5" id="O6V-mY-fnN"/>
+                    <constraint firstAttribute="bottom" secondItem="CFm-F6-pGf" secondAttribute="bottom" constant="5" id="ZHI-99-zCC"/>
+                    <constraint firstAttribute="trailing" secondItem="CFm-F6-pGf" secondAttribute="trailing" constant="24" id="amF-1t-Tve"/>
+                    <constraint firstItem="CFm-F6-pGf" firstAttribute="leading" secondItem="j5w-8X-A2y" secondAttribute="leading" constant="24" id="uzp-XR-XFb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="countyCodeContainerView" destination="SyD-n8-eeV" id="Owd-T0-cBi"/>
+                <outlet property="countyCodeLabel" destination="FaY-M5-Vug" id="N5Y-d2-qbU"/>
+                <outlet property="countyContainerView" destination="CFm-F6-pGf" id="bt9-la-Y5V"/>
+                <outlet property="countyNameLabel" destination="Arf-tf-NyD" id="ZFx-9X-Ygp"/>
+            </connections>
+            <point key="canvasLocation" x="92.753623188405811" y="-22.098214285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
