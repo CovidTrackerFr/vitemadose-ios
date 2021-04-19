@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Vaccination Centres View Controller-->
+        <!--Centres List View Controller-->
         <scene sceneID="C4y-ja-FRD">
             <objects>
-                <viewController id="AzR-0V-BTr" customClass="VaccinationCentresViewController" customModule="ViteMaDose" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AzR-0V-BTr" customClass="CentresListViewController" customModule="ViteMaDose" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a2e-mw-8Fo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

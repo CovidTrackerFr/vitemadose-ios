@@ -47,10 +47,10 @@
 		5793484C262241B900F8A4A0 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793484B262241B900F8A4A0 /* Stats.swift */; };
 		57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */; };
 		57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */; };
-		57AD21D62621041200ED2B95 /* VaccinationCentresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */; };
-		57AD21DE2621042700ED2B95 /* VaccinationCentresViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */; };
+		57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21D52621041200ED2B95 /* CentresListViewController.swift */; };
+		57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21DD2621042700ED2B95 /* CentresListViewController.storyboard */; };
 		57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */; };
-		57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */; };
+		57AD21F62621097A00ED2B95 /* CentresListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21F52621097A00ED2B95 /* CentresListViewModel.swift */; };
 		57AF504A262CDB3D0085E3C1 /* CentresStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AF5048262CDB3D0085E3C1 /* CentresStatsCell.swift */; };
 		57AF504B262CDB3D0085E3C1 /* CentresStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AF5049262CDB3D0085E3C1 /* CentresStatsCell.xib */; };
 		57AF504F262CDD5A0085E3C1 /* CentresTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AF504E262CDD5A0085E3C1 /* CentresTitleCell.swift */; };
@@ -148,10 +148,10 @@
 		5793484B262241B900F8A4A0 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Commons.swift"; sourceTree = "<group>"; };
 		57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerController+Commons.swift"; sourceTree = "<group>"; };
-		57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresViewController.swift; sourceTree = "<group>"; };
-		57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VaccinationCentresViewController.storyboard; sourceTree = "<group>"; };
+		57AD21D52621041200ED2B95 /* CentresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresListViewController.swift; sourceTree = "<group>"; };
+		57AD21DD2621042700ED2B95 /* CentresListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CentresListViewController.storyboard; sourceTree = "<group>"; };
 		57AD21ED2621073200ED2B95 /* CountySelectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CountySelectionViewController.storyboard; sourceTree = "<group>"; };
-		57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCentresViewModel.swift; sourceTree = "<group>"; };
+		57AD21F52621097A00ED2B95 /* CentresListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresListViewModel.swift; sourceTree = "<group>"; };
 		57AF5048262CDB3D0085E3C1 /* CentresStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresStatsCell.swift; sourceTree = "<group>"; };
 		57AF5049262CDB3D0085E3C1 /* CentresStatsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentresStatsCell.xib; sourceTree = "<group>"; };
 		57AF504E262CDD5A0085E3C1 /* CentresTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresTitleCell.swift; sourceTree = "<group>"; };
@@ -305,7 +305,7 @@
 			children = (
 				5767392E261E3BB2004A700D /* Home */,
 				57AD21E22621067D00ED2B95 /* CountySelection */,
-				57AD21D4262103F000ED2B95 /* VaccinationCentres */,
+				57AD21D4262103F000ED2B95 /* CentresList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,7 +326,7 @@
 			children = (
 				5767393D261E3C10004A700D /* Home */,
 				57AD21E9262106E100ED2B95 /* CountySelection */,
-				57AD21FA2621098500ED2B95 /* VaccinationCentres */,
+				57AD21FA2621098500ED2B95 /* CentresList */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -405,14 +405,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		57AD21D4262103F000ED2B95 /* VaccinationCentres */ = {
+		57AD21D4262103F000ED2B95 /* CentresList */ = {
 			isa = PBXGroup;
 			children = (
 				57C401A72624266800EFFCA3 /* Cells */,
-				57AD21D52621041200ED2B95 /* VaccinationCentresViewController.swift */,
-				57AD21DD2621042700ED2B95 /* VaccinationCentresViewController.storyboard */,
+				57AD21D52621041200ED2B95 /* CentresListViewController.swift */,
+				57AD21DD2621042700ED2B95 /* CentresListViewController.storyboard */,
 			);
-			path = VaccinationCentres;
+			path = CentresList;
 			sourceTree = "<group>";
 		};
 		57AD21E22621067D00ED2B95 /* CountySelection */ = {
@@ -434,12 +434,12 @@
 			path = CountySelection;
 			sourceTree = "<group>";
 		};
-		57AD21FA2621098500ED2B95 /* VaccinationCentres */ = {
+		57AD21FA2621098500ED2B95 /* CentresList */ = {
 			isa = PBXGroup;
 			children = (
-				57AD21F52621097A00ED2B95 /* VaccinationCentresViewModel.swift */,
+				57AD21F52621097A00ED2B95 /* CentresListViewModel.swift */,
 			);
-			path = VaccinationCentres;
+			path = CentresList;
 			sourceTree = "<group>";
 		};
 		57C4018526238E2200EFFCA3 /* Header */ = {
@@ -608,7 +608,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57AD21DE2621042700ED2B95 /* VaccinationCentresViewController.storyboard in Resources */,
+				57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */,
 				5747142B262B6BA300535DF1 /* CountyCell.xib in Resources */,
 				57C4018F26238E5300EFFCA3 /* CountySelectionHeaderView.xib in Resources */,
 				57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */,
@@ -698,7 +698,7 @@
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,
 				57C4018126238ABC00EFFCA3 /* UIFont+Commons.swift in Sources */,
 				57673921261E3B59004A700D /* Collection+Commons.swift in Sources */,
-				57AD21F62621097A00ED2B95 /* VaccinationCentresViewModel.swift in Sources */,
+				57AD21F62621097A00ED2B95 /* CentresListViewModel.swift in Sources */,
 				57AF504A262CDB3D0085E3C1 /* CentresStatsCell.swift in Sources */,
 				57673912261E3962004A700D /* VaccinationCentre.swift in Sources */,
 				57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */,
@@ -722,7 +722,7 @@
 				57C4017626235B6200EFFCA3 /* HomePartnersFooterView.swift in Sources */,
 				576738F3261E353E004A700D /* APIService.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
-				57AD21D62621041200ED2B95 /* VaccinationCentresViewController.swift in Sources */,
+				57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */,
 				57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */,
 				57C401962623929800EFFCA3 /* HomeCountyCell.swift in Sources */,
 				57ECA227262B031F001B368F /* UserDefaultsWrapper.swift in Sources */,

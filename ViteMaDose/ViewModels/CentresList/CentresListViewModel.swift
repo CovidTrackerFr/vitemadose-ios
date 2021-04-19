@@ -1,5 +1,5 @@
 //
-//  VaccinationCentresViewModel.swift
+//  CentresListViewModel.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 09/04/2021.
@@ -11,20 +11,18 @@ import UIKit
 import PhoneNumberKit
 import APIRequest
 
-// MARK: - Vaccination Centres Cell ViewModel
-
-enum VaccinationCentresSection: CaseIterable {
+enum CentresListSection: CaseIterable {
     case heading
     case centres
 }
 
-enum VaccinationCentresCell: Hashable {
+enum CentresListCell: Hashable {
     case title(HomeTitleCellViewData)
     case stats(CentresStatsCellViewData)
     case centre(CentreViewData)
 }
 
-protocol VaccinationCentresViewModelProvider {
+protocol CentresListViewModelProvider {
     var county: County { get }
     var vaccinationCentres: VaccinationCentres? { get }
     func load(animated: Bool)
@@ -32,19 +30,21 @@ protocol VaccinationCentresViewModelProvider {
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
 }
 
-protocol VaccinationCentresViewModelDelegate: class {
+protocol CentresListViewModelDelegate: class {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentLoadError(_ error: Error)
     func reloadTableView(
-        with headingCells: [VaccinationCentresCell],
-        andCentresCells centresCells: [VaccinationCentresCell],
+        with headingCells: [CentresListCell],
+        andCentresCells centresCells: [CentresListCell],
         animated: Bool
     )
     func reloadTableViewFooter(with text: String?)
 }
 
-class VaccinationCentresViewModel {
+// MARK: - Centres List ViewModel
+
+class CentresListViewModel {
     private let apiService: APIServiceProvider
     private let phoneNumberKit = PhoneNumberKit()
 
@@ -62,14 +62,14 @@ class VaccinationCentresViewModel {
         locale: Locale(identifier: "fr_FR")
     )
 
-    private var headingCells: [VaccinationCentresCell] = []
-    private var centresCells: [VaccinationCentresCell] = []
+    private var headingCells: [CentresListCell] = []
+    private var centresCells: [CentresListCell] = []
     private var footerText: String?
 
     var county: County
     var vaccinationCentres: VaccinationCentres?
 
-    weak var delegate: VaccinationCentresViewModelDelegate?
+    weak var delegate: CentresListViewModelDelegate?
 
     var numberOfRows: Int {
         return allVaccinationCentres.count
@@ -136,7 +136,7 @@ class VaccinationCentresViewModel {
             bottomMargin: 5
         )
         let vaccinationCentresViewData = vaccinationCentreCellsViewData.map({
-            VaccinationCentresCell.centre($0)
+            CentresListCell.centre($0)
         })
 
         headingCells.append(.title(centresListTitleViewData))
@@ -216,9 +216,9 @@ class VaccinationCentresViewModel {
     }
 }
 
-// MARK: - VaccinationCentresViewModelProvider
+// MARK: - Centres List ViewModelProvider
 
-extension VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
+extension CentresListViewModel: CentresListViewModelProvider {
 
     func load(animated: Bool) {
         guard !isLoading else { return }

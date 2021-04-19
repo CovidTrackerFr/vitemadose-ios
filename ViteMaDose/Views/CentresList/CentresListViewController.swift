@@ -1,5 +1,5 @@
 //
-//  VaccinationCentresViewController.swift
+//  CentresListViewController.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 09/04/2021.
@@ -8,12 +8,12 @@
 import UIKit
 import SafariServices
 
-class VaccinationCentresViewController: UIViewController, Storyboarded {
+class CentresListViewController: UIViewController, Storyboarded {
 
     @IBOutlet private var tableView: UITableView!
-    var viewModel: VaccinationCentresViewModel!
+    var viewModel: CentresListViewModel!
 
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<VaccinationCentresSection, VaccinationCentresCell>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<CentresListSection, CentresListCell>
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -116,15 +116,15 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
 }
 
-extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate {
+extension CentresListViewController: CentresListViewModelDelegate {
 
     func reloadTableView(
-        with headingCells: [VaccinationCentresCell],
-        andCentresCells centresCells: [VaccinationCentresCell],
+        with headingCells: [CentresListCell],
+        andCentresCells centresCells: [CentresListCell],
         animated: Bool
     ) {
         var snapshot = Snapshot()
-        snapshot.appendSections(VaccinationCentresSection.allCases)
+        snapshot.appendSections(CentresListSection.allCases)
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(centresCells, toSection: .centres)
 
@@ -171,7 +171,7 @@ extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate 
 
 }
 
-extension VaccinationCentresViewController: UITableViewDelegate {
+extension CentresListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: Show details
@@ -181,9 +181,9 @@ extension VaccinationCentresViewController: UITableViewDelegate {
 
 // MARK: - DataSource
 
-extension VaccinationCentresViewController {
+extension CentresListViewController {
 
-    private func makeDataSource() -> UITableViewDiffableDataSource<VaccinationCentresSection, VaccinationCentresCell> {
+    private func makeDataSource() -> UITableViewDiffableDataSource<CentresListSection, CentresListCell> {
         return UITableViewDiffableDataSource(
             tableView: tableView,
             cellProvider: { [weak self] tableView, indexPath, vaccinationCentreCell in
@@ -192,7 +192,7 @@ extension VaccinationCentresViewController {
         )
     }
 
-    private func dequeueAndConfigure(cell: VaccinationCentresCell, at indexPath: IndexPath) -> UITableViewCell {
+    private func dequeueAndConfigure(cell: CentresListCell, at indexPath: IndexPath) -> UITableViewCell {
         switch cell {
             case let .title(cellViewData):
                 let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
@@ -220,7 +220,7 @@ extension VaccinationCentresViewController {
 }
 
 
-extension VaccinationCentresViewController: UIGestureRecognizerDelegate {
+extension CentresListViewController: UIGestureRecognizerDelegate {
 
     /// Enable swipe to go back
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {

@@ -155,8 +155,8 @@ extension HomeViewController: HomeViewModelDelegate {
     func presentVaccinationCentres(for county: County) {
         viewModel.updateLastSelectedCountyIfNeeded(county.codeDepartement)
 
-        let vaccinationCentresViewController = VaccinationCentresViewController.instantiate()
-        vaccinationCentresViewController.viewModel = VaccinationCentresViewModel(county: county)
+        let vaccinationCentresViewController = CentresListViewController.instantiate()
+        vaccinationCentresViewController.viewModel = CentresListViewModel(county: county)
         navigationController?.show(vaccinationCentresViewController, sender: self)
         AppAnalytics.didSelectCounty(county)
     }
