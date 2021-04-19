@@ -166,6 +166,7 @@
 		57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleCell.xib; sourceTree = "<group>"; };
 		57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
+		6A28354B262DC06C00FA6456 /* ViteMaDose.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViteMaDose.entitlements; sourceTree = "<group>"; };
 		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
 		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 		576738BE261E329C004A700D /* ViteMaDose */ = {
 			isa = PBXGroup;
 			children = (
+				6A28354B262DC06C00FA6456 /* ViteMaDose.entitlements */,
 				57673986261E5AF3004A700D /* Application */,
 				5767392A261E3B99004A700D /* Views */,
 				5767393C261E3BFD004A700D /* ViewModels */,
@@ -920,6 +922,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2021.04.14.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -941,6 +944,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2021.04.14.1;
 				DEVELOPMENT_TEAM = 86VX52L29V;
