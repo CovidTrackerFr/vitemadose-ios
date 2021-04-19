@@ -59,10 +59,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JOf-JA-oc0">
-                                        <rect key="frame" x="0.0" y="35" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="35" width="334" height="52.333333333333343"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agR-aK-aVl">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="52.333333333333336"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZr-aj-FuH">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -91,7 +91,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZWO-Zh-Ojd">
-                                                <rect key="frame" x="35" y="0.0" width="299" height="50"/>
+                                                <rect key="frame" x="35" y="0.0" width="299" height="52.333333333333336"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Name Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-Wz-Rl8">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="20.333333333333332"/>
@@ -100,7 +100,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adress Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T1-al-8oS">
-                                                        <rect key="frame" x="0.0" y="25.333333333333329" width="299" height="24.666666666666671"/>
+                                                        <rect key="frame" x="0.0" y="25.333333333333329" width="299" height="27"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -111,13 +111,13 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qJu-Bv-GfN">
-                                        <rect key="frame" x="0.0" y="95" width="334" height="25"/>
+                                        <rect key="frame" x="0.0" y="97.333333333333329" width="334" height="25"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke4-AM-Kfx">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yxe-rO-Rhr">
-                                                        <rect key="frame" x="4" y="5.6666666666666652" width="17" height="14.333333333333334"/>
+                                                        <rect key="frame" x="4" y="5.6666666666666794" width="17" height="14.333333333333334"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <imageReference key="image" image="phone.fill" catalog="system" symbolScale="default"/>
                                                     </imageView>
@@ -132,12 +132,16 @@
                                                     <constraint firstAttribute="trailing" secondItem="yxe-rO-Rhr" secondAttribute="trailing" constant="4" id="fTg-HM-NHh"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Phone Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9T-Kv-PYZ">
-                                                <rect key="frame" x="35" y="0.0" width="299" height="25"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVE-JB-L1O">
+                                                <rect key="frame" x="35" y="0.0" width="110" height="25"/>
+                                                <state key="normal" title="Phone Button">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acS-cY-Ilz" userLabel="Spacer">
+                                                <rect key="frame" x="155" y="0.0" width="179" height="25"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -145,7 +149,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cdi-QJ-fZB">
-                                        <rect key="frame" x="0.0" y="130" width="334" height="25"/>
+                                        <rect key="frame" x="0.0" y="132.33333333333334" width="334" height="25"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCc-II-2Sb">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -179,7 +183,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Y-xp-ddy">
-                                        <rect key="frame" x="0.0" y="165" width="334" height="59"/>
+                                        <rect key="frame" x="0.0" y="167.33333333333334" width="334" height="59"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRS-H0-agD" userLabel="Spacer">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="15"/>
@@ -201,7 +205,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Doses Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ss-Cb-2US">
-                                        <rect key="frame" x="0.0" y="234" width="334" height="43"/>
+                                        <rect key="frame" x="0.0" y="236.33333333333329" width="334" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -230,15 +234,15 @@
                 <outlet property="addressLabel" destination="4T1-al-8oS" id="Qhk-X1-MuG"/>
                 <outlet property="addressNameContainer" destination="JOf-JA-oc0" id="ltz-NM-436"/>
                 <outlet property="addressNameIconContainer" destination="uZr-aj-FuH" id="U8A-NA-WhV"/>
-                <outlet property="bookingbutton" destination="jo2-ri-Awx" id="aMD-EZ-fOM"/>
+                <outlet property="bookingButton" destination="jo2-ri-Awx" id="aMD-EZ-fOM"/>
                 <outlet property="cellContentView" destination="7fb-IB-1V4" id="nCK-ro-133"/>
                 <outlet property="dateContainer" destination="aeD-cr-7oW" id="mvB-lK-Us3"/>
                 <outlet property="dateIconContainer" destination="7pV-Uq-Jgh" id="zq2-Wd-BfW"/>
                 <outlet property="dateLabel" destination="2jK-7L-pLd" id="1xK-aJ-zPK"/>
                 <outlet property="dosesLabel" destination="6Ss-Cb-2US" id="Fxv-xS-Xjh"/>
                 <outlet property="nameLabel" destination="Iei-Wz-Rl8" id="R6P-lM-x01"/>
-                <outlet property="phoneLabel" destination="J9T-Kv-PYZ" id="m10-Lw-jcP"/>
-                <outlet property="phoneNumberContrainer" destination="qJu-Bv-GfN" id="R7G-EF-tTJ"/>
+                <outlet property="phoneButton" destination="pVE-JB-L1O" id="uRr-Xs-GcP"/>
+                <outlet property="phoneNumberContainer" destination="qJu-Bv-GfN" id="R7G-EF-tTJ"/>
                 <outlet property="phoneNumberIconContainer" destination="Ke4-AM-Kfx" id="tx5-tb-qnm"/>
                 <outlet property="vaccineTypesContainer" destination="Cdi-QJ-fZB" id="mAn-jR-ywW"/>
                 <outlet property="vaccineTypesIconContainer" destination="LCc-II-2Sb" id="P27-rm-6df"/>
@@ -264,6 +268,9 @@
         <namedColor name="royalBlue">
             <color red="0.33300000429153442" green="0.37999999523162842" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

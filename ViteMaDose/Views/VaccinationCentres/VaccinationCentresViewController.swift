@@ -51,10 +51,22 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
         navigationController?.popViewController(animated: true)
     }
 
-    private func openBookingUrl(_ url: URL) {
+    private func openBookingUrl(_ url: URL?) {
+        guard let url = url else { return }
         let config = SFSafariViewController.Configuration()
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
+    }
+
+    private func openPhoneNumberUrl(_ url: URL?) {
+        guard
+            let url = url,
+            UIApplication.shared.canOpenURL(url)
+        else {
+            return
+        }
+
+        UIApplication.shared.open(url)
     }
 
     private func configureNavigationBar() {
@@ -106,10 +118,15 @@ class VaccinationCentresViewController: UIViewController, Storyboarded {
 
 extension VaccinationCentresViewController: VaccinationCentresViewModelDelegate {
 
-    func reloadTableView(with cells: [VaccinationCentresCell], animated: Bool) {
+    func reloadTableView(
+        with headingCells: [VaccinationCentresCell],
+        andCentresCells centresCells: [VaccinationCentresCell],
+        animated: Bool
+    ) {
         var snapshot = Snapshot()
         snapshot.appendSections(VaccinationCentresSection.allCases)
-        snapshot.appendItems(cells, toSection: .centres)
+        snapshot.appendItems(headingCells, toSection: .heading)
+        snapshot.appendItems(centresCells, toSection: .centres)
 
         dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: animated)
@@ -188,10 +205,12 @@ extension VaccinationCentresViewController {
             case let .centre(cellViewData):
                 let cell = tableView.dequeueReusableCell(with: CentreCell.self, for: indexPath)
                 cell.bookingButtonTapHandler = { [weak self] in
-                    guard let bookingURL = self?.viewModel.bookingLink(at: indexPath) else {
-                        return
-                    }
+                    let bookingURL = self?.viewModel.bookingLink(at: indexPath)
                     self?.openBookingUrl(bookingURL)
+                }
+                cell.phoneNumberTapHandler = { [weak self] in
+                    let phoneUrl = self?.viewModel.phoneNumberLink(at: indexPath)
+                    self?.openPhoneNumberUrl(phoneUrl)
                 }
                 cell.configure(with: cellViewData)
                 return cell

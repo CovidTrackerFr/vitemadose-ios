@@ -14,6 +14,7 @@ import APIRequest
 // MARK: - Vaccination Centres Cell ViewModel
 
 enum VaccinationCentresSection: CaseIterable {
+    case heading
     case centres
 }
 
@@ -28,13 +29,18 @@ protocol VaccinationCentresViewModelProvider {
     var vaccinationCentres: VaccinationCentres? { get }
     func load(animated: Bool)
     func bookingLink(at indexPath: IndexPath) -> URL?
+    func phoneNumberLink(at indexPath: IndexPath) -> URL?
 }
 
 protocol VaccinationCentresViewModelDelegate: class {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentLoadError(_ error: Error)
-    func reloadTableView(with cells: [VaccinationCentresCell], animated: Bool)
+    func reloadTableView(
+        with headingCells: [VaccinationCentresCell],
+        andCentresCells centresCells: [VaccinationCentresCell],
+        animated: Bool
+    )
     func reloadTableViewFooter(with text: String?)
 }
 
@@ -56,7 +62,8 @@ class VaccinationCentresViewModel {
         locale: Locale(identifier: "fr_FR")
     )
 
-    private var cells: [VaccinationCentresCell] = []
+    private var headingCells: [VaccinationCentresCell] = []
+    private var centresCells: [VaccinationCentresCell] = []
     private var footerText: String?
 
     var county: County
@@ -82,7 +89,7 @@ class VaccinationCentresViewModel {
         updateCells()
         updateFooterText()
 
-        delegate?.reloadTableView(with: cells, animated: animated)
+        delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
         delegate?.reloadTableViewFooter(with: footerText)
     }
 
@@ -91,15 +98,12 @@ class VaccinationCentresViewModel {
     }
 
     private func updateCells() {
-        guard let vaccinationCentres = vaccinationCentres else {
-            cells.removeAll()
-            return
-        }
+        let availableCentres = vaccinationCentres?.centresDisponibles ?? []
+        let unavailableCentres = vaccinationCentres?.centresIndisponibles ?? []
+        let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
+        allVaccinationCentres = availableCentres + unavailableCentres
 
-        let isEmpty = vaccinationCentres.centresDisponibles.isEmpty && vaccinationCentres.centresIndisponibles.isEmpty
-        allVaccinationCentres = vaccinationCentres.centresDisponibles + vaccinationCentres.centresIndisponibles
-
-        let dosesCount = vaccinationCentres.centresDisponibles.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        let dosesCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
         let vaccinationCentreCellsViewData = allVaccinationCentres.map({ getVaccinationCentreViewData($0) })
 
         let mainTitleViewData = HomeTitleCellViewData(
@@ -113,16 +117,19 @@ class VaccinationCentresViewModel {
 
         let statsCellViewData = CentresStatsCellViewData(
             dosesCount: dosesCount,
-            availableCentresCount: vaccinationCentres.centresDisponibles.count,
+            availableCentresCount: availableCentres.count,
             allCentresCount: allVaccinationCentres.count
         )
 
-        cells = [
+        headingCells = [
             .title(mainTitleViewData),
             .stats(statsCellViewData),
         ]
 
-        guard !isEmpty else { return }
+        guard !isEmpty else {
+            centresCells.removeAll()
+            return
+        }
 
         let centresListTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.centresListTitle,
@@ -132,8 +139,8 @@ class VaccinationCentresViewModel {
             VaccinationCentresCell.centre($0)
         })
 
-        cells.append(.title(centresListTitleViewData))
-        cells.append(contentsOf: vaccinationCentresViewData)
+        headingCells.append(.title(centresListTitleViewData))
+        centresCells = vaccinationCentresViewData
     }
 
     private func updateFooterText() {
@@ -173,21 +180,6 @@ class VaccinationCentresViewModel {
         }
 
         let bookingButtonText = isAvailable ? "Prendre rendez-vous" : "Vérifier ce centre"
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(
-            systemName: "arrow.up.right",
-            withConfiguration:UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
-        )?.withTintColor(.white, renderingMode: .alwaysOriginal)
-
-        let bookingButtonAttributedText = NSMutableAttributedString(
-            string: bookingButtonText + " ",
-            attributes: [
-                NSAttributedString.Key.foregroundColor : UIColor.white,
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold),
-            ]
-        )
-
-        bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
         var phoneText: String?
         if let phoneNumber = centre.metadata?.phoneNumber {
@@ -210,7 +202,7 @@ class VaccinationCentresViewModel {
             addressNameText: centre.nom ?? "Nom du centre indisponible",
             addressText: centre.metadata?.address ?? "Addresse indisponible",
             phoneText: phoneText,
-            bookingButtonText: bookingButtonAttributedText,
+            bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: ", "),
             dosesCount: centre.appointmentCount,
             isAvailable: isAvailable,
@@ -264,4 +256,16 @@ extension VaccinationCentresViewModel: VaccinationCentresViewModelProvider {
         return bookingUrl
     }
 
+    func phoneNumberLink(at indexPath: IndexPath) -> URL? {
+        guard
+            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
+            let phoneNumber = vaccinationCentre.metadata?.phoneNumber,
+            let phoneNumberUrl = URL(string: "tel://\(phoneNumber)"),
+            phoneNumberUrl.isValid
+        else {
+            return nil
+        }
+
+        return phoneNumberUrl
+    }
 }
