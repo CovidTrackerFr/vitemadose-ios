@@ -14,7 +14,7 @@ enum StatsDataType: Hashable {
     case externalMap
 }
 
-protocol HomeStatsCellViewDataProvider: HomeCellViewDataProvider {
+protocol HomeStatsCellViewDataProvider {
     var title: NSMutableAttributedString { get }
     var description: String? { get }
     var icon: UIImage? { get }
@@ -67,11 +67,11 @@ class HomeStatsCell: UITableViewCell {
 
 struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
 
-    var title: NSMutableAttributedString
-    var description: String?
-    var icon: UIImage?
-    var iconContainerColor: UIColor
-    var dataType: StatsDataType
+    let title: NSMutableAttributedString
+    let description: String?
+    let icon: UIImage?
+    let iconContainerColor: UIColor
+    let dataType: StatsDataType
 
     init(_ dataType: StatsDataType) {
         self.dataType = dataType

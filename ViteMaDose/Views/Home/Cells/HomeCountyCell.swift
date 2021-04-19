@@ -12,9 +12,9 @@ protocol HomeCountyCellViewDataProvider: CountyCellViewDataProvider {
 }
 
 struct HomeCountyCellViewData: HomeCountyCellViewDataProvider, Hashable {
-    var titleText: String?
-    var countyName: String
-    var countyCode: String
+    let titleText: String?
+    let countyName: String
+    let countyCode: String
 }
 
 class HomeCountyCell: CountyCell {

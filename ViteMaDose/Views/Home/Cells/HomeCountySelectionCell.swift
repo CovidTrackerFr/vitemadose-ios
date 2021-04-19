@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol HomeCountySelectionCellViewDataProvider: HomeCellViewDataProvider {
+protocol HomeCountySelectionCellViewDataProvider {
     var searchBarText: String { get }
 }
 
 struct HomeCountySelectionViewData: HomeCountySelectionCellViewDataProvider, Hashable {
-    var searchBarText = "Séléctionner un département..."
+    let searchBarText = "Sélectionner un département..."
 }
 
 class HomeCountySelectionCell: UITableViewCell {

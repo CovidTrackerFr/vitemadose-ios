@@ -1,5 +1,5 @@
 //
-//  VaccinationBookingTableViewCell.swift
+//  CentreCell.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 12/04/2021.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol VaccinationBookingCellViewModelProvider {
-    var dayText: String? { get}
+protocol CentreViewDataProvider {
+    var dayText: String? { get }
     var timeText: String? { get }
     var addressNameText: String? { get }
     var addressText: String? { get }
     var phoneText: String? { get }
-    var bookingButtonText: NSMutableAttributedString { get }
+    var bookingButtonText: String { get }
     var vaccineTypesText: String? { get }
     var dosesCount: Int? { get }
     var isAvailable: Bool { get }
@@ -21,21 +21,21 @@ protocol VaccinationBookingCellViewModelProvider {
     var partnerLogo: UIImage? { get }
 }
 
-struct VaccinationBookingCellViewModel: VaccinationBookingCellViewModelProvider {
-    var dayText: String?
-    var timeText: String?
-    var addressNameText: String?
-    var addressText: String?
-    var phoneText: String?
-    var bookingButtonText: NSMutableAttributedString
-    var vaccineTypesText: String?
-    var dosesCount: Int?
-    var isAvailable: Bool
-    var url: URL?
-    var partnerLogo: UIImage?
+struct CentreViewData: CentreViewDataProvider, Hashable {
+    let dayText: String?
+    let timeText: String?
+    let addressNameText: String?
+    let addressText: String?
+    let phoneText: String?
+    let bookingButtonText: String
+    let vaccineTypesText: String?
+    let dosesCount: Int?
+    let isAvailable: Bool
+    let url: URL?
+    let partnerLogo: UIImage?
 }
 
-class VaccinationBookingTableViewCell: UITableViewCell {
+class CentreCell: UITableViewCell {
     @IBOutlet var dateContainer: UIStackView!
     @IBOutlet var dateIconContainer: UIView!
     @IBOutlet private var dateLabel: UILabel!
@@ -45,9 +45,9 @@ class VaccinationBookingTableViewCell: UITableViewCell {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var addressLabel: UILabel!
 
-    @IBOutlet var phoneNumberContrainer: UIStackView!
+    @IBOutlet var phoneNumberContainer: UIStackView!
     @IBOutlet var phoneNumberIconContainer: UIView!
-    @IBOutlet private var phoneLabel: UILabel!
+    @IBOutlet private var phoneButton: UIButton!
 
     @IBOutlet var vaccineTypesContainer: UIStackView!
     @IBOutlet private var vaccineTypesLabel: UILabel!
@@ -55,7 +55,7 @@ class VaccinationBookingTableViewCell: UITableViewCell {
     @IBOutlet var vaccineTypesIconContainer: UIView!
     @IBOutlet var dosesLabel: UILabel!
 
-    @IBOutlet private var bookingbutton: UIButton!
+    @IBOutlet private var bookingButton: UIButton!
     @IBOutlet private var cellContentView: UIView!
 
     private lazy var iconContainers: [UIView] = [
@@ -66,6 +66,7 @@ class VaccinationBookingTableViewCell: UITableViewCell {
     ]
 
     var bookingButtonTapHandler: (() -> Void)?
+    var phoneNumberTapHandler: (() -> Void)?
 
     private enum Constant {
         static let cellContentViewCornerRadius: CGFloat = 15
@@ -82,56 +83,46 @@ class VaccinationBookingTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         contentView.backgroundColor = .athensGray
         cellContentView.backgroundColor = .tertiarySystemBackground
-        bookingbutton.backgroundColor = .royalBlue
-        bookingbutton.setCornerRadius(Constant.bookingButtonCornerRadius)
+        bookingButton.backgroundColor = .royalBlue
+        bookingButton.setCornerRadius(Constant.bookingButtonCornerRadius)
         cellContentView.setCornerRadius(Constant.cellContentViewCornerRadius)
     }
 
-    func configure(with viewModel: VaccinationBookingCellViewModelProvider?) {
-        guard let viewModel = viewModel else {
-            preconditionFailure("ViewModel is required")
-        }
+    func configure(with viewData: CentreViewData) {
+        configureBookButton(viewData)
+        configurePhoneNumberView(viewData)
 
         dateLabel.attributedText = createDateText(
-            dayText: viewModel.dayText,
-            timeText: viewModel.timeText,
-            isAvailable: viewModel.isAvailable
+            dayText: viewData.dayText,
+            timeText: viewData.timeText,
+            isAvailable: viewData.isAvailable
         )
 
-        nameLabel.text = viewModel.addressNameText
+        nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor
 
-        addressLabel.text = viewModel.addressText
+        addressLabel.text = viewData.addressText
         addressLabel.textColor = Constant.labelSecondaryColor
 
-        phoneNumberContrainer.isHidden = viewModel.phoneText == nil
-        phoneLabel.text = viewModel.phoneText
-        phoneLabel.font = Constant.labelPrimaryFont
-        phoneLabel.textColor = Constant.labelPrimaryColor
-
-        vaccineTypesContainer.isHidden = viewModel.vaccineTypesText == nil
-        vaccineTypesLabel.text = viewModel.vaccineTypesText
+        vaccineTypesContainer.isHidden = viewData.vaccineTypesText == nil
+        vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
-        bookingbutton.backgroundColor = viewModel.isAvailable ? .royalBlue : .darkGray
-        bookingbutton.setTitleColor(.white, for: .normal)
-        bookingbutton.setAttributedTitle(viewModel.bookingButtonText, for: .normal)
-        bookingbutton.addTarget(
-            self,
-            action: #selector(didTapBookButton),
-            for: .touchUpInside
-        )
-
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureDosesLabel(dosesCount: viewModel.dosesCount, partnerLogo: viewModel.partnerLogo)
+        configureDosesLabel(dosesCount: viewData.dosesCount, partnerLogo: viewData.partnerLogo)
     }
 
     @objc private func didTapBookButton() {
         bookingButtonTapHandler?()
+    }
+
+    @objc private func didTapPhoneNumber() {
+        phoneNumberTapHandler?()
     }
 
     override func prepareForReuse() {
@@ -140,11 +131,11 @@ class VaccinationBookingTableViewCell: UITableViewCell {
             dateLabel,
             nameLabel,
             addressLabel,
-            phoneLabel,
             vaccineTypesLabel,
             dosesLabel
         ])
-        bookingbutton.setTitle(nil, for: .normal)
+        phoneButton.setTitle(nil, for: .normal)
+        bookingButton.setTitle(nil, for: .normal)
     }
 
     private func createDateText(
@@ -213,6 +204,59 @@ class VaccinationBookingTableViewCell: UITableViewCell {
         dosesLabel.attributedText = dosesAndLogoString
     }
 
+    private func configurePhoneNumberView(_ viewData: CentreViewData) {
+        guard let phoneNumber = viewData.phoneText else {
+            phoneNumberContainer.isHidden = true
+            return
+        }
+
+        phoneNumberContainer.isHidden = false
+
+        let phoneButtonAttributedText = NSMutableAttributedString(
+            string: phoneNumber,
+            attributes: [
+                NSAttributedString.Key.foregroundColor : Constant.labelPrimaryColor,
+                NSAttributedString.Key.font : Constant.labelPrimaryFont,
+                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+            ]
+        )
+
+        phoneButton.backgroundColor = .clear
+        phoneButton.setAttributedTitle(phoneButtonAttributedText, for: .normal)
+        phoneButton.addTarget(
+            self,
+            action: #selector(didTapPhoneNumber),
+            for: .touchUpInside
+        )
+    }
+
+    private func configureBookButton(_ viewData: CentreViewData) {
+        let imageAttachment = NSTextAttachment()
+        let iconImage = UIImage(
+            systemName: "arrow.up.right",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
+        )
+        imageAttachment.image = iconImage?.withTintColor(.white, renderingMode: .alwaysOriginal)
+
+        let bookingButtonAttributedText = NSMutableAttributedString(
+            string: viewData.bookingButtonText,
+            attributes: [
+                NSAttributedString.Key.foregroundColor : UIColor.white,
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold),
+            ]
+        )
+
+        bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
+
+        bookingButton.backgroundColor = viewData.isAvailable ? .royalBlue : .darkGray
+        bookingButton.setTitleColor(.white, for: .normal)
+        bookingButton.setAttributedTitle(bookingButtonAttributedText, for: .normal)
+        bookingButton.addTarget(
+            self,
+            action: #selector(didTapBookButton),
+            for: .touchUpInside
+        )
+    }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {
         views.forEach{ $0.setCornerRadius(radius) }
