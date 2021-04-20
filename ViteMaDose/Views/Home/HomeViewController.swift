@@ -121,12 +121,7 @@ class HomeViewController: UIViewController, Storyboarded {
     
     private func presentCreditViewController() {
         let creditViewController = CreditViewController.instantiate()
-        creditViewController.viewModel = CreditViewModel(credits: [
-            Credit(nom: "Victor Sarda", image: "https://github.com/victor-sarda.png"),
-            Credit(nom: "Paul Jeannot", image: "https://github.com/pauljeannot.png"),
-            Credit(nom: "Nathan Fallet", image: "https://github.com/NathanFallet.png"),
-            Credit(nom: "Guillaume Rozier", image: "https://github.com/rozierguillaume.png"),
-        ])
+        creditViewController.viewModel = CreditViewModel(credits: CreditStore.store)
         
         DispatchQueue.main.async { [weak self] in
             self?.present(creditViewController, animated: true)

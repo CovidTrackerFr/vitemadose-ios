@@ -34,6 +34,7 @@ class CreditViewController: UIViewController, Storyboarded {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(cellType: CreditCell.self)
+        tableView.register(cellType: CreditSectionView.self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -50,11 +51,28 @@ class CreditViewController: UIViewController, Storyboarded {
 // MARK: - UITableViewDataSource
 
 extension CreditViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows
+        viewModel.numberOfRows(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Case of title
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(with: CreditSectionView.self, for: indexPath)
+            guard let cellViewModel = viewModel.sectionViewModel(at: indexPath.section) else {
+                assertionFailure("Cell view model missing at \(indexPath)")
+                return UITableViewCell()
+            }
+            
+            cell.configure(with: cellViewModel)
+            return cell
+        }
+        
+        // Case of user
         let cell = tableView.dequeueReusableCell(with: CreditCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
             assertionFailure("Cell view model missing at \(indexPath)")

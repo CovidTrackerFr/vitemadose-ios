@@ -8,7 +8,8 @@
 import Foundation
 
 protocol CreditViewModelProvider {
-    var numberOfRows: Int { get }
+    var numberOfSections: Int { get }
+    func numberOfRows(in section: Int) -> Int
     func cellViewModel(at indexPath: IndexPath) -> CreditCellViewDataProvider?
     func didSelectCell(at indexPath: IndexPath)
 }
@@ -22,10 +23,14 @@ class CreditViewModel: CreditViewModelProvider {
     private let apiService: APIServiceProvider
     weak var delegate: CreditViewModelDelegate?
 
-    private var allCredits: [Credit] = []
+    private var allCredits: Credits = []
 
-    var numberOfRows: Int {
+    var numberOfSections: Int {
         allCredits.count
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        (allCredits[section].users?.count ?? 0) + 1
     }
 
     // MARK: init
@@ -39,9 +44,25 @@ class CreditViewModel: CreditViewModelProvider {
 
         delegate?.reloadTableView(with: credits)
     }
+    
+    func sectionViewModel(at section: Int) -> CreditSectionViewDataProvider? {
+        guard let sectionModel = allCredits[safe: section] else {
+            assertionFailure("No section found at section \(section)")
+            return nil
+        }
+
+        guard let title = sectionModel.section
+        else {
+            return nil
+        }
+
+        return CreditSectionViewData(
+            title: title
+        )
+    }
 
     func cellViewModel(at indexPath: IndexPath) -> CreditCellViewDataProvider? {
-        guard let credit = allCredits[safe: indexPath.row] else {
+        guard let credit = allCredits[safe: indexPath.section]?.users?[safe: indexPath.row - 1] else {
             assertionFailure("No credit found at IndexPath \(indexPath)")
             return nil
         }
@@ -59,7 +80,7 @@ class CreditViewModel: CreditViewModelProvider {
     }
 
     func didSelectCell(at indexPath: IndexPath) {
-        guard let credit = allCredits[safe: indexPath.row] else {
+        guard let credit = allCredits[safe: indexPath.section]?.users?[safe: indexPath.row - 1] else {
             assertionFailure("Credit not found at indexPath \(indexPath)")
             return
         }
