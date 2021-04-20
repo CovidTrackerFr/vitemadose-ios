@@ -121,7 +121,7 @@ class HomeViewController: UIViewController, Storyboarded {
     
     private func presentCreditViewController() {
         let creditViewController = CreditViewController.instantiate()
-        creditViewController.viewModel = CreditViewModel(credits: CreditStore.store)
+        creditViewController.viewModel = CreditViewModel(credits: [])
         
         DispatchQueue.main.async { [weak self] in
             self?.present(creditViewController, animated: true)

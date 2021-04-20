@@ -15,6 +15,8 @@ protocol APIServiceProvider {
     func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> ()) -> APIRequest
     @discardableResult
     func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> ()) -> APIRequest
+    @discardableResult
+    func fetchContributors(completion: @escaping (Credits?, APIResponseStatus) -> ()) -> APIRequest
 }
 
 struct APIService: APIServiceProvider {
@@ -52,6 +54,19 @@ struct APIService: APIServiceProvider {
             path: RemoteConfiguration.shared.statsPath,
             configuration: configuration
         ).execute(Stats.self) { data, status in
+            DispatchQueue.main.async {
+                completion(data, status)
+            }
+        }
+    }
+    
+    func fetchContributors(completion: @escaping (Credits?, APIResponseStatus) -> ()) -> APIRequest {
+        let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
+        return APIRequest(
+            "GET",
+            path: RemoteConfiguration.shared.contributorsPath,
+            configuration: configuration
+        ).execute(Credits.self) { data, status in
             DispatchQueue.main.async {
                 completion(data, status)
             }

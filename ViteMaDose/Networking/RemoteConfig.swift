@@ -61,4 +61,8 @@ extension RemoteConfiguration {
         let path = configuration.configValue(forKey: "path_data_department").stringValue!
         return path.replacingOccurrences(of: "{code}", with: county)
     }
+    
+    var contributorsPath: String {
+        return configuration.configValue(forKey: "path_contributors").stringValue!
+    }
 }

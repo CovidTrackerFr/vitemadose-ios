@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import APIRequest
 
 protocol CreditViewModelProvider {
     var numberOfSections: Int { get }
@@ -17,6 +18,9 @@ protocol CreditViewModelProvider {
 protocol CreditViewModelDelegate: class {
     func reloadTableView(with credits: Credits)
     func dismissViewController(with credit: Credit)
+    
+    func updateLoadingState(isLoading: Bool, isEmpty: Bool)
+    func presentLoadError(_ error: Error)
 }
 
 class CreditViewModel: CreditViewModelProvider {
@@ -24,6 +28,12 @@ class CreditViewModel: CreditViewModelProvider {
     weak var delegate: CreditViewModelDelegate?
 
     private var allCredits: Credits = []
+    private var isLoading = false {
+        didSet {
+            let isEmpty = allCredits.count == 0
+            delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
+        }
+    }
 
     var numberOfSections: Int {
         allCredits.count
@@ -88,5 +98,30 @@ class CreditViewModel: CreditViewModelProvider {
         }
 
         delegate?.dismissViewController(with: credit)
+    }
+    
+    private func handleLoad(with credits: Credits) {
+        self.allCredits = credits
+
+        delegate?.reloadTableView(with: credits)
+    }
+    
+    private func handleError(_ error: APIResponseStatus) {
+        delegate?.presentLoadError(error)
+    }
+    
+    func load() {
+        guard !isLoading else { return }
+        isLoading = true
+
+        apiService.fetchContributors { [weak self] data, status in
+            self?.isLoading = false
+
+            if let credits = data {
+                self?.handleLoad(with: credits)
+            } else {
+                self?.handleError(status)
+            }
+        }
     }
 }

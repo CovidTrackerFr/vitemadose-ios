@@ -10,5 +10,7 @@
 	<string>/vitemadose/departements.json</string>
 	<key>path_data_department</key>
 	<string>/vitemadose/{code}.json</string>
+	<key>path_contributors</key>
+	<string>/vitemadose/contributors.json</string>
 </dict>
 </plist>

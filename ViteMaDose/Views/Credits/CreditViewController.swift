@@ -19,22 +19,24 @@ class CreditViewController: UIViewController, Storyboarded {
     var viewModel: CreditViewModel!
 
     private lazy var countySelectionHeaderView: CreditHeaderView = CreditHeaderView.instanceFromNib()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         guard viewModel != nil else {
             preconditionFailure("ViewModel was not set for CreditViewController")
         }
-        tableView.delegate = self
-        tableView.dataSource = self
-        viewModel.delegate = self
+        
+        configureTableView()
+        
         view.backgroundColor = .athensGray
-        tableView.backgroundColor = .athensGray
-        tableView.tableHeaderView = countySelectionHeaderView
-        tableView.estimatedRowHeight = 80
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(cellType: CreditCell.self)
-        tableView.register(cellType: CreditSectionView.self)
+        viewModel.delegate = self
+        viewModel.load()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +47,20 @@ class CreditViewController: UIViewController, Storyboarded {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.updateHeaderViewHeight()
+    }
+    
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.backgroundColor = .athensGray
+        tableView.tableHeaderView = countySelectionHeaderView
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundView = activityIndicator
+        
+        tableView.register(cellType: CreditCell.self)
+        tableView.register(cellType: CreditSectionView.self)
     }
 }
 
@@ -102,5 +118,28 @@ extension CreditViewController: CreditViewModelDelegate {
         dismiss(animated: true) { [weak self] in
             self?.delegate?.didSelect(credit: credit)
         }
+    }
+    
+    func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
+        if !isLoading {
+            activityIndicator.stopAnimating()
+        } else {
+            guard isEmpty else { return }
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        }
+    }
+
+    func presentLoadError(_ error: Error) {
+        presentRetryableAndCancellableError(
+            error: error,
+            retryHandler: { [unowned self] _ in
+                self.viewModel.load()
+            },
+            cancelHandler: { [unowned self] _ in
+                self.navigationController?.popViewController(animated: true)
+            },
+            completionHandler: nil
+        )
     }
 }
