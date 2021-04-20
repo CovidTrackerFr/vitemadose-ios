@@ -12,7 +12,8 @@ import Haptica
 
 class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
-
+    @IBOutlet weak var logoContainerView: UIView!
+    
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
     private lazy var viewModel: HomeViewModelProvider = {
@@ -87,10 +88,16 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.register(cellType: HomeCountySelectionCell.self)
         tableView.register(cellType: HomeCountyCell.self)
         tableView.register(cellType: HomeStatsCell.self)
+        
+        logoContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLogoContainerView)))
     }
 
     @objc func didPullToRefresh() {
         viewModel.reloadStats()
+    }
+    
+    @objc func didTapLogoContainerView() {
+        presentCreditViewController()
     }
 
     private func presentCountySelectionViewController() {
@@ -110,6 +117,20 @@ class HomeViewController: UIViewController, Storyboarded {
         let config = SFSafariViewController.Configuration()
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
+    }
+    
+    private func presentCreditViewController() {
+        let creditViewController = CreditViewController.instantiate()
+        creditViewController.viewModel = CreditViewModel(credits: [
+            Credit(nom: "Victor Sarda", image: "https://github.com/victor-sarda.png"),
+            Credit(nom: "Paul Jeannot", image: "https://github.com/pauljeannot.png"),
+            Credit(nom: "Nathan Fallet", image: "https://github.com/NathanFallet.png"),
+            Credit(nom: "Guillaume Rozier", image: "https://github.com/rozierguillaume.png"),
+        ])
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.present(creditViewController, animated: true)
+        }
     }
 }
 

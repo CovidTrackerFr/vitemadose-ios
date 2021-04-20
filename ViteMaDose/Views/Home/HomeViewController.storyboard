@@ -76,6 +76,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoContainerView" destination="LX7-dM-o8Y" id="Hbb-rc-S8t"/>
                         <outlet property="tableView" destination="cr4-N6-zzO" id="Mms-SD-Iuw"/>
                     </connections>
                 </viewController>
