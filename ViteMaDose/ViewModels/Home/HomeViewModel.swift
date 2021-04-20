@@ -125,8 +125,8 @@ class HomeViewModel {
         statsCell = [
             .title(statsTitleViewModel),
             .stats(allCentresViewModel),
-            .stats(centresWithAvailabilitiesViewModel),
             .stats(allAvailabilitiesViewModel),
+            .stats(centresWithAvailabilitiesViewModel),
             .stats(percentageAvailabilitiesViewModel),
             .stats(externalMapViewModel)
         ]
