@@ -14,25 +14,35 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trouvez une dose de vaccin facilement et rapidement" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bs8-Sg-IF1">
-                    <rect key="frame" x="24" y="25" width="366" height="182"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titre" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bs8-Sg-IF1">
+                    <rect key="frame" x="24" y="25" width="366" height="41"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOH-Cz-mof">
+                    <rect key="frame" x="24" y="76" width="366" height="141"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Bs8-Sg-IF1" secondAttribute="trailing" constant="24" id="6Te-p1-5v2"/>
-                <constraint firstItem="Bs8-Sg-IF1" firstAttribute="top" secondItem="sla-vE-A3Q" secondAttribute="top" constant="25" id="HiQ-Vs-nGn"/>
-                <constraint firstItem="Bs8-Sg-IF1" firstAttribute="leading" secondItem="sla-vE-A3Q" secondAttribute="leading" constant="24" id="Oji-7F-CfN"/>
-                <constraint firstAttribute="bottom" secondItem="Bs8-Sg-IF1" secondAttribute="bottom" constant="15" id="jI1-rI-MfJ"/>
+                <constraint firstItem="zOH-Cz-mof" firstAttribute="top" secondItem="Bs8-Sg-IF1" secondAttribute="bottom" constant="10" id="Bbc-Cm-iKd"/>
+                <constraint firstItem="zOH-Cz-mof" firstAttribute="leading" secondItem="sla-vE-A3Q" secondAttribute="leading" constant="24" id="E2W-yI-Fon"/>
+                <constraint firstAttribute="bottom" secondItem="zOH-Cz-mof" secondAttribute="bottom" constant="5" id="HB8-8y-jvY"/>
+                <constraint firstItem="Bs8-Sg-IF1" firstAttribute="top" secondItem="sla-vE-A3Q" secondAttribute="top" constant="25" id="Lk1-1v-80A"/>
+                <constraint firstAttribute="trailing" secondItem="zOH-Cz-mof" secondAttribute="trailing" constant="24" id="gUe-d5-cly"/>
+                <constraint firstItem="Bs8-Sg-IF1" firstAttribute="leading" secondItem="sla-vE-A3Q" secondAttribute="leading" constant="24" id="lqh-Oc-hKd"/>
+                <constraint firstAttribute="trailing" secondItem="Bs8-Sg-IF1" secondAttribute="trailing" constant="24" id="lyC-Cw-dGy"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="descriptionLabel" destination="zOH-Cz-mof" id="4N8-ZJ-3Hx"/>
                 <outlet property="titleLabel" destination="Bs8-Sg-IF1" id="dn3-eQ-J1n"/>
             </connections>
-            <point key="canvasLocation" x="-4.3478260869565224" y="65.625"/>
+            <point key="canvasLocation" x="-36" y="84"/>
         </view>
     </objects>
     <resources>
