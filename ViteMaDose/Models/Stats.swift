@@ -13,6 +13,10 @@ struct StatsValue: Codable {
     let disponibles: Int
     let total: Int
     let creneaux: Int
+    
+    var pourcentage: Int {
+        (disponibles * 100) / total
+    }
 
     enum CodingKeys: String, CodingKey {
         case disponibles = "disponibles"
