@@ -10,25 +10,28 @@ import Kingfisher
 
 protocol CreditCellViewDataProvider {
     var creditName: String { get }
+    var creditRole: String { get }
     var creditImage: String { get }
 }
 
 struct CreditCellViewData: CreditCellViewDataProvider, Hashable {
-    var titleText: String?
     var creditName: String
+    var creditRole: String
     var creditImage: String
 }
 
 class CreditCell: UITableViewCell {
     @IBOutlet private var creditImageView: UIImageView!
     @IBOutlet private var creditNameLabel: UILabel!
+    @IBOutlet weak var creditRoleLabel: UILabel!
     @IBOutlet private var creditContainerView: UIView!
 
     private enum Constant {
         static let creditNameTextColor: UIColor = .label
         static let creditImageBackgroundColor: UIColor = .royalBlue
         static let cellBackgrounColor: UIColor = .tertiarySystemBackground
-        static let labelsFont: UIFont = .rounded(ofSize: 18, weight: .bold)
+        static let labelMainFont: UIFont = .rounded(ofSize: 18, weight: .bold)
+        static let labelSecondFont: UIFont = .rounded(ofSize: 15, weight: .regular)
         static let viewsCornerRadius: CGFloat = 15
     }
 
@@ -43,10 +46,13 @@ class CreditCell: UITableViewCell {
 
         creditImageView.kf.setImage(with: URL(string: viewData.creditImage))
         creditNameLabel.text = viewData.creditName
+        creditRoleLabel.text = viewData.creditRole
 
         creditNameLabel.textColor = Constant.creditNameTextColor
+        creditRoleLabel.textColor = Constant.creditNameTextColor
 
-        creditNameLabel.font = Constant.labelsFont
+        creditNameLabel.font = Constant.labelMainFont
+        creditRoleLabel.font = Constant.labelSecondFont
     }
 
     override func prepareForReuse() {

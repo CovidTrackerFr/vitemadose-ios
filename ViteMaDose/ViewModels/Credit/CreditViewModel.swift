@@ -68,6 +68,7 @@ class CreditViewModel: CreditViewModelProvider {
         }
 
         guard let nom = credit.nom,
+              let role = credit.role,
               let image = credit.image
         else {
             return nil
@@ -75,6 +76,7 @@ class CreditViewModel: CreditViewModelProvider {
 
         return CreditCellViewData(
             creditName: nom,
+            creditRole: role,
             creditImage: image
         )
     }

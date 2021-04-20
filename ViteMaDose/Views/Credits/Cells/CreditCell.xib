@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFm-F6-pGf">
-                        <rect key="frame" x="24" y="5" width="354" height="68"/>
+                        <rect key="frame" x="24" y="5" width="354" height="70.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yn7-42-KlF">
-                                <rect key="frame" x="8" y="8" width="338" height="52"/>
+                                <rect key="frame" x="8" y="8" width="338" height="54.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZP-zD-Fe1">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="54.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JOF-Zo-WjW">
-                                                <rect key="frame" x="0.0" y="6" width="40" height="40"/>
+                                                <rect key="frame" x="0.0" y="7.5" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="J7H-2P-pRd"/>
                                                     <constraint firstAttribute="height" constant="40" id="TN2-VE-hHq"/>
@@ -42,12 +42,18 @@
                                             <constraint firstAttribute="width" constant="40" id="s5W-GX-oZZ"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZXs-sh-754">
-                                        <rect key="frame" x="55" y="0.0" width="283" height="52"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZXs-sh-754">
+                                        <rect key="frame" x="55" y="0.0" width="283" height="54.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Arf-tf-NyD">
-                                                <rect key="frame" x="0.0" y="0.0" width="283" height="52"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zb-J9-cLa">
+                                                <rect key="frame" x="0.0" y="34" width="283" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -77,6 +83,7 @@
                 <outlet property="creditContainerView" destination="CFm-F6-pGf" id="YEk-cN-2ue"/>
                 <outlet property="creditImageView" destination="JOF-Zo-WjW" id="rS5-2E-sCl"/>
                 <outlet property="creditNameLabel" destination="Arf-tf-NyD" id="Q4W-Oc-Szi"/>
+                <outlet property="creditRoleLabel" destination="3zb-J9-cLa" id="pzu-hp-UaZ"/>
             </connections>
             <point key="canvasLocation" x="92.753623188405811" y="-22.098214285714285"/>
         </tableViewCell>

@@ -31,16 +31,17 @@ typealias Credits = [CreditSection]
 struct CreditStore {
     static let store: Credits = [
         CreditSection(section: "Chef d'équipe", users: [
-            Credit(nom: "Guillaume Rozier", image: "https://github.com/rozierguillaume.png", role: ""),
+            Credit(nom: "Guillaume Rozier", image: "https://github.com/rozierguillaume.png", role: "Le grand chef"),
         ]),
         CreditSection(section: "Team iOS", users: [
-            Credit(nom: "Victor Sarda", image: "https://github.com/victor-sarda.png", role: ""),
-            Credit(nom: "Paul Jeannot", image: "https://github.com/pauljeannot.png", role: ""),
-            Credit(nom: "Nathan Fallet", image: "https://github.com/NathanFallet.png", role: ""),
+            Credit(nom: "Victor Sarda", image: "https://github.com/victor-sarda.png", role: "Développeur"),
+            Credit(nom: "Paul Jeannot", image: "https://github.com/pauljeannot.png", role: "Développeur"),
+            Credit(nom: "Nathan Fallet", image: "https://github.com/NathanFallet.png", role: "Dev & App Store"),
+            Credit(nom: "Michaël Nass", image: "https://github.com/PlugNCS.png", role: "App Store"),
         ]),
         CreditSection(section: "Team Android", users: [
-            Credit(nom: "Michel Gauzins", image: "https://github.com/michgauz.png", role: ""),
-            Credit(nom: "JB Dumoulin", image: "https://github.com/dumoulinjb.png", role: ""),
+            Credit(nom: "Michel Gauzins", image: "https://github.com/michgauz.png", role: "Dev & Play Store"),
+            Credit(nom: "JB Dumoulin", image: "https://github.com/dumoulinjb.png", role: "Développeur"),
         ]),
     ]
 }
