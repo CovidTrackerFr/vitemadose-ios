@@ -229,7 +229,11 @@ extension CentresListViewController {
             let mapItem = MKMapItem(placemark: placemark)
             mapItem.name = centreInfo.name
 
-            self?.presentOpenMapAlert(address: centreInfo.address, mapItem: mapItem)
+            self?.presentOpenMapAlert(
+                sourceView: cell.addressNameContainer,
+                address: centreInfo.address,
+                mapItem: mapItem
+            )
         }
         // Phone number tap
         cell.phoneNumberTapHandler = { [weak self] in
@@ -243,7 +247,11 @@ extension CentresListViewController {
         }
     }
 
-    private func presentOpenMapAlert(address: String?, mapItem: MKMapItem) {
+    private func presentOpenMapAlert(
+        sourceView: UIView,
+        address: String?,
+        mapItem: MKMapItem
+    ) {
         let actionSheet = UIAlertController(
             title: mapItem.name,
             message: address,
@@ -264,6 +272,8 @@ extension CentresListViewController {
         actionSheet.addAction(openAction)
         actionSheet.addAction(cancelAction)
         actionSheet.preferredAction = openAction
+        actionSheet.popoverPresentationController?.sourceView = sourceView
+
         present(actionSheet, animated: true)
     }
 }
