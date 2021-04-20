@@ -119,6 +119,7 @@ class HomeViewModel {
         let allCentresViewModel = HomeCellStatsViewData(.allCentres(allCountiesStats.total))
         let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(allCountiesStats.disponibles))
         let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(allCountiesStats.creneaux))
+        let percentageAvailabilitiesViewModel = HomeCellStatsViewData(.percentageAvailabilities(allCountiesStats.pourcentage))
         let externalMapViewModel = HomeCellStatsViewData(.externalMap)
 
         statsCell = [
@@ -126,6 +127,7 @@ class HomeViewModel {
             .stats(allCentresViewModel),
             .stats(centresWithAvailabilitiesViewModel),
             .stats(allAvailabilitiesViewModel),
+            .stats(percentageAvailabilitiesViewModel),
             .stats(externalMapViewModel)
         ]
     }

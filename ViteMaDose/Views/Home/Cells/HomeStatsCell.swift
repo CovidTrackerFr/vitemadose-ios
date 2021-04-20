@@ -11,6 +11,7 @@ enum StatsDataType: Hashable {
     case allCentres(Int)
     case centresWithAvailabilities(Int)
     case allAvailabilities(Int)
+    case percentageAvailabilities(Int)
     case externalMap
 }
 
@@ -90,6 +91,10 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
             case let .allAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
                 description = "Créneaux disponibles"
+                iconContainerColor = .royalBlue
+            case let .percentageAvailabilities(count):
+                title = NSMutableAttributedString(string: "\(count)%")
+                description = "De centres avec des disponibilités"
                 iconContainerColor = .systemBlue
             case .externalMap:
                 let imageAttachment = NSTextAttachment()
@@ -121,6 +126,8 @@ private extension StatsDataType {
                 imageName = "checkmark"
             case .allAvailabilities:
                 imageName = "calendar"
+            case .percentageAvailabilities:
+                imageName = "percent"
             case .externalMap:
                 imageName = "mappin"
         }
