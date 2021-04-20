@@ -36,24 +36,24 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
 }
 
 class CentreCell: UITableViewCell {
-    @IBOutlet var dateContainer: UIStackView!
-    @IBOutlet var dateIconContainer: UIView!
+    @IBOutlet private var dateContainer: UIStackView!
+    @IBOutlet private var dateIconContainer: UIView!
     @IBOutlet private var dateLabel: UILabel!
 
-    @IBOutlet var addressNameContainer: UIStackView!
-    @IBOutlet var addressNameIconContainer: UIView!
+    @IBOutlet private(set) var addressNameContainer: UIStackView!
+    @IBOutlet private var addressNameIconContainer: UIView!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var addressLabel: UILabel!
 
-    @IBOutlet var phoneNumberContainer: UIStackView!
-    @IBOutlet var phoneNumberIconContainer: UIView!
+    @IBOutlet private var phoneNumberContainer: UIStackView!
+    @IBOutlet private var phoneNumberIconContainer: UIView!
     @IBOutlet private var phoneButton: UIButton!
 
-    @IBOutlet var vaccineTypesContainer: UIStackView!
+    @IBOutlet private var vaccineTypesContainer: UIStackView!
     @IBOutlet private var vaccineTypesLabel: UILabel!
 
-    @IBOutlet var vaccineTypesIconContainer: UIView!
-    @IBOutlet var dosesLabel: UILabel!
+    @IBOutlet private var vaccineTypesIconContainer: UIView!
+    @IBOutlet private var dosesLabel: UILabel!
 
     @IBOutlet private var bookingButton: UIButton!
     @IBOutlet private var cellContentView: UIView!
