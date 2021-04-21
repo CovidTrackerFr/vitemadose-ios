@@ -32,6 +32,7 @@ protocol CentresListViewModelProvider {
     var county: County { get }
     var vaccinationCentres: VaccinationCentres? { get }
     func load(animated: Bool)
+    func sort(animated: Bool)
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)?
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
     func bookingLink(at indexPath: IndexPath) -> URL?
@@ -259,6 +260,12 @@ extension CentresListViewModel: CentresListViewModelProvider {
                 self?.handleError(status)
             }
         }
+    }
+    
+    func sort(animated: Bool) {
+        updateCells()
+        
+        delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
     }
 
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)? {

@@ -38,6 +38,9 @@
                                     <segment title="First"/>
                                     <segment title="Second"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortingSegmentChanged:" destination="sw7-gG-DQT" eventType="valueChanged" id="j0G-DX-FaJ"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                     </stackView>

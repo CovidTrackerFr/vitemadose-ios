@@ -10,6 +10,10 @@ import SafariServices
 import MapKit
 import Haptica
 
+protocol CentresListViewControllerDelegate: class {
+    func didChange(mode: CentresSortOrder)
+}
+
 class CentresListViewController: UIViewController, Storyboarded {
 
     @IBOutlet private var tableView: UITableView!
@@ -209,6 +213,7 @@ extension CentresListViewController {
             case let .sorting(cellViewData):
                 let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
                 cell.configure(with: cellViewData)
+                cell.delegate = self
                 return cell
             case let .stats(cellViewData):
                 let cell = tableView.dequeueReusableCell(with: CentresStatsCell.self, for: indexPath)
@@ -290,4 +295,13 @@ extension CentresListViewController: UIGestureRecognizerDelegate {
         return true
     }
 
+}
+
+extension CentresListViewController: CentresListViewControllerDelegate {
+    
+    func didChange(mode: CentresSortOrder) {
+        viewModel.sort = mode
+        viewModel.sort(animated: true)
+    }
+    
 }
