@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="402" height="98"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="L5v-pV-hTv">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="L5v-pV-hTv">
                         <rect key="frame" x="24" y="10" width="354" height="78"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8H-59-BiQ">
@@ -27,11 +27,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwH-ps-5uT">
-                                <rect key="frame" x="0.0" y="30.5" width="354" height="47.5"/>
+                                <rect key="frame" x="0.0" y="25.5" width="354" height="52.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Zgc-91-cDp">
+                                <rect key="frame" x="0.0" y="78" width="354" height="1"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -46,6 +53,7 @@
             <connections>
                 <outlet property="bottomConstraint" destination="PHm-8n-s4W" id="yfg-Ag-Tdf"/>
                 <outlet property="descriptionLabel" destination="QwH-ps-5uT" id="GHL-4I-dSO"/>
+                <outlet property="segmentedControl" destination="Zgc-91-cDp" id="Ro7-gv-yIA"/>
                 <outlet property="titleLabel" destination="P8H-59-BiQ" id="LIY-Tr-SB6"/>
                 <outlet property="topConstraint" destination="bj4-5j-E1D" id="Q2m-vB-9Jr"/>
             </connections>

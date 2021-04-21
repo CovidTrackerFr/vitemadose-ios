@@ -18,8 +18,14 @@ enum CentresListSection: CaseIterable {
 
 enum CentresListCell: Hashable {
     case title(HomeTitleCellViewData)
+    case sorting(CentresSortingCellViewData)
     case stats(CentresStatsCellViewData)
     case centre(CentreViewData)
+}
+
+enum CentresSortOrder: Int {
+    case auPlusProche = 0
+    case auPlusVite = 1
 }
 
 protocol CentresListViewModelProvider {
@@ -69,6 +75,8 @@ class CentresListViewModel {
 
     var county: County
     var vaccinationCentres: VaccinationCentres?
+    
+    var sort: CentresSortOrder = .auPlusProche
 
     weak var delegate: CentresListViewModelDelegate?
 
@@ -102,7 +110,17 @@ class CentresListViewModel {
         let availableCentres = vaccinationCentres?.centresDisponibles ?? []
         let unavailableCentres = vaccinationCentres?.centresIndisponibles ?? []
         let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
-        allVaccinationCentres = availableCentres + unavailableCentres
+        
+        let sortedAvailableCentres = availableCentres.sorted(by: { centre1, centre2 in
+            switch sort {
+                case .auPlusProche:
+                    return auPlusProche(centre1, centre2)
+                case .auPlusVite:
+                    return auPlusVite(centre1, centre2)
+            }
+        })
+        
+        allVaccinationCentres = sortedAvailableCentres + unavailableCentres
 
         let dosesCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
         let vaccinationCentreCellsViewData = allVaccinationCentres.map({ getVaccinationCentreViewData($0) })
@@ -132,15 +150,16 @@ class CentresListViewModel {
             return
         }
 
-        let centresListTitleViewData = HomeTitleCellViewData(
+        let centresListTitleViewData = CentresSortingCellViewData(
             titleText: CentresTitleCell.centresListTitle,
-            bottomMargin: 5
+            bottomMargin: 5,
+            mode: sort
         )
         let vaccinationCentresViewData = vaccinationCentreCellsViewData.map({
             CentresListCell.centre($0)
         })
 
-        headingCells.append(.title(centresListTitleViewData))
+        headingCells.append(.sorting(centresListTitleViewData))
         centresCells = vaccinationCentresViewData
     }
 
@@ -279,4 +298,26 @@ extension CentresListViewModel: CentresListViewModelProvider {
         AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
         return bookingUrl
     }
+}
+
+// MARK: - Sort centre
+
+extension CentresListViewModel {
+    
+    func auPlusProche(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
+        guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
+              let rdv2 = centre2.prochainRdv?.toDate(nil, region: region) else {
+            return false
+        }
+        return rdv1.isBeforeDate(rdv2, granularity: .second)
+    }
+    
+    func auPlusVite(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
+        guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
+              let rdv2 = centre2.prochainRdv?.toDate(nil, region: region) else {
+            return false
+        }
+        return rdv1.isBeforeDate(rdv2, granularity: .second)
+    }
+    
 }

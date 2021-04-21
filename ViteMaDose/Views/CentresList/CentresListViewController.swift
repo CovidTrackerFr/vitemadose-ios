@@ -206,6 +206,10 @@ extension CentresListViewController {
                 let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
                 cell.configure(with: cellViewData)
                 return cell
+            case let .sorting(cellViewData):
+                let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
+                cell.configure(with: cellViewData)
+                return cell
             case let .stats(cellViewData):
                 let cell = tableView.dequeueReusableCell(with: CentresStatsCell.self, for: indexPath)
                 cell.configure(with: cellViewData)
