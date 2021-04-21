@@ -77,7 +77,7 @@ class CentresListViewModel {
     var county: County
     var vaccinationCentres: VaccinationCentres?
     
-    var sort: CentresSortOrder = .auPlusProche
+    var sort: CentresSortOrder = .auPlusVite
 
     weak var delegate: CentresListViewModelDelegate?
 
@@ -154,7 +154,8 @@ class CentresListViewModel {
         let centresListTitleViewData = CentresSortingCellViewData(
             titleText: CentresTitleCell.centresListTitle,
             bottomMargin: 5,
-            mode: sort
+            mode: sort,
+            showSelector: false // TODO: Set to true when search is done by city, otherwise false
         )
         let vaccinationCentresViewData = vaccinationCentreCellsViewData.map({
             CentresListCell.centre($0)
@@ -312,6 +313,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
 extension CentresListViewModel {
     
     func auPlusProche(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
+        // TODO: Calculate by distance
         guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
               let rdv2 = centre2.prochainRdv?.toDate(nil, region: region) else {
             return false

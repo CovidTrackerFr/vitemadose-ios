@@ -9,6 +9,7 @@ import UIKit
 
 protocol CentresSortingCellViewDataProvider: HomeTitleCellViewDataProvider {
     var mode: CentresSortOrder { get }
+    var showSelector: Bool { get }
 }
 
 struct CentresSortingCellViewData: CentresSortingCellViewDataProvider, Hashable {
@@ -17,19 +18,22 @@ struct CentresSortingCellViewData: CentresSortingCellViewDataProvider, Hashable 
     let topMargin: CGFloat
     let bottomMargin: CGFloat
     let mode: CentresSortOrder
+    let showSelector: Bool
 
     init(
         titleText: NSMutableAttributedString,
         subTitleText: NSMutableAttributedString? = nil,
         topMargin: CGFloat = 10,
         bottomMargin: CGFloat = 10,
-        mode: CentresSortOrder = .auPlusProche
+        mode: CentresSortOrder = .auPlusProche,
+        showSelector: Bool
     ) {
         self.titleText = titleText
         self.subTitleText = subTitleText
         self.topMargin = topMargin
         self.bottomMargin = bottomMargin
         self.mode = mode
+        self.showSelector = showSelector
     }
 }
 
@@ -72,7 +76,7 @@ class CentresTitleCell: HomeTitleCell {
         
         if let viewData = viewData as? CentresSortingCellViewData {
             segmentedControl.selectedSegmentIndex = viewData.mode.rawValue
-            segmentedControl.isHidden = false
+            segmentedControl.isHidden = !viewData.showSelector
         } else {
             segmentedControl.isHidden = true
         }
