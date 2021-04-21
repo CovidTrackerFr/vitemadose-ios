@@ -741,23 +741,23 @@
 			shellScript = "# Fixes binary framework bug, see:\n# https://developer.apple.com/documentation/xcode-release-notes/xcode-12_4-release-notes#Swift-Packages\n# https://github.com/firebase/firebase-ios-sdk/issues/6472\n#\n\necho \"Removing static frameworks from ${TARGET_NAME}.app\"\nfind \"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/\" -name '*.framework' -print0 | while IFS= read -r -d '' fm; do\n    name=$(basename \"${fm}\" .framework)\n    target=\"${fm}/${name}\"\n    echo \"Checking: ${fm}\"\n    if file \"${target}\" | grep -q \"current ar archive\"; then\n        rm -rf \"${fm}\"\n        echo \"Removed static framework: ${fm}\"\n    fi\ndone\n";
 		};
 		57B7CD53262E36A60065DD80 /* Build Number */ = {
- 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
- 			);
- 			inputFileListPaths = (
- 			);
- 			inputPaths = (
- 			);
- 			name = "Build Number";
- 			outputFileListPaths = (
- 			);
- 			outputPaths = (
- 			);
- 			runOnlyForDeploymentPostprocessing = 0;
- 			shellPath = /bin/sh;
- 			shellScript = "#!/bin/bash\nbranch=${1:-'master'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nif [ -f \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}.dSYM/Contents/Info.plist\"\nfi\n";
- 		};
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Scripts/set_build_number.sh\n";
+		};
 		DA68646626276624005B2AC2 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1023,7 +1023,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 138;
+				CURRENT_PROJECT_VERSION = 841539;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZL9396WK65;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
@@ -1046,7 +1046,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 138;
+				CURRENT_PROJECT_VERSION = 841539;
 				DEVELOPMENT_TEAM = ZL9396WK65;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
