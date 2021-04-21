@@ -113,11 +113,9 @@ extension CreditViewController: CreditViewModelDelegate {
     func reloadTableView(with credits: Credits) {
         tableView.reloadData()
     }
-
-    func dismissViewController(with credit: Credit) {
-        dismiss(animated: true) { [weak self] in
-            self?.delegate?.didSelect(credit: credit)
-        }
+    
+    func openURL(url: URL) {
+        UIApplication.shared.open(url)
     }
     
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
@@ -137,7 +135,7 @@ extension CreditViewController: CreditViewModelDelegate {
                 self.viewModel.load()
             },
             cancelHandler: { [unowned self] _ in
-                self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
             },
             completionHandler: nil
         )

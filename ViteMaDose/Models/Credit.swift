@@ -13,6 +13,7 @@ struct Credit: Codable {
     let nom: String?
     let image: String?
     let role: String?
+    let detailsURL: String?
 }
 
 // MARK: - CreditSection

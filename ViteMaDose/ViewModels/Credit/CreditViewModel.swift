@@ -17,7 +17,7 @@ protocol CreditViewModelProvider {
 
 protocol CreditViewModelDelegate: class {
     func reloadTableView(with credits: Credits)
-    func dismissViewController(with credit: Credit)
+    func openURL(url: URL)
     
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
     func presentLoadError(_ error: Error)
@@ -97,7 +97,9 @@ class CreditViewModel: CreditViewModelProvider {
             return
         }
 
-        delegate?.dismissViewController(with: credit)
+        if let detailsURL = credit.detailsURL, let url = URL(string: detailsURL) {
+            delegate?.openURL(url: url)
+        }
     }
     
     private func handleLoad(with credits: Credits) {

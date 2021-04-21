@@ -12,7 +12,6 @@ import Haptica
 
 class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
-    @IBOutlet weak var logoContainerView: UIView!
     
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
@@ -88,16 +87,10 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.register(cellType: HomeCountySelectionCell.self)
         tableView.register(cellType: HomeCountyCell.self)
         tableView.register(cellType: HomeStatsCell.self)
-        
-        logoContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLogoContainerView)))
     }
 
     @objc func didPullToRefresh() {
         viewModel.reloadStats()
-    }
-    
-    @objc func didTapLogoContainerView() {
-        presentCreditViewController()
     }
 
     private func presentCountySelectionViewController() {
@@ -119,6 +112,7 @@ class HomeViewController: UIViewController, Storyboarded {
         present(safariViewController, animated: true)
     }
     
+    // TODO: Move this to settings to open contributors
     private func presentCreditViewController() {
         let creditViewController = CreditViewController.instantiate()
         creditViewController.viewModel = CreditViewModel(credits: [])
