@@ -152,7 +152,7 @@ class CentresListViewModel {
 
         let lastUpdateDay = lastUpdate.toString(.date(.short))
         let lastUpdateTime = lastUpdate.toString(.time(.short))
-        footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
+        footerText = "last_updated".localized().format([lastUpdateDay, lastUpdateTime])
     }
 
 
@@ -180,7 +180,7 @@ class CentresListViewModel {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable ? "Prendre rendez-vous" : "Vérifier ce centre"
+        let bookingButtonText = isAvailable ? "book_appointment_space".localized() : "check_location_space".localized()
 
         var phoneText: String?
         if let phoneNumber = centre.metadata?.phoneNumber {
@@ -200,8 +200,8 @@ class CentresListViewModel {
         return CentreViewData(
             dayText: dayString,
             timeText: timeString,
-            addressNameText: centre.nom ?? "Nom du centre indisponible",
-            addressText: centre.metadata?.address ?? "Addresse indisponible",
+            addressNameText: centre.nom ?? "location_name_unavailable".localized(),
+            addressText: centre.metadata?.address ?? "address_unavailable".localized(),
             phoneText: phoneText,
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: ", "),

@@ -17,7 +17,7 @@ class HomePartnersFooterView: UIView {
     @IBOutlet var logoImageView5: UIImageView!
 
     private enum Constant {
-        static let titleText = "Trouvez vos rendez-vous avec"
+        static let titleText = "find_appointment_with".localized()
     }
 
     private lazy var allLogos: [UIImageView] = [

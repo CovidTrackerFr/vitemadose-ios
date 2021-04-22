@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  ViteMaDose
+
+  Created by PlugN on 22/04/2021.
+  
+*/
+"title_text" = "Trouvez une dose de vaccin facilement et rapidement";
+"easily" = "facilement";
+"quickly" = "rapidement";
+"last_stats" = "Dernières statistiques";
+"found_locations" = "Lieux trouvés en France";
+"location" = "Lieu";
+"locations" = "Lieux";
+"availablilties" = "%@ avec rendez-vous disponibles";
+"available_slots" = "Créneaux disponibles";
+"percentage_available" = "De lieux avec des disponibilités";
+"percentage" = "%@ %";
+"open_map_locations_space" = "Ouvrir la carte des lieux ";
+"select_area" = "Sélectionner un département...";
+"find_appointment_with" = "Trouvez vos rendez-vous avec";
+"select_your_area" = "Sélectionnez votre département";
+"area" = "Département";
+"we_found" = "Nous avons trouvé";
+"shots" = "doses";
+"for_the_area" = "pour le département";
+"no_shots_found" = "Nous n'avons pas trouvé de doses pour le département";
+"locations_list" = "Liste des lieux";
+"with_appointments" = "%@ avec rendez-vous";
+"total_locations" = "%@ au total";
+"found_locations" = "Lieux trouvés";
+"found_locaion" = "Lieu trouvé";
+"no_appointments" = "Aucun rendez-vous";
+"unavailable_date" = "Date Indisponible";
+"date_string" = "Le %@ à partir de %@";
+"x_shot_space" = "%@ dose ";
+"x_shots_space" = "%@ doses ";
+"open_route" = "Ouvrir l'itinéraire";
+"cancel" = "Annuler";
+"recent_search" = "Recherche Récente";
+"last_updated" = "Dernière mise à jour le %@ à %@";
+"book_appointment_space" = "Prendre rendez-vous ";
+"check_location_space" = "Vérifier ce lieu ";
+"location_name_unavailable" = "Nom du lieu indisponible";
+"address_unavailable" = "Adresse indisponible";
+"unexpected_error" = "Oups, il y a un problème :(";
+"retry" = "Réessayer";

@@ -42,13 +42,11 @@ class CentresStatsCell: UITableViewCell {
 
         static let detailViewsCornerRadius: CGFloat = 15
 
-        // TODO: Localisation
         static func availableCentresText(_ count: Int) -> String {
-            "\(count > 1 ? "Centres" : "Centre") avec rendez-vous"
+            "with_appointments".localized().format(["\(count > 1 ? "locations".localized() : "location".localized())"])
         }
-        // TODO: Localisation
         static func allCentresText(_ count: Int) -> String {
-            "\(count > 1 ? "Centres trouvés" : "Centre trouvé") au total"
+            "total_locations".localized().format(["\(count > 1 ? "found_locations".localized() : "found_location".localized())"])
         }
     }
 

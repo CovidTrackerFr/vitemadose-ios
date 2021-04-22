@@ -61,9 +61,9 @@ class HomeTitleCell: UITableViewCell {
 extension HomeTitleCell {
     static var mainTitleAttributedText: NSMutableAttributedString {
         let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
-        let titleText = "Trouvez une dose de vaccin facilement et rapidement"
-        let titleFirstHighlightedText = "facilement"
-        let titleSecondHighlightedText = "rapidement"
+        let titleText = "title_text".localized()
+        let titleFirstHighlightedText = "easily".localized()
+        let titleSecondHighlightedText = "quickly".localized()
 
         let attributedText = NSMutableAttributedString(
             string: titleText,
@@ -87,7 +87,7 @@ extension HomeTitleCell {
 
     static var lastStatsAttributedText: NSMutableAttributedString {
         let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
-        let titleText = "Dernières statistiques"
+        let titleText = "last_stats".localized()
 
         return NSMutableAttributedString(
             string: titleText,

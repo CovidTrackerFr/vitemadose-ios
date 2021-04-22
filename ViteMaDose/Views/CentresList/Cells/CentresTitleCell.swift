@@ -15,11 +15,11 @@ class CentresTitleCell: HomeTitleCell {
         static let highlightedDosesTextColor: UIColor = .systemGreen
         static let highlightedCountyTextColor: UIColor = .mandy
 
-        static let titleFirstPartText = "Nous avons trouvé"
-        static let titleSecondPartText = "doses"
-        static let titleThirdText = "pour le département"
-        static let titleNoDoseText = "Nous n'avons pas trouvé de doses pour le département"
-        static let subtitleText = "Liste des centres"
+        static let titleFirstPartText = "we_found".localized()
+        static let titleSecondPartText = "shots".localized()
+        static let titleThirdText = "for_the_area".localized()
+        static let titleNoDoseText = "no_shots_found".localized()
+        static let subtitleText = "locations_list".localized()
     }
 }
 

@@ -81,20 +81,19 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
         switch dataType {
             case let .allCentres(count):
                 title = NSMutableAttributedString(string: String(count))
-                description = "Centres trouvés en France"
+                description = "found_locations".localized()
                 iconContainerColor = .systemOrange
             case let .centresWithAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
-                // TODO: Localisation
-                description = "\(count > 1 ? "Centres" : "Centre") avec rendez-vous disponibles"
+                description = "availablilties".localized().format(["\(count > 1 ? "locations".localized() : "location".localized())"])
                 iconContainerColor = .systemGreen
             case let .allAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
-                description = "Créneaux disponibles"
+                description = "available_slots".localized()
                 iconContainerColor = .royalBlue
             case let .percentageAvailabilities(count):
-                title = NSMutableAttributedString(string: "\(count)%")
-                description = "De centres avec des disponibilités"
+                title = NSMutableAttributedString(string: "percentage".localized().format([String(count)]))
+                description = "percentage_available".localized()
                 iconContainerColor = .systemBlue
             case .externalMap:
                 let imageAttachment = NSTextAttachment()
@@ -103,7 +102,7 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
                     withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
                 )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-                let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
+                let fullString = NSMutableAttributedString(string: "open_map_locations_space".localized())
                 fullString.append(NSAttributedString(attachment: imageAttachment))
                 title = fullString
                 description = nil
