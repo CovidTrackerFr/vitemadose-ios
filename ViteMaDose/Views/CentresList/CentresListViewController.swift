@@ -258,7 +258,7 @@ extension CentresListViewController {
             preferredStyle: .actionSheet
         )
 
-        let openAction = UIAlertAction(title: "open_route".localized(), style: .default) { _ in
+        let openAction = UIAlertAction(title: LocalizedString.open_route, style: .default) { _ in
             MKMapItem.openMaps(
                 with: [mapItem],
                 launchOptions: [
@@ -267,7 +267,7 @@ extension CentresListViewController {
             )
         }
 
-        let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: LocalizedString.cancel, style: .cancel, handler: nil)
 
         actionSheet.addAction(openAction)
         actionSheet.addAction(cancelAction)

@@ -15,11 +15,6 @@ class CentresTitleCell: HomeTitleCell {
         static let highlightedDosesTextColor: UIColor = .systemGreen
         static let highlightedCountyTextColor: UIColor = .mandy
 
-        static let titleFirstPartText = "we_found".localized()
-        static let titleSecondPartText = "shots".localized()
-        static let titleThirdText = "for_the_area".localized()
-        static let titleNoDoseText = "no_shots_found".localized()
-        static let subtitleText = "locations_list".localized()
     }
 }
 
@@ -36,15 +31,15 @@ extension CentresTitleCell {
 
         guard dosesCount > 0 else {
             let title = NSMutableAttributedString(
-                string:"\(Constant.titleNoDoseText) \(countyName)",
+                string:"\(LocalizedString.no_shots_found) \(countyName)",
                 attributes: attributes
             )
             title.setColorForText(textForAttribute: countyName, withColor: .mandy)
             return title
         }
 
-        let dosesCountString = "\(String(dosesCount)) \(Constant.titleSecondPartText)"
-        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleThirdText) \(countyName)"
+        let dosesCountString = "\(String(dosesCount)) \(LocalizedString.shots)"
+        let titleString = "\(LocalizedString.we_found) \(dosesCountString) \(LocalizedString.for_the_area) \(countyName)"
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
@@ -60,7 +55,7 @@ extension CentresTitleCell {
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
             NSAttributedString.Key.font: Constant.titleFont,
         ]
-        return NSMutableAttributedString(string: Constant.subtitleText, attributes: attributes)
+        return NSMutableAttributedString(string: LocalizedString.locations_list, attributes: attributes)
     }
 
 }

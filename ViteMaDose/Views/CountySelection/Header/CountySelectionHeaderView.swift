@@ -11,8 +11,8 @@ class CountySelectionHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
 
     private enum Constant {
-        static let titleText = "select_your_area".localized()
-        static let highlightedText = "area".localized()
+        static let titleText = LocalizedString.select_your_area
+        static let highlightedText = LocalizedString.area
         static let highlightedTextColor = UIColor.mandy
         static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
         static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
