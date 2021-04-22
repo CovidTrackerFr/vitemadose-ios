@@ -11,7 +11,7 @@ struct LocalizedString {
     
     
     // Unchanging strings
-    static let title_text = "title_text".localized()
+    static let find_a_shot = "find_a_shot".localized()
     static let easily = "easily".localized()
     static let quickly = "quickly".localized()
     static let last_stats = "last_stats".localized()

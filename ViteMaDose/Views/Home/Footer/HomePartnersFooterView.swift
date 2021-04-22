@@ -16,10 +16,6 @@ class HomePartnersFooterView: UIView {
     @IBOutlet private var logo4ImageView: UIImageView!
     @IBOutlet var logoImageView5: UIImageView!
 
-    private enum Constant {
-        static let titleText = LocalizedString.find_appointment_with
-    }
-
     private lazy var allLogos: [UIImageView] = [
         logo1ImageView,
         logo2ImageView,
@@ -32,7 +28,7 @@ class HomePartnersFooterView: UIView {
         super.awakeFromNib()
         backgroundColor = .athensGray
         
-        titleLabel.text = Constant.titleText
+        titleLabel.text = LocalizedString.find_appointment_with
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel
 

@@ -11,8 +11,6 @@ class CountySelectionHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
 
     private enum Constant {
-        static let titleText = LocalizedString.select_your_area
-        static let highlightedText = LocalizedString.area
         static let highlightedTextColor = UIColor.mandy
         static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
         static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
@@ -27,14 +25,14 @@ class CountySelectionHeaderView: UIView {
 
     private func configureTitle() {
         let attributedText = NSMutableAttributedString(
-            string: Constant.titleText,
+            string: LocalizedString.select_your_area,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label,
             ]
         )
         attributedText.setColorForText(
-            textForAttribute: Constant.highlightedText,
+            textForAttribute: LocalizedString.area,
             withColor: Constant.highlightedTextColor
         )
         titleLabel.attributedText = attributedText
