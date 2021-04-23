@@ -10,7 +10,7 @@ import FirebaseRemoteConfig
 import APIRequest
 
 struct RemoteConfiguration {
-    
+
     static let shared = RemoteConfiguration()
     let configuration: RemoteConfig
 
@@ -23,8 +23,8 @@ struct RemoteConfiguration {
         configuration.configSettings = settings
     }
 
-    func synchronize(completion: @escaping (APIResponseStatus) -> ()) {
-        configuration.fetch(withExpirationDuration: 0) { (status, error) in
+    func synchronize(completion: @escaping (APIResponseStatus) -> Void) {
+        configuration.fetch(withExpirationDuration: 0) { (_, error) in
             guard error == nil else {
                 print("Error while fetching remote configuration (\(error.debugDescription)).")
                 completion(.error)
@@ -44,7 +44,7 @@ extension RemoteConfiguration {
     var host: String {
         return baseUrl.replacingOccurrences(of: "https://", with: "")
     }
-    
+
     var baseUrl: String {
         return configuration.configValue(forKey: "url_base").stringValue!
     }

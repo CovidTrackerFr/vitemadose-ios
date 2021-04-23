@@ -25,13 +25,13 @@ class HomePartnersFooterView: UIView {
         logo2ImageView,
         logo3ImageView,
         logo4ImageView,
-        logoImageView5,
+        logoImageView5
     ]
 
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .athensGray
-        
+
         titleLabel.text = Constant.titleText
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel

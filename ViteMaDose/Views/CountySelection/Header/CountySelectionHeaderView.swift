@@ -30,7 +30,7 @@ class CountySelectionHeaderView: UIView {
             string: Constant.titleText,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
-                NSAttributedString.Key.foregroundColor: UIColor.label,
+                NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
         attributedText.setColorForText(

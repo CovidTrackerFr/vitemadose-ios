@@ -54,14 +54,14 @@ extension CountySelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: CountyCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
             assertionFailure("Cell view model missing at \(indexPath)")
             return UITableViewCell()
         }
-        
+
         cell.configure(with: cellViewModel)
         return cell
     }
@@ -87,4 +87,3 @@ extension CountySelectionViewController: CountySelectionViewModelDelegate {
         }
     }
 }
-

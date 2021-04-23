@@ -153,7 +153,7 @@ extension CentresListViewController: CentresListViewModelDelegate {
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
         tableView.tableFooterView?.isHidden = isLoading
-        
+
         if !isLoading {
             activityIndicator.stopAnimating()
             refreshControl.endRefreshing()
@@ -194,7 +194,7 @@ extension CentresListViewController {
     private func makeDataSource() -> UITableViewDiffableDataSource<CentresListSection, CentresListCell> {
         return UITableViewDiffableDataSource(
             tableView: tableView,
-            cellProvider: { [weak self] tableView, indexPath, vaccinationCentreCell in
+            cellProvider: { [weak self] _, indexPath, vaccinationCentreCell in
                 return self?.dequeueAndConfigure(cell: vaccinationCentreCell, at: indexPath)
             }
         )
@@ -202,19 +202,19 @@ extension CentresListViewController {
 
     private func dequeueAndConfigure(cell: CentresListCell, at indexPath: IndexPath) -> UITableViewCell {
         switch cell {
-            case let .title(cellViewData):
-                let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
-                cell.configure(with: cellViewData)
-                return cell
-            case let .stats(cellViewData):
-                let cell = tableView.dequeueReusableCell(with: CentresStatsCell.self, for: indexPath)
-                cell.configure(with: cellViewData)
-                return cell
-            case let .centre(cellViewData):
-                let cell = tableView.dequeueReusableCell(with: CentreCell.self, for: indexPath)
-                configureHandlers(for: cell, at: indexPath)
-                cell.configure(with: cellViewData)
-                return cell
+        case let .title(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
+            cell.configure(with: cellViewData)
+            return cell
+        case let .stats(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentresStatsCell.self, for: indexPath)
+            cell.configure(with: cellViewData)
+            return cell
+        case let .centre(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentreCell.self, for: indexPath)
+            configureHandlers(for: cell, at: indexPath)
+            cell.configure(with: cellViewData)
+            return cell
         }
     }
 
@@ -262,7 +262,7 @@ extension CentresListViewController {
             MKMapItem.openMaps(
                 with: [mapItem],
                 launchOptions: [
-                    MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault,
+                    MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault
                 ]
             )
         }
@@ -277,7 +277,6 @@ extension CentresListViewController {
         present(actionSheet, animated: true)
     }
 }
-
 
 extension CentresListViewController: UIGestureRecognizerDelegate {
 

@@ -79,38 +79,37 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
         icon = dataType.iconImage
 
         switch dataType {
-            case let .allCentres(count):
-                title = NSMutableAttributedString(string: String(count))
-                description = "Centres trouvés en France"
-                iconContainerColor = .systemOrange
-            case let .centresWithAvailabilities(count):
-                title = NSMutableAttributedString(string: String(count))
-                // TODO: Localisation
-                description = "\(count > 1 ? "Centres" : "Centre") avec rendez-vous disponibles"
-                iconContainerColor = .systemGreen
-            case let .allAvailabilities(count):
-                title = NSMutableAttributedString(string: String(count))
-                description = "Créneaux disponibles"
-                iconContainerColor = .royalBlue
-            case let .percentageAvailabilities(count):
-                title = NSMutableAttributedString(string: "\(count)%")
-                description = "De centres avec des disponibilités"
-                iconContainerColor = .systemBlue
-            case .externalMap:
-                let imageAttachment = NSTextAttachment()
-                imageAttachment.image = UIImage(
-                    systemName: "arrow.up.right",
-                    withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
-                )?.withTintColor(.label, renderingMode: .alwaysOriginal)
+        case let .allCentres(count):
+            title = NSMutableAttributedString(string: String(count))
+            description = "Centres trouvés en France"
+            iconContainerColor = .systemOrange
+        case let .centresWithAvailabilities(count):
+            title = NSMutableAttributedString(string: String(count))
+            // TODO: Localisation
+            description = "\(count > 1 ? "Centres" : "Centre") avec rendez-vous disponibles"
+            iconContainerColor = .systemGreen
+        case let .allAvailabilities(count):
+            title = NSMutableAttributedString(string: String(count))
+            description = "Créneaux disponibles"
+            iconContainerColor = .royalBlue
+        case let .percentageAvailabilities(count):
+            title = NSMutableAttributedString(string: "\(count)%")
+            description = "De centres avec des disponibilités"
+            iconContainerColor = .systemBlue
+        case .externalMap:
+            let imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(
+                systemName: "arrow.up.right",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+            )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-                let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
-                fullString.append(NSAttributedString(attachment: imageAttachment))
-                title = fullString
-                description = nil
-                iconContainerColor = .systemRed
+            let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
+            fullString.append(NSAttributedString(attachment: imageAttachment))
+            title = fullString
+            description = nil
+            iconContainerColor = .systemRed
         }
     }
-
 }
 
 private extension StatsDataType {
@@ -120,16 +119,16 @@ private extension StatsDataType {
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
 
         switch self {
-            case .allCentres:
-                imageName = "magnifyingglass"
-            case .centresWithAvailabilities:
-                imageName = "checkmark"
-            case .allAvailabilities:
-                imageName = "calendar"
-            case .percentageAvailabilities:
-                imageName = "percent"
-            case .externalMap:
-                imageName = "mappin"
+        case .allCentres:
+            imageName = "magnifyingglass"
+        case .centresWithAvailabilities:
+            imageName = "checkmark"
+        case .allAvailabilities:
+            imageName = "calendar"
+        case .percentageAvailabilities:
+            imageName = "percent"
+        case .externalMap:
+            imageName = "mappin"
         }
 
         let image = UIImage(systemName: imageName, withConfiguration: configuration)

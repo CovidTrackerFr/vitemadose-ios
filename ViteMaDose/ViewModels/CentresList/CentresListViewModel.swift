@@ -124,7 +124,7 @@ class CentresListViewModel {
 
         headingCells = [
             .title(mainTitleViewData),
-            .stats(statsCellViewData),
+            .stats(statsCellViewData)
         ]
 
         guard !isEmpty else {
@@ -154,7 +154,6 @@ class CentresListViewModel {
         let lastUpdateTime = lastUpdate.toString(.time(.short))
         footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
     }
-
 
     func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var url: URL?
@@ -191,8 +190,7 @@ class CentresListViewModel {
                     ignoreType: true
                 )
                 phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
-            }
-            catch {
+            } catch {
                 phoneText = phoneNumber
             }
         }
@@ -251,7 +249,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
         else {
             return nil
         }
-        return (name, centre.metadata?.address, lat,  long)
+        return (name, centre.metadata?.address, lat, long)
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
