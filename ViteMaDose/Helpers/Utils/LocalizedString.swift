@@ -48,7 +48,6 @@ enum LocalizedString {
         
     }
     
-    
     enum country_selection {
         
         enum title {
@@ -59,8 +58,6 @@ enum LocalizedString {
         }
         
     }
-    
-    
     
     enum vaccination_locations_list {
         
@@ -76,7 +73,6 @@ enum LocalizedString {
         static let location_name_unavailable = "vaccination_locations_list.location_name_unavailable".localized()
         static let address_unavailable = "vaccination_locations_list.address_unavailable".localized()
         static let cancel_button = "vaccination_locations_list.cancel_button".localized()
-        
         
         static func date(date: String, time: String) -> String {
             return "vaccination_locations_list.date".localized().format([date, time])
