@@ -10,9 +10,10 @@ import SafariServices
 import FirebaseAnalytics
 import Haptica
 
-class HomeViewController: UIViewController, Storyboarded {
-    @IBOutlet private var tableView: UITableView!
+// MARK: - `HomeViewController`
+final class HomeViewController: UIViewController {
 
+    // MARK: - iVars
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
     private lazy var viewModel: HomeViewModelProvider = {
@@ -21,29 +22,25 @@ class HomeViewController: UIViewController, Storyboarded {
         return viewModel
     }()
 
-    private lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
-        return refreshControl
-    }()
-
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        return activityIndicator
-    }()
-
-    private lazy var footerView: HomePartnersFooterView = {
-        let view: HomePartnersFooterView = HomePartnersFooterView.instanceFromNib()
-        view.isHidden = true
-        return view
-    }()
+    private var homeView: HomeView! { self.view as? HomeView}
 
     private lazy var dataSource = makeDataSource()
 
+    // MARK: - Init
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Overrides
 
+    override func loadView() {
+        let view = HomeView(frame: UIScreen.main.bounds)
+        self.view = view
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
@@ -71,22 +68,10 @@ class HomeViewController: UIViewController, Storyboarded {
     private func configureViewController() {
         view.backgroundColor = .athensGray
 
-        tableView.delegate = self
-        tableView.dataSource = dataSource
-        tableView.backgroundColor = .athensGray
-        tableView.alwaysBounceVertical = false
+        self.homeView.tableView.delegate = self
+        self.homeView.tableView.dataSource = dataSource
 
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-
-        tableView.refreshControl = refreshControl
-        tableView.backgroundView = activityIndicator
-        tableView.tableFooterView = footerView
-
-        tableView.register(cellType: HomeTitleCell.self)
-        tableView.register(cellType: HomeCountySelectionCell.self)
-        tableView.register(cellType: HomeCountyCell.self)
-        tableView.register(cellType: HomeStatsCell.self)
+        self.homeView.refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
     }
 
     @objc func didPullToRefresh() {
@@ -155,8 +140,7 @@ extension HomeViewController: HomeViewModelDelegate {
         dataSource.apply(update, animatingDifferences: true)
     }
 
-    // MARK: Present
-
+    // MARK: - Present
     func presentVaccinationCentres(for county: County) {
         viewModel.updateLastSelectedCountyIfNeeded(county.codeDepartement)
 
@@ -167,14 +151,14 @@ extension HomeViewController: HomeViewModelDelegate {
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
-        tableView.tableFooterView?.isHidden = isLoading
+        self.homeView.tableView.tableFooterView?.isHidden = isLoading
         if !isLoading {
-            activityIndicator.stopAnimating()
-            refreshControl.endRefreshing()
+            self.homeView.activityIndicator.stopAnimating()
+            self.homeView.refreshControl.endRefreshing()
         } else {
             guard isEmpty else { return }
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
+            self.homeView.activityIndicator.isHidden = false
+            self.homeView.activityIndicator.startAnimating()
         }
     }
 
@@ -185,7 +169,7 @@ extension HomeViewController: HomeViewModelDelegate {
                 self.viewModel.reloadStats()
             },
             cancelHandler: { [unowned self] _ in
-                self.refreshControl.endRefreshing()
+                self.homeView.refreshControl.endRefreshing()
             },
             completionHandler: nil
         )
@@ -235,7 +219,7 @@ extension HomeViewController {
 
     private func makeDataSource() -> UITableViewDiffableDataSource<HomeSection, HomeCell> {
         return UITableViewDiffableDataSource(
-            tableView: tableView,
+            tableView: self.homeView.tableView,
             cellProvider: { [weak self] _, indexPath, homeCell in
                 return self?.dequeueAndConfigure(cell: homeCell, at: indexPath)
             }
@@ -245,19 +229,19 @@ extension HomeViewController {
     private func dequeueAndConfigure(cell: HomeCell, at indexPath: IndexPath) -> UITableViewCell {
         switch cell {
         case let .title(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
+            let cell = self.homeView.tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .countySelection(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
+            let cell = self.homeView.tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .county(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
+            let cell = self.homeView.tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .stats(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeStatsCell.self, for: indexPath)
+            let cell = self.homeView.tableView.dequeueReusableCell(with: HomeStatsCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         }

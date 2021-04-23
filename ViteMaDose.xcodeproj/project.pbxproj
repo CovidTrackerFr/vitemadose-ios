@@ -35,7 +35,6 @@
 		57673921261E3B59004A700D /* Collection+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673920261E3B59004A700D /* Collection+Commons.swift */; };
 		57673926261E3B6C004A700D /* UIView+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673925261E3B6C004A700D /* UIView+Common.swift */; };
 		57673930261E3BC5004A700D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767392F261E3BC5004A700D /* HomeViewController.swift */; };
-		57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57673937261E3BDE004A700D /* HomeViewController.storyboard */; };
 		5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767393E261E3C1F004A700D /* HomeViewModel.swift */; };
 		57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673954261E4145004A700D /* ClassNameProtocol.swift */; };
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
@@ -71,6 +70,7 @@
 		57ECA227262B031F001B368F /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */; };
 		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
 		6A0FA1A0262CAB6C002D3AA8 /* APIRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0FA19F262CAB6C002D3AA8 /* APIRequest */; };
+		889B9A5026330D6F00175E24 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889B9A4F26330D6F00175E24 /* HomeView.swift */; };
 		DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA234DC22626494600D6F71C /* remote-configuration.plist */; };
 		DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA234DD02626506600D6F71C /* RemoteConfig.swift */; };
 		DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */; };
@@ -137,7 +137,6 @@
 		57673920261E3B59004A700D /* Collection+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Commons.swift"; sourceTree = "<group>"; };
 		57673925261E3B6C004A700D /* UIView+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Common.swift"; sourceTree = "<group>"; };
 		5767392F261E3BC5004A700D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		57673937261E3BDE004A700D /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
 		5767393E261E3C1F004A700D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		57673954261E4145004A700D /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplayable.swift; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
 		6A28354B262DC06C00FA6456 /* ViteMaDose.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViteMaDose.entitlements; sourceTree = "<group>"; };
 		889B9A49263307EC00175E24 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		889B9A4F26330D6F00175E24 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
 		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
@@ -321,8 +321,7 @@
 			children = (
 				579348282621DA9D00F8A4A0 /* Cells */,
 				57EC4706262B629B00FBA991 /* Footer */,
-				5767392F261E3BC5004A700D /* HomeViewController.swift */,
-				57673937261E3BDE004A700D /* HomeViewController.storyboard */,
+				889B9A4C26330D5E00175E24 /* Home */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -479,6 +478,15 @@
 			path = Footer;
 			sourceTree = "<group>";
 		};
+		889B9A4C26330D5E00175E24 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5767392F261E3BC5004A700D /* HomeViewController.swift */,
+				889B9A4F26330D6F00175E24 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		DA6864792627A1BC005B2AC2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,7 +631,6 @@
 				5747142B262B6BA300535DF1 /* CountyCell.xib in Resources */,
 				57C4018F26238E5300EFFCA3 /* CountySelectionHeaderView.xib in Resources */,
 				57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */,
-				57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */,
 				57AD21EE2621073200ED2B95 /* CountySelectionViewController.storyboard in Resources */,
 				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
 				57C401972623929800EFFCA3 /* HomeCountyCell.xib in Resources */,
@@ -752,6 +759,7 @@
 				5767390A261E3875004A700D /* County.swift in Sources */,
 				57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */,
 				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
+				889B9A5026330D6F00175E24 /* HomeView.swift in Sources */,
 				57673903261E3783004A700D /* Data+Commons.swift in Sources */,
 				DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */,
 				576738C0261E329C004A700D /* AppDelegate.swift in Sources */,
