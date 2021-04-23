@@ -1,0 +1,10 @@
+included:
+    - ViteMaDose
+    - ViteMaDosesTests
+    - ViteMaDoseUITests
+disabled_rules:
+    - large_tuple
+    - force_cast
+    - todo
+    - nesting
+line_length: 200

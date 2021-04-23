@@ -31,12 +31,12 @@ extension CentresTitleCell {
     ) -> NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
-            NSAttributedString.Key.font: Constant.titleFont,
+            NSAttributedString.Key.font: Constant.titleFont
         ]
 
         guard dosesCount > 0 else {
             let title = NSMutableAttributedString(
-                string:"\(Constant.titleNoDoseText) \(countyName)",
+                string: "\(Constant.titleNoDoseText) \(countyName)",
                 attributes: attributes
             )
             title.setColorForText(textForAttribute: countyName, withColor: .mandy)
@@ -58,7 +58,7 @@ extension CentresTitleCell {
     static var centresListTitle: NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
-            NSAttributedString.Key.font: Constant.titleFont,
+            NSAttributedString.Key.font: Constant.titleFont
         ]
         return NSMutableAttributedString(string: Constant.subtitleText, attributes: attributes)
     }
