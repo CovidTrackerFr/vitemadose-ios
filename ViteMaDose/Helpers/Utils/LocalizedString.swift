@@ -15,9 +15,11 @@ enum LocalizedString {
         static let recent_search = "home.recent_search".localized()
         
         enum title {
+            
             static let title = "home.title.title".localized()
             static let first_highlighted_text = "home.title.first_highlighted_text".localized()
             static let second_highlighted_text = "home.title.second_highlighted_text".localized()
+            
         }
         
         enum stats {
@@ -94,7 +96,8 @@ enum LocalizedString {
         static func last_update(date: String, time: String) -> String {
             return "vaccination_locations_list.last_update".localized().format([date, time])
         }
-        static func title(quantity: String, area: String) -> String { "vaccination_locations_list.title".localized().format([quantity, area])
+        static func title(quantity: String, area: String) -> String {
+            "vaccination_locations_list.title".localized().format([quantity, area])
         }
         
     }
@@ -102,7 +105,6 @@ enum LocalizedString {
     enum generic_error {
         
         static let cancel_button = "generic_error.cancel_button".localized()
-        
         static let title = "generic_error.title".localized()
         static let retry_button = "generic_error.retry_button".localized()
         static let default_message = "generic_error.default_message".localized()
