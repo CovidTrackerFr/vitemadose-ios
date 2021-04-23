@@ -45,6 +45,7 @@
 		5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */; };
 		579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */; };
 		5793484C262241B900F8A4A0 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793484B262241B900F8A4A0 /* Stats.swift */; };
+		5795BE102633540C00A44849 /* String+DateParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795BE0F2633540C00A44849 /* String+DateParsing.swift */; };
 		57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */; };
 		57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */; };
 		57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21D52621041200ED2B95 /* CentresListViewController.swift */; };
@@ -150,6 +151,7 @@
 		5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsCell.swift; sourceTree = "<group>"; };
 		579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Commons.swift"; sourceTree = "<group>"; };
 		5793484B262241B900F8A4A0 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		5795BE0F2633540C00A44849 /* String+DateParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateParsing.swift"; sourceTree = "<group>"; };
 		57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Commons.swift"; sourceTree = "<group>"; };
 		57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerController+Commons.swift"; sourceTree = "<group>"; };
 		57AD21D52621041200ED2B95 /* CentresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresListViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
 		6A28354B262DC06C00FA6456 /* ViteMaDose.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViteMaDose.entitlements; sourceTree = "<group>"; };
+		889B9A49263307EC00175E24 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
 		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 		576738B3261E329C004A700D = {
 			isa = PBXGroup;
 			children = (
+				889B9A49263307EC00175E24 /* .swiftlint.yml */,
 				576738BE261E329C004A700D /* ViteMaDose */,
 				576738D5261E32A3004A700D /* ViteMaDoseTests */,
 				576738E0261E32A3004A700D /* ViteMaDoseUITests */,
@@ -375,6 +379,7 @@
 				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 				577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */,
 				EDE43C512630F61500087A2F /* String+Commons.swift */,
+				5795BE0F2633540C00A44849 /* String+DateParsing.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 576738E6261E32A3004A700D /* Build configuration list for PBXNativeTarget "ViteMaDose" */;
 			buildPhases = (
+				889B9A48263307BC00175E24 /* Swiftlint */,
 				576738B8261E329C004A700D /* Sources */,
 				576738B9261E329C004A700D /* Frameworks */,
 				576738BA261E329C004A700D /* Resources */,
@@ -597,6 +603,11 @@
 			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+<<<<<<< HEAD
+=======
+				fr,
+				en,
+>>>>>>> develop
 				Base,
 				fr,
 			);
@@ -698,6 +709,24 @@
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/Scripts/set_build_number.sh\n";
 		};
+		889B9A48263307BC00175E24 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		DA68646626276624005B2AC2 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -730,6 +759,7 @@
 				EDE43C522630F61500087A2F /* String+Commons.swift in Sources */,
 				575CC22F262AF4E1008D1869 /* HomeCountySelectionCell.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */,
+				5795BE102633540C00A44849 /* String+DateParsing.swift in Sources */,
 				577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */,
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,

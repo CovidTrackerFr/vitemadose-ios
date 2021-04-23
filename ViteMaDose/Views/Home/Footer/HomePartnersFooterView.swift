@@ -21,7 +21,7 @@ class HomePartnersFooterView: UIView {
         logo2ImageView,
         logo3ImageView,
         logo4ImageView,
-        logoImageView5,
+        logoImageView5
     ]
 
     override func awakeFromNib() {

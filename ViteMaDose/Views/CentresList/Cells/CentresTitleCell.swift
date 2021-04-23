@@ -26,7 +26,7 @@ extension CentresTitleCell {
     ) -> NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
-            NSAttributedString.Key.font: Constant.titleFont,
+            NSAttributedString.Key.font: Constant.titleFont
         ]
 
         guard dosesCount > 0 else {
@@ -53,7 +53,7 @@ extension CentresTitleCell {
     static var centresListTitle: NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
-            NSAttributedString.Key.font: Constant.titleFont,
+            NSAttributedString.Key.font: Constant.titleFont
         ]
         return NSMutableAttributedString(string: LocalizedString.vaccination_locations_list.list_title, attributes: attributes)
     }

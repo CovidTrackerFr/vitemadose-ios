@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    var embedInNavigationController:  UINavigationController {
+    var embedInNavigationController: UINavigationController {
         return UINavigationController(rootViewController: self)
     }
 }

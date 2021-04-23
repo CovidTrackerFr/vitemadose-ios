@@ -14,7 +14,7 @@ struct County: Codable {
     let nomDepartement: String?
     let codeRegion: Int?
     let nomRegion: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case codeDepartement = "code_departement"
         case nomDepartement = "nom_departement"

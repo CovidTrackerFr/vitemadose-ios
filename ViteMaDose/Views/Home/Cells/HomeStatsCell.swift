@@ -109,7 +109,6 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
                 iconContainerColor = .systemRed
         }
     }
-
 }
 
 private extension StatsDataType {
@@ -119,16 +118,16 @@ private extension StatsDataType {
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
 
         switch self {
-            case .allCentres:
-                imageName = "magnifyingglass"
-            case .centresWithAvailabilities:
-                imageName = "checkmark"
-            case .allAvailabilities:
-                imageName = "calendar"
-            case .percentageAvailabilities:
-                imageName = "percent"
-            case .externalMap:
-                imageName = "mappin"
+        case .allCentres:
+            imageName = "magnifyingglass"
+        case .centresWithAvailabilities:
+            imageName = "checkmark"
+        case .allAvailabilities:
+            imageName = "calendar"
+        case .percentageAvailabilities:
+            imageName = "percent"
+        case .externalMap:
+            imageName = "mappin"
         }
 
         let image = UIImage(systemName: imageName, withConfiguration: configuration)

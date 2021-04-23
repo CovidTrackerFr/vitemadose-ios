@@ -28,7 +28,7 @@ class CountySelectionHeaderView: UIView {
             string: LocalizedString.country_selection.title.title,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
-                NSAttributedString.Key.foregroundColor: UIColor.label,
+                NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
         attributedText.setColorForText(

@@ -66,7 +66,7 @@ extension HomeTitleCell {
             string: LocalizedString.home.title.title,
             attributes: [
                 NSAttributedString.Key.font: titleFont,
-                NSAttributedString.Key.foregroundColor: UIColor.label,
+                NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
 
@@ -89,7 +89,7 @@ extension HomeTitleCell {
             string: LocalizedString.home.stats.last_stats,
             attributes: [
                 NSAttributedString.Key.font: titleFont,
-                NSAttributedString.Key.foregroundColor: UIColor.label,
+                NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
     }
