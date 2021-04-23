@@ -63,7 +63,7 @@ extension HomeTitleCell {
         let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
 
         let attributedText = NSMutableAttributedString(
-            string: LocalizedString.home.title.title,
+            string: LocalizedString.Home.Title.title,
             attributes: [
                 NSAttributedString.Key.font: titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label
@@ -71,11 +71,11 @@ extension HomeTitleCell {
         )
 
         attributedText.setColorForText(
-            textForAttribute: LocalizedString.home.title.first_highlighted_text,
+            textForAttribute: LocalizedString.Home.Title.firstHighlightedText,
             withColor: .royalBlue
         )
         attributedText.setColorForText(
-            textForAttribute: LocalizedString.home.title.second_highlighted_text,
+            textForAttribute: LocalizedString.Home.Title.secondHighlightedText,
             withColor: .mandy
         )
 
@@ -86,7 +86,7 @@ extension HomeTitleCell {
         let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
 
         return NSMutableAttributedString(
-            string: LocalizedString.home.stats.last_stats,
+            string: LocalizedString.Home.Stats.lastStats,
             attributes: [
                 NSAttributedString.Key.font: titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label

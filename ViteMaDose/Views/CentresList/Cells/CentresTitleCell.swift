@@ -31,15 +31,15 @@ extension CentresTitleCell {
 
         guard dosesCount > 0 else {
             let title = NSMutableAttributedString(
-                string:"\(LocalizedString.vaccination_locations_list.no_results) \(countyName)",
+                string: "\(LocalizedString.VaccinationLocationsList.noResults) \(countyName)",
                 attributes: attributes
             )
             title.setColorForText(textForAttribute: countyName, withColor: .mandy)
             return title
         }
 
-        let dosesCountString = dosesCount > 1 ? LocalizedString.vaccination_locations_list.doses(dosesCount) : LocalizedString.vaccination_locations_list.dose(dosesCount)
-        let titleString = "\(LocalizedString.vaccination_locations_list.title(quantity: dosesCountString, area: countyName))"
+        let dosesCountString = dosesCount > 1 ? LocalizedString.VaccinationLocationsList.doses(dosesCount) : LocalizedString.VaccinationLocationsList.dose(dosesCount)
+        let titleString = "\(LocalizedString.VaccinationLocationsList.title(quantity: dosesCountString, area: countyName))"
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
@@ -55,7 +55,7 @@ extension CentresTitleCell {
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
             NSAttributedString.Key.font: Constant.titleFont
         ]
-        return NSMutableAttributedString(string: LocalizedString.vaccination_locations_list.list_title, attributes: attributes)
+        return NSMutableAttributedString(string: LocalizedString.VaccinationLocationsList.listTitle, attributes: attributes)
     }
 
 }

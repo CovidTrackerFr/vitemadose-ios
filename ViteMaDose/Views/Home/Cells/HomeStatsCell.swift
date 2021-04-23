@@ -79,30 +79,30 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
         icon = dataType.iconImage
 
         switch dataType {
-            case let .allCentres(count):
+        case let .allCentres(count):
                 title = NSMutableAttributedString(string: String(count))
-                description = LocalizedString.home.stats.all_locations
+                description = LocalizedString.Home.Stats.allLocations
                 iconContainerColor = .systemOrange
-            case let .centresWithAvailabilities(count):
+        case let .centresWithAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
-                description = LocalizedString.home.stats.available_locations("\(count > 1 ? LocalizedString.global.locations : LocalizedString.global.location)")
+                description = LocalizedString.Home.Stats.availableLocations("\(count > 1 ? LocalizedString.Global.locations : LocalizedString.Global.location)")
                 iconContainerColor = .systemGreen
-            case let .allAvailabilities(count):
+        case let .allAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
-                description = LocalizedString.home.stats.all_availabilities
+                description = LocalizedString.Home.Stats.allAvailabilities
                 iconContainerColor = .royalBlue
-            case let .percentageAvailabilities(count):
-                title = NSMutableAttributedString(string: LocalizedString.global.percentage(count))
-                description = LocalizedString.home.stats.percentage
+        case let .percentageAvailabilities(count):
+                title = NSMutableAttributedString(string: LocalizedString.Global.percentage(count))
+                description = LocalizedString.Home.Stats.percentage
                 iconContainerColor = .systemBlue
-            case .externalMap:
+        case .externalMap:
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.image = UIImage(
                     systemName: "arrow.up.right",
                     withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
                 )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-                let fullString = NSMutableAttributedString(string: LocalizedString.home.stats.open_map)
+                let fullString = NSMutableAttributedString(string: LocalizedString.Home.Stats.openMap)
                 fullString.append(NSAttributedString(attachment: imageAttachment))
                 title = fullString
                 description = nil

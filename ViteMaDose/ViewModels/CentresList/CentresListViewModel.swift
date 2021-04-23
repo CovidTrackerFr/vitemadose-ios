@@ -152,7 +152,7 @@ class CentresListViewModel {
 
         let lastUpdateDay = lastUpdate.toString(.date(.short))
         let lastUpdateTime = lastUpdate.toString(.time(.short))
-        footerText = LocalizedString.vaccination_locations_list.last_update(date: lastUpdateDay, time: lastUpdateTime)
+        footerText = LocalizedString.VaccinationLocationsList.lastUpdate(date: lastUpdateDay, time: lastUpdateTime)
     }
 
     func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
@@ -172,7 +172,7 @@ class CentresListViewModel {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable ? LocalizedString.vaccination_locations_list.book_button : LocalizedString.vaccination_locations_list.verify_button
+        let bookingButtonText = isAvailable ? LocalizedString.VaccinationLocationsList.bookButton : LocalizedString.VaccinationLocationsList.verifyButton
 
         var phoneText: String?
         if let phoneNumber = centre.metadata?.phoneNumber {
@@ -191,8 +191,8 @@ class CentresListViewModel {
         return CentreViewData(
             dayText: dayString,
             timeText: timeString,
-            addressNameText: centre.nom ?? LocalizedString.vaccination_locations_list.location_name_unavailable,
-            addressText: centre.metadata?.address ?? LocalizedString.vaccination_locations_list.address_unavailable,
+            addressNameText: centre.nom ?? LocalizedString.VaccinationLocationsList.locationNameUnavailable,
+            addressText: centre.metadata?.address ?? LocalizedString.VaccinationLocationsList.addressUnavailable,
             phoneText: phoneText,
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: ", "),

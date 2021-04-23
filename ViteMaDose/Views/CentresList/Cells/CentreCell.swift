@@ -161,19 +161,19 @@ class CentreCell: UITableViewCell {
 
         guard isAvailable else {
             return NSMutableAttributedString(
-                string: LocalizedString.vaccination_locations_list.no_appointments,
+                string: LocalizedString.VaccinationLocationsList.noAppointments,
                 attributes: attributes
             )
         }
 
         guard let dayText = dayText, let timeText = timeText else {
             return NSMutableAttributedString.init(
-                string: LocalizedString.vaccination_locations_list.date_unavailable,
+                string: LocalizedString.VaccinationLocationsList.dateUnavailable,
                 attributes: attributes
             )
         }
 
-        let dateString = LocalizedString.vaccination_locations_list.date(date: dayText, time: timeText)
+        let dateString = LocalizedString.VaccinationLocationsList.date(date: dayText, time: timeText)
         let dateText = NSMutableAttributedString(
             string: dateString,
             attributes: attributes
@@ -200,7 +200,7 @@ class CentreCell: UITableViewCell {
         }
 
         dosesLabel.isHidden = false
-        let dosesText: String = dosesCount > 1 ? LocalizedString.vaccination_locations_list.doses(dosesCount) : LocalizedString.vaccination_locations_list.dose(dosesCount)
+        let dosesText: String = dosesCount > 1 ? LocalizedString.VaccinationLocationsList.doses(dosesCount) : LocalizedString.VaccinationLocationsList.dose(dosesCount)
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
             dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)
