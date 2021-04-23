@@ -227,7 +227,6 @@
 		576738B3261E329C004A700D = {
 			isa = PBXGroup;
 			children = (
-				889B9A49263307EC00175E24 /* .swiftlint.yml */,
 				576738BE261E329C004A700D /* ViteMaDose */,
 				576738D5261E32A3004A700D /* ViteMaDoseTests */,
 				576738E0261E32A3004A700D /* ViteMaDoseUITests */,
@@ -389,6 +388,7 @@
 		57673986261E5AF3004A700D /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				889B9A49263307EC00175E24 /* .swiftlint.yml */,
 				577A7F6B262CA3D000B1D03C /* GoogleService-Info.plist */,
 				576738BF261E329C004A700D /* AppDelegate.swift */,
 				576738C1261E329C004A700D /* SceneDelegate.swift */,
