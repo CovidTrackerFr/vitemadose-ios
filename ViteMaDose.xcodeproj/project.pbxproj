@@ -603,11 +603,6 @@
 			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-<<<<<<< HEAD
-=======
-				fr,
-				en,
->>>>>>> develop
 				Base,
 				fr,
 			);
