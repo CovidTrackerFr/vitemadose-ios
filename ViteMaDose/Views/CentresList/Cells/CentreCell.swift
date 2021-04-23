@@ -62,7 +62,7 @@ class CentreCell: UITableViewCell {
         dateIconContainer,
         addressNameIconContainer,
         phoneNumberIconContainer,
-        vaccineTypesIconContainer,
+        vaccineTypesIconContainer
     ]
 
     var addressTapHandler: (() -> Void)?
@@ -156,7 +156,7 @@ class CentreCell: UITableViewCell {
     ) -> NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.labelPrimaryColor,
-            NSAttributedString.Key.font: Constant.labelPrimaryFont,
+            NSAttributedString.Key.font: Constant.labelPrimaryFont
         ]
 
         guard isAvailable else {
@@ -191,7 +191,7 @@ class CentreCell: UITableViewCell {
     ) {
         let attributes = [
             NSAttributedString.Key.font: Constant.dosesLabelFont,
-            NSAttributedString.Key.foregroundColor: Constant.labelSecondaryColor,
+            NSAttributedString.Key.foregroundColor: Constant.labelSecondaryColor
         ]
 
         guard let dosesCount = dosesCount, dosesCount > 0 else {
@@ -226,9 +226,9 @@ class CentreCell: UITableViewCell {
         let phoneButtonAttributedText = NSMutableAttributedString(
             string: phoneNumber,
             attributes: [
-                NSAttributedString.Key.foregroundColor : Constant.labelPrimaryColor,
-                NSAttributedString.Key.font : Constant.labelPrimaryFont,
-                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                NSAttributedString.Key.foregroundColor: Constant.labelPrimaryColor,
+                NSAttributedString.Key.font: Constant.labelPrimaryFont,
+                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
             ]
         )
 
@@ -252,8 +252,8 @@ class CentreCell: UITableViewCell {
         let bookingButtonAttributedText = NSMutableAttributedString(
             string: viewData.bookingButtonText,
             attributes: [
-                NSAttributedString.Key.foregroundColor : UIColor.white,
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold),
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold)
             ]
         )
 
@@ -270,10 +270,10 @@ class CentreCell: UITableViewCell {
     }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {
-        views.forEach{ $0.setCornerRadius(radius) }
+        views.forEach { $0.setCornerRadius(radius) }
     }
 
     private func resetTextFor(_ labels: [UILabel]) {
-        labels.forEach{ $0.text = nil }
+        labels.forEach { $0.text = nil }
     }
 }

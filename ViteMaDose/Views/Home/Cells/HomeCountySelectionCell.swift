@@ -16,7 +16,7 @@ struct HomeCountySelectionViewData: HomeCountySelectionCellViewDataProvider, Has
 }
 
 class HomeCountySelectionCell: UITableViewCell {
-    
+
     @IBOutlet private var searchBarView: UIView!
     @IBOutlet private var searchBarTitle: UILabel!
 
@@ -32,7 +32,6 @@ class HomeCountySelectionCell: UITableViewCell {
         backgroundColor = .clear
         contentView.backgroundColor = .clear
         searchBarView.backgroundColor = .tertiarySystemBackground
-
 
         searchBarTitle.font = Constant.searchBarFont
 
