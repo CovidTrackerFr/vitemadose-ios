@@ -7,69 +7,106 @@
 
 import Foundation
 
-struct LocalizedString {
+enum LocalizedString {
     
-    
-    // Unchanging strings
-    static let find_a_shot = "find_a_shot".localized()
-    static let easily = "easily".localized()
-    static let quickly = "quickly".localized()
-    static let last_stats = "last_stats".localized()
-    static let found_locations_country = "found_locations_country".localized()
-    static let location = "location".localized()
-    static let locations = "locations".localized()
-    static let available_slots = "available_slots".localized()
-    static let percentage_available = "percentage_available".localized()
-    static let open_map_locations_space = "open_map_locations_space".localized()
-    static let select_area = "select_area".localized()
-    static let find_appointment_with = "find_appointment_with".localized()
-    static let select_your_area = "select_your_area".localized()
-    static let area = "area".localized()
-    static let we_found = "we_found".localized()
-    static let shots = "shots".localized()
-    static let for_the_area = "for_the_area".localized()
-    static let no_shots_found = "no_shots_found".localized()
-    static let locations_list = "locations_list".localized()
-    static let found_locations = "found_locations".localized()
-    static let found_locaion = "found_locaion".localized()
-    static let no_appointments = "no_appointments".localized()
-    static let unavailable_date = "unavailable_date".localized()
-    static let open_route = "open_route".localized()
-    static let cancel = "cancel".localized()
-    static let recent_search = "recent_search".localized()
-    static let book_appointment_space = "book_appointment_space".localized()
-    static let check_location_space = "check_location_space".localized()
-    static let location_name_unavailable = "location_name_unavailable".localized()
-    static let address_unavailable = "address_unavailable".localized()
-    static let unexpected_error = "unexpected_error".localized()
-    static let retry = "retry".localized()
-    
-    
-    // Variable strings
-    static func availablilties(quantity: String) -> String {
-        return "availablilties".localized().format([quantity])
-    }
-    static func percentage(quantity: String) -> String {
-        return "percentage".localized().format([quantity])
-    }
-    static func date_string(date: String, time: String) -> String {
-        return "date_string".localized().format([date, time])
-    }
-    static func x_shot_space(quantity: String) -> String {
-        return "x_shot_space".localized().format([quantity])
-    }
-    static func x_shots_space(quantity: String) -> String {
-        return "x_shots_space".localized().format([quantity])
-    }
-    static func with_appointments(quantity: String) -> String {
-        return "with_appointments".localized().format([quantity])
-    }
-    static func total_locations(quantity: String) -> String {
-        "total_locations".localized().format([quantity])
-    }
-    static func last_updated(date: String, time: String) -> String {
-        return "last_updated".localized().format([date, time])
+    enum home {
+        
+        static let partners = "home.partners".localized()
+        static let recent_search = "home.recent_search".localized()
+        
+        enum title {
+            static let title = "home.title.title".localized()
+            static let first_highlighted_text = "home.title.first_highlighted_text".localized()
+            static let second_highlighted_text = "home.title.second_highlighted_text".localized()
+        }
+        
+        enum stats {
+            
+            static let last_stats = "home.stats.last_stats".localized()
+            static let all_locations = "home.stats.all_locations".localized()
+            static let all_availabilities = "home.stats.all_availabilities".localized()
+            static let percentage = "home.stats.percentage".localized()
+            static let open_map = "home.stats.open_map".localized()
+            
+            static func available_locations(_ plural: String) -> String {
+                return "home.stats.available_locations".localized().format([plural])
+            }
+        }
+        
     }
     
+    enum global {
+        
+        static let location = "global.location".localized()
+        static let locations = "global.locations".localized()
+        
+        static func percentage(_ quantity: Int) -> String {
+            return "global.percentage".localized().format([String(quantity)])
+        }
+        
+    }
+    
+    
+    enum country_selection {
+        
+        enum title {
+            
+            static let title = "country_selection.title.title".localized()
+            static let highlighted_text = "country_selection.title.highlighted_text".localized()
+            
+        }
+        
+    }
+    
+    
+    
+    enum vaccination_locations_list {
+        
+        static let no_results = "vaccination_locations_list.no_results".localized()
+        static let list_title = "vaccination_locations_list.list_title".localized()
+        static let found_locations = "vaccination_locations_list.found_locations".localized()
+        static let found_location = "vaccination_locations_list.found_location".localized()
+        static let no_appointments = "vaccination_locations_list.no_appointments".localized()
+        static let date_unavailable = "vaccination_locations_list.date_unavailable".localized()
+        static let open_route = "vaccination_locations_list.open_route".localized()
+        static let book_button = "vaccination_locations_list.book_button".localized()
+        static let verify_button = "vaccination_locations_list.verify_button".localized()
+        static let location_name_unavailable = "vaccination_locations_list.location_name_unavailable".localized()
+        static let address_unavailable = "vaccination_locations_list.address_unavailable".localized()
+        static let cancel_button = "vaccination_locations_list.cancel_button".localized()
+        
+        
+        static func date(date: String, time: String) -> String {
+            return "vaccination_locations_list.date".localized().format([date, time])
+        }
+        static func dose(_ quantity: Int) -> String {
+            return "vaccination_locations_list.dose".localized().format([String(quantity)])
+        }
+        static func doses(_ quantity: Int) -> String {
+            return "vaccination_locations_list.doses".localized().format([String(quantity)])
+        }
+        static func available_locations(_ plural: String) -> String {
+            return "vaccination_locations_list.available_locations".localized().format([plural])
+        }
+        static func all_locations(_ plural: String) -> String {
+            "vaccination_locations_list.all_locations".localized().format([plural])
+        }
+        static func last_update(date: String, time: String) -> String {
+            return "vaccination_locations_list.last_update".localized().format([date, time])
+        }
+        static func title(quantity: String, area: String) -> String { "vaccination_locations_list.title".localized().format([quantity, area])
+        }
+        
+    }
+    
+    enum generic_error {
+        
+        static let cancel_button = "generic_error.cancel_button".localized()
+        
+        static let title = "generic_error.title".localized()
+        static let retry_button = "generic_error.retry_button".localized()
+        static let default_message = "generic_error.default_message".localized()
+        
+    }
     
 }

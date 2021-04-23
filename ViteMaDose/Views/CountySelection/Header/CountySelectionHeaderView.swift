@@ -25,14 +25,14 @@ class CountySelectionHeaderView: UIView {
 
     private func configureTitle() {
         let attributedText = NSMutableAttributedString(
-            string: LocalizedString.select_your_area,
+            string: LocalizedString.country_selection.title.title,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label,
             ]
         )
         attributedText.setColorForText(
-            textForAttribute: LocalizedString.area,
+            textForAttribute: LocalizedString.country_selection.title.highlighted_text,
             withColor: Constant.highlightedTextColor
         )
         titleLabel.attributedText = attributedText

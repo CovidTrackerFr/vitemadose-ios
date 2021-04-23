@@ -152,7 +152,7 @@ class CentresListViewModel {
 
         let lastUpdateDay = lastUpdate.toString(.date(.short))
         let lastUpdateTime = lastUpdate.toString(.time(.short))
-        footerText = LocalizedString.last_updated(date: lastUpdateDay, time: lastUpdateTime)
+        footerText = LocalizedString.vaccination_locations_list.last_update(date: lastUpdateDay, time: lastUpdateTime)
     }
 
 
@@ -180,7 +180,7 @@ class CentresListViewModel {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable ? LocalizedString.book_appointment_space : LocalizedString.check_location_space
+        let bookingButtonText = isAvailable ? LocalizedString.vaccination_locations_list.book_button : LocalizedString.vaccination_locations_list.verify_button
 
         var phoneText: String?
         if let phoneNumber = centre.metadata?.phoneNumber {
@@ -200,8 +200,8 @@ class CentresListViewModel {
         return CentreViewData(
             dayText: dayString,
             timeText: timeString,
-            addressNameText: centre.nom ?? LocalizedString.location_name_unavailable,
-            addressText: centre.metadata?.address ?? LocalizedString.address_unavailable,
+            addressNameText: centre.nom ?? LocalizedString.vaccination_locations_list.location_name_unavailable,
+            addressText: centre.metadata?.address ?? LocalizedString.vaccination_locations_list.address_unavailable,
             phoneText: phoneText,
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: ", "),

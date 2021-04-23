@@ -28,7 +28,7 @@ class HomePartnersFooterView: UIView {
         super.awakeFromNib()
         backgroundColor = .athensGray
         
-        titleLabel.text = LocalizedString.find_appointment_with
+        titleLabel.text = LocalizedString.home.partners
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel
 
