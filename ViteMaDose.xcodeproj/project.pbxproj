@@ -45,6 +45,7 @@
 		5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */; };
 		579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */; };
 		5793484C262241B900F8A4A0 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793484B262241B900F8A4A0 /* Stats.swift */; };
+		5795BE102633540C00A44849 /* String+DateParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795BE0F2633540C00A44849 /* String+DateParsing.swift */; };
 		57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */; };
 		57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */; };
 		57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21D52621041200ED2B95 /* CentresListViewController.swift */; };
@@ -147,6 +148,7 @@
 		5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsCell.swift; sourceTree = "<group>"; };
 		579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Commons.swift"; sourceTree = "<group>"; };
 		5793484B262241B900F8A4A0 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		5795BE0F2633540C00A44849 /* String+DateParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateParsing.swift"; sourceTree = "<group>"; };
 		57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Commons.swift"; sourceTree = "<group>"; };
 		57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerController+Commons.swift"; sourceTree = "<group>"; };
 		57AD21D52621041200ED2B95 /* CentresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresListViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */,
 				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 				577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */,
+				5795BE0F2633540C00A44849 /* String+DateParsing.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
 				575CC22F262AF4E1008D1869 /* HomeCountySelectionCell.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */,
+				5795BE102633540C00A44849 /* String+DateParsing.swift in Sources */,
 				577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */,
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,
