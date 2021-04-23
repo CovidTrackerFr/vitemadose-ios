@@ -157,7 +157,7 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="unG-8S-bvw">
                                                         <rect key="frame" x="4" y="4.3333333333333339" width="17" height="17"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <imageReference key="image" image="shippingbox.fill" catalog="system" symbolScale="default"/>
+                                                        <imageReference key="image" image="cube.box.fill" catalog="system" symbolScale="default"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemPurpleColor"/>
