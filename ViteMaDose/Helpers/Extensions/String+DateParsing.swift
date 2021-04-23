@@ -16,12 +16,7 @@ extension String {
     /// - Parameter region: custom option `Region`
     /// - Returns: optional `Date`
     func toString(with style: DateToStringStyles, region: Region) -> String? {
-        if let date = self.toDate(nil, region: region) {
-            return date.toString(style)
-        } else if let isoDate = self.toISODate(nil, region: region) {
-            return isoDate.toString(style)
-        }
-
-        return nil
+        let date = toDate(nil, region: region) ?? toISODate(nil, region: region)
+        return date?.toString(style)
     }
 }
