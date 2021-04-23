@@ -14,6 +14,13 @@ Vite Ma Dose ne collecte aucune donnée personnelle. Ce point d’entrée unique
 
 Téléchargement de l'application : [App Store](https://apps.apple.com/fr/app/vite-ma-dose/id1563630754)
 
+## Prérequis pour travailler sur le projet
+
+- Xcode 12+ sur macOS 11+
+- [SwiftLint](https://github.com/realm/SwiftLint)
+
+Pour discuter avec le reste de l'équipe de développement iOS, il est conseillé de nous rejoindre sur [Mattermost](https://mattermost.covidtracker.fr/covidtracker/channels/dev-ios).
+
 ## Autres branches du projet
 
 L'application Android : [GitHub](https://github.com/CovidTrackerFr/vitemadose-android), [Play Store](https://play.google.com/store/apps/details?id=com.cvtracker.vmd2)

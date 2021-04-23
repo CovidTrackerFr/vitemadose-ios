@@ -124,7 +124,7 @@ class CentresListViewModel {
 
         headingCells = [
             .title(mainTitleViewData),
-            .stats(statsCellViewData),
+            .stats(statsCellViewData)
         ]
 
         guard !isEmpty else {
@@ -155,7 +155,6 @@ class CentresListViewModel {
         footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
     }
 
-
     func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var url: URL?
         if let urlString = centre.url {
@@ -164,16 +163,9 @@ class CentresListViewModel {
 
         let isAvailable = centre.prochainRdv != nil
 
-        var dayString: String?
-        var timeString: String?
-
-        if
-            let dateString = centre.prochainRdv,
-            let date = dateString.toDate(nil, region: region)
-        {
-            dayString = date.toString(.date(.long))
-            timeString = date.toString(.time(.short))
-        }
+        let nextAppointment = centre.prochainRdv
+        let dayString = nextAppointment?.toString(with: .date(.long), region: region)
+        let timeString = nextAppointment?.toString(with: .time(.short), region: region)
 
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
@@ -191,8 +183,7 @@ class CentresListViewModel {
                     ignoreType: true
                 )
                 phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
-            }
-            catch {
+            } catch {
                 phoneText = phoneNumber
             }
         }
@@ -251,7 +242,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
         else {
             return nil
         }
-        return (name, centre.metadata?.address, lat,  long)
+        return (name, centre.metadata?.address, lat, long)
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
