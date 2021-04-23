@@ -22,7 +22,7 @@ struct AppAnalytics {
             AnalyticsEventScreenView,
             parameters: [
                 AnalyticsParameterScreenName: screenName.rawValue,
-                AnalyticsParameterScreenClass: screenClass,
+                AnalyticsParameterScreenClass: screenClass
             ])
     }
 
@@ -49,7 +49,7 @@ struct AppAnalytics {
             "rdv_name": name,
             "rdv_location_type": type,
             "rdv_platform": platform,
-            "rdv_vaccine":vaccine,
+            "rdv_vaccine": vaccine
         ])
     }
 

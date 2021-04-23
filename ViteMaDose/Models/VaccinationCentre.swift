@@ -42,9 +42,9 @@ extension VaccinationCentre {
         let city: String?
 
         enum CodingKeys: String, CodingKey {
-            case longitude = "longitude"
-            case latitude = "latitude"
-            case city = "city"
+            case longitude
+            case latitude
+            case city
         }
     }
 
@@ -54,13 +54,12 @@ extension VaccinationCentre {
         let businessHours: [String: String?]?
 
         enum CodingKeys: String, CodingKey {
-            case address = "address"
+            case address
             case phoneNumber = "phone_number"
             case businessHours = "business_hours"
         }
     }
 }
-
 
 // MARK: - VaccinationCentres
 
@@ -68,7 +67,7 @@ struct VaccinationCentres: Codable {
     let lastUpdated: String?
     let centresDisponibles: [VaccinationCentre]
     let centresIndisponibles: [VaccinationCentre]
-    
+
     enum CodingKeys: String, CodingKey {
         case lastUpdated = "last_updated"
         case centresDisponibles = "centres_disponibles"

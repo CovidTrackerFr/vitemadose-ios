@@ -16,13 +16,13 @@ extension URL {
         guard var urlComponents = URLComponents(string: absoluteString) else { return absoluteURL }
         var queryItems: [URLQueryItem] = urlComponents.queryItems ?? []
         let queryItem = URLQueryItem(name: queryItem, value: value)
-        
+
         queryItems.append(queryItem)
         urlComponents.queryItems = queryItems
-        
+
         return urlComponents.url!
     }
-    
+
     /// Init an URL
     /// - Parameter string: String URL
     init(staticString string: StaticString) {

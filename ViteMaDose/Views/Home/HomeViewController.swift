@@ -223,18 +223,18 @@ extension HomeViewController: UITableViewDelegate {
         }
 
         switch homeCell {
-            case .countySelection:
-                presentCountySelectionViewController()
-            case .county:
-                viewModel.didSelectLastCounty()
-                Haptic.impact(.light).generate()
-            case let .stats(viewData):
-                guard viewData.dataType == .externalMap else {
-                    return
-                }
-                presentVaccinationCentresMap()
-            default:
+        case .countySelection:
+            presentCountySelectionViewController()
+        case .county:
+            viewModel.didSelectLastCounty()
+            Haptic.impact(.light).generate()
+        case let .stats(viewData):
+            guard viewData.dataType == .externalMap else {
                 return
+            }
+            presentVaccinationCentresMap()
+        default:
+            return
         }
     }
 }
@@ -246,7 +246,7 @@ extension HomeViewController {
     private func makeDataSource() -> UITableViewDiffableDataSource<HomeSection, HomeCell> {
         return UITableViewDiffableDataSource(
             tableView: tableView,
-            cellProvider: { [weak self] tableView, indexPath, homeCell in
+            cellProvider: { [weak self] _, indexPath, homeCell in
                 return self?.dequeueAndConfigure(cell: homeCell, at: indexPath)
             }
         )
@@ -254,22 +254,22 @@ extension HomeViewController {
 
     private func dequeueAndConfigure(cell: HomeCell, at indexPath: IndexPath) -> UITableViewCell {
         switch cell {
-            case let .title(cellViewModel):
-                let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
-                cell.configure(with: cellViewModel)
-                return cell
-            case let .countySelection(cellViewModel):
-                let cell = tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
-                cell.configure(with: cellViewModel)
-                return cell
-            case let .county(cellViewModel):
-                let cell = tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
-                cell.configure(with: cellViewModel)
-                return cell
-            case let .stats(cellViewModel):
-                let cell = tableView.dequeueReusableCell(with: HomeStatsCell.self, for: indexPath)
-                cell.configure(with: cellViewModel)
-                return cell
+        case let .title(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
+            cell.configure(with: cellViewModel)
+            return cell
+        case let .countySelection(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
+            cell.configure(with: cellViewModel)
+            return cell
+        case let .county(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
+            cell.configure(with: cellViewModel)
+            return cell
+        case let .stats(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeStatsCell.self, for: indexPath)
+            cell.configure(with: cellViewModel)
+            return cell
         }
     }
 }

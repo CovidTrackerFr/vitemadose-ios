@@ -193,6 +193,7 @@
 		6AD0CC46262EC9B2001F8807 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
 		6AD0CC52262EDF67001F8807 /* CreditSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditSectionView.swift; sourceTree = "<group>"; };
 		6AD0CC56262EDF74001F8807 /* CreditSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditSectionView.xib; sourceTree = "<group>"; };
+		889B9A49263307EC00175E24 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
 		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* CountySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountySelectionViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 		576738B3261E329C004A700D = {
 			isa = PBXGroup;
 			children = (
+				889B9A49263307EC00175E24 /* .swiftlint.yml */,
 				576738BE261E329C004A700D /* ViteMaDose */,
 				576738D5261E32A3004A700D /* ViteMaDoseTests */,
 				576738E0261E32A3004A700D /* ViteMaDoseUITests */,
@@ -557,6 +559,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 576738E6261E32A3004A700D /* Build configuration list for PBXNativeTarget "ViteMaDose" */;
 			buildPhases = (
+				889B9A48263307BC00175E24 /* Swiftlint */,
 				576738B8261E329C004A700D /* Sources */,
 				576738B9261E329C004A700D /* Frameworks */,
 				576738BA261E329C004A700D /* Resources */,
@@ -650,9 +653,10 @@
 			};
 			buildConfigurationList = 576738B7261E329C004A700D /* Build configuration list for PBXProject "ViteMaDose" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				fr,
 				en,
 				Base,
 			);
@@ -757,6 +761,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/Scripts/set_build_number.sh\n";
+		};
+		889B9A48263307BC00175E24 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		DA68646626276624005B2AC2 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
