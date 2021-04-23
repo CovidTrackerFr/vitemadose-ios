@@ -1,0 +1,7 @@
+included:
+    - ViteMaDose
+    - ViteMaDosesTests
+    - ViteMaDoseUITests
+disabled_rules:
+    - large_tuple
+    - force_cast
