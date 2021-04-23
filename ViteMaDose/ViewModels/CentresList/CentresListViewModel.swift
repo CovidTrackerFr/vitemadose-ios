@@ -163,16 +163,9 @@ class CentresListViewModel {
 
         let isAvailable = centre.prochainRdv != nil
 
-        var dayString: String?
-        var timeString: String?
-
-        if
-            let dateString = centre.prochainRdv,
-            let date = dateString.toDate(nil, region: region)
-        {
-            dayString = date.toString(.date(.long))
-            timeString = date.toString(.time(.short))
-        }
+        let nextAppointment = centre.prochainRdv
+        let dayString = nextAppointment?.toString(with: .date(.long), region: region)
+        let timeString = nextAppointment?.toString(with: .time(.short), region: region)
 
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
