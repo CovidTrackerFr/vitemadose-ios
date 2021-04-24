@@ -121,8 +121,6 @@
 		576738D2261E32A3004A700D /* ViteMaDoseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViteMaDoseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738D6261E32A3004A700D /* ViteMaDoseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViteMaDoseTests.swift; sourceTree = "<group>"; };
 		576738D8261E32A3004A700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		576738E1261E32A3004A700D /* ViteMaDoseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViteMaDoseUITests.swift; sourceTree = "<group>"; };
-		576738E3261E32A3004A700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		576738F2261E353D004A700D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		576738FA261E374A004A700D /* URL+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Commons.swift"; sourceTree = "<group>"; };
 		57673902261E3783004A700D /* Data+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Commons.swift"; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 				889B9A49263307EC00175E24 /* .swiftlint.yml */,
 				576738BE261E329C004A700D /* ViteMaDose */,
 				576738D5261E32A3004A700D /* ViteMaDoseTests */,
-				576738E0261E32A3004A700D /* ViteMaDoseUITests */,
 				576738BD261E329C004A700D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -258,15 +255,6 @@
 				576738D8261E32A3004A700D /* Info.plist */,
 			);
 			path = ViteMaDoseTests;
-			sourceTree = "<group>";
-		};
-		576738E0261E32A3004A700D /* ViteMaDoseUITests */ = {
-			isa = PBXGroup;
-			children = (
-				576738E1261E32A3004A700D /* ViteMaDoseUITests.swift */,
-				576738E3261E32A3004A700D /* Info.plist */,
-			);
-			path = ViteMaDoseUITests;
 			sourceTree = "<group>";
 		};
 		576738F9261E3709004A700D /* Helpers */ = {
