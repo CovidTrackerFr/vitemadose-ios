@@ -71,7 +71,7 @@
 		57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401A8262426B100EFFCA3 /* CentreCell.swift */; };
 		57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* CentreCell.xib */; };
 		57DEAA03263444BB005E8628 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 57DEAA05263444BB005E8628 /* Localizable.stringsdict */; };
-		57DEAA1326346D9D005E8628 /* Double+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DEAA1226346D9D005E8628 /* Double+Commons.swift */; };
+		57DEAA1326346D9D005E8628 /* FormatterUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DEAA1226346D9D005E8628 /* FormatterUtils.swift */; };
 		57EC46FF262B1DC500FBA991 /* HomeTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */; };
 		57ECA227262B031F001B368F /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */; };
 		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
@@ -177,7 +177,7 @@
 		57C401A8262426B100EFFCA3 /* CentreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCell.swift; sourceTree = "<group>"; };
 		57C401A9262426B100EFFCA3 /* CentreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentreCell.xib; sourceTree = "<group>"; };
 		57DEAA04263444BB005E8628 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		57DEAA1226346D9D005E8628 /* Double+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Commons.swift"; sourceTree = "<group>"; };
+		57DEAA1226346D9D005E8628 /* FormatterUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterUtils.swift; sourceTree = "<group>"; };
 		57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleCell.xib; sourceTree = "<group>"; };
 		57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
@@ -382,7 +382,6 @@
 				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 				577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */,
 				5795BE0F2633540C00A44849 /* String+Commons.swift */,
-				57DEAA1226346D9D005E8628 /* Double+Commons.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -507,6 +506,7 @@
 			children = (
 				57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */,
 				DA68647A2627A1CA005B2AC2 /* AppAnalytics.swift */,
+				57DEAA1226346D9D005E8628 /* FormatterUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -764,7 +764,7 @@
 				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
 				575CC22F262AF4E1008D1869 /* HomeCountySelectionCell.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */,
-				57DEAA1326346D9D005E8628 /* Double+Commons.swift in Sources */,
+				57DEAA1326346D9D005E8628 /* FormatterUtils.swift in Sources */,
 				5795BE102633540C00A44849 /* String+Commons.swift in Sources */,
 				577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */,
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
