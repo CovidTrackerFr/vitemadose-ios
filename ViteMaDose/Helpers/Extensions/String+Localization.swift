@@ -8,23 +8,6 @@
 
 import Foundation
 
-extension String {
-    static var space = " "
-    static var commaWithSpace = ", "
-
-    var localized: String {
-        return NSLocalizedString(self, comment: "")
-    }
-
-    func format(_ args: CVarArg...) -> String {
-        return String(format: self, locale: .current, arguments: args)
-    }
-
-    func format(_ args: [String]) -> String {
-        return String(format: self, locale: .current, arguments: args)
-    }
-}
-
 enum Localization {
     enum Home {
         static let select_county = "home.select_county".localized
