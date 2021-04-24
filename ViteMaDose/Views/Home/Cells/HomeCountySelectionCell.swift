@@ -12,7 +12,7 @@ protocol HomeCountySelectionCellViewDataProvider {
 }
 
 struct HomeCountySelectionViewData: HomeCountySelectionCellViewDataProvider, Hashable {
-    let searchBarText = "Sélectionner un département..."
+    let searchBarText = LocalizedString.CountrySelection.Title.title
 }
 
 class HomeCountySelectionCell: UITableViewCell {

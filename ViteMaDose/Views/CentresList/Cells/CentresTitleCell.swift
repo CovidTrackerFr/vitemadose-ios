@@ -15,11 +15,6 @@ class CentresTitleCell: HomeTitleCell {
         static let highlightedDosesTextColor: UIColor = .systemGreen
         static let highlightedCountyTextColor: UIColor = .mandy
 
-        static let titleFirstPartText = "Nous avons trouvé"
-        static let titleSecondPartText = "doses"
-        static let titleThirdText = "pour le département"
-        static let titleNoDoseText = "Nous n'avons pas trouvé de doses pour le département"
-        static let subtitleText = "Liste des centres"
     }
 }
 
@@ -36,15 +31,15 @@ extension CentresTitleCell {
 
         guard dosesCount > 0 else {
             let title = NSMutableAttributedString(
-                string: "\(Constant.titleNoDoseText) \(countyName)",
+                string: "\(LocalizedString.VaccinationLocationsList.noResults) \(countyName)",
                 attributes: attributes
             )
             title.setColorForText(textForAttribute: countyName, withColor: .mandy)
             return title
         }
 
-        let dosesCountString = "\(String(dosesCount)) \(Constant.titleSecondPartText)"
-        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleThirdText) \(countyName)"
+        let dosesCountString = dosesCount > 1 ? LocalizedString.VaccinationLocationsList.doses(dosesCount) : LocalizedString.VaccinationLocationsList.dose(dosesCount)
+        let titleString = "\(LocalizedString.VaccinationLocationsList.title(quantity: dosesCountString, area: countyName))"
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
@@ -60,7 +55,7 @@ extension CentresTitleCell {
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
             NSAttributedString.Key.font: Constant.titleFont
         ]
-        return NSMutableAttributedString(string: Constant.subtitleText, attributes: attributes)
+        return NSMutableAttributedString(string: LocalizedString.VaccinationLocationsList.listTitle, attributes: attributes)
     }
 
 }

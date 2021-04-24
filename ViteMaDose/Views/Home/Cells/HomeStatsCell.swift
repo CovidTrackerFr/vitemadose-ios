@@ -80,34 +80,33 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
 
         switch dataType {
         case let .allCentres(count):
-            title = NSMutableAttributedString(string: String(count))
-            description = "Centres trouvés en France"
-            iconContainerColor = .systemOrange
+                title = NSMutableAttributedString(string: String(count))
+                description = LocalizedString.Home.Stats.allLocations
+                iconContainerColor = .systemOrange
         case let .centresWithAvailabilities(count):
-            title = NSMutableAttributedString(string: String(count))
-            // TODO: Localisation
-            description = "\(count > 1 ? "Centres" : "Centre") avec rendez-vous disponibles"
-            iconContainerColor = .systemGreen
+                title = NSMutableAttributedString(string: String(count))
+                description = LocalizedString.Home.Stats.availableLocations("\(count > 1 ? LocalizedString.Global.locations : LocalizedString.Global.location)")
+                iconContainerColor = .systemGreen
         case let .allAvailabilities(count):
-            title = NSMutableAttributedString(string: String(count))
-            description = "Créneaux disponibles"
-            iconContainerColor = .royalBlue
+                title = NSMutableAttributedString(string: String(count))
+                description = LocalizedString.Home.Stats.allAvailabilities
+                iconContainerColor = .royalBlue
         case let .percentageAvailabilities(count):
-            title = NSMutableAttributedString(string: "\(count)%")
-            description = "De centres avec des disponibilités"
-            iconContainerColor = .systemBlue
+                title = NSMutableAttributedString(string: LocalizedString.Global.percentage(count))
+                description = LocalizedString.Home.Stats.percentage
+                iconContainerColor = .systemBlue
         case .externalMap:
-            let imageAttachment = NSTextAttachment()
-            imageAttachment.image = UIImage(
-                systemName: "arrow.up.right",
-                withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
-            )?.withTintColor(.label, renderingMode: .alwaysOriginal)
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(
+                    systemName: "arrow.up.right",
+                    withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+                )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-            let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
-            fullString.append(NSAttributedString(attachment: imageAttachment))
-            title = fullString
-            description = nil
-            iconContainerColor = .systemRed
+                let fullString = NSMutableAttributedString(string: LocalizedString.Home.Stats.openMap)
+                fullString.append(NSAttributedString(attachment: imageAttachment))
+                title = fullString
+                description = nil
+                iconContainerColor = .systemRed
         }
     }
 }

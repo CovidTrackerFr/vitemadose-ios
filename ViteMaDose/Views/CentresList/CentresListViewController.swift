@@ -258,7 +258,7 @@ extension CentresListViewController {
             preferredStyle: .actionSheet
         )
 
-        let openAction = UIAlertAction(title: "Ouvrir l'itinéraire", style: .default) { _ in
+        let openAction = UIAlertAction(title: LocalizedString.VaccinationLocationsList.openRoute, style: .default) { _ in
             MKMapItem.openMaps(
                 with: [mapItem],
                 launchOptions: [
@@ -267,7 +267,7 @@ extension CentresListViewController {
             )
         }
 
-        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: LocalizedString.VaccinationLocationsList.cancelButton, style: .cancel, handler: nil)
 
         actionSheet.addAction(openAction)
         actionSheet.addAction(cancelAction)

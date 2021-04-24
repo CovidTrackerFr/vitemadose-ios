@@ -15,13 +15,13 @@ extension UIViewController: ErrorDisplayable {
         completionHandler: (() -> Void)?
     ) {
         let alert = UIAlertController(
-            title: "Oups, il y a un problème :(",
+            title: LocalizedString.GenericError.title,
             message: error.localizedDescription,
             preferredStyle: .alert
         )
 
-        let retryAction = UIAlertAction(title: "Réessayer", style: .default, handler: retryHandler)
-        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: cancelHandler)
+        let retryAction = UIAlertAction(title: LocalizedString.GenericError.retryButton, style: .default, handler: retryHandler)
+        let cancelAction = UIAlertAction(title: LocalizedString.GenericError.cancelButton, style: .cancel, handler: cancelHandler)
 
         alert.addAction(cancelAction)
         alert.addAction(retryAction)
@@ -37,12 +37,12 @@ extension UIViewController: ErrorDisplayable {
         completionHandler: (() -> Void)?
     ) {
         let alert = UIAlertController(
-            title: "Oups, il y a un problème :(",
+            title: LocalizedString.GenericError.title,
             message: error.localizedDescription,
             preferredStyle: .alert
         )
 
-        let retryAction = UIAlertAction(title: "Réessayer", style: .default, handler: retryHandler)
+        let retryAction = UIAlertAction(title: LocalizedString.GenericError.retryButton, style: .default, handler: retryHandler)
         alert.addAction(retryAction)
 
         DispatchQueue.main.async { [weak self] in
