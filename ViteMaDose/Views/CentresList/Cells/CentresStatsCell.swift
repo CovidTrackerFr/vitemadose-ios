@@ -68,7 +68,7 @@ class CentresStatsCell: UITableViewCell {
         availableCentresCountView.setCornerRadius(Constant.detailViewsCornerRadius)
 
         availableCentresCountLabel.text = String(viewData.availableCentresCount)
-        availableCentresDescriptionLabel.text = Localization.LocationsList.available_locations.format(viewData.availableCentresCount)
+        availableCentresDescriptionLabel.text = Localization.Locations.available_locations.format(viewData.availableCentresCount)
 
         availableCentresCountLabel.font = Constant.titleFont
         availableCentresCountLabel.textColor = Constant.titleColor
@@ -82,7 +82,7 @@ class CentresStatsCell: UITableViewCell {
         allCentresCountView.setCornerRadius(Constant.detailViewsCornerRadius)
 
         allCentresCountLabel.text = String(viewData.allCentresCount)
-        allCentresDescriptionLabel.text = Localization.LocationsList.all_locations.format(viewData.allCentresCount)
+        allCentresDescriptionLabel.text = Localization.Locations.all_locations.format(viewData.allCentresCount)
 
         allCentresCountLabel.font = Constant.titleFont
         allCentresDescriptionLabel.textColor = Constant.titleColor

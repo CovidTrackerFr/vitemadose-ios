@@ -200,7 +200,7 @@ class CentreCell: UITableViewCell {
         }
 
         dosesLabel.isHidden = false
-        let dosesText: String = Localization.LocationsList.doses.format(dosesCount) + String.space
+        let dosesText: String = Localization.Locations.doses.format(dosesCount) + String.space
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
             dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)

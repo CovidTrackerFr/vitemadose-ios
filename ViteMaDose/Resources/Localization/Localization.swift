@@ -37,7 +37,7 @@ enum Localization {
         }
     }
 
-    enum LocationsList {
+    enum Locations {
         static let list_title = "locations.list_title".localized
         static let no_results = "locations.no_results".localized
         static let available_locations = "locations-list.available_locations".localized
