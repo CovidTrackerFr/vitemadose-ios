@@ -11,7 +11,7 @@ enum StatsDataType: Hashable {
     case allCentres(Int)
     case centresWithAvailabilities(Int)
     case allAvailabilities(Int)
-    case percentageAvailabilities(Int?)
+    case percentageAvailabilities(Double?)
     case externalMap
 }
 
@@ -92,11 +92,8 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
             description = Localization.Home.Stats.all_availabilities
             iconContainerColor = .royalBlue
         case let .percentageAvailabilities(count):
-            if let count = count {
-                title = NSMutableAttributedString(string: "\(count)%")
-            } else {
-                title = NSMutableAttributedString(string: "-")
-            }
+            let formattedCount = count?.percentFormatted() ?? "-"
+            title = NSMutableAttributedString(string: formattedCount)
             description = Localization.Home.Stats.available_locations_percentage
             iconContainerColor = .systemBlue
         case .externalMap:
