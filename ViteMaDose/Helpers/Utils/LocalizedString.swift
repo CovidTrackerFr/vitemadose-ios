@@ -116,14 +116,15 @@ enum LocalizedString {
 
     fileprivate enum PluralHandler {
 
+        fileprivate static let location = "plural_handler.location".localized()
+        fileprivate static let locations = "plural_handler.locations".localized()
+
         fileprivate static func dose(_ quantity: Int) -> String {
             return "plural_handler.dose".localized().format([String(quantity)])
         }
         fileprivate static func doses(_ quantity: Int) -> String {
             return "plural_handler.doses".localized().format([String(quantity)])
         }
-        fileprivate static let location = "plural_handler.location".localized()
-        fileprivate static let locations = "plural_handler.locations".localized()
 
     }
 
