@@ -87,7 +87,7 @@ extension HomeTitleCell {
 
     static var lastStatsAttributedText: NSMutableAttributedString {
         let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
-        let titleText = "Dernières statistiques"
+        let titleText = Localization.Home.last_stats
 
         return NSMutableAttributedString(
             string: titleText,

@@ -161,19 +161,19 @@ class CentreCell: UITableViewCell {
 
         guard isAvailable else {
             return NSMutableAttributedString(
-                string: "Aucun rendez-vous",
+                string: Localization.Location.no_appointment,
                 attributes: attributes
             )
         }
 
         guard let dayText = dayText, let timeText = timeText else {
             return NSMutableAttributedString.init(
-                string: "Date Indisponible",
+                string: Localization.Location.unavailable_date,
                 attributes: attributes
             )
         }
 
-        let dateString = "Le \(dayText) à partir de \(timeText)"
+        let dateString = Localization.Location.date.format(dayText, timeText)
         let dateText = NSMutableAttributedString(
             string: dateString,
             attributes: attributes
@@ -200,7 +200,7 @@ class CentreCell: UITableViewCell {
         }
 
         dosesLabel.isHidden = false
-        let dosesText: String = dosesCount > 1 ? String("\(dosesCount) doses ") : String("\(dosesCount) dose ")
+        let dosesText: String = Localization.LocationsList.doses.format(dosesCount) + String.space
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
             dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)
