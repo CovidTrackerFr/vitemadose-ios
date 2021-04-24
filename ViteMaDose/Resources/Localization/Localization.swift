@@ -40,12 +40,12 @@ enum Localization {
     enum Locations {
         static let list_title = "locations.list_title".localized
         static let no_results = "locations.no_results".localized
-        static let available_locations = "locations-list.available_locations".localized
-        static let all_locations = "locations-list.all_locations".localized
-        static let doses = "locations-list.doses".localized
+        static let available_locations = "locations.available_locations".localized
+        static let all_locations = "locations.all_locations".localized
+        static let doses = "locations.doses".localized
 
         enum MainTitle {
-            static let title = "locations-list.main_title".localized
+            static let title = "locations.main_title".localized
         }
     }
 

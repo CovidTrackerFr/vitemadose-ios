@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>locations-list.available_locations</key>
+	<key>locations.available_locations</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@count@</string>
@@ -20,7 +20,7 @@
 			<string>Lieux avec rendez-vous</string>
 		</dict>
 	</dict>
-	<key>locations-list.all_locations</key>
+	<key>locations.all_locations</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@count@</string>
@@ -38,7 +38,7 @@
 			<string>Lieux trouvés au total</string>
 		</dict>
 	</dict>
-	<key>locations-list.doses</key>
+	<key>locations.doses</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@count@</string>
@@ -56,7 +56,7 @@
 			<string>%d doses</string>
 		</dict>
 	</dict>
-	<key>locations-list.main_title</key>
+	<key>locations.main_title</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@count@</string>
