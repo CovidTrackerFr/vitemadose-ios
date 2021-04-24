@@ -143,7 +143,7 @@ class HomeViewModel {
         }
 
         return HomeCountyCellViewData(
-            titleText: "Recherche Récente",
+            titleText: Localization.Home.recent_search,
             countyName: countyName,
             countyCode: countyCode
         )
