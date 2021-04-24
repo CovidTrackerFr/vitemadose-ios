@@ -1,5 +1,5 @@
 //
-//  String+Localization.swift
+//  Localization.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 24/04/2021.
@@ -38,7 +38,7 @@ enum Localization {
     }
 
     enum LocationsList {
-        static let list_title = "locations-list.list_title".localized
+        static let list_title = "locations.list_title".localized
         static let no_results = "locations.no_results".localized
         static let available_locations = "locations-list.available_locations".localized
         static let all_locations = "locations-list.all_locations".localized

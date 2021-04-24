@@ -13,7 +13,7 @@
 "home.select_county" = "Sélectionner un département...";
 "home.recent_search" = "Recherche récente";
 "home.last_stats" = "Dernières statistiques";
-"home.open_map" = "Ouvrir la carte des lieux ";
+"home.open_map" = "Ouvrir la carte des lieux";
 "home.partners" = "Trouvez vos rendez-vous avec";
 "home.stats.all_locations" = "Lieux trouvés en France";
 "home.stats.all_availabilities" = "Créneaux disponibles";
@@ -23,12 +23,12 @@
 "county_selection.main_title" = "Sélectionnez un département";
 "county_selection.main_title.highlighted_text" = "département";
 // Locations
-"locations-list.list_title" = "Liste des lieux";
+"locations.list_title" = "Liste des lieux";
 "locations.no_results" = "Nous n'avons pas trouvé de doses pour le département %@";
 // Location
 "location.date" = "Le %@ à partir de %@";
-"location.book_button" = "Prendre rendez-vous ";
-"location.verify_button" = "Vérifier ce lieu ";
+"location.book_button" = "Prendre rendez-vous";
+"location.verify_button" = "Vérifier ce lieu";
 "location.last_update" = "Dernière mise à jour le %@ à %@";
 "location.no_appointment" = "Aucun rendez-vous";
 "location.open_route" = "Ouvrir l'itinéraire";

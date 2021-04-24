@@ -103,7 +103,7 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
             )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-            let fullString = NSMutableAttributedString(string: Localization.Home.open_map)
+            let fullString = NSMutableAttributedString(string: Localization.Home.open_map + String.space)
             fullString.append(NSAttributedString(attachment: imageAttachment))
             title = fullString
             description = nil

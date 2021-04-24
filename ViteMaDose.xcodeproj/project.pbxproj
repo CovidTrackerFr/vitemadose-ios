@@ -56,7 +56,7 @@
 		57AF504B262CDB3D0085E3C1 /* CentresStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AF5049262CDB3D0085E3C1 /* CentresStatsCell.xib */; };
 		57AF504F262CDD5A0085E3C1 /* CentresTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AF504E262CDD5A0085E3C1 /* CentresTitleCell.swift */; };
 		57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AF5054262CE28E0085E3C1 /* CentresTitleCell.xib */; };
-		57B2BCA02633AC5B001B3D61 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2BC9F2633AC5B001B3D61 /* String+Localization.swift */; };
+		57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2BC9F2633AC5B001B3D61 /* Localization.swift */; };
 		57B2BCA32633B254001B3D61 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57B2BCA52633B254001B3D61 /* Localizable.strings */; };
 		57B7CD50262E28460065DD80 /* Haptica in Frameworks */ = {isa = PBXBuildFile; productRef = 57B7CD4F262E28460065DD80 /* Haptica */; };
 		57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */; };
@@ -163,7 +163,7 @@
 		57AF5049262CDB3D0085E3C1 /* CentresStatsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentresStatsCell.xib; sourceTree = "<group>"; };
 		57AF504E262CDD5A0085E3C1 /* CentresTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresTitleCell.swift; sourceTree = "<group>"; };
 		57AF5054262CE28E0085E3C1 /* CentresTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentresTitleCell.xib; sourceTree = "<group>"; };
-		57B2BC9F2633AC5B001B3D61 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		57B2BC9F2633AC5B001B3D61 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		57B2BCA42633B254001B3D61 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Commons.swift"; sourceTree = "<group>"; };
 		57C4017426235B6200EFFCA3 /* HomePartnersFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePartnersFooterView.swift; sourceTree = "<group>"; };
@@ -359,8 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				576738C8261E32A2004A700D /* Assets.xcassets */,
-				57B2BCA52633B254001B3D61 /* Localizable.strings */,
-				57DEAA05263444BB005E8628 /* Localizable.stringsdict */,
+				57DEAA1826346FA7005E8628 /* Localization */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -383,7 +382,6 @@
 				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 				577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */,
 				5795BE0F2633540C00A44849 /* String+Commons.swift */,
-				57B2BC9F2633AC5B001B3D61 /* String+Localization.swift */,
 				57DEAA1226346D9D005E8628 /* Double+Commons.swift */,
 			);
 			path = Extensions;
@@ -483,6 +481,16 @@
 				57C401A9262426B100EFFCA3 /* CentreCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		57DEAA1826346FA7005E8628 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				57B2BCA52633B254001B3D61 /* Localizable.strings */,
+				57DEAA05263444BB005E8628 /* Localizable.stringsdict */,
+				57B2BC9F2633AC5B001B3D61 /* Localization.swift */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		57EC4706262B629B00FBA991 /* Footer */ = {
@@ -776,7 +784,7 @@
 				575CC224262AECA7008D1869 /* HomeTitleCell.swift in Sources */,
 				57C4018726238E4900EFFCA3 /* CountySelectionHeaderView.swift in Sources */,
 				DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */,
-				57B2BCA02633AC5B001B3D61 /* String+Localization.swift in Sources */,
+				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
 				5747142A262B6BA300535DF1 /* CountyCell.swift in Sources */,
 				DA4D995E261E6D6300D28AD0 /* CountySelectionViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,

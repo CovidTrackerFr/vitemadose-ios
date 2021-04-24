@@ -173,8 +173,8 @@ class CentresListViewModel {
         }
 
         let bookingButtonText = isAvailable
-            ? Localization.Location.book_button
-            : Localization.Location.verify_button
+            ? Localization.Location.book_button + String.space
+            : Localization.Location.verify_button + String.space
 
         var phoneText: String?
         if let phoneNumber = centre.metadata?.phoneNumber {
