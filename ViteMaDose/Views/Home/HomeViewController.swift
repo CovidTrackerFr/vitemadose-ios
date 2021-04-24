@@ -216,7 +216,7 @@ extension HomeViewController: UITableViewDelegate {
         case .countySelection:
             presentCountySelectionViewController()
         case .county:
-            viewModel.didSelectLastCounty()
+            viewModel.didSelectLastCounty(indexPath)
             Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {

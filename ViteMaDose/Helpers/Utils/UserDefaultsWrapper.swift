@@ -31,7 +31,7 @@ final class UserDefault<T> {
 
 extension UserDefault {
     enum Key: String {
-        case lastSelectedCountyCode
+        case lastSelectedCountyCodes
     }
 }
 
@@ -60,6 +60,6 @@ final class OptionalUserDefault<T> {
 }
 
 extension UserDefaults {
-    @OptionalUserDefault(key: .lastSelectedCountyCode)
-    static var lastSelectedCountyCode: String?
+    @UserDefault(wrappedValue: [String?](), key: .lastSelectedCountyCodes)
+    static var lastSelectedCountyCodes: [String?]
 }

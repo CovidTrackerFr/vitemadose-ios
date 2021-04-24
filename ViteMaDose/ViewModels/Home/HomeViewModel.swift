@@ -28,7 +28,7 @@ protocol HomeViewModelProvider {
     func load()
     func reloadStats()
     func updateLastSelectedCountyIfNeeded(_ code: String?)
-    func didSelectLastCounty()
+    func didSelectLastCounty(_ indexPath: IndexPath)
     func didSelect(_ county: County)
 
     var counties: Counties { get }
@@ -98,7 +98,7 @@ class HomeViewModel {
     private func updateHeadingCells() {
         let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)
         let countySelectionViewData = HomeCountySelectionViewData()
-        let lastSelectedCountyViewData = getLastSelectedCountyCellViewData()
+        let lastSelectedCountyViewData = getLastSelectedCountyCellsViewData()
 
         headingCells = [
             .title(titleCellViewData),
@@ -106,7 +106,9 @@ class HomeViewModel {
         ]
 
         if let viewData = lastSelectedCountyViewData {
-            headingCells.append(.county(viewData))
+            for element in viewData {
+                headingCells.append(.county(element))
+            }
         }
     }
 
@@ -132,21 +134,32 @@ class HomeViewModel {
         ]
     }
 
-    private func getLastSelectedCountyCellViewData() -> HomeCountyCellViewData? {
-        guard
-            let lastSelectedCountyCode = UserDefaults.lastSelectedCountyCode,
-            let county = counties.first(where: { $0.codeDepartement == lastSelectedCountyCode}),
-            let countyName = county.nomDepartement,
-            let countyCode = county.codeDepartement
-        else {
-            return nil
+    private func getLastSelectedCountyCellsViewData() -> [HomeCountyCellViewData]? {
+
+        var countyCellsViewData = [HomeCountyCellViewData]()
+
+        for index in UserDefaults.lastSelectedCountyCodes {
+
+            let county = counties.first(where: { index == $0.codeDepartement })
+
+            if
+                let county = county,
+                let countyName = county.nomDepartement,
+                let countyCode = county.codeDepartement
+            {
+                countyCellsViewData.append(HomeCountyCellViewData(
+                    titleText: countyCellsViewData.isEmpty ? Localization.Home.recent_searches : nil,
+                    countyName: countyName,
+                    countyCode: countyCode
+                ))
+            }
         }
 
-        return HomeCountyCellViewData(
-            titleText: Localization.Home.recent_search,
-            countyName: countyName,
-            countyCode: countyCode
-        )
+        if !countyCellsViewData.isEmpty {
+            return countyCellsViewData
+        } else {
+            return nil
+        }
     }
 
     private func handleInitialLoadError(_ error: APIResponseStatus) {
@@ -207,10 +220,11 @@ extension HomeViewModel: HomeViewModelProvider {
         handleLastSelectedCountyUpdate()
     }
 
-    func didSelectLastCounty() {
+    func didSelectLastCounty(_ indexPath: IndexPath) {
+        let row = indexPath.row - 2
         guard
-            let countyCode = UserDefaults.lastSelectedCountyCode,
-            let county = counties.first(where: { $0.codeDepartement == countyCode})
+            let countyCode = UserDefaults.lastSelectedCountyCodes[safe:row],
+            let county = counties.first(where: { countyCode == $0.codeDepartement })
         else {
             return
         }

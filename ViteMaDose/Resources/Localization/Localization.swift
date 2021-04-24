@@ -11,7 +11,7 @@ import Foundation
 enum Localization {
     enum Home {
         static let select_county = "home.select_county".localized
-        static let recent_search = "home.recent_search".localized
+        static let recent_searches = "home.recent_searches".localized
         static let last_stats = "home.last_stats".localized
         static let open_map = "home.open_map".localized
         static let partners = "home.partners".localized

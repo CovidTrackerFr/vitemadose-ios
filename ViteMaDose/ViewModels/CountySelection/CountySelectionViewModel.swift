@@ -64,7 +64,14 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
             return
         }
 
-        UserDefaults.lastSelectedCountyCode = county.codeDepartement
+        if let codeDepartement = county.codeDepartement {
+            var lastSelectedCountyCodes = UserDefaults.lastSelectedCountyCodes
+            while lastSelectedCountyCodes.count >= 3 {
+                lastSelectedCountyCodes.removeLast()
+            }
+            lastSelectedCountyCodes.insert(codeDepartement, at: 0)
+            UserDefaults.lastSelectedCountyCodes = lastSelectedCountyCodes
+        }
         delegate?.dismissViewController(with: county)
     }
 }
