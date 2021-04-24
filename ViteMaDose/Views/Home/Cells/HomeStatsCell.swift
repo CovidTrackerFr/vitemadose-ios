@@ -85,7 +85,7 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
                 iconContainerColor = .systemOrange
         case let .centresWithAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))
-                description = LocalizedString.Home.Stats.availableLocations("\(count > 1 ? LocalizedString.Global.locations : LocalizedString.Global.location)")
+                description = LocalizedString.Home.Stats.availableLocations(LocalizedString.Global.locations(count))
                 iconContainerColor = .systemGreen
         case let .allAvailabilities(count):
                 title = NSMutableAttributedString(string: String(count))

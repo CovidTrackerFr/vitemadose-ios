@@ -39,9 +39,13 @@ enum LocalizedString {
 
     enum Global {
 
-        static let location = "global.location".localized()
-        static let locations = "global.locations".localized()
-
+        static func locations(_ quantity: Int) -> String {
+            if quantity > 1 {
+                return PluralHandler.locations
+            } else {
+                return PluralHandler.location
+            }
+        }
         static func percentage(_ quantity: Int) -> String {
             return "global.percentage".localized().format([String(quantity)])
         }
@@ -61,7 +65,6 @@ enum LocalizedString {
 
     enum VaccinationLocationsList {
 
-        static let noResults = "vaccination_locations_list.no_results".localized()
         static let listTitle = "vaccination_locations_list.list_title".localized()
         static let foundLocations = "vaccination_locations_list.found_locations".localized()
         static let foundLocation = "vaccination_locations_list.found_location".localized()
@@ -77,23 +80,27 @@ enum LocalizedString {
         static func date(date: String, time: String) -> String {
             return "vaccination_locations_list.date".localized().format([date, time])
         }
-        static func dose(_ quantity: Int) -> String {
-            return "vaccination_locations_list.dose".localized().format([String(quantity)])
-        }
-        static func doses(_ quantity: Int) -> String {
-            return "vaccination_locations_list.doses".localized().format([String(quantity)])
+        static func dosesCount(_ quantity: Int) -> String {
+            if quantity > 1 {
+                return PluralHandler.doses(quantity)
+            } else {
+                return PluralHandler.dose(quantity)
+            }
         }
         static func availableLocations(_ plural: String) -> String {
             return "vaccination_locations_list.available_locations".localized().format([plural])
         }
         static func allLocations(_ plural: String) -> String {
-            "vaccination_locations_list.all_locations".localized().format([plural])
+            return "vaccination_locations_list.all_locations".localized().format([plural])
         }
         static func lastUpdate(date: String, time: String) -> String {
             return "vaccination_locations_list.last_update".localized().format([date, time])
         }
         static func title(quantity: String, area: String) -> String {
-            "vaccination_locations_list.title".localized().format([quantity, area])
+            return "vaccination_locations_list.title".localized().format([quantity, area])
+        }
+        static func noResults(area: String) -> String {
+            return "vaccination_locations_list.no_results".localized().format([area])
         }
 
     }
@@ -104,6 +111,19 @@ enum LocalizedString {
         static let title = "generic_error.title".localized()
         static let retryButton = "generic_error.retry_button".localized()
         static let defaultMessage = "generic_error.default_message".localized()
+
+    }
+
+    fileprivate enum PluralHandler {
+
+        fileprivate static func dose(_ quantity: Int) -> String {
+            return "plural_handler.dose".localized().format([String(quantity)])
+        }
+        fileprivate static func doses(_ quantity: Int) -> String {
+            return "plural_handler.doses".localized().format([String(quantity)])
+        }
+        fileprivate static let location = "plural_handler.location".localized()
+        fileprivate static let locations = "plural_handler.locations".localized()
 
     }
 

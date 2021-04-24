@@ -29,19 +29,17 @@
 "vaccination_locations_list.title" = "Nous avons trouvé %@ pour le département %@";
 "vaccination_locations_list.available_locations" = "%@ avec rendez-vous";
 "vaccination_locations_list.all_locations" = "%@ trouvés au total";
-"vaccination_locations_list.doses" = "%@ doses ";
 "vaccination_locations_list.list_title" = "Liste des lieux";
 "vaccination_locations_list.date" = "Le %@ à partir de %@";
 "vaccination_locations_list.book_button" = "Prendre rendez-vous ";
 "vaccination_locations_list.verify_button" = "Vérifier ce lieu ";
 "vaccination_locations_list.last_update" = "Dernière mise à jour le %@ à %@";
-"vaccination_locations_list.no_results" = "Nous n'avons pas trouvé de doses pour le département";
+"vaccination_locations_list.no_results" = "Nous n'avons pas trouvé de doses pour le département %@";
 "vaccination_locations_list.no_appointments" = "Aucun rendez-vous";
 "vaccination_locations_list.date_unavailable" = "Date indisponible";
 "vaccination_locations_list.open_route" = "Ouvrir l'itinéraire";
 "vaccination_locations_list.location_name_unavailable" = "Nom du lieu indisponible";
 "vaccination_locations_list.address_unavailable" = "Adresse indisponible";
-"vaccination_locations_list.dose" = "%@ dose ";
 "vaccination_locations_list.found_locations" = "Lieux trouvés";
 "vaccination_locations_list.found_location" = "Lieu trouvé";
 "vaccination_locations_list.cancel_button" = "Annuler";
@@ -54,5 +52,9 @@
 
 // Global
 "global.percentage" = "%@ %%";
-"global.location" = "Lieu";
-"global.locations" = "Lieux";
+
+// Plural Handler
+"plural_handler.location" = "Lieu";
+"plural_handler.locations" = "Lieux";
+"plural_handler.doses" = "%@ doses ";
+"plural_handler.dose" = "%@ dose ";

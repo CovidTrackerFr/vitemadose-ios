@@ -200,7 +200,7 @@ class CentreCell: UITableViewCell {
         }
 
         dosesLabel.isHidden = false
-        let dosesText: String = dosesCount > 1 ? LocalizedString.VaccinationLocationsList.doses(dosesCount) : LocalizedString.VaccinationLocationsList.dose(dosesCount)
+        let dosesText: String = LocalizedString.VaccinationLocationsList.dosesCount(dosesCount)
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
             dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)
