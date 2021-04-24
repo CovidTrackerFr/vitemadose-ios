@@ -14,8 +14,8 @@ struct StatsValue: Codable {
     let total: Int
     let creneaux: Int
 
-    var pourcentage: Int {
-        (disponibles * 100) / total
+    var pourcentage: Int? {
+        total > 0 ? (disponibles * 100) / total : nil
     }
 
     enum CodingKeys: String, CodingKey {
