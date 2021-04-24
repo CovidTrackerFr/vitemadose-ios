@@ -24,7 +24,6 @@
 		576738C9261E32A2004A700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 576738C8261E32A2004A700D /* Assets.xcassets */; };
 		576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 576738CA261E32A2004A700D /* LaunchScreen.storyboard */; };
 		576738D7261E32A3004A700D /* ViteMaDoseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738D6261E32A3004A700D /* ViteMaDoseTests.swift */; };
-		576738E2261E32A3004A700D /* ViteMaDoseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738E1261E32A3004A700D /* ViteMaDoseUITests.swift */; };
 		576738F3261E353E004A700D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738F2261E353D004A700D /* APIService.swift */; };
 		576738FB261E374A004A700D /* URL+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738FA261E374A004A700D /* URL+Commons.swift */; };
 		57673903261E3783004A700D /* Data+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673902261E3783004A700D /* Data+Commons.swift */; };
@@ -91,13 +90,6 @@
 			remoteGlobalIDString = 576738BB261E329C004A700D;
 			remoteInfo = ViteMaDose;
 		};
-		576738DE261E32A3004A700D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 576738B4261E329C004A700D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 576738BB261E329C004A700D;
-			remoteInfo = ViteMaDose;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -129,7 +121,6 @@
 		576738D2261E32A3004A700D /* ViteMaDoseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViteMaDoseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738D6261E32A3004A700D /* ViteMaDoseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViteMaDoseTests.swift; sourceTree = "<group>"; };
 		576738D8261E32A3004A700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		576738DD261E32A3004A700D /* ViteMaDoseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViteMaDoseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738E1261E32A3004A700D /* ViteMaDoseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViteMaDoseUITests.swift; sourceTree = "<group>"; };
 		576738E3261E32A3004A700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		576738F2261E353D004A700D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -213,13 +204,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		576738DA261E32A3004A700D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -248,7 +232,6 @@
 			children = (
 				576738BC261E329C004A700D /* ViteMaDose.app */,
 				576738D2261E32A3004A700D /* ViteMaDoseTests.xctest */,
-				576738DD261E32A3004A700D /* ViteMaDoseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -569,24 +552,6 @@
 			productReference = 576738D2261E32A3004A700D /* ViteMaDoseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		576738DC261E32A3004A700D /* ViteMaDoseUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 576738EC261E32A3004A700D /* Build configuration list for PBXNativeTarget "ViteMaDoseUITests" */;
-			buildPhases = (
-				576738D9261E32A3004A700D /* Sources */,
-				576738DA261E32A3004A700D /* Frameworks */,
-				576738DB261E32A3004A700D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				576738DF261E32A3004A700D /* PBXTargetDependency */,
-			);
-			name = ViteMaDoseUITests;
-			productName = ViteMaDoseUITests;
-			productReference = 576738DD261E32A3004A700D /* ViteMaDoseUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -600,10 +565,6 @@
 						CreatedOnToolsVersion = 12.4;
 					};
 					576738D1261E32A3004A700D = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 576738BB261E329C004A700D;
-					};
-					576738DC261E32A3004A700D = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 576738BB261E329C004A700D;
 					};
@@ -631,7 +592,6 @@
 			targets = (
 				576738BB261E329C004A700D /* ViteMaDose */,
 				576738D1261E32A3004A700D /* ViteMaDoseTests */,
-				576738DC261E32A3004A700D /* ViteMaDoseUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -664,13 +624,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		576738D0261E32A3004A700D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		576738DB261E32A3004A700D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -816,14 +769,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		576738D9261E32A3004A700D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				576738E2261E32A3004A700D /* ViteMaDoseUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -831,11 +776,6 @@
 			isa = PBXTargetDependency;
 			target = 576738BB261E329C004A700D /* ViteMaDose */;
 			targetProxy = 576738D3261E32A3004A700D /* PBXContainerItemProxy */;
-		};
-		576738DF261E32A3004A700D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 576738BB261E329C004A700D /* ViteMaDose */;
-			targetProxy = 576738DE261E32A3004A700D /* PBXContainerItemProxy */;
 		};
 		577A7F33262B8FF200B1D03C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1092,44 +1032,6 @@
 			};
 			name = Release;
 		};
-		576738ED261E32A3004A700D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ViteMaDoseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.ViteMaDoseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ViteMaDose;
-			};
-			name = Debug;
-		};
-		576738EE261E32A3004A700D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ViteMaDoseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.ViteMaDoseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ViteMaDose;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1156,15 +1058,6 @@
 			buildConfigurations = (
 				576738EA261E32A3004A700D /* Debug */,
 				576738EB261E32A3004A700D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		576738EC261E32A3004A700D /* Build configuration list for PBXNativeTarget "ViteMaDoseUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				576738ED261E32A3004A700D /* Debug */,
-				576738EE261E32A3004A700D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
