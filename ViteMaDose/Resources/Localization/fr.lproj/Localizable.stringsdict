@@ -38,7 +38,7 @@
 			<string>Lieux trouvés au total</string>
 		</dict>
 	</dict>
-	<key>locations.doses</key>
+	<key>locations.appointments</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@count@</string>
@@ -49,11 +49,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>%d dose</string>
+			<string>%d créneau</string>
 			<key>one</key>
-			<string>%d dose</string>
+			<string>%d créneau</string>
 			<key>other</key>
-			<string>%d doses</string>
+			<string>%d créneaux</string>
 		</dict>
 	</dict>
 	<key>locations.main_title</key>
@@ -67,9 +67,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Nous avons trouvé %d dose pour le département %@</string>
+			<string>Nous avons trouvé %d créneau pour le département %@</string>
 			<key>other</key>
-			<string>Nous avons trouvé %d doses pour le département %@</string>
+			<string>Nous avons trouvé %d créneaux pour le département %@</string>
 		</dict>
 	</dict>
 </dict>

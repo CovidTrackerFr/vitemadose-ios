@@ -42,7 +42,7 @@ enum Localization {
         static let no_results = "locations.no_results".localized
         static let available_locations = "locations.available_locations".localized
         static let all_locations = "locations.all_locations".localized
-        static let doses = "locations.doses".localized
+        static let appointments = "locations.appointments".localized
 
         enum MainTitle {
             static let title = "locations.main_title".localized

@@ -80,19 +80,19 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
 
         switch dataType {
         case let .allCentres(count):
-            title = NSMutableAttributedString(string: String(count))
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
             description = Localization.Home.Stats.all_locations
             iconContainerColor = .systemOrange
         case let .centresWithAvailabilities(count):
-            title = NSMutableAttributedString(string: String(count))
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
             description = Localization.Home.Stats.locations_with_availabilities
             iconContainerColor = .systemGreen
         case let .allAvailabilities(count):
-            title = NSMutableAttributedString(string: String(count))
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
             description = Localization.Home.Stats.all_availabilities
             iconContainerColor = .royalBlue
         case let .percentageAvailabilities(count):
-            let formattedCount = count?.percentFormatted() ?? "-"
+            let formattedCount = count?.formattedWithPercentage ?? "-"
             title = NSMutableAttributedString(string: formattedCount)
             description = Localization.Home.Stats.available_locations_percentage
             iconContainerColor = .systemBlue

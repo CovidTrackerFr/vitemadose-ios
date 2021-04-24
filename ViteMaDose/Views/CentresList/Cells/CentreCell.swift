@@ -15,7 +15,7 @@ protocol CentreViewDataProvider {
     var phoneText: String? { get }
     var bookingButtonText: String { get }
     var vaccineTypesText: String? { get }
-    var dosesCount: Int? { get }
+    var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var url: URL? { get }
     var partnerLogo: UIImage? { get }
@@ -29,7 +29,7 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
     let phoneText: String?
     let bookingButtonText: String
     let vaccineTypesText: String?
-    let dosesCount: Int?
+    let appointmentsCount: Int?
     let isAvailable: Bool
     let url: URL?
     let partnerLogo: UIImage?
@@ -53,7 +53,7 @@ class CentreCell: UITableViewCell {
     @IBOutlet private var vaccineTypesLabel: UILabel!
 
     @IBOutlet private var vaccineTypesIconContainer: UIView!
-    @IBOutlet private var dosesLabel: UILabel!
+    @IBOutlet private var appointmentsLabel: UILabel!
 
     @IBOutlet private var bookingButton: UIButton!
     @IBOutlet private var cellContentView: UIView!
@@ -79,7 +79,7 @@ class CentreCell: UITableViewCell {
         static let labelPrimaryFont: UIFont = .systemFont(ofSize: 16, weight: .medium)
         static let labelPrimaryColor: UIColor = .label
         static let labelSecondaryColor: UIColor = .secondaryLabel
-        static let dosesLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        static let appointmentsLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
     }
 
     override func awakeFromNib() {
@@ -121,7 +121,7 @@ class CentreCell: UITableViewCell {
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureDosesLabel(dosesCount: viewData.dosesCount, partnerLogo: viewData.partnerLogo)
+        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo)
     }
 
     @objc private func didTapAddress() {
@@ -143,7 +143,7 @@ class CentreCell: UITableViewCell {
             nameLabel,
             addressLabel,
             vaccineTypesLabel,
-            dosesLabel
+            appointmentsLabel
         ])
         phoneButton.setTitle(nil, for: .normal)
         bookingButton.setTitle(nil, for: .normal)
@@ -185,34 +185,34 @@ class CentreCell: UITableViewCell {
         return dateText
     }
 
-    private func configureDosesLabel(
-        dosesCount: Int?,
+    private func configureAppointmentsLabel(
+        appointmentsCount: Int?,
         partnerLogo: UIImage?
     ) {
         let attributes = [
-            NSAttributedString.Key.font: Constant.dosesLabelFont,
+            NSAttributedString.Key.font: Constant.appointmentsLabelFont,
             NSAttributedString.Key.foregroundColor: Constant.labelSecondaryColor
         ]
 
-        guard let dosesCount = dosesCount, dosesCount > 0 else {
-            dosesLabel.isHidden = true
+        guard let appointmentsCount = appointmentsCount, appointmentsCount > 0 else {
+            appointmentsLabel.isHidden = true
             return
         }
 
-        dosesLabel.isHidden = false
-        let dosesText: String = Localization.Locations.doses.format(dosesCount) + String.space
+        appointmentsLabel.isHidden = false
+        let appointmentsText: String = Localization.Locations.appointments.format(appointmentsCount) + String.space
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
-            dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)
+            appointmentsLabel.attributedText = NSAttributedString(string: appointmentsText, attributes: attributes)
             return
         }
 
         let attachmentLogo = NSTextAttachment(rightImage: logo, height: 20, offset: 10)
         let logoString = NSAttributedString(attachment: attachmentLogo)
-        let dosesAndLogoString = NSMutableAttributedString(string: dosesText, attributes: attributes)
-        dosesAndLogoString.append(logoString)
+        let appointmentsAndLogoString = NSMutableAttributedString(string: appointmentsText, attributes: attributes)
+        appointmentsAndLogoString.append(logoString)
 
-        dosesLabel.attributedText = dosesAndLogoString
+        appointmentsLabel.attributedText = appointmentsAndLogoString
     }
 
     private func configurePhoneNumberView(_ viewData: CentreViewData) {

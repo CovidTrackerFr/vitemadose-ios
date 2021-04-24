@@ -24,7 +24,7 @@
 "county_selection.main_title.highlighted_text" = "département";
 // Locations
 "locations.list_title" = "Liste des lieux";
-"locations.no_results" = "Nous n'avons pas trouvé de doses pour le département %@";
+"locations.no_results" = "Nous n'avons pas trouvé de créneau pour le département %@";
 // Location
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";

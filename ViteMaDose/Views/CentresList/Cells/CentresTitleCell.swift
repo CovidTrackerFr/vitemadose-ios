@@ -11,16 +11,13 @@ class CentresTitleCell: HomeTitleCell {
     private enum Constant {
         static let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
         static let titleColor: UIColor = .label
-
-        static let highlightedDosesTextColor: UIColor = .systemGreen
-        static let highlightedCountyTextColor: UIColor = .mandy
     }
 }
 
 extension CentresTitleCell {
 
     static func mainTitleAttributedText(
-        withDoses dosesCount: Int,
+        withAppointmentsCount appointmentsCount: Int,
         andCountyName countyName: String
     ) -> NSMutableAttributedString {
         let attributes = [
@@ -28,7 +25,7 @@ extension CentresTitleCell {
             NSAttributedString.Key.font: Constant.titleFont
         ]
 
-        guard dosesCount > 0 else {
+        guard appointmentsCount > 0 else {
             let title = NSMutableAttributedString(
                 string: Localization.Locations.no_results.format(countyName),
                 attributes: attributes
@@ -37,13 +34,13 @@ extension CentresTitleCell {
             return title
         }
 
-        let dosesCountString = Localization.Locations.doses.format(dosesCount)
-        let titleString = Localization.Locations.MainTitle.title.format(dosesCount, countyName)
+        let appointmentsCountString = Localization.Locations.appointments.format(appointmentsCount)
+        let titleString = Localization.Locations.MainTitle.title.format(appointmentsCount, countyName)
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
         )
-        title.setColorForText(textForAttribute: dosesCountString, withColor: .mandy)
+        title.setColorForText(textForAttribute: appointmentsCountString, withColor: .mandy)
         title.setColorForText(textForAttribute: countyName, withColor: .royalBlue)
 
         return title

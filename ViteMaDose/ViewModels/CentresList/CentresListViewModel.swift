@@ -104,12 +104,12 @@ class CentresListViewModel {
         let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
         allVaccinationCentres = availableCentres + unavailableCentres
 
-        let dosesCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
         let vaccinationCentreCellsViewData = allVaccinationCentres.map({ getVaccinationCentreViewData($0) })
 
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
-                withDoses: dosesCount,
+                withAppointmentsCount: appointmentsCount,
                 andCountyName: county.nomDepartement ?? ""
             ),
             topMargin: 25,
@@ -117,7 +117,7 @@ class CentresListViewModel {
         )
 
         let statsCellViewData = CentresStatsCellViewData(
-            dosesCount: dosesCount,
+            appointmentsCount: appointmentsCount,
             availableCentresCount: availableCentres.count,
             allCentresCount: allVaccinationCentres.count
         )
@@ -198,7 +198,7 @@ class CentresListViewModel {
             phoneText: phoneText,
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
-            dosesCount: centre.appointmentCount,
+            appointmentsCount: centre.appointmentCount,
             isAvailable: isAvailable,
             url: url,
             partnerLogo: partnerLogo
