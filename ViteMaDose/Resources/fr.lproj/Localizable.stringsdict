@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>locations-list.available_locations</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>Lieu avec rendez-vous</string>
+			<key>one</key>
+			<string>Lieu avec rendez-vous</string>
+			<key>other</key>
+			<string>Lieux avec rendez-vous</string>
+		</dict>
+	</dict>
+	<key>locations-list.all_locations</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>Lieu trouvé au total</string>
+			<key>one</key>
+			<string>Lieu trouvé au total</string>
+			<key>other</key>
+			<string>Lieux trouvés au total</string>
+		</dict>
+	</dict>
+	<key>locations-list.doses</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d dose</string>
+			<key>one</key>
+			<string>%d dose</string>
+			<key>other</key>
+			<string>%d doses</string>
+		</dict>
+	</dict>
+	<key>locations-list.main_title</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Nous avons trouvé %d dose pour le département %@</string>
+			<key>other</key>
+			<string>Nous avons trouvé %d doses pour le département %@</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

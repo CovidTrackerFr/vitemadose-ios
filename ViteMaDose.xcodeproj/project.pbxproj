@@ -70,6 +70,7 @@
 		57C401972623929800EFFCA3 /* HomeCountyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401952623929800EFFCA3 /* HomeCountyCell.xib */; };
 		57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401A8262426B100EFFCA3 /* CentreCell.swift */; };
 		57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* CentreCell.xib */; };
+		57DEAA03263444BB005E8628 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 57DEAA05263444BB005E8628 /* Localizable.stringsdict */; };
 		57EC46FF262B1DC500FBA991 /* HomeTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */; };
 		57ECA227262B031F001B368F /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */; };
 		57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */; };
@@ -174,6 +175,7 @@
 		57C401952623929800EFFCA3 /* HomeCountyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCountyCell.xib; sourceTree = "<group>"; };
 		57C401A8262426B100EFFCA3 /* CentreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCell.swift; sourceTree = "<group>"; };
 		57C401A9262426B100EFFCA3 /* CentreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentreCell.xib; sourceTree = "<group>"; };
+		57DEAA04263444BB005E8628 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleCell.xib; sourceTree = "<group>"; };
 		57ECA226262B031F001B368F /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		57FE5C0E261FA84D0012B66D /* UIColor+VideMaDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+VideMaDose.swift"; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			children = (
 				576738C8261E32A2004A700D /* Assets.xcassets */,
 				57B2BCA52633B254001B3D61 /* Localizable.strings */,
+				57DEAA05263444BB005E8628 /* Localizable.stringsdict */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
 				575CC230262AF4E1008D1869 /* HomeCountySelectionCell.xib in Resources */,
 				57B2BCA32633B254001B3D61 /* Localizable.strings in Resources */,
+				57DEAA03263444BB005E8628 /* Localizable.stringsdict in Resources */,
 				57AF504B262CDB3D0085E3C1 /* CentresStatsCell.xib in Resources */,
 				57EC46FF262B1DC500FBA991 /* HomeTitleCell.xib in Resources */,
 				5793482F2621E1E200F8A4A0 /* HomeStatsCell.xib in Resources */,
@@ -858,6 +862,14 @@
 				57B2BCA42633B254001B3D61 /* fr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		57DEAA05263444BB005E8628 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57DEAA04263444BB005E8628 /* fr */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
