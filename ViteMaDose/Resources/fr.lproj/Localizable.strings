@@ -40,3 +40,5 @@
 "error.generic.retry_button" = "Réessayer";
 "error.generic.cancel_button" = "Annuler";
 "error.generic.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
+"error.network.server_error" = "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard.";
+"error.network.offline" = "Il semblerait que vous soyez hors ligne.";

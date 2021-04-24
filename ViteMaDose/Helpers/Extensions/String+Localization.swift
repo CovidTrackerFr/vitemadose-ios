@@ -85,5 +85,10 @@ enum Localization {
             static let cancel_button = "error.generic.cancel_button".localized
             static let default_message = "error.generic.default_message".localized
         }
+
+        enum Network {
+            static let server_error = "error.network.server_error".localized
+            static let offline = "error.network.offline".localized
+        }
     }
 }
