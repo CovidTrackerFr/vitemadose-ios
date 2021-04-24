@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  ViteMaDose
+
+  Created by Victor Sarda on 24/04/2021.
+  
+*/
+
+// Home
+"home.main_title" = "Trouvez une dose de vaccin facilement et rapidement";
+"home.main_title.first_highlighted_text" = "facilement";
+"home.main_title.second_highlighted_text" = "rapidement";
+"home.select_county" = "Sélectionner un département...";
+"home.recent_search" = "Recherche récente";
+"home.last_stats" = "Dernières statistiques";
+"home.open_map" = "Ouvrir la carte des lieux ";
+"home.partners" = "Trouvez vos rendez-vous avec";
+"home.stats.all_locations" = "Lieux trouvés en France";
+"home.stats.all_availabilities" = "Créneaux disponibles";
+"home.stats.locations_with_availabilities" = "Lieux avec rendez-vous disponibles";
+"home.stats.available_locations_percentage" = "De lieux avec des disponibilités";
+// County Selection
+"county_selection.title" = "Sélectionnez un département";
+"county_selection.title.highlighted_text" = "département";
+// Vaccination Locations
+"locations-list.main_title" = "Nous avons trouvé %@ pour le département %@";
+"locations-list.available_locations_singular" = "Lieu avec rendez-vous";
+"locations-list.available_locations_plural" = "Lieux avec rendez-vous";
+"locations-list.all_locations_singular" = "%d trouvé au total";
+"locations-list.all_locations_plural" = "%d trouvés au total";
+"locations-list.doses_singular" = "%d dose ";
+"locations-list.doses_plural" = "%d doses ";
+"locations-list.list_title" = "Liste des lieux";
+"locations-list.found_locations_singular" = "Lieu trouvé";
+"locations-list.found_locations_plural" = "Lieux trouvés";
+"location.date" = "Le %@ à partir de %@";
+"location.book_button" = "Prendre rendez-vous ";
+"location.verify_button" = "Vérifier ce lieu ";
+"location.last_update" = "Dernière mise à jour le %@ à %@";
+"location.no_results" = "Nous n'avons pas trouvé de doses pour le département %@";
+"location.no_appointment" = "Aucun rendez-vous";
+"location.open_route" = "Ouvrir l'itinéraire";
+"location.unavailable_date" = "Date indisponible";
+"location.unavailable_address" = "Adresse indisponible";
+
+// Generic Error
+"generic_error.title" = "Oups! Nous avons des difficultés techniques...";
+"generic_error.retry_button" = "Réessayer";
+"generic_error.cancel_button" = "Annuler";
+"generic_error.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
