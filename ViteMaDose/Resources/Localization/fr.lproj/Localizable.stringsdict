@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>locations.available_locations</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>Lieu avec rendez-vous</string>
+			<key>one</key>
+			<string>Lieu avec rendez-vous</string>
+			<key>other</key>
+			<string>Lieux avec rendez-vous</string>
+		</dict>
+	</dict>
+	<key>locations.all_locations</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>Lieu trouvé au total</string>
+			<key>one</key>
+			<string>Lieu trouvé au total</string>
+			<key>other</key>
+			<string>Lieux trouvés au total</string>
+		</dict>
+	</dict>
+	<key>locations.appointments</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d créneau</string>
+			<key>one</key>
+			<string>%d créneau</string>
+			<key>other</key>
+			<string>%d créneaux</string>
+		</dict>
+	</dict>
+	<key>locations.main_title</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Nous avons trouvé %d créneau pour le département %@</string>
+			<key>other</key>
+			<string>Nous avons trouvé %d créneaux pour le département %@</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

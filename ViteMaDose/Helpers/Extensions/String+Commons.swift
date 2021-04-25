@@ -1,5 +1,5 @@
 //
-//  Date+Parsing.swift
+//  String+Commons.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 23/04/2021.
@@ -9,6 +9,9 @@ import Foundation
 import SwiftDate
 
 extension String {
+    static let space = " "
+    static let commaWithSpace = ", "
+
     /// Parse a date with an undefined format
     /// This function will try to parse the `String` as a Date
     /// using `SwiftDate`.
@@ -18,5 +21,17 @@ extension String {
     func toString(with style: DateToStringStyles, region: Region) -> String? {
         let date = toDate(nil, region: region) ?? toISODate(nil, region: region)
         return date?.toString(style)
+    }
+
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+
+    func format(_ args: CVarArg...) -> String {
+        return String(format: self, locale: .current, arguments: args)
+    }
+
+    func format(_ args: [String]) -> String {
+        return String(format: self, locale: .current, arguments: args)
     }
 }

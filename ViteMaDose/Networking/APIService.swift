@@ -64,11 +64,11 @@ extension APIResponseStatus: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .error:
-            return "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard."
+            return Localization.Error.Network.server_error
         case .offline:
-            return "Il semblerait que vous soyez hors ligne."
+            return Localization.Error.Network.offline
         default:
-            return "Une erreur est survenue, veuillez réessayer plus tard."
+            return Localization.Error.Generic.default_message
         }
     }
 }

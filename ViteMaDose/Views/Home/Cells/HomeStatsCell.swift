@@ -11,7 +11,7 @@ enum StatsDataType: Hashable {
     case allCentres(Int)
     case centresWithAvailabilities(Int)
     case allAvailabilities(Int)
-    case percentageAvailabilities(Int?)
+    case percentageAvailabilities(Double?)
     case externalMap
 }
 
@@ -80,25 +80,21 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
 
         switch dataType {
         case let .allCentres(count):
-            title = NSMutableAttributedString(string: String(count))
-            description = "Centres trouvés en France"
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
+            description = Localization.Home.Stats.all_locations
             iconContainerColor = .systemOrange
         case let .centresWithAvailabilities(count):
-            title = NSMutableAttributedString(string: String(count))
-            // TODO: Localisation
-            description = "\(count > 1 ? "Centres" : "Centre") avec rendez-vous disponibles"
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
+            description = Localization.Home.Stats.locations_with_availabilities
             iconContainerColor = .systemGreen
         case let .allAvailabilities(count):
-            title = NSMutableAttributedString(string: String(count))
-            description = "Créneaux disponibles"
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
+            description = Localization.Home.Stats.all_availabilities
             iconContainerColor = .royalBlue
         case let .percentageAvailabilities(count):
-            if let count = count {
-                title = NSMutableAttributedString(string: "\(count)%")
-            } else {
-                title = NSMutableAttributedString(string: "-")
-            }
-            description = "De centres avec des disponibilités"
+            let formattedCount = count?.formattedWithPercentage ?? "-"
+            title = NSMutableAttributedString(string: formattedCount)
+            description = Localization.Home.Stats.available_locations_percentage
             iconContainerColor = .systemBlue
         case .externalMap:
             let imageAttachment = NSTextAttachment()
@@ -107,7 +103,7 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
             )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-            let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
+            let fullString = NSMutableAttributedString(string: Localization.Home.open_map + String.space)
             fullString.append(NSAttributedString(attachment: imageAttachment))
             title = fullString
             description = nil
