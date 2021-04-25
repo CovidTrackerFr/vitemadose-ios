@@ -49,6 +49,7 @@ protocol HomeViewModelDelegate: class {
 
 class HomeViewModel {
     private let apiService: APIServiceProvider
+    private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
     var counties: Counties = []
@@ -68,8 +69,12 @@ class HomeViewModel {
 
     // MARK: init
 
-    required init(apiService: APIServiceProvider = APIService()) {
+    required init(
+        apiService: APIServiceProvider = APIService(),
+        userDefaults: UserDefaults = .shared
+    ) {
         self.apiService = apiService
+        self.userDefaults = userDefaults
     }
 
     // MARK: Handle API result
@@ -134,7 +139,7 @@ class HomeViewModel {
 
     private func getLastSelectedCountyCellViewData() -> HomeCountyCellViewData? {
         guard
-            let lastSelectedCountyCode = UserDefaults.lastSelectedCountyCode,
+            let lastSelectedCountyCode = userDefaults.lastSelectedCountyCode,
             let county = counties.first(where: { $0.codeDepartement == lastSelectedCountyCode}),
             let countyName = county.nomDepartement,
             let countyCode = county.codeDepartement
@@ -212,7 +217,7 @@ extension HomeViewModel: HomeViewModelProvider {
 
     func didSelectLastCounty() {
         guard
-            let countyCode = UserDefaults.lastSelectedCountyCode,
+            let countyCode = userDefaults.lastSelectedCountyCode,
             let county = counties.first(where: { $0.codeDepartement == countyCode})
         else {
             return
