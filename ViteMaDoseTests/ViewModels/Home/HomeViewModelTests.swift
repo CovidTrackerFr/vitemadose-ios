@@ -6,27 +6,190 @@
 //
 
 import XCTest
+@testable import ViteMaDose
+@testable import APIRequest
 
 class HomeViewModelTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    private var counties = [
+        County(codeDepartement: "1", nomDepartement: "Amazing County", codeRegion: 0, nomRegion: "Amazing Region"),
+        County(codeDepartement: "2", nomDepartement: "Amazing County 2", codeRegion: 1, nomRegion: "Amazing Region 2")
+    ]
+    private var stats = [
+        StatsKey.allCounties.rawValue: StatsValue(disponibles: 123, total: 456, creneaux: 789),
+        "Another Key": StatsValue(disponibles: 0, total: 0, creneaux: 0),
+    ]
+
+    private var apiServiceMock: APIServiceMock!
+    private var userDefaults: UserDefaults!
+
+    private lazy var viewModel = HomeViewModel(
+        apiService: apiServiceMock,
+        userDefaults: userDefaults
+    )
+
+    override func setUp() {
+        super.setUp()
+        apiServiceMock = APIServiceMock()
+        userDefaults = .makeClearedInstance()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testLoadWithNoError() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        let expectedHeadingCells: [HomeCell] = [
+            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
+            .countySelection(HomeCountySelectionViewData())
+        ]
+
+        let expectedPercentage = (Double(123) * 100) / Double(456)
+
+        let expectedStatsCells: [HomeCell] = [
+            .title(.init(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15.0, bottomMargin: 5.0)),
+            .stats(.init(.allCentres(456))),
+            .stats(.init(.allAvailabilities(789))),
+            .stats(.init(.centresWithAvailabilities(123))),
+            .stats(.init(.percentageAvailabilities(expectedPercentage))),
+            .stats(.init(.externalMap))
+        ]
+
+        let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
+        let statsCells = try XCTUnwrap(delegateSpy.reloadTableView?.statsCells)
+
+        XCTAssertEqual(headingCells, expectedHeadingCells)
+        XCTAssertEqual(statsCells, expectedStatsCells)
+
+        XCTAssertEqual(viewModel.counties.count, 2)
+        XCTAssertEqual(viewModel.stats?.count, 2)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertNil(delegateSpy.presentInitialLoadError)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLoadWithCountiesError() throws {
+        let error = APIResponseStatus.notFound
+
+        apiServiceMock.fetchCountiesResult = .failure(error)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? APIResponseStatus)
+
+        XCTAssertNil(delegateSpy.reloadTableView)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, true)
+        XCTAssertEqual(expectedError, error)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testReloadError() throws {
+        let error = APIResponseStatus.networkConnectTimeoutError
+
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        XCTAssertNotNil(delegateSpy.reloadTableView)
+        XCTAssertNil(delegateSpy.presentInitialLoadError)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, false)
+
+        apiServiceMock.fetchStatsResult = .failure(error)
+        viewModel.reloadStats()
+
+        let expectedReloadError = try XCTUnwrap(delegateSpy.presentFetchStatsError as? APIResponseStatus)
+
+        XCTAssertNil(delegateSpy.presentInitialLoadError)
+        XCTAssertEqual(expectedReloadError, error)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, false)
     }
 
+    func testLastSelectedCountyIsAdded() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        let expectedHeadingCells: [HomeCell] = [
+            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
+            .countySelection(HomeCountySelectionViewData())
+        ]
+
+        let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
+        XCTAssertEqual(headingCells, expectedHeadingCells)
+
+        let firstCounty = try XCTUnwrap(counties.first)
+        userDefaults.lastSelectedCountyCode = firstCounty.codeDepartement
+        viewModel.load()
+
+        let expectedUpdatedCells = expectedHeadingCells + [
+            .county(.init(titleText: Localization.Home.recent_search, countyName: firstCounty.nomDepartement!, countyCode: firstCounty.codeDepartement!))
+        ]
+
+        XCTAssertEqual(delegateSpy.reloadTableView?.headingCells, expectedUpdatedCells)
+    }
+
+    func testExistingLastSelectedCountyIsAdded() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let firstCounty = try XCTUnwrap(counties.first)
+        userDefaults.lastSelectedCountyCode = firstCounty.codeDepartement
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        let expectedHeadingCells: [HomeCell] = [
+            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
+            .countySelection(HomeCountySelectionViewData()),
+            .county(.init(titleText: Localization.Home.recent_search, countyName: firstCounty.nomDepartement!, countyCode: firstCounty.codeDepartement!))
+        ]
+
+        let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
+        XCTAssertEqual(headingCells, expectedHeadingCells)
+    }
+
+    func testDidSelectLastCountyPresentsList() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let firstCounty = try XCTUnwrap(counties.first)
+        userDefaults.lastSelectedCountyCode = firstCounty.codeDepartement
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+        viewModel.didSelectLastCounty()
+
+        XCTAssertEqual(delegateSpy.presentVaccinationCentresCounty, firstCounty)
+    }
+
+    func testDidSelectCountyPresentsList() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        let firstCounty = try XCTUnwrap(counties.first)
+
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+        viewModel.didSelect(firstCounty)
+
+        XCTAssertEqual(delegateSpy.presentVaccinationCentresCounty, firstCounty)
+    }
 }
+
+
