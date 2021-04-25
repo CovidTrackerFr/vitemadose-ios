@@ -23,7 +23,6 @@
 		576738C2261E329C004A700D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738C1261E329C004A700D /* SceneDelegate.swift */; };
 		576738C9261E32A2004A700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 576738C8261E32A2004A700D /* Assets.xcassets */; };
 		576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 576738CA261E32A2004A700D /* LaunchScreen.storyboard */; };
-		576738D7261E32A3004A700D /* ViteMaDoseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738D6261E32A3004A700D /* ViteMaDoseTests.swift */; };
 		576738F3261E353E004A700D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738F2261E353D004A700D /* APIService.swift */; };
 		576738FB261E374A004A700D /* URL+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576738FA261E374A004A700D /* URL+Commons.swift */; };
 		57673903261E3783004A700D /* Data+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673902261E3783004A700D /* Data+Commons.swift */; };
@@ -37,6 +36,7 @@
 		57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57673937261E3BDE004A700D /* HomeViewController.storyboard */; };
 		5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767393E261E3C1F004A700D /* HomeViewModel.swift */; };
 		57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673954261E4145004A700D /* ClassNameProtocol.swift */; };
+		577265C02634D77A009B707C /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577265BF2634D77A009B707C /* HomeViewModelTests.swift */; };
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
 		577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */; };
 		577A7F6C262CA3D000B1D03C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info.plist */; };
@@ -119,7 +119,6 @@
 		576738CB261E32A2004A700D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		576738CD261E32A2004A700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		576738D2261E32A3004A700D /* ViteMaDoseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViteMaDoseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		576738D6261E32A3004A700D /* ViteMaDoseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViteMaDoseTests.swift; sourceTree = "<group>"; };
 		576738D8261E32A3004A700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		576738F2261E353D004A700D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		576738FA261E374A004A700D /* URL+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Commons.swift"; sourceTree = "<group>"; };
@@ -134,6 +133,8 @@
 		57673937261E3BDE004A700D /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
 		5767393E261E3C1F004A700D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		57673954261E4145004A700D /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
+		577265BE2634D779009B707C /* ViteMaDoseTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViteMaDoseTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		577265BF2634D77A009B707C /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplayable.swift; sourceTree = "<group>"; };
 		577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorDisplayable.swift"; sourceTree = "<group>"; };
 		577A7F6B262CA3D000B1D03C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -205,6 +206,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		571720A52634D9B300896A0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		57471427262B6B7500535DF1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +229,7 @@
 				576738BE261E329C004A700D /* ViteMaDose */,
 				576738D5261E32A3004A700D /* ViteMaDoseTests */,
 				576738BD261E329C004A700D /* Products */,
+				571720A52634D9B300896A0D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -251,8 +260,9 @@
 		576738D5261E32A3004A700D /* ViteMaDoseTests */ = {
 			isa = PBXGroup;
 			children = (
-				576738D6261E32A3004A700D /* ViteMaDoseTests.swift */,
+				577265C32634D798009B707C /* ViewModels */,
 				576738D8261E32A3004A700D /* Info.plist */,
+				577265BE2634D779009B707C /* ViteMaDoseTests-Bridging-Header.h */,
 			);
 			path = ViteMaDoseTests;
 			sourceTree = "<group>";
@@ -377,6 +387,22 @@
 				DA234DC22626494600D6F71C /* remote-configuration.plist */,
 			);
 			name = Application;
+			sourceTree = "<group>";
+		};
+		577265C32634D798009B707C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				577265C42634D7AA009B707C /* Home */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		577265C42634D7AA009B707C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				577265BF2634D77A009B707C /* HomeViewModelTests.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		579348282621DA9D00F8A4A0 /* Cells */ = {
@@ -554,6 +580,7 @@
 					};
 					576738D1261E32A3004A700D = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 						TestTargetID = 576738BB261E329C004A700D;
 					};
 				};
@@ -753,7 +780,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				576738D7261E32A3004A700D /* ViteMaDoseTests.swift in Sources */,
+				577265C02634D77A009B707C /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,6 +1010,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ViteMaDoseTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -993,6 +1021,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.ViteMaDoseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ViteMaDoseTests/ViteMaDoseTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViteMaDose.app/ViteMaDose";
@@ -1004,6 +1034,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ViteMaDoseTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -1014,6 +1045,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.victorsarda.ViteMaDoseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ViteMaDoseTests/ViteMaDoseTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ViteMaDose.app/ViteMaDose";
