@@ -42,9 +42,7 @@ protocol HomeViewModelDelegate: class {
     func presentInitialLoadError(_ error: Error)
     func presentFetchStatsError(_ error: Error)
 
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells: [HomeCell])
-    func reloadHeadingSection(with headingCells: [HomeCell])
-    func reloadStatsSection(with statsCells: [HomeCell])
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
 }
 
 class HomeViewModel {
@@ -92,12 +90,12 @@ class HomeViewModel {
     private func handleStatsReload(with stats: Stats) {
         self.stats = stats
         updateStatsCells()
-        delegate?.reloadStatsSection(with: statsCell)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func handleLastSelectedCountyUpdate() {
         updateHeadingCells()
-        delegate?.reloadHeadingSection(with: headingCells)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func updateHeadingCells() {
