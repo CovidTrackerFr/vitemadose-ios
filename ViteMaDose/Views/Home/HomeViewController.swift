@@ -41,14 +41,19 @@ class HomeViewController: UIViewController, Storyboarded {
     }()
 
     private lazy var dataSource = makeDataSource()
-
+    private let remoteConfiguration: RemoteConfiguration = .shared
     // MARK: - Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
 
-        RemoteConfiguration.shared.synchronize { [unowned self] _ in
+        remoteConfiguration.synchronize { [unowned self] _ in
+            if let urlString = self.remoteConfiguration.maintenanceModeUrl {
+                let maintenanceViewController = MaintenanceViewController(urlString: urlString)
+                self.present(maintenanceViewController, animated: true)
+                return
+            }
             self.viewModel.load()
         }
     }

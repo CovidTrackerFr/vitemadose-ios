@@ -59,6 +59,8 @@
 		57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AF5054262CE28E0085E3C1 /* CentresTitleCell.xib */; };
 		57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B2BC9F2633AC5B001B3D61 /* Localization.swift */; };
 		57B2BCA32633B254001B3D61 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57B2BCA52633B254001B3D61 /* Localizable.strings */; };
+		57B6BEA42636060200D9AAC1 /* MaintenanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B6BEA32636060200D9AAC1 /* MaintenanceViewController.swift */; };
+		57B6BEAA2636153000D9AAC1 /* maintenance.html in Resources */ = {isa = PBXBuildFile; fileRef = 57B6BEA92636153000D9AAC1 /* maintenance.html */; };
 		57B7CD50262E28460065DD80 /* Haptica in Frameworks */ = {isa = PBXBuildFile; productRef = 57B7CD4F262E28460065DD80 /* Haptica */; };
 		57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */; };
 		57C4017626235B6200EFFCA3 /* HomePartnersFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017426235B6200EFFCA3 /* HomePartnersFooterView.swift */; };
@@ -167,6 +169,8 @@
 		57AF5054262CE28E0085E3C1 /* CentresTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentresTitleCell.xib; sourceTree = "<group>"; };
 		57B2BC9F2633AC5B001B3D61 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		57B2BCA42633B254001B3D61 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		57B6BEA32636060200D9AAC1 /* MaintenanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceViewController.swift; sourceTree = "<group>"; };
+		57B6BEA92636153000D9AAC1 /* maintenance.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = maintenance.html; sourceTree = "<group>"; };
 		57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Commons.swift"; sourceTree = "<group>"; };
 		57C4017426235B6200EFFCA3 /* HomePartnersFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePartnersFooterView.swift; sourceTree = "<group>"; };
 		57C4017526235B6200EFFCA3 /* HomePartnersFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePartnersFooterView.xib; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				5767392E261E3BB2004A700D /* Home */,
 				57AD21E22621067D00ED2B95 /* CountySelection */,
 				57AD21D4262103F000ED2B95 /* CentresList */,
+				57B6BEA2263605DE00D9AAC1 /* Maintenance */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				576738C8261E32A2004A700D /* Assets.xcassets */,
+				57B6BEA92636153000D9AAC1 /* maintenance.html */,
 				57DEAA1826346FA7005E8628 /* Localization */,
 			);
 			path = Resources;
@@ -461,6 +467,14 @@
 				57AD21F52621097A00ED2B95 /* CentresListViewModel.swift */,
 			);
 			path = CentresList;
+			sourceTree = "<group>";
+		};
+		57B6BEA2263605DE00D9AAC1 /* Maintenance */ = {
+			isa = PBXGroup;
+			children = (
+				57B6BEA32636060200D9AAC1 /* MaintenanceViewController.swift */,
+			);
+			path = Maintenance;
 			sourceTree = "<group>";
 		};
 		57C4018526238E2200EFFCA3 /* Header */ = {
@@ -647,6 +661,7 @@
 			files = (
 				57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */,
 				5747142B262B6BA300535DF1 /* CountyCell.xib in Resources */,
+				57B6BEAA2636153000D9AAC1 /* maintenance.html in Resources */,
 				57C4018F26238E5300EFFCA3 /* CountySelectionHeaderView.xib in Resources */,
 				57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */,
 				57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */,
@@ -783,6 +798,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B6BEA42636060200D9AAC1 /* MaintenanceViewController.swift in Sources */,
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,
 				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
 				575CC22F262AF4E1008D1869 /* HomeCountySelectionCell.swift in Sources */,
