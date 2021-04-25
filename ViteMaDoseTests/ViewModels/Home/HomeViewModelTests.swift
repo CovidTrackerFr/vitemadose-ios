@@ -63,11 +63,50 @@ class HomeViewModelTests: XCTestCase {
 
         XCTAssertEqual(headingCells, expectedHeadingCells)
         XCTAssertEqual(statsCells, expectedStatsCells)
-
-        XCTAssertEqual(viewModel.counties.count, 2)
-        XCTAssertEqual(viewModel.stats?.count, 2)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
         XCTAssertNil(delegateSpy.presentInitialLoadError)
+    }
+
+    func testReloadWithoutError() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        XCTAssertEqual(delegateSpy.reloadTableView?.headingCells.count, 2)
+        XCTAssertEqual(delegateSpy.reloadTableView?.statsCells.count, 6)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertNil(delegateSpy.presentInitialLoadError)
+
+        // Reload with changes
+
+        apiServiceMock.fetchStatsResult = .success([
+            StatsKey.allCounties.rawValue: StatsValue(disponibles: 0, total: 0, creneaux: 0)
+        ])
+        viewModel.reloadStats()
+
+        let expectedHeadingCells: [HomeCell] = [
+            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
+            .countySelection(HomeCountySelectionViewData())
+        ]
+        let expectedStatsCells: [HomeCell] = [
+            .title(.init(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15.0, bottomMargin: 5.0)),
+            .stats(.init(.allCentres(0))),
+            .stats(.init(.allAvailabilities(0))),
+            .stats(.init(.centresWithAvailabilities(0))),
+            .stats(.init(.percentageAvailabilities(nil))),
+            .stats(.init(.externalMap))
+        ]
+
+        let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
+        let statsCells = try XCTUnwrap(delegateSpy.reloadTableView?.statsCells)
+
+        XCTAssertEqual(headingCells, expectedHeadingCells)
+        XCTAssertEqual(statsCells, expectedStatsCells)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertNil(delegateSpy.presentFetchStatsError)
     }
 
     func testLoadWithCountiesError() throws {

@@ -60,10 +60,10 @@ class HomeViewModel {
         }
     }
 
-    private(set) var headingCells: [HomeCell] = []
-    private(set) var statsCell: [HomeCell] = []
+    private var headingCells: [HomeCell] = []
+    private var statsCell: [HomeCell] = []
 
-    private(set) var lastSelectedCountyCode: String?
+    private var lastSelectedCountyCode: String?
 
     // MARK: init
 

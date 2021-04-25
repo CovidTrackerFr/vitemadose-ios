@@ -30,17 +30,7 @@ class HomeViewModelDelegateSpy: HomeViewModelDelegate {
     }
 
     var reloadTableView: (headingCells: [HomeCell], statsCells: [HomeCell])?
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells: [HomeCell]) {
-        reloadTableView = (headingCells, andStatsCells)
-    }
-
-    var reloadHeadingSection: [HomeCell]?
-    func reloadHeadingSection(with headingCells: [HomeCell]) {
-        reloadHeadingSection = headingCells
-    }
-
-    var reloadStatsSection: [HomeCell]?
-    func reloadStatsSection(with statsCells: [HomeCell]) {
-        reloadStatsSection = statsCells
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell]) {
+        reloadTableView = (headingCells, statsCells)
     }
 }
