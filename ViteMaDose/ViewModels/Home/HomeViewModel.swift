@@ -61,10 +61,10 @@ class HomeViewModel {
         }
     }
 
-    private var headingCells: [HomeCell] = []
-    private var statsCell: [HomeCell] = []
+    private(set) var headingCells: [HomeCell] = []
+    private(set) var statsCell: [HomeCell] = []
 
-    private var lastSelectedCountyCode: String?
+    private(set) var lastSelectedCountyCode: String?
 
     // MARK: init
 
@@ -166,18 +166,20 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchCounties { [weak self] data, status in
-            if let counties = data {
-                self?.apiService.fetchStats { data, status in
-                    if let stats = data {
+        apiService.fetchCounties { [weak self] result in
+            switch result {
+            case let .success(counties):
+                self?.apiService.fetchStats { result in
+                    switch result {
+                    case let .success(stats):
                         self?.handleInitialLoad(counties: counties, stats: stats)
                         self?.isLoading = false
-                    } else {
+                    case let .failure(status):
                         self?.handleInitialLoadError(status)
                         self?.isLoading = false
                     }
                 }
-            } else {
+            case let .failure(status):
                 self?.handleInitialLoadError(status)
                 self?.isLoading = false
             }
@@ -188,12 +190,13 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchStats { [weak self] data, status in
+        apiService.fetchStats { [weak self] result in
             self?.isLoading = false
 
-            if let stats = data {
+            switch result {
+            case let .success(stats):
                 self?.handleStatsReload(with: stats)
-            } else {
+            case let .failure(status):
                 self?.handleStatsError(status)
             }
         }

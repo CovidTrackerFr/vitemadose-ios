@@ -10,16 +10,16 @@ import APIRequest
 
 protocol APIServiceProvider {
     @discardableResult
-    func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> Void) -> APIRequest
+    func fetchCounties(completion: @escaping (Result<Counties, APIResponseStatus>) -> Void) -> APIRequest
     @discardableResult
-    func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> Void) -> APIRequest
+    func fetchVaccinationCentres(country: String, completion: @escaping (Result<VaccinationCentres, APIResponseStatus>) -> Void) -> APIRequest
     @discardableResult
-    func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> Void) -> APIRequest
+    func fetchStats(completion: @escaping (Result<Stats, APIResponseStatus>) -> Void) -> APIRequest
 }
 
 struct APIService: APIServiceProvider {
 
-    func fetchCounties(completion: @escaping (Counties?, APIResponseStatus) -> Void) -> APIRequest {
+    func fetchCounties(completion: @escaping (Result<Counties, APIResponseStatus>) -> Void) -> APIRequest {
         let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
         return APIRequest(
             "GET",
@@ -27,12 +27,16 @@ struct APIService: APIServiceProvider {
             configuration: configuration
         ).execute(Counties.self) { data, status in
             DispatchQueue.main.async {
-                completion(data, status)
+                if let data = data {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(status))
+                }
             }
         }
     }
 
-    func fetchVaccinationCentres(country: String, completion: @escaping (VaccinationCentres?, APIResponseStatus) -> Void) -> APIRequest {
+    func fetchVaccinationCentres(country: String, completion: @escaping (Result<VaccinationCentres, APIResponseStatus>) -> Void) -> APIRequest {
         let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
         return APIRequest(
             "GET",
@@ -40,12 +44,16 @@ struct APIService: APIServiceProvider {
             configuration: configuration
         ).execute(VaccinationCentres.self) { data, status in
             DispatchQueue.main.async {
-                completion(data, status)
+                if let data = data {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(status))
+                }
             }
         }
     }
 
-    func fetchStats(completion: @escaping (Stats?, APIResponseStatus) -> Void) -> APIRequest {
+    func fetchStats(completion: @escaping (Result<Stats, APIResponseStatus>) -> Void) -> APIRequest {
         let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
         return APIRequest(
             "GET",
@@ -53,7 +61,11 @@ struct APIService: APIServiceProvider {
             configuration: configuration
         ).execute(Stats.self) { data, status in
             DispatchQueue.main.async {
-                completion(data, status)
+                if let data = data {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(status))
+                }
             }
         }
     }
