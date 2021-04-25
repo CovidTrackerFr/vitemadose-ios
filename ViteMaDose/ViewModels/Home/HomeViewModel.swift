@@ -63,7 +63,7 @@ class HomeViewModel {
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
 
-    private var lastSelectedCountyCode: String?
+    private(set) var lastSelectedCountyCode: String?
 
     // MARK: init
 

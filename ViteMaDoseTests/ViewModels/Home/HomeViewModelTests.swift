@@ -127,6 +127,24 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(expectedError, error)
     }
 
+    func testLoadWithStatsError() throws {
+        let error = APIResponseStatus.notFound
+
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .failure(error)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? APIResponseStatus)
+
+        XCTAssertNil(delegateSpy.reloadTableView)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, true)
+        XCTAssertEqual(expectedError, error)
+    }
+
     func testReloadError() throws {
         let error = APIResponseStatus.networkConnectTimeoutError
 
@@ -162,8 +180,8 @@ class HomeViewModelTests: XCTestCase {
         viewModel.load()
 
         let expectedHeadingCells: [HomeCell] = [
-            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
-            .countySelection(HomeCountySelectionViewData())
+            .title(.init(titleText: HomeTitleCell.mainTitleAttributedText)),
+            .countySelection(.init())
         ]
 
         let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
@@ -192,9 +210,13 @@ class HomeViewModelTests: XCTestCase {
         viewModel.load()
 
         let expectedHeadingCells: [HomeCell] = [
-            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
-            .countySelection(HomeCountySelectionViewData()),
-            .county(.init(titleText: Localization.Home.recent_search, countyName: firstCounty.nomDepartement!, countyCode: firstCounty.codeDepartement!))
+            .title(.init(titleText: HomeTitleCell.mainTitleAttributedText)),
+            .countySelection(.init()),
+            .county(.init(
+                        titleText: Localization.Home.recent_search,
+                        countyName: firstCounty.nomDepartement ?? "",
+                        countyCode: firstCounty.codeDepartement ?? ""
+            ))
         ]
 
         let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
@@ -228,6 +250,24 @@ class HomeViewModelTests: XCTestCase {
         viewModel.didSelect(firstCounty)
 
         XCTAssertEqual(delegateSpy.presentVaccinationCentresCounty, firstCounty)
+    }
+
+    func testLastSelectedCountyIsUpdatedIfNeeded() throws {
+        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchStatsResult = .success(stats)
+
+        let delegateSpy = HomeViewModelDelegateSpy()
+        let firstCounty = try XCTUnwrap(counties.first)
+        let secondCounty = try XCTUnwrap(counties[safe: 1])
+
+        viewModel.delegate = delegateSpy
+        viewModel.load()
+
+        viewModel.updateLastSelectedCountyIfNeeded(firstCounty.codeDepartement)
+        XCTAssertEqual(viewModel.lastSelectedCountyCode, firstCounty.codeDepartement)
+
+        viewModel.updateLastSelectedCountyIfNeeded(secondCounty.codeDepartement)
+        XCTAssertEqual(viewModel.lastSelectedCountyCode, secondCounty.codeDepartement)
     }
 }
 
