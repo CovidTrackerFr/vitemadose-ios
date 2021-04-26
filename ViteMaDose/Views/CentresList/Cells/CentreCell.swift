@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - CentreViewDataProvider
 protocol CentreViewDataProvider {
     var dayText: String? { get }
     var timeText: String? { get }
@@ -21,6 +22,7 @@ protocol CentreViewDataProvider {
     var partnerLogo: UIImage? { get }
 }
 
+// MARK: - CentreViewData
 struct CentreViewData: CentreViewDataProvider, Hashable {
     let dayText: String?
     let timeText: String?
@@ -35,28 +37,33 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
     let partnerLogo: UIImage?
 }
 
-class CentreCell: UITableViewCell {
-    @IBOutlet private var dateContainer: UIStackView!
-    @IBOutlet private var dateIconContainer: UIView!
-    @IBOutlet private var dateLabel: UILabel!
+// MARK: - CentreCell
+final class CentreCell: UITableViewCell {
 
-    @IBOutlet private(set) var addressNameContainer: UIStackView!
-    @IBOutlet private var addressNameIconContainer: UIView!
-    @IBOutlet private var nameLabel: UILabel!
-    @IBOutlet private var addressLabel: UILabel!
+    // MARK: - iVars
+    @IBOutlet weak private var dateContainer: UIStackView!
+    @IBOutlet weak private var dateIconContainer: UIView!
+    @IBOutlet weak private var dateLabel: UILabel!
 
-    @IBOutlet private var phoneNumberContainer: UIStackView!
-    @IBOutlet private var phoneNumberIconContainer: UIView!
-    @IBOutlet private var phoneButton: UIButton!
+    @IBOutlet weak private(set) var addressNameContainer: UIStackView!
+    @IBOutlet weak private var addressNameIconContainer: UIView!
+    @IBOutlet weak private var nameLabel: UILabel!
+    @IBOutlet weak private var addressLabel: UILabel!
 
-    @IBOutlet private var vaccineTypesContainer: UIStackView!
-    @IBOutlet private var vaccineTypesLabel: UILabel!
+    @IBOutlet weak private var phoneNumberContainer: UIStackView!
+    @IBOutlet weak private var phoneNumberIconContainer: UIView!
+    @IBOutlet weak private var phoneButton: UIButton!
 
-    @IBOutlet private var vaccineTypesIconContainer: UIView!
-    @IBOutlet private var appointmentsLabel: UILabel!
+    @IBOutlet weak private var vaccineTypesContainer: UIStackView!
+    @IBOutlet weak private var vaccineTypesLabel: UILabel!
 
-    @IBOutlet private var bookingButton: UIButton!
-    @IBOutlet private var cellContentView: UIView!
+    @IBOutlet weak private var vaccineTypesIconContainer: UIView!
+    @IBOutlet weak private var appointmentsLabel: UILabel!
+
+    @IBOutlet weak private var bookingButton: UIButton!
+    @IBOutlet weak private var cellContentView: UIView!
+
+    @IBOutlet weak private var vacineTypeImageView: UIImageView!
 
     private lazy var iconContainers: [UIView] = [
         dateIconContainer,
@@ -82,6 +89,7 @@ class CentreCell: UITableViewCell {
         static let appointmentsLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
     }
 
+    // MARK: - View lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -90,6 +98,7 @@ class CentreCell: UITableViewCell {
         bookingButton.backgroundColor = .royalBlue
         bookingButton.setCornerRadius(Constant.bookingButtonCornerRadius)
         cellContentView.setCornerRadius(Constant.cellContentViewCornerRadius)
+        vacineTypeImageView.image = UIImage(systemName: "cube.box.fill")
     }
 
     func configure(with viewData: CentreViewData) {
@@ -124,18 +133,6 @@ class CentreCell: UITableViewCell {
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo)
     }
 
-    @objc private func didTapAddress() {
-        addressTapHandler?()
-    }
-
-    @objc private func didTapPhoneNumber() {
-        phoneNumberTapHandler?()
-    }
-
-    @objc private func didTapBookButton() {
-        bookingButtonTapHandler?()
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
         resetTextFor([
@@ -149,6 +146,20 @@ class CentreCell: UITableViewCell {
         bookingButton.setTitle(nil, for: .normal)
     }
 
+    // MARK: - Actions
+    @objc private func didTapAddress() {
+        addressTapHandler?()
+    }
+
+    @objc private func didTapPhoneNumber() {
+        phoneNumberTapHandler?()
+    }
+
+    @objc private func didTapBookButton() {
+        bookingButtonTapHandler?()
+    }
+
+    // MARK: - Helpers
     private func createDateText(
         dayText: String?,
         timeText: String?,
