@@ -40,12 +40,13 @@
 		57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673954261E4145004A700D /* ClassNameProtocol.swift */; };
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
 		577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */; };
-		577A7F6C262CA3D000B1D03C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info.plist */; };
+		577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
 		5793482F2621E1E200F8A4A0 /* HomeStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5793482E2621E1E200F8A4A0 /* HomeStatsCell.xib */; };
 		5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */; };
 		579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */; };
 		5793484C262241B900F8A4A0 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793484B262241B900F8A4A0 /* Stats.swift */; };
 		5795BE102633540C00A44849 /* String+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795BE0F2633540C00A44849 /* String+Commons.swift */; };
+		579D713226373A030021CB56 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 579D713126373A030021CB56 /* GoogleService-Info-debug.plist */; };
 		57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */; };
 		57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */; };
 		57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD21D52621041200ED2B95 /* CentresListViewController.swift */; };
@@ -147,12 +148,13 @@
 		57673954261E4145004A700D /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplayable.swift; sourceTree = "<group>"; };
 		577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorDisplayable.swift"; sourceTree = "<group>"; };
-		577A7F6B262CA3D000B1D03C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		5793482E2621E1E200F8A4A0 /* HomeStatsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeStatsCell.xib; sourceTree = "<group>"; };
 		5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsCell.swift; sourceTree = "<group>"; };
 		579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Commons.swift"; sourceTree = "<group>"; };
 		5793484B262241B900F8A4A0 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		5795BE0F2633540C00A44849 /* String+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Commons.swift"; sourceTree = "<group>"; };
+		579D713126373A030021CB56 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
 		57AD21C7261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Commons.swift"; sourceTree = "<group>"; };
 		57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerController+Commons.swift"; sourceTree = "<group>"; };
 		57AD21D52621041200ED2B95 /* CentresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresListViewController.swift; sourceTree = "<group>"; };
@@ -398,7 +400,8 @@
 		57673986261E5AF3004A700D /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				577A7F6B262CA3D000B1D03C /* GoogleService-Info.plist */,
+				579D713126373A030021CB56 /* GoogleService-Info-debug.plist */,
+				577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */,
 				576738BF261E329C004A700D /* AppDelegate.swift */,
 				576738C1261E329C004A700D /* SceneDelegate.swift */,
 				576738CA261E32A2004A700D /* LaunchScreen.storyboard */,
@@ -523,6 +526,7 @@
 				576738B9261E329C004A700D /* Frameworks */,
 				576738BA261E329C004A700D /* Resources */,
 				57613EF8262507C800AB6F2F /* Embed Frameworks */,
+				579D712C263738E20021CB56 /* Firebase Configuration */,
 				DA68646626276624005B2AC2 /* Crashlytics */,
 				577A7F2B262B8AB600B1D03C /* Firebase SPM  */,
 				57B7CD53262E36A60065DD80 /* Build Number */,
@@ -650,8 +654,9 @@
 				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
 				57C401972623929800EFFCA3 /* HomeCountyCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */,
-				577A7F6C262CA3D000B1D03C /* GoogleService-Info.plist in Resources */,
+				577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */,
 				57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */,
+				579D713226373A030021CB56 /* GoogleService-Info-debug.plist in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
 				575CC230262AF4E1008D1869 /* HomeCountySelectionCell.xib in Resources */,
 				57B2BCA32633B254001B3D61 /* Localizable.strings in Resources */,
@@ -696,7 +701,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Fixes binary framework bug, see:\n# https://developer.apple.com/documentation/xcode-release-notes/xcode-12_4-release-notes#Swift-Packages\n# https://github.com/firebase/firebase-ios-sdk/issues/6472\n#\n\necho \"Removing static frameworks from ${TARGET_NAME}.app\"\nfind \"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/\" -name '*.framework' -print0 | while IFS= read -r -d '' fm; do\n    name=$(basename \"${fm}\" .framework)\n    target=\"${fm}/${name}\"\n    echo \"Checking: ${fm}\"\n    if file \"${target}\" | grep -q \"current ar archive\"; then\n        rm -rf \"${fm}\"\n        echo \"Removed static framework: ${fm}\"\n    fi\ndone\n";
+			shellScript = "$SRCROOT/Scripts/firebase-spm.sh\n";
+		};
+		579D712C263738E20021CB56 /* Firebase Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase Configuration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Scripts/set-google-plist.sh\n\n";
 		};
 		57B7CD53262E36A60065DD80 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1008,7 +1031,7 @@
 		576738E7261E32A3004A700D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1021,7 +1044,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose;
+				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
