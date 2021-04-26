@@ -57,11 +57,12 @@ extension RemoteConfiguration {
     }
 
     var maintenanceModeUrl: String? {
-        let configValue = configuration.configValue(forKey: "ios_maintenance_mode_url").stringValue ?? ""
-        guard !configValue.isEmpty else {
+        let configValue = configuration.configValue(forKey: "ios_maintenance_mode_url").stringValue
+        if let value = configValue, !value.isEmpty {
+            return configValue
+        } else {
             return nil
         }
-        return configValue
     }
 
     func countyDataPath(for county: String) -> String {
