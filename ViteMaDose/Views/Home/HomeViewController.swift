@@ -41,14 +41,18 @@ class HomeViewController: UIViewController, Storyboarded {
     }()
 
     private lazy var dataSource = makeDataSource()
-
+    private let remoteConfiguration: RemoteConfiguration = .shared
     // MARK: - Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
 
-        RemoteConfiguration.shared.synchronize { [unowned self] _ in
+        remoteConfiguration.synchronize { [unowned self] _ in
+            if let maintenanceUrlString = self.remoteConfiguration.maintenanceModeUrl {
+                self.presentMaintenancePage(with: maintenanceUrlString)
+                return
+            }
             self.viewModel.load()
         }
     }
@@ -110,6 +114,11 @@ class HomeViewController: UIViewController, Storyboarded {
         let config = SFSafariViewController.Configuration()
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
+    }
+
+    private func presentMaintenancePage(with urlString: String) {
+        let maintenanceViewController = MaintenanceViewController(urlString: urlString)
+        present(maintenanceViewController, animated: true)
     }
 }
 
