@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PartnerLogo: String, CaseIterable {
+enum PartnerLogo: String, CaseIterable, Equatable {
     case doctolib = "Doctolib"
     case maiia = "Maiia"
     case ordoclic = "Ordoclic"
@@ -16,33 +16,33 @@ enum PartnerLogo: String, CaseIterable {
 
     var image: UIImage? {
         switch self {
-            case .doctolib:
-                return UIImage(named: PartnerLogo.doctolib.rawValue)
-            case .maiia:
-                return UIImage(named: PartnerLogo.maiia.rawValue)
-            case .ordoclic:
-                return UIImage(named: PartnerLogo.ordoclic.rawValue)
-            case .keldoc:
-                return UIImage(named: PartnerLogo.keldoc.rawValue)
-            case .maPharma:
-                return UIImage(named: PartnerLogo.maPharma.rawValue)
+        case .doctolib:
+            return UIImage(named: PartnerLogo.doctolib.rawValue)
+        case .maiia:
+            return UIImage(named: PartnerLogo.maiia.rawValue)
+        case .ordoclic:
+            return UIImage(named: PartnerLogo.ordoclic.rawValue)
+        case .keldoc:
+            return UIImage(named: PartnerLogo.keldoc.rawValue)
+        case .maPharma:
+            return UIImage(named: PartnerLogo.maPharma.rawValue)
         }
     }
 
     init?(rawValue: String) {
         switch rawValue {
-            case PartnerLogo.doctolib.rawValue:
-                self = .doctolib
-            case PartnerLogo.maiia.rawValue:
-                self = .maiia
-            case PartnerLogo.ordoclic.rawValue:
-                self = .ordoclic
-            case PartnerLogo.keldoc.rawValue:
-                self = .keldoc
-            case PartnerLogo.maPharma.rawValue:
-                self = .maPharma
-            default:
-                return nil
+        case PartnerLogo.doctolib.rawValue:
+            self = .doctolib
+        case PartnerLogo.maiia.rawValue:
+            self = .maiia
+        case PartnerLogo.ordoclic.rawValue:
+            self = .ordoclic
+        case PartnerLogo.keldoc.rawValue:
+            self = .keldoc
+        case PartnerLogo.maPharma.rawValue:
+            self = .maPharma
+        default:
+            return nil
         }
     }
 }

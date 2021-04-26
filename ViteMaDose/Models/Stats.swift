@@ -9,28 +9,32 @@ import Foundation
 
 // MARK: - StatsValue
 
-struct StatsValue: Codable {
+struct StatsValue: Codable, Equatable {
     let disponibles: Int
     let total: Int
     let creneaux: Int
 
+    var pourcentage: Double? {
+        total > 0 ? (Double(disponibles) * 100) / Double(total) : nil
+    }
+
     enum CodingKeys: String, CodingKey {
-        case disponibles = "disponibles"
-        case total = "total"
-        case creneaux = "creneaux"
+        case disponibles
+        case total
+        case creneaux
     }
 }
 
-enum StatsKey {
+enum StatsKey: Equatable {
     case allCounties
     case county(Int)
 
     var rawValue: String {
         switch self {
-            case .allCounties:
-                return "tout_departement"
-            case let .county(code):
-                return String(code)
+        case .allCounties:
+            return "tout_departement"
+        case let .county(code):
+            return String(code)
         }
     }
 }

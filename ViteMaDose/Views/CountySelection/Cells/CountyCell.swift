@@ -28,7 +28,7 @@ class CountyCell: UITableViewCell {
         static let countyCodeTextColor: UIColor = .white
         static let countyNameTextColor: UIColor = .label
         static let countyCodeBackgroundColor: UIColor = .royalBlue
-        static let cellBackgrounColor: UIColor = .tertiarySystemBackground
+        static let cellBackgroundColor: UIColor = .tertiarySystemBackground
         static let labelsFont: UIFont = .rounded(ofSize: 18, weight: .bold)
         static let viewsCornerRadius: CGFloat = 15
     }
@@ -37,7 +37,7 @@ class CountyCell: UITableViewCell {
         contentView.backgroundColor = .athensGray
 
         countyCodeContainerView.backgroundColor = Constant.countyCodeBackgroundColor
-        countyContainerView.backgroundColor = Constant.cellBackgrounColor
+        countyContainerView.backgroundColor = Constant.cellBackgroundColor
 
         countyCodeContainerView.setCornerRadius(Constant.viewsCornerRadius)
         countyContainerView.setCornerRadius(Constant.viewsCornerRadius)

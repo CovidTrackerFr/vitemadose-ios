@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - CentreViewDataProvider
 protocol CentreViewDataProvider {
     var dayText: String? { get }
     var timeText: String? { get }
@@ -15,12 +16,13 @@ protocol CentreViewDataProvider {
     var phoneText: String? { get }
     var bookingButtonText: String { get }
     var vaccineTypesText: String? { get }
-    var dosesCount: Int? { get }
+    var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var url: URL? { get }
     var partnerLogo: UIImage? { get }
 }
 
+// MARK: - CentreViewData
 struct CentreViewData: CentreViewDataProvider, Hashable {
     let dayText: String?
     let timeText: String?
@@ -29,40 +31,45 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
     let phoneText: String?
     let bookingButtonText: String
     let vaccineTypesText: String?
-    let dosesCount: Int?
+    let appointmentsCount: Int?
     let isAvailable: Bool
     let url: URL?
     let partnerLogo: UIImage?
 }
 
-class CentreCell: UITableViewCell {
-    @IBOutlet private var dateContainer: UIStackView!
-    @IBOutlet private var dateIconContainer: UIView!
-    @IBOutlet private var dateLabel: UILabel!
+// MARK: - CentreCell
+final class CentreCell: UITableViewCell {
 
-    @IBOutlet private(set) var addressNameContainer: UIStackView!
-    @IBOutlet private var addressNameIconContainer: UIView!
-    @IBOutlet private var nameLabel: UILabel!
-    @IBOutlet private var addressLabel: UILabel!
+    // MARK: - iVars
+    @IBOutlet weak private var dateContainer: UIStackView!
+    @IBOutlet weak private var dateIconContainer: UIView!
+    @IBOutlet weak private var dateLabel: UILabel!
 
-    @IBOutlet private var phoneNumberContainer: UIStackView!
-    @IBOutlet private var phoneNumberIconContainer: UIView!
-    @IBOutlet private var phoneButton: UIButton!
+    @IBOutlet weak private(set) var addressNameContainer: UIStackView!
+    @IBOutlet weak private var addressNameIconContainer: UIView!
+    @IBOutlet weak private var nameLabel: UILabel!
+    @IBOutlet weak private var addressLabel: UILabel!
 
-    @IBOutlet private var vaccineTypesContainer: UIStackView!
-    @IBOutlet private var vaccineTypesLabel: UILabel!
+    @IBOutlet weak private var phoneNumberContainer: UIStackView!
+    @IBOutlet weak private var phoneNumberIconContainer: UIView!
+    @IBOutlet weak private var phoneButton: UIButton!
 
-    @IBOutlet private var vaccineTypesIconContainer: UIView!
-    @IBOutlet private var dosesLabel: UILabel!
+    @IBOutlet weak private var vaccineTypesContainer: UIStackView!
+    @IBOutlet weak private var vaccineTypesLabel: UILabel!
 
-    @IBOutlet private var bookingButton: UIButton!
-    @IBOutlet private var cellContentView: UIView!
+    @IBOutlet weak private var vaccineTypesIconContainer: UIView!
+    @IBOutlet weak private var appointmentsLabel: UILabel!
+
+    @IBOutlet weak private var bookingButton: UIButton!
+    @IBOutlet weak private var cellContentView: UIView!
+
+    @IBOutlet weak private var vacineTypeImageView: UIImageView!
 
     private lazy var iconContainers: [UIView] = [
         dateIconContainer,
         addressNameIconContainer,
         phoneNumberIconContainer,
-        vaccineTypesIconContainer,
+        vaccineTypesIconContainer
     ]
 
     var addressTapHandler: (() -> Void)?
@@ -79,9 +86,10 @@ class CentreCell: UITableViewCell {
         static let labelPrimaryFont: UIFont = .systemFont(ofSize: 16, weight: .medium)
         static let labelPrimaryColor: UIColor = .label
         static let labelSecondaryColor: UIColor = .secondaryLabel
-        static let dosesLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        static let appointmentsLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
     }
 
+    // MARK: - View lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -90,6 +98,7 @@ class CentreCell: UITableViewCell {
         bookingButton.backgroundColor = .royalBlue
         bookingButton.setCornerRadius(Constant.bookingButtonCornerRadius)
         cellContentView.setCornerRadius(Constant.cellContentViewCornerRadius)
+        vacineTypeImageView.image = UIImage(systemName: "cube.box.fill")
     }
 
     func configure(with viewData: CentreViewData) {
@@ -121,9 +130,23 @@ class CentreCell: UITableViewCell {
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureDosesLabel(dosesCount: viewData.dosesCount, partnerLogo: viewData.partnerLogo)
+        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetTextFor([
+            dateLabel,
+            nameLabel,
+            addressLabel,
+            vaccineTypesLabel,
+            appointmentsLabel
+        ])
+        phoneButton.setTitle(nil, for: .normal)
+        bookingButton.setTitle(nil, for: .normal)
+    }
+
+    // MARK: - Actions
     @objc private func didTapAddress() {
         addressTapHandler?()
     }
@@ -136,19 +159,7 @@ class CentreCell: UITableViewCell {
         bookingButtonTapHandler?()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        resetTextFor([
-            dateLabel,
-            nameLabel,
-            addressLabel,
-            vaccineTypesLabel,
-            dosesLabel
-        ])
-        phoneButton.setTitle(nil, for: .normal)
-        bookingButton.setTitle(nil, for: .normal)
-    }
-
+    // MARK: - Helpers
     private func createDateText(
         dayText: String?,
         timeText: String?,
@@ -156,24 +167,24 @@ class CentreCell: UITableViewCell {
     ) -> NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.labelPrimaryColor,
-            NSAttributedString.Key.font: Constant.labelPrimaryFont,
+            NSAttributedString.Key.font: Constant.labelPrimaryFont
         ]
 
         guard isAvailable else {
             return NSMutableAttributedString(
-                string: "Aucun rendez-vous",
+                string: Localization.Location.no_appointment,
                 attributes: attributes
             )
         }
 
         guard let dayText = dayText, let timeText = timeText else {
             return NSMutableAttributedString.init(
-                string: "Date Indisponible",
+                string: Localization.Location.unavailable_date,
                 attributes: attributes
             )
         }
 
-        let dateString = "Le \(dayText) à partir de \(timeText)"
+        let dateString = Localization.Location.date.format(dayText, timeText)
         let dateText = NSMutableAttributedString(
             string: dateString,
             attributes: attributes
@@ -185,34 +196,34 @@ class CentreCell: UITableViewCell {
         return dateText
     }
 
-    private func configureDosesLabel(
-        dosesCount: Int?,
+    private func configureAppointmentsLabel(
+        appointmentsCount: Int?,
         partnerLogo: UIImage?
     ) {
         let attributes = [
-            NSAttributedString.Key.font: Constant.dosesLabelFont,
-            NSAttributedString.Key.foregroundColor: Constant.labelSecondaryColor,
+            NSAttributedString.Key.font: Constant.appointmentsLabelFont,
+            NSAttributedString.Key.foregroundColor: Constant.labelSecondaryColor
         ]
 
-        guard let dosesCount = dosesCount, dosesCount > 0 else {
-            dosesLabel.isHidden = true
+        guard let appointmentsCount = appointmentsCount, appointmentsCount > 0 else {
+            appointmentsLabel.isHidden = true
             return
         }
 
-        dosesLabel.isHidden = false
-        let dosesText: String = dosesCount > 1 ? String("\(dosesCount) doses ") : String("\(dosesCount) dose ")
+        appointmentsLabel.isHidden = false
+        let appointmentsText: String = Localization.Locations.appointments.format(appointmentsCount) + String.space
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
-            dosesLabel.attributedText = NSAttributedString(string: dosesText, attributes: attributes)
+            appointmentsLabel.attributedText = NSAttributedString(string: appointmentsText, attributes: attributes)
             return
         }
 
         let attachmentLogo = NSTextAttachment(rightImage: logo, height: 20, offset: 10)
         let logoString = NSAttributedString(attachment: attachmentLogo)
-        let dosesAndLogoString = NSMutableAttributedString(string: dosesText, attributes: attributes)
-        dosesAndLogoString.append(logoString)
+        let appointmentsAndLogoString = NSMutableAttributedString(string: appointmentsText, attributes: attributes)
+        appointmentsAndLogoString.append(logoString)
 
-        dosesLabel.attributedText = dosesAndLogoString
+        appointmentsLabel.attributedText = appointmentsAndLogoString
     }
 
     private func configurePhoneNumberView(_ viewData: CentreViewData) {
@@ -226,9 +237,9 @@ class CentreCell: UITableViewCell {
         let phoneButtonAttributedText = NSMutableAttributedString(
             string: phoneNumber,
             attributes: [
-                NSAttributedString.Key.foregroundColor : Constant.labelPrimaryColor,
-                NSAttributedString.Key.font : Constant.labelPrimaryFont,
-                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                NSAttributedString.Key.foregroundColor: Constant.labelPrimaryColor,
+                NSAttributedString.Key.font: Constant.labelPrimaryFont,
+                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
             ]
         )
 
@@ -252,8 +263,8 @@ class CentreCell: UITableViewCell {
         let bookingButtonAttributedText = NSMutableAttributedString(
             string: viewData.bookingButtonText,
             attributes: [
-                NSAttributedString.Key.foregroundColor : UIColor.white,
-                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold),
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold)
             ]
         )
 
@@ -270,10 +281,10 @@ class CentreCell: UITableViewCell {
     }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {
-        views.forEach{ $0.setCornerRadius(radius) }
+        views.forEach { $0.setCornerRadius(radius) }
     }
 
     private func resetTextFor(_ labels: [UILabel]) {
-        labels.forEach{ $0.text = nil }
+        labels.forEach { $0.text = nil }
     }
 }

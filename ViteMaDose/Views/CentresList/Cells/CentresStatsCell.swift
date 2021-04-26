@@ -8,13 +8,13 @@
 import UIKit
 
 protocol CentresStatsCellViewDataProvider {
-    var dosesCount: Int { get }
+    var appointmentsCount: Int { get }
     var availableCentresCount: Int { get }
     var allCentresCount: Int { get }
 }
 
 struct CentresStatsCellViewData: CentresStatsCellViewDataProvider, Hashable {
-    let dosesCount: Int
+    let appointmentsCount: Int
     let availableCentresCount: Int
     let allCentresCount: Int
 }
@@ -41,15 +41,6 @@ class CentresStatsCell: UITableViewCell {
         static let descriptionColor: UIColor = .secondaryLabel
 
         static let detailViewsCornerRadius: CGFloat = 15
-
-        // TODO: Localisation
-        static func availableCentresText(_ count: Int) -> String {
-            "\(count > 1 ? "Centres" : "Centre") avec rendez-vous"
-        }
-        // TODO: Localisation
-        static func allCentresText(_ count: Int) -> String {
-            "\(count > 1 ? "Centres trouvés" : "Centre trouvé") au total"
-        }
     }
 
     override func awakeFromNib() {
@@ -67,17 +58,17 @@ class CentresStatsCell: UITableViewCell {
     private func configureAvailableCentresView(_ viewData: CentresStatsCellViewData) {
         let checkMarkIcon =  UIImage(systemName: "checkmark")
         let crossMarkIcon = UIImage(systemName: "xmark")
-        let hasDoses = viewData.dosesCount > 0
+        let hasAppointments = viewData.appointmentsCount > 0
 
-        availableCentresIconImageView.image = hasDoses ? checkMarkIcon : crossMarkIcon
+        availableCentresIconImageView.image = hasAppointments ? checkMarkIcon : crossMarkIcon
         availableCentresIconImageView.image = availableCentresIconImageView.image?.withTintColor(.white)
-        availableCentresIconContainer.backgroundColor = hasDoses ? .systemGreen : .systemRed
+        availableCentresIconContainer.backgroundColor = hasAppointments ? .systemGreen : .systemRed
 
         availableCentresIconContainer.setCornerRadius(availableCentresIconContainer.bounds.width / 2)
         availableCentresCountView.setCornerRadius(Constant.detailViewsCornerRadius)
 
-        availableCentresCountLabel.text = String(viewData.availableCentresCount)
-        availableCentresDescriptionLabel.text = Constant.availableCentresText(viewData.availableCentresCount)
+        availableCentresCountLabel.text = viewData.availableCentresCount.formattedWithSeparator
+        availableCentresDescriptionLabel.text = Localization.Locations.available_locations.format(viewData.availableCentresCount)
 
         availableCentresCountLabel.font = Constant.titleFont
         availableCentresCountLabel.textColor = Constant.titleColor
@@ -90,8 +81,8 @@ class CentresStatsCell: UITableViewCell {
         allCentresIconContainer.setCornerRadius(allCentresIconContainer.bounds.width / 2)
         allCentresCountView.setCornerRadius(Constant.detailViewsCornerRadius)
 
-        allCentresCountLabel.text = String(viewData.allCentresCount)
-        allCentresDescriptionLabel.text = Constant.allCentresText(viewData.allCentresCount)
+        allCentresCountLabel.text = viewData.allCentresCount.formattedWithSeparator
+        allCentresDescriptionLabel.text = Localization.Locations.all_locations.format(viewData.allCentresCount)
 
         allCentresCountLabel.font = Constant.titleFont
         allCentresDescriptionLabel.textColor = Constant.titleColor

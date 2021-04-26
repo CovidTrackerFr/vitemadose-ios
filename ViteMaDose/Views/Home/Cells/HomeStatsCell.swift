@@ -11,6 +11,7 @@ enum StatsDataType: Hashable {
     case allCentres(Int)
     case centresWithAvailabilities(Int)
     case allAvailabilities(Int)
+    case percentageAvailabilities(Double?)
     case externalMap
 }
 
@@ -78,34 +79,47 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
         icon = dataType.iconImage
 
         switch dataType {
-            case let .allCentres(count):
-                title = NSMutableAttributedString(string: String(count))
-                description = "Centres trouvés en France"
-                iconContainerColor = .systemOrange
-            case let .centresWithAvailabilities(count):
-                title = NSMutableAttributedString(string: String(count))
-                // TODO: Localisation
-                description = "\(count > 1 ? "Centres" : "Centre") avec rendez-vous disponibles"
-                iconContainerColor = .systemGreen
-            case let .allAvailabilities(count):
-                title = NSMutableAttributedString(string: String(count))
-                description = "Créneaux disponibles"
-                iconContainerColor = .systemBlue
-            case .externalMap:
-                let imageAttachment = NSTextAttachment()
-                imageAttachment.image = UIImage(
-                    systemName: "arrow.up.right",
-                    withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
-                )?.withTintColor(.label, renderingMode: .alwaysOriginal)
+        case let .allCentres(count):
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
+            description = Localization.Home.Stats.all_locations
+            iconContainerColor = .systemOrange
+        case let .centresWithAvailabilities(count):
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
+            description = Localization.Home.Stats.locations_with_availabilities
+            iconContainerColor = .systemGreen
+        case let .allAvailabilities(count):
+            title = NSMutableAttributedString(string: count.formattedWithSeparator)
+            description = Localization.Home.Stats.all_availabilities
+            iconContainerColor = .royalBlue
+        case let .percentageAvailabilities(count):
+            let formattedCount = count?.formattedWithPercentage ?? "-"
+            title = NSMutableAttributedString(string: formattedCount)
+            description = Localization.Home.Stats.available_locations_percentage
+            iconContainerColor = .systemBlue
+        case .externalMap:
+            let imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(
+                systemName: "arrow.up.right",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+            )?.withTintColor(.label, renderingMode: .alwaysOriginal)
 
-                let fullString = NSMutableAttributedString(string: "Ouvrir la carte des centres ")
-                fullString.append(NSAttributedString(attachment: imageAttachment))
-                title = fullString
-                description = nil
-                iconContainerColor = .systemRed
+            let fullString = NSMutableAttributedString(string: Localization.Home.open_map + String.space)
+            fullString.append(NSAttributedString(attachment: imageAttachment))
+            title = fullString
+            description = nil
+            iconContainerColor = .systemRed
         }
     }
 
+    /// Custom equality implementation to compare the title strings only
+    static func == (lhs: HomeCellStatsViewData, rhs: HomeCellStatsViewData) -> Bool {
+        return
+            lhs.title.string == rhs.title.string &&
+            lhs.description == rhs.description &&
+            lhs.icon == rhs.icon &&
+            lhs.iconContainerColor == rhs.iconContainerColor &&
+            lhs.dataType == rhs.dataType
+    }
 }
 
 private extension StatsDataType {
@@ -115,18 +129,19 @@ private extension StatsDataType {
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
 
         switch self {
-            case .allCentres:
-                imageName = "magnifyingglass"
-            case .centresWithAvailabilities:
-                imageName = "checkmark"
-            case .allAvailabilities:
-                imageName = "calendar"
-            case .externalMap:
-                imageName = "mappin"
+        case .allCentres:
+            imageName = "magnifyingglass"
+        case .centresWithAvailabilities:
+            imageName = "checkmark"
+        case .allAvailabilities:
+            imageName = "calendar"
+        case .percentageAvailabilities:
+            imageName = "percent"
+        case .externalMap:
+            imageName = "mappin"
         }
 
         let image = UIImage(systemName: imageName, withConfiguration: configuration)
         return image?.withTintColor(.white, renderingMode: .alwaysOriginal)
     }
-
 }

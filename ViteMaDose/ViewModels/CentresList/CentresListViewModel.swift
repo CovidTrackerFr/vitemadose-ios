@@ -104,12 +104,12 @@ class CentresListViewModel {
         let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
         allVaccinationCentres = availableCentres + unavailableCentres
 
-        let dosesCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
         let vaccinationCentreCellsViewData = allVaccinationCentres.map({ getVaccinationCentreViewData($0) })
 
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
-                withDoses: dosesCount,
+                withAppointmentsCount: appointmentsCount,
                 andCountyName: county.nomDepartement ?? ""
             ),
             topMargin: 25,
@@ -117,14 +117,14 @@ class CentresListViewModel {
         )
 
         let statsCellViewData = CentresStatsCellViewData(
-            dosesCount: dosesCount,
+            appointmentsCount: appointmentsCount,
             availableCentresCount: availableCentres.count,
             allCentresCount: allVaccinationCentres.count
         )
 
         headingCells = [
             .title(mainTitleViewData),
-            .stats(statsCellViewData),
+            .stats(statsCellViewData)
         ]
 
         guard !isEmpty else {
@@ -152,9 +152,8 @@ class CentresListViewModel {
 
         let lastUpdateDay = lastUpdate.toString(.date(.short))
         let lastUpdateTime = lastUpdate.toString(.time(.short))
-        footerText = "Dernière mise à jour le \(lastUpdateDay) à \(lastUpdateTime)"
+        footerText = Localization.Location.last_update.format(lastUpdateDay, lastUpdateTime)
     }
-
 
     func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var url: URL?
@@ -164,23 +163,18 @@ class CentresListViewModel {
 
         let isAvailable = centre.prochainRdv != nil
 
-        var dayString: String?
-        var timeString: String?
-
-        if
-            let dateString = centre.prochainRdv,
-            let date = dateString.toDate(nil, region: region)
-        {
-            dayString = date.toString(.date(.long))
-            timeString = date.toString(.time(.short))
-        }
+        let nextAppointment = centre.prochainRdv
+        let dayString = nextAppointment?.toString(with: .date(.long), region: region)
+        let timeString = nextAppointment?.toString(with: .time(.short), region: region)
 
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable ? "Prendre rendez-vous" : "Vérifier ce centre"
+        let bookingButtonText = isAvailable
+            ? Localization.Location.book_button + String.space
+            : Localization.Location.verify_button + String.space
 
         var phoneText: String?
         if let phoneNumber = centre.metadata?.phoneNumber {
@@ -191,8 +185,7 @@ class CentresListViewModel {
                     ignoreType: true
                 )
                 phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
-            }
-            catch {
+            } catch {
                 phoneText = phoneNumber
             }
         }
@@ -200,12 +193,12 @@ class CentresListViewModel {
         return CentreViewData(
             dayText: dayString,
             timeText: timeString,
-            addressNameText: centre.nom ?? "Nom du centre indisponible",
-            addressText: centre.metadata?.address ?? "Addresse indisponible",
+            addressNameText: centre.nom ?? Localization.Location.unavailable_name,
+            addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
             phoneText: phoneText,
             bookingButtonText: bookingButtonText,
-            vaccineTypesText: centre.vaccineType?.joined(separator: ", "),
-            dosesCount: centre.appointmentCount,
+            vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
+            appointmentsCount: centre.appointmentCount,
             isAvailable: isAvailable,
             url: url,
             partnerLogo: partnerLogo
@@ -231,12 +224,13 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] data, status in
+        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] result in
             self?.isLoading = false
 
-            if let vaccinationCentres = data {
+            switch result {
+            case let .success(vaccinationCentres):
                 self?.handleLoad(with: vaccinationCentres, animated: animated)
-            } else {
+            case let .failure(status):
                 self?.handleError(status)
             }
         }
@@ -251,7 +245,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
         else {
             return nil
         }
-        return (name, centre.metadata?.address, lat,  long)
+        return (name, centre.metadata?.address, lat, long)
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
