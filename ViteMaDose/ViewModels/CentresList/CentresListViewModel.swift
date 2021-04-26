@@ -224,12 +224,13 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] data, status in
+        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] result in
             self?.isLoading = false
 
-            if let vaccinationCentres = data {
+            switch result {
+            case let .success(vaccinationCentres):
                 self?.handleLoad(with: vaccinationCentres, animated: animated)
-            } else {
+            case let .failure(status):
                 self?.handleError(status)
             }
         }

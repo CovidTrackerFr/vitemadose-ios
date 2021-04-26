@@ -110,6 +110,16 @@ struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
             iconContainerColor = .systemRed
         }
     }
+
+    /// Custom equality implementation to compare the title strings only
+    static func == (lhs: HomeCellStatsViewData, rhs: HomeCellStatsViewData) -> Bool {
+        return
+            lhs.title.string == rhs.title.string &&
+            lhs.description == rhs.description &&
+            lhs.icon == rhs.icon &&
+            lhs.iconContainerColor == rhs.iconContainerColor &&
+            lhs.dataType == rhs.dataType
+    }
 }
 
 private extension StatsDataType {
@@ -134,5 +144,4 @@ private extension StatsDataType {
         let image = UIImage(systemName: imageName, withConfiguration: configuration)
         return image?.withTintColor(.white, renderingMode: .alwaysOriginal)
     }
-
 }

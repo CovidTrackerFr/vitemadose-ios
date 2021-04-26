@@ -20,6 +20,7 @@ protocol CountySelectionViewModelDelegate: class {
 
 class CountySelectionViewModel: CountySelectionViewModelProvider {
     private let apiService: APIServiceProvider
+    private let userDefaults: UserDefaults
     weak var delegate: CountySelectionViewModelDelegate?
 
     private var allCounties: [County] = []
@@ -32,10 +33,12 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
 
     required init(
         apiService: APIServiceProvider = APIService(),
-        counties: Counties
+        counties: Counties,
+        userDefaults: UserDefaults = .shared
     ) {
         self.apiService = apiService
         self.allCounties = counties
+        self.userDefaults = userDefaults
 
         delegate?.reloadTableView(with: counties)
     }
@@ -64,7 +67,7 @@ class CountySelectionViewModel: CountySelectionViewModelProvider {
             return
         }
 
-        UserDefaults.lastSelectedCountyCode = county.codeDepartement
+        userDefaults.lastSelectedCountyCode = county.codeDepartement
         delegate?.dismissViewController(with: county)
     }
 }
