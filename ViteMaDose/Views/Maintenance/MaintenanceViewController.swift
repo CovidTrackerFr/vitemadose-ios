@@ -16,9 +16,12 @@ class MaintenanceViewController: UIViewController {
         return webView
     }()
 
-    init(urlString: String?) {
+    /// Custom init with `urlString`
+    /// If the URL is invalid, it will show a default local maintenance page
+    /// Please see `Resources/maintenance.html`
+    /// - Parameter urlString: maintenance page URL
+    init(urlString: String) {
         if
-            let urlString = urlString,
             let url = URL(string: urlString),
             url.isValid
         {
@@ -41,6 +44,7 @@ class MaintenanceViewController: UIViewController {
         configureWebView()
 
         guard let url = maintenanceUrl else {
+            // Fallback
             loadLocalMaintenanceHTML()
             return
         }
