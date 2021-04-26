@@ -23,17 +23,16 @@ struct RemoteConfiguration {
         configuration.configSettings = settings
     }
 
-    func synchronize(completion: @escaping (APIResponseStatus) -> Void) {
-        configuration.fetch(withExpirationDuration: 0) { (_, error) in
-            guard error == nil else {
-                print("Error while fetching remote configuration (\(error.debugDescription)).")
-                completion(.error)
-                return
+    func synchronize(completion: @escaping (Result<Void, Error>) -> Void) {
+        configuration.fetch(withExpirationDuration: 0) { _, error in
+            if let error = error {
+                print("Error while fetching remote configuration (\(error.localizedDescription)).")
+                completion(.failure(error))
+            } else {
+                configuration.activate()
+                print("[RemoteConfiguration] Successfully fetched remote configuration.")
+                completion(.success(()))
             }
-
-            configuration.activate()
-            print("[RemoteConfiguration] Successfully fetched remote configuration.")
-            completion(.ok)
         }
     }
 }
