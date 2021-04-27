@@ -116,12 +116,13 @@ class CreditViewModel: CreditViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchContributors { [weak self] data, status in
+        apiService.fetchContributors { [weak self] result in
             self?.isLoading = false
 
-            if let credits = data {
+            switch result {
+            case let .success(credits):
                 self?.handleLoad(with: credits)
-            } else {
+            case let .failure(status):
                 self?.handleError(status)
             }
         }

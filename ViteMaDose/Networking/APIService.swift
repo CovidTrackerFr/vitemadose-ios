@@ -16,7 +16,7 @@ protocol APIServiceProvider {
     @discardableResult
     func fetchStats(completion: @escaping (Result<Stats, APIResponseStatus>) -> Void) -> APIRequest
     @discardableResult
-    func fetchContributors(completion: @escaping (Credits?, APIResponseStatus) -> Void) -> APIRequest
+    func fetchContributors(completion: @escaping (Result<Credits, APIResponseStatus>) -> Void) -> APIRequest
 }
 
 struct APIService: APIServiceProvider {
@@ -72,7 +72,7 @@ struct APIService: APIServiceProvider {
         }
     }
 
-    func fetchContributors(completion: @escaping (Credits?, APIResponseStatus) -> Void) -> APIRequest {
+    func fetchContributors(completion: @escaping (Result<Credits, APIResponseStatus>) -> Void) -> APIRequest {
         let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
         return APIRequest(
             "GET",
@@ -80,7 +80,11 @@ struct APIService: APIServiceProvider {
             configuration: configuration
         ).execute(Credits.self) { data, status in
             DispatchQueue.main.async {
-                completion(data, status)
+                if let data = data {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(status))
+                }
             }
         }
     }
