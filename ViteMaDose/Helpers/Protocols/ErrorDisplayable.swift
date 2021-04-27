@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ErrorDisplayable: class {
+protocol ErrorDisplayable: AnyObject {
     func presentRetryableAndCancellableError(
         error: Error,
         retryHandler:  @escaping (_: UIAlertAction) -> Void,

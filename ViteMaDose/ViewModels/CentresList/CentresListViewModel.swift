@@ -31,7 +31,7 @@ protocol CentresListViewModelProvider {
     func bookingLink(at indexPath: IndexPath) -> URL?
 }
 
-protocol CentresListViewModelDelegate: class {
+protocol CentresListViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentLoadError(_ error: Error)

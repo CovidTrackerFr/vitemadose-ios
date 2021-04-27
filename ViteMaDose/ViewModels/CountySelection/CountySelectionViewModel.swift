@@ -13,7 +13,7 @@ protocol CountySelectionViewModelProvider {
     func didSelectCell(at indexPath: IndexPath)
 }
 
-protocol CountySelectionViewModelDelegate: class {
+protocol CountySelectionViewModelDelegate: AnyObject {
     func reloadTableView(with counties: Counties)
     func dismissViewController(with county: County)
 }
