@@ -18,9 +18,8 @@ extension String {
     /// If parsing fails, it will try to parse as an `ISO` date as a fallback
     /// - Parameter region: custom option `Region`
     /// - Returns: optional `Date`
-    func toString(with style: DateToStringStyles, region: Region) -> String? {
-        let date = toDate(nil, region: region) ?? toISODate(nil, region: region)
-        return date?.toString(style)
+    func toDate(region: Region) -> DateInRegion? {
+        return toDate(nil, region: region) ?? toISODate(nil, region: region)
     }
 
     var localized: String {

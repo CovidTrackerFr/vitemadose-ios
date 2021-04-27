@@ -184,9 +184,9 @@ class CentresListViewModel {
 
         let isAvailable = centre.prochainRdv != nil
 
-        let nextAppointment = centre.prochainRdv
-        let dayString = nextAppointment?.toString(with: .date(.long), region: region)
-        let timeString = nextAppointment?.toString(with: .time(.short), region: region)
+        let nextAppointment = centre.prochainRdv?.toDate(region: region)
+        let dayString = nextAppointment?.toString(.date(.long))
+        let timeString = nextAppointment?.toString(.time(.short))
 
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
@@ -308,16 +308,16 @@ extension CentresListViewModel {
 
     func auPlusProche(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
         // TODO: Calculate by distance
-        guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
-              let rdv2 = centre2.prochainRdv?.toDate(nil, region: region) else {
+        guard let rdv1 = centre1.prochainRdv?.toDate(region: region),
+              let rdv2 = centre2.prochainRdv?.toDate(region: region) else {
             return false
         }
         return rdv1.isBeforeDate(rdv2, granularity: .second)
     }
 
     func auPlusVite(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
-        guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
-              let rdv2 = centre2.prochainRdv?.toDate(nil, region: region) else {
+        guard let rdv1 = centre1.prochainRdv?.toDate(region: region),
+              let rdv2 = centre2.prochainRdv?.toDate(region: region) else {
             return false
         }
         return rdv1.isBeforeDate(rdv2, granularity: .second)
