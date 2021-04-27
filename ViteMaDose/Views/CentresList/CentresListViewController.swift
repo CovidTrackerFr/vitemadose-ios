@@ -297,10 +297,10 @@ extension CentresListViewController: UIGestureRecognizerDelegate {
 }
 
 extension CentresListViewController: CentresListViewControllerDelegate {
-    
+
     func didChange(mode: CentresSortOrder) {
         viewModel.sort = mode
         viewModel.sort(animated: true)
     }
-    
+
 }

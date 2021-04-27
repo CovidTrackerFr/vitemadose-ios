@@ -39,36 +39,33 @@ struct CentresSortingCellViewData: CentresSortingCellViewDataProvider, Hashable 
 
 class CentresTitleCell: HomeTitleCell {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
+
     weak var delegate: CentresListViewControllerDelegate?
-    
+
     private enum Constant {
         static let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
         static let titleColor: UIColor = .label
 
         static let highlightedDosesTextColor: UIColor = .systemGreen
         static let highlightedCountyTextColor: UIColor = .mandy
-
-        static let auPlusProcheText = "Au plus proche"
-        static let auPlusViteText = "Au plus vite"
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         segmentedControl.setBackgroundImage(UIImage(color: .white, size: CGSize(width: 1, height: 16)), for: .normal, barMetrics: .default)
         segmentedControl.setBackgroundImage(UIImage(color: .royalBlue, size: CGSize(width: 1, height: 16)), for: .selected, barMetrics: .default)
-        
+
         segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.label], for: .normal)
         segmentedControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        
-        segmentedControl.setTitle(Constant.auPlusProcheText, forSegmentAt: 0)
-        segmentedControl.setTitle(Constant.auPlusViteText, forSegmentAt: 1)
+
+        segmentedControl.setTitle(Localization.Locations.closest, forSegmentAt: 0)
+        segmentedControl.setTitle(Localization.Locations.quickest, forSegmentAt: 1)
     }
-    
+
     override func configure(with viewData: HomeTitleCellViewDataProvider) {
         super.configure(with: viewData)
-        
+
         if let viewData = viewData as? CentresSortingCellViewData {
             segmentedControl.selectedSegmentIndex = viewData.mode.rawValue
             segmentedControl.isHidden = !viewData.showSelector
@@ -76,7 +73,7 @@ class CentresTitleCell: HomeTitleCell {
             segmentedControl.isHidden = true
         }
     }
-    
+
     @IBAction func sortingSegmentChanged(_ sender: Any) {
         delegate?.didChange(mode: segmentedControl.selectedSegmentIndex == 0 ? .auPlusProche : .auPlusVite)
     }

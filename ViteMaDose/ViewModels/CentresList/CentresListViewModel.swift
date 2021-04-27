@@ -76,7 +76,7 @@ class CentresListViewModel {
 
     var county: County
     var vaccinationCentres: VaccinationCentres?
-    
+
     var sort: CentresSortOrder = .auPlusVite
 
     weak var delegate: CentresListViewModelDelegate?
@@ -111,16 +111,16 @@ class CentresListViewModel {
         let availableCentres = vaccinationCentres?.centresDisponibles ?? []
         let unavailableCentres = vaccinationCentres?.centresIndisponibles ?? []
         let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
-        
+
         let sortedAvailableCentres = availableCentres.sorted(by: { centre1, centre2 in
             switch sort {
-                case .auPlusProche:
-                    return auPlusProche(centre1, centre2)
-                case .auPlusVite:
-                    return auPlusVite(centre1, centre2)
+            case .auPlusProche:
+                return auPlusProche(centre1, centre2)
+            case .auPlusVite:
+                return auPlusVite(centre1, centre2)
             }
         })
-        
+
         allVaccinationCentres = sortedAvailableCentres + unavailableCentres
 
         let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
@@ -256,10 +256,10 @@ extension CentresListViewModel: CentresListViewModelProvider {
             }
         }
     }
-    
+
     func sort(animated: Bool) {
         updateCells()
-        
+
         delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
     }
 
@@ -305,7 +305,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
 // MARK: - Sort centre
 
 extension CentresListViewModel {
-    
+
     func auPlusProche(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
         // TODO: Calculate by distance
         guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
@@ -314,7 +314,7 @@ extension CentresListViewModel {
         }
         return rdv1.isBeforeDate(rdv2, granularity: .second)
     }
-    
+
     func auPlusVite(_ centre1: VaccinationCentre, _ centre2: VaccinationCentre) -> Bool {
         guard let rdv1 = centre1.prochainRdv?.toDate(nil, region: region),
               let rdv2 = centre2.prochainRdv?.toDate(nil, region: region) else {
@@ -322,5 +322,5 @@ extension CentresListViewModel {
         }
         return rdv1.isBeforeDate(rdv2, granularity: .second)
     }
-    
+
 }
