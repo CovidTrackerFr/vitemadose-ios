@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - County
 
-struct County: Codable {
+struct County: Codable, Equatable {
     let codeDepartement: String?
     let nomDepartement: String?
     let codeRegion: Int?

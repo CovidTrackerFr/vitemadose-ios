@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PartnerLogo: String, CaseIterable {
+enum PartnerLogo: String, CaseIterable, Equatable {
     case doctolib = "Doctolib"
     case maiia = "Maiia"
     case ordoclic = "Ordoclic"
