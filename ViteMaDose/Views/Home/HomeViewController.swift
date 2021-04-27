@@ -41,14 +41,18 @@ class HomeViewController: UIViewController, Storyboarded {
     }()
 
     private lazy var dataSource = makeDataSource()
-
+    private let remoteConfiguration: RemoteConfiguration = .shared
     // MARK: - Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
 
-        RemoteConfiguration.shared.synchronize { [unowned self] _ in
+        remoteConfiguration.synchronize { [unowned self] _ in
+            if let maintenanceUrlString = self.remoteConfiguration.maintenanceModeUrl {
+                self.presentMaintenancePage(with: maintenanceUrlString)
+                return
+            }
             self.viewModel.load()
         }
     }
@@ -111,6 +115,11 @@ class HomeViewController: UIViewController, Storyboarded {
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
     }
+
+    private func presentMaintenancePage(with urlString: String) {
+        let maintenanceViewController = MaintenanceViewController(urlString: urlString)
+        present(maintenanceViewController, animated: true)
+    }
 }
 
 // MARK: - HomeViewModelDelegate
@@ -119,40 +128,14 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Table View Updates
 
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells: [HomeCell]) {
-        var snapshot = dataSource.snapshot()
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell]) {
+        var snapshot = Snapshot()
         snapshot.appendSections(HomeSection.allCases)
         snapshot.appendItems(headingCells, toSection: .heading)
-        snapshot.appendItems(andStatsCells, toSection: .stats)
+        snapshot.appendItems(statsCells, toSection: .stats)
 
         dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: false)
-    }
-
-    func reloadHeadingSection(with headingCells: [HomeCell]) {
-        let snapshot = dataSource.snapshot()
-
-        // Create a new snapshot with current stats cells
-        // Apply heading changes
-        var update = Snapshot()
-        update.appendSections(HomeSection.allCases)
-        update.appendItems(snapshot.itemIdentifiers(inSection: .stats), toSection: .stats)
-        update.appendItems(headingCells, toSection: .heading)
-
-        dataSource.apply(update, animatingDifferences: true)
-    }
-
-    func reloadStatsSection(with statsCells: [HomeCell]) {
-        let snapshot = dataSource.snapshot()
-
-        // Create a new snapshot with current heading cells
-        // Apply stats changes
-        var update = Snapshot()
-        update.appendSections(HomeSection.allCases)
-        update.appendItems(snapshot.itemIdentifiers(inSection: .heading), toSection: .heading)
-        update.appendItems(statsCells, toSection: .stats)
-
-        dataSource.apply(update, animatingDifferences: true)
     }
 
     // MARK: Present

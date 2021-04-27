@@ -42,13 +42,12 @@ protocol HomeViewModelDelegate: class {
     func presentInitialLoadError(_ error: Error)
     func presentFetchStatsError(_ error: Error)
 
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells: [HomeCell])
-    func reloadHeadingSection(with headingCells: [HomeCell])
-    func reloadStatsSection(with statsCells: [HomeCell])
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
 }
 
 class HomeViewModel {
     private let apiService: APIServiceProvider
+    private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
     var counties: Counties = []
@@ -64,12 +63,16 @@ class HomeViewModel {
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
 
-    private var lastSelectedCountyCode: String?
+    private(set) var lastSelectedCountyCode: String?
 
     // MARK: init
 
-    required init(apiService: APIServiceProvider = APIService()) {
+    required init(
+        apiService: APIServiceProvider = APIService(),
+        userDefaults: UserDefaults = .shared
+    ) {
         self.apiService = apiService
+        self.userDefaults = userDefaults
     }
 
     // MARK: Handle API result
@@ -87,12 +90,12 @@ class HomeViewModel {
     private func handleStatsReload(with stats: Stats) {
         self.stats = stats
         updateStatsCells()
-        delegate?.reloadStatsSection(with: statsCell)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func handleLastSelectedCountyUpdate() {
         updateHeadingCells()
-        delegate?.reloadHeadingSection(with: headingCells)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func updateHeadingCells() {
@@ -134,7 +137,7 @@ class HomeViewModel {
 
     private func getLastSelectedCountyCellViewData() -> HomeCountyCellViewData? {
         guard
-            let lastSelectedCountyCode = UserDefaults.lastSelectedCountyCode,
+            let lastSelectedCountyCode = userDefaults.lastSelectedCountyCode,
             let county = counties.first(where: { $0.codeDepartement == lastSelectedCountyCode}),
             let countyName = county.nomDepartement,
             let countyCode = county.codeDepartement
@@ -143,7 +146,7 @@ class HomeViewModel {
         }
 
         return HomeCountyCellViewData(
-            titleText: "Recherche Récente",
+            titleText: Localization.Home.recent_search,
             countyName: countyName,
             countyCode: countyCode
         )
@@ -166,18 +169,20 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchCounties { [weak self] data, status in
-            if let counties = data {
-                self?.apiService.fetchStats { data, status in
-                    if let stats = data {
+        apiService.fetchCounties { [weak self] result in
+            switch result {
+            case let .success(counties):
+                self?.apiService.fetchStats { result in
+                    switch result {
+                    case let .success(stats):
                         self?.handleInitialLoad(counties: counties, stats: stats)
                         self?.isLoading = false
-                    } else {
+                    case let .failure(status):
                         self?.handleInitialLoadError(status)
                         self?.isLoading = false
                     }
                 }
-            } else {
+            case let .failure(status):
                 self?.handleInitialLoadError(status)
                 self?.isLoading = false
             }
@@ -188,12 +193,13 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchStats { [weak self] data, status in
+        apiService.fetchStats { [weak self] result in
             self?.isLoading = false
 
-            if let stats = data {
+            switch result {
+            case let .success(stats):
                 self?.handleStatsReload(with: stats)
-            } else {
+            case let .failure(status):
                 self?.handleStatsError(status)
             }
         }
@@ -209,7 +215,7 @@ extension HomeViewModel: HomeViewModelProvider {
 
     func didSelectLastCounty() {
         guard
-            let countyCode = UserDefaults.lastSelectedCountyCode,
+            let countyCode = userDefaults.lastSelectedCountyCode,
             let county = counties.first(where: { $0.codeDepartement == countyCode})
         else {
             return

@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  ViteMaDose
+
+  Created by Victor Sarda on 24/04/2021.
+  
+*/
+
+// Home
+"home.main_title" = "Trouvez une dose de vaccin facilement et rapidement";
+"home.main_title.first_highlighted_text" = "facilement";
+"home.main_title.second_highlighted_text" = "rapidement";
+"home.select_county" = "Sélectionner un département...";
+"home.recent_search" = "Recherche récente";
+"home.last_stats" = "Dernières statistiques";
+"home.open_map" = "Afficher les lieux sur la carte";
+"home.partners" = "Trouvez vos rendez-vous avec";
+"home.stats.all_locations" = "Lieux trouvés en France";
+"home.stats.all_availabilities" = "Créneaux disponibles";
+"home.stats.locations_with_availabilities" = "Lieux avec rendez-vous disponibles";
+"home.stats.available_locations_percentage" = "De lieux avec des disponibilités";
+// County Selection
+"county_selection.main_title" = "Sélectionnez un département";
+"county_selection.main_title.highlighted_text" = "département";
+// Locations
+"locations.list_title" = "Liste des lieux";
+"locations.no_results" = "Nous n'avons pas trouvé de créneau pour le département %@";
+// Location
+"location.date" = "Le %@ à partir de %@";
+"location.book_button" = "Prendre rendez-vous";
+"location.verify_button" = "Vérifier ce lieu";
+"location.last_update" = "Dernière mise à jour le %@ à %@";
+"location.no_appointment" = "Aucun rendez-vous";
+"location.open_route" = "Ouvrir l'itinéraire";
+"location.unavailable_date" = "Date indisponible";
+"location.unavailable_name" = "Nom du centre indisponible";
+"location.unavailable_address" = "Adresse indisponible";
+// Error
+"error.generic.title" = "Oups! Nous avons des difficultés techniques...";
+"error.generic.retry_button" = "Réessayer";
+"error.generic.cancel_button" = "Annuler";
+"error.generic.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
+"error.network.server_error" = "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard.";
+"error.network.offline" = "Il semblerait que vous soyez hors ligne.";

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - VaccinationCentre
 
-struct VaccinationCentre: Codable {
+struct VaccinationCentre: Codable, Equatable {
     let departement: String?
     let nom: String?
     let url: String?
@@ -36,7 +36,7 @@ struct VaccinationCentre: Codable {
 }
 
 extension VaccinationCentre {
-    struct Location: Codable {
+    struct Location: Codable, Equatable {
         let longitude: Double?
         let latitude: Double?
         let city: String?
@@ -48,7 +48,7 @@ extension VaccinationCentre {
         }
     }
 
-    struct Metadata: Codable {
+    struct Metadata: Codable, Equatable {
         let address: String?
         let phoneNumber: String?
         let businessHours: [String: String?]?
@@ -63,7 +63,7 @@ extension VaccinationCentre {
 
 // MARK: - VaccinationCentres
 
-struct VaccinationCentres: Codable {
+struct VaccinationCentres: Codable, Equatable {
     let lastUpdated: String?
     let centresDisponibles: [VaccinationCentre]
     let centresIndisponibles: [VaccinationCentre]

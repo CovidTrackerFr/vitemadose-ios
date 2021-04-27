@@ -49,11 +49,6 @@ class CentresTitleCell: HomeTitleCell {
         static let highlightedDosesTextColor: UIColor = .systemGreen
         static let highlightedCountyTextColor: UIColor = .mandy
 
-        static let titleFirstPartText = "Nous avons trouvé"
-        static let titleSecondPartText = "doses"
-        static let titleThirdText = "pour le département"
-        static let titleNoDoseText = "Nous n'avons pas trouvé de doses pour le département"
-        static let subtitleText = "Liste des centres"
         static let auPlusProcheText = "Au plus proche"
         static let auPlusViteText = "Au plus vite"
     }
@@ -90,7 +85,7 @@ class CentresTitleCell: HomeTitleCell {
 extension CentresTitleCell {
 
     static func mainTitleAttributedText(
-        withDoses dosesCount: Int,
+        withAppointmentsCount appointmentsCount: Int,
         andCountyName countyName: String
     ) -> NSMutableAttributedString {
         let attributes = [
@@ -98,22 +93,22 @@ extension CentresTitleCell {
             NSAttributedString.Key.font: Constant.titleFont
         ]
 
-        guard dosesCount > 0 else {
+        guard appointmentsCount > 0 else {
             let title = NSMutableAttributedString(
-                string: "\(Constant.titleNoDoseText) \(countyName)",
+                string: Localization.Locations.no_results.format(countyName),
                 attributes: attributes
             )
             title.setColorForText(textForAttribute: countyName, withColor: .mandy)
             return title
         }
 
-        let dosesCountString = "\(String(dosesCount)) \(Constant.titleSecondPartText)"
-        let titleString = "\(Constant.titleFirstPartText) \(dosesCountString) \(Constant.titleThirdText) \(countyName)"
+        let appointmentsCountString = Localization.Locations.appointments.format(appointmentsCount)
+        let titleString = Localization.Locations.MainTitle.title.format(appointmentsCount, countyName)
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
         )
-        title.setColorForText(textForAttribute: dosesCountString, withColor: .mandy)
+        title.setColorForText(textForAttribute: appointmentsCountString, withColor: .mandy)
         title.setColorForText(textForAttribute: countyName, withColor: .royalBlue)
 
         return title
@@ -124,7 +119,7 @@ extension CentresTitleCell {
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
             NSAttributedString.Key.font: Constant.titleFont
         ]
-        return NSMutableAttributedString(string: Constant.subtitleText, attributes: attributes)
+        return NSMutableAttributedString(string: Localization.Locations.list_title, attributes: attributes)
     }
 
 }
