@@ -17,7 +17,7 @@ struct CreditSectionViewData: CreditSectionViewDataProvider, Hashable {
 
 class CreditSectionView: UITableViewCell {
     @IBOutlet private var titleLabel: UILabel!
-    
+
     private enum Constant {
         static let creditNameTextColor: UIColor = .label
         static let labelsFont: UIFont = .rounded(ofSize: 18, weight: .bold)

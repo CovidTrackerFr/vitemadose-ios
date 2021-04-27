@@ -18,7 +18,7 @@ protocol CreditViewModelProvider {
 protocol CreditViewModelDelegate: class {
     func reloadTableView(with credits: Credits)
     func openURL(url: URL)
-    
+
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
     func presentLoadError(_ error: Error)
 }
@@ -38,7 +38,7 @@ class CreditViewModel: CreditViewModelProvider {
     var numberOfSections: Int {
         allCredits.count
     }
-    
+
     func numberOfRows(in section: Int) -> Int {
         (allCredits[section].users?.count ?? 0) + 1
     }
@@ -54,7 +54,7 @@ class CreditViewModel: CreditViewModelProvider {
 
         delegate?.reloadTableView(with: credits)
     }
-    
+
     func sectionViewModel(at section: Int) -> CreditSectionViewDataProvider? {
         guard let sectionModel = allCredits[safe: section] else {
             assertionFailure("No section found at section \(section)")
@@ -101,17 +101,17 @@ class CreditViewModel: CreditViewModelProvider {
             delegate?.openURL(url: url)
         }
     }
-    
+
     private func handleLoad(with credits: Credits) {
         self.allCredits = credits
 
         delegate?.reloadTableView(with: credits)
     }
-    
+
     private func handleError(_ error: APIResponseStatus) {
         delegate?.presentLoadError(error)
     }
-    
+
     func load() {
         guard !isLoading else { return }
         isLoading = true

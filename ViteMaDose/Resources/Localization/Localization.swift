@@ -37,6 +37,15 @@ enum Localization {
         }
     }
 
+    enum Credits {
+        enum MainTitle {
+            static let title = "credits.main_title.title".localized
+            static let subtitle = "credits.main_title.subtitle".localized
+            static let highlightedText1 = "credits.main_title.highlightedText1".localized
+            static let highlightedText2 = "credits.main_title.highlightedText2".localized
+        }
+    }
+
     enum Locations {
         static let list_title = "locations.list_title".localized
         static let no_results = "locations.no_results".localized

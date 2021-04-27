@@ -12,7 +12,7 @@ import Haptica
 
 class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
-    
+
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
     private lazy var viewModel: HomeViewModelProvider = {
@@ -115,12 +115,12 @@ class HomeViewController: UIViewController, Storyboarded {
         let safariViewController = SFSafariViewController(url: url, configuration: config)
         present(safariViewController, animated: true)
     }
-    
+
     // TODO: Move this to settings to open contributors
     private func presentCreditViewController() {
         let creditViewController = CreditViewController.instantiate()
         creditViewController.viewModel = CreditViewModel(credits: [])
-        
+
         DispatchQueue.main.async { [weak self] in
             self?.present(creditViewController, animated: true)
         }

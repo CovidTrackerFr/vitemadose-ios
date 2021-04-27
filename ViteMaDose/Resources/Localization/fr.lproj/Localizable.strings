@@ -22,6 +22,11 @@
 // County Selection
 "county_selection.main_title" = "Sélectionnez un département";
 "county_selection.main_title.highlighted_text" = "département";
+// Credits
+"credits.main_title.title" = "Contributeurs";
+"credits.main_title.subtitle" = "ViteMaDose est un projet open source, construit par l'ensemble de ses généreux contributeurs :";
+"credits.main_title.highlightedText1" = "open source";
+"credits.main_title.highlightedText2" = "généreux contributeurs";
 // Locations
 "locations.list_title" = "Liste des lieux";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour le département %@";

@@ -19,7 +19,7 @@ class CreditViewController: UIViewController, Storyboarded {
     var viewModel: CreditViewModel!
 
     private lazy var countySelectionHeaderView: CreditHeaderView = CreditHeaderView.instanceFromNib()
-    
+
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.startAnimating()
@@ -31,9 +31,9 @@ class CreditViewController: UIViewController, Storyboarded {
         guard viewModel != nil else {
             preconditionFailure("ViewModel was not set for CreditViewController")
         }
-        
+
         configureTableView()
-        
+
         view.backgroundColor = .athensGray
         viewModel.delegate = self
         viewModel.load()
@@ -48,17 +48,17 @@ class CreditViewController: UIViewController, Storyboarded {
         super.viewDidLayoutSubviews()
         tableView.updateHeaderViewHeight()
     }
-    
+
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         tableView.backgroundColor = .athensGray
         tableView.tableHeaderView = countySelectionHeaderView
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundView = activityIndicator
-        
+
         tableView.register(cellType: CreditCell.self)
         tableView.register(cellType: CreditSectionView.self)
     }
@@ -70,11 +70,11 @@ extension CreditViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.numberOfSections
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows(in: section)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Case of title
         if indexPath.row == 0 {
@@ -83,18 +83,18 @@ extension CreditViewController: UITableViewDataSource {
                 assertionFailure("Cell view model missing at \(indexPath)")
                 return UITableViewCell()
             }
-            
+
             cell.configure(with: cellViewModel)
             return cell
         }
-        
+
         // Case of user
         let cell = tableView.dequeueReusableCell(with: CreditCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
             assertionFailure("Cell view model missing at \(indexPath)")
             return UITableViewCell()
         }
-        
+
         cell.configure(with: cellViewModel)
         return cell
     }
@@ -113,11 +113,11 @@ extension CreditViewController: CreditViewModelDelegate {
     func reloadTableView(with credits: Credits) {
         tableView.reloadData()
     }
-    
+
     func openURL(url: URL) {
         UIApplication.shared.open(url)
     }
-    
+
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
         if !isLoading {
             activityIndicator.stopAnimating()

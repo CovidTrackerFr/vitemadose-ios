@@ -71,8 +71,8 @@ struct APIService: APIServiceProvider {
             }
         }
     }
-    
-    func fetchContributors(completion: @escaping (Credits?, APIResponseStatus) -> ()) -> APIRequest {
+
+    func fetchContributors(completion: @escaping (Credits?, APIResponseStatus) -> Void) -> APIRequest {
         let configuration = APIConfiguration(host: RemoteConfiguration.shared.host)
         return APIRequest(
             "GET",
