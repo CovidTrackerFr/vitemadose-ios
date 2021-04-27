@@ -113,6 +113,7 @@
 /* Begin PBXFileReference section */
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
 		5702B5DA2635965C00C51F47 /* APIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceMock.swift; sourceTree = "<group>"; };
+		570E4273263893E5004A47F9 /* ViteMaDoseDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViteMaDoseDebug.entitlements; sourceTree = "<group>"; };
 		57471428262B6BA300535DF1 /* CountyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountyCell.swift; sourceTree = "<group>"; };
 		57471429262B6BA300535DF1 /* CountyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountyCell.xib; sourceTree = "<group>"; };
 		575CC223262AECA7008D1869 /* HomeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleCell.swift; sourceTree = "<group>"; };
@@ -263,7 +264,6 @@
 		576738BE261E329C004A700D /* ViteMaDose */ = {
 			isa = PBXGroup;
 			children = (
-				6A28354B262DC06C00FA6456 /* ViteMaDose.entitlements */,
 				57673986261E5AF3004A700D /* Application */,
 				5767392A261E3B99004A700D /* Views */,
 				5767393C261E3BFD004A700D /* ViewModels */,
@@ -400,6 +400,8 @@
 		57673986261E5AF3004A700D /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				570E4273263893E5004A47F9 /* ViteMaDoseDebug.entitlements */,
+				6A28354B262DC06C00FA6456 /* ViteMaDose.entitlements */,
 				579D713126373A030021CB56 /* GoogleService-Info-debug.plist */,
 				577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */,
 				576738BF261E329C004A700D /* AppDelegate.swift */,
@@ -1020,7 +1022,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDoseDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 841539;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
