@@ -35,7 +35,7 @@ protocol HomeViewModelProvider {
     var stats: Stats? { get }
 }
 
-protocol HomeViewModelDelegate: class {
+protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentVaccinationCentres(for county: County)
