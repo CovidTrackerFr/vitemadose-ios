@@ -77,7 +77,7 @@ class CentresListViewModel {
     var county: County
     var vaccinationCentres: VaccinationCentres?
 
-    var sort: CentresSortOrder = .auPlusVite
+    var sort: CentresSortOrder = .auPlusProche
 
     weak var delegate: CentresListViewModelDelegate?
 
