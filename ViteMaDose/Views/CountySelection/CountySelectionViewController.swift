@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Haptica
 
-protocol CountySelectionViewControllerDelegate: class {
+protocol CountySelectionViewControllerDelegate: AnyObject {
     func didSelect(county: County)
 }
 
