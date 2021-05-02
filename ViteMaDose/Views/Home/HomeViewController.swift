@@ -88,8 +88,8 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.tableFooterView = footerView
 
         tableView.register(cellType: HomeTitleCell.self)
-        tableView.register(cellType: HomeCountySelectionCell.self)
-        tableView.register(cellType: HomeCountyCell.self)
+        tableView.register(cellType: HomeDepartmentSelectionCell.self)
+        tableView.register(cellType: HomeDepartmentCell.self)
         tableView.register(cellType: HomeStatsCell.self)
     }
 
@@ -97,15 +97,15 @@ class HomeViewController: UIViewController, Storyboarded {
         viewModel.reloadStats()
     }
 
-    private func presentCountySelectionViewController() {
+    private func presentDepartmentSelectionViewController() {
         AppAnalytics.didTapSearchBar()
 
-        let countySelectionViewController = CountySelectionViewController.instantiate()
-        countySelectionViewController.delegate = self
-        countySelectionViewController.viewModel = CountySelectionViewModel(counties: viewModel.counties)
+        let departmentSelectionViewController = DepartmentSelectionViewController.instantiate()
+        departmentSelectionViewController.delegate = self
+        departmentSelectionViewController.viewModel = DepartmentSelectionViewModel(departments: viewModel.departments)
 
         DispatchQueue.main.async { [weak self] in
-            self?.present(countySelectionViewController, animated: true)
+            self?.present(departmentSelectionViewController, animated: true)
         }
     }
 
@@ -140,13 +140,13 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Present
 
-    func presentVaccinationCentres(for county: County) {
-        viewModel.updateLastSelectedCountyIfNeeded(county.codeDepartement)
+    func presentVaccinationCentres(for department: Department) {
+        viewModel.updateLastSelectedDepartmentIfNeeded(department.codeDepartement)
 
         let vaccinationCentresViewController = CentresListViewController.instantiate()
-        vaccinationCentresViewController.viewModel = CentresListViewModel(county: county)
+        vaccinationCentresViewController.viewModel = CentresListViewModel(department: department)
         navigationController?.show(vaccinationCentresViewController, sender: self)
-        AppAnalytics.didSelectCounty(county)
+        AppAnalytics.didSelectDepartment(department)
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
@@ -196,10 +196,10 @@ extension HomeViewController: UITableViewDelegate {
         }
 
         switch homeCell {
-        case .countySelection:
-            presentCountySelectionViewController()
-        case .county:
-            viewModel.didSelectLastCounty()
+        case .departmentSelection:
+            presentDepartmentSelectionViewController()
+        case .department:
+            viewModel.didSelectLastDepartment()
             Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {
@@ -231,12 +231,12 @@ extension HomeViewController {
             let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .countySelection(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
+        case let .departmentSelection(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeDepartmentSelectionCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .county(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
+        case let .department(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeDepartmentCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .stats(cellViewModel):
@@ -247,12 +247,12 @@ extension HomeViewController {
     }
 }
 
-// MARK: - CountySelectionViewControllerDelegate
+// MARK: - DepartmentSelection ViewController Delegate
 
-extension HomeViewController: CountySelectionViewControllerDelegate {
+extension HomeViewController: DepartmentSelectionViewControllerDelegate {
 
-    func didSelect(county: County) {
-        viewModel.didSelect(county)
+    func didSelect(department: Department) {
+        viewModel.didSelect(department)
     }
 
 }

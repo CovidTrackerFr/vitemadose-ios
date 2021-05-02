@@ -1,5 +1,5 @@
 //
-//  County.swift
+//  Department.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 07/04/2021.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - County
+// MARK: - Department
 
-struct County: Codable, Equatable {
+struct Department: Codable, Equatable {
     let codeDepartement: String?
     let nomDepartement: String?
     let codeRegion: Int?
@@ -23,6 +23,6 @@ struct County: Codable, Equatable {
     }
 }
 
-// MARK: - Counties
+// MARK: - Departments
 
-typealias Counties = [County]
+typealias Departments = [Department]

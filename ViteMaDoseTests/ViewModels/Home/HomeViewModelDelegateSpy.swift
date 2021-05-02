@@ -14,9 +14,9 @@ class HomeViewModelDelegateSpy: HomeViewModelDelegate {
         updateLoadingState = (isLoading, isEmpty)
     }
 
-    var presentVaccinationCentresCounty: County?
-    func presentVaccinationCentres(for county: County) {
-        presentVaccinationCentresCounty = county
+    var presentVaccinationCentresDepartment: Department?
+    func presentVaccinationCentres(for departments: Department) {
+        presentVaccinationCentresDepartment = departments
     }
 
     var presentInitialLoadError: Error?

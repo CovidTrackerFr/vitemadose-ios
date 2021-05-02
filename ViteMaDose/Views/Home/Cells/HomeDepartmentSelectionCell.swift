@@ -1,5 +1,5 @@
 //
-//  CountySelectionTableViewCell.swift
+//  HomeDepartmentSelectionCell.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 17/04/2021.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol HomeCountySelectionCellViewDataProvider {
+protocol HomeDepartmentSelectionCellViewDataProvider {
     var searchBarText: String { get }
 }
 
-struct HomeCountySelectionViewData: HomeCountySelectionCellViewDataProvider, Hashable {
-    let searchBarText = Localization.Home.select_county
+struct HomeDepartmentSelectionViewData: HomeDepartmentSelectionCellViewDataProvider, Hashable {
+    let searchBarText = Localization.Home.select_department
 }
 
-class HomeCountySelectionCell: UITableViewCell {
+class HomeDepartmentSelectionCell: UITableViewCell {
 
     @IBOutlet private var searchBarView: UIView!
     @IBOutlet private var searchBarTitle: UILabel!
@@ -44,7 +44,7 @@ class HomeCountySelectionCell: UITableViewCell {
         searchBarView.setCornerRadius(Constant.searchBarViewCornerRadius, withShadow: shadow)
     }
 
-    func configure(with viewData: HomeCountySelectionCellViewDataProvider = HomeCountySelectionViewData()) {
+    func configure(with viewData: HomeDepartmentSelectionCellViewDataProvider = HomeDepartmentSelectionViewData()) {
         searchBarTitle.text = viewData.searchBarText
     }
 }

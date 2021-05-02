@@ -10,7 +10,7 @@
 "home.main_title" = "Trouvez une dose de vaccin facilement et rapidement";
 "home.main_title.first_highlighted_text" = "facilement";
 "home.main_title.second_highlighted_text" = "rapidement";
-"home.select_county" = "Sélectionner un département...";
+"home.select_department" = "Sélectionner un département...";
 "home.recent_search" = "Recherche récente";
 "home.last_stats" = "Dernières statistiques";
 "home.open_map" = "Afficher les lieux sur la carte";
@@ -19,9 +19,9 @@
 "home.stats.all_availabilities" = "Créneaux disponibles";
 "home.stats.locations_with_availabilities" = "Lieux avec rendez-vous disponibles";
 "home.stats.available_locations_percentage" = "De lieux avec des disponibilités";
-// County Selection
-"county_selection.main_title" = "Sélectionnez un département";
-"county_selection.main_title.highlighted_text" = "département";
+// Department Selection
+"department_selection.main_title" = "Sélectionnez un département";
+"department_selection.main_title.highlighted_text" = "département";
 // Locations
 "locations.list_title" = "Liste des lieux";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour le département %@";

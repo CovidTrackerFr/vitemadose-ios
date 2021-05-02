@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="371" id="jLc-63-NbW" customClass="HomeCountyCell" customModule="ViteMaDose" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="371" id="jLc-63-NbW" customClass="HomeDepartmentCell" customModule="ViteMaDose" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="402" height="127"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jLc-63-NbW" id="u1P-IH-Qip">
@@ -66,7 +66,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cYR-ds-Nza">
                                                 <rect key="frame" x="55" y="0.0" width="283" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="County name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="jRu-Kn-5WZ">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Department name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="jRu-Kn-5WZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         <nil key="textColor"/>
@@ -97,10 +97,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="countyCodeContainerView" destination="CGd-ou-sVd" id="XuT-7Y-Z24"/>
-                <outlet property="countyCodeLabel" destination="QWA-oC-MrX" id="fjG-p6-v11"/>
-                <outlet property="countyContainerView" destination="bpz-pa-5X5" id="dfd-6y-zAl"/>
-                <outlet property="countyNameLabel" destination="jRu-Kn-5WZ" id="XyE-fR-lhN"/>
+                <outlet property="cellContainerView" destination="bpz-pa-5X5" id="GHN-S3-wal"/>
+                <outlet property="codeContainerView" destination="CGd-ou-sVd" id="4gD-1I-hvb"/>
+                <outlet property="codeLabel" destination="QWA-oC-MrX" id="sY5-IX-nWa"/>
+                <outlet property="nameLabel" destination="jRu-Kn-5WZ" id="AG3-sg-iy2"/>
                 <outlet property="titleLabel" destination="Xic-Ds-uJp" id="bgJ-xb-v8W"/>
             </connections>
             <point key="canvasLocation" x="92.753623188405811" y="-5.6919642857142856"/>

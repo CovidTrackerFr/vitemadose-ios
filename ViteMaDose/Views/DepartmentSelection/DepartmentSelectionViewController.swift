@@ -1,5 +1,5 @@
 //
-//  CountySelectionViewController.swift
+//  DepartmentSelectionViewController.swift
 //  ViteMaDose
 //
 //  Created by Paul Jeannot on 08/04/2021.
@@ -9,32 +9,32 @@ import Foundation
 import UIKit
 import Haptica
 
-protocol CountySelectionViewControllerDelegate: AnyObject {
-    func didSelect(county: County)
+protocol DepartmentSelectionViewControllerDelegate: AnyObject {
+    func didSelect(department: Department)
 }
 
-class CountySelectionViewController: UIViewController, Storyboarded {
+class DepartmentSelectionViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
-    weak var delegate: CountySelectionViewControllerDelegate?
+    weak var delegate: DepartmentSelectionViewControllerDelegate?
 
-    var viewModel: CountySelectionViewModel!
+    var viewModel: DepartmentSelectionViewModel!
 
-    private lazy var countySelectionHeaderView: CountySelectionHeaderView = CountySelectionHeaderView.instanceFromNib()
+    private lazy var departmentSelectionHeaderView: DepartmentSelectionHeaderView = DepartmentSelectionHeaderView.instanceFromNib()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         guard viewModel != nil else {
-            preconditionFailure("ViewModel was not set for CountySelectionViewController")
+            preconditionFailure("ViewModel was not set for DepartmentSelectionViewController")
         }
         tableView.delegate = self
         tableView.dataSource = self
         viewModel.delegate = self
         view.backgroundColor = .athensGray
         tableView.backgroundColor = .athensGray
-        tableView.tableHeaderView = countySelectionHeaderView
+        tableView.tableHeaderView = departmentSelectionHeaderView
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(cellType: CountyCell.self)
+        tableView.register(cellType: DepartmentCell.self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -50,13 +50,13 @@ class CountySelectionViewController: UIViewController, Storyboarded {
 
 // MARK: - UITableViewDataSource
 
-extension CountySelectionViewController: UITableViewDataSource {
+extension DepartmentSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(with: CountyCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(with: DepartmentCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
             assertionFailure("Cell view model missing at \(indexPath)")
             return UITableViewCell()
@@ -69,21 +69,21 @@ extension CountySelectionViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension CountySelectionViewController: UITableViewDelegate {
+extension DepartmentSelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectCell(at: indexPath)
         Haptic.impact(.light).generate()
     }
 }
 
-extension CountySelectionViewController: CountySelectionViewModelDelegate {
-    func reloadTableView(with counties: Counties) {
+extension DepartmentSelectionViewController: DepartmentSelectionViewModelDelegate {
+    func reloadTableView(with departments: Departments) {
         tableView.reloadData()
     }
 
-    func dismissViewController(with county: County) {
+    func dismissViewController(with department: Department) {
         dismiss(animated: true) { [weak self] in
-            self?.delegate?.didSelect(county: county)
+            self?.delegate?.didSelect(department: department)
         }
     }
 }

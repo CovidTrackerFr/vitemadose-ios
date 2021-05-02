@@ -10,7 +10,7 @@ import Foundation
 
 enum Localization {
     enum Home {
-        static let select_county = "home.select_county".localized
+        static let select_department = "home.select_department".localized
         static let recent_search = "home.recent_search".localized
         static let last_stats = "home.last_stats".localized
         static let open_map = "home.open_map".localized
@@ -30,10 +30,10 @@ enum Localization {
         }
     }
 
-    enum CountySelection {
+    enum DepartmentSelection {
         enum MainTitle {
-            static let title = "county_selection.main_title".localized
-            static let highlighted_text = "county_selection.main_title.highlighted_text".localized
+            static let title = "department_selection.main_title".localized
+            static let highlighted_text = "department_selection.main_title.highlighted_text".localized
         }
     }
 

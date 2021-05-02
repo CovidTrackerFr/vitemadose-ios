@@ -16,8 +16,8 @@ enum BaseAPIErrorMock: Error {
 class BaseAPIServiceMock: BaseAPIServiceProvider {
     var provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>()
 
-    var fetchDepartmentsResult: Result<Counties, Error>?
-    func fetchDepartments(completion: @escaping (Result<Counties, Error>) -> Void) {
+    var fetchDepartmentsResult: Result<Departments, Error>?
+    func fetchDepartments(completion: @escaping (Result<Departments, Error>) -> Void) {
         completion(fetchDepartmentsResult ?? .failure(BaseAPIErrorMock.unknown))
     }
 
