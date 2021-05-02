@@ -140,13 +140,13 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Present
 
-    func presentVaccinationCentres(for department: Department) {
-        viewModel.updateLastSelectedDepartmentIfNeeded(department.codeDepartement)
+    func presentVaccinationCentres(for location: LocationSearchResult) {
+        viewModel.updateLastSelectedDepartmentIfNeeded(location.departmentCode)
 
         let vaccinationCentresViewController = CentresListViewController.instantiate()
-        vaccinationCentresViewController.viewModel = CentresListViewModel(department: department)
+        vaccinationCentresViewController.viewModel = CentresListViewModel(searchResult: location)
         navigationController?.show(vaccinationCentresViewController, sender: self)
-        AppAnalytics.didSelectDepartment(department)
+        AppAnalytics.didSelectLocation(location)
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
@@ -251,8 +251,8 @@ extension HomeViewController {
 
 extension HomeViewController: DepartmentSelectionViewControllerDelegate {
 
-    func didSelect(department: Department) {
-        viewModel.didSelect(department)
+    func didSelect(location: LocationSearchResult) {
+        viewModel.didSelect(location)
     }
 
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HomeDepartmentCellViewDataProvider: DepartmentCellViewDataProvider {
+protocol HomeDepartmentCellViewDataProvider: LocationSearchResultCellViewDataProvider {
     var titleText: String? { get }
 }
 
@@ -17,7 +17,7 @@ struct HomeDepartmentCellViewData: HomeDepartmentCellViewDataProvider, Hashable 
     let code: String
 }
 
-class HomeDepartmentCell: DepartmentCell {
+class HomeDepartmentCell: LocationSearchResultCell {
     @IBOutlet var titleLabel: UILabel!
 
      func configure(with viewData: HomeDepartmentCellViewDataProvider) {

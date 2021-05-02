@@ -1,5 +1,5 @@
 //
-//  DepartmentCell.swift
+//  LocationSearchCell.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 17/04/2021.
@@ -7,18 +7,19 @@
 
 import UIKit
 
-protocol DepartmentCellViewDataProvider {
+protocol LocationSearchResultCellViewDataProvider {
     var name: String { get }
     var code: String { get }
 }
 
-struct DepartmentCellViewData: DepartmentCellViewDataProvider, Hashable {
-    var titleText: String?
-    var name: String
-    var code: String
+struct LocationSearchResultCellViewData: LocationSearchResultCellViewDataProvider, Hashable, Identifiable {
+    let id = UUID()
+    let titleText: String?
+    let name: String
+    let code: String
 }
 
-class DepartmentCell: UITableViewCell {
+class LocationSearchResultCell: UITableViewCell {
     @IBOutlet private var codeLabel: UILabel!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var cellContainerView: UIView!
@@ -33,7 +34,7 @@ class DepartmentCell: UITableViewCell {
         static let viewsCornerRadius: CGFloat = 15
     }
 
-    func configure(with viewData: DepartmentCellViewDataProvider) {
+    func configure(with viewData: LocationSearchResultCellViewDataProvider) {
         contentView.backgroundColor = .athensGray
 
         codeContainerView.backgroundColor = Constant.codeBackgroundColor

@@ -23,7 +23,7 @@ enum CentresListCell: Hashable {
 }
 
 protocol CentresListViewModelProvider {
-    var department: Department { get }
+    var searchResult: LocationSearchResult { get }
     var vaccinationCentres: VaccinationCentres? { get }
     func load(animated: Bool)
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)?
@@ -67,7 +67,7 @@ class CentresListViewModel {
     private var centresCells: [CentresListCell] = []
     private var footerText: String?
 
-    var department: Department
+    var searchResult: LocationSearchResult
     var vaccinationCentres: VaccinationCentres?
 
     weak var delegate: CentresListViewModelDelegate?
@@ -78,10 +78,10 @@ class CentresListViewModel {
 
     init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        department: Department
+        searchResult: LocationSearchResult
     ) {
         self.apiService = apiService
-        self.department = department
+        self.searchResult = searchResult
     }
 
     private func handleLoad(with vaccinationCentres: VaccinationCentres, animated: Bool) {
@@ -110,7 +110,7 @@ class CentresListViewModel {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
                 withAppointmentsCount: appointmentsCount,
-                andDepartmentName: department.nomDepartement ?? ""
+                andDepartmentName: searchResult.name
             ),
             topMargin: 25,
             bottomMargin: 0
@@ -218,13 +218,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        guard let departmentCode = department.codeDepartement else {
-            isLoading = false
-            handleError(NSError())
-            return
-        }
-
-        apiService.fetchVaccinationCentres(departmentCode: departmentCode) { [weak self] result in
+        apiService.fetchVaccinationCentres(departmentCode: searchResult.departmentCode) { [weak self] result in
             self?.isLoading = false
 
             switch result {

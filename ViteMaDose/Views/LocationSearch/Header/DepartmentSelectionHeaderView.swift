@@ -8,7 +8,8 @@
 import UIKit
 
 class DepartmentSelectionHeaderView: UIView {
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private(set) var searchBar: UISearchBar!
 
     private enum Constant {
         static let highlightedTextColor = UIColor.mandy

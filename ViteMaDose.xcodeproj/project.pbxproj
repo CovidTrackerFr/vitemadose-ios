@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
-		5747142A262B6BA300535DF1 /* DepartmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57471428262B6BA300535DF1 /* DepartmentCell.swift */; };
-		5747142B262B6BA300535DF1 /* DepartmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57471429262B6BA300535DF1 /* DepartmentCell.xib */; };
+		57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57044415263F0D1000F802F2 /* LocationSearchResult.swift */; };
+		5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */; };
+		5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */; };
 		575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC210262AD8F7008D1869 /* PhoneNumberKit */; };
 		575CC218262ADA0D008D1869 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC217262ADA0D008D1869 /* FirebaseRemoteConfig */; };
 		575CC21A262ADA0D008D1869 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC219262ADA0D008D1869 /* FirebaseAnalytics */; };
@@ -116,9 +117,10 @@
 /* Begin PBXFileReference section */
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
 		5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceMock.swift; sourceTree = "<group>"; };
+		57044415263F0D1000F802F2 /* LocationSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResult.swift; sourceTree = "<group>"; };
 		570E4273263893E5004A47F9 /* ViteMaDoseDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViteMaDoseDebug.entitlements; sourceTree = "<group>"; };
-		57471428262B6BA300535DF1 /* DepartmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentCell.swift; sourceTree = "<group>"; };
-		57471429262B6BA300535DF1 /* DepartmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepartmentCell.xib; sourceTree = "<group>"; };
+		57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultCell.swift; sourceTree = "<group>"; };
+		57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchResultCell.xib; sourceTree = "<group>"; };
 		575CC223262AECA7008D1869 /* HomeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleCell.swift; sourceTree = "<group>"; };
 		575CC22D262AF4E0008D1869 /* HomeDepartmentSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDepartmentSelectionCell.swift; sourceTree = "<group>"; };
 		575CC22E262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDepartmentSelectionCell.xib; sourceTree = "<group>"; };
@@ -241,8 +243,8 @@
 		57471427262B6B7500535DF1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				57471428262B6BA300535DF1 /* DepartmentCell.swift */,
-				57471429262B6BA300535DF1 /* DepartmentCell.xib */,
+				57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */,
+				57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -321,6 +323,7 @@
 				5793484B262241B900F8A4A0 /* Stats.swift */,
 				57613F02262510D700AB6F2F /* PartnerLogo.swift */,
 				5795476C263E1C1B00AD5DFD /* City.swift */,
+				57044415263F0D1000F802F2 /* LocationSearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -329,7 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				5767392E261E3BB2004A700D /* Home */,
-				57AD21E22621067D00ED2B95 /* DepartmentSelection */,
+				57AD21E22621067D00ED2B95 /* LocationSearch */,
 				57AD21D4262103F000ED2B95 /* CentresList */,
 				57B6BEA2263605DE00D9AAC1 /* Maintenance */,
 			);
@@ -351,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				5767393D261E3C10004A700D /* Home */,
-				57AD21E9262106E100ED2B95 /* DepartmentSelection */,
+				57AD21E9262106E100ED2B95 /* LocationSearch */,
 				57AD21FA2621098500ED2B95 /* CentresList */,
 			);
 			path = ViewModels;
@@ -464,7 +467,7 @@
 			path = CentresList;
 			sourceTree = "<group>";
 		};
-		57AD21E22621067D00ED2B95 /* DepartmentSelection */ = {
+		57AD21E22621067D00ED2B95 /* LocationSearch */ = {
 			isa = PBXGroup;
 			children = (
 				57471427262B6B7500535DF1 /* Cells */,
@@ -472,15 +475,15 @@
 				DA4D9952261E6B6A00D28AD0 /* DepartmentSelectionViewController.swift */,
 				57AD21ED2621073200ED2B95 /* DepartmentSelectionViewController.storyboard */,
 			);
-			path = DepartmentSelection;
+			path = LocationSearch;
 			sourceTree = "<group>";
 		};
-		57AD21E9262106E100ED2B95 /* DepartmentSelection */ = {
+		57AD21E9262106E100ED2B95 /* LocationSearch */ = {
 			isa = PBXGroup;
 			children = (
 				DA4D995D261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift */,
 			);
-			path = DepartmentSelection;
+			path = LocationSearch;
 			sourceTree = "<group>";
 		};
 		57AD21FA2621098500ED2B95 /* CentresList */ = {
@@ -660,7 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */,
-				5747142B262B6BA300535DF1 /* DepartmentCell.xib in Resources */,
+				5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */,
 				57B6BEAA2636153000D9AAC1 /* maintenance.html in Resources */,
 				57C4018F26238E5300EFFCA3 /* DepartmentSelectionHeaderView.xib in Resources */,
 				57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */,
@@ -804,6 +807,7 @@
 				5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */,
 				57C4018126238ABC00EFFCA3 /* UIFont+Commons.swift in Sources */,
 				57673921261E3B59004A700D /* Collection+Commons.swift in Sources */,
+				57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */,
 				57AD21F62621097A00ED2B95 /* CentresListViewModel.swift in Sources */,
 				5795476D263E1C1B00AD5DFD /* City.swift in Sources */,
 				57AF504A262CDB3D0085E3C1 /* CentresStatsCell.swift in Sources */,
@@ -819,7 +823,7 @@
 				57C4018726238E4900EFFCA3 /* DepartmentSelectionHeaderView.swift in Sources */,
 				DA4D9953261E6B6A00D28AD0 /* DepartmentSelectionViewController.swift in Sources */,
 				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
-				5747142A262B6BA300535DF1 /* DepartmentCell.swift in Sources */,
+				5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */,
 				DA4D995E261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,
 				57954771263E1D1D00AD5DFD /* CachePolicyPlugin.swift in Sources */,

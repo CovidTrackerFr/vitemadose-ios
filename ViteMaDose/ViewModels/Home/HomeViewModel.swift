@@ -29,7 +29,7 @@ protocol HomeViewModelProvider {
     func reloadStats()
     func updateLastSelectedDepartmentIfNeeded(_ code: String?)
     func didSelectLastDepartment()
-    func didSelect(_ department: Department)
+    func didSelect(_ location: LocationSearchResult)
 
     var departments: Departments { get }
     var stats: Stats? { get }
@@ -38,7 +38,7 @@ protocol HomeViewModelProvider {
 protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
-    func presentVaccinationCentres(for department: Department)
+    func presentVaccinationCentres(for location: LocationSearchResult)
     func presentInitialLoadError(_ error: Error)
     func presentFetchStatsError(_ error: Error)
 
@@ -139,8 +139,7 @@ class HomeViewModel {
         guard
             let lastSelectedDepartmentCode = userDefaults.lastSelectedDepartmentCode,
             let department = departments.first(where: { $0.codeDepartement == lastSelectedDepartmentCode}),
-            let name = department.nomDepartement,
-            let code = department.codeDepartement
+            let name = department.nomDepartement
         else {
             return nil
         }
@@ -148,7 +147,7 @@ class HomeViewModel {
         return HomeDepartmentCellViewData(
             titleText: Localization.Home.recent_search,
             name: name,
-            code: code
+            code: department.codeDepartement
         )
     }
 
@@ -220,10 +219,10 @@ extension HomeViewModel: HomeViewModelProvider {
         else {
             return
         }
-        delegate?.presentVaccinationCentres(for: department)
+        delegate?.presentVaccinationCentres(for: department.asLocationSearchResult)
     }
 
-    func didSelect(_ department: Department) {
-        delegate?.presentVaccinationCentres(for: department)
+    func didSelect(_ location: LocationSearchResult) {
+        delegate?.presentVaccinationCentres(for: location)
     }
 }

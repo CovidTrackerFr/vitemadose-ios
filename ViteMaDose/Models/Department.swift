@@ -10,16 +10,23 @@ import Foundation
 // MARK: - Department
 
 struct Department: Codable, Equatable {
-    let codeDepartement: String?
+    let codeDepartement: String
     let nomDepartement: String?
-    let codeRegion: Int?
-    let nomRegion: String?
 
     enum CodingKeys: String, CodingKey {
         case codeDepartement = "code_departement"
         case nomDepartement = "nom_departement"
-        case codeRegion = "code_region"
-        case nomRegion = "nom_region"
+    }
+}
+
+extension Department {
+    var asLocationSearchResult: LocationSearchResult {
+        return LocationSearchResult(
+            name: nomDepartement ?? "",
+            departmentCode: codeDepartement,
+            departmentCodes: [],
+            location: nil
+        )
     }
 }
 
