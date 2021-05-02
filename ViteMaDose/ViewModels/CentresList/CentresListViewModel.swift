@@ -9,7 +9,7 @@ import Foundation
 import SwiftDate
 import UIKit
 import PhoneNumberKit
-import APIRequest
+import Moya
 
 enum CentresListSection: CaseIterable {
     case heading
@@ -46,7 +46,7 @@ protocol CentresListViewModelDelegate: AnyObject {
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
-    private let apiService: APIServiceProvider
+    private let apiService: BaseAPIServiceProvider
     private let phoneNumberKit = PhoneNumberKit()
 
     private var allVaccinationCentres: [VaccinationCentre] = []
@@ -77,7 +77,7 @@ class CentresListViewModel {
     }
 
     init(
-        apiService: APIServiceProvider = APIService(),
+        apiService: BaseAPIServiceProvider = BaseAPIService(),
         county: County
     ) {
         self.apiService = apiService
@@ -205,7 +205,7 @@ class CentresListViewModel {
         )
     }
 
-    private func handleError(_ error: APIResponseStatus) {
+    private func handleError(_ error: Error) {
         delegate?.presentLoadError(error)
     }
 }
@@ -218,13 +218,13 @@ extension CentresListViewModel: CentresListViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        guard let countyCode = county.codeDepartement else {
+        guard let departmentCode = county.codeDepartement else {
             isLoading = false
-            handleError(APIResponseStatus.preconditionRequired)
+            handleError(NSError())
             return
         }
 
-        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] result in
+        apiService.fetchVaccinationCentres(departmentCode: departmentCode) { [weak self] result in
             self?.isLoading = false
 
             switch result {
