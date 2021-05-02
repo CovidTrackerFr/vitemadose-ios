@@ -14,7 +14,7 @@ struct City: Codable {
     let nom: String?
     let codePostal: String?
     let centre: Centre?
-    let departement: Departement?
+    let departement: CityDepartement?
 
     enum CodingKeys: String, CodingKey {
         case nom
@@ -50,13 +50,20 @@ extension City {
 
 // MARK: - Departement
 
-struct Departement: Codable {
+struct CityDepartement: Codable {
     let code: String?
     let nom: String?
 
     enum CodingKeys: String, CodingKey {
         case code
         case nom
+    }
+}
+
+extension CityDepartement {
+    var nearDepartments: [String]? {
+        guard let code = self.code else { return nil }
+        return NearDepartments.nearDepartmentsCodes(for: code)
     }
 }
 

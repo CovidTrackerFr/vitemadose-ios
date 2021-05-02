@@ -12,6 +12,7 @@
 		57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57044415263F0D1000F802F2 /* LocationSearchResult.swift */; };
 		5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */; };
 		5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */; };
+		5752DC63263F33D2004BA4BC /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5752DC62263F33D2004BA4BC /* PromiseKit */; };
 		575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC210262AD8F7008D1869 /* PhoneNumberKit */; };
 		575CC218262ADA0D008D1869 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC217262ADA0D008D1869 /* FirebaseRemoteConfig */; };
 		575CC21A262ADA0D008D1869 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC219262ADA0D008D1869 /* FirebaseAnalytics */; };
@@ -42,6 +43,10 @@
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
 		577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */; };
 		577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
+		5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785E60E263F3F7200E655FF /* NearDepartments.swift */; };
+		5785E612263F43EB00E655FF /* Departments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785E611263F43EB00E655FF /* Departments.swift */; };
+		5785E615263F446300E655FF /* departments.json in Resources */ = {isa = PBXBuildFile; fileRef = 5785E614263F446300E655FF /* departments.json */; };
+		5785E619263F448F00E655FF /* near_departments.json in Resources */ = {isa = PBXBuildFile; fileRef = 5785E618263F448F00E655FF /* near_departments.json */; };
 		5793482F2621E1E200F8A4A0 /* HomeStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5793482E2621E1E200F8A4A0 /* HomeStatsCell.xib */; };
 		5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */; };
 		579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */; };
@@ -87,7 +92,7 @@
 		DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA234DC22626494600D6F71C /* remote-configuration.plist */; };
 		DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA234DD02626506600D6F71C /* RemoteConfig.swift */; };
 		DA4D9953261E6B6A00D28AD0 /* DepartmentSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* DepartmentSelectionViewController.swift */; };
-		DA4D995E261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift */; };
+		DA4D995E261E6D6300D28AD0 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* LocationSearchViewModel.swift */; };
 		DA68647B2627A1CA005B2AC2 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68647A2627A1CA005B2AC2 /* AppAnalytics.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +155,10 @@
 		577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplayable.swift; sourceTree = "<group>"; };
 		577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorDisplayable.swift"; sourceTree = "<group>"; };
 		577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		5785E60E263F3F7200E655FF /* NearDepartments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearDepartments.swift; sourceTree = "<group>"; };
+		5785E611263F43EB00E655FF /* Departments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departments.swift; sourceTree = "<group>"; };
+		5785E614263F446300E655FF /* departments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departments.json; sourceTree = "<group>"; };
+		5785E618263F448F00E655FF /* near_departments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = near_departments.json; sourceTree = "<group>"; };
 		5793482E2621E1E200F8A4A0 /* HomeStatsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeStatsCell.xib; sourceTree = "<group>"; };
 		5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsCell.swift; sourceTree = "<group>"; };
 		579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Commons.swift"; sourceTree = "<group>"; };
@@ -195,7 +204,7 @@
 		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
 		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		DA4D9952261E6B6A00D28AD0 /* DepartmentSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectionViewController.swift; sourceTree = "<group>"; };
-		DA4D995D261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectionViewModel.swift; sourceTree = "<group>"; };
+		DA4D995D261E6D6300D28AD0 /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		DA68647A2627A1CA005B2AC2 /* AppAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalytics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */,
+				5752DC63263F33D2004BA4BC /* PromiseKit in Frameworks */,
 				57B7CD50262E28460065DD80 /* Haptica in Frameworks */,
 				57954763263E1A1700AD5DFD /* Moya in Frameworks */,
 				575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */,
@@ -374,6 +384,10 @@
 				576738C8261E32A2004A700D /* Assets.xcassets */,
 				57B6BEA92636153000D9AAC1 /* maintenance.html */,
 				57DEAA1826346FA7005E8628 /* Localization */,
+				5785E60E263F3F7200E655FF /* NearDepartments.swift */,
+				5785E611263F43EB00E655FF /* Departments.swift */,
+				5785E614263F446300E655FF /* departments.json */,
+				5785E618263F448F00E655FF /* near_departments.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -481,7 +495,7 @@
 		57AD21E9262106E100ED2B95 /* LocationSearch */ = {
 			isa = PBXGroup;
 			children = (
-				DA4D995D261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift */,
+				DA4D995D261E6D6300D28AD0 /* LocationSearchViewModel.swift */,
 			);
 			path = LocationSearch;
 			sourceTree = "<group>";
@@ -589,6 +603,7 @@
 				575CC21B262ADA0D008D1869 /* FirebaseCrashlytics */,
 				57B7CD4F262E28460065DD80 /* Haptica */,
 				57954762263E1A1700AD5DFD /* Moya */,
+				5752DC62263F33D2004BA4BC /* PromiseKit */,
 			);
 			productName = ViteMaDose;
 			productReference = 576738BC261E329C004A700D /* ViteMaDose.app */;
@@ -646,6 +661,7 @@
 				575CC216262ADA0D008D1869 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57B7CD4E262E28460065DD80 /* XCRemoteSwiftPackageReference "Haptica" */,
 				57954761263E1A1600AD5DFD /* XCRemoteSwiftPackageReference "Moya" */,
+				5752DC61263F33D2004BA4BC /* XCRemoteSwiftPackageReference "PromiseKit" */,
 			);
 			productRefGroup = 576738BD261E329C004A700D /* Products */;
 			projectDirPath = "";
@@ -669,6 +685,7 @@
 				57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */,
 				57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */,
 				57AD21EE2621073200ED2B95 /* DepartmentSelectionViewController.storyboard in Resources */,
+				5785E615263F446300E655FF /* departments.json in Resources */,
 				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
 				57C401972623929800EFFCA3 /* HomeDepartmentCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */,
@@ -683,6 +700,7 @@
 				57EC46FF262B1DC500FBA991 /* HomeTitleCell.xib in Resources */,
 				5793482F2621E1E200F8A4A0 /* HomeStatsCell.xib in Resources */,
 				576738C9261E32A2004A700D /* Assets.xcassets in Resources */,
+				5785E619263F448F00E655FF /* near_departments.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +819,7 @@
 				57954769263E1B3D00AD5DFD /* GeoAPIService.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */,
 				57DEAA1326346D9D005E8628 /* FormatterUtils.swift in Sources */,
+				5785E612263F43EB00E655FF /* Departments.swift in Sources */,
 				5795BE102633540C00A44849 /* String+Commons.swift in Sources */,
 				577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */,
 				57673917261E3B1A004A700D /* UITableView+Commons.swift in Sources */,
@@ -823,8 +842,9 @@
 				57C4018726238E4900EFFCA3 /* DepartmentSelectionHeaderView.swift in Sources */,
 				DA4D9953261E6B6A00D28AD0 /* DepartmentSelectionViewController.swift in Sources */,
 				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
+				5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */,
 				5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */,
-				DA4D995E261E6D6300D28AD0 /* DepartmentSelectionViewModel.swift in Sources */,
+				DA4D995E261E6D6300D28AD0 /* LocationSearchViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,
 				57954771263E1D1D00AD5DFD /* CachePolicyPlugin.swift in Sources */,
 				57954766263E1B2600AD5DFD /* BaseAPIService.swift in Sources */,
@@ -1158,6 +1178,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5752DC61263F33D2004BA4BC /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.3;
+			};
+		};
 		575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
@@ -1201,6 +1229,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5752DC62263F33D2004BA4BC /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5752DC61263F33D2004BA4BC /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
 		575CC210262AD8F7008D1869 /* PhoneNumberKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;

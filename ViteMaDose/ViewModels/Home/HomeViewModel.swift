@@ -50,7 +50,7 @@ class HomeViewModel {
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
-    var departments: Departments = []
+    let departments: Departments
     var stats: Stats?
 
     private var isLoading = false {
@@ -69,16 +69,17 @@ class HomeViewModel {
 
     required init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
+        departments: Departments = Department.list,
         userDefaults: UserDefaults = .shared
     ) {
         self.apiService = apiService
+        self.departments = departments
         self.userDefaults = userDefaults
     }
 
     // MARK: Handle API result
 
-    private func handleInitialLoad(departments: Departments, stats: Stats) {
-        self.departments = departments
+    private func handleInitialLoad(stats: Stats) {
         self.stats = stats
 
         updateHeadingCells()
@@ -138,16 +139,15 @@ class HomeViewModel {
     private func getLastSelectedDepartmentCellViewData() -> HomeDepartmentCellViewData? {
         guard
             let lastSelectedDepartmentCode = userDefaults.lastSelectedDepartmentCode,
-            let department = departments.first(where: { $0.codeDepartement == lastSelectedDepartmentCode}),
-            let name = department.nomDepartement
+            let department = departments.first(where: { $0.code == lastSelectedDepartmentCode})
         else {
             return nil
         }
 
         return HomeDepartmentCellViewData(
             titleText: Localization.Home.recent_search,
-            name: name,
-            code: department.codeDepartement
+            name: department.name,
+            code: department.code
         )
     }
 
@@ -168,19 +168,11 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchDepartments { [weak self] result in
+        apiService.fetchStats { [weak self] result in
             switch result {
-            case let .success(departments):
-                self?.apiService.fetchStats { result in
-                    switch result {
-                    case let .success(stats):
-                        self?.handleInitialLoad(departments: departments, stats: stats)
-                        self?.isLoading = false
-                    case let .failure(status):
-                        self?.handleInitialLoadError(status)
-                        self?.isLoading = false
-                    }
-                }
+            case let .success(stats):
+                self?.handleInitialLoad(stats: stats)
+                self?.isLoading = false
             case let .failure(status):
                 self?.handleInitialLoadError(status)
                 self?.isLoading = false
@@ -215,7 +207,7 @@ extension HomeViewModel: HomeViewModelProvider {
     func didSelectLastDepartment() {
         guard
             let code = userDefaults.lastSelectedDepartmentCode,
-            let department = departments.first(where: { $0.codeDepartement == code})
+            let department = departments.first(where: { $0.code == code})
         else {
             return
         }

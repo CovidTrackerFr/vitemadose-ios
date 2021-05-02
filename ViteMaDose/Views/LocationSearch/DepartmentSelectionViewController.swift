@@ -17,7 +17,7 @@ class DepartmentSelectionViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     weak var delegate: DepartmentSelectionViewControllerDelegate?
 
-    var viewModel: DepartmentSelectionViewModel!
+    var viewModel: LocationSearchViewModel!
 
     private typealias Snapshot = NSDiffableDataSourceSnapshot<LocationSearchSection, LocationSearchCell>
     private lazy var dataSource = makeDataSource()
@@ -97,7 +97,7 @@ extension DepartmentSelectionViewController: UITableViewDelegate {
 
 // MARK: - DepartmentSelection ViewModelDelegate
 
-extension DepartmentSelectionViewController: DepartmentSelectionViewModelDelegate {
+extension DepartmentSelectionViewController: LocationSearchViewModelDelegate {
     func reloadTableView(with cells: [LocationSearchCell]) {
         var snapshot = Snapshot()
         snapshot.appendSections(LocationSearchSection.allCases)

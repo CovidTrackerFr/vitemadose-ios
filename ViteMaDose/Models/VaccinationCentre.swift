@@ -74,3 +74,5 @@ struct VaccinationCentres: Codable, Equatable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
+
+typealias LocationVaccinationCentres = [VaccinationCentres]

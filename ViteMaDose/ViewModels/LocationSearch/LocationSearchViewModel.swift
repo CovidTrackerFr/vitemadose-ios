@@ -1,5 +1,5 @@
 //
-//  DepartmentSelectionViewModel.swift
+//  LocationSearchViewModel.swift
 //  ViteMaDose
 //
 //  Created by Paul Jeannot on 08/04/2021.
@@ -39,23 +39,23 @@ enum LocationSearchStrategy {
     }
 }
 
-protocol DepartmentSelectionViewModelProvider {
+protocol LocationSearchViewModelProvider {
     func loadDepartments()
     func search(query: String)
     func didSelectCell(at indexPath: IndexPath)
 }
 
-protocol DepartmentSelectionViewModelDelegate: AnyObject {
+protocol LocationSearchViewModelDelegate: AnyObject {
     func reloadTableView(with cells: [LocationSearchCell])
     func dismissViewController(with department: LocationSearchResult)
 }
 
-// MARK: - DepartmentSelectionViewModel
+// MARK: - LocationSearchViewModel
 
-class DepartmentSelectionViewModel: DepartmentSelectionViewModelProvider {
+class LocationSearchViewModel: LocationSearchViewModelProvider {
     private let geoAPIService: GeoAPIServiceProvider
     private let userDefaults: UserDefaults
-    weak var delegate: DepartmentSelectionViewModelDelegate?
+    weak var delegate: LocationSearchViewModelDelegate?
 
     private let departments: Departments
     private var searchResults: [LocationSearchResult] = [] {
@@ -107,8 +107,7 @@ class DepartmentSelectionViewModel: DepartmentSelectionViewModelProvider {
                 return LocationSearchResult(
                     name: cityName,
                     departmentCode: departmentCode,
-                    // TODO: Near departments
-                    departmentCodes: [],
+                    departmentCodes: city.departement?.nearDepartments ?? [],
                     location: city.location
                 )
             }
