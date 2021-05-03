@@ -95,7 +95,7 @@ class CentresListViewModel {
         let availableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.centresDisponibles))
         let unavailableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.centresIndisponibles))
 
-        vaccinationCentresList = availableCentres + unavailableCentres
+        vaccinationCentresList = (availableCentres + unavailableCentres).uniqued()
 
         let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
         let vaccinationCentreCellsViewData = vaccinationCentresList.map(getVaccinationCentreViewData)
