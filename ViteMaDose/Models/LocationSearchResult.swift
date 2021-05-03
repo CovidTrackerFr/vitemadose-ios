@@ -11,7 +11,7 @@ import MapKit
 struct LocationSearchResult: Codable, Hashable {
     let name: String
     let departmentCode: String
-    let departmentCodes: [String]
+    let nearDepartmentCodes: [String]
     let coordinates: Coordinates?
 
     struct Coordinates: Codable, Hashable {

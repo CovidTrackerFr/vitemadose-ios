@@ -104,7 +104,7 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
                 return LocationSearchResult(
                     name: name,
                     departmentCode: departmentCode,
-                    departmentCodes: city.departement?.nearDepartments ?? [],
+                    nearDepartmentCodes: city.departement?.nearDepartments ?? [],
                     coordinates: city.coordinates
                 )
             }
