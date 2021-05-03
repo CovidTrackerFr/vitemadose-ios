@@ -52,7 +52,7 @@
 		579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */; };
 		5793484C262241B900F8A4A0 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793484B262241B900F8A4A0 /* Stats.swift */; };
 		57954763263E1A1700AD5DFD /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 57954762263E1A1700AD5DFD /* Moya */; };
-		57954766263E1B2600AD5DFD /* GeoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57954765263E1B2600AD5DFD /* GeoAPI.swift */; };
+		57954766263E1B2600AD5DFD /* GeoAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57954765263E1B2600AD5DFD /* GeoAPIService.swift */; };
 		57954769263E1B3D00AD5DFD /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57954768263E1B3D00AD5DFD /* BaseAPIService.swift */; };
 		5795476D263E1C1B00AD5DFD /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795476C263E1C1B00AD5DFD /* City.swift */; };
 		57954771263E1D1D00AD5DFD /* CachePolicyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57954770263E1D1D00AD5DFD /* CachePolicyPlugin.swift */; };
@@ -163,7 +163,7 @@
 		5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsCell.swift; sourceTree = "<group>"; };
 		579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Commons.swift"; sourceTree = "<group>"; };
 		5793484B262241B900F8A4A0 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
-		57954765263E1B2600AD5DFD /* GeoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoAPI.swift; sourceTree = "<group>"; };
+		57954765263E1B2600AD5DFD /* GeoAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoAPIService.swift; sourceTree = "<group>"; };
 		57954768263E1B3D00AD5DFD /* BaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
 		5795476C263E1C1B00AD5DFD /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		57954770263E1D1D00AD5DFD /* CachePolicyPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachePolicyPlugin.swift; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 			children = (
 				DA234DD02626506600D6F71C /* RemoteConfig.swift */,
 				57954768263E1B3D00AD5DFD /* BaseAPIService.swift */,
-				57954765263E1B2600AD5DFD /* GeoAPI.swift */,
+				57954765263E1B2600AD5DFD /* GeoAPIService.swift */,
 				57954770263E1D1D00AD5DFD /* CachePolicyPlugin.swift */,
 			);
 			path = Networking;
@@ -846,7 +846,7 @@
 				DA4D995E261E6D6300D28AD0 /* LocationSearchViewModel.swift in Sources */,
 				5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */,
 				57954771263E1D1D00AD5DFD /* CachePolicyPlugin.swift in Sources */,
-				57954766263E1B2600AD5DFD /* GeoAPI.swift in Sources */,
+				57954766263E1B2600AD5DFD /* GeoAPIService.swift in Sources */,
 				57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */,
 				57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */,
 				5793484C262241B900F8A4A0 /* Stats.swift in Sources */,

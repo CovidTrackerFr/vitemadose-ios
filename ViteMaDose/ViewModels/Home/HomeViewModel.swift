@@ -91,16 +91,13 @@ class HomeViewModel {
     private func updateHeadingCells() {
         let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0)
         let departmentSelectionViewData = HomeSearchBarCellViewData()
-        let lastSelectedDepartmentViewData = getLastSelectedDepartmentCellViewData()
+        let lastSelectedDepartmentViewData = getRecentSearchResultsViewData()
 
         headingCells = [
             .title(titleCellViewData),
             .searchBar(departmentSelectionViewData)
         ]
-
-        for viewData in lastSelectedDepartmentViewData {
-            headingCells.append(.searchResult(viewData))
-        }
+        headingCells.append(contentsOf: lastSelectedDepartmentViewData.map(HomeCell.searchResult))
     }
 
     private func updateStatsCells() {
@@ -125,7 +122,7 @@ class HomeViewModel {
         ]
     }
 
-    private func getLastSelectedDepartmentCellViewData() -> [HomeSearchResultCellViewData] {
+    private func getRecentSearchResultsViewData() -> [HomeSearchResultCellViewData] {
         let lastSearchResults = userDefaults.lastSearchResult
         return lastSearchResults.enumerated().map { index, location in
             HomeSearchResultCellViewData(

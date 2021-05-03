@@ -12,13 +12,11 @@ import MapKit
 
 struct City: Codable {
     let nom: String?
-    let codePostal: String?
     let centre: Centre?
     let departement: CityDepartement?
 
     enum CodingKeys: String, CodingKey {
         case nom
-        case codePostal = "code"
         case centre
         case departement
     }
@@ -49,7 +47,7 @@ extension City {
     }
 }
 
-// MARK: - Departement
+// MARK: - City Departement
 
 struct CityDepartement: Codable {
     let code: String?

@@ -25,7 +25,6 @@ class LocationSearchViewController: UIViewController, Storyboarded {
 
     private lazy var departmentSelectionHeaderView: LocationSearchHeaderView = {
         let view: LocationSearchHeaderView = LocationSearchHeaderView.instanceFromNib()
-        view.searchBar.placeholder = "Commune, départment, code postal"
         view.searchBar.textContentType = .addressCity
         view.searchBar.delegate = self
         return view

@@ -87,22 +87,14 @@ class CentresListViewModel {
         delegate?.reloadTableViewFooter(with: footerText)
     }
 
-    private func handleReload(with vaccinationCentres: [VaccinationCentres]) {
+    private func handleReload(with vaccinationCentres: LocationVaccinationCentres) {
         handleLoad(with: vaccinationCentres, animated: true)
     }
 
     private func updateCells() {
-        let availableCentres = locationVaccinationCentres
-            .flatMap(\.centresDisponibles)
-            .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
-            .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
+        let availableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.centresDisponibles))
+        let unavailableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.centresIndisponibles))
 
-        let unavailableCentres =  locationVaccinationCentres
-            .flatMap(\.centresIndisponibles)
-            .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
-            .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
-
-        let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
         vaccinationCentresList = availableCentres + unavailableCentres
 
         let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
@@ -128,7 +120,7 @@ class CentresListViewModel {
             .stats(statsCellViewData)
         ]
 
-        guard !isEmpty else {
+        guard !vaccinationCentresList.isEmpty else {
             centresCells.removeAll()
             return
         }
@@ -160,7 +152,13 @@ class CentresListViewModel {
         footerText = Localization.Location.last_update.format(lastUpdateDay, lastUpdateTime)
     }
 
-    func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
+    private func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
+        return centres
+            .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
+            .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
+    }
+
+    private func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
@@ -202,16 +200,23 @@ extension CentresListViewModel: CentresListViewModelProvider {
 
         when(resolved: departmentsToLoad).done { [weak self] results in
             self?.isLoading = false
-            let vaccinationCentres = results
-                .compactMap { result -> VaccinationCentres? in
-                    switch result {
-                    case let .fulfilled(centres):
-                        return centres
-                    case .rejected:
-                        return nil
-                    }
+            var errors: [Error] = []
+
+            let vaccinationCentres = results.compactMap { result -> VaccinationCentres? in
+                switch result {
+                case let .fulfilled(centres):
+                    return centres
+                case let .rejected(error):
+                    errors.append(error)
+                    return nil
                 }
-            self?.handleLoad(with: vaccinationCentres, animated: animated)
+            }
+
+            if let error = errors.first {
+                self?.handleError(error)
+            } else {
+                self?.handleLoad(with: vaccinationCentres, animated: animated)
+            }
         }
     }
 

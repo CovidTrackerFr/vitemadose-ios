@@ -126,21 +126,29 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
             assertionFailure("Search result not found at indexPath \(indexPath)")
             return
         }
+
         var lastSearchResults = userDefaults.lastSearchResult
         guard !lastSearchResults.contains(searchResult) else {
             delegate?.dismissViewController(with: searchResult)
             return
         }
 
-        if lastSearchResults.count >= 3 {
-            lastSearchResults.insert(searchResult, at: 0)
-            lastSearchResults.removeLast()
-        } else {
-            lastSearchResults.append(searchResult)
-        }
-
+        updateLastSearchResults(withSearchResult: searchResult, in: &lastSearchResults)
         userDefaults.lastSearchResult = lastSearchResults
         delegate?.dismissViewController(with: searchResult)
+    }
+
+    private func updateLastSearchResults(
+        withSearchResult searchResult: LocationSearchResult,
+        in localSearchResults: inout [LocationSearchResult]
+    ) {
+        // Limit list to 3 results
+        if localSearchResults.count >= 3 {
+            localSearchResults.insert(searchResult, at: 0)
+            localSearchResults.removeLast()
+        } else {
+            localSearchResults.append(searchResult)
+        }
     }
 
     private func updateCells() {

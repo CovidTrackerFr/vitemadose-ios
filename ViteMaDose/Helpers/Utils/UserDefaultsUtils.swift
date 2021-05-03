@@ -41,7 +41,7 @@ extension UserDefaults {
         case lastSearchResult
     }
 
-    // MARK: Last Selected Search Result
+    // MARK: Last Selected Search Results
 
     var lastSearchResult: [LocationSearchResult] {
         get {
