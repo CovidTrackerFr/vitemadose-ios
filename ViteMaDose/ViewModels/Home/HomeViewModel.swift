@@ -17,8 +17,8 @@ enum HomeSection: CaseIterable {
 
 enum HomeCell: Hashable {
     case title(HomeTitleCellViewData)
-    case departmentSelection(HomeDepartmentSelectionViewData)
-    case department(HomeDepartmentCellViewData)
+    case departmentSelection(HomeSearchBarCellViewData)
+    case department(HomeSearchResultCellViewData)
     case stats(HomeCellStatsViewData)
 }
 
@@ -98,7 +98,7 @@ class HomeViewModel {
 
     private func updateHeadingCells() {
         let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0)
-        let departmentSelectionViewData = HomeDepartmentSelectionViewData()
+        let departmentSelectionViewData = HomeSearchBarCellViewData()
         let lastSelectedDepartmentViewData = getLastSelectedDepartmentCellViewData()
 
         headingCells = [
@@ -133,11 +133,11 @@ class HomeViewModel {
         ]
     }
 
-    private func getLastSelectedDepartmentCellViewData() -> [HomeDepartmentCellViewData] {
+    private func getLastSelectedDepartmentCellViewData() -> [HomeSearchResultCellViewData] {
         let lastSearchResults = userDefaults.lastSearchResult
         return lastSearchResults.enumerated().map { index, location in
-            HomeDepartmentCellViewData(
-                titleText: index == 0 ? Localization.Home.recent_search : nil,
+            HomeSearchResultCellViewData(
+                titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
                 name: location.name,
                 code: location.departmentCode
             )

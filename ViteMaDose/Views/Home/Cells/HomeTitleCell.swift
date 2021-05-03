@@ -14,7 +14,8 @@ protocol HomeTitleCellViewDataProvider {
     var bottomMargin: CGFloat { get }
 }
 
-struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable {
+struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable, Identifiable {
+    let id = UUID()
     let titleText: NSMutableAttributedString
     let subTitleText: NSMutableAttributedString?
     let topMargin: CGFloat

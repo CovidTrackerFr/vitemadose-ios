@@ -21,19 +21,20 @@ class LocationSearchHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .athensGray
+        searchBar.placeholder = Localization.LocationSearch.search_placeholder
         configureTitle()
     }
 
     private func configureTitle() {
         let attributedText = NSMutableAttributedString(
-            string: Localization.DepartmentSelection.MainTitle.title,
+            string: Localization.LocationSearch.MainTitle.title,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
         attributedText.setColorForText(
-            textForAttribute: Localization.DepartmentSelection.MainTitle.highlighted_text,
+            textForAttribute: Localization.LocationSearch.MainTitle.highlighted_text,
             withColor: Constant.highlightedTextColor
         )
         titleLabel.attributedText = attributedText

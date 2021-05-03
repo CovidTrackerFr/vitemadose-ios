@@ -111,7 +111,7 @@ class CentresListViewModel {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
                 withAppointmentsCount: appointmentsCount,
-                andDepartmentName: searchResult.name
+                andSearchResult: searchResult
             ),
             topMargin: 25,
             bottomMargin: 0

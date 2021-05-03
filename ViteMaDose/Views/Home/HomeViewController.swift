@@ -88,8 +88,8 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.tableFooterView = footerView
 
         tableView.register(cellType: HomeTitleCell.self)
-        tableView.register(cellType: HomeDepartmentSelectionCell.self)
-        tableView.register(cellType: HomeDepartmentCell.self)
+        tableView.register(cellType: HomeSearchBarCell.self)
+        tableView.register(cellType: HomeSearchResultCell.self)
         tableView.register(cellType: HomeStatsCell.self)
     }
 
@@ -230,11 +230,11 @@ extension HomeViewController {
             cell.configure(with: cellViewModel)
             return cell
         case let .departmentSelection(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeDepartmentSelectionCell.self, for: indexPath)
+            let cell = tableView.dequeueReusableCell(with: HomeSearchBarCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .department(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeDepartmentCell.self, for: indexPath)
+            let cell = tableView.dequeueReusableCell(with: HomeSearchResultCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .stats(cellViewModel):
@@ -245,7 +245,7 @@ extension HomeViewController {
     }
 }
 
-// MARK: - DepartmentSelection ViewController Delegate
+// MARK: - LocationSearch ViewController Delegate
 
 extension HomeViewController: LocationSearchViewControllerDelegate {
 

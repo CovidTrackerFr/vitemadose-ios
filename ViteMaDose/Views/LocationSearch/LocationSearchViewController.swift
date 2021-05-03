@@ -92,7 +92,7 @@ extension LocationSearchViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - DepartmentSelection ViewModelDelegate
+// MARK: - LocationSearch ViewModelDelegate
 
 extension LocationSearchViewController: LocationSearchViewModelDelegate {
     func reloadTableView(with cells: [LocationSearchCell]) {

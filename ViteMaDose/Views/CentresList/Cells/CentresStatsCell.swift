@@ -13,7 +13,8 @@ protocol CentresStatsCellViewDataProvider {
     var allCentresCount: Int { get }
 }
 
-struct CentresStatsCellViewData: CentresStatsCellViewDataProvider, Hashable {
+struct CentresStatsCellViewData: CentresStatsCellViewDataProvider, Hashable, Identifiable {
+    let id = UUID()
     let appointmentsCount: Int
     let availableCentresCount: Int
     let allCentresCount: Int

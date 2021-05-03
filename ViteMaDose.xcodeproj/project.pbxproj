@@ -19,8 +19,8 @@
 		575CC21A262ADA0D008D1869 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC219262ADA0D008D1869 /* FirebaseAnalytics */; };
 		575CC21C262ADA0D008D1869 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC21B262ADA0D008D1869 /* FirebaseCrashlytics */; };
 		575CC224262AECA7008D1869 /* HomeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC223262AECA7008D1869 /* HomeTitleCell.swift */; };
-		575CC22F262AF4E1008D1869 /* HomeDepartmentSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC22D262AF4E0008D1869 /* HomeDepartmentSelectionCell.swift */; };
-		575CC230262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575CC22E262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib */; };
+		575CC22F262AF4E1008D1869 /* HomeSearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */; };
+		575CC230262AF4E1008D1869 /* HomeSearchBarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 575CC22E262AF4E1008D1869 /* HomeSearchBarCell.xib */; };
 		57613EFD2625085000AB6F2F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFC2625085000AB6F2F /* SwiftDate */; };
 		57613EFF2625085000AB6F2F /* SwiftDateStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 57613EFE2625085000AB6F2F /* SwiftDateStatic */; };
 		57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57613F02262510D700AB6F2F /* PartnerLogo.swift */; };
@@ -80,8 +80,8 @@
 		57C4018126238ABC00EFFCA3 /* UIFont+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */; };
 		57C4018726238E4900EFFCA3 /* LocationSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4018626238E4900EFFCA3 /* LocationSearchHeaderView.swift */; };
 		57C4018F26238E5300EFFCA3 /* LocationSearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4018E26238E5300EFFCA3 /* LocationSearchHeaderView.xib */; };
-		57C401962623929800EFFCA3 /* HomeDepartmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401942623929800EFFCA3 /* HomeDepartmentCell.swift */; };
-		57C401972623929800EFFCA3 /* HomeDepartmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401952623929800EFFCA3 /* HomeDepartmentCell.xib */; };
+		57C401962623929800EFFCA3 /* HomeSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401942623929800EFFCA3 /* HomeSearchResultCell.swift */; };
+		57C401972623929800EFFCA3 /* HomeSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401952623929800EFFCA3 /* HomeSearchResultCell.xib */; };
 		57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401A8262426B100EFFCA3 /* CentreCell.swift */; };
 		57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* CentreCell.xib */; };
 		57DEAA03263444BB005E8628 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 57DEAA05263444BB005E8628 /* Localizable.stringsdict */; };
@@ -128,8 +128,8 @@
 		57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchResultCell.xib; sourceTree = "<group>"; };
 		57493FDC26403F5100F7E662 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		575CC223262AECA7008D1869 /* HomeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleCell.swift; sourceTree = "<group>"; };
-		575CC22D262AF4E0008D1869 /* HomeDepartmentSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDepartmentSelectionCell.swift; sourceTree = "<group>"; };
-		575CC22E262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDepartmentSelectionCell.xib; sourceTree = "<group>"; };
+		575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchBarCell.swift; sourceTree = "<group>"; };
+		575CC22E262AF4E1008D1869 /* HomeSearchBarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSearchBarCell.xib; sourceTree = "<group>"; };
 		57613F02262510D700AB6F2F /* PartnerLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerLogo.swift; sourceTree = "<group>"; };
 		576738BC261E329C004A700D /* ViteMaDose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViteMaDose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576738BF261E329C004A700D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -190,8 +190,8 @@
 		57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Commons.swift"; sourceTree = "<group>"; };
 		57C4018626238E4900EFFCA3 /* LocationSearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchHeaderView.swift; sourceTree = "<group>"; };
 		57C4018E26238E5300EFFCA3 /* LocationSearchHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchHeaderView.xib; sourceTree = "<group>"; };
-		57C401942623929800EFFCA3 /* HomeDepartmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDepartmentCell.swift; sourceTree = "<group>"; };
-		57C401952623929800EFFCA3 /* HomeDepartmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDepartmentCell.xib; sourceTree = "<group>"; };
+		57C401942623929800EFFCA3 /* HomeSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchResultCell.swift; sourceTree = "<group>"; };
+		57C401952623929800EFFCA3 /* HomeSearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSearchResultCell.xib; sourceTree = "<group>"; };
 		57C401A8262426B100EFFCA3 /* CentreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCell.swift; sourceTree = "<group>"; };
 		57C401A9262426B100EFFCA3 /* CentreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentreCell.xib; sourceTree = "<group>"; };
 		57DEAA04263444BB005E8628 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -463,10 +463,10 @@
 				57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */,
 				5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */,
 				5793482E2621E1E200F8A4A0 /* HomeStatsCell.xib */,
-				575CC22D262AF4E0008D1869 /* HomeDepartmentSelectionCell.swift */,
-				575CC22E262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib */,
-				57C401942623929800EFFCA3 /* HomeDepartmentCell.swift */,
-				57C401952623929800EFFCA3 /* HomeDepartmentCell.xib */,
+				575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */,
+				575CC22E262AF4E1008D1869 /* HomeSearchBarCell.xib */,
+				57C401942623929800EFFCA3 /* HomeSearchResultCell.swift */,
+				57C401952623929800EFFCA3 /* HomeSearchResultCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -687,13 +687,13 @@
 				57AD21EE2621073200ED2B95 /* LocationSearchViewController.storyboard in Resources */,
 				5785E615263F446300E655FF /* departments.json in Resources */,
 				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
-				57C401972623929800EFFCA3 /* HomeDepartmentCell.xib in Resources */,
+				57C401972623929800EFFCA3 /* HomeSearchResultCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */,
 				577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */,
 				57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */,
 				579D713226373A030021CB56 /* GoogleService-Info-debug.plist in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
-				575CC230262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib in Resources */,
+				575CC230262AF4E1008D1869 /* HomeSearchBarCell.xib in Resources */,
 				57B2BCA32633B254001B3D61 /* Localizable.strings in Resources */,
 				57DEAA03263444BB005E8628 /* Localizable.stringsdict in Resources */,
 				57AF504B262CDB3D0085E3C1 /* CentresStatsCell.xib in Resources */,
@@ -815,7 +815,7 @@
 				57B6BEA42636060200D9AAC1 /* MaintenanceViewController.swift in Sources */,
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,
 				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
-				575CC22F262AF4E1008D1869 /* HomeDepartmentSelectionCell.swift in Sources */,
+				575CC22F262AF4E1008D1869 /* HomeSearchBarCell.swift in Sources */,
 				57954769263E1B3D00AD5DFD /* GeoAPIService.swift in Sources */,
 				5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */,
 				57DEAA1326346D9D005E8628 /* FormatterUtils.swift in Sources */,
@@ -857,7 +857,7 @@
 				57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */,
 				57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */,
 				57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */,
-				57C401962623929800EFFCA3 /* HomeDepartmentCell.swift in Sources */,
+				57C401962623929800EFFCA3 /* HomeSearchResultCell.swift in Sources */,
 				57ECA227262B031F001B368F /* UserDefaultsUtils.swift in Sources */,
 				579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */,
 				57673930261E3BC5004A700D /* HomeViewController.swift in Sources */,
