@@ -18,7 +18,6 @@ protocol CentreViewDataProvider {
     var vaccineTypesText: String? { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
-    var url: URL? { get }
     var partnerLogo: UIImage? { get }
 }
 
@@ -33,7 +32,6 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
     let vaccineTypesText: String?
     let appointmentsCount: Int?
     let isAvailable: Bool
-    let url: URL?
     let partnerLogo: UIImage?
 }
 

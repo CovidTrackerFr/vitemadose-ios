@@ -28,3 +28,26 @@ extension LocationSearchResult.Coordinates {
         )
     }
 }
+
+extension LocationSearchResult {
+    func filterVaccinationCentreByDistance(vaccinationCentre: VaccinationCentre) -> Bool {
+        guard
+            let searchResultLocation = coordinates?.asCCLocation,
+            let vaccinationCentreCoordinates = vaccinationCentre.locationAsCLLocation
+        else {
+            return true
+        }
+        return searchResultLocation.distance(from: vaccinationCentreCoordinates) <= AppConstant.maximumVaccinationCentresDistanceInMeters
+    }
+
+    func sortVaccinationCentresByLocation(_ lhs: VaccinationCentre, _ rhs: VaccinationCentre) -> Bool {
+        guard
+            let baseLocation = coordinates?.asCCLocation,
+            let lhsLocation = lhs.locationAsCLLocation,
+            let rhsLocation = rhs.locationAsCLLocation
+        else {
+            return false
+        }
+        return lhsLocation.distance(from: baseLocation) < rhsLocation.distance(from: baseLocation)
+    }
+}

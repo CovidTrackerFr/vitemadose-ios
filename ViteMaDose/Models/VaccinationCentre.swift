@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import MapKit
+import PhoneNumberKit
+import SwiftDate
 
 // MARK: - VaccinationCentre
 
@@ -58,6 +61,84 @@ extension VaccinationCentre {
             case phoneNumber = "phone_number"
             case businessHours = "business_hours"
         }
+    }
+}
+
+extension VaccinationCentre {
+    var isAvailable: Bool {
+        return prochainRdv != nil
+    }
+
+    var nextAppointmentDay: String? {
+        return prochainRdv?.toString(with: .date(.long), region: AppConstant.franceRegion)
+    }
+
+    var nextAppointmentTime: String? {
+        return prochainRdv?.toString(with: .time(.short), region: AppConstant.franceRegion)
+    }
+
+    var appointmentUrl: URL? {
+        guard
+            let urlString = self.url,
+            let url = URL(string: urlString),
+            url.isValid
+        else {
+            return nil
+        }
+        return URL(string: urlString)
+    }
+
+    var phoneUrl: URL? {
+        guard
+            let phoneNumber = metadata?.phoneNumber,
+            let phoneNumberUrl = URL(string: "tel://\(phoneNumber)"),
+            phoneNumberUrl.isValid
+        else {
+            return nil
+        }
+        return phoneNumberUrl
+    }
+
+    var locationAsCLLocation: CLLocation? {
+        guard
+            let latitude = location?.latitude,
+            let longitude = location?.longitude
+        else {
+            return nil
+        }
+        return CLLocation(
+            latitude: latitude,
+            longitude: longitude
+        )
+    }
+
+    func formattedCentreName(selectedLocation: CLLocation?) -> String {
+        guard var name = nom else {
+            return Localization.Location.unavailable_name
+        }
+
+        if
+            let location = locationAsCLLocation,
+            let selectedLocation = selectedLocation
+        {
+            // Add distance in kilometres
+            let distanceInKm = location.distance(from: selectedLocation) / 1000
+            let formattedDistance = String(format: "%.1f", distanceInKm)
+            name.append(String.space + "(\(formattedDistance) km)")
+        }
+
+        return name
+    }
+
+    func formattedPhoneNumber(_ phoneNumberKit: PhoneNumberKit) -> String? {
+        guard let metaDataPhoneNumber = metadata?.phoneNumber else { return nil }
+        let parsedPhoneNumber = try? phoneNumberKit.parse(
+            metaDataPhoneNumber,
+            withRegion: "FR",
+            ignoreType: true
+        )
+        guard let phoneNumber = parsedPhoneNumber else { return nil }
+        return phoneNumberKit.format(phoneNumber, toType: .national)
     }
 }
 

@@ -46,6 +46,10 @@ protocol CentresListViewModelDelegate: AnyObject {
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
+    private enum Constant {
+        static let maximumDistanceInKm = 75.0
+    }
+
     private let apiService: BaseAPIServiceProvider
     private let phoneNumberKit = PhoneNumberKit()
 
@@ -57,12 +61,6 @@ class CentresListViewModel {
             delegate?.updateLoadingState(isLoading: isLoading, isEmpty: vaccinationCentresList.isEmpty)
         }
     }
-
-    private lazy var region = Region(
-        calendar: Calendar.current,
-        zone: Zones.current,
-        locale: Locale(identifier: "fr_FR")
-    )
 
     private var headingCells: [CentresListCell] = []
     private var centresCells: [CentresListCell] = []
@@ -94,14 +92,21 @@ class CentresListViewModel {
     }
 
     private func updateCells() {
-        let availableCentres = locationVaccinationCentres.flatMap(\.centresDisponibles)
-        let unavailableCentres =  locationVaccinationCentres.flatMap(\.centresIndisponibles)
+        let availableCentres = locationVaccinationCentres
+            .flatMap(\.centresDisponibles)
+            .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
+            .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
+
+        let unavailableCentres =  locationVaccinationCentres
+            .flatMap(\.centresIndisponibles)
+            .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
+            .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
 
         let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
         vaccinationCentresList = availableCentres + unavailableCentres
 
         let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
-        let vaccinationCentreCellsViewData = vaccinationCentresList.map({ getVaccinationCentreViewData($0) })
+        let vaccinationCentreCellsViewData = vaccinationCentresList.map(getVaccinationCentreViewData)
 
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
@@ -141,7 +146,11 @@ class CentresListViewModel {
     }
 
     private func updateFooterText() {
-        guard let lastUpdate = locationVaccinationCentres.first?.lastUpdated?.toDate(nil, region: region) else {
+        guard let lastUpdate = locationVaccinationCentres
+                .first?
+                .lastUpdated?
+                .toDate(nil, region: AppConstant.franceRegion)
+        else {
             footerText = nil
             return
         }
@@ -152,51 +161,25 @@ class CentresListViewModel {
     }
 
     func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
-        var url: URL?
-        if let urlString = centre.url {
-            url = URL(string: urlString)
-        }
-
-        let isAvailable = centre.prochainRdv != nil
-
-        let nextAppointment = centre.prochainRdv
-        let dayString = nextAppointment?.toString(with: .date(.long), region: region)
-        let timeString = nextAppointment?.toString(with: .time(.short), region: region)
-
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable
+        let bookingButtonText = centre.isAvailable
             ? Localization.Location.book_button + String.space
             : Localization.Location.verify_button + String.space
 
-        var phoneText: String?
-        if let phoneNumber = centre.metadata?.phoneNumber {
-            do {
-                let parsedPhoneNumber = try phoneNumberKit.parse(
-                    phoneNumber,
-                    withRegion: "FR",
-                    ignoreType: true
-                )
-                phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
-            } catch {
-                phoneText = phoneNumber
-            }
-        }
-
         return CentreViewData(
-            dayText: dayString,
-            timeText: timeString,
-            addressNameText: centre.nom ?? Localization.Location.unavailable_name,
+            dayText: centre.nextAppointmentDay,
+            timeText: centre.nextAppointmentTime,
+            addressNameText: centre.formattedCentreName(selectedLocation: searchResult.coordinates?.asCCLocation),
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
-            phoneText: phoneText,
+            phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
             appointmentsCount: centre.appointmentCount,
-            isAvailable: isAvailable,
-            url: url,
+            isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo
         )
     }
@@ -258,28 +241,14 @@ extension CentresListViewModel: CentresListViewModelProvider {
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
-        guard
-            let vaccinationCentre = vaccinationCentresList[safe: indexPath.row],
-            let phoneNumber = vaccinationCentre.metadata?.phoneNumber,
-            let phoneNumberUrl = URL(string: "tel://\(phoneNumber)"),
-            phoneNumberUrl.isValid
-        else {
-            return nil
-        }
-        return phoneNumberUrl
+        return vaccinationCentresList[safe: indexPath.row]?.phoneUrl
     }
 
     func bookingLink(at indexPath: IndexPath) -> URL? {
-        guard
-            let vaccinationCentre = vaccinationCentresList[safe: indexPath.row],
-            let bookingUrlString = vaccinationCentre.url,
-            let bookingUrl = URL(string: bookingUrlString),
-            bookingUrl.isValid
-        else {
+        guard let vaccinationCentre = vaccinationCentresList[safe: indexPath.row] else {
             return nil
         }
-
         AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
-        return bookingUrl
+        return vaccinationCentre.appointmentUrl
     }
 }

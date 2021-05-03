@@ -138,7 +138,7 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
         } else {
             lastSearchResults.append(searchResult)
         }
-        
+
         userDefaults.lastSearchResult = lastSearchResults
         delegate?.dismissViewController(with: searchResult)
     }

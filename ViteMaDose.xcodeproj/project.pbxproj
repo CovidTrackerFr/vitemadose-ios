@@ -12,6 +12,7 @@
 		57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57044415263F0D1000F802F2 /* LocationSearchResult.swift */; };
 		5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */; };
 		5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */; };
+		57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57493FDC26403F5100F7E662 /* AppConstant.swift */; };
 		5752DC63263F33D2004BA4BC /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5752DC62263F33D2004BA4BC /* PromiseKit */; };
 		575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC210262AD8F7008D1869 /* PhoneNumberKit */; };
 		575CC218262ADA0D008D1869 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC217262ADA0D008D1869 /* FirebaseRemoteConfig */; };
@@ -125,6 +126,7 @@
 		570E4273263893E5004A47F9 /* ViteMaDoseDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViteMaDoseDebug.entitlements; sourceTree = "<group>"; };
 		57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultCell.swift; sourceTree = "<group>"; };
 		57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchResultCell.xib; sourceTree = "<group>"; };
+		57493FDC26403F5100F7E662 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		575CC223262AECA7008D1869 /* HomeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleCell.swift; sourceTree = "<group>"; };
 		575CC22D262AF4E0008D1869 /* HomeDepartmentSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDepartmentSelectionCell.swift; sourceTree = "<group>"; };
 		575CC22E262AF4E1008D1869 /* HomeDepartmentSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDepartmentSelectionCell.xib; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				57DEAA1826346FA7005E8628 /* Localization */,
 				5785E614263F446300E655FF /* departments.json */,
 				5785E618263F448F00E655FF /* near_departments.json */,
+				57493FDC26403F5100F7E662 /* AppConstant.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -852,6 +855,7 @@
 				57C4017626235B6200EFFCA3 /* HomePartnersFooterView.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
 				57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */,
+				57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */,
 				57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */,
 				57C401962623929800EFFCA3 /* HomeDepartmentCell.swift in Sources */,
 				57ECA227262B031F001B368F /* UserDefaultsUtils.swift in Sources */,

@@ -25,6 +25,7 @@ struct City: Codable {
 }
 
 // MARK: - Centre
+
 struct Centre: Codable {
     let coordinates: [Double]
 
