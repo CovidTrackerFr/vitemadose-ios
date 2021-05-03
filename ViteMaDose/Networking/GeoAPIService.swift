@@ -1,45 +1,38 @@
 //
-//  BaseAPIService.swift
+//  GeoAPIService.swift
 //  ViteMaDose
 //
-//  Created by Victor Sarda on 01/05/2021.
+//  Created by Victor Sarda on 07/04/2021.
 //
 
 import Foundation
 import Moya
 
-// MARK: - Base API
+// MARK: - Geo API
 
-enum BaseAPI {
-    case departments
-    case stats
-    case vaccinationCentres(departmentCode: String)
+enum GeoAPI {
+    case citiesByName(name: String)
+    case citiesByPostCode(postCode: String)
 }
 
-extension BaseAPI: TargetType {
-    private static let remoteConfig = RemoteConfiguration.shared
-
+extension GeoAPI: TargetType {
+    static let limit = "15"
     var baseURL: URL {
-        let urlString = Self.remoteConfig.baseUrl
-        return URL(staticString: urlString)
+        return URL(staticString: "https://geo.api.gouv.fr/")
     }
 
     var path: String {
         switch self {
-        case .departments:
-            return Self.remoteConfig.departmentsPath
-        case .stats:
-            return Self.remoteConfig.statsPath
-        case let .vaccinationCentres(code):
-            return Self.remoteConfig.departmentPath(withCode: code)
+        case .citiesByName,
+             .citiesByPostCode:
+            return "communes"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .departments,
-             .stats,
-             .vaccinationCentres:
+        case .citiesByName,
+             .citiesByPostCode:
             return .get
         }
     }
@@ -48,83 +41,76 @@ extension BaseAPI: TargetType {
         return Data()
     }
 
-    var headers: [String: String]? {
-        return ["Content-type": "application/json"]
-    }
-
     var task: Task {
         switch self {
-        case .departments,
-             .stats,
-             .vaccinationCentres:
-            return .requestPlain
+        case let .citiesByName(name):
+            return .requestParameters(
+                parameters: [
+                    "nom": name,
+                    "fields": "codesPostaux,departement",
+                    "limit": Self.limit
+                ],
+                encoding: URLEncoding.queryString
+            )
+        case let .citiesByPostCode(postCode):
+            return .requestParameters(
+                parameters: [
+                    "codePostal": postCode,
+                    "fields": "codesPostaux,departement",
+                    "limit": Self.limit
+                ],
+                encoding: URLEncoding.queryString
+            )
         }
     }
 
-    var validationType: ValidationType {
-        return .successCodes
+    var headers: [String: String]? {
+        return ["Content-type": "application/json"]
     }
 }
 
-// MARK: - Base API Service
+// MARK: - API Service
 
-protocol BaseAPIServiceProvider: AnyObject {
-    var provider: MoyaProvider<BaseAPI> { get }
+protocol GeoAPIServiceProvider: AnyObject {
+    var provider: MoyaProvider<GeoAPI> { get }
 
-    func fetchDepartments(completion: @escaping (Result<Counties, Error>) -> Void)
-    func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void)
-    func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
+    func fetchCities(byPostCode code: String, completion: @escaping (Cities) -> Void)
+    func fetchCities(byName name: String, completion: @escaping (Cities) -> Void)
 }
 
-class BaseAPIService: BaseAPIServiceProvider {
-    let provider: MoyaProvider<BaseAPI>
+class GeoAPIService: GeoAPIServiceProvider {
+    let provider: MoyaProvider<GeoAPI>
 
-    init(provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>(plugins: [CachePolicyPlugin()])) {
+    init(provider: MoyaProvider<GeoAPI> = MoyaProvider<GeoAPI>()) {
         self.provider = provider
     }
 
-    func fetchDepartments(completion: @escaping (Result<Counties, Error>) -> Void) {
-        request(target: .departments, completion: completion)
+    func fetchCities(byPostCode code: String, completion: @escaping (Cities) -> Void) {
+        request(target: .citiesByPostCode(postCode: code), completion: completion)
     }
 
-    func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void) {
-        request(target: .stats, completion: completion)
-    }
-
-    func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void) {
-        request(target: .vaccinationCentres(departmentCode: departmentCode), completion: completion)
+    func fetchCities(byName name: String, completion: @escaping (Cities) -> Void) {
+        request(target: .citiesByName(name: name), completion: completion)
     }
 }
 
 // MARK: - Decode
 
-private extension BaseAPIService {
-    private func request<T: Decodable>(target: BaseAPI, completion: @escaping (Result<T, Error>) -> Void) {
+private extension GeoAPIService {
+    private func request(target: GeoAPI, completion: @escaping (Cities) -> Void) {
         provider.request(target) { result in
             switch result {
             case let .success(response):
                 do {
-                    let results = try JSONDecoder().decode(T.self, from: response.data)
-                    completion(.success(results))
-                } catch let error {
-                    completion(.failure(error))
+                    let filteredResponse = try response.filterSuccessfulStatusCodes()
+                    let cities = try JSONDecoder().decode(Cities.self, from: filteredResponse.data)
+                    completion(cities)
+                } catch {
+                    completion([])
                 }
-            case let .failure(error):
-                completion(.failure(error))
+            case .failure:
+                completion([])
             }
-        }
-    }
-}
-
-// MARK: - Cache Policy
-
-extension BaseAPI: CachePolicyGettable {
-    var cachePolicy: URLRequest.CachePolicy {
-        switch self {
-        case .departments,
-             .stats,
-             .vaccinationCentres:
-            return .reloadIgnoringLocalCacheData
         }
     }
 }
