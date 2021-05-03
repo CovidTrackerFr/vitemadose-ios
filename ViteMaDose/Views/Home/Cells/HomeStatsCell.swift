@@ -66,8 +66,7 @@ class HomeStatsCell: UITableViewCell {
     }
 }
 
-struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable, Identifiable {
-    let id = UUID()
+struct HomeCellStatsViewData: HomeStatsCellViewDataProvider, Hashable {
     let title: NSMutableAttributedString
     let description: String?
     let icon: UIImage?

@@ -154,6 +154,7 @@ class CentresListViewModel {
 
     private func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
         return centres
+            .uniqued()
             .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
             .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
     }

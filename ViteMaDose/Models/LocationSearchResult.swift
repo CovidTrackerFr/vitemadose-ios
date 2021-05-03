@@ -8,13 +8,13 @@
 import Foundation
 import MapKit
 
-struct LocationSearchResult: Codable, Equatable {
+struct LocationSearchResult: Codable, Hashable {
     let name: String
     let departmentCode: String
     let departmentCodes: [String]
     let coordinates: Coordinates?
 
-    struct Coordinates: Codable, Equatable {
+    struct Coordinates: Codable, Hashable {
         let latitude: Double
         let longitude: Double
     }

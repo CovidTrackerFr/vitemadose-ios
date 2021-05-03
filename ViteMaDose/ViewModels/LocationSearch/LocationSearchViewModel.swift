@@ -109,7 +109,7 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
                 )
             }
 
-            self.searchResults = citiesResult + foundDepartmentsResult
+            self.searchResults = (citiesResult + foundDepartmentsResult).uniqued()
         }
 
         switch searchStrategy {
@@ -134,7 +134,7 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
         }
 
         updateLastSearchResults(withSearchResult: searchResult, in: &lastSearchResults)
-        userDefaults.lastSearchResult = lastSearchResults
+        userDefaults.lastSearchResult = lastSearchResults.uniqued()
         delegate?.dismissViewController(with: searchResult)
     }
 

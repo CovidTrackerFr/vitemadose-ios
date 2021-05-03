@@ -12,8 +12,7 @@ protocol LocationSearchResultCellViewDataProvider {
     var code: String { get }
 }
 
-struct LocationSearchResultCellViewData: LocationSearchResultCellViewDataProvider, Hashable, Identifiable {
-    let id = UUID()
+struct LocationSearchResultCellViewData: LocationSearchResultCellViewDataProvider, Hashable {
     let titleText: String?
     let name: String
     let code: String

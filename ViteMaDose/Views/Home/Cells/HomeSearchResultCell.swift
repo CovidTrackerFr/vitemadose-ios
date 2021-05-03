@@ -11,8 +11,7 @@ protocol HomeSearchResultCellViewDataProvider: LocationSearchResultCellViewDataP
     var titleText: String? { get }
 }
 
-struct HomeSearchResultCellViewData: HomeSearchResultCellViewDataProvider, Hashable, Identifiable {
-    let id = UUID()
+struct HomeSearchResultCellViewData: HomeSearchResultCellViewDataProvider, Hashable {
     let titleText: String?
     let name: String
     let code: String

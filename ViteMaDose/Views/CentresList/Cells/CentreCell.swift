@@ -22,8 +22,7 @@ protocol CentreViewDataProvider {
 }
 
 // MARK: - CentreViewData
-struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
-    let id = UUID()
+struct CentreViewData: CentreViewDataProvider, Hashable {
     let dayText: String?
     let timeText: String?
     let addressNameText: String?

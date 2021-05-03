@@ -12,7 +12,8 @@ import SwiftDate
 
 // MARK: - VaccinationCentre
 
-struct VaccinationCentre: Codable, Equatable {
+struct VaccinationCentre: Codable, Hashable {
+    let gid: String?
     let departement: String?
     let nom: String?
     let url: String?
@@ -25,21 +26,22 @@ struct VaccinationCentre: Codable, Equatable {
     let vaccineType: [String]?
 
     enum CodingKeys: String, CodingKey {
-        case departement = "departement"
-        case nom = "nom"
-        case url = "url"
-        case location = "location"
-        case metadata = "metadata"
+        case gid
+        case departement
+        case nom
+        case url
+        case location
+        case metadata
         case prochainRdv = "prochain_rdv"
-        case plateforme = "plateforme"
-        case type = "type"
+        case plateforme
+        case type
         case appointmentCount = "appointment_count"
         case vaccineType = "vaccine_type"
     }
 }
 
 extension VaccinationCentre {
-    struct Location: Codable, Equatable {
+    struct Location: Codable, Hashable {
         let longitude: Double?
         let latitude: Double?
         let city: String?
@@ -51,7 +53,7 @@ extension VaccinationCentre {
         }
     }
 
-    struct Metadata: Codable, Equatable {
+    struct Metadata: Codable, Hashable {
         let address: String?
         let phoneNumber: String?
         let businessHours: [String: String?]?
