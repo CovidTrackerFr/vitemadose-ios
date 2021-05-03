@@ -37,7 +37,7 @@ extension LocationSearchResult {
         else {
             return true
         }
-        return searchResultLocation.distance(from: vaccinationCentreCoordinates) <= AppConstant.maximumVaccinationCentresDistanceInMeters
+        return searchResultLocation.distance(from: vaccinationCentreCoordinates) <= RemoteConfiguration.shared.vaccinationCentresListRadiusInMeters
     }
 
     func sortVaccinationCentresByLocation(_ lhs: VaccinationCentre, _ rhs: VaccinationCentre) -> Bool {

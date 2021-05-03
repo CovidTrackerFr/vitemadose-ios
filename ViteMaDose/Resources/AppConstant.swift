@@ -14,6 +14,4 @@ enum AppConstant {
         zone: Zones.current,
         locale: Locale(identifier: "fr_FR")
     )
-
-    static let maximumVaccinationCentresDistanceInMeters: Double = 75000
 }
