@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Department
+
 struct Department: Codable, Equatable {
     var name: String
     var code: String
@@ -36,8 +38,12 @@ extension Department {
         return LocationSearchResult(
             name: name,
             departmentCode: code,
-            departmentCodes: NearDepartments.nearDepartmentsCodes(for: code),
-            location: nil
+            departmentCodes: [],
+            coordinates: nil
         )
     }
 }
+
+// MARK: - Departments
+
+typealias Departments = [Department]

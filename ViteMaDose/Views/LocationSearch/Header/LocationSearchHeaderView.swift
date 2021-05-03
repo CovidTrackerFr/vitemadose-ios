@@ -1,5 +1,5 @@
 //
-//  DepartmentSelectionHeaderView.swift
+//  LocationSearchHeaderView.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 11/04/2021.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class DepartmentSelectionHeaderView: UIView {
+class LocationSearchHeaderView: UIView {
     @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private(set) var searchBar: UISearchBar!
+    @IBOutlet private(set) weak var searchBar: UISearchBar!
 
     private enum Constant {
         static let highlightedTextColor = UIColor.mandy

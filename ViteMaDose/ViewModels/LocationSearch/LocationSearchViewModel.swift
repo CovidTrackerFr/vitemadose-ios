@@ -14,7 +14,6 @@ enum LocationSearchSection: CaseIterable {
 }
 
 enum LocationSearchCell: Hashable {
-    case title(String)
     case searchResult(LocationSearchResultCellViewData)
 }
 
@@ -25,7 +24,6 @@ enum LocationSearchStrategy {
     init?(query: String) {
         guard
             let firstCharacter = query.first,
-            !query.isEmpty,
             query.count > 1
         else {
             return nil
@@ -94,21 +92,20 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
             let citiesResult = cities.compactMap { city -> LocationSearchResult? in
                 guard
                     let departmentCode = city.departement?.code,
-                    let name = city.nom
+                    var name = city.nom
                 else {
                     return nil
                 }
 
-                var cityName = name
                 if let postCode = postCode {
-                    cityName.append(String.space + "(\(postCode))")
+                    name.append(String.space + "(\(postCode))")
                 }
 
                 return LocationSearchResult(
-                    name: cityName,
+                    name: name,
                     departmentCode: departmentCode,
                     departmentCodes: city.departement?.nearDepartments ?? [],
-                    location: city.location
+                    coordinates: city.coordinates
                 )
             }
 
@@ -129,8 +126,20 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
             assertionFailure("Search result not found at indexPath \(indexPath)")
             return
         }
+        var lastSearchResults = userDefaults.lastSearchResult
+        guard !lastSearchResults.contains(searchResult) else {
+            delegate?.dismissViewController(with: searchResult)
+            return
+        }
 
-        userDefaults.lastSelectedDepartmentCode = searchResult.departmentCode
+        if lastSearchResults.count >= 3 {
+            lastSearchResults.insert(searchResult, at: 0)
+            lastSearchResults.removeLast()
+        } else {
+            lastSearchResults.append(searchResult)
+        }
+        
+        userDefaults.lastSearchResult = lastSearchResults
         delegate?.dismissViewController(with: searchResult)
     }
 

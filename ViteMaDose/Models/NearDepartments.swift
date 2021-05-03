@@ -4,9 +4,10 @@
 //
 //  Created by Victor Sarda on 02/05/2021.
 //
-// swiftlint:disable all
 
 import Foundation
+
+// MARK: - NearDepartments
 
 struct NearDepartments {
     private static let fileName = "near_departments"

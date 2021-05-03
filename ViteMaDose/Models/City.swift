@@ -34,16 +34,16 @@ struct Centre: Codable {
 }
 
 extension City {
-    var location: CLLocation? {
+    var coordinates: LocationSearchResult.Coordinates? {
         guard
             let longitude = centre?.coordinates[safe: 0],
             let latitude = centre?.coordinates[safe: 1]
         else {
             return nil
         }
-        return CLLocation(
-            latitude: CLLocationDegrees(latitude),
-            longitude: CLLocationDegrees(longitude)
+        return LocationSearchResult.Coordinates(
+            latitude: latitude,
+            longitude: longitude
         )
     }
 }

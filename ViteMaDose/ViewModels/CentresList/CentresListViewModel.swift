@@ -216,6 +216,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
 
         let departmentCodes = [searchResult.departmentCode] + searchResult.departmentCodes
         let departmentsToLoad: [Promise<VaccinationCentres>] = departmentCodes.map(createDepartmentPromise(code:))
+
         when(resolved: departmentsToLoad).done { [weak self] results in
             self?.isLoading = false
             let vaccinationCentres = results

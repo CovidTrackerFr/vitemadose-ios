@@ -100,7 +100,7 @@ class HomeViewController: UIViewController, Storyboarded {
     private func presentDepartmentSelectionViewController() {
         AppAnalytics.didTapSearchBar()
 
-        let departmentSelectionViewController = DepartmentSelectionViewController.instantiate()
+        let departmentSelectionViewController = LocationSearchViewController.instantiate()
         departmentSelectionViewController.delegate = self
         departmentSelectionViewController.viewModel = LocationSearchViewModel(departments: viewModel.departments)
 
@@ -141,8 +141,6 @@ extension HomeViewController: HomeViewModelDelegate {
     // MARK: Present
 
     func presentVaccinationCentres(for location: LocationSearchResult) {
-        viewModel.updateLastSelectedDepartmentIfNeeded(location.departmentCode)
-
         let vaccinationCentresViewController = CentresListViewController.instantiate()
         vaccinationCentresViewController.viewModel = CentresListViewModel(searchResult: location)
         navigationController?.show(vaccinationCentresViewController, sender: self)
@@ -198,8 +196,8 @@ extension HomeViewController: UITableViewDelegate {
         switch homeCell {
         case .departmentSelection:
             presentDepartmentSelectionViewController()
-        case .department:
-            viewModel.didSelectLastDepartment()
+        case let .department(viewData):
+            viewModel.didSelectSavedSearchResult(withName: viewData.name)
             Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {
@@ -249,7 +247,7 @@ extension HomeViewController {
 
 // MARK: - DepartmentSelection ViewController Delegate
 
-extension HomeViewController: DepartmentSelectionViewControllerDelegate {
+extension HomeViewController: LocationSearchViewControllerDelegate {
 
     func didSelect(location: LocationSearchResult) {
         viewModel.didSelect(location)

@@ -1,5 +1,5 @@
 //
-//  DepartmentSelectionViewController.swift
+//  LocationSearchViewController.swift
 //  ViteMaDose
 //
 //  Created by Paul Jeannot on 08/04/2021.
@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 import Haptica
 
-protocol DepartmentSelectionViewControllerDelegate: AnyObject {
+protocol LocationSearchViewControllerDelegate: AnyObject {
     func didSelect(location: LocationSearchResult)
 }
 
-class DepartmentSelectionViewController: UIViewController, Storyboarded {
+class LocationSearchViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
-    weak var delegate: DepartmentSelectionViewControllerDelegate?
+    weak var delegate: LocationSearchViewControllerDelegate?
 
     var viewModel: LocationSearchViewModel!
 
@@ -23,15 +23,13 @@ class DepartmentSelectionViewController: UIViewController, Storyboarded {
     private lazy var dataSource = makeDataSource()
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
 
-    private lazy var departmentSelectionHeaderView: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "Commune, départment, code postal"
-        searchBar.textContentType = .location
-        searchBar.delegate = self
-        return searchBar
+    private lazy var departmentSelectionHeaderView: LocationSearchHeaderView = {
+        let view: LocationSearchHeaderView = LocationSearchHeaderView.instanceFromNib()
+        view.searchBar.placeholder = "Commune, départment, code postal"
+        view.searchBar.textContentType = .addressCity
+        view.searchBar.delegate = self
+        return view
     }()
-
-    private let notificationCenter = NotificationCenter.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +40,10 @@ class DepartmentSelectionViewController: UIViewController, Storyboarded {
         tableView.delegate = self
         tableView.dataSource = dataSource
         viewModel.delegate = self
+        tableView.tableHeaderView = departmentSelectionHeaderView
 
         view.backgroundColor = .athensGray
         tableView.backgroundColor = .athensGray
-        tableView.tableHeaderView = departmentSelectionHeaderView
         tableView.keyboardDismissMode = .onDrag
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
@@ -57,6 +55,7 @@ class DepartmentSelectionViewController: UIViewController, Storyboarded {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AppAnalytics.logScreen(.departmentSelect, screenClass: Self.className)
+        departmentSelectionHeaderView.searchBar.becomeFirstResponder()
     }
 
     override func viewDidLayoutSubviews() {
@@ -67,7 +66,7 @@ class DepartmentSelectionViewController: UIViewController, Storyboarded {
 
 // MARK: - UITableViewDataSource
 
-extension DepartmentSelectionViewController {
+extension LocationSearchViewController {
     private func makeDataSource() -> UITableViewDiffableDataSource<LocationSearchSection, LocationSearchCell> {
         return UITableViewDiffableDataSource(
             tableView: tableView,
@@ -77,8 +76,6 @@ extension DepartmentSelectionViewController {
                     let cell = tableView.dequeueReusableCell(with: LocationSearchResultCell.self, for: indexPath)
                     cell.configure(with: viewData)
                     return cell
-                case .title:
-                    return UITableViewCell(frame: .zero)
                 }
             }
         )
@@ -87,7 +84,7 @@ extension DepartmentSelectionViewController {
 
 // MARK: - UITableViewDelegate
 
-extension DepartmentSelectionViewController: UITableViewDelegate {
+extension LocationSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchController.isActive = false
         viewModel.didSelectCell(at: indexPath)
@@ -97,7 +94,7 @@ extension DepartmentSelectionViewController: UITableViewDelegate {
 
 // MARK: - DepartmentSelection ViewModelDelegate
 
-extension DepartmentSelectionViewController: LocationSearchViewModelDelegate {
+extension LocationSearchViewController: LocationSearchViewModelDelegate {
     func reloadTableView(with cells: [LocationSearchCell]) {
         var snapshot = Snapshot()
         snapshot.appendSections(LocationSearchSection.allCases)
@@ -114,13 +111,12 @@ extension DepartmentSelectionViewController: LocationSearchViewModelDelegate {
     }
 }
 
-extension DepartmentSelectionViewController: UISearchBarDelegate {
+extension LocationSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             viewModel.loadDepartments()
             return
         }
-
         // Debounce
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
@@ -130,15 +126,15 @@ extension DepartmentSelectionViewController: UISearchBarDelegate {
         perform(#selector(self.reload(_:)), with: searchBar, afterDelay: 0.3)
     }
 
+    @objc func reload(_ searchBar: UISearchBar) {
+        viewModel.search(query: searchBar.text ?? "")
+    }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 
     func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-    }
-
-    @objc func reload(_ searchBar: UISearchBar) {
-        viewModel.search(query: searchBar.text ?? "")
     }
 }
