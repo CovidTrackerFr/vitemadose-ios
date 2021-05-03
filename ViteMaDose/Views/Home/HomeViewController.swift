@@ -94,7 +94,7 @@ class HomeViewController: UIViewController, Storyboarded {
     }
 
     @objc func didPullToRefresh() {
-        viewModel.reloadStats()
+        viewModel.load()
     }
 
     private func presentDepartmentSelectionViewController() {
@@ -160,19 +160,6 @@ extension HomeViewController: HomeViewModelDelegate {
     }
 
     func presentFetchStatsError(_ error: Error) {
-        presentRetryableAndCancellableError(
-            error: error,
-            retryHandler: { [unowned self] _ in
-                self.viewModel.reloadStats()
-            },
-            cancelHandler: { [unowned self] _ in
-                self.refreshControl.endRefreshing()
-            },
-            completionHandler: nil
-        )
-    }
-
-    func presentInitialLoadError(_ error: Error) {
         presentRetryableError(
             error: error,
             retryHandler: { [unowned self] _ in
@@ -194,9 +181,9 @@ extension HomeViewController: UITableViewDelegate {
         }
 
         switch homeCell {
-        case .departmentSelection:
+        case .searchBar:
             presentDepartmentSelectionViewController()
-        case let .department(viewData):
+        case let .searchResult(viewData):
             viewModel.didSelectSavedSearchResult(withName: viewData.name)
             Haptic.impact(.light).generate()
         case let .stats(viewData):
@@ -229,11 +216,11 @@ extension HomeViewController {
             let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .departmentSelection(cellViewModel):
+        case let .searchBar(cellViewModel):
             let cell = tableView.dequeueReusableCell(with: HomeSearchBarCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .department(cellViewModel):
+        case let .searchResult(cellViewModel):
             let cell = tableView.dequeueReusableCell(with: HomeSearchResultCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell

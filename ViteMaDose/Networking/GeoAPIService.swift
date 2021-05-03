@@ -11,7 +11,6 @@ import Moya
 // MARK: - Base API
 
 enum BaseAPI {
-    case departments
     case stats
     case vaccinationCentres(departmentCode: String)
 }
@@ -26,8 +25,6 @@ extension BaseAPI: TargetType {
 
     var path: String {
         switch self {
-        case .departments:
-            return Self.remoteConfig.departmentsPath
         case .stats:
             return Self.remoteConfig.statsPath
         case let .vaccinationCentres(code):
@@ -37,8 +34,7 @@ extension BaseAPI: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .departments,
-             .stats,
+        case .stats,
              .vaccinationCentres:
             return .get
         }
@@ -54,8 +50,7 @@ extension BaseAPI: TargetType {
 
     var task: Task {
         switch self {
-        case .departments,
-             .stats,
+        case .stats,
              .vaccinationCentres:
             return .requestPlain
         }
@@ -71,7 +66,6 @@ extension BaseAPI: TargetType {
 protocol BaseAPIServiceProvider: AnyObject {
     var provider: MoyaProvider<BaseAPI> { get }
 
-    func fetchDepartments(completion: @escaping (Result<Departments, Error>) -> Void)
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void)
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
 }
@@ -81,10 +75,6 @@ class BaseAPIService: BaseAPIServiceProvider {
 
     init(provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>(plugins: [CachePolicyPlugin()])) {
         self.provider = provider
-    }
-
-    func fetchDepartments(completion: @escaping (Result<Departments, Error>) -> Void) {
-        request(target: .departments, completion: completion)
     }
 
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void) {
@@ -121,8 +111,7 @@ private extension BaseAPIService {
 extension BaseAPI: CachePolicyGettable {
     var cachePolicy: URLRequest.CachePolicy {
         switch self {
-        case .departments,
-             .stats,
+        case .stats,
              .vaccinationCentres:
             return .reloadIgnoringLocalCacheData
         }

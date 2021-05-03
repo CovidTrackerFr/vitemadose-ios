@@ -17,8 +17,8 @@ enum HomeSection: CaseIterable {
 
 enum HomeCell: Hashable {
     case title(HomeTitleCellViewData)
-    case departmentSelection(HomeSearchBarCellViewData)
-    case department(HomeSearchResultCellViewData)
+    case searchBar(HomeSearchBarCellViewData)
+    case searchResult(HomeSearchResultCellViewData)
     case stats(HomeCellStatsViewData)
 }
 
@@ -26,7 +26,6 @@ enum HomeCell: Hashable {
 
 protocol HomeViewModelProvider {
     func load()
-    func reloadStats()
     func didSelectSavedSearchResult(withName name: String)
     func didSelect(_ location: LocationSearchResult)
 
@@ -38,7 +37,6 @@ protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentVaccinationCentres(for location: LocationSearchResult)
-    func presentInitialLoadError(_ error: Error)
     func presentFetchStatsError(_ error: Error)
 
     func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
@@ -76,18 +74,12 @@ class HomeViewModel {
 
     // MARK: Handle API result
 
-    private func handleInitialLoad(stats: Stats) {
+    private func handleStatsLoad(stats: Stats) {
         self.stats = stats
 
         updateHeadingCells()
         updateStatsCells()
 
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
-    }
-
-    private func handleStatsReload(with stats: Stats) {
-        self.stats = stats
-        updateStatsCells()
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
@@ -103,11 +95,11 @@ class HomeViewModel {
 
         headingCells = [
             .title(titleCellViewData),
-            .departmentSelection(departmentSelectionViewData)
+            .searchBar(departmentSelectionViewData)
         ]
 
         for viewData in lastSelectedDepartmentViewData {
-            headingCells.append(.department(viewData))
+            headingCells.append(.searchResult(viewData))
         }
     }
 
@@ -144,10 +136,6 @@ class HomeViewModel {
         }
     }
 
-    private func handleInitialLoadError(_ error: Error) {
-        delegate?.presentInitialLoadError(error)
-    }
-
     private func handleStatsError(_ error: Error) {
         delegate?.presentFetchStatsError(error)
     }
@@ -166,24 +154,7 @@ extension HomeViewModel: HomeViewModelProvider {
 
             switch result {
             case let .success(stats):
-                self.handleInitialLoad(stats: stats)
-            case let .failure(status):
-                self.handleInitialLoadError(status)
-            }
-        }
-    }
-
-    func reloadStats() {
-        guard !isLoading else { return }
-        isLoading = true
-
-        apiService.fetchStats { [weak self] result in
-            guard let self = self else { return }
-            self.isLoading = false
-
-            switch result {
-            case let .success(stats):
-                self.handleStatsReload(with: stats)
+                self.handleStatsLoad(stats: stats)
             case let .failure(status):
                 self.handleStatsError(status)
             }

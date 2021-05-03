@@ -11,7 +11,8 @@ protocol HomeSearchBarCellViewDataProvider {
     var searchBarText: String { get }
 }
 
-struct HomeSearchBarCellViewData: HomeSearchBarCellViewDataProvider, Hashable {
+struct HomeSearchBarCellViewData: HomeSearchBarCellViewDataProvider, Hashable, Identifiable {
+    let id = UUID()
     let searchBarText = Localization.Home.search_placeholder
 }
 
