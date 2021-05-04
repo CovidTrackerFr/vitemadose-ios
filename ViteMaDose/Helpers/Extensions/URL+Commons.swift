@@ -25,7 +25,7 @@ extension URL {
 
     /// Init an URL
     /// - Parameter string: String URL
-    init(staticString string: StaticString) {
+    init(staticString string: String) {
         guard let url = URL(string: "\(string)") else {
             preconditionFailure("Invalid static URL string: \(string)")
         }

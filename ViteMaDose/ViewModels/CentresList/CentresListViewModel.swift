@@ -9,7 +9,8 @@ import Foundation
 import SwiftDate
 import UIKit
 import PhoneNumberKit
-import APIRequest
+import Moya
+import PromiseKit
 
 enum CentresListSection: CaseIterable {
     case heading
@@ -29,8 +30,7 @@ enum CentresSortOrder: Int {
 }
 
 protocol CentresListViewModelProvider {
-    var county: County { get }
-    var vaccinationCentres: VaccinationCentres? { get }
+    var searchResult: LocationSearchResult { get }
     func load(animated: Bool)
     func sort(animated: Bool)
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)?
@@ -38,7 +38,7 @@ protocol CentresListViewModelProvider {
     func bookingLink(at indexPath: IndexPath) -> URL?
 }
 
-protocol CentresListViewModelDelegate: class {
+protocol CentresListViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
     func presentLoadError(_ error: Error)
@@ -53,48 +53,41 @@ protocol CentresListViewModelDelegate: class {
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
-    private let apiService: APIServiceProvider
-    private let phoneNumberKit = PhoneNumberKit()
-
-    private var allVaccinationCentres: [VaccinationCentre] = []
-    private var isLoading = false {
-        didSet {
-            let isEmpty = vaccinationCentres == nil
-            delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
-        }
+    private enum Constant {
+        static let maximumDistanceInKm = 75.0
     }
 
-    private lazy var region = Region(
-        calendar: Calendar.current,
-        zone: Zones.current,
-        locale: Locale(identifier: "fr_FR")
-    )
+    private let apiService: BaseAPIServiceProvider
+    private let phoneNumberKit = PhoneNumberKit()
+
+    private var vaccinationCentresList: [VaccinationCentre] = []
+    private var locationVaccinationCentres: LocationVaccinationCentres = []
+
+    private var isLoading = false {
+        didSet {
+            delegate?.updateLoadingState(isLoading: isLoading, isEmpty: vaccinationCentresList.isEmpty)
+        }
+    }
 
     private var headingCells: [CentresListCell] = []
     private var centresCells: [CentresListCell] = []
     private var footerText: String?
 
-    var county: County
-    var vaccinationCentres: VaccinationCentres?
-
     var sort: CentresSortOrder = .auPlusProche
 
+    var searchResult: LocationSearchResult
     weak var delegate: CentresListViewModelDelegate?
 
-    var numberOfRows: Int {
-        return allVaccinationCentres.count
-    }
-
     init(
-        apiService: APIServiceProvider = APIService(),
-        county: County
+        apiService: BaseAPIServiceProvider = BaseAPIService(),
+        searchResult: LocationSearchResult
     ) {
         self.apiService = apiService
-        self.county = county
+        self.searchResult = searchResult
     }
 
-    private func handleLoad(with vaccinationCentres: VaccinationCentres, animated: Bool) {
-        self.vaccinationCentres = vaccinationCentres
+    private func handleLoad(with locationVaccinationCentres: LocationVaccinationCentres, animated: Bool) {
+        self.locationVaccinationCentres = locationVaccinationCentres
 
         updateCells()
         updateFooterText()
@@ -103,15 +96,14 @@ class CentresListViewModel {
         delegate?.reloadTableViewFooter(with: footerText)
     }
 
-    private func handleReload(with vaccinationCentres: VaccinationCentres) {
+    private func handleReload(with vaccinationCentres: LocationVaccinationCentres) {
         handleLoad(with: vaccinationCentres, animated: true)
     }
 
     private func updateCells() {
-        let availableCentres = vaccinationCentres?.centresDisponibles ?? []
-        let unavailableCentres = vaccinationCentres?.centresIndisponibles ?? []
-        let isEmpty = availableCentres.isEmpty && unavailableCentres.isEmpty
-
+        let availableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.centresDisponibles))
+        let unavailableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.centresIndisponibles))
+      
         let sortedAvailableCentres = availableCentres.sorted(by: { centre1, centre2 in
             switch sort {
             case .auPlusProche:
@@ -121,15 +113,15 @@ class CentresListViewModel {
             }
         })
 
-        allVaccinationCentres = sortedAvailableCentres + unavailableCentres
+        vaccinationCentresList = (sortedAvailableCentres + unavailableCentres).uniqued()
 
         let appointmentsCount = availableCentres.reduce(0) { $0 + ($1.appointmentCount ?? 0) }
-        let vaccinationCentreCellsViewData = allVaccinationCentres.map({ getVaccinationCentreViewData($0) })
+        let vaccinationCentreCellsViewData = vaccinationCentresList.map(getVaccinationCentreViewData)
 
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
                 withAppointmentsCount: appointmentsCount,
-                andCountyName: county.nomDepartement ?? ""
+                andSearchResult: searchResult
             ),
             topMargin: 25,
             bottomMargin: 0
@@ -138,7 +130,7 @@ class CentresListViewModel {
         let statsCellViewData = CentresStatsCellViewData(
             appointmentsCount: appointmentsCount,
             availableCentresCount: availableCentres.count,
-            allCentresCount: allVaccinationCentres.count
+            allCentresCount: vaccinationCentresList.count
         )
 
         headingCells = [
@@ -146,7 +138,7 @@ class CentresListViewModel {
             .stats(statsCellViewData)
         ]
 
-        guard !isEmpty else {
+        guard !vaccinationCentresList.isEmpty else {
             centresCells.removeAll()
             return
         }
@@ -166,7 +158,11 @@ class CentresListViewModel {
     }
 
     private func updateFooterText() {
-        guard let lastUpdate = vaccinationCentres?.lastUpdated?.toDate(nil, region: region) else {
+        guard let lastUpdate = locationVaccinationCentres
+                .first?
+                .lastUpdated?
+                .toDate(nil, region: AppConstant.franceRegion)
+        else {
             footerText = nil
             return
         }
@@ -176,57 +172,38 @@ class CentresListViewModel {
         footerText = Localization.Location.last_update.format(lastUpdateDay, lastUpdateTime)
     }
 
-    func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
-        var url: URL?
-        if let urlString = centre.url {
-            url = URL(string: urlString)
-        }
+    private func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
+        return centres
+            .uniqued()
+            .filter(searchResult.filterVaccinationCentreByDistance(vaccinationCentre:))
+            .sorted(by: searchResult.sortVaccinationCentresByLocation(_:_:))
+    }
 
-        let isAvailable = centre.prochainRdv != nil
-
-        let nextAppointment = centre.prochainRdv?.toDate(region: region)
-        let dayString = nextAppointment?.toString(.date(.long))
-        let timeString = nextAppointment?.toString(.time(.short))
-
+    private func getVaccinationCentreViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
             partnerLogo =  PartnerLogo(rawValue: platform)?.image
         }
 
-        let bookingButtonText = isAvailable
+        let bookingButtonText = centre.isAvailable
             ? Localization.Location.book_button + String.space
             : Localization.Location.verify_button + String.space
 
-        var phoneText: String?
-        if let phoneNumber = centre.metadata?.phoneNumber {
-            do {
-                let parsedPhoneNumber = try phoneNumberKit.parse(
-                    phoneNumber,
-                    withRegion: "FR",
-                    ignoreType: true
-                )
-                phoneText = phoneNumberKit.format(parsedPhoneNumber, toType: .national)
-            } catch {
-                phoneText = phoneNumber
-            }
-        }
-
         return CentreViewData(
-            dayText: dayString,
-            timeText: timeString,
-            addressNameText: centre.nom ?? Localization.Location.unavailable_name,
+            dayText: centre.nextAppointmentDay,
+            timeText: centre.nextAppointmentTime,
+            addressNameText: centre.formattedCentreName(selectedLocation: searchResult.coordinates?.asCCLocation),
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
-            phoneText: phoneText,
+            phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
             appointmentsCount: centre.appointmentCount,
-            isAvailable: isAvailable,
-            url: url,
+            isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo
         )
     }
 
-    private func handleError(_ error: APIResponseStatus) {
+    private func handleError(_ error: Error) {
         delegate?.presentLoadError(error)
     }
 }
@@ -239,20 +216,40 @@ extension CentresListViewModel: CentresListViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        guard let countyCode = county.codeDepartement else {
-            isLoading = false
-            handleError(APIResponseStatus.preconditionRequired)
-            return
-        }
+        let departmentCodes = [searchResult.departmentCode] + searchResult.nearDepartmentCodes
+        let departmentsToLoad: [Promise<VaccinationCentres>] = departmentCodes.map(createDepartmentPromise(code:))
 
-        apiService.fetchVaccinationCentres(country: countyCode) { [weak self] result in
+        when(resolved: departmentsToLoad).done { [weak self] results in
             self?.isLoading = false
+            var errors: [Error] = []
 
-            switch result {
-            case let .success(vaccinationCentres):
+            let vaccinationCentres = results.compactMap { result -> VaccinationCentres? in
+                switch result {
+                case let .fulfilled(centres):
+                    return centres
+                case let .rejected(error):
+                    errors.append(error)
+                    return nil
+                }
+            }
+
+            if let error = errors.first {
+                self?.handleError(error)
+            } else {
                 self?.handleLoad(with: vaccinationCentres, animated: animated)
-            case let .failure(status):
-                self?.handleError(status)
+            }
+        }
+    }
+
+    private func createDepartmentPromise(code: String) -> Promise<VaccinationCentres> {
+        return Promise { seal in
+            apiService.fetchVaccinationCentres(departmentCode: code) { result in
+                switch result {
+                case let .success(centres):
+                    seal.fulfill(centres)
+                case let .failure(error):
+                    seal.reject(error)
+                }
             }
         }
     }
@@ -265,7 +262,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
 
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)? {
         guard
-            let centre = allVaccinationCentres[safe: indexPath.row],
+            let centre = vaccinationCentresList[safe: indexPath.row],
             let name = centre.nom,
             let lat = centre.location?.latitude,
             let long = centre.location?.longitude
@@ -276,29 +273,15 @@ extension CentresListViewModel: CentresListViewModelProvider {
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
-        guard
-            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
-            let phoneNumber = vaccinationCentre.metadata?.phoneNumber,
-            let phoneNumberUrl = URL(string: "tel://\(phoneNumber)"),
-            phoneNumberUrl.isValid
-        else {
-            return nil
-        }
-        return phoneNumberUrl
+        return vaccinationCentresList[safe: indexPath.row]?.phoneUrl
     }
 
     func bookingLink(at indexPath: IndexPath) -> URL? {
-        guard
-            let vaccinationCentre = allVaccinationCentres[safe: indexPath.row],
-            let bookingUrlString = vaccinationCentre.url,
-            let bookingUrl = URL(string: bookingUrlString),
-            bookingUrl.isValid
-        else {
+        guard let vaccinationCentre = vaccinationCentresList[safe: indexPath.row] else {
             return nil
         }
-
         AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)
-        return bookingUrl
+        return vaccinationCentre.appointmentUrl
     }
 }
 

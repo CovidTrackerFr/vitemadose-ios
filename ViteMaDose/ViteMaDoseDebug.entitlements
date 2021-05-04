@@ -6,7 +6,7 @@
 	<array>
 		<string>applinks:vitemadose.covidtracker.fr</string>
 		<string>applinks:vitemadose.app</string>
-		<string>applinks:vitemadose.page.link</string>
+		<string>applinks:vitemadosedev.page.link</string>
 	</array>
 </dict>
 </plist>

@@ -18,12 +18,12 @@ protocol CentreViewDataProvider {
     var vaccineTypesText: String? { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
-    var url: URL? { get }
     var partnerLogo: UIImage? { get }
 }
 
 // MARK: - CentreViewData
-struct CentreViewData: CentreViewDataProvider, Hashable {
+struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
+    let id = UUID()
     let dayText: String?
     let timeText: String?
     let addressNameText: String?
@@ -33,7 +33,6 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
     let vaccineTypesText: String?
     let appointmentsCount: Int?
     let isAvailable: Bool
-    let url: URL?
     let partnerLogo: UIImage?
 }
 

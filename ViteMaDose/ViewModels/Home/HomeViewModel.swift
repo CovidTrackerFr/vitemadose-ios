@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import APIRequest
+import Moya
 
 // MARK: - Home Cell ViewModel
 
@@ -17,8 +17,8 @@ enum HomeSection: CaseIterable {
 
 enum HomeCell: Hashable {
     case title(HomeTitleCellViewData)
-    case countySelection(HomeCountySelectionViewData)
-    case county(HomeCountyCellViewData)
+    case searchBar(HomeSearchBarCellViewData)
+    case searchResult(HomeSearchResultCellViewData)
     case stats(HomeCellStatsViewData)
 }
 
@@ -26,36 +26,33 @@ enum HomeCell: Hashable {
 
 protocol HomeViewModelProvider {
     func load()
-    func reloadStats()
-    func updateLastSelectedCountyIfNeeded(_ code: String?)
-    func didSelectLastCounty()
-    func didSelect(_ county: County)
+    func didSelectSavedSearchResult(withName name: String)
+    func didSelect(_ location: LocationSearchResult)
 
-    var counties: Counties { get }
+    var departments: Departments { get }
     var stats: Stats? { get }
 }
 
-protocol HomeViewModelDelegate: class {
+protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
-    func presentVaccinationCentres(for county: County)
-    func presentInitialLoadError(_ error: Error)
+    func presentVaccinationCentres(for location: LocationSearchResult)
     func presentFetchStatsError(_ error: Error)
 
     func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
 }
 
 class HomeViewModel {
-    private let apiService: APIServiceProvider
+    private let apiService: BaseAPIServiceProvider
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
-    var counties: Counties = []
+    let departments: Departments
     var stats: Stats?
 
     private var isLoading = false {
         didSet {
-            let isEmpty = counties.isEmpty && stats == nil
+            let isEmpty = departments.isEmpty && stats == nil
             delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
         }
     }
@@ -63,22 +60,21 @@ class HomeViewModel {
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
 
-    private(set) var lastSelectedCountyCode: String?
-
     // MARK: init
 
     required init(
-        apiService: APIServiceProvider = APIService(),
+        apiService: BaseAPIServiceProvider = BaseAPIService(),
+        departments: Departments = Department.list,
         userDefaults: UserDefaults = .shared
     ) {
         self.apiService = apiService
+        self.departments = departments
         self.userDefaults = userDefaults
     }
 
     // MARK: Handle API result
 
-    private func handleInitialLoad(counties: Counties, stats: Stats) {
-        self.counties = counties
+    private func handleStatsLoad(stats: Stats) {
         self.stats = stats
 
         updateHeadingCells()
@@ -87,42 +83,33 @@ class HomeViewModel {
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
-    private func handleStatsReload(with stats: Stats) {
-        self.stats = stats
-        updateStatsCells()
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
-    }
-
-    private func handleLastSelectedCountyUpdate() {
+    private func handleLastSelectedSearchResult() {
         updateHeadingCells()
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func updateHeadingCells() {
-        let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)
-        let countySelectionViewData = HomeCountySelectionViewData()
-        let lastSelectedCountyViewData = getLastSelectedCountyCellViewData()
+        let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0)
+        let departmentSelectionViewData = HomeSearchBarCellViewData()
+        let lastSelectedDepartmentViewData = getRecentSearchResultsViewData()
 
         headingCells = [
             .title(titleCellViewData),
-            .countySelection(countySelectionViewData)
+            .searchBar(departmentSelectionViewData)
         ]
-
-        if let viewData = lastSelectedCountyViewData {
-            headingCells.append(.county(viewData))
-        }
+        headingCells.append(contentsOf: lastSelectedDepartmentViewData.map(HomeCell.searchResult))
     }
 
     private func updateStatsCells() {
-        guard let allCountiesStats = stats?[StatsKey.allCounties.rawValue] else {
+        guard let departmentsStats = stats?[StatsKey.allDepartments.rawValue] else {
             return
         }
 
-        let statsTitleViewModel = HomeTitleCellViewData(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15, bottomMargin: 5)
-        let allCentresViewModel = HomeCellStatsViewData(.allCentres(allCountiesStats.total))
-        let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(allCountiesStats.disponibles))
-        let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(allCountiesStats.creneaux))
-        let percentageAvailabilitiesViewModel = HomeCellStatsViewData(.percentageAvailabilities(allCountiesStats.pourcentage))
+        let statsTitleViewModel = HomeTitleCellViewData(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 20, bottomMargin: 5)
+        let allCentresViewModel = HomeCellStatsViewData(.allCentres(departmentsStats.total))
+        let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(departmentsStats.disponibles))
+        let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(departmentsStats.creneaux))
+        let percentageAvailabilitiesViewModel = HomeCellStatsViewData(.percentageAvailabilities(departmentsStats.pourcentage))
         let externalMapViewModel = HomeCellStatsViewData(.externalMap)
 
         statsCell = [
@@ -135,28 +122,18 @@ class HomeViewModel {
         ]
     }
 
-    private func getLastSelectedCountyCellViewData() -> HomeCountyCellViewData? {
-        guard
-            let lastSelectedCountyCode = userDefaults.lastSelectedCountyCode,
-            let county = counties.first(where: { $0.codeDepartement == lastSelectedCountyCode}),
-            let countyName = county.nomDepartement,
-            let countyCode = county.codeDepartement
-        else {
-            return nil
+    private func getRecentSearchResultsViewData() -> [HomeSearchResultCellViewData] {
+        let lastSearchResults = userDefaults.lastSearchResult
+        return lastSearchResults.enumerated().map { index, location in
+            HomeSearchResultCellViewData(
+                titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
+                name: location.name,
+                code: location.departmentCode
+            )
         }
-
-        return HomeCountyCellViewData(
-            titleText: Localization.Home.recent_search,
-            countyName: countyName,
-            countyCode: countyCode
-        )
     }
 
-    private func handleInitialLoadError(_ error: APIResponseStatus) {
-        delegate?.presentInitialLoadError(error)
-    }
-
-    private func handleStatsError(_ error: APIResponseStatus) {
+    private func handleStatsError(_ error: Error) {
         delegate?.presentFetchStatsError(error)
     }
 }
@@ -164,66 +141,33 @@ class HomeViewModel {
 // MARK: - HomeViewModelProvider
 
 extension HomeViewModel: HomeViewModelProvider {
-    // TODO: Concurrent calls
     func load() {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchCounties { [weak self] result in
-            switch result {
-            case let .success(counties):
-                self?.apiService.fetchStats { result in
-                    switch result {
-                    case let .success(stats):
-                        self?.handleInitialLoad(counties: counties, stats: stats)
-                        self?.isLoading = false
-                    case let .failure(status):
-                        self?.handleInitialLoadError(status)
-                        self?.isLoading = false
-                    }
-                }
-            case let .failure(status):
-                self?.handleInitialLoadError(status)
-                self?.isLoading = false
-            }
-        }
-    }
-
-    func reloadStats() {
-        guard !isLoading else { return }
-        isLoading = true
-
         apiService.fetchStats { [weak self] result in
-            self?.isLoading = false
+            guard let self = self else { return }
+            self.isLoading = false
 
             switch result {
             case let .success(stats):
-                self?.handleStatsReload(with: stats)
+                self.handleStatsLoad(stats: stats)
             case let .failure(status):
-                self?.handleStatsError(status)
+                self.handleStatsError(status)
             }
         }
     }
 
-    func updateLastSelectedCountyIfNeeded(_ code: String?) {
-        guard code != lastSelectedCountyCode else {
+    func didSelectSavedSearchResult(withName name: String) {
+        guard let searchResult = userDefaults.lastSearchResult.first(where: { $0.name == name }) else {
+            assertionFailure("Search result not found: \(name)")
             return
         }
-        lastSelectedCountyCode = code
-        handleLastSelectedCountyUpdate()
+        delegate?.presentVaccinationCentres(for: searchResult)
     }
 
-    func didSelectLastCounty() {
-        guard
-            let countyCode = userDefaults.lastSelectedCountyCode,
-            let county = counties.first(where: { $0.codeDepartement == countyCode})
-        else {
-            return
-        }
-        delegate?.presentVaccinationCentres(for: county)
-    }
-
-    func didSelect(_ county: County) {
-        delegate?.presentVaccinationCentres(for: county)
+    func didSelect(_ location: LocationSearchResult) {
+        handleLastSelectedSearchResult()
+        delegate?.presentVaccinationCentres(for: location)
     }
 }

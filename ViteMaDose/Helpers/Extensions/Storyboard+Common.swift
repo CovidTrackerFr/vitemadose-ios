@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol Storyboarded: class {
+protocol Storyboarded: AnyObject {
     static var storyboard: UIStoryboard { get }
 }
 

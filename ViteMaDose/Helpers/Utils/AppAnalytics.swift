@@ -29,22 +29,22 @@ struct AppAnalytics {
         Analytics.logEvent("search_by_departement", parameters: [:])
     }
 
-    static func didSelectCounty(_ county: County) {
+    static func didSelectLocation(_ location: LocationSearchResult) {
         Analytics.logEvent("county_selected", parameters: [
-            "codeDepartement": (county.codeDepartement?.lowercased() ?? "") as NSString
+            "codeDepartement": (location.departmentCode.lowercased()) as NSString
         ])
     }
 
     static func didSelectVaccinationCentre(_ vaccinationCentre: VaccinationCentre) {
         let eventName = (vaccinationCentre.appointmentCount ?? 0) > 0 ? "rdv_click" : "rdv_verify"
-        let county = vaccinationCentre.departement?.lowercased() ?? ""
+        let department = vaccinationCentre.departement?.lowercased() ?? ""
         let name = vaccinationCentre.nom?.lowercased() ?? ""
         let type = vaccinationCentre.type?.lowercased() ?? ""
         let platform = vaccinationCentre.plateforme?.lowercased() ?? ""
         let vaccine = vaccinationCentre.vaccineType?.joined(separator: ",").lowercased() ?? ""
 
         Analytics.logEvent(eventName, parameters: [
-            "rdv_departement": county,
+            "rdv_departement": department,
             "rdv_name": name,
             "rdv_location_type": type,
             "rdv_platform": platform,

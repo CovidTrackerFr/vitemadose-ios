@@ -7,4 +7,5 @@ disabled_rules:
     - force_cast
     - todo
     - nesting
+    - identifier_name
 line_length: 200

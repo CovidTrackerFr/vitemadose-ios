@@ -26,14 +26,14 @@ struct StatsValue: Codable, Equatable {
 }
 
 enum StatsKey: Equatable {
-    case allCounties
-    case county(Int)
+    case allDepartments
+    case department(Int)
 
     var rawValue: String {
         switch self {
-        case .allCounties:
+        case .allDepartments:
             return "tout_departement"
-        case let .county(code):
+        case let .department(code):
             return String(code)
         }
     }
