@@ -16,7 +16,7 @@ struct NearDepartments {
         guard
             let url = Bundle.main.url(forResource: Self.fileName, withExtension: "json"),
             let data = try? Data(contentsOf: url),
-            let nearDepartmentsList = data.decode([String: [String]].self)
+            case let .success(nearDepartmentsList) = data.decode([String: [String]].self)
         else {
             assertionFailure("Near departments should not be empty")
             return [:]

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Department
 
-struct Department: Codable, Equatable {
+struct Department: Codable, Hashable {
     var name: String
     var code: String
 
@@ -24,12 +24,12 @@ struct Department: Codable, Equatable {
         guard
             let url = Bundle.main.url(forResource: Self.fileName, withExtension: "json"),
             let data = try? Data(contentsOf: url),
-            let departments = data.decode([Department].self)
+            case let .success(departments) = data.decode([Department].self)
         else {
             assertionFailure("Departments should not be empty")
             return []
         }
-        return departments
+        return departments.uniqued()
     }
 }
 

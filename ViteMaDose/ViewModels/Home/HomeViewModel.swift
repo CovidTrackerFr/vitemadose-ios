@@ -29,7 +29,6 @@ protocol HomeViewModelProvider {
     func didSelectSavedSearchResult(withName name: String)
     func didSelect(_ location: LocationSearchResult)
 
-    var departments: Departments { get }
     var stats: Stats? { get }
 }
 
@@ -47,12 +46,11 @@ class HomeViewModel {
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
-    let departments: Departments
     var stats: Stats?
 
     private var isLoading = false {
         didSet {
-            let isEmpty = departments.isEmpty && stats == nil
+            let isEmpty = stats == nil
             delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
         }
     }
@@ -64,11 +62,9 @@ class HomeViewModel {
 
     required init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        departments: Departments = Department.list,
         userDefaults: UserDefaults = .shared
     ) {
         self.apiService = apiService
-        self.departments = departments
         self.userDefaults = userDefaults
     }
 
@@ -123,7 +119,7 @@ class HomeViewModel {
     }
 
     private func getRecentSearchResultsViewData() -> [HomeSearchResultCellViewData] {
-        let lastSearchResults = userDefaults.lastSearchResult
+        let lastSearchResults = userDefaults.lastSearchResults
         return lastSearchResults.enumerated().map { index, location in
             HomeSearchResultCellViewData(
                 titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
@@ -159,7 +155,7 @@ extension HomeViewModel: HomeViewModelProvider {
     }
 
     func didSelectSavedSearchResult(withName name: String) {
-        guard let searchResult = userDefaults.lastSearchResult.first(where: { $0.name == name }) else {
+        guard let searchResult = userDefaults.lastSearchResults.first(where: { $0.name == name }) else {
             assertionFailure("Search result not found: \(name)")
             return
         }

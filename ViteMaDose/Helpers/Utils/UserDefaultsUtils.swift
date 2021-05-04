@@ -38,23 +38,24 @@ extension UserDefaults {
     // MARK: Keys
 
     private enum Key: String {
-        case lastSearchResult
+        case lastSearchResults
     }
 
     // MARK: Last Selected Search Results
 
-    var lastSearchResult: [LocationSearchResult] {
+    var lastSearchResults: [LocationSearchResult] {
         get {
-            guard let searchResult = object(forKey: Key.lastSearchResult.rawValue) as? Data else {
+            let searchResultData = object(forKey: Key.lastSearchResults.rawValue) as? Data
+            guard case let .success(results) = searchResultData?.decode([LocationSearchResult].self) else {
                 return []
             }
-            return searchResult.decode([LocationSearchResult].self) ?? []
+            return results
         }
         set {
-            guard let encoded = try? Self.encoder.encode(newValue) else {
+            guard let encoded = try? Self.encoder.encode(newValue.uniqued()) else {
                 return
             }
-            setValue(encoded, forKey: Key.lastSearchResult.rawValue)
+            setValue(encoded, forKey: Key.lastSearchResults.rawValue)
         }
     }
 

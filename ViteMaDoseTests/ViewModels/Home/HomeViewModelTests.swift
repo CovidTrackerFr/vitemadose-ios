@@ -155,11 +155,11 @@ class HomeViewModelTests: XCTestCase {
         assertHomeSearchBarCell(headingCells[1], expectedViewData: .init())
 
         let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
-        userDefaults.lastSearchResult = [firstSearchResult]
+        userDefaults.lastSearchResults = [firstSearchResult]
         viewModel.load()
 
         let expectedSearchResultViewData = HomeSearchResultCellViewData(
-            titleText: Localization.Home.recent_search.format(userDefaults.lastSearchResult.count),
+            titleText: Localization.Home.recent_search.format(userDefaults.lastSearchResults.count),
             name: firstSearchResult.name,
             code: firstSearchResult.departmentCode
         )
@@ -174,14 +174,14 @@ class HomeViewModelTests: XCTestCase {
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
-        userDefaults.lastSearchResult = [firstSearchResult]
+        userDefaults.lastSearchResults = [firstSearchResult]
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
 
         let expectedSearchResultViewData = HomeSearchResultCellViewData(
-            titleText: Localization.Home.recent_search.format(userDefaults.lastSearchResult.count),
+            titleText: Localization.Home.recent_search.format(userDefaults.lastSearchResults.count),
             name: firstSearchResult.name,
             code: firstSearchResult.departmentCode
         )
@@ -196,7 +196,7 @@ class HomeViewModelTests: XCTestCase {
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
-        userDefaults.lastSearchResult = [firstSearchResult]
+        userDefaults.lastSearchResults = [firstSearchResult]
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy

@@ -89,16 +89,11 @@ class BaseAPIService: BaseAPIServiceProvider {
 // MARK: - Decode
 
 private extension BaseAPIService {
-    private func request<T: Decodable>(target: BaseAPI, completion: @escaping (Result<T, Error>) -> Void) {
+    private func request<T: Codable>(target: BaseAPI, completion: @escaping (Result<T, Error>) -> Void) {
         provider.request(target) { result in
             switch result {
             case let .success(response):
-                do {
-                    let results = try JSONDecoder().decode(T.self, from: response.data)
-                    completion(.success(results))
-                } catch let error {
-                    completion(.failure(error))
-                }
+                completion(response.data.decode(T.self))
             case let .failure(error):
                 completion(.failure(error))
             }

@@ -102,7 +102,7 @@ class HomeViewController: UIViewController, Storyboarded {
 
         let departmentSelectionViewController = LocationSearchViewController.instantiate()
         departmentSelectionViewController.delegate = self
-        departmentSelectionViewController.viewModel = LocationSearchViewModel(departments: viewModel.departments)
+        departmentSelectionViewController.viewModel = LocationSearchViewModel()
 
         DispatchQueue.main.async { [weak self] in
             self?.present(departmentSelectionViewController, animated: true)

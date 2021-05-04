@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - CentreViewDataProvider
+
 protocol CentreViewDataProvider {
     var dayText: String? { get }
     var timeText: String? { get }
@@ -22,8 +23,9 @@ protocol CentreViewDataProvider {
 }
 
 // MARK: - CentreViewData
+
 struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
-    let id = UUID()
+    let id: String
     let dayText: String?
     let timeText: String?
     let addressNameText: String?
@@ -37,6 +39,7 @@ struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
 }
 
 // MARK: - CentreCell
+
 final class CentreCell: UITableViewCell {
 
     // MARK: - iVars

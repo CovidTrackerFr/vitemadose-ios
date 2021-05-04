@@ -12,8 +12,9 @@ import SwiftDate
 
 // MARK: - VaccinationCentre
 
-struct VaccinationCentre: Codable, Hashable {
-    let gid: String?
+struct VaccinationCentre: Codable, Hashable, Identifiable {
+    private let internalId: String?
+    private let gid: String?
     let departement: String?
     let nom: String?
     let url: String?
@@ -25,7 +26,12 @@ struct VaccinationCentre: Codable, Hashable {
     let appointmentCount: Int?
     let vaccineType: [String]?
 
+    var id: String {
+        return internalId ?? gid ?? UUID().uuidString
+    }
+
     enum CodingKeys: String, CodingKey {
+        case internalId = "internal_id"
         case gid
         case departement
         case nom
@@ -63,6 +69,12 @@ extension VaccinationCentre {
             case phoneNumber = "phone_number"
             case businessHours = "business_hours"
         }
+    }
+}
+
+extension Sequence where Element == VaccinationCentre {
+    var allAppointmentsCount: Int {
+       return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
     }
 }
 
@@ -146,10 +158,29 @@ extension VaccinationCentre {
 
 // MARK: - VaccinationCentres
 
-struct VaccinationCentres: Codable, Equatable {
+struct VaccinationCentres: Codable, Hashable {
     let lastUpdated: String?
-    let centresDisponibles: [VaccinationCentre]
-    let centresIndisponibles: [VaccinationCentre]
+    private let centresDisponibles: [VaccinationCentre]
+    private let centresIndisponibles: [VaccinationCentre]
+
+    var availableCentres: [VaccinationCentre] {
+        return centresDisponibles.uniqued()
+    }
+
+    var unavailableCentres: [VaccinationCentre] {
+        return centresIndisponibles.uniqued()
+    }
+
+    var formattedLastUpdated: String? {
+        guard let lastUpdateDate = lastUpdated?.toDate(nil, region: AppConstant.franceRegion) else {
+            return nil
+        }
+
+        let lastUpdateDay = lastUpdateDate.toString(.date(.short))
+        let lastUpdateTime = lastUpdateDate.toString(.time(.short))
+
+        return Localization.Location.last_update.format(lastUpdateDay, lastUpdateTime)
+    }
 
     enum CodingKeys: String, CodingKey {
         case lastUpdated = "last_updated"

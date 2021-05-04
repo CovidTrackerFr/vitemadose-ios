@@ -56,6 +56,7 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
     weak var delegate: LocationSearchViewModelDelegate?
 
     private let departments: Departments
+    private var searchStrategy: LocationSearchStrategy?
     private var searchResults: [LocationSearchResult] = [] {
         didSet {
             updateCells()
@@ -66,7 +67,7 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
 
     required init(
         geoAPIService: GeoAPIServiceProvider = GeoAPIService(),
-        departments: Departments,
+        departments: Departments = Department.list,
         userDefaults: UserDefaults = .shared
     ) {
         self.geoAPIService = geoAPIService
@@ -78,47 +79,49 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
         searchResults = departments.map(\.asLocationSearchResult)
     }
 
-    func search(query: String) {
-        guard let searchStrategy = LocationSearchStrategy(query: query) else {
-            loadDepartments()
-            return
-        }
+    private func updateCells() {
+        let cells = searchResults.map(createLocationSearchResultCell)
+        delegate?.reloadTableView(with: cells)
+    }
 
+    func search(query: String) {
+        searchStrategy = LocationSearchStrategy(query: query)
         let foundDepartmentsResult = searchInDepartmentsList(query: query)
-        var postCode: String?
 
         let fetchCitiesCompletion: (Cities) -> Void = { [weak self] cities in
             guard let self = self else { return }
-            let citiesResult = cities.compactMap { city -> LocationSearchResult? in
-                guard
-                    let departmentCode = city.departement?.code,
-                    var name = city.nom
-                else {
-                    return nil
-                }
-
-                if let postCode = postCode {
-                    name.append(String.space + "(\(postCode))")
-                }
-
-                return LocationSearchResult(
-                    name: name,
-                    departmentCode: departmentCode,
-                    nearDepartmentCodes: city.departement?.nearDepartments ?? [],
-                    coordinates: city.coordinates
-                )
-            }
-
-            self.searchResults = (citiesResult + foundDepartmentsResult).uniqued()
+            let citiesResult = cities.compactMap(self.cityAsLocationSearchResult)
+            self.searchResults = (citiesResult + foundDepartmentsResult).unique(by: \.hashValue)
         }
 
         switch searchStrategy {
         case let .withName(name):
             geoAPIService.fetchCities(byName: name, completion: fetchCitiesCompletion)
         case let .withPostCode(code):
-            postCode = code
             geoAPIService.fetchCities(byPostCode: code, completion: fetchCitiesCompletion)
+        case .none:
+            loadDepartments()
         }
+    }
+
+    private func cityAsLocationSearchResult(_ city: City) -> LocationSearchResult? {
+        guard
+            let departmentCode = city.departement?.code,
+            var name = city.nom
+        else {
+            return nil
+        }
+
+        if case let .withPostCode(code) = searchStrategy {
+            name.append(String.space + "(\(code))")
+        }
+
+        return LocationSearchResult(
+            name: name,
+            departmentCode: departmentCode,
+            nearDepartmentCodes: city.departement?.nearDepartments ?? [],
+            coordinates: city.coordinates
+        )
     }
 
     func didSelectCell(at indexPath: IndexPath) {
@@ -127,14 +130,14 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
             return
         }
 
-        var lastSearchResults = userDefaults.lastSearchResult
+        var lastSearchResults = userDefaults.lastSearchResults
         guard !lastSearchResults.contains(searchResult) else {
             delegate?.dismissViewController(with: searchResult)
             return
         }
 
         updateLastSearchResults(withSearchResult: searchResult, in: &lastSearchResults)
-        userDefaults.lastSearchResult = lastSearchResults.uniqued()
+        userDefaults.lastSearchResults = lastSearchResults
         delegate?.dismissViewController(with: searchResult)
     }
 
@@ -151,16 +154,13 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
         }
     }
 
-    private func updateCells() {
-        let cells: [LocationSearchCell] = searchResults.compactMap { searchResult in
-            let viewData = LocationSearchResultCellViewData(
-                titleText: nil,
-                name: searchResult.name,
-                code: searchResult.departmentCode
-            )
-            return .searchResult(viewData)
-        }
-        delegate?.reloadTableView(with: cells)
+    private func createLocationSearchResultCell(for searchResult: LocationSearchResult) -> LocationSearchCell {
+        let viewData = LocationSearchResultCellViewData(
+            titleText: nil,
+            name: searchResult.name,
+            code: searchResult.departmentCode
+        )
+        return .searchResult(viewData)
     }
 
     private func searchInDepartmentsList(query: String) -> [LocationSearchResult] {

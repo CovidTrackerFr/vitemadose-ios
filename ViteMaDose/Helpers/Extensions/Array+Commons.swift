@@ -13,3 +13,10 @@ extension Sequence where Element: Hashable {
         return filter { set.insert($0).inserted }
     }
 }
+
+extension RangeReplaceableCollection {
+    func unique<T: Hashable>(by keyPath: KeyPath<Element, T>) -> Self {
+        var unique = Set<T>()
+        return filter { unique.insert($0[keyPath: keyPath]).inserted }
+    }
+}

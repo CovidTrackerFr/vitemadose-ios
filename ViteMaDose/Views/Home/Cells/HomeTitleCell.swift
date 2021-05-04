@@ -15,6 +15,7 @@ protocol HomeTitleCellViewDataProvider {
 }
 
 struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable {
+
     let titleText: NSMutableAttributedString
     let subTitleText: NSMutableAttributedString?
     let topMargin: CGFloat
