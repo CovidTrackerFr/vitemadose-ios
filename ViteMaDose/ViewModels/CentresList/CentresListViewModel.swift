@@ -84,7 +84,7 @@ class CentresListViewModel {
             centresCount: vaccinationCentresList.count
         )
         let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
-        let footerText = locationVaccinationCentres.first?.lastUpdated
+        let footerText = locationVaccinationCentres.first?.formattedLastUpdated
 
         delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
         delegate?.reloadTableViewFooter(with: footerText)
