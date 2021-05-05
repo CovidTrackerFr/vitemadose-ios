@@ -71,7 +71,7 @@ extension BaseAPI: TargetType {
 protocol BaseAPIServiceProvider: AnyObject {
     var provider: MoyaProvider<BaseAPI> { get }
 
-    func fetchDepartments(completion: @escaping (Result<Counties, Error>) -> Void)
+    func fetchDepartments(completion: @escaping (Result<Departments, Error>) -> Void)
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void)
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
 }
@@ -83,7 +83,7 @@ class BaseAPIService: BaseAPIServiceProvider {
         self.provider = provider
     }
 
-    func fetchDepartments(completion: @escaping (Result<Counties, Error>) -> Void) {
+    func fetchDepartments(completion: @escaping (Result<Departments, Error>) -> Void) {
         request(target: .departments, completion: completion)
     }
 

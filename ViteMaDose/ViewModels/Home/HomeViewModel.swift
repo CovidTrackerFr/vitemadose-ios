@@ -17,8 +17,8 @@ enum HomeSection: CaseIterable {
 
 enum HomeCell: Hashable {
     case title(HomeTitleCellViewData)
-    case countySelection(HomeCountySelectionViewData)
-    case county(HomeCountyCellViewData)
+    case departmentSelection(HomeDepartmentSelectionViewData)
+    case department(HomeDepartmentCellViewData)
     case stats(HomeCellStatsViewData)
 }
 
@@ -27,18 +27,18 @@ enum HomeCell: Hashable {
 protocol HomeViewModelProvider {
     func load()
     func reloadStats()
-    func updateLastSelectedCountyIfNeeded(_ code: String?)
-    func didSelectLastCounty()
-    func didSelect(_ county: County)
+    func updateLastSelectedDepartmentIfNeeded(_ code: String?)
+    func didSelectLastDepartment()
+    func didSelect(_ department: Department)
 
-    var counties: Counties { get }
+    var departments: Departments { get }
     var stats: Stats? { get }
 }
 
 protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
-    func presentVaccinationCentres(for county: County)
+    func presentVaccinationCentres(for department: Department)
     func presentInitialLoadError(_ error: Error)
     func presentFetchStatsError(_ error: Error)
 
@@ -50,12 +50,12 @@ class HomeViewModel {
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
-    var counties: Counties = []
+    var departments: Departments = []
     var stats: Stats?
 
     private var isLoading = false {
         didSet {
-            let isEmpty = counties.isEmpty && stats == nil
+            let isEmpty = departments.isEmpty && stats == nil
             delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
         }
     }
@@ -63,7 +63,7 @@ class HomeViewModel {
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
 
-    private(set) var lastSelectedCountyCode: String?
+    private(set) var lastSelectedDepartmentCode: String?
 
     // MARK: init
 
@@ -77,8 +77,8 @@ class HomeViewModel {
 
     // MARK: Handle API result
 
-    private func handleInitialLoad(counties: Counties, stats: Stats) {
-        self.counties = counties
+    private func handleInitialLoad(departments: Departments, stats: Stats) {
+        self.departments = departments
         self.stats = stats
 
         updateHeadingCells()
@@ -93,36 +93,36 @@ class HomeViewModel {
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
-    private func handleLastSelectedCountyUpdate() {
+    private func handleLastSelectedDepartmentUpdate() {
         updateHeadingCells()
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func updateHeadingCells() {
         let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)
-        let countySelectionViewData = HomeCountySelectionViewData()
-        let lastSelectedCountyViewData = getLastSelectedCountyCellViewData()
+        let departmentSelectionViewData = HomeDepartmentSelectionViewData()
+        let lastSelectedDepartmentViewData = getLastSelectedDepartmentCellViewData()
 
         headingCells = [
             .title(titleCellViewData),
-            .countySelection(countySelectionViewData)
+            .departmentSelection(departmentSelectionViewData)
         ]
 
-        if let viewData = lastSelectedCountyViewData {
-            headingCells.append(.county(viewData))
+        if let viewData = lastSelectedDepartmentViewData {
+            headingCells.append(.department(viewData))
         }
     }
 
     private func updateStatsCells() {
-        guard let allCountiesStats = stats?[StatsKey.allCounties.rawValue] else {
+        guard let departmentsStats = stats?[StatsKey.allDepartments.rawValue] else {
             return
         }
 
         let statsTitleViewModel = HomeTitleCellViewData(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15, bottomMargin: 5)
-        let allCentresViewModel = HomeCellStatsViewData(.allCentres(allCountiesStats.total))
-        let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(allCountiesStats.disponibles))
-        let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(allCountiesStats.creneaux))
-        let percentageAvailabilitiesViewModel = HomeCellStatsViewData(.percentageAvailabilities(allCountiesStats.pourcentage))
+        let allCentresViewModel = HomeCellStatsViewData(.allCentres(departmentsStats.total))
+        let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(departmentsStats.disponibles))
+        let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(departmentsStats.creneaux))
+        let percentageAvailabilitiesViewModel = HomeCellStatsViewData(.percentageAvailabilities(departmentsStats.pourcentage))
         let externalMapViewModel = HomeCellStatsViewData(.externalMap)
 
         statsCell = [
@@ -135,20 +135,20 @@ class HomeViewModel {
         ]
     }
 
-    private func getLastSelectedCountyCellViewData() -> HomeCountyCellViewData? {
+    private func getLastSelectedDepartmentCellViewData() -> HomeDepartmentCellViewData? {
         guard
-            let lastSelectedCountyCode = userDefaults.lastSelectedCountyCode,
-            let county = counties.first(where: { $0.codeDepartement == lastSelectedCountyCode}),
-            let countyName = county.nomDepartement,
-            let countyCode = county.codeDepartement
+            let lastSelectedDepartmentCode = userDefaults.lastSelectedDepartmentCode,
+            let department = departments.first(where: { $0.codeDepartement == lastSelectedDepartmentCode}),
+            let name = department.nomDepartement,
+            let code = department.codeDepartement
         else {
             return nil
         }
 
-        return HomeCountyCellViewData(
+        return HomeDepartmentCellViewData(
             titleText: Localization.Home.recent_search,
-            countyName: countyName,
-            countyCode: countyCode
+            name: name,
+            code: code
         )
     }
 
@@ -171,11 +171,11 @@ extension HomeViewModel: HomeViewModelProvider {
 
         apiService.fetchDepartments { [weak self] result in
             switch result {
-            case let .success(counties):
+            case let .success(departments):
                 self?.apiService.fetchStats { result in
                     switch result {
                     case let .success(stats):
-                        self?.handleInitialLoad(counties: counties, stats: stats)
+                        self?.handleInitialLoad(departments: departments, stats: stats)
                         self?.isLoading = false
                     case let .failure(status):
                         self?.handleInitialLoadError(status)
@@ -205,25 +205,25 @@ extension HomeViewModel: HomeViewModelProvider {
         }
     }
 
-    func updateLastSelectedCountyIfNeeded(_ code: String?) {
-        guard code != lastSelectedCountyCode else {
+    func updateLastSelectedDepartmentIfNeeded(_ code: String?) {
+        guard code != lastSelectedDepartmentCode else {
             return
         }
-        lastSelectedCountyCode = code
-        handleLastSelectedCountyUpdate()
+        lastSelectedDepartmentCode = code
+        handleLastSelectedDepartmentUpdate()
     }
 
-    func didSelectLastCounty() {
+    func didSelectLastDepartment() {
         guard
-            let countyCode = userDefaults.lastSelectedCountyCode,
-            let county = counties.first(where: { $0.codeDepartement == countyCode})
+            let code = userDefaults.lastSelectedDepartmentCode,
+            let department = departments.first(where: { $0.codeDepartement == code})
         else {
             return
         }
-        delegate?.presentVaccinationCentres(for: county)
+        delegate?.presentVaccinationCentres(for: department)
     }
 
-    func didSelect(_ county: County) {
-        delegate?.presentVaccinationCentres(for: county)
+    func didSelect(_ department: Department) {
+        delegate?.presentVaccinationCentres(for: department)
     }
 }

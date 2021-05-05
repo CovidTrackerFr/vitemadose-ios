@@ -37,18 +37,18 @@ extension UserDefaults {
     // MARK: Keys
 
     private enum Key: String {
-        case lastSelectedCountyCode
+        case lastSelectedDepartmentCode = "lastSelectedCountyCode"
     }
 
-    // MARK: Last Selected County Code
+    // MARK: Last Selected Department Code
 
-    var lastSelectedCountyCode: String? {
+    var lastSelectedDepartmentCode: String? {
         get {
-            let rawValue = string(forKey: Key.lastSelectedCountyCode.rawValue)
+            let rawValue = string(forKey: Key.lastSelectedDepartmentCode.rawValue)
             return rawValue
         }
         set {
-            setValue(newValue, forKey: Key.lastSelectedCountyCode.rawValue)
+            setValue(newValue, forKey: Key.lastSelectedDepartmentCode.rawValue)
         }
     }
 

@@ -23,7 +23,7 @@ enum CentresListCell: Hashable {
 }
 
 protocol CentresListViewModelProvider {
-    var county: County { get }
+    var department: Department { get }
     var vaccinationCentres: VaccinationCentres? { get }
     func load(animated: Bool)
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, lat: Double, long: Double)?
@@ -67,7 +67,7 @@ class CentresListViewModel {
     private var centresCells: [CentresListCell] = []
     private var footerText: String?
 
-    var county: County
+    var department: Department
     var vaccinationCentres: VaccinationCentres?
 
     weak var delegate: CentresListViewModelDelegate?
@@ -78,10 +78,10 @@ class CentresListViewModel {
 
     init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        county: County
+        department: Department
     ) {
         self.apiService = apiService
-        self.county = county
+        self.department = department
     }
 
     private func handleLoad(with vaccinationCentres: VaccinationCentres, animated: Bool) {
@@ -110,7 +110,7 @@ class CentresListViewModel {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
                 withAppointmentsCount: appointmentsCount,
-                andCountyName: county.nomDepartement ?? ""
+                andDepartmentName: department.nomDepartement ?? ""
             ),
             topMargin: 25,
             bottomMargin: 0
@@ -218,7 +218,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        guard let departmentCode = county.codeDepartement else {
+        guard let departmentCode = department.codeDepartement else {
             isLoading = false
             handleError(NSError())
             return

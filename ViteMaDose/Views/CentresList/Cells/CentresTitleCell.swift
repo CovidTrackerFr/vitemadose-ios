@@ -18,7 +18,7 @@ extension CentresTitleCell {
 
     static func mainTitleAttributedText(
         withAppointmentsCount appointmentsCount: Int,
-        andCountyName countyName: String
+        andDepartmentName departmentName: String
     ) -> NSMutableAttributedString {
         let attributes = [
             NSAttributedString.Key.foregroundColor: Constant.titleColor,
@@ -27,21 +27,21 @@ extension CentresTitleCell {
 
         guard appointmentsCount > 0 else {
             let title = NSMutableAttributedString(
-                string: Localization.Locations.no_results.format(countyName),
+                string: Localization.Locations.no_results.format(departmentName),
                 attributes: attributes
             )
-            title.setColorForText(textForAttribute: countyName, withColor: .mandy)
+            title.setColorForText(textForAttribute: departmentName, withColor: .mandy)
             return title
         }
 
         let appointmentsCountString = Localization.Locations.appointments.format(appointmentsCount)
-        let titleString = Localization.Locations.MainTitle.title.format(appointmentsCount, countyName)
+        let titleString = Localization.Locations.MainTitle.title.format(appointmentsCount, departmentName)
         let title = NSMutableAttributedString(
             string: titleString,
             attributes: attributes
         )
         title.setColorForText(textForAttribute: appointmentsCountString, withColor: .mandy)
-        title.setColorForText(textForAttribute: countyName, withColor: .royalBlue)
+        title.setColorForText(textForAttribute: departmentName, withColor: .royalBlue)
 
         return title
     }

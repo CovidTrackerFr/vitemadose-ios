@@ -1,5 +1,5 @@
 //
-//  CountySelectionHeaderView.swift
+//  DepartmentSelectionHeaderView.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 11/04/2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CountySelectionHeaderView: UIView {
+class DepartmentSelectionHeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
 
     private enum Constant {
@@ -25,14 +25,14 @@ class CountySelectionHeaderView: UIView {
 
     private func configureTitle() {
         let attributedText = NSMutableAttributedString(
-            string: Localization.CountySelection.MainTitle.title,
+            string: Localization.DepartmentSelection.MainTitle.title,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
         attributedText.setColorForText(
-            textForAttribute: Localization.CountySelection.MainTitle.highlighted_text,
+            textForAttribute: Localization.DepartmentSelection.MainTitle.highlighted_text,
             withColor: Constant.highlightedTextColor
         )
         titleLabel.attributedText = attributedText

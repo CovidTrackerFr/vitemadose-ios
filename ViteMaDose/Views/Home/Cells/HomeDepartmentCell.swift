@@ -1,5 +1,5 @@
 //
-//  CountyCellTableViewCell.swift
+//  HomeDepartmentCell.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 11/04/2021.
@@ -7,20 +7,20 @@
 
 import UIKit
 
-protocol HomeCountyCellViewDataProvider: CountyCellViewDataProvider {
+protocol HomeDepartmentCellViewDataProvider: DepartmentCellViewDataProvider {
     var titleText: String? { get }
 }
 
-struct HomeCountyCellViewData: HomeCountyCellViewDataProvider, Hashable {
+struct HomeDepartmentCellViewData: HomeDepartmentCellViewDataProvider, Hashable {
     let titleText: String?
-    let countyName: String
-    let countyCode: String
+    let name: String
+    let code: String
 }
 
-class HomeCountyCell: CountyCell {
+class HomeDepartmentCell: DepartmentCell {
     @IBOutlet var titleLabel: UILabel!
 
-     func configure(with viewData: HomeCountyCellViewDataProvider) {
+     func configure(with viewData: HomeDepartmentCellViewDataProvider) {
         super.configure(with: viewData)
 
         titleLabel.isHidden = viewData.titleText == nil
