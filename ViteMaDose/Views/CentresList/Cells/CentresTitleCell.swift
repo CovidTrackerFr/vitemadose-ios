@@ -25,7 +25,7 @@ extension CentresTitleCell {
             NSAttributedString.Key.font: Constant.titleFont
         ]
 
-        let searchResultName = searchResult.name
+        let searchResultName = searchResult.formattedName
         guard appointmentsCount > 0 else {
             let title = NSMutableAttributedString(
                 string: Localization.Locations.no_results.format(searchResultName),

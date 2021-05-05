@@ -37,6 +37,7 @@ extension Department {
     var asLocationSearchResult: LocationSearchResult {
         return LocationSearchResult(
             name: name,
+            postCode: nil,
             departmentCode: code,
             nearDepartmentCodes: [],
             coordinates: nil

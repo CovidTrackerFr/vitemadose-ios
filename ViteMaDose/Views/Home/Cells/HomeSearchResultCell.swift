@@ -14,7 +14,8 @@ protocol HomeSearchResultCellViewDataProvider: LocationSearchResultCellViewDataP
 struct HomeSearchResultCellViewData: HomeSearchResultCellViewDataProvider, Hashable {
     let titleText: String?
     let name: String
-    let code: String
+    let postCode: String?
+    let departmentCode: String
 }
 
 class HomeSearchResultCell: LocationSearchResultCell {

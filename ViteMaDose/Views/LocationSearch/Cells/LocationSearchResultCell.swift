@@ -9,13 +9,14 @@ import UIKit
 
 protocol LocationSearchResultCellViewDataProvider {
     var name: String { get }
-    var code: String { get }
+    var postCode: String? { get }
+    var departmentCode: String { get }
 }
 
 struct LocationSearchResultCellViewData: LocationSearchResultCellViewDataProvider, Hashable {
-    let titleText: String?
     let name: String
-    let code: String
+    let postCode: String?
+    let departmentCode: String
 }
 
 class LocationSearchResultCell: UITableViewCell {
@@ -42,7 +43,7 @@ class LocationSearchResultCell: UITableViewCell {
         codeContainerView.setCornerRadius(Constant.viewsCornerRadius)
         cellContainerView.setCornerRadius(Constant.viewsCornerRadius)
 
-        codeLabel.text = viewData.code
+        codeLabel.text = viewData.departmentCode
         nameLabel.text = viewData.name
 
         codeLabel.textColor = Constant.codeTextColor

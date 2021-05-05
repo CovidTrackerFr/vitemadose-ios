@@ -90,8 +90,12 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
 
         let fetchCitiesCompletion: (Cities) -> Void = { [weak self] cities in
             guard let self = self else { return }
-            let citiesResult = cities.compactMap(self.cityAsLocationSearchResult)
-            self.searchResults = (citiesResult + foundDepartmentsResult).unique(by: \.hashValue)
+            let citiesResult = cities
+                .map(self.cityAsLocationSearchResult)
+                .unique(by: \.formattedName)
+                .sorted(by: { LocationSearchResult.sortByBestMatch(query, $0, $1) })
+
+            self.searchResults = foundDepartmentsResult + citiesResult
         }
 
         switch searchStrategy {
@@ -104,22 +108,19 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
         }
     }
 
-    private func cityAsLocationSearchResult(_ city: City) -> LocationSearchResult? {
-        guard
-            let departmentCode = city.departement?.code,
-            var name = city.nom
-        else {
-            return nil
-        }
-
+    private func cityAsLocationSearchResult(_ city: City) -> LocationSearchResult {
+        var postCode: String?
         if case let .withPostCode(code) = searchStrategy {
-            name.append(String.space + "(\(code))")
+             postCode = code
+        } else if let firstPostCode = city.postCode {
+            postCode = firstPostCode
         }
 
         return LocationSearchResult(
-            name: name,
-            departmentCode: departmentCode,
-            nearDepartmentCodes: city.departement?.nearDepartments ?? [],
+            name: city.nom,
+            postCode: postCode,
+            departmentCode: city.departement.code,
+            nearDepartmentCodes: city.departement.nearDepartments,
             coordinates: city.coordinates
         )
     }
@@ -156,23 +157,18 @@ class LocationSearchViewModel: LocationSearchViewModelProvider {
 
     private func createLocationSearchResultCell(for searchResult: LocationSearchResult) -> LocationSearchCell {
         let viewData = LocationSearchResultCellViewData(
-            titleText: nil,
-            name: searchResult.name,
-            code: searchResult.departmentCode
+            name: searchResult.formattedName,
+            postCode: searchResult.postCode,
+            departmentCode: searchResult.departmentCode
         )
         return .searchResult(viewData)
     }
 
     private func searchInDepartmentsList(query: String) -> [LocationSearchResult] {
-        let lowerCasedQuery = query.lowercased()
         return departments
             .map(\.asLocationSearchResult)
-            .filter({
-                let lowerCasedName = $0.name.lowercased()
-                let lowerCaseCode = $0.departmentCode.lowercased()
-                return
-                    lowerCasedName.contains(lowerCasedQuery) ||
-                    lowerCaseCode.contains(lowerCasedQuery)
-            })
+            .unique(by: \.name)
+            .filter({ LocationSearchResult.filterDepartmentsByQuery(query, $0) })
+            .sorted(by: { LocationSearchResult.sortByBestMatch(query, $0, $1) })
     }
 }

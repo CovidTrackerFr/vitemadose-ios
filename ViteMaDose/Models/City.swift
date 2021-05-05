@@ -11,14 +11,16 @@ import MapKit
 // MARK: - City
 
 struct City: Codable {
-    let nom: String?
+    let nom: String
     let centre: Centre?
-    let departement: CityDepartement?
+    let departement: CityDepartement
+    let codesPostaux: [String]?
 
     enum CodingKeys: String, CodingKey {
         case nom
         case centre
         case departement
+        case codesPostaux
     }
 }
 
@@ -33,6 +35,10 @@ struct Centre: Codable {
 }
 
 extension City {
+    var postCode: String? {
+        return codesPostaux?.first
+    }
+
     var coordinates: LocationSearchResult.Coordinates? {
         guard
             let longitude = centre?.coordinates[safe: 0],
@@ -50,8 +56,8 @@ extension City {
 // MARK: - City Departement
 
 struct CityDepartement: Codable {
-    let code: String?
-    let nom: String?
+    let code: String
+    let nom: String
 
     enum CodingKeys: String, CodingKey {
         case code
@@ -60,8 +66,7 @@ struct CityDepartement: Codable {
 }
 
 extension CityDepartement {
-    var nearDepartments: [String]? {
-        guard let code = self.code else { return nil }
+    var nearDepartments: [String] {
         return NearDepartments.nearDepartmentsCodes(for: code)
     }
 }

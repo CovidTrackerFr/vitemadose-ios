@@ -123,8 +123,9 @@ class HomeViewModel {
         return lastSearchResults.enumerated().map { index, location in
             HomeSearchResultCellViewData(
                 titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
-                name: location.name,
-                code: location.departmentCode
+                name: location.formattedName,
+                postCode: location.postCode,
+                departmentCode: location.departmentCode
             )
         }
     }

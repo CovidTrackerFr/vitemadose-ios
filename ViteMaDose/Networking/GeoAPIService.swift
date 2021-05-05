@@ -47,7 +47,7 @@ extension GeoAPI: TargetType {
             return .requestParameters(
                 parameters: [
                     "nom": name,
-                    "fields": "departement,centre",
+                    "fields": "codesPostaux,departement,centre",
                     "limit": Self.limit
                 ],
                 encoding: URLEncoding.queryString
@@ -56,7 +56,7 @@ extension GeoAPI: TargetType {
             return .requestParameters(
                 parameters: [
                     "codePostal": postCode,
-                    "fields": "departement,centre",
+                    "fields": "codesPostaux,departement,centre",
                     "limit": Self.limit
                 ],
                 encoding: URLEncoding.queryString
