@@ -11,8 +11,8 @@ import MapKit
 
 class HomeViewModelTests: XCTestCase {
     private let locationSearchResults = [
-        LocationSearchResult(name: "Amazing department", departmentCode: "01", departmentCodes: [], coordinates: nil),
-        LocationSearchResult(name: "Amazing city", departmentCode: "02", departmentCodes: ["01"], coordinates: LocationSearchResult.Coordinates(latitude: 0.123, longitude: 0.456))
+        LocationSearchResult(name: "Amazing department", departmentCode: "01", nearDepartmentCodes: [], coordinates: nil),
+        LocationSearchResult(name: "Amazing city", departmentCode: "02", nearDepartmentCodes: ["01"], coordinates: LocationSearchResult.Coordinates(latitude: 0.123, longitude: 0.456))
     ]
 
     private var stats = [
@@ -116,7 +116,7 @@ class HomeViewModelTests: XCTestCase {
 
         XCTAssertNil(delegateSpy.reloadTableView)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
-        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, true)
         XCTAssertEqual(expectedError, error)
     }
 
@@ -131,7 +131,7 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertNotNil(delegateSpy.reloadTableView)
         XCTAssertNil(delegateSpy.presentFetchStatsError)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
-        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, true)
 
         apiServiceMock.fetchStatsResult = .failure(error)
         viewModel.load()
