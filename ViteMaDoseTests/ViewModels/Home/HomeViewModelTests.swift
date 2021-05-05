@@ -7,7 +7,6 @@
 
 import XCTest
 @testable import ViteMaDose
-@testable import APIRequest
 
 class HomeViewModelTests: XCTestCase {
 
@@ -20,7 +19,7 @@ class HomeViewModelTests: XCTestCase {
         "Another Key": StatsValue(disponibles: 0, total: 0, creneaux: 0),
     ]
 
-    private var apiServiceMock: APIServiceMock!
+    private var apiServiceMock: BaseAPIServiceMock!
     private var userDefaults: UserDefaults!
 
     private lazy var viewModel = HomeViewModel(
@@ -30,12 +29,12 @@ class HomeViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        apiServiceMock = APIServiceMock()
+        apiServiceMock = BaseAPIServiceMock()
         userDefaults = .makeClearedInstance()
     }
 
     func testLoadWithNoError() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -68,7 +67,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testReloadWithoutError() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -110,16 +109,16 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testLoadWithCountiesError() throws {
-        let error = APIResponseStatus.notFound
+        let error = BaseAPIErrorMock.networkError
 
-        apiServiceMock.fetchCountiesResult = .failure(error)
+        apiServiceMock.fetchDepartmentsResult = .failure(error)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
 
-        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? APIResponseStatus)
+        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? BaseAPIErrorMock)
 
         XCTAssertNil(delegateSpy.reloadTableView)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
@@ -128,16 +127,16 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testLoadWithStatsError() throws {
-        let error = APIResponseStatus.notFound
+        let error = BaseAPIErrorMock.networkError
 
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .failure(error)
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
 
-        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? APIResponseStatus)
+        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? BaseAPIErrorMock)
 
         XCTAssertNil(delegateSpy.reloadTableView)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
@@ -146,9 +145,9 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testReloadError() throws {
-        let error = APIResponseStatus.networkConnectTimeoutError
+        let error = BaseAPIErrorMock.networkError
 
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -163,7 +162,7 @@ class HomeViewModelTests: XCTestCase {
         apiServiceMock.fetchStatsResult = .failure(error)
         viewModel.reloadStats()
 
-        let expectedReloadError = try XCTUnwrap(delegateSpy.presentFetchStatsError as? APIResponseStatus)
+        let expectedReloadError = try XCTUnwrap(delegateSpy.presentFetchStatsError as? BaseAPIErrorMock)
 
         XCTAssertNil(delegateSpy.presentInitialLoadError)
         XCTAssertEqual(expectedReloadError, error)
@@ -172,7 +171,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testLastSelectedCountyIsAdded() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -199,7 +198,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testExistingLastSelectedCountyIsAdded() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let firstCounty = try XCTUnwrap(counties.first)
@@ -213,9 +212,9 @@ class HomeViewModelTests: XCTestCase {
             .title(.init(titleText: HomeTitleCell.mainTitleAttributedText)),
             .countySelection(.init()),
             .county(.init(
-                        titleText: Localization.Home.recent_search,
-                        countyName: firstCounty.nomDepartement ?? "",
-                        countyCode: firstCounty.codeDepartement ?? ""
+                titleText: Localization.Home.recent_search,
+                countyName: firstCounty.nomDepartement ?? "",
+                countyCode: firstCounty.codeDepartement ?? ""
             ))
         ]
 
@@ -224,7 +223,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testDidSelectLastCountyPresentsList() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let firstCounty = try XCTUnwrap(counties.first)
@@ -239,7 +238,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testDidSelectCountyPresentsList() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -253,7 +252,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testLastSelectedCountyIsUpdatedIfNeeded() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        apiServiceMock.fetchDepartmentsResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()

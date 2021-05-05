@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 extension UIViewController: ErrorDisplayable {
     func presentRetryableAndCancellableError(
@@ -16,7 +17,7 @@ extension UIViewController: ErrorDisplayable {
     ) {
         let alert = UIAlertController(
             title: Localization.Error.Generic.title,
-            message: error.localizedDescription,
+            message: errorMessage(for: error),
             preferredStyle: .alert
         )
 
@@ -38,7 +39,7 @@ extension UIViewController: ErrorDisplayable {
     ) {
         let alert = UIAlertController(
             title: Localization.Error.Generic.title,
-            message: error.localizedDescription,
+            message: errorMessage(for: error),
             preferredStyle: .alert
         )
 
@@ -48,5 +49,10 @@ extension UIViewController: ErrorDisplayable {
         DispatchQueue.main.async { [weak self] in
             self?.present(alert, animated: true, completion: completionHandler)
         }
+    }
+
+    private func errorMessage(for error: Error) -> String {
+      // TODO: Error handling
+        return Localization.Error.Generic.default_message
     }
 }

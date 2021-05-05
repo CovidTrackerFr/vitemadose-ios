@@ -7,7 +7,6 @@
 
 import Foundation
 import FirebaseRemoteConfig
-import APIRequest
 
 struct RemoteConfiguration {
 
@@ -40,10 +39,6 @@ struct RemoteConfiguration {
 // MARK: - Defaults values
 
 extension RemoteConfiguration {
-    var host: String {
-        return baseUrl.replacingOccurrences(of: "https://", with: "")
-    }
-
     var baseUrl: String {
         return configuration.configValue(forKey: "url_base").stringValue!
     }
@@ -52,7 +47,7 @@ extension RemoteConfiguration {
         return configuration.configValue(forKey: "path_stats").stringValue!
     }
 
-    var countiesListPath: String {
+    var departmentsPath: String {
         return configuration.configValue(forKey: "path_list_departments").stringValue!
     }
 
@@ -65,9 +60,8 @@ extension RemoteConfiguration {
         }
     }
 
-    func countyDataPath(for county: String) -> String {
+    func departmentPath(withCode code: String) -> String {
         let path = configuration.configValue(forKey: "path_data_department").stringValue!
-        return path.replacingOccurrences(of: "{code}", with: county)
+        return path.replacingOccurrences(of: "{code}", with: code)
     }
-
 }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import APIRequest
+import Moya
 
 // MARK: - Home Cell ViewModel
 
@@ -46,7 +46,7 @@ protocol HomeViewModelDelegate: AnyObject {
 }
 
 class HomeViewModel {
-    private let apiService: APIServiceProvider
+    private let apiService: BaseAPIServiceProvider
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
@@ -68,7 +68,7 @@ class HomeViewModel {
     // MARK: init
 
     required init(
-        apiService: APIServiceProvider = APIService(),
+        apiService: BaseAPIServiceProvider = BaseAPIService(),
         userDefaults: UserDefaults = .shared
     ) {
         self.apiService = apiService
@@ -152,11 +152,11 @@ class HomeViewModel {
         )
     }
 
-    private func handleInitialLoadError(_ error: APIResponseStatus) {
+    private func handleInitialLoadError(_ error: Error) {
         delegate?.presentInitialLoadError(error)
     }
 
-    private func handleStatsError(_ error: APIResponseStatus) {
+    private func handleStatsError(_ error: Error) {
         delegate?.presentFetchStatsError(error)
     }
 }
@@ -169,7 +169,7 @@ extension HomeViewModel: HomeViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchCounties { [weak self] result in
+        apiService.fetchDepartments { [weak self] result in
             switch result {
             case let .success(counties):
                 self?.apiService.fetchStats { result in
