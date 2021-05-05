@@ -36,19 +36,12 @@ extension String {
         return String(format: self, locale: .current, arguments: args)
     }
 
-    func levDis(to string: String, ignoreCase: Bool = true, trimWhiteSpacesAndNewLines: Bool = true) -> Float {
-
+    func levDis(to string: String) -> Float {
         var firstString = self
         var secondString = string
 
-        if ignoreCase {
-            firstString = firstString.lowercased()
-            secondString = secondString.lowercased()
-        }
-        if trimWhiteSpacesAndNewLines {
-            firstString = firstString.trimmingCharacters(in: .whitespacesAndNewlines)
-            secondString = secondString.trimmingCharacters(in: .whitespacesAndNewlines)
-        }
+        firstString = firstString.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        secondString = secondString.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 
         let empty = [Int](repeating: 0, count: secondString.count)
         var last = [Int](0...secondString.count)
