@@ -156,7 +156,9 @@ extension HomeViewModel: HomeViewModelProvider {
     }
 
     func didSelectSavedSearchResult(withName name: String) {
-        guard let searchResult = userDefaults.lastSearchResults.first(where: { $0.name == name }) else {
+        let predicate: (LocationSearchResult) -> Bool = { $0.formattedName == name }
+        let foundSearchResult = userDefaults.lastSearchResults.first(where: predicate)
+        guard let searchResult = foundSearchResult else {
             assertionFailure("Search result not found: \(name)")
             return
         }
