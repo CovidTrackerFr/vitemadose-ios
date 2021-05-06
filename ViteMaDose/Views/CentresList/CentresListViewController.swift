@@ -120,6 +120,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.register(cellType: CentresTitleCell.self)
         tableView.register(cellType: CentreCell.self)
         tableView.register(cellType: CentresStatsCell.self)
+        tableView.register(cellType: CentresSortOptionsCell.self)
     }
 
 }
@@ -136,7 +137,7 @@ extension CentresListViewController: CentresListViewModelDelegate {
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(centresCells, toSection: .centres)
 
-        dataSource.defaultRowAnimation = .fade
+        dataSource.defaultRowAnimation = animated ? .fade : .none
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
@@ -213,6 +214,14 @@ extension CentresListViewController {
         case let .centre(cellViewData):
             let cell = tableView.dequeueReusableCell(with: CentreCell.self, for: indexPath)
             configureHandlers(for: cell, at: indexPath)
+            cell.configure(with: cellViewData)
+            return cell
+        case let .sort(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentresSortOptionsCell.self, for: indexPath)
+            cell.sortSegmentedControlHandler = { [weak self] option in
+                Haptic.impact(.light).generate()
+                self?.viewModel.sortList(by: CentresListSortOption(option))
+            }
             cell.configure(with: cellViewData)
             return cell
         }

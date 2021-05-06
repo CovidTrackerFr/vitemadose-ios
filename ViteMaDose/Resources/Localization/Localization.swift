@@ -50,6 +50,11 @@ enum Localization {
             static let title_department = "locations.main_title_department".localized
             static let title_city = "locations.main_title_city".localized
         }
+
+        enum SortOption {
+            static let closest = "locations.sort_option.closest".localized
+            static let fastest = "locations.sort_option.fastest".localized
+        }
     }
 
     enum Location {
