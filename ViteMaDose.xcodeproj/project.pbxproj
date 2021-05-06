@@ -44,6 +44,8 @@
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
 		577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */; };
 		577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
+		5785314E26441A64005302DB /* CentresSortOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785314D26441A64005302DB /* CentresSortOptionsCell.swift */; };
+		5785315226441B07005302DB /* CentresSortOptionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5785315126441B07005302DB /* CentresSortOptionsCell.xib */; };
 		5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785E60E263F3F7200E655FF /* NearDepartments.swift */; };
 		5785E612263F43EB00E655FF /* Departments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785E611263F43EB00E655FF /* Departments.swift */; };
 		5785E615263F446300E655FF /* departments.json in Resources */ = {isa = PBXBuildFile; fileRef = 5785E614263F446300E655FF /* departments.json */; };
@@ -157,6 +159,8 @@
 		577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplayable.swift; sourceTree = "<group>"; };
 		577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorDisplayable.swift"; sourceTree = "<group>"; };
 		577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		5785314D26441A64005302DB /* CentresSortOptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresSortOptionsCell.swift; sourceTree = "<group>"; };
+		5785315126441B07005302DB /* CentresSortOptionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentresSortOptionsCell.xib; sourceTree = "<group>"; };
 		5785E60E263F3F7200E655FF /* NearDepartments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearDepartments.swift; sourceTree = "<group>"; };
 		5785E611263F43EB00E655FF /* Departments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departments.swift; sourceTree = "<group>"; };
 		5785E614263F446300E655FF /* departments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departments.json; sourceTree = "<group>"; };
@@ -537,6 +541,8 @@
 				57AF5049262CDB3D0085E3C1 /* CentresStatsCell.xib */,
 				57C401A8262426B100EFFCA3 /* CentreCell.swift */,
 				57C401A9262426B100EFFCA3 /* CentreCell.xib */,
+				5785314D26441A64005302DB /* CentresSortOptionsCell.swift */,
+				5785315126441B07005302DB /* CentresSortOptionsCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -692,6 +698,7 @@
 				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
 				57C401972623929800EFFCA3 /* HomeSearchResultCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */,
+				5785315226441B07005302DB /* CentresSortOptionsCell.xib in Resources */,
 				577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */,
 				57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */,
 				579D713226373A030021CB56 /* GoogleService-Info-debug.plist in Resources */,
@@ -862,6 +869,7 @@
 				57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */,
 				57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */,
 				57C401962623929800EFFCA3 /* HomeSearchResultCell.swift in Sources */,
+				5785314E26441A64005302DB /* CentresSortOptionsCell.swift in Sources */,
 				57ECA227262B031F001B368F /* UserDefaultsUtils.swift in Sources */,
 				579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */,
 				57673930261E3BC5004A700D /* HomeViewController.swift in Sources */,

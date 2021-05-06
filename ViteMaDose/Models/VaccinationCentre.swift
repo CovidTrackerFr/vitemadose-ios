@@ -83,6 +83,10 @@ extension VaccinationCentre {
         return prochainRdv != nil
     }
 
+    var nextAppointmentDate: Date? {
+        return prochainRdv?.toDate(nil, region: AppConstant.franceRegion)?.date ?? prochainRdv?.toISODate(nil, region: AppConstant.franceRegion)?.date
+    }
+
     var nextAppointmentDay: String? {
         return prochainRdv?.toString(with: .date(.long), region: AppConstant.franceRegion)
     }
@@ -190,3 +194,13 @@ struct VaccinationCentres: Codable, Hashable {
 }
 
 typealias LocationVaccinationCentres = [VaccinationCentres]
+
+extension LocationVaccinationCentres {
+    var allAvailableCentres: [VaccinationCentre] {
+        return flatMap(\.availableCentres).unique(by: \.id)
+    }
+
+    var allUnavailableCentres: [VaccinationCentre] {
+        return flatMap(\.unavailableCentres).unique(by: \.id)
+    }
+}

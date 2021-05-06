@@ -73,4 +73,16 @@ extension LocationSearchResult {
         }
         return lhsLocation.distance(from: baseLocation) < rhsLocation.distance(from: baseLocation)
     }
+
+    func sortVaccinationCentresByAppointment(_ lhs: VaccinationCentre, _ rhs: VaccinationCentre) -> Bool {
+        guard
+            let lhsDate = lhs.nextAppointmentDate,
+            let rhsDate = rhs.nextAppointmentDate,
+            lhs.isAvailable,
+            rhs.isAvailable
+        else {
+            return false
+        }
+        return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
+    }
 }

@@ -20,11 +20,39 @@ enum CentresListCell: Hashable {
     case title(HomeTitleCellViewData)
     case stats(CentresStatsCellViewData)
     case centre(CentreViewData)
+    case sort(CentresSortOptionsCellViewData)
+}
+
+enum CentresListSortOption: Equatable {
+    case closest
+    case fastest
+
+    init(_ value: Int) {
+        switch value {
+        case 0:
+            self = .closest
+        case 1:
+            self = .fastest
+        default:
+            assertionFailure("Value should either be 0 or 1")
+            self = .closest
+        }
+    }
+
+    var index: Int {
+        switch self {
+        case .closest:
+            return 0
+        case .fastest:
+            return 1
+        }
+    }
 }
 
 protocol CentresListViewModelProvider {
     var searchResult: LocationSearchResult { get }
     func load(animated: Bool)
+    func sortList(by order: CentresListSortOption)
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)?
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
     func bookingLink(at indexPath: IndexPath) -> URL?
@@ -46,9 +74,9 @@ protocol CentresListViewModelDelegate: AnyObject {
 
 class CentresListViewModel {
     private let apiService: BaseAPIServiceProvider
-    private let phoneNumberKit = PhoneNumberKit()
-
-    private var vaccinationCentresList: [VaccinationCentre] = []
+    private(set) var searchResult: LocationSearchResult
+    private let phoneNumberKit: PhoneNumberKit
+    private let userDefaults: UserDefaults
 
     private var isLoading = false {
         didSet {
@@ -56,24 +84,33 @@ class CentresListViewModel {
         }
     }
 
-    private var headingCells: [CentresListCell] = []
-    private var centresCells: [CentresListCell] = []
-    private var footerText: String?
+    private var locationVaccinationCentres: LocationVaccinationCentres = []
+    private var vaccinationCentresList: [VaccinationCentre] = []
 
-    var searchResult: LocationSearchResult
+    private var footerText: String?
     weak var delegate: CentresListViewModelDelegate?
 
     init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        searchResult: LocationSearchResult
+        searchResult: LocationSearchResult,
+        phoneNumberKit: PhoneNumberKit = PhoneNumberKit(),
+        userDefaults: UserDefaults = .shared
     ) {
         self.apiService = apiService
         self.searchResult = searchResult
+        self.phoneNumberKit = phoneNumberKit
+        self.userDefaults = userDefaults
     }
 
-    private func handleLoad(with locationVaccinationCentres: LocationVaccinationCentres, animated: Bool) {
-        let availableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.availableCentres))
-        let unavailableCentres = getVaccinationCentres(for: locationVaccinationCentres.flatMap(\.unavailableCentres))
+    private func reloadTableView(animated: Bool) {
+        let availableCentres = getVaccinationCentres(
+            for: locationVaccinationCentres.allAvailableCentres,
+            sortOption: userDefaults.centresListSortOption
+        )
+        let unavailableCentres = getVaccinationCentres(
+            for: locationVaccinationCentres.allUnavailableCentres,
+            sortOption: .closest
+        )
 
         // Merge arrays and make sure there is no centre with duplicate ids
         vaccinationCentresList = (availableCentres + unavailableCentres).unique(by: \.id)
@@ -88,10 +125,6 @@ class CentresListViewModel {
 
         delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
         delegate?.reloadTableViewFooter(with: footerText)
-    }
-
-    private func handleReload(with vaccinationCentres: LocationVaccinationCentres) {
-        handleLoad(with: vaccinationCentres, animated: true)
     }
 
     private func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
@@ -115,12 +148,19 @@ class CentresListViewModel {
             .stats(statsCellViewData)
         ]
 
-        if centresCount > 0 {
-            let centresListTitleViewData = HomeTitleCellViewData(
-                titleText: CentresTitleCell.centresListTitle,
-                bottomMargin: 5
-            )
-            cells.append(.title(centresListTitleViewData))
+        guard centresCount > 0 else {
+            return cells
+        }
+
+        let centresListTitleViewData = HomeTitleCellViewData(
+            titleText: CentresTitleCell.centresListTitle,
+            bottomMargin: 0
+        )
+        cells.append(.title(centresListTitleViewData))
+
+        if searchResult.coordinates != nil {
+            let viewData = CentresSortOptionsCellViewData(sortOption: userDefaults.centresListSortOption)
+            cells.append(.sort(viewData))
         }
 
         return cells
@@ -140,10 +180,18 @@ class CentresListViewModel {
     /// The maximum distance value is set in our remote config file
     /// - Parameter centres: a list of vaccination centres returned by the API
     /// - Returns: array of filtered and sorted centres
-    private func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
-        return centres
-            .filter(searchResult.filterVaccinationCentreByDistance)
-            .sorted(by: searchResult.sortVaccinationCentresByLocation)
+    private func getVaccinationCentres(
+        for centres: [VaccinationCentre],
+        sortOption: CentresListSortOption
+    ) -> [VaccinationCentre] {
+        let centres = centres.filter(searchResult.filterVaccinationCentreByDistance)
+
+        switch sortOption {
+        case .closest:
+            return centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
+        case .fastest:
+            return centres.sorted(by: searchResult.sortVaccinationCentresByAppointment)
+        }
     }
 
     private func getVaccinationCentreCellViewData(_ centre: VaccinationCentre) -> CentreViewData {
@@ -204,9 +252,15 @@ extension CentresListViewModel: CentresListViewModelProvider {
             if let error = errors.first {
                 self?.handleError(error)
             } else {
-                self?.handleLoad(with: vaccinationCentres, animated: animated)
+                self?.locationVaccinationCentres = vaccinationCentres
+                self?.reloadTableView(animated: animated)
             }
         }
+    }
+
+    func sortList(by order: CentresListSortOption) {
+        userDefaults.centresListSortOption = order
+        reloadTableView(animated: false)
     }
 
     private func createDepartmentPromise(code: String) -> Promise<VaccinationCentres> {
