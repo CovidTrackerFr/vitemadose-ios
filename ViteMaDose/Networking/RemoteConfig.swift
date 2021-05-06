@@ -60,6 +60,14 @@ extension RemoteConfiguration {
         }
     }
 
+    var vaccinationCentresListRadiusInKm: NSNumber {
+        return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
+    }
+
+    var vaccinationCentresListRadiusInMeters: Double {
+        return vaccinationCentresListRadiusInKm.doubleValue * 1000
+    }
+
     func departmentPath(withCode code: String) -> String {
         let path = configuration.configValue(forKey: "path_data_department").stringValue!
         return path.replacingOccurrences(of: "{code}", with: code)

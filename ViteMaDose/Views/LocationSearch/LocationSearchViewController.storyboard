@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Department Selection View Controller-->
+        <!--Location Search View Controller-->
         <scene sceneID="L8X-yB-j7x">
             <objects>
-                <viewController id="QZT-b6-2pN" customClass="DepartmentSelectionViewController" customModule="ViteMaDose" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QZT-b6-2pN" customClass="LocationSearchViewController" customModule="ViteMaDose" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="672-ZT-dnY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

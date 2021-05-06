@@ -224,8 +224,7 @@ extension CentresListViewController {
             guard let centreInfo = self?.viewModel.centreLocation(at: indexPath) else {
                 return
             }
-            let location = CLLocationCoordinate2D(latitude: centreInfo.lat, longitude: centreInfo.long)
-            let placemark =  MKPlacemark(coordinate: location)
+            let placemark =  MKPlacemark(coordinate: centreInfo.location.coordinate)
             let mapItem = MKMapItem(placemark: placemark)
             mapItem.name = centreInfo.name
 
@@ -258,7 +257,7 @@ extension CentresListViewController {
             preferredStyle: .actionSheet
         )
 
-        let openAction = UIAlertAction(title: "Ouvrir l'itinéraire", style: .default) { _ in
+        let openAction = UIAlertAction(title: Localization.Location.open_route, style: .default) { _ in
             MKMapItem.openMaps(
                 with: [mapItem],
                 launchOptions: [
@@ -267,7 +266,7 @@ extension CentresListViewController {
             )
         }
 
-        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel, handler: nil)
 
         actionSheet.addAction(openAction)
         actionSheet.addAction(cancelAction)

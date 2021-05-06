@@ -10,26 +10,35 @@ import Foundation
 extension Data {
     /// Try do deserialise data into a given object type
     /// - Parameter type: Object type
-    func decode<T: Codable>(_ type: T.Type) -> T? {
+    func decode<T: Codable>(_ type: T.Type) -> Result<T, Error> {
         let jsonDecoder = JSONDecoder()
-        var result: T?
+        
         do {
             let decoded = try jsonDecoder.decode(T.self, from: self)
-            result = decoded
-        } catch DecodingError.dataCorrupted(let context) {
+            return .success(decoded)
+        } catch {
+            #if DEBUG
+            logDecodeError(error)
+            #endif
+            return .failure(error)
+        }
+    }
+
+    private func logDecodeError(_ error: Error) {
+        switch error {
+        case let DecodingError.dataCorrupted(context):
             print(context)
-        } catch DecodingError.keyNotFound(let key, let context) {
+        case let DecodingError.keyNotFound(key, context):
             print("Key '\(key)' not found:", context.debugDescription)
             print("codingPath:", context.codingPath)
-        } catch DecodingError.valueNotFound(let value, let context) {
+        case let DecodingError.valueNotFound(value, context):
             print("Value '\(value)' not found:", context.debugDescription)
             print("codingPath:", context.codingPath)
-        } catch DecodingError.typeMismatch(let type, let context) {
+        case let DecodingError.typeMismatch(type, context):
             print("Type '\(type)' mismatch:", context.debugDescription)
             print("codingPath:", context.codingPath)
-        } catch {
-            result = nil
+        default:
+            print("Unknown:", error.localizedDescription)
         }
-        return result
     }
 }

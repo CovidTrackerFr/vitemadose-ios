@@ -29,9 +29,9 @@ struct AppAnalytics {
         Analytics.logEvent("search_by_departement", parameters: [:])
     }
 
-    static func didSelectDepartment(_ department: Department) {
+    static func didSelectLocation(_ location: LocationSearchResult) {
         Analytics.logEvent("county_selected", parameters: [
-            "codeDepartement": (department.codeDepartement?.lowercased() ?? "") as NSString
+            "codeDepartement": (location.departmentCode.lowercased()) as NSString
         ])
     }
 

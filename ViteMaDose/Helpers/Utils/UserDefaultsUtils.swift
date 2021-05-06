@@ -12,6 +12,7 @@ extension UserDefaults {
     // MARK: - Setup
 
     static let userDefaultSuiteName = "app.vitemadose"
+    static let encoder = JSONEncoder()
 
     static var shared: UserDefaults {
         let combined = UserDefaults.standard
@@ -37,18 +38,24 @@ extension UserDefaults {
     // MARK: Keys
 
     private enum Key: String {
-        case lastSelectedDepartmentCode = "lastSelectedCountyCode"
+        case lastSearchResults
     }
 
-    // MARK: Last Selected Department Code
+    // MARK: Last Selected Search Results
 
-    var lastSelectedDepartmentCode: String? {
+    var lastSearchResults: [LocationSearchResult] {
         get {
-            let rawValue = string(forKey: Key.lastSelectedDepartmentCode.rawValue)
-            return rawValue
+            let searchResultData = object(forKey: Key.lastSearchResults.rawValue) as? Data
+            guard case let .success(results) = searchResultData?.decode([LocationSearchResult].self) else {
+                return []
+            }
+            return results
         }
         set {
-            setValue(newValue, forKey: Key.lastSelectedDepartmentCode.rawValue)
+            guard let encoded = try? Self.encoder.encode(newValue.uniqued()) else {
+                return
+            }
+            setValue(encoded, forKey: Key.lastSearchResults.rawValue)
         }
     }
 

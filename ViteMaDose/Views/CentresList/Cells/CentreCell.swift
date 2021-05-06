@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - CentreViewDataProvider
+
 protocol CentreViewDataProvider {
     var dayText: String? { get }
     var timeText: String? { get }
@@ -18,12 +19,13 @@ protocol CentreViewDataProvider {
     var vaccineTypesText: String? { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
-    var url: URL? { get }
     var partnerLogo: UIImage? { get }
 }
 
 // MARK: - CentreViewData
-struct CentreViewData: CentreViewDataProvider, Hashable {
+
+struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
+    let id: String
     let dayText: String?
     let timeText: String?
     let addressNameText: String?
@@ -33,11 +35,11 @@ struct CentreViewData: CentreViewDataProvider, Hashable {
     let vaccineTypesText: String?
     let appointmentsCount: Int?
     let isAvailable: Bool
-    let url: URL?
     let partnerLogo: UIImage?
 }
 
 // MARK: - CentreCell
+
 final class CentreCell: UITableViewCell {
 
     // MARK: - iVars

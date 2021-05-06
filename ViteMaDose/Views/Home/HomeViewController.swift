@@ -88,21 +88,21 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.tableFooterView = footerView
 
         tableView.register(cellType: HomeTitleCell.self)
-        tableView.register(cellType: HomeDepartmentSelectionCell.self)
-        tableView.register(cellType: HomeDepartmentCell.self)
+        tableView.register(cellType: HomeSearchBarCell.self)
+        tableView.register(cellType: HomeSearchResultCell.self)
         tableView.register(cellType: HomeStatsCell.self)
     }
 
     @objc func didPullToRefresh() {
-        viewModel.reloadStats()
+        viewModel.load()
     }
 
     private func presentDepartmentSelectionViewController() {
         AppAnalytics.didTapSearchBar()
 
-        let departmentSelectionViewController = DepartmentSelectionViewController.instantiate()
+        let departmentSelectionViewController = LocationSearchViewController.instantiate()
         departmentSelectionViewController.delegate = self
-        departmentSelectionViewController.viewModel = DepartmentSelectionViewModel(departments: viewModel.departments)
+        departmentSelectionViewController.viewModel = LocationSearchViewModel()
 
         DispatchQueue.main.async { [weak self] in
             self?.present(departmentSelectionViewController, animated: true)
@@ -140,13 +140,11 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Present
 
-    func presentVaccinationCentres(for department: Department) {
-        viewModel.updateLastSelectedDepartmentIfNeeded(department.codeDepartement)
-
+    func presentVaccinationCentres(for location: LocationSearchResult) {
         let vaccinationCentresViewController = CentresListViewController.instantiate()
-        vaccinationCentresViewController.viewModel = CentresListViewModel(department: department)
+        vaccinationCentresViewController.viewModel = CentresListViewModel(searchResult: location)
         navigationController?.show(vaccinationCentresViewController, sender: self)
-        AppAnalytics.didSelectDepartment(department)
+        AppAnalytics.didSelectLocation(location)
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
@@ -162,19 +160,6 @@ extension HomeViewController: HomeViewModelDelegate {
     }
 
     func presentFetchStatsError(_ error: Error) {
-        presentRetryableAndCancellableError(
-            error: error,
-            retryHandler: { [unowned self] _ in
-                self.viewModel.reloadStats()
-            },
-            cancelHandler: { [unowned self] _ in
-                self.refreshControl.endRefreshing()
-            },
-            completionHandler: nil
-        )
-    }
-
-    func presentInitialLoadError(_ error: Error) {
         presentRetryableError(
             error: error,
             retryHandler: { [unowned self] _ in
@@ -196,10 +181,10 @@ extension HomeViewController: UITableViewDelegate {
         }
 
         switch homeCell {
-        case .departmentSelection:
+        case .searchBar:
             presentDepartmentSelectionViewController()
-        case .department:
-            viewModel.didSelectLastDepartment()
+        case let .searchResult(viewData):
+            viewModel.didSelectSavedSearchResult(withName: viewData.name)
             Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {
@@ -231,12 +216,12 @@ extension HomeViewController {
             let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .departmentSelection(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeDepartmentSelectionCell.self, for: indexPath)
+        case let .searchBar(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeSearchBarCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .department(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeDepartmentCell.self, for: indexPath)
+        case let .searchResult(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeSearchResultCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .stats(cellViewModel):
@@ -247,12 +232,12 @@ extension HomeViewController {
     }
 }
 
-// MARK: - DepartmentSelection ViewController Delegate
+// MARK: - LocationSearch ViewController Delegate
 
-extension HomeViewController: DepartmentSelectionViewControllerDelegate {
+extension HomeViewController: LocationSearchViewControllerDelegate {
 
-    func didSelect(department: Department) {
-        viewModel.didSelect(department)
+    func didSelect(location: LocationSearchResult) {
+        viewModel.didSelect(location)
     }
 
 }

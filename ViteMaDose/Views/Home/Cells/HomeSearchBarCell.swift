@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol HomeDepartmentSelectionCellViewDataProvider {
+protocol HomeSearchBarCellViewDataProvider {
     var searchBarText: String { get }
 }
 
-struct HomeDepartmentSelectionViewData: HomeDepartmentSelectionCellViewDataProvider, Hashable {
-    let searchBarText = Localization.Home.select_department
+struct HomeSearchBarCellViewData: HomeSearchBarCellViewDataProvider, Hashable {
+    let searchBarText = Localization.Home.search_placeholder
 }
 
-class HomeDepartmentSelectionCell: UITableViewCell {
+class HomeSearchBarCell: UITableViewCell {
 
     @IBOutlet private var searchBarView: UIView!
     @IBOutlet private var searchBarTitle: UILabel!
@@ -44,7 +44,7 @@ class HomeDepartmentSelectionCell: UITableViewCell {
         searchBarView.setCornerRadius(Constant.searchBarViewCornerRadius, withShadow: shadow)
     }
 
-    func configure(with viewData: HomeDepartmentSelectionCellViewDataProvider = HomeDepartmentSelectionViewData()) {
+    func configure(with viewData: HomeSearchBarCellViewDataProvider = HomeSearchBarCellViewData()) {
         searchBarTitle.text = viewData.searchBarText
     }
 }

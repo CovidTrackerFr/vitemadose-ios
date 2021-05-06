@@ -1,5 +1,5 @@
 //
-//  DepartmentSelectionHeaderView.swift
+//  LocationSearchHeaderView.swift
 //  ViteMaDose
 //
 //  Created by Victor Sarda on 11/04/2021.
@@ -7,8 +7,9 @@
 
 import UIKit
 
-class DepartmentSelectionHeaderView: UIView {
-    @IBOutlet var titleLabel: UILabel!
+class LocationSearchHeaderView: UIView {
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private(set) weak var searchBar: UISearchBar!
 
     private enum Constant {
         static let highlightedTextColor = UIColor.mandy
@@ -20,19 +21,20 @@ class DepartmentSelectionHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .athensGray
+        searchBar.placeholder = Localization.LocationSearch.search_placeholder
         configureTitle()
     }
 
     private func configureTitle() {
         let attributedText = NSMutableAttributedString(
-            string: Localization.DepartmentSelection.MainTitle.title,
+            string: Localization.LocationSearch.MainTitle.title,
             attributes: [
                 NSAttributedString.Key.font: Constant.titleFont,
                 NSAttributedString.Key.foregroundColor: UIColor.label
             ]
         )
         attributedText.setColorForText(
-            textForAttribute: Localization.DepartmentSelection.MainTitle.highlighted_text,
+            textForAttribute: Localization.LocationSearch.MainTitle.highlighted_text,
             withColor: Constant.highlightedTextColor
         )
         titleLabel.attributedText = attributedText

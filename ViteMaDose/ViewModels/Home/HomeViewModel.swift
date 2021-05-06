@@ -17,8 +17,8 @@ enum HomeSection: CaseIterable {
 
 enum HomeCell: Hashable {
     case title(HomeTitleCellViewData)
-    case departmentSelection(HomeDepartmentSelectionViewData)
-    case department(HomeDepartmentCellViewData)
+    case searchBar(HomeSearchBarCellViewData)
+    case searchResult(HomeSearchResultCellViewData)
     case stats(HomeCellStatsViewData)
 }
 
@@ -26,20 +26,16 @@ enum HomeCell: Hashable {
 
 protocol HomeViewModelProvider {
     func load()
-    func reloadStats()
-    func updateLastSelectedDepartmentIfNeeded(_ code: String?)
-    func didSelectLastDepartment()
-    func didSelect(_ department: Department)
+    func didSelectSavedSearchResult(withName name: String)
+    func didSelect(_ location: LocationSearchResult)
 
-    var departments: Departments { get }
     var stats: Stats? { get }
 }
 
 protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
 
-    func presentVaccinationCentres(for department: Department)
-    func presentInitialLoadError(_ error: Error)
+    func presentVaccinationCentres(for location: LocationSearchResult)
     func presentFetchStatsError(_ error: Error)
 
     func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
@@ -50,20 +46,17 @@ class HomeViewModel {
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?
 
-    var departments: Departments = []
     var stats: Stats?
 
     private var isLoading = false {
         didSet {
-            let isEmpty = departments.isEmpty && stats == nil
+            let isEmpty = stats == nil
             delegate?.updateLoadingState(isLoading: isLoading, isEmpty: isEmpty)
         }
     }
 
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
-
-    private(set) var lastSelectedDepartmentCode: String?
 
     // MARK: init
 
@@ -77,8 +70,7 @@ class HomeViewModel {
 
     // MARK: Handle API result
 
-    private func handleInitialLoad(departments: Departments, stats: Stats) {
-        self.departments = departments
+    private func handleStatsLoad(stats: Stats) {
         self.stats = stats
 
         updateHeadingCells()
@@ -87,30 +79,21 @@ class HomeViewModel {
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
-    private func handleStatsReload(with stats: Stats) {
-        self.stats = stats
-        updateStatsCells()
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
-    }
-
-    private func handleLastSelectedDepartmentUpdate() {
+    private func handleLastSelectedSearchResult() {
         updateHeadingCells()
         delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
     }
 
     private func updateHeadingCells() {
-        let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)
-        let departmentSelectionViewData = HomeDepartmentSelectionViewData()
-        let lastSelectedDepartmentViewData = getLastSelectedDepartmentCellViewData()
+        let titleCellViewData = HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0)
+        let departmentSelectionViewData = HomeSearchBarCellViewData()
+        let lastSelectedDepartmentViewData = getRecentSearchResultsViewData()
 
         headingCells = [
             .title(titleCellViewData),
-            .departmentSelection(departmentSelectionViewData)
+            .searchBar(departmentSelectionViewData)
         ]
-
-        if let viewData = lastSelectedDepartmentViewData {
-            headingCells.append(.department(viewData))
-        }
+        headingCells.append(contentsOf: lastSelectedDepartmentViewData.map(HomeCell.searchResult))
     }
 
     private func updateStatsCells() {
@@ -118,7 +101,7 @@ class HomeViewModel {
             return
         }
 
-        let statsTitleViewModel = HomeTitleCellViewData(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15, bottomMargin: 5)
+        let statsTitleViewModel = HomeTitleCellViewData(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 20, bottomMargin: 5)
         let allCentresViewModel = HomeCellStatsViewData(.allCentres(departmentsStats.total))
         let centresWithAvailabilitiesViewModel = HomeCellStatsViewData(.centresWithAvailabilities(departmentsStats.disponibles))
         let allAvailabilitiesViewModel = HomeCellStatsViewData(.allAvailabilities(departmentsStats.creneaux))
@@ -135,25 +118,16 @@ class HomeViewModel {
         ]
     }
 
-    private func getLastSelectedDepartmentCellViewData() -> HomeDepartmentCellViewData? {
-        guard
-            let lastSelectedDepartmentCode = userDefaults.lastSelectedDepartmentCode,
-            let department = departments.first(where: { $0.codeDepartement == lastSelectedDepartmentCode}),
-            let name = department.nomDepartement,
-            let code = department.codeDepartement
-        else {
-            return nil
+    private func getRecentSearchResultsViewData() -> [HomeSearchResultCellViewData] {
+        let lastSearchResults = userDefaults.lastSearchResults
+        return lastSearchResults.enumerated().map { index, location in
+            HomeSearchResultCellViewData(
+                titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
+                name: location.formattedName,
+                postCode: location.postCode,
+                departmentCode: location.departmentCode
+            )
         }
-
-        return HomeDepartmentCellViewData(
-            titleText: Localization.Home.recent_search,
-            name: name,
-            code: code
-        )
-    }
-
-    private func handleInitialLoadError(_ error: Error) {
-        delegate?.presentInitialLoadError(error)
     }
 
     private func handleStatsError(_ error: Error) {
@@ -164,66 +138,35 @@ class HomeViewModel {
 // MARK: - HomeViewModelProvider
 
 extension HomeViewModel: HomeViewModelProvider {
-    // TODO: Concurrent calls
     func load() {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchDepartments { [weak self] result in
-            switch result {
-            case let .success(departments):
-                self?.apiService.fetchStats { result in
-                    switch result {
-                    case let .success(stats):
-                        self?.handleInitialLoad(departments: departments, stats: stats)
-                        self?.isLoading = false
-                    case let .failure(status):
-                        self?.handleInitialLoadError(status)
-                        self?.isLoading = false
-                    }
-                }
-            case let .failure(status):
-                self?.handleInitialLoadError(status)
-                self?.isLoading = false
-            }
-        }
-    }
-
-    func reloadStats() {
-        guard !isLoading else { return }
-        isLoading = true
-
         apiService.fetchStats { [weak self] result in
-            self?.isLoading = false
+            guard let self = self else { return }
+            self.isLoading = false
 
             switch result {
             case let .success(stats):
-                self?.handleStatsReload(with: stats)
+                self.handleStatsLoad(stats: stats)
             case let .failure(status):
-                self?.handleStatsError(status)
+                self.handleStatsError(status)
             }
         }
     }
 
-    func updateLastSelectedDepartmentIfNeeded(_ code: String?) {
-        guard code != lastSelectedDepartmentCode else {
+    func didSelectSavedSearchResult(withName name: String) {
+        let predicate: (LocationSearchResult) -> Bool = { $0.formattedName == name }
+        let foundSearchResult = userDefaults.lastSearchResults.first(where: predicate)
+        guard let searchResult = foundSearchResult else {
+            assertionFailure("Search result not found: \(name)")
             return
         }
-        lastSelectedDepartmentCode = code
-        handleLastSelectedDepartmentUpdate()
+        delegate?.presentVaccinationCentres(for: searchResult)
     }
 
-    func didSelectLastDepartment() {
-        guard
-            let code = userDefaults.lastSelectedDepartmentCode,
-            let department = departments.first(where: { $0.codeDepartement == code})
-        else {
-            return
-        }
-        delegate?.presentVaccinationCentres(for: department)
-    }
-
-    func didSelect(_ department: Department) {
-        delegate?.presentVaccinationCentres(for: department)
+    func didSelect(_ location: LocationSearchResult) {
+        handleLastSelectedSearchResult()
+        delegate?.presentVaccinationCentres(for: location)
     }
 }

@@ -47,7 +47,7 @@ extension GeoAPI: TargetType {
             return .requestParameters(
                 parameters: [
                     "nom": name,
-                    "fields": "codesPostaux,departement",
+                    "fields": "codesPostaux,departement,centre",
                     "limit": Self.limit
                 ],
                 encoding: URLEncoding.queryString
@@ -56,7 +56,7 @@ extension GeoAPI: TargetType {
             return .requestParameters(
                 parameters: [
                     "codePostal": postCode,
-                    "fields": "codesPostaux,departement",
+                    "fields": "codesPostaux,departement,centre",
                     "limit": Self.limit
                 ],
                 encoding: URLEncoding.queryString
@@ -99,18 +99,17 @@ class GeoAPIService: GeoAPIServiceProvider {
 private extension GeoAPIService {
     private func request(target: GeoAPI, completion: @escaping (Cities) -> Void) {
         provider.request(target) { result in
+            var citiesResult: Cities = []
             switch result {
             case let .success(response):
-                do {
-                    let filteredResponse = try response.filterSuccessfulStatusCodes()
-                    let cities = try JSONDecoder().decode(Cities.self, from: filteredResponse.data)
-                    completion(cities)
-                } catch {
-                    completion([])
+                let filteredResponse = try? response.filterSuccessfulStatusCodes()
+                if case let .success(cities) = filteredResponse?.data.decode(Cities.self) {
+                    citiesResult = cities
                 }
-            case .failure:
-                completion([])
+            default:
+                break
             }
+            completion(citiesResult)
         }
     }
 }
