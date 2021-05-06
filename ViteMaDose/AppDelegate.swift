@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func resetUserDefaultsIfNeeded() {
         #if DEBUG
         if CommandLine.arguments.contains("-resetLocalStorage") {
-            UserDefaults.shared.removePersistentDomain(forName: UserDefaults.userDefaultSuiteName)
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         }
         #endif
     }
