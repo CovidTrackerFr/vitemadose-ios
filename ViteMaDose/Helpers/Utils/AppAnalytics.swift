@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAnalytics
 
-struct AppAnalytics {
+enum AppAnalytics {
 
     enum ScreenName: String {
         case home = "home"
@@ -52,4 +52,31 @@ struct AppAnalytics {
         ])
     }
 
+    static func trackSearchEvent(
+        searchResult: LocationSearchResult,
+        appointmentsCount: Int,
+        availableCentresCount: Int,
+        unAvailableCentresCount: Int,
+        sortOption: CentresListSortOption
+    ) {
+        let eventName = searchResult.coordinates == nil ? "search_by_departement" : "search_by_commune"
+        Analytics.logEvent(eventName, parameters: [
+            "search_departement": "\(searchResult.departmentCode) - \(searchResult.name)",
+            "search_nb_doses": appointmentsCount as NSNumber,
+            "search_nb_lieu_vaccination": availableCentresCount as NSNumber,
+            "search_nb_lieu_vaccination_inactive": unAvailableCentresCount as NSNumber,
+            "search_filter_type": sortOption.analyticsValue
+        ])
+    }
+}
+
+private extension CentresListSortOption {
+    var analyticsValue: String {
+        switch self {
+        case .closest:
+            return "au plus proche"
+        case .fastest:
+            return "au plus tot"
+        }
+    }
 }

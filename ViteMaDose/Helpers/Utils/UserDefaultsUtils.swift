@@ -50,10 +50,11 @@ extension UserDefaults {
             guard case let .success(results) = searchResultData?.decode([LocationSearchResult].self) else {
                 return []
             }
-            return results
+            return results.unique(by: \.formattedName)
         }
         set {
-            guard let encoded = try? Self.encoder.encode(newValue.uniqued()) else {
+            let results = newValue.unique(by: \.formattedName)
+            guard let encoded = try? Self.encoder.encode(results) else {
                 return
             }
             setValue(encoded, forKey: Key.lastSearchResults.rawValue)
