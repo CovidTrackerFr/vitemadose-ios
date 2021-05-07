@@ -123,6 +123,14 @@ class CentresListViewModel {
         let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
         let footerText = locationVaccinationCentres.first?.formattedLastUpdated
 
+        AppAnalytics.trackSearchEvent(
+            searchResult: searchResult,
+            appointmentsCount: availableCentres.allAppointmentsCount,
+            availableCentresCount: availableCentres.count,
+            unAvailableCentresCount: unavailableCentres.count,
+            sortOption: userDefaults.centresListSortOption
+        )
+
         delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
         delegate?.reloadTableViewFooter(with: footerText)
     }
