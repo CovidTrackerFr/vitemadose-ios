@@ -88,24 +88,24 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.tableFooterView = footerView
 
         tableView.register(cellType: HomeTitleCell.self)
-        tableView.register(cellType: HomeCountySelectionCell.self)
-        tableView.register(cellType: HomeCountyCell.self)
+        tableView.register(cellType: HomeSearchBarCell.self)
+        tableView.register(cellType: HomeSearchResultCell.self)
         tableView.register(cellType: HomeStatsCell.self)
     }
 
     @objc func didPullToRefresh() {
-        viewModel.reloadStats()
+        viewModel.load()
     }
 
-    private func presentCountySelectionViewController() {
+    private func presentDepartmentSelectionViewController() {
         AppAnalytics.didTapSearchBar()
 
-        let countySelectionViewController = CountySelectionViewController.instantiate()
-        countySelectionViewController.delegate = self
-        countySelectionViewController.viewModel = CountySelectionViewModel(counties: viewModel.counties)
+        let departmentSelectionViewController = LocationSearchViewController.instantiate()
+        departmentSelectionViewController.delegate = self
+        departmentSelectionViewController.viewModel = LocationSearchViewModel()
 
         DispatchQueue.main.async { [weak self] in
-            self?.present(countySelectionViewController, animated: true)
+            self?.present(departmentSelectionViewController, animated: true)
         }
     }
 
@@ -150,13 +150,11 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Present
 
-    func presentVaccinationCentres(for county: County) {
-        viewModel.updateLastSelectedCountyIfNeeded(county.codeDepartement)
-
+    func presentVaccinationCentres(for location: LocationSearchResult) {
         let vaccinationCentresViewController = CentresListViewController.instantiate()
-        vaccinationCentresViewController.viewModel = CentresListViewModel(county: county)
+        vaccinationCentresViewController.viewModel = CentresListViewModel(searchResult: location)
         navigationController?.show(vaccinationCentresViewController, sender: self)
-        AppAnalytics.didSelectCounty(county)
+        AppAnalytics.didSelectLocation(location)
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
@@ -172,19 +170,6 @@ extension HomeViewController: HomeViewModelDelegate {
     }
 
     func presentFetchStatsError(_ error: Error) {
-        presentRetryableAndCancellableError(
-            error: error,
-            retryHandler: { [unowned self] _ in
-                self.viewModel.reloadStats()
-            },
-            cancelHandler: { [unowned self] _ in
-                self.refreshControl.endRefreshing()
-            },
-            completionHandler: nil
-        )
-    }
-
-    func presentInitialLoadError(_ error: Error) {
         presentRetryableError(
             error: error,
             retryHandler: { [unowned self] _ in
@@ -206,10 +191,10 @@ extension HomeViewController: UITableViewDelegate {
         }
 
         switch homeCell {
-        case .countySelection:
-            presentCountySelectionViewController()
-        case .county:
-            viewModel.didSelectLastCounty()
+        case .searchBar:
+            presentDepartmentSelectionViewController()
+        case let .searchResult(viewData):
+            viewModel.didSelectSavedSearchResult(withName: viewData.name)
             Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {
@@ -241,12 +226,12 @@ extension HomeViewController {
             let cell = tableView.dequeueReusableCell(with: HomeTitleCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .countySelection(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeCountySelectionCell.self, for: indexPath)
+        case let .searchBar(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeSearchBarCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
-        case let .county(cellViewModel):
-            let cell = tableView.dequeueReusableCell(with: HomeCountyCell.self, for: indexPath)
+        case let .searchResult(cellViewModel):
+            let cell = tableView.dequeueReusableCell(with: HomeSearchResultCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
             return cell
         case let .stats(cellViewModel):
@@ -257,12 +242,12 @@ extension HomeViewController {
     }
 }
 
-// MARK: - CountySelectionViewControllerDelegate
+// MARK: - LocationSearch ViewController Delegate
 
-extension HomeViewController: CountySelectionViewControllerDelegate {
+extension HomeViewController: LocationSearchViewControllerDelegate {
 
-    func didSelect(county: County) {
-        viewModel.didSelect(county)
+    func didSelect(location: LocationSearchResult) {
+        viewModel.didSelect(location)
     }
 
 }

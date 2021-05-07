@@ -6,21 +6,21 @@
 //
 
 import XCTest
+import MapKit
 @testable import ViteMaDose
-@testable import APIRequest
 
 class HomeViewModelTests: XCTestCase {
-
-    private var counties = [
-        County(codeDepartement: "1", nomDepartement: "Amazing County", codeRegion: 0, nomRegion: "Amazing Region"),
-        County(codeDepartement: "2", nomDepartement: "Amazing County 2", codeRegion: 1, nomRegion: "Amazing Region 2")
+    private let locationSearchResults = [
+        LocationSearchResult(name: "Amazing department", departmentCode: "01", nearDepartmentCodes: [], coordinates: nil),
+        LocationSearchResult(name: "Amazing city", departmentCode: "02", nearDepartmentCodes: ["01"], coordinates: LocationSearchResult.Coordinates(latitude: 0.123, longitude: 0.456))
     ]
+
     private var stats = [
-        StatsKey.allCounties.rawValue: StatsValue(disponibles: 123, total: 456, creneaux: 789),
+        StatsKey.allDepartments.rawValue: StatsValue(disponibles: 123, total: 456, creneaux: 789),
         "Another Key": StatsValue(disponibles: 0, total: 0, creneaux: 0),
     ]
 
-    private var apiServiceMock: APIServiceMock!
+    private var apiServiceMock: BaseAPIServiceMock!
     private var userDefaults: UserDefaults!
 
     private lazy var viewModel = HomeViewModel(
@@ -30,45 +30,41 @@ class HomeViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        apiServiceMock = APIServiceMock()
+        apiServiceMock = BaseAPIServiceMock()
         userDefaults = .makeClearedInstance()
     }
 
-    func testLoadWithNoError() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+    func testLoadWithoutError() throws {
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
 
-        let expectedHeadingCells: [HomeCell] = [
-            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
-            .countySelection(HomeCountySelectionViewData())
-        ]
-
         let expectedPercentage = (Double(123) * 100) / Double(456)
-
-        let expectedStatsCells: [HomeCell] = [
-            .title(.init(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15.0, bottomMargin: 5.0)),
-            .stats(.init(.allCentres(456))),
-            .stats(.init(.allAvailabilities(789))),
-            .stats(.init(.centresWithAvailabilities(123))),
-            .stats(.init(.percentageAvailabilities(expectedPercentage))),
-            .stats(.init(.externalMap))
-        ]
-
         let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
         let statsCells = try XCTUnwrap(delegateSpy.reloadTableView?.statsCells)
 
-        XCTAssertEqual(headingCells, expectedHeadingCells)
-        XCTAssertEqual(statsCells, expectedStatsCells)
+        // Heading cells
+        assertHomeTitleCell(
+            headingCells[0],
+            expectedViewData: .init(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0.0)
+        )
+        assertHomeSearchBarCell(headingCells[1], expectedViewData: .init())
+
+        // Stats cells
+        assertHomeTitleCell(statsCells[0], expectedViewData: .init(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 20.0, bottomMargin: 5.0))
+        assertHomeStatsCell(statsCells[1], expectedViewData: .init(.allCentres(456)))
+        assertHomeStatsCell(statsCells[2], expectedViewData: .init(.allAvailabilities(789)))
+        assertHomeStatsCell(statsCells[3], expectedViewData: .init(.centresWithAvailabilities(123)))
+        assertHomeStatsCell(statsCells[4], expectedViewData: .init(.percentageAvailabilities(expectedPercentage)))
+        assertHomeStatsCell(statsCells[5], expectedViewData: .init(.externalMap))
+
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
-        XCTAssertNil(delegateSpy.presentInitialLoadError)
+        XCTAssertNil(delegateSpy.presentFetchStatsError)
     }
 
     func testReloadWithoutError() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -78,66 +74,45 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(delegateSpy.reloadTableView?.headingCells.count, 2)
         XCTAssertEqual(delegateSpy.reloadTableView?.statsCells.count, 6)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
-        XCTAssertNil(delegateSpy.presentInitialLoadError)
+        XCTAssertNil(delegateSpy.presentFetchStatsError)
 
         // Reload with changes
-
         apiServiceMock.fetchStatsResult = .success([
-            StatsKey.allCounties.rawValue: StatsValue(disponibles: 0, total: 0, creneaux: 0)
+            StatsKey.allDepartments.rawValue: StatsValue(disponibles: 0, total: 0, creneaux: 0)
         ])
-        viewModel.reloadStats()
-
-        let expectedHeadingCells: [HomeCell] = [
-            .title(HomeTitleCellViewData(titleText: HomeTitleCell.mainTitleAttributedText)),
-            .countySelection(HomeCountySelectionViewData())
-        ]
-        let expectedStatsCells: [HomeCell] = [
-            .title(.init(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 15.0, bottomMargin: 5.0)),
-            .stats(.init(.allCentres(0))),
-            .stats(.init(.allAvailabilities(0))),
-            .stats(.init(.centresWithAvailabilities(0))),
-            .stats(.init(.percentageAvailabilities(nil))),
-            .stats(.init(.externalMap))
-        ]
+        viewModel.load()
 
         let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
         let statsCells = try XCTUnwrap(delegateSpy.reloadTableView?.statsCells)
 
-        XCTAssertEqual(headingCells, expectedHeadingCells)
-        XCTAssertEqual(statsCells, expectedStatsCells)
+        // Heading cells
+        assertHomeTitleCell(
+            headingCells[0],
+            expectedViewData: .init(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0.0)
+        )
+        assertHomeSearchBarCell(headingCells[1], expectedViewData: .init())
+
+        // Stats cells
+        assertHomeTitleCell(statsCells[0], expectedViewData: .init(titleText: HomeTitleCell.lastStatsAttributedText, topMargin: 20.0, bottomMargin: 5.0))
+        assertHomeStatsCell(statsCells[1], expectedViewData: .init(.allCentres(0)))
+        assertHomeStatsCell(statsCells[2], expectedViewData: .init(.allAvailabilities(0)))
+        assertHomeStatsCell(statsCells[3], expectedViewData: .init(.centresWithAvailabilities(0)))
+        assertHomeStatsCell(statsCells[4], expectedViewData: .init(.percentageAvailabilities(nil)))
+        assertHomeStatsCell(statsCells[5], expectedViewData: .init(.externalMap))
+
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
         XCTAssertNil(delegateSpy.presentFetchStatsError)
     }
 
-    func testLoadWithCountiesError() throws {
-        let error = APIResponseStatus.notFound
-
-        apiServiceMock.fetchCountiesResult = .failure(error)
-        apiServiceMock.fetchStatsResult = .success(stats)
-
-        let delegateSpy = HomeViewModelDelegateSpy()
-        viewModel.delegate = delegateSpy
-        viewModel.load()
-
-        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? APIResponseStatus)
-
-        XCTAssertNil(delegateSpy.reloadTableView)
-        XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
-        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, true)
-        XCTAssertEqual(expectedError, error)
-    }
-
     func testLoadWithStatsError() throws {
-        let error = APIResponseStatus.notFound
-
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        let error = BaseAPIErrorMock.networkError
         apiServiceMock.fetchStatsResult = .failure(error)
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
 
-        let expectedError = try XCTUnwrap(delegateSpy.presentInitialLoadError as? APIResponseStatus)
+        let expectedError = try XCTUnwrap(delegateSpy.presentFetchStatsError as? BaseAPIErrorMock)
 
         XCTAssertNil(delegateSpy.reloadTableView)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
@@ -146,9 +121,7 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testReloadError() throws {
-        let error = APIResponseStatus.networkConnectTimeoutError
-
-        apiServiceMock.fetchCountiesResult = .success(counties)
+        let error = BaseAPIErrorMock.networkError
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
@@ -156,119 +129,138 @@ class HomeViewModelTests: XCTestCase {
         viewModel.load()
 
         XCTAssertNotNil(delegateSpy.reloadTableView)
-        XCTAssertNil(delegateSpy.presentInitialLoadError)
+        XCTAssertNil(delegateSpy.presentFetchStatsError)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
-        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, false)
+        XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, true)
 
         apiServiceMock.fetchStatsResult = .failure(error)
-        viewModel.reloadStats()
+        viewModel.load()
 
-        let expectedReloadError = try XCTUnwrap(delegateSpy.presentFetchStatsError as? APIResponseStatus)
-
-        XCTAssertNil(delegateSpy.presentInitialLoadError)
+        let expectedReloadError = try XCTUnwrap(delegateSpy.presentFetchStatsError as? BaseAPIErrorMock)
         XCTAssertEqual(expectedReloadError, error)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isLoading, false)
         XCTAssertEqual(delegateSpy.updateLoadingState?.isEmpty, false)
     }
 
-    func testLastSelectedCountyIsAdded() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+    func testLastSelectedDepartmentIsAdded() throws {
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
-
-        let expectedHeadingCells: [HomeCell] = [
-            .title(.init(titleText: HomeTitleCell.mainTitleAttributedText)),
-            .countySelection(.init())
-        ]
 
         let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
-        XCTAssertEqual(headingCells, expectedHeadingCells)
 
-        let firstCounty = try XCTUnwrap(counties.first)
-        userDefaults.lastSelectedCountyCode = firstCounty.codeDepartement
+        assertHomeTitleCell(headingCells[0], expectedViewData: .init(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0.0))
+        assertHomeSearchBarCell(headingCells[1], expectedViewData: .init())
+
+        let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
+        userDefaults.lastSearchResults = [firstSearchResult]
         viewModel.load()
 
-        let expectedUpdatedCells = expectedHeadingCells + [
-            .county(.init(titleText: Localization.Home.recent_search, countyName: firstCounty.nomDepartement!, countyCode: firstCounty.codeDepartement!))
-        ]
+        let expectedSearchResultViewData = HomeSearchResultCellViewData(
+            titleText: Localization.Home.recent_search.format(userDefaults.lastSearchResults.count),
+            name: firstSearchResult.name,
+            code: firstSearchResult.departmentCode
+        )
 
-        XCTAssertEqual(delegateSpy.reloadTableView?.headingCells, expectedUpdatedCells)
+        let updatedHeadingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
+        assertHomeTitleCell(updatedHeadingCells[0], expectedViewData: .init(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0.0))
+        assertHomeSearchBarCell(updatedHeadingCells[1], expectedViewData: .init())
+        assertHomeSearchResultCell(updatedHeadingCells[2], expectedViewData: expectedSearchResultViewData)
     }
 
-    func testExistingLastSelectedCountyIsAdded() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+    func testExistingLastSelectedDepartmentIsAdded() throws {
         apiServiceMock.fetchStatsResult = .success(stats)
 
-        let firstCounty = try XCTUnwrap(counties.first)
-        userDefaults.lastSelectedCountyCode = firstCounty.codeDepartement
+        let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
+        userDefaults.lastSearchResults = [firstSearchResult]
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
 
-        let expectedHeadingCells: [HomeCell] = [
-            .title(.init(titleText: HomeTitleCell.mainTitleAttributedText)),
-            .countySelection(.init()),
-            .county(.init(
-                        titleText: Localization.Home.recent_search,
-                        countyName: firstCounty.nomDepartement ?? "",
-                        countyCode: firstCounty.codeDepartement ?? ""
-            ))
-        ]
+        let expectedSearchResultViewData = HomeSearchResultCellViewData(
+            titleText: Localization.Home.recent_search.format(userDefaults.lastSearchResults.count),
+            name: firstSearchResult.name,
+            code: firstSearchResult.departmentCode
+        )
 
         let headingCells = try XCTUnwrap(delegateSpy.reloadTableView?.headingCells)
-        XCTAssertEqual(headingCells, expectedHeadingCells)
+        assertHomeTitleCell(headingCells[0], expectedViewData: .init(titleText: HomeTitleCell.mainTitleAttributedText, bottomMargin: 0.0))
+        assertHomeSearchBarCell(headingCells[1], expectedViewData: .init())
+        assertHomeSearchResultCell(headingCells[2], expectedViewData: expectedSearchResultViewData)
     }
 
-    func testDidSelectLastCountyPresentsList() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+    func testDidSelectLastDepartmentPresentsList() throws {
         apiServiceMock.fetchStatsResult = .success(stats)
 
-        let firstCounty = try XCTUnwrap(counties.first)
-        userDefaults.lastSelectedCountyCode = firstCounty.codeDepartement
+        let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
+        userDefaults.lastSearchResults = [firstSearchResult]
 
         let delegateSpy = HomeViewModelDelegateSpy()
         viewModel.delegate = delegateSpy
         viewModel.load()
-        viewModel.didSelectLastCounty()
+        viewModel.didSelectSavedSearchResult(withName: firstSearchResult.name)
 
-        XCTAssertEqual(delegateSpy.presentVaccinationCentresCounty, firstCounty)
+        XCTAssertEqual(delegateSpy.presentVaccinationCentresLocationSearchResult, firstSearchResult)
     }
 
-    func testDidSelectCountyPresentsList() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
+    func testDidSelectDepartmentPresentsList() throws {
         apiServiceMock.fetchStatsResult = .success(stats)
 
         let delegateSpy = HomeViewModelDelegateSpy()
-        let firstCounty = try XCTUnwrap(counties.first)
+        let firstSearchResult = try XCTUnwrap(locationSearchResults.first)
 
         viewModel.delegate = delegateSpy
         viewModel.load()
-        viewModel.didSelect(firstCounty)
+        viewModel.didSelect(firstSearchResult)
 
-        XCTAssertEqual(delegateSpy.presentVaccinationCentresCounty, firstCounty)
+        XCTAssertEqual(delegateSpy.presentVaccinationCentresLocationSearchResult, firstSearchResult)
     }
 
-    func testLastSelectedCountyIsUpdatedIfNeeded() throws {
-        apiServiceMock.fetchCountiesResult = .success(counties)
-        apiServiceMock.fetchStatsResult = .success(stats)
+    private func assertHomeTitleCell(_ cell: HomeCell, expectedViewData: HomeTitleCellViewData) {
+        guard case let .title(viewData) = cell else {
+            XCTFail("Cell type should be title")
+            return
+        }
 
-        let delegateSpy = HomeViewModelDelegateSpy()
-        let firstCounty = try XCTUnwrap(counties.first)
-        let secondCounty = try XCTUnwrap(counties[safe: 1])
+        XCTAssertEqual(viewData.titleText, expectedViewData.titleText)
+        XCTAssertEqual(viewData.subTitleText, expectedViewData.subTitleText)
+        XCTAssertEqual(viewData.topMargin, expectedViewData.topMargin)
+        XCTAssertEqual(viewData.bottomMargin, expectedViewData.bottomMargin)
+    }
 
-        viewModel.delegate = delegateSpy
-        viewModel.load()
+    private func assertHomeSearchBarCell(_ cell: HomeCell, expectedViewData: HomeSearchBarCellViewData) {
+        guard case let .searchBar(viewData) = cell else {
+            XCTFail("Cell type should be searchBar")
+            return
+        }
 
-        viewModel.updateLastSelectedCountyIfNeeded(firstCounty.codeDepartement)
-        XCTAssertEqual(viewModel.lastSelectedCountyCode, firstCounty.codeDepartement)
+        XCTAssertEqual(viewData.searchBarText, expectedViewData.searchBarText)
+    }
 
-        viewModel.updateLastSelectedCountyIfNeeded(secondCounty.codeDepartement)
-        XCTAssertEqual(viewModel.lastSelectedCountyCode, secondCounty.codeDepartement)
+    private func assertHomeStatsCell(_ cell: HomeCell, expectedViewData: HomeCellStatsViewData) {
+        guard case let .stats(viewData) = cell else {
+            XCTFail("Cell type should be stats")
+            return
+        }
+
+        XCTAssertEqual(viewData.dataType, expectedViewData.dataType)
+        XCTAssertEqual(viewData.title.string, expectedViewData.title.string)
+        XCTAssertEqual(viewData.description, expectedViewData.description)
+        XCTAssertEqual(viewData.icon, expectedViewData.icon)
+        XCTAssertEqual(viewData.iconContainerColor, expectedViewData.iconContainerColor)
+    }
+
+    private func assertHomeSearchResultCell(_ cell: HomeCell, expectedViewData: HomeSearchResultCellViewData) {
+        guard case let .searchResult(viewData) = cell else {
+            XCTFail("Cell type should be searchResult")
+            return
+        }
+
+        XCTAssertEqual(viewData.titleText, expectedViewData.titleText)
+        XCTAssertEqual(viewData.name, expectedViewData.name)
+        XCTAssertEqual(viewData.code, expectedViewData.code)
     }
 }
-
-

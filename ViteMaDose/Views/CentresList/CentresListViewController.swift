@@ -120,6 +120,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.register(cellType: CentresTitleCell.self)
         tableView.register(cellType: CentreCell.self)
         tableView.register(cellType: CentresStatsCell.self)
+        tableView.register(cellType: CentresSortOptionsCell.self)
     }
 
 }
@@ -136,7 +137,7 @@ extension CentresListViewController: CentresListViewModelDelegate {
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(centresCells, toSection: .centres)
 
-        dataSource.defaultRowAnimation = .fade
+        dataSource.defaultRowAnimation = animated ? .fade : .none
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
@@ -215,6 +216,14 @@ extension CentresListViewController {
             configureHandlers(for: cell, at: indexPath)
             cell.configure(with: cellViewData)
             return cell
+        case let .sort(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentresSortOptionsCell.self, for: indexPath)
+            cell.sortSegmentedControlHandler = { [weak self] option in
+                Haptic.impact(.light).generate()
+                self?.viewModel.sortList(by: CentresListSortOption(option))
+            }
+            cell.configure(with: cellViewData)
+            return cell
         }
     }
 
@@ -224,8 +233,7 @@ extension CentresListViewController {
             guard let centreInfo = self?.viewModel.centreLocation(at: indexPath) else {
                 return
             }
-            let location = CLLocationCoordinate2D(latitude: centreInfo.lat, longitude: centreInfo.long)
-            let placemark =  MKPlacemark(coordinate: location)
+            let placemark =  MKPlacemark(coordinate: centreInfo.location.coordinate)
             let mapItem = MKMapItem(placemark: placemark)
             mapItem.name = centreInfo.name
 
@@ -258,7 +266,7 @@ extension CentresListViewController {
             preferredStyle: .actionSheet
         )
 
-        let openAction = UIAlertAction(title: "Ouvrir l'itinéraire", style: .default) { _ in
+        let openAction = UIAlertAction(title: Localization.Location.open_route, style: .default) { _ in
             MKMapItem.openMaps(
                 with: [mapItem],
                 launchOptions: [
@@ -267,7 +275,7 @@ extension CentresListViewController {
             )
         }
 
-        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel, handler: nil)
 
         actionSheet.addAction(openAction)
         actionSheet.addAction(cancelAction)
