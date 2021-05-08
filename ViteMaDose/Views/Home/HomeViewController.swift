@@ -120,6 +120,12 @@ final class HomeViewController: UIViewController, Storyboarded {
         let maintenanceViewController = MaintenanceViewController(urlString: urlString)
         present(maintenanceViewController, animated: true)
     }
+
+    @IBAction private func followedCentresButtonTapped(_ sender: UIButton) {
+        let followedCentresViewController = CentresListViewController.instantiate()
+        followedCentresViewController.viewModel = FollowedCentresViewModel()
+        navigationController?.pushViewController(followedCentresViewController, animated: true)
+    }
 }
 
 // MARK: - HomeViewModelDelegate

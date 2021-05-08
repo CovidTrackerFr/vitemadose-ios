@@ -119,8 +119,8 @@ final class LocationSearchViewModel: LocationSearchViewModelProvider {
         return LocationSearchResult(
             name: city.nom,
             postCode: postCode,
-            departmentCode: city.departement.code,
-            nearDepartmentCodes: city.departement.nearDepartments,
+            selectedDepartmentCode: city.departement.code,
+            departmentCodes: city.departement.nearDepartments,
             coordinates: city.coordinates
         )
     }
@@ -159,7 +159,7 @@ final class LocationSearchViewModel: LocationSearchViewModelProvider {
         let viewData = LocationSearchResultCellViewData(
             name: searchResult.formattedName,
             postCode: searchResult.postCode,
-            departmentCode: searchResult.departmentCode
+            departmentCode: searchResult.selectedDepartmentCode.emptyIfNil
         )
         return .searchResult(viewData)
     }

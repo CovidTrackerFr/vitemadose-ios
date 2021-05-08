@@ -29,7 +29,7 @@
                                         <rect key="frame" x="24" y="20" width="366" height="49"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LX7-dM-o8Y">
-                                                <rect key="frame" x="0.0" y="0.0" width="366" height="49"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="49"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="twr-cU-Myc">
                                                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="49"/>
@@ -46,6 +46,17 @@
                                                     <constraint firstItem="twr-cU-Myc" firstAttribute="top" secondItem="LX7-dM-o8Y" secondAttribute="top" id="urm-9R-7Rc"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5l-M6-qi1">
+                                                <rect key="frame" x="326" y="0.0" width="40" height="49"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="3dn-dZ-rlq"/>
+                                                </constraints>
+                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <state key="normal" image="bookmark.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="followedCentresButtonTapped:" destination="u8L-Ja-9UJ" eventType="touchUpInside" id="lvI-52-x5H"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -103,6 +114,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="logo" width="166" height="44"/>
         <namedColor name="royalBlue">
             <color red="0.33300000429153442" green="0.37999999523162842" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -110,6 +122,9 @@
         <namedColor name="wildSand">
             <color red="0.9649999737739563" green="0.9649999737739563" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

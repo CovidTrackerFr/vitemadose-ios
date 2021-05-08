@@ -126,7 +126,7 @@ extension LocationSearchViewController: UISearchBarDelegate {
     }
 
     @objc func reload(_ searchBar: UISearchBar) {
-        viewModel.search(query: searchBar.text ?? "")
+        viewModel.search(query: searchBar.text.emptyIfNil)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

@@ -13,8 +13,8 @@ import SwiftDate
 // MARK: - VaccinationCentre
 
 struct VaccinationCentre: Codable, Hashable, Identifiable {
-    private let internalId: String?
     private let gid: String?
+    public let internalId: String?
     let departement: String?
     let nom: String?
     let url: String?
@@ -128,6 +128,18 @@ extension VaccinationCentre {
             latitude: latitude,
             longitude: longitude
         )
+    }
+
+    static var sortedByAppointment: (Self, Self) -> Bool = {
+        guard
+            let lhsDate = $0.nextAppointmentDate,
+            let rhsDate = $1.nextAppointmentDate,
+            $0.isAvailable,
+            $1.isAvailable
+        else {
+            return false
+        }
+        return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
     }
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {

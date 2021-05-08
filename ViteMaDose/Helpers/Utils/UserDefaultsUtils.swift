@@ -40,6 +40,7 @@ extension UserDefaults {
     private enum Key: String {
         case lastSearchResults
         case centresListSortOption
+        case followedCentres
     }
 
     // MARK: Last Selected Search Results
@@ -73,4 +74,42 @@ extension UserDefaults {
         }
     }
 
+    var followedCentres: [String: Set<FollowedCentre>] {
+        get {
+            let followedCentresData = object(forKey: Key.followedCentres.rawValue) as? Data
+            guard case let .success(followedCentres) = followedCentresData?.decode([String: Set<FollowedCentre>].self) else {
+                return [:]
+            }
+            return followedCentres
+        }
+        set {
+            guard let encoded = try? Self.encoder.encode(newValue) else {
+                return
+            }
+            setValue(encoded, forKey: Key.followedCentres.rawValue)
+        }
+    }
+
+    func followedCentre(forDepartment departmentCode: String, id: String) -> FollowedCentre? {
+        return followedCentres[departmentCode]?.first(where: { $0.id == id })
+    }
+
+    func addFollowedCentre(_ centre: FollowedCentre, forDepartment departmentCode: String) {
+        var updatedCentres = followedCentres
+        let centresForCode = updatedCentres[departmentCode] ?? []
+        updatedCentres[departmentCode] = centresForCode.union([centre])
+        followedCentres = updatedCentres
+    }
+
+    func removedFollowedCentre(_ centreId: String, forDepartment departmentCode: String) {
+        var updatedCentres = followedCentres
+        if let centre = updatedCentres[departmentCode]?.first(where: { $0.id == centreId }) {
+            updatedCentres[departmentCode]?.remove(centre)
+        }
+        followedCentres = updatedCentres
+    }
+
+    func isCentreFollowed(_ centreId: String, forDepartment departmentCode: String) -> Bool {
+        return followedCentres[departmentCode]?.first(where: { $0.id == centreId }) != nil
+    }
 }

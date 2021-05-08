@@ -11,10 +11,9 @@ import MapKit
 import Haptica
 
 class CentresListViewController: UIViewController, Storyboarded {
-
     @IBOutlet private var tableView: UITableView!
-    var viewModel: CentresListViewModel!
 
+    var viewModel: CentresListViewModelProvider!
     private typealias Snapshot = NSDiffableDataSourceSnapshot<CentresListSection, CentresListCell>
 
     private lazy var refreshControl: UIRefreshControl = {
@@ -177,15 +176,6 @@ extension CentresListViewController: CentresListViewModelDelegate {
             completionHandler: nil
         )
     }
-
-}
-
-extension CentresListViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Show details
-    }
-
 }
 
 // MARK: - DataSource
@@ -287,10 +277,11 @@ extension CentresListViewController {
 }
 
 extension CentresListViewController: UIGestureRecognizerDelegate {
-
     /// Enable swipe to go back
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
         return true
     }
-
 }

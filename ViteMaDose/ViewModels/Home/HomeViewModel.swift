@@ -125,7 +125,7 @@ final class HomeViewModel {
                 titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
                 name: location.formattedName,
                 postCode: location.postCode,
-                departmentCode: location.departmentCode
+                departmentCode: location.selectedDepartmentCode
             )
         }
     }

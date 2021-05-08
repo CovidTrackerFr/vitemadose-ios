@@ -49,13 +49,16 @@ enum CentresListSortOption: Equatable {
     }
 }
 
-protocol CentresListViewModelProvider {
-    var searchResult: LocationSearchResult { get }
+protocol CentresListViewModelProvider: AnyObject {
+    var delegate: CentresListViewModelDelegate? { get set }
     func load(animated: Bool)
     func sortList(by order: CentresListSortOption)
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)?
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
     func bookingLink(at indexPath: IndexPath) -> URL?
+    func followCentre(at indexPath: IndexPath, watch: Bool)
+    func unfollowCentre(at indexPath: IndexPath)
+    func isCentreFollowed(at indexPath: IndexPath) -> Bool?
 }
 
 protocol CentresListViewModelDelegate: AnyObject {
@@ -74,9 +77,17 @@ protocol CentresListViewModelDelegate: AnyObject {
 
 class CentresListViewModel {
     private let apiService: BaseAPIServiceProvider
-    private(set) var searchResult: LocationSearchResult
     private let phoneNumberKit: PhoneNumberKit
-    private let userDefaults: UserDefaults
+    private let searchResult: LocationSearchResult?
+    private(set) var userDefaults: UserDefaults
+
+    internal var sortOption: CentresListSortOption {
+        return userDefaults.centresListSortOption
+    }
+
+    internal var shouldFooterText: Bool {
+        return true
+    }
 
     private var isLoading = false {
         didSet {
@@ -85,14 +96,14 @@ class CentresListViewModel {
     }
 
     private var locationVaccinationCentres: LocationVaccinationCentres = []
-    private var vaccinationCentresList: [VaccinationCentre] = []
+    private(set) var vaccinationCentresList: [VaccinationCentre] = []
 
     private var footerText: String?
     weak var delegate: CentresListViewModelDelegate?
 
     init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        searchResult: LocationSearchResult,
+        searchResult: LocationSearchResult?,
         phoneNumberKit: PhoneNumberKit = PhoneNumberKit(),
         userDefaults: UserDefaults = .shared
     ) {
@@ -123,19 +134,12 @@ class CentresListViewModel {
         let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
         let footerText = locationVaccinationCentres.first?.formattedLastUpdated
 
-        AppAnalytics.trackSearchEvent(
-            searchResult: searchResult,
-            appointmentsCount: availableCentres.allAppointmentsCount,
-            availableCentresCount: availableCentres.count,
-            unAvailableCentresCount: unavailableCentres.count,
-            sortOption: userDefaults.centresListSortOption
-        )
-
+        trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
         delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
-        delegate?.reloadTableViewFooter(with: footerText)
+        delegate?.reloadTableViewFooter(with: shouldFooterText ? footerText : nil)
     }
 
-    private func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
+    internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
                 withAppointmentsCount: appointmentsCount,
@@ -166,7 +170,7 @@ class CentresListViewModel {
         )
         cells.append(.title(centresListTitleViewData))
 
-        if searchResult.coordinates != nil {
+        if searchResult?.coordinates != nil {
             let viewData = CentresSortOptionsCellViewData(sortOption: userDefaults.centresListSortOption)
             cells.append(.sort(viewData))
         }
@@ -183,25 +187,6 @@ class CentresListViewModel {
         return vaccinationCentreCellsViewData.map(CentresListCell.centre)
     }
 
-    /// Creates a list of vaccination centre sorted by distance
-    /// Centres are also filtered by maximum distance from the selected location
-    /// The maximum distance value is set in our remote config file
-    /// - Parameter centres: a list of vaccination centres returned by the API
-    /// - Returns: array of filtered and sorted centres
-    private func getVaccinationCentres(
-        for centres: [VaccinationCentre],
-        sortOption: CentresListSortOption
-    ) -> [VaccinationCentre] {
-        let centres = centres.filter(searchResult.filterVaccinationCentreByDistance)
-
-        switch sortOption {
-        case .closest:
-            return centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
-        case .fastest:
-            return centres.sorted(by: searchResult.sortVaccinationCentresByAppointment)
-        }
-    }
-
     private func getVaccinationCentreCellViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
@@ -216,7 +201,7 @@ class CentresListViewModel {
             id: centre.id,
             dayText: centre.nextAppointmentDay,
             timeText: centre.nextAppointmentTime,
-            addressNameText: centre.formattedCentreName(selectedLocation: searchResult.coordinates?.asCCLocation),
+            addressNameText: centre.formattedCentreName(selectedLocation: searchResult?.coordinates?.asCCLocation),
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
@@ -230,6 +215,69 @@ class CentresListViewModel {
     private func handleError(_ error: Error) {
         delegate?.presentLoadError(error)
     }
+
+    private func createDepartmentsPromises(_ codes: [String]) -> [Promise<VaccinationCentres>] {
+        return codes.map { code in
+            return Promise { seal in
+                apiService.fetchVaccinationCentres(departmentCode: code) { result in
+                    switch result {
+                    case let .success(centres):
+                        seal.fulfill(centres)
+                    case let .failure(error):
+                        seal.reject(error)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Ovveridables
+
+    /// Creates a list of vaccination centre sorted by distance
+    /// Centres are also filtered by maximum distance from the selected location
+    /// The maximum distance value is set in our remote config file
+    /// - Parameter centres: a list of vaccination centres returned by the API
+    /// - Returns: array of filtered and sorted centres
+    internal func getVaccinationCentres(
+        for centres: [VaccinationCentre],
+        sortOption: CentresListSortOption
+    ) -> [VaccinationCentre] {
+        guard let searchResult = self.searchResult else {
+            assertionFailure("Search result should not be nil")
+            return centres
+        }
+        let centres = centres.filter(searchResult.filterVaccinationCentreByDistance)
+
+        switch sortOption {
+        case .closest:
+            return centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
+        case .fastest:
+            return centres.sorted(by: VaccinationCentre.sortedByAppointment)
+        }
+    }
+
+    internal func trackSearchResult(
+        availableCentres: [VaccinationCentre],
+        unavailableCentres: [VaccinationCentre]
+    ) {
+        guard let searchResult = self.searchResult else {
+            assertionFailure("Search result should not be nil")
+            return
+        }
+
+        AppAnalytics.trackSearchEvent(
+            searchResult: searchResult,
+            appointmentsCount: availableCentres.allAppointmentsCount,
+            availableCentresCount: availableCentres.count,
+            unAvailableCentresCount: unavailableCentres.count,
+            sortOption: userDefaults.centresListSortOption
+        )
+    }
+
+    internal func departmentsToLoad() -> [String] {
+        let departmentCodes: [String?] = [searchResult?.selectedDepartmentCode] + (searchResult?.departmentCodes ?? [])
+        return departmentCodes.compactMap({ $0 })
+    }
 }
 
 // MARK: - Centres List ViewModelProvider
@@ -240,10 +288,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        let departmentCodes = [searchResult.departmentCode] + searchResult.nearDepartmentCodes
-        let departmentsToLoad: [Promise<VaccinationCentres>] = departmentCodes.map(createDepartmentPromise)
+        let departmentsToLoadPromises: [Promise<VaccinationCentres>] = createDepartmentsPromises(departmentsToLoad())
 
-        when(resolved: departmentsToLoad).done { [weak self] results in
+        when(resolved: departmentsToLoadPromises).done { [weak self] results in
             self?.isLoading = false
             var errors: [Error] = []
 
@@ -271,17 +318,36 @@ extension CentresListViewModel: CentresListViewModelProvider {
         reloadTableView(animated: false)
     }
 
-    private func createDepartmentPromise(code: String) -> Promise<VaccinationCentres> {
-        return Promise { seal in
-            apiService.fetchVaccinationCentres(departmentCode: code) { result in
-                switch result {
-                case let .success(centres):
-                    seal.fulfill(centres)
-                case let .failure(error):
-                    seal.reject(error)
-                }
-            }
+    func followCentre(at indexPath: IndexPath, watch: Bool) {
+        guard let centre = vaccinationCentresList[safe: indexPath.row],
+              let departmentCode = centre.departement,
+              let internalId = centre.internalId
+        else {
+            return
         }
+        let followedCentre = FollowedCentre(id: internalId, isWatching: watch)
+        userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
+        reloadTableView(animated: true)
+    }
+
+    func unfollowCentre(at indexPath: IndexPath) {
+        guard let centre = vaccinationCentresList[safe: indexPath.row],
+              let departmentCode = centre.departement,
+              let internalId = centre.internalId
+        else {
+            return
+        }
+        userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
+        reloadTableView(animated: true)
+    }
+
+    func isCentreFollowed(at indexPath: IndexPath) -> Bool? {
+        guard let centre = vaccinationCentresList[safe: indexPath.row],
+              let departmentCode = centre.departement
+        else {
+            return nil
+        }
+        return userDefaults.isCentreFollowed(centre.id, forDepartment: departmentCode)
     }
 
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)? {
