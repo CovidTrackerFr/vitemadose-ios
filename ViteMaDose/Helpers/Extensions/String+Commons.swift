@@ -20,6 +20,12 @@ extension String {
     /// - Parameter region: custom option `Region`
     /// - Returns: optional `Date`
     func toString(with style: DateToStringStyles, region: Region) -> String? {
+        // Fix #102: If it is a timezoned date and the timezone is not specified
+        if contains("T") && !contains("+") {
+            // Convert date to non timezoned date
+            return replacingOccurrences(of: "T", with: " ").toString(with: style, region: region)
+        }
+
         let date = toDate(nil, region: region) ?? toISODate(nil, region: region)
         return date?.toString(style)
     }
