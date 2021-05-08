@@ -8,7 +8,7 @@
 import UIKit
 import Haptica
 
-protocol CreditViewControllerDelegate: class {
+protocol CreditViewControllerDelegate: AnyObject {
     func didSelect(credit: Credit)
 }
 

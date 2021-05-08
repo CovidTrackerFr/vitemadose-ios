@@ -36,14 +36,12 @@
 		5767391C261E3B40004A700D /* Storyboard+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767391B261E3B40004A700D /* Storyboard+Common.swift */; };
 		57673921261E3B59004A700D /* Collection+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673920261E3B59004A700D /* Collection+Commons.swift */; };
 		57673926261E3B6C004A700D /* UIView+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673925261E3B6C004A700D /* UIView+Common.swift */; };
-		57673930261E3BC5004A700D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767392F261E3BC5004A700D /* HomeViewController.swift */; };
 		57673938261E3BDE004A700D /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57673937261E3BDE004A700D /* HomeViewController.storyboard */; };
 		5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767393E261E3C1F004A700D /* HomeViewModel.swift */; };
 		57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673954261E4145004A700D /* ClassNameProtocol.swift */; };
 		577265C02634D77A009B707C /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577265BF2634D77A009B707C /* HomeViewModelTests.swift */; };
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
 		577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */; };
-		577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
 		5785314E26441A64005302DB /* CentresSortOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785314D26441A64005302DB /* CentresSortOptionsCell.swift */; };
 		5785315226441B07005302DB /* CentresSortOptionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5785315126441B07005302DB /* CentresSortOptionsCell.xib */; };
 		5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785E60E263F3F7200E655FF /* NearDepartments.swift */; };
@@ -81,7 +79,6 @@
 		57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4017526235B6200EFFCA3 /* HomePartnersFooterView.xib */; };
 		57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */; };
 		57C4018126238ABC00EFFCA3 /* UIFont+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */; };
-		57C4018726238E4900EFFCA3 /* LocationSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4018626238E4900EFFCA3 /* LocationSearchHeaderView.swift */; };
 		57C4018F26238E5300EFFCA3 /* LocationSearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C4018E26238E5300EFFCA3 /* LocationSearchHeaderView.xib */; };
 		57C401962623929800EFFCA3 /* HomeSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C401942623929800EFFCA3 /* HomeSearchResultCell.swift */; };
 		57C401972623929800EFFCA3 /* HomeSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401952623929800EFFCA3 /* HomeSearchResultCell.xib */; };
@@ -103,9 +100,12 @@
 		6AD0CC47262EC9B2001F8807 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CC46262EC9B2001F8807 /* CreditViewModel.swift */; };
 		6AD0CC53262EDF67001F8807 /* CreditSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CC52262EDF67001F8807 /* CreditSectionView.swift */; };
 		6AD0CC57262EDF74001F8807 /* CreditSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AD0CC56262EDF74001F8807 /* CreditSectionView.xib */; };
+		6AF7D48C2647062F000E8042 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767392F261E3BC5004A700D /* HomeViewController.swift */; };
+		6AF7D48D26470674000E8042 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* LocationSearchViewController.swift */; };
+		6AF7D48E26470677000E8042 /* LocationSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4018626238E4900EFFCA3 /* LocationSearchHeaderView.swift */; };
+		6AF7D48F2647068A000E8042 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
 		DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA234DC22626494600D6F71C /* remote-configuration.plist */; };
 		DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA234DD02626506600D6F71C /* RemoteConfig.swift */; };
-		DA4D9953261E6B6A00D28AD0 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D9952261E6B6A00D28AD0 /* LocationSearchViewController.swift */; };
 		DA4D995E261E6D6300D28AD0 /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D995D261E6D6300D28AD0 /* LocationSearchViewModel.swift */; };
 		DA68647B2627A1CA005B2AC2 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68647A2627A1CA005B2AC2 /* AppAnalytics.swift */; };
 /* End PBXBuildFile section */
@@ -767,10 +767,9 @@
 				57C401972623929800EFFCA3 /* HomeSearchResultCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */,
 				6AD0CC3E262EC8D0001F8807 /* CreditHeaderView.xib in Resources */,
-				577A7F6C262CA3D000B1D03C /* GoogleService-Info.plist in Resources */,
 				5785315226441B07005302DB /* CentresSortOptionsCell.xib in Resources */,
-				577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */,
 				57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */,
+				6AF7D48F2647068A000E8042 /* GoogleService-Info-prod.plist in Resources */,
 				579D713226373A030021CB56 /* GoogleService-Info-debug.plist in Resources */,
 				576738CC261E32A2004A700D /* LaunchScreen.storyboard in Resources */,
 				575CC230262AF4E1008D1869 /* HomeSearchBarCell.xib in Resources */,
@@ -909,9 +908,11 @@
 				57673921261E3B59004A700D /* Collection+Commons.swift in Sources */,
 				6AD0CC34262EC58D001F8807 /* Credit.swift in Sources */,
 				57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */,
+				6AF7D48D26470674000E8042 /* LocationSearchViewController.swift in Sources */,
 				57AD21F62621097A00ED2B95 /* CentresListViewModel.swift in Sources */,
 				570E94E22640B16E0068E5FC /* Array+Commons.swift in Sources */,
 				5795476D263E1C1B00AD5DFD /* City.swift in Sources */,
+				6AF7D48C2647062F000E8042 /* HomeViewController.swift in Sources */,
 				57AF504A262CDB3D0085E3C1 /* CentresStatsCell.swift in Sources */,
 				57673912261E3962004A700D /* VaccinationCentre.swift in Sources */,
 				57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */,
@@ -921,11 +922,7 @@
 				DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */,
 				576738C0261E329C004A700D /* AppDelegate.swift in Sources */,
 				575CC224262AECA7008D1869 /* HomeTitleCell.swift in Sources */,
-				57C4018726238E4900EFFCA3 /* CountySelectionHeaderView.swift in Sources */,
 				6AD0CC28262EC1AB001F8807 /* CreditCell.swift in Sources */,
-				DA4D9953261E6B6A00D28AD0 /* CountySelectionViewController.swift in Sources */,
-				57C4018726238E4900EFFCA3 /* LocationSearchHeaderView.swift in Sources */,
-				DA4D9953261E6B6A00D28AD0 /* LocationSearchViewController.swift in Sources */,
 				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
 				5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */,
 				5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */,
@@ -935,6 +932,7 @@
 				57954766263E1B2600AD5DFD /* GeoAPIService.swift in Sources */,
 				57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */,
 				57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */,
+				6AF7D48E26470677000E8042 /* LocationSearchHeaderView.swift in Sources */,
 				5793484C262241B900F8A4A0 /* Stats.swift in Sources */,
 				6AD0CC3A262EC82F001F8807 /* CreditHeaderView.swift in Sources */,
 				57AD21CD262102F700ED2B95 /* UIViewControllerController+Commons.swift in Sources */,
@@ -949,7 +947,6 @@
 				57ECA227262B031F001B368F /* UserDefaultsUtils.swift in Sources */,
 				579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */,
 				6AD0CC47262EC9B2001F8807 /* CreditViewModel.swift in Sources */,
-				57673930261E3BC5004A700D /* HomeViewController.swift in Sources */,
 				577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */,
 				57AF504F262CDD5A0085E3C1 /* CentresTitleCell.swift in Sources */,
 				6AD0CC53262EDF67001F8807 /* CreditSectionView.swift in Sources */,

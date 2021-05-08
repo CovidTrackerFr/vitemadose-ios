@@ -70,7 +70,7 @@ extension RemoteConfiguration {
 
     var contributorsPath: String {
         return configuration.configValue(forKey: "path_contributors").stringValue!
-    }    
+    }
 
     func departmentPath(withCode code: String) -> String {
         let path = configuration.configValue(forKey: "path_data_department").stringValue!

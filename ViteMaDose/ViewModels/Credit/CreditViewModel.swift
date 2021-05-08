@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import APIRequest
 
 protocol CreditViewModelProvider {
     var numberOfSections: Int { get }
@@ -15,7 +14,7 @@ protocol CreditViewModelProvider {
     func didSelectCell(at indexPath: IndexPath)
 }
 
-protocol CreditViewModelDelegate: class {
+protocol CreditViewModelDelegate: AnyObject {
     func reloadTableView(with credits: Credits)
     func openURL(url: URL)
 
@@ -24,7 +23,7 @@ protocol CreditViewModelDelegate: class {
 }
 
 class CreditViewModel: CreditViewModelProvider {
-    private let apiService: APIServiceProvider
+    private let apiService: BaseAPIServiceProvider
     weak var delegate: CreditViewModelDelegate?
 
     private var allCredits: Credits = []
@@ -46,7 +45,7 @@ class CreditViewModel: CreditViewModelProvider {
     // MARK: init
 
     required init(
-        apiService: APIServiceProvider = APIService(),
+        apiService: BaseAPIServiceProvider = BaseAPIService(),
         credits: Credits
     ) {
         self.apiService = apiService
@@ -108,7 +107,7 @@ class CreditViewModel: CreditViewModelProvider {
         delegate?.reloadTableView(with: credits)
     }
 
-    private func handleError(_ error: APIResponseStatus) {
+    private func handleError(_ error: Error) {
         delegate?.presentLoadError(error)
     }
 
@@ -116,14 +115,15 @@ class CreditViewModel: CreditViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        apiService.fetchContributors { [weak self] result in
-            self?.isLoading = false
+        apiService.fetchCredits { [weak self] result in
+            guard let self = self else { return }
+            self.isLoading = false
 
             switch result {
             case let .success(credits):
-                self?.handleLoad(with: credits)
+                self.handleLoad(with: credits)
             case let .failure(status):
-                self?.handleError(status)
+                self.handleError(status)
             }
         }
     }
