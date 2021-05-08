@@ -60,10 +60,15 @@ class CentresListViewController: UIViewController, Storyboarded {
 
     private func openBookingUrl(_ url: URL?) {
         guard let url = url else { return }
-        let config = SFSafariViewController.Configuration()
-        let safariViewController = SFSafariViewController(url: url, configuration: config)
-        Haptic.impact(.light).generate()
-        present(safariViewController, animated: true)
+        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+            Haptic.impact(.light).generate()
+            if !success {
+                // Opening the Universal Link did not work, opening in SFSafariWebViewController instead
+                let config = SFSafariViewController.Configuration()
+                let safariViewController = SFSafariViewController(url: url, configuration: config)
+                self.present(safariViewController, animated: true)
+            }
+        }
     }
 
     private func openPhoneNumberUrl(_ url: URL?) {
