@@ -192,8 +192,8 @@ extension CentresListViewController: UITableViewDelegate {
 
 extension CentresListViewController {
 
-    private func makeDataSource() -> UITableViewDiffableDataSource<CentresListSection, CentresListCell> {
-        return UITableViewDiffableDataSource(
+    private func makeDataSource() -> EditableDiffableDataSource<CentresListSection, CentresListCell> {
+        return EditableDiffableDataSource(
             tableView: tableView,
             cellProvider: { [weak self] _, indexPath, vaccinationCentreCell in
                 return self?.dequeueAndConfigure(cell: vaccinationCentreCell, at: indexPath)
