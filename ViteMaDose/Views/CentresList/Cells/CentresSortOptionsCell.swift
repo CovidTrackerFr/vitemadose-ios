@@ -15,7 +15,7 @@ struct CentresSortOptionsCellViewData: CentresSortOptionsCellViewDataProvider, H
     let sortOption: CentresListSortOption
 }
 
-class CentresSortOptionsCell: UITableViewCell {
+final class CentresSortOptionsCell: UITableViewCell {
     @IBOutlet private var sortSegmentedControl: UISegmentedControl!
     var sortSegmentedControlHandler: ((Int) -> Void)?
 

@@ -10,7 +10,7 @@ import SafariServices
 import FirebaseAnalytics
 import Haptica
 
-class HomeViewController: UIViewController, Storyboarded {
+final class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
 
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>

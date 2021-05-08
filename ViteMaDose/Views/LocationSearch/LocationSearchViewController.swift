@@ -13,7 +13,7 @@ protocol LocationSearchViewControllerDelegate: AnyObject {
     func didSelect(location: LocationSearchResult)
 }
 
-class LocationSearchViewController: UIViewController, Storyboarded {
+final class LocationSearchViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     weak var delegate: LocationSearchViewControllerDelegate?
 

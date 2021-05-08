@@ -41,7 +41,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
 }
 
-class HomeViewModel {
+final class HomeViewModel {
     private let apiService: BaseAPIServiceProvider
     private let userDefaults: UserDefaults
     weak var delegate: HomeViewModelDelegate?

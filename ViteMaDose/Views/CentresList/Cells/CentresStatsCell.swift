@@ -19,7 +19,7 @@ struct CentresStatsCellViewData: CentresStatsCellViewDataProvider, Hashable {
     let allCentresCount: Int
 }
 
-class CentresStatsCell: UITableViewCell {
+final class CentresStatsCell: UITableViewCell {
 
     @IBOutlet var availableCentresCountLabel: UILabel!
     @IBOutlet var availableCentresDescriptionLabel: UILabel!

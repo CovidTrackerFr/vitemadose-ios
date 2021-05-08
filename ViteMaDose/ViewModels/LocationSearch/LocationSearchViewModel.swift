@@ -50,7 +50,7 @@ protocol LocationSearchViewModelDelegate: AnyObject {
 
 // MARK: - LocationSearchViewModel
 
-class LocationSearchViewModel: LocationSearchViewModelProvider {
+final class LocationSearchViewModel: LocationSearchViewModelProvider {
     private let geoAPIService: GeoAPIServiceProvider
     private let userDefaults: UserDefaults
     weak var delegate: LocationSearchViewModelDelegate?
