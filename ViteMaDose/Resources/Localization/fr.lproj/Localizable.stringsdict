@@ -31,11 +31,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>Lieu trouvé au total</string>
+			<string>Lieu au total</string>
 			<key>one</key>
-			<string>Lieu trouvé au total</string>
+			<string>Lieu au total</string>
 			<key>other</key>
-			<string>Lieux trouvés au total</string>
+			<string>Lieux au total</string>
 		</dict>
 	</dict>
 	<key>locations.appointments</key>

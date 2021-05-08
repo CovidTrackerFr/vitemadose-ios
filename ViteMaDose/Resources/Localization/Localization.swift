@@ -41,6 +41,7 @@ enum Localization {
 
     enum Locations {
         static let list_title = "locations.list_title".localized
+        static let followed_list_title = "locations.followed_list_title".localized
         static let no_results = "locations.no_results".localized
         static let available_locations = "locations.available_locations".localized
         static let all_locations = "locations.all_locations".localized
@@ -67,6 +68,15 @@ enum Localization {
         static let unavailable_date = "location.unavailable_date".localized
         static let unavailable_name = "location.unavailable_name".localized
         static let unavailable_address = "location.unavailable_address".localized
+        static let start_following_title = "location.start_following_title".localized
+        static let start_following_message = "location.start_following_message".localized
+        static let follow_action_title = "location.follow_action_title".localized
+        static let notify_button = "location.notify_button".localized
+        static let follow_button = "location.follow_button".localized
+        static let unfollow_action_title = "location.unfollow_action_title".localized
+        static let stop_following_title = "location.stop_following_title".localized
+        static let stop_following_message = "location.stop_following_message".localized
+        static let stop_following_button = "location.stop_following_button".localized
     }
 
     enum Error {
