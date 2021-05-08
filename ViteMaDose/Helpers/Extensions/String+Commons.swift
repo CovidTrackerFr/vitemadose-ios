@@ -22,8 +22,9 @@ extension String {
     func toString(with style: DateToStringStyles, region: Region) -> String? {
         // Fix #102: If it is a timezoned date and the timezone is not specified
         if contains("T") && !contains("+") {
-            // Convert date to non timezoned date
-            return replacingOccurrences(of: "T", with: " ").toString(with: style, region: region)
+            // Add missing timezone
+            let diff = region.timeZone.secondsFromGMT() / 3600 // 1 or 2 depending on summer or winter time
+            return (self + "+0\(diff):00").toString(with: style, region: region)
         }
 
         let date = toDate(nil, region: region) ?? toISODate(nil, region: region)
