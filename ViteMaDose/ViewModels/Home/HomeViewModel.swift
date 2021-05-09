@@ -25,27 +25,30 @@ enum HomeCell: Hashable {
 // MARK: - Home ViewModel
 
 protocol HomeViewModelProvider {
+    var stats: Stats? { get }
+    var delegate: HomeViewModelDelegate? { get }
+
     func load()
     func didSelectSavedSearchResult(withName name: String)
     func didSelect(_ location: LocationSearchResult)
-
-    var stats: Stats? { get }
+    func displayAppOnboardingIfNeeded()
+    func requestNotificationsAuthorization()
 }
 
 protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
-
     func presentVaccinationCentres(for location: LocationSearchResult)
     func presentFetchStatsError(_ error: Error)
-
+    func presentNotificationsOnboarding()
     func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
 }
 
 final class HomeViewModel {
     private let apiService: BaseAPIServiceProvider
     private let userDefaults: UserDefaults
-    weak var delegate: HomeViewModelDelegate?
+    private let notificationCenter: UNUserNotificationCenter
 
+    weak var delegate: HomeViewModelDelegate?
     var stats: Stats?
 
     private var isLoading = false {
@@ -62,10 +65,12 @@ final class HomeViewModel {
 
     required init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        userDefaults: UserDefaults = .shared
+        userDefaults: UserDefaults = .shared,
+        notificationCenter: UNUserNotificationCenter = .current()
     ) {
         self.apiService = apiService
         self.userDefaults = userDefaults
+        self.notificationCenter = notificationCenter
     }
 
     // MARK: Handle API result
@@ -168,5 +173,17 @@ extension HomeViewModel: HomeViewModelProvider {
     func didSelect(_ location: LocationSearchResult) {
         handleLastSelectedSearchResult()
         delegate?.presentVaccinationCentres(for: location)
+    }
+
+    func displayAppOnboardingIfNeeded() {
+        guard !userDefaults.didPresentAppOnboarding else {
+            return
+        }
+        userDefaults.didPresentAppOnboarding = true
+        delegate?.presentNotificationsOnboarding()
+    }
+
+    func requestNotificationsAuthorization() {
+        FCMHelper.shared.requestNotificationsAuthorizationIfNeeded(notificationCenter)
     }
 }

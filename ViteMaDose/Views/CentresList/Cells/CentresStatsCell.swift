@@ -13,7 +13,7 @@ protocol CentresStatsCellViewDataProvider {
     var allCentresCount: Int { get }
 }
 
-struct CentresStatsCellViewData: CentresStatsCellViewDataProvider, Hashable {
+public struct CentresStatsCellViewData: CentresStatsCellViewDataProvider, Hashable {
     let appointmentsCount: Int
     let availableCentresCount: Int
     let allCentresCount: Int

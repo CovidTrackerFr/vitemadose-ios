@@ -11,7 +11,7 @@ protocol CentresSortOptionsCellViewDataProvider {
     var sortOption: CentresListSortOption { get }
 }
 
-struct CentresSortOptionsCellViewData: CentresSortOptionsCellViewDataProvider, Hashable {
+public struct CentresSortOptionsCellViewData: CentresSortOptionsCellViewDataProvider, Hashable {
     let sortOption: CentresListSortOption
 }
 

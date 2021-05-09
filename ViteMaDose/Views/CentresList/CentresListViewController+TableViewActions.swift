@@ -31,7 +31,9 @@ extension CentresListViewController: UITableViewDelegate {
             )
 
             let notifyAction = UIAlertAction(title: Localization.Location.notify_button, style: .default) { [weak self] _ in
-                self?.viewModel.followCentre(at: indexPath, watch: true)
+                self?.viewModel.requestNotificationsAuthorizationIfNeeded {
+                    self?.viewModel.followCentre(at: indexPath, watch: true)
+                }
                 Haptic.notification(.success).generate()
                 handled(true)
             }
@@ -54,7 +56,7 @@ extension CentresListViewController: UITableViewDelegate {
             self?.present(bottomSheet, animated: true)
         }
 
-        action.image = UIImage(systemName: "bookmark.fill")
+        action.image = UIImage(systemName: "bookmark.fill")?.tint(with: .label)
         action.backgroundColor = .athensGray
         return action
     }
@@ -84,8 +86,25 @@ extension CentresListViewController: UITableViewDelegate {
             self?.present(bottomSheet, animated: true)
         }
 
-        action.image = UIImage(systemName: "bookmark")
+        action.image = UIImage(systemName: "bookmark")?.tint(with: .label)
         action.backgroundColor = .athensGray
         return action
+    }
+
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            tableView.cellForRow(at: indexPath)?.layoutIfNeeded()
+        }
+    }
+}
+
+extension UITableViewCell {
+    var cellActionButtonLabel: UILabel? {
+        superview?.subviews
+            .filter { String(describing: $0).range(of: "UISwipeActionPullView") != nil }
+            .flatMap { $0.subviews }
+            .filter { String(describing: $0).range(of: "UISwipeActionStandardButton") != nil }
+            .flatMap { $0.subviews }
+            .compactMap { $0 as? UILabel }.first
     }
 }

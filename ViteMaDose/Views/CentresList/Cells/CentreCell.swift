@@ -24,8 +24,8 @@ protocol CentreViewDataProvider {
 
 // MARK: - CentreViewData
 
-struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
-    let id: String
+public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
+    public let id: String
     let dayText: String?
     let timeText: String?
     let addressNameText: String?
@@ -148,7 +148,17 @@ final class CentreCell: UITableViewCell {
         bookingButton.setTitle(nil, for: .normal)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        cellActionButtonLabel?.textColor = .label
+    }
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        cellActionButtonLabel?.textColor = .label
+    }
+
     // MARK: - Actions
+
     @objc private func didTapAddress() {
         addressTapHandler?()
     }
@@ -162,6 +172,7 @@ final class CentreCell: UITableViewCell {
     }
 
     // MARK: - Helpers
+
     private func createDateText(
         dayText: String?,
         timeText: String?,

@@ -14,11 +14,11 @@ extension UserDefaults {
     static let userDefaultSuiteName = "app.vitemadose"
     static let encoder = JSONEncoder()
 
-    static var shared: UserDefaults {
+    static let shared: UserDefaults = {
         let combined = UserDefaults.standard
         combined.addSuite(named: userDefaultSuiteName)
         return combined
-    }
+    }()
 
     /// Testing purposes only
     /// - Returns: Cleared UserDefault instance
@@ -35,15 +35,16 @@ extension UserDefaults {
         return defaults
     }
 
-    // MARK: Keys
+    // MARK: - Keys
 
     private enum Key: String {
         case lastSearchResults
         case centresListSortOption
         case followedCentres
+        case didPresentAppOnboarding
     }
 
-    // MARK: Last Selected Search Results
+    // MARK: - Last Selected Search Results
 
     var lastSearchResults: [LocationSearchResult] {
         get {
@@ -62,6 +63,8 @@ extension UserDefaults {
         }
     }
 
+    // MARK: - Centres List Sort Option
+
     var centresListSortOption: CentresListSortOption {
         get {
             guard let savedIndex = value(forKey: Key.centresListSortOption.rawValue) as? Int else {
@@ -73,6 +76,8 @@ extension UserDefaults {
             setValue(newValue.index, forKey: Key.centresListSortOption.rawValue)
         }
     }
+
+    // MARK: - Followed Centres
 
     var followedCentres: [String: Set<FollowedCentre>] {
         get {
@@ -89,6 +94,20 @@ extension UserDefaults {
             setValue(encoded, forKey: Key.followedCentres.rawValue)
         }
     }
+
+    // MARK: - Did Present App Onboarding
+
+    var didPresentAppOnboarding: Bool {
+        get {
+            let rawValue = bool(forKey: Key.didPresentAppOnboarding.rawValue)
+            return rawValue
+        }
+        set {
+            setValue(newValue, forKey: Key.didPresentAppOnboarding.rawValue)
+        }
+    }
+
+    // MARK: - Helpers
 
     func followedCentre(forDepartment departmentCode: String, id: String) -> FollowedCentre? {
         return followedCentres[departmentCode]?.first(where: { $0.id == id })

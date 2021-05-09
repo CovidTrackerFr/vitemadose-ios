@@ -9,6 +9,7 @@ import UIKit
 import SafariServices
 import FirebaseAnalytics
 import Haptica
+import BLTNBoard
 
 final class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
@@ -40,8 +41,30 @@ final class HomeViewController: UIViewController, Storyboarded {
         return view
     }()
 
+    // TODO: Full onboarding
+    private lazy var bulletinManager: BLTNItemManager = {
+        let actionHandler: (BLTNActionItem) -> Void = { [weak self] item in
+            self?.viewModel.requestNotificationsAuthorization()
+            item.manager?.dismissBulletin()
+        }
+
+        let alternativeHandler: (BLTNActionItem) -> Void = { item in
+            item.manager?.dismissBulletin()
+        }
+
+        let notificationsPage = OnboardingManager.shared.makeNotificationsPage(
+            actionHandler: actionHandler,
+            alternativeHandler: alternativeHandler
+        )
+        let manager = BLTNItemManager(rootItem: notificationsPage)
+        manager.backgroundColor = .tertiarySystemBackground
+        manager.backgroundViewStyle = .dimmed
+        return manager
+    }()
+
     private lazy var dataSource = makeDataSource()
     private let remoteConfiguration: RemoteConfiguration = .shared
+
     // MARK: - Overrides
 
     override func viewDidLoad() {
@@ -65,6 +88,7 @@ final class HomeViewController: UIViewController, Storyboarded {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AppAnalytics.logScreen(.home, screenClass: Self.className)
+        viewModel.displayAppOnboardingIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,7 +148,9 @@ final class HomeViewController: UIViewController, Storyboarded {
     @IBAction private func followedCentresButtonTapped(_ sender: UIButton) {
         let followedCentresViewController = CentresListViewController.instantiate()
         followedCentresViewController.viewModel = FollowedCentresViewModel()
-        navigationController?.pushViewController(followedCentresViewController, animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(followedCentresViewController, animated: true)
+        }
     }
 }
 
@@ -163,6 +189,10 @@ extension HomeViewController: HomeViewModelDelegate {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         }
+    }
+
+    func presentNotificationsOnboarding() {
+        bulletinManager.showBulletin(above: self)
     }
 
     func presentFetchStatsError(_ error: Error) {

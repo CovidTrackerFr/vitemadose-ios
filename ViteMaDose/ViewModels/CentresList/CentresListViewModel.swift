@@ -10,68 +10,7 @@ import UIKit
 import PhoneNumberKit
 import PromiseKit
 import MapKit
-
-enum CentresListSection: CaseIterable {
-    case heading
-    case centres
-}
-
-enum CentresListCell: Hashable {
-    case title(HomeTitleCellViewData)
-    case stats(CentresStatsCellViewData)
-    case centre(CentreViewData)
-    case sort(CentresSortOptionsCellViewData)
-}
-
-enum CentresListSortOption: Equatable {
-    case closest
-    case fastest
-
-    init(_ value: Int) {
-        switch value {
-        case 0:
-            self = .closest
-        case 1:
-            self = .fastest
-        default:
-            assertionFailure("Value should either be 0 or 1")
-            self = .closest
-        }
-    }
-
-    var index: Int {
-        switch self {
-        case .closest:
-            return 0
-        case .fastest:
-            return 1
-        }
-    }
-}
-
-protocol CentresListViewModelProvider: AnyObject {
-    var delegate: CentresListViewModelDelegate? { get set }
-    func load(animated: Bool)
-    func sortList(by order: CentresListSortOption)
-    func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)?
-    func phoneNumberLink(at indexPath: IndexPath) -> URL?
-    func bookingLink(at indexPath: IndexPath) -> URL?
-    func followCentre(at indexPath: IndexPath, watch: Bool)
-    func unfollowCentre(at indexPath: IndexPath)
-    func isCentreFollowed(at indexPath: IndexPath) -> Bool?
-}
-
-protocol CentresListViewModelDelegate: AnyObject {
-    func updateLoadingState(isLoading: Bool, isEmpty: Bool)
-
-    func presentLoadError(_ error: Error)
-    func reloadTableView(
-        with headingCells: [CentresListCell],
-        andCentresCells centresCells: [CentresListCell],
-        animated: Bool
-    )
-    func reloadTableViewFooter(with text: String?)
-}
+import Firebase
 
 // MARK: - Centres List ViewModel
 
@@ -80,6 +19,7 @@ class CentresListViewModel {
     private let phoneNumberKit: PhoneNumberKit
     private let searchResult: LocationSearchResult?
     private(set) var userDefaults: UserDefaults
+    private let notificationCenter: UNUserNotificationCenter
 
     internal var sortOption: CentresListSortOption {
         return userDefaults.centresListSortOption
@@ -105,12 +45,14 @@ class CentresListViewModel {
         apiService: BaseAPIServiceProvider = BaseAPIService(),
         searchResult: LocationSearchResult?,
         phoneNumberKit: PhoneNumberKit = PhoneNumberKit(),
-        userDefaults: UserDefaults = .shared
+        userDefaults: UserDefaults = .shared,
+        notificationCenter: UNUserNotificationCenter = .current()
     ) {
         self.apiService = apiService
         self.searchResult = searchResult
         self.phoneNumberKit = phoneNumberKit
         self.userDefaults = userDefaults
+        self.notificationCenter = notificationCenter
     }
 
     private func reloadTableView(animated: Bool) {
@@ -326,8 +268,25 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
         let followedCentre = FollowedCentre(id: internalId, isWatching: watch)
-        userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
-        reloadTableView(animated: true)
+        guard watch else {
+            userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
+            reloadTableView(animated: true)
+            return
+        }
+
+        FCMHelper.shared.subscribeToCentreTopic(
+            withDepartmentCode: departmentCode,
+            andCentreId: internalId
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
+                self.reloadTableView(animated: true)
+            case let .failure(error):
+                self.delegate?.presentLoadError(error)
+            }
+        }
     }
 
     func unfollowCentre(at indexPath: IndexPath) {
@@ -337,8 +296,31 @@ extension CentresListViewModel: CentresListViewModelProvider {
         else {
             return
         }
-        userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
-        reloadTableView(animated: true)
+
+        guard let followedCentre = userDefaults.followedCentre(forDepartment: departmentCode, id: internalId) else {
+            assertionFailure("Followed centre not found for department \(departmentCode) and centre id \(internalId)")
+            return
+        }
+
+        guard followedCentre.isWatching else {
+            userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
+            reloadTableView(animated: true)
+            return
+        }
+
+        FCMHelper.shared.unsubscribeToCentreTopic(
+            withDepartmentCode: departmentCode,
+            andCentreId: internalId
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
+                self.reloadTableView(animated: true)
+            case let .failure(error):
+                self.delegate?.presentLoadError(error)
+            }
+        }
     }
 
     func isCentreFollowed(at indexPath: IndexPath) -> Bool? {
@@ -348,6 +330,13 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return nil
         }
         return userDefaults.isCentreFollowed(centre.id, forDepartment: departmentCode)
+    }
+
+    func requestNotificationsAuthorizationIfNeeded(completion: @escaping () -> Void) {
+        FCMHelper.shared.requestNotificationsAuthorizationIfNeeded(
+            notificationCenter,
+            completion: completion
+        )
     }
 
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)? {
