@@ -28,7 +28,7 @@ public protocol CentresListViewModelProvider: AnyObject {
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)?
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
     func bookingLink(at indexPath: IndexPath) -> URL?
-    func followCentre(at indexPath: IndexPath, watch: Bool)
+    func followCentre(at indexPath: IndexPath, notificationsType: FollowedCentre.NotificationsType)
     func unfollowCentre(at indexPath: IndexPath)
     func isCentreFollowed(at indexPath: IndexPath) -> Bool?
     func requestNotificationsAuthorizationIfNeeded(completion: @escaping () -> Void)
@@ -44,4 +44,5 @@ public protocol CentresListViewModelDelegate: AnyObject {
         animated: Bool
     )
     func reloadTableViewFooter(with text: String?)
+    func dismissViewController()
 }

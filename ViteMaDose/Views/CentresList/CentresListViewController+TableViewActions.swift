@@ -30,16 +30,24 @@ extension CentresListViewController: UITableViewDelegate {
                 preferredStyle: .actionSheet
             )
 
-            let notifyAction = UIAlertAction(title: Localization.Location.notify_button, style: .default) { [weak self] _ in
+            let allNotificationsAction = UIAlertAction(title: "Toutes les notifications", style: .default) { [weak self] _ in
                 self?.viewModel.requestNotificationsAuthorizationIfNeeded {
-                    self?.viewModel.followCentre(at: indexPath, watch: true)
+                    self?.viewModel.followCentre(at: indexPath, notificationsType: .all)
                 }
                 Haptic.notification(.success).generate()
                 handled(true)
             }
 
-            let followAction = UIAlertAction(title: Localization.Location.follow_button, style: .default) { [weak self] _ in
-                self?.viewModel.followCentre(at: indexPath, watch: false)
+            let chronoDosesNotificationsAction = UIAlertAction(title: "Notifications Chronodoses", style: .default) { [weak self] _ in
+                self?.viewModel.requestNotificationsAuthorizationIfNeeded {
+                    self?.viewModel.followCentre(at: indexPath, notificationsType: .chronodoses)
+                }
+                Haptic.notification(.success).generate()
+                handled(true)
+            }
+
+            let followOnlyAction = UIAlertAction(title: Localization.Location.follow_button, style: .default) { [weak self] _ in
+                self?.viewModel.followCentre(at: indexPath, notificationsType: .none)
                 Haptic.notification(.success).generate()
                 handled(true)
             }
@@ -48,15 +56,16 @@ extension CentresListViewController: UITableViewDelegate {
                 handled(true)
             }
 
-            bottomSheet.addAction(notifyAction)
-            bottomSheet.addAction(followAction)
+            bottomSheet.addAction(allNotificationsAction)
+            bottomSheet.addAction(chronoDosesNotificationsAction)
+            bottomSheet.addAction(followOnlyAction)
             bottomSheet.addAction(cancelAction)
             bottomSheet.popoverPresentationController?.sourceView = view
 
             self?.present(bottomSheet, animated: true)
         }
 
-        action.image = UIImage(systemName: "bookmark.fill")?.tint(with: .label)
+        action.image = UIImage(systemName: "bell.fill")?.tint(with: .label)
         action.backgroundColor = .athensGray
         return action
     }
@@ -86,7 +95,7 @@ extension CentresListViewController: UITableViewDelegate {
             self?.present(bottomSheet, animated: true)
         }
 
-        action.image = UIImage(systemName: "bookmark")?.tint(with: .label)
+        action.image = UIImage(systemName: "bell.slash.fill")?.tint(with: .label)
         action.backgroundColor = .athensGray
         return action
     }
@@ -95,16 +104,5 @@ extension CentresListViewController: UITableViewDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             tableView.cellForRow(at: indexPath)?.layoutIfNeeded()
         }
-    }
-}
-
-extension UITableViewCell {
-    var cellActionButtonLabel: UILabel? {
-        superview?.subviews
-            .filter { String(describing: $0).range(of: "UISwipeActionPullView") != nil }
-            .flatMap { $0.subviews }
-            .filter { String(describing: $0).range(of: "UISwipeActionStandardButton") != nil }
-            .flatMap { $0.subviews }
-            .compactMap { $0 as? UILabel }.first
     }
 }

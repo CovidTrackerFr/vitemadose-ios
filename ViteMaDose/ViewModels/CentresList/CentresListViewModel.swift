@@ -55,32 +55,6 @@ class CentresListViewModel {
         self.notificationCenter = notificationCenter
     }
 
-    private func reloadTableView(animated: Bool) {
-        let availableCentres = getVaccinationCentres(
-            for: locationVaccinationCentres.allAvailableCentres,
-            sortOption: userDefaults.centresListSortOption
-        )
-        let unavailableCentres = getVaccinationCentres(
-            for: locationVaccinationCentres.allUnavailableCentres,
-            sortOption: .closest
-        )
-
-        // Merge arrays and make sure there is no centre with duplicate ids
-        vaccinationCentresList = (availableCentres + unavailableCentres).unique(by: \.id)
-
-        let headingCells = createHeadingCells(
-            appointmentsCount: availableCentres.allAppointmentsCount,
-            availableCentresCount: availableCentres.count,
-            centresCount: vaccinationCentresList.count
-        )
-        let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
-        let footerText = locationVaccinationCentres.first?.formattedLastUpdated
-
-        trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
-        delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
-        delegate?.reloadTableViewFooter(with: shouldFooterText ? footerText : nil)
-    }
-
     internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
@@ -150,7 +124,8 @@ class CentresListViewModel {
             vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
             appointmentsCount: centre.appointmentCount,
             isAvailable: centre.isAvailable,
-            partnerLogo: partnerLogo
+            partnerLogo: partnerLogo,
+            isChronoDose: centre.hasChronoDose
         )
     }
 
@@ -174,6 +149,32 @@ class CentresListViewModel {
     }
 
     // MARK: - Ovveridables
+
+    internal func reloadTableView(animated: Bool) {
+        let availableCentres = getVaccinationCentres(
+            for: locationVaccinationCentres.allAvailableCentres,
+            sortOption: userDefaults.centresListSortOption
+        )
+        let unavailableCentres = getVaccinationCentres(
+            for: locationVaccinationCentres.allUnavailableCentres,
+            sortOption: .closest
+        )
+
+        // Merge arrays and make sure there is no centre with duplicate ids
+        vaccinationCentresList = (availableCentres + unavailableCentres).unique(by: \.id)
+
+        let headingCells = createHeadingCells(
+            appointmentsCount: availableCentres.allAppointmentsCount,
+            availableCentresCount: availableCentres.count,
+            centresCount: vaccinationCentresList.count
+        )
+        let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
+        let footerText = locationVaccinationCentres.first?.formattedLastUpdated
+
+        trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
+        delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
+        delegate?.reloadTableViewFooter(with: shouldFooterText ? footerText : nil)
+    }
 
     /// Creates a list of vaccination centre sorted by distance
     /// Centres are also filtered by maximum distance from the selected location
@@ -260,23 +261,30 @@ extension CentresListViewModel: CentresListViewModelProvider {
         reloadTableView(animated: false)
     }
 
-    func followCentre(at indexPath: IndexPath, watch: Bool) {
+    func followCentre(at indexPath: IndexPath, notificationsType: FollowedCentre.NotificationsType) {
         guard let centre = vaccinationCentresList[safe: indexPath.row],
               let departmentCode = centre.departement,
               let internalId = centre.internalId
         else {
             return
         }
-        let followedCentre = FollowedCentre(id: internalId, isWatching: watch)
-        guard watch else {
+        let followedCentre = FollowedCentre(id: internalId, notificationsType: notificationsType)
+
+        if case .none = followedCentre.notificationsType {
             userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
             reloadTableView(animated: true)
             return
         }
 
+        var chronoDosesOnly = false
+        if case .chronodoses = followedCentre.notificationsType {
+            chronoDosesOnly = true
+        }
+
         FCMHelper.shared.subscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId
+            andCentreId: internalId,
+            chronoDosesOnly: chronoDosesOnly
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -302,15 +310,21 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        guard followedCentre.isWatching else {
+        if case .none = followedCentre.notificationsType {
             userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
             reloadTableView(animated: true)
             return
         }
 
+        var chronoDosesOnly = false
+        if case .chronodoses = followedCentre.notificationsType {
+            chronoDosesOnly = true
+        }
+
         FCMHelper.shared.unsubscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId
+            andCentreId: internalId,
+            chronoDosesOnly: chronoDosesOnly
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {

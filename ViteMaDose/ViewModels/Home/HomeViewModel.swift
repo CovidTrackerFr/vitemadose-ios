@@ -20,6 +20,7 @@ enum HomeCell: Hashable {
     case searchBar(HomeSearchBarCellViewData)
     case searchResult(HomeSearchResultCellViewData)
     case stats(HomeCellStatsViewData)
+    case followedCentre
 }
 
 // MARK: - Home ViewModel
@@ -29,6 +30,7 @@ protocol HomeViewModelProvider {
     var delegate: HomeViewModelDelegate? { get }
 
     func load()
+    func reloadHeadingCellsIfNeeded()
     func didSelectSavedSearchResult(withName name: String)
     func didSelect(_ location: LocationSearchResult)
     func displayAppOnboardingIfNeeded()
@@ -40,7 +42,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func presentVaccinationCentres(for location: LocationSearchResult)
     func presentFetchStatsError(_ error: Error)
     func presentNotificationsOnboarding()
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell], animated: Bool)
 }
 
 final class HomeViewModel {
@@ -60,6 +62,7 @@ final class HomeViewModel {
 
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
+    private lazy var hasFollowedCentresLastSate = userDefaults.hasFollowedCentres
 
     // MARK: init
 
@@ -81,12 +84,12 @@ final class HomeViewModel {
         updateHeadingCells()
         updateStatsCells()
 
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell, animated: false)
     }
 
     private func handleLastSelectedSearchResult() {
         updateHeadingCells()
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell, animated: true)
     }
 
     private func updateHeadingCells() {
@@ -98,6 +101,10 @@ final class HomeViewModel {
             .title(titleCellViewData),
             .searchBar(departmentSelectionViewData)
         ]
+        if userDefaults.hasFollowedCentres {
+            headingCells.append(.followedCentre)
+        }
+
         headingCells.append(contentsOf: lastSelectedDepartmentViewData.map(HomeCell.searchResult))
     }
 
@@ -158,6 +165,19 @@ extension HomeViewModel: HomeViewModelProvider {
                 self.handleStatsError(status)
             }
         }
+    }
+
+    func reloadHeadingCellsIfNeeded() {
+        let hasFollowedCentres = userDefaults.hasFollowedCentres
+        if hasFollowedCentresLastSate == hasFollowedCentres {
+            hasFollowedCentresLastSate = hasFollowedCentres
+            return
+        }
+
+        updateHeadingCells()
+        hasFollowedCentresLastSate = hasFollowedCentres
+
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell, animated: true)
     }
 
     func didSelectSavedSearchResult(withName name: String) {

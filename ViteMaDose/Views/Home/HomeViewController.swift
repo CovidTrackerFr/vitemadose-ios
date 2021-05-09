@@ -89,6 +89,7 @@ final class HomeViewController: UIViewController, Storyboarded {
         super.viewDidAppear(animated)
         AppAnalytics.logScreen(.home, screenClass: Self.className)
         viewModel.displayAppOnboardingIfNeeded()
+        viewModel.reloadHeadingCellsIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,6 +116,7 @@ final class HomeViewController: UIViewController, Storyboarded {
         tableView.register(cellType: HomeSearchBarCell.self)
         tableView.register(cellType: HomeSearchResultCell.self)
         tableView.register(cellType: HomeStatsCell.self)
+        tableView.register(cellType: HomeFollowedCentresCell.self)
     }
 
     @objc func didPullToRefresh() {
@@ -145,12 +147,10 @@ final class HomeViewController: UIViewController, Storyboarded {
         present(maintenanceViewController, animated: true)
     }
 
-    @IBAction private func followedCentresButtonTapped(_ sender: UIButton) {
+    private func presentFollowedCentres() {
         let followedCentresViewController = CentresListViewController.instantiate()
         followedCentresViewController.viewModel = FollowedCentresViewModel()
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(followedCentresViewController, animated: true)
-        }
+        navigationController?.pushViewController(followedCentresViewController, animated: true)
     }
 }
 
@@ -160,14 +160,14 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Table View Updates
 
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell]) {
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell], animated: Bool) {
         var snapshot = Snapshot()
         snapshot.appendSections(HomeSection.allCases)
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(statsCells, toSection: .stats)
 
         dataSource.defaultRowAnimation = .fade
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
     // MARK: Present
@@ -222,13 +222,16 @@ extension HomeViewController: UITableViewDelegate {
         case let .searchResult(viewData):
             viewModel.didSelectSavedSearchResult(withName: viewData.name)
             Haptic.impact(.light).generate()
+        case .followedCentre:
+            presentFollowedCentres()
+            Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {
                 return
             }
             presentVaccinationCentresMap()
-        default:
-            return
+        case .title:
+            break
         }
     }
 }
@@ -255,6 +258,10 @@ extension HomeViewController {
         case let .searchBar(cellViewModel):
             let cell = tableView.dequeueReusableCell(with: HomeSearchBarCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
+            return cell
+        case .followedCentre:
+            let cell = tableView.dequeueReusableCell(with: HomeFollowedCentresCell.self, for: indexPath)
+            cell.configure()
             return cell
         case let .searchResult(cellViewModel):
             let cell = tableView.dequeueReusableCell(with: HomeSearchResultCell.self, for: indexPath)

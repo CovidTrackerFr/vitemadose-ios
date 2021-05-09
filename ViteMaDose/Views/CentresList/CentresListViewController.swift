@@ -136,7 +136,7 @@ extension CentresListViewController: CentresListViewModelDelegate {
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(centresCells, toSection: .centres)
 
-        dataSource.defaultRowAnimation = animated ? .fade : .none
+        dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
@@ -175,6 +175,10 @@ extension CentresListViewController: CentresListViewModelDelegate {
             },
             completionHandler: nil
         )
+    }
+
+    func dismissViewController() {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 

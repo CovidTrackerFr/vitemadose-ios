@@ -62,6 +62,8 @@
 		5793483C2621E2F100F8A4A0 /* HomeStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */; };
 		579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */; };
 		5793484C262241B900F8A4A0 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793484B262241B900F8A4A0 /* Stats.swift */; };
+		5793E6E0264891DA0042F64F /* HomeFollowedCentresCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793E6DF264891DA0042F64F /* HomeFollowedCentresCell.swift */; };
+		5793E6E3264891E80042F64F /* HomeFollowedCentresCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5793E6E2264891E80042F64F /* HomeFollowedCentresCell.xib */; };
 		57954763263E1A1700AD5DFD /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 57954762263E1A1700AD5DFD /* Moya */; };
 		57954766263E1B2600AD5DFD /* GeoAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57954765263E1B2600AD5DFD /* GeoAPIService.swift */; };
 		57954769263E1B3D00AD5DFD /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57954768263E1B3D00AD5DFD /* BaseAPIService.swift */; };
@@ -186,6 +188,8 @@
 		5793483B2621E2F100F8A4A0 /* HomeStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatsCell.swift; sourceTree = "<group>"; };
 		579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Commons.swift"; sourceTree = "<group>"; };
 		5793484B262241B900F8A4A0 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		5793E6DF264891DA0042F64F /* HomeFollowedCentresCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFollowedCentresCell.swift; sourceTree = "<group>"; };
+		5793E6E2264891E80042F64F /* HomeFollowedCentresCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFollowedCentresCell.xib; sourceTree = "<group>"; };
 		57954765263E1B2600AD5DFD /* GeoAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoAPIService.swift; sourceTree = "<group>"; };
 		57954768263E1B3D00AD5DFD /* BaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
 		5795476C263E1C1B00AD5DFD /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -499,6 +503,8 @@
 				575CC22E262AF4E1008D1869 /* HomeSearchBarCell.xib */,
 				57C401942623929800EFFCA3 /* HomeSearchResultCell.swift */,
 				57C401952623929800EFFCA3 /* HomeSearchResultCell.xib */,
+				5793E6DF264891DA0042F64F /* HomeFollowedCentresCell.swift */,
+				5793E6E2264891E80042F64F /* HomeFollowedCentresCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -743,6 +749,7 @@
 			files = (
 				57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */,
 				5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */,
+				5793E6E3264891E80042F64F /* HomeFollowedCentresCell.xib in Resources */,
 				57B6BEAA2636153000D9AAC1 /* maintenance.html in Resources */,
 				57C4018F26238E5300EFFCA3 /* LocationSearchHeaderView.xib in Resources */,
 				57C4017726235B6200EFFCA3 /* HomePartnersFooterView.xib in Resources */,
@@ -893,6 +900,7 @@
 				57CB253426460501004776CA /* FollowedCentre.swift in Sources */,
 				57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */,
 				572B065A2648251400BB04DB /* CentresListViewModelProvider.swift in Sources */,
+				5793E6E0264891DA0042F64F /* HomeFollowedCentresCell.swift in Sources */,
 				57AD21F62621097A00ED2B95 /* CentresListViewModel.swift in Sources */,
 				570E94E22640B16E0068E5FC /* Array+Commons.swift in Sources */,
 				5795476D263E1C1B00AD5DFD /* City.swift in Sources */,

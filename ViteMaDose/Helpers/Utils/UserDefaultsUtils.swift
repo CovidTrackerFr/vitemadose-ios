@@ -109,6 +109,10 @@ extension UserDefaults {
 
     // MARK: - Helpers
 
+    var hasFollowedCentres: Bool {
+        return !followedCentres.values.map(\.isEmpty).allSatisfy({ $0 == true })
+    }
+
     func followedCentre(forDepartment departmentCode: String, id: String) -> FollowedCentre? {
         return followedCentres[departmentCode]?.first(where: { $0.id == id })
     }

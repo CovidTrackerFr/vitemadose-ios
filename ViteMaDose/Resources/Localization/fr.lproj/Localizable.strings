@@ -40,10 +40,10 @@
 "location.unavailable_address" = "Adresse indisponible";
 // Location start following
 "location.start_following_title" = "Recevoir les notifications ?";
-"location.start_following_message" = "Si vous choisissez d'être notifié, nous vous enverrons des notifications lorsque les disponibilités de ce centre changeront";
+"location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilités ou seulement lorsque des Chronodoses sont disponibles pour ce centre.";
 "location.follow_action_title" = "Suivre";
 "location.notify_button" = "Être notifié";
-"location.follow_button" = "Suivre uniquement";
+"location.follow_button" = "Suivre sans notifications";
 // Location stop following
 "location.stop_following_title" = "Ne plus suivre ce centre ?";
 "location.stop_following_message" = "Si vous avez activé les notifications pour ce centre, elles seront désactivées.";

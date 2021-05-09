@@ -25,6 +25,7 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
     let type: String?
     let appointmentCount: Int?
     let vaccineType: [String]?
+    let appointmentSchedules: [AppointmentSchedule?]?
 
     var id: String {
         return internalId ?? gid ?? UUID().uuidString
@@ -43,6 +44,7 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
         case type
         case appointmentCount = "appointment_count"
         case vaccineType = "vaccine_type"
+        case appointmentSchedules = "appointment_schedules"
     }
 }
 
@@ -70,6 +72,25 @@ extension VaccinationCentre {
             case businessHours = "business_hours"
         }
     }
+
+    struct AppointmentSchedule: Codable, Hashable {
+        let name: String?
+        let from: String?
+        let to: String?
+        let total: Int?
+
+        enum CodingKeys: String, CodingKey {
+            case name
+            case from
+            case to
+            case total
+        }
+
+        enum AppointmentScheduleKey {
+            static let chronoDose = "chronodose"
+        }
+    }
+
 }
 
 extension Sequence where Element == VaccinationCentre {
@@ -128,6 +149,11 @@ extension VaccinationCentre {
             latitude: latitude,
             longitude: longitude
         )
+    }
+
+    var hasChronoDose: Bool {
+        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
+        return appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }) != nil
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {

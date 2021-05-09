@@ -20,6 +20,7 @@ protocol CentreViewDataProvider {
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var partnerLogo: UIImage? { get }
+    var isChronoDose: Bool { get }
 }
 
 // MARK: - CentreViewData
@@ -36,6 +37,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
+    let isChronoDose: Bool
 }
 
 // MARK: - CentreCell
@@ -65,7 +67,12 @@ final class CentreCell: UITableViewCell {
     @IBOutlet weak private var bookingButton: UIButton!
     @IBOutlet weak private var cellContentView: UIView!
 
-    @IBOutlet weak private var vacineTypeImageView: UIImageView!
+    @IBOutlet weak private var vaccineTypeImageView: UIImageView!
+
+    @IBOutlet var chronoDoseViewContainer: UIView!
+    @IBOutlet var chronoDoseStackView: UIStackView!
+    @IBOutlet var chronoDoseViewContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var chronoDoseLabel: UILabel!
 
     private lazy var iconContainers: [UIView] = [
         dateIconContainer,
@@ -100,12 +107,13 @@ final class CentreCell: UITableViewCell {
         bookingButton.backgroundColor = .royalBlue
         bookingButton.setCornerRadius(Constant.bookingButtonCornerRadius)
         cellContentView.setCornerRadius(Constant.cellContentViewCornerRadius)
-        vacineTypeImageView.image = UIImage(systemName: "cube.box.fill")
+        vaccineTypeImageView.image = UIImage(systemName: "cube.box.fill")
     }
 
     func configure(with viewData: CentreViewData) {
         configureBookButton(viewData)
         configurePhoneNumberView(viewData)
+        configureChronoDoseView(viewData)
 
         dateLabel.attributedText = createDateText(
             dayText: viewData.dayText,
@@ -150,11 +158,11 @@ final class CentreCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        cellActionButtonLabel?.textColor = .label
+        cellActionButton?.setTitleColor(.label, for: .normal)
     }
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        cellActionButtonLabel?.textColor = .label
+        cellActionButton?.setTitleColor(.label, for: .normal)
     }
 
     // MARK: - Actions
@@ -291,6 +299,21 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapBookButton),
             for: .touchUpInside
         )
+    }
+
+    private func configureChronoDoseView(_ viewData: CentreViewData) {
+        guard viewData.isChronoDose else {
+            chronoDoseViewContainerHeightConstraint.constant = 0
+            chronoDoseStackView.arrangedSubviews.forEach({ $0.isHidden = true })
+            return
+        }
+
+        chronoDoseStackView.arrangedSubviews.forEach({ $0.isHidden = false })
+        chronoDoseViewContainerHeightConstraint.constant = 35
+        chronoDoseViewContainer.clipsToBounds = false
+        chronoDoseViewContainer.layer.cornerRadius = 15.0
+        chronoDoseViewContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        chronoDoseLabel.text = "Chronodoses Disponibles"
     }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {

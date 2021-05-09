@@ -16,14 +16,16 @@ struct FCMHelper {
     func subscribeToCentreTopic(
         withDepartmentCode departmentCode: String,
         andCentreId centreId: String,
+        chronoDosesOnly: Bool,
         completion: @escaping (Swift.Result<Void, Error>) -> Void
     ) {
-        Messaging.messaging().subscribe(toTopic: centreTopicName(departmentCode, centreId)) { error in
+        let topicName = centreTopicName(departmentCode: departmentCode, centreId: centreId, chronoDosesOnly: chronoDosesOnly)
+        Messaging.messaging().subscribe(toTopic: topicName) { error in
             if let error = error {
                 Log.e("SUBSCRIBE ERROR: \(error.localizedDescription)")
                 completion(.failure(error))
             } else {
-                Log.i("SUBSCRIBE SUCCESS: \(centreTopicName(departmentCode, centreId))")
+                Log.i("SUBSCRIBE SUCCESS: \(topicName)")
                 completion(.success(()))
             }
         }
@@ -32,21 +34,27 @@ struct FCMHelper {
     func unsubscribeToCentreTopic(
         withDepartmentCode departmentCode: String,
         andCentreId centreId: String,
+        chronoDosesOnly: Bool,
         completion: @escaping (Swift.Result<Void, Error>) -> Void
     ) {
-        Messaging.messaging().unsubscribe(fromTopic: centreTopicName(departmentCode, centreId)) { error in
+        let topicName = centreTopicName(departmentCode: departmentCode, centreId: centreId, chronoDosesOnly: chronoDosesOnly)
+        Messaging.messaging().unsubscribe(fromTopic: topicName) { error in
             if let error = error {
                 Log.e("UNSUBSCRIBE ERROR: \(error.localizedDescription)")
                 completion(.failure(error))
             } else {
-                Log.i("UNSUBSCRIBE SUCCESS: \(centreTopicName(departmentCode, centreId))")
+                Log.i("UNSUBSCRIBE SUCCESS: \(topicName)")
                 completion(.success(()))
             }
         }
     }
 
-    private var centreTopicName: (String, String) -> String = {
-        return "department_\($0)_center_\($1)"
+    private func centreTopicName(departmentCode: String, centreId: String, chronoDosesOnly: Bool) -> String {
+        let topicName = "department_\(departmentCode)_center_\(centreId)"
+        if chronoDosesOnly {
+            return topicName.appending("_chronodoses")
+        }
+        return topicName
     }
 
     func requestNotificationsAuthorizationIfNeeded(

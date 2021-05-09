@@ -21,6 +21,13 @@ final class FollowedCentresViewModel: CentresListViewModel {
         super.init(searchResult: nil)
     }
 
+    override func reloadTableView(animated: Bool) {
+        super.reloadTableView(animated: animated)
+        if vaccinationCentresList.isEmpty {
+            delegate?.dismissViewController()
+        }
+    }
+
     override internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.followedCentresListTitle,
