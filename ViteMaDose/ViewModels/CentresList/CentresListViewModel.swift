@@ -113,6 +113,15 @@ class CentresListViewModel {
             ? Localization.Location.book_button + String.space
             : Localization.Location.verify_button + String.space
 
+        var notificationsType: FollowedCentre.NotificationsType?
+        if let internalId = centre.internalId, let department = centre.departement {
+            if let followedCentre = userDefaults.followedCentre(forDepartment: department, id: internalId) {
+                notificationsType = followedCentre.notificationsType
+            } else {
+                notificationsType = FollowedCentre.NotificationsType.none
+            }
+        }
+
         return CentreViewData(
             id: centre.id,
             dayText: centre.nextAppointmentDay,
@@ -125,7 +134,8 @@ class CentresListViewModel {
             appointmentsCount: centre.appointmentCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
-            isChronoDose: centre.hasChronoDose
+            isChronoDose: centre.hasChronoDose,
+            notificationsType: notificationsType
         )
     }
 
@@ -151,29 +161,33 @@ class CentresListViewModel {
     // MARK: - Ovveridables
 
     internal func reloadTableView(animated: Bool) {
-        let availableCentres = getVaccinationCentres(
-            for: locationVaccinationCentres.allAvailableCentres,
-            sortOption: userDefaults.centresListSortOption
-        )
-        let unavailableCentres = getVaccinationCentres(
-            for: locationVaccinationCentres.allUnavailableCentres,
-            sortOption: .closest
-        )
+        let availableCentres: [VaccinationCentre]
+        let unavailableCentres: [VaccinationCentre]
+
+        // If search result, filter by maximum distance
+        if let searchResult = self.searchResult {
+            availableCentres = locationVaccinationCentres.allAvailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
+            unavailableCentres = locationVaccinationCentres.allUnavailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
+        } else {
+            availableCentres = locationVaccinationCentres.allAvailableCentres
+            unavailableCentres = locationVaccinationCentres.allUnavailableCentres
+        }
 
         // Merge arrays and make sure there is no centre with duplicate ids
-        vaccinationCentresList = (availableCentres + unavailableCentres).unique(by: \.id)
+        let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
+        vaccinationCentresList = getVaccinationCentres(for: allCentres, sortOption: userDefaults.centresListSortOption, searchResult: searchResult)
 
         let headingCells = createHeadingCells(
-            appointmentsCount: availableCentres.allAppointmentsCount,
-            availableCentresCount: availableCentres.count,
-            centresCount: vaccinationCentresList.count
+            appointmentsCount: allCentres.allAppointmentsCount,
+            availableCentresCount: allCentres.allAvailableCentresCount,
+            centresCount: allCentres.count
         )
         let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
         let footerText = locationVaccinationCentres.first?.formattedLastUpdated
 
         trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
-        delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
-        delegate?.reloadTableViewFooter(with: shouldFooterText ? footerText : nil)
+        self.delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
+        self.delegate?.reloadTableViewFooter(with: self.shouldFooterText ? footerText : nil)
     }
 
     /// Creates a list of vaccination centre sorted by distance
@@ -183,19 +197,30 @@ class CentresListViewModel {
     /// - Returns: array of filtered and sorted centres
     internal func getVaccinationCentres(
         for centres: [VaccinationCentre],
-        sortOption: CentresListSortOption
+        sortOption: CentresListSortOption,
+        searchResult: LocationSearchResult?
     ) -> [VaccinationCentre] {
-        guard let searchResult = self.searchResult else {
-            assertionFailure("Search result should not be nil")
-            return centres
+        // If search result has no coordinates (department), sort options are not displayed and
+        // centres are ordered by appointment time
+        guard searchResult?.coordinates != nil else {
+            return centres.sorted(by: VaccinationCentre.sortedByAppointment)
         }
-        let centres = centres.filter(searchResult.filterVaccinationCentreByDistance)
 
         switch sortOption {
         case .closest:
-            return centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
+            if let searchResult = searchResult {
+                return centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
+            } else {
+                // Fall back if search result is missing
+                assertionFailure("Tried to sort by distance with invalid search result")
+                return centres.sorted(by: VaccinationCentre.sortedByAppointment)
+            }
         case .fastest:
             return centres.sorted(by: VaccinationCentre.sortedByAppointment)
+        case .chronoDoses:
+            return centres
+                .filter(VaccinationCentre.filteredByChronoDoses)
+                .sorted(by: VaccinationCentre.sortedByAppointment)
         }
     }
 

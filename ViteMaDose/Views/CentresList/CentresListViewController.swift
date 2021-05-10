@@ -28,6 +28,14 @@ class CentresListViewController: UIViewController, Storyboarded {
         return activityIndicator
     }()
 
+    private let footerView: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .tertiaryLabel
+        label.textAlignment = .center
+        return label
+    }()
+
     private lazy var dataSource = makeDataSource()
 
     override func viewDidLoad() {
@@ -109,12 +117,13 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.backgroundColor = .athensGray
         tableView.contentInset.top = -10
 
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableView.automaticDimension
 
         tableView.refreshControl = refreshControl
         tableView.backgroundView = activityIndicator
         tableView.contentInset.bottom = 10
+        tableView.tableFooterView = footerView
 
         tableView.register(cellType: CentresTitleCell.self)
         tableView.register(cellType: CentreCell.self)
@@ -138,22 +147,20 @@ extension CentresListViewController: CentresListViewModelDelegate {
 
         dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: animated)
+
+        // FIXME: Find out why the reload is broken when list contains only one centre
+        if centresCells.count == 1 {
+            tableView.reloadData()
+        }
     }
 
     func reloadTableViewFooter(with text: String?) {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textColor = .tertiaryLabel
-        label.textAlignment = .center
-        label.text = text
-        label.sizeToFit()
-
-        tableView.tableFooterView = label
+        footerView.text = text
+        footerView.sizeToFit()
+        tableView.tableFooterView = footerView
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
-        tableView.tableFooterView?.isHidden = isLoading
-
         if !isLoading {
             activityIndicator.stopAnimating()
             refreshControl.endRefreshing()
@@ -184,10 +191,10 @@ extension CentresListViewController: CentresListViewModelDelegate {
 
 // MARK: - DataSource
 
-extension CentresListViewController {
+extension CentresListViewController: UITableViewDelegate {
 
-    private func makeDataSource() -> EditableDiffableDataSource<CentresListSection, CentresListCell> {
-        return EditableDiffableDataSource(
+    private func makeDataSource() -> UITableViewDiffableDataSource<CentresListSection, CentresListCell> {
+        return UITableViewDiffableDataSource(
             tableView: tableView,
             cellProvider: { [weak self] _, indexPath, vaccinationCentreCell in
                 return self?.dequeueAndConfigure(cell: vaccinationCentreCell, at: indexPath)
@@ -247,6 +254,15 @@ extension CentresListViewController {
             let bookingURL = self?.viewModel.bookingLink(at: indexPath)
             self?.openBookingUrl(bookingURL)
         }
+        // Follow/Unfollow button tap
+        cell.followButtonTapHandler = { [weak self] in
+            guard let isFollowing = self?.viewModel.isCentreFollowed(at: indexPath) else { return }
+            if isFollowing {
+                self?.presentUnfollowCentreBottomSheet(forCell: cell, atIndexPath: indexPath)
+            } else {
+                self?.presentFollowCentreBottomSheet(forCell: cell, atIndexPath: indexPath)
+            }
+        }
     }
 
     private func presentOpenMapAlert(
@@ -277,6 +293,58 @@ extension CentresListViewController {
         actionSheet.popoverPresentationController?.sourceView = sourceView
 
         present(actionSheet, animated: true)
+    }
+
+    private func presentFollowCentreBottomSheet(forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        let bottomSheet = UIAlertController(
+            title: Localization.Location.start_following_title,
+            message: Localization.Location.start_following_message,
+            preferredStyle: .actionSheet
+        )
+
+        let allNotificationsAction = UIAlertAction(title: "Toutes les notifications", style: .default) { [weak self] _ in
+            self?.viewModel.requestNotificationsAuthorizationIfNeeded {
+                self?.viewModel.followCentre(at: indexPath, notificationsType: .all)
+            }
+            Haptic.notification(.success).generate()
+        }
+
+        let chronoDosesNotificationsAction = UIAlertAction(title: "Chronodoses uniquement", style: .default) { [weak self] _ in
+            self?.viewModel.requestNotificationsAuthorizationIfNeeded {
+                self?.viewModel.followCentre(at: indexPath, notificationsType: .chronodoses)
+            }
+            Haptic.notification(.success).generate()
+        }
+
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
+
+        bottomSheet.addAction(allNotificationsAction)
+        bottomSheet.addAction(chronoDosesNotificationsAction)
+        bottomSheet.addAction(cancelAction)
+        bottomSheet.popoverPresentationController?.sourceView = cell
+
+        present(bottomSheet, animated: true)
+    }
+
+    private func presentUnfollowCentreBottomSheet(forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        let bottomSheet = UIAlertController(
+            title: Localization.Location.stop_following_title,
+            message: Localization.Location.stop_following_message,
+            preferredStyle: .actionSheet
+        )
+
+        let unfollowAction = UIAlertAction(title: Localization.Location.stop_following_button, style: .destructive) { [weak self] _ in
+            self?.viewModel.unfollowCentre(at: indexPath)
+            Haptic.impact(.medium).generate()
+        }
+
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
+
+        bottomSheet.addAction(unfollowAction)
+        bottomSheet.addAction(cancelAction)
+        bottomSheet.popoverPresentationController?.sourceView = view
+
+        self.present(bottomSheet, animated: true)
     }
 }
 

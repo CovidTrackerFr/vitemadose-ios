@@ -34,14 +34,13 @@ protocol HomeViewModelProvider {
     func didSelectSavedSearchResult(withName name: String)
     func didSelect(_ location: LocationSearchResult)
     func displayAppOnboardingIfNeeded()
-    func requestNotificationsAuthorization()
 }
 
 protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
     func presentVaccinationCentres(for location: LocationSearchResult)
     func presentFetchStatsError(_ error: Error)
-    func presentNotificationsOnboarding()
+    func presentOnboarding()
     func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell], animated: Bool)
 }
 
@@ -200,10 +199,6 @@ extension HomeViewModel: HomeViewModelProvider {
             return
         }
         userDefaults.didPresentAppOnboarding = true
-        delegate?.presentNotificationsOnboarding()
-    }
-
-    func requestNotificationsAuthorization() {
-        FCMHelper.shared.requestNotificationsAuthorizationIfNeeded(notificationCenter)
+        delegate?.presentOnboarding()
     }
 }

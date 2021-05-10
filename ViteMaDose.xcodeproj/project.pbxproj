@@ -44,7 +44,6 @@
 		5767393F261E3C1F004A700D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767393E261E3C1F004A700D /* HomeViewModel.swift */; };
 		57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57673954261E4145004A700D /* ClassNameProtocol.swift */; };
 		577265C02634D77A009B707C /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577265BF2634D77A009B707C /* HomeViewModelTests.swift */; };
-		5774772A264720AF000CC89E /* CentresListViewController+TableViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57747729264720AF000CC89E /* CentresListViewController+TableViewActions.swift */; };
 		577A7F5E262C6D6400B1D03C /* ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */; };
 		577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */; };
 		577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
@@ -99,7 +98,6 @@
 		57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C401A9262426B100EFFCA3 /* CentreCell.xib */; };
 		57CB253426460501004776CA /* FollowedCentre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB253326460501004776CA /* FollowedCentre.swift */; };
 		57CB25382646B905004776CA /* FollowedCentresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB25372646B905004776CA /* FollowedCentresViewModel.swift */; };
-		57CB253F2646E20B004776CA /* EditableDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB253E2646E20B004776CA /* EditableDiffableDataSource.swift */; };
 		57DEAA03263444BB005E8628 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 57DEAA05263444BB005E8628 /* Localizable.stringsdict */; };
 		57DEAA1326346D9D005E8628 /* FormatterUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DEAA1226346D9D005E8628 /* FormatterUtils.swift */; };
 		57EC46FF262B1DC500FBA991 /* HomeTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */; };
@@ -174,7 +172,6 @@
 		57673954261E4145004A700D /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		577265BE2634D779009B707C /* ViteMaDoseTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViteMaDoseTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		577265BF2634D77A009B707C /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
-		57747729264720AF000CC89E /* CentresListViewController+TableViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CentresListViewController+TableViewActions.swift"; sourceTree = "<group>"; };
 		577A7F5D262C6D6400B1D03C /* ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDisplayable.swift; sourceTree = "<group>"; };
 		577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorDisplayable.swift"; sourceTree = "<group>"; };
 		577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
@@ -223,7 +220,6 @@
 		57C401A9262426B100EFFCA3 /* CentreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentreCell.xib; sourceTree = "<group>"; };
 		57CB253326460501004776CA /* FollowedCentre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedCentre.swift; sourceTree = "<group>"; };
 		57CB25372646B905004776CA /* FollowedCentresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedCentresViewModel.swift; sourceTree = "<group>"; };
-		57CB253E2646E20B004776CA /* EditableDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableDiffableDataSource.swift; sourceTree = "<group>"; };
 		57DEAA04263444BB005E8628 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		57DEAA1226346D9D005E8628 /* FormatterUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterUtils.swift; sourceTree = "<group>"; };
 		57EC46FE262B1DC500FBA991 /* HomeTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleCell.xib; sourceTree = "<group>"; };
@@ -514,7 +510,6 @@
 			children = (
 				57C401A72624266800EFFCA3 /* Cells */,
 				57AD21D52621041200ED2B95 /* CentresListViewController.swift */,
-				57747729264720AF000CC89E /* CentresListViewController+TableViewActions.swift */,
 				57AD21DD2621042700ED2B95 /* CentresListViewController.storyboard */,
 			);
 			path = CentresList;
@@ -592,7 +587,6 @@
 		57CB253D2646E1F5004776CA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				57CB253E2646E20B004776CA /* EditableDiffableDataSource.swift */,
 				572B06482648107900BB04DB /* Logger.swift */,
 			);
 			path = Classes;
@@ -909,7 +903,6 @@
 				57CB25382646B905004776CA /* FollowedCentresViewModel.swift in Sources */,
 				57C4017C262383DA00EFFCA3 /* UIImage+Commons.swift in Sources */,
 				57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */,
-				57CB253F2646E20B004776CA /* EditableDiffableDataSource.swift in Sources */,
 				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
 				57673903261E3783004A700D /* Data+Commons.swift in Sources */,
 				572B0654264813DE00BB04DB /* CentresListSortOption.swift in Sources */,
@@ -920,7 +913,6 @@
 				DA4D9953261E6B6A00D28AD0 /* LocationSearchViewController.swift in Sources */,
 				572B064C264811BE00BB04DB /* FCMHelper.swift in Sources */,
 				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
-				5774772A264720AF000CC89E /* CentresListViewController+TableViewActions.swift in Sources */,
 				5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */,
 				5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */,
 				DA4D995E261E6D6300D28AD0 /* LocationSearchViewModel.swift in Sources */,

@@ -97,6 +97,12 @@ extension Sequence where Element == VaccinationCentre {
     var allAppointmentsCount: Int {
        return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
     }
+
+    var allAvailableCentresCount: Int {
+        return reduce(0) { (previous, current) in
+            previous + (current.isAvailable ? 1 : 0)
+        }
+    }
 }
 
 extension VaccinationCentre {
@@ -153,7 +159,13 @@ extension VaccinationCentre {
 
     var hasChronoDose: Bool {
         let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        return appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }) != nil
+        guard
+            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
+            let chronoDosesCount = chronoDose?.total
+        else {
+            return false
+        }
+        return chronoDosesCount > 0
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -166,6 +178,10 @@ extension VaccinationCentre {
             return false
         }
         return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
+    }
+
+    static var filteredByChronoDoses: (Self) -> Bool = {
+        return $0.hasChronoDose
     }
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {

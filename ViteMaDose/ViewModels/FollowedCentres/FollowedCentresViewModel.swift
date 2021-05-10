@@ -34,23 +34,13 @@ final class FollowedCentresViewModel: CentresListViewModel {
             topMargin: 25,
             bottomMargin: 0
         )
-        var cells: [CentresListCell] = [ .title(mainTitleViewData)]
-
-        if !vaccinationCentresList.isEmpty {
-            let statsCellViewData = CentresStatsCellViewData(
-                appointmentsCount: appointmentsCount,
-                availableCentresCount: availableCentresCount,
-                allCentresCount: centresCount
-            )
-            cells.append(.stats(statsCellViewData))
-        }
-
-        return cells
+        return [.title(mainTitleViewData)]
     }
 
     override internal func getVaccinationCentres(
         for centres: [VaccinationCentre],
-        sortOption: CentresListSortOption
+        sortOption: CentresListSortOption,
+        searchResult: LocationSearchResult?
     ) -> [VaccinationCentre] {
         let followedCentresIds = userDefaults.followedCentres.flatMap({ (element) in
             return element.value.map(\.id)

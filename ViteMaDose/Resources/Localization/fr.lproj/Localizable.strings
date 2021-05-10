@@ -27,7 +27,7 @@
 "locations.followed_list_title" = "Liste de vos lieux suivis";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
-"locations.sort_option.fastest" = "Disponible au plus vite";
+"locations.sort_option.fastest" = "Au plus vite";
 // Location
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";

@@ -43,20 +43,8 @@ final class HomeViewController: UIViewController, Storyboarded {
 
     // TODO: Full onboarding
     private lazy var bulletinManager: BLTNItemManager = {
-        let actionHandler: (BLTNActionItem) -> Void = { [weak self] item in
-            self?.viewModel.requestNotificationsAuthorization()
-            item.manager?.dismissBulletin()
-        }
-
-        let alternativeHandler: (BLTNActionItem) -> Void = { item in
-            item.manager?.dismissBulletin()
-        }
-
-        let notificationsPage = OnboardingManager.shared.makeNotificationsPage(
-            actionHandler: actionHandler,
-            alternativeHandler: alternativeHandler
-        )
-        let manager = BLTNItemManager(rootItem: notificationsPage)
+        let rootItem = OnboardingManager.makeFirstPage()
+        let manager = BLTNItemManager(rootItem: rootItem)
         manager.backgroundColor = .tertiarySystemBackground
         manager.backgroundViewStyle = .dimmed
         return manager
@@ -191,7 +179,7 @@ extension HomeViewController: HomeViewModelDelegate {
         }
     }
 
-    func presentNotificationsOnboarding() {
+    func presentOnboarding() {
         bulletinManager.showBulletin(above: self)
     }
 

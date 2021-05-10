@@ -77,6 +77,8 @@ private extension CentresListSortOption {
             return "au plus proche"
         case .fastest:
             return "au plus tot"
+        case .chronoDoses:
+            return "chronodoses"
         }
     }
 }
