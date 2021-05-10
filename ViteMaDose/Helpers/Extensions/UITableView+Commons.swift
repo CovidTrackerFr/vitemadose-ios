@@ -26,13 +26,3 @@ extension UITableView {
         header.frame.size.height = newSize.height
     }
 }
-
-extension UITableViewCell {
-    var cellActionButton: UIButton? {
-        superview?.subviews
-            .filter { String(describing: $0).range(of: "UISwipeActionPullView") != nil }
-            .flatMap { $0.subviews }
-            .filter { String(describing: $0).range(of: "UISwipeActionStandardButton") != nil }
-            .first as? UIButton
-    }
-}
