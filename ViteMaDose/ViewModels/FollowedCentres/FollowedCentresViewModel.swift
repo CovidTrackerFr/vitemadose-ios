@@ -30,13 +30,13 @@ final class FollowedCentresViewModel: CentresListViewModel {
     }
 
     override func reloadTableView(animated: Bool) {
+        super.reloadTableView(animated: animated)
+
         let shouldDismiss = vaccinationCentresList.isEmpty && followedCentresIds.isEmpty
         if shouldDismiss {
             delegate?.dismissViewController()
             return
         }
-
-        super.reloadTableView(animated: animated)
     }
 
     override internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
