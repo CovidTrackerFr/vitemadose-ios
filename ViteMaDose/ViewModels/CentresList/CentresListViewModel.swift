@@ -10,7 +10,7 @@ import UIKit
 import PhoneNumberKit
 import PromiseKit
 import MapKit
-import Firebase
+import Haptica
 
 // MARK: - Centres List ViewModel
 
@@ -27,6 +27,10 @@ class CentresListViewModel {
 
     internal var shouldFooterText: Bool {
         return true
+    }
+
+    internal var shouldAnimateReload: Bool {
+        return false
     }
 
     private var isLoading = false {
@@ -87,7 +91,7 @@ class CentresListViewModel {
         cells.append(.title(centresListTitleViewData))
 
         if searchResult?.coordinates != nil {
-            let viewData = CentresSortOptionsCellViewData(sortOption: userDefaults.centresListSortOption)
+            let viewData = CentresSortOptionsCellViewData(sortOption: sortOption)
             cells.append(.sort(viewData))
         }
 
@@ -158,7 +162,7 @@ class CentresListViewModel {
         }
     }
 
-    // MARK: - Ovveridables
+    // MARK: - Overridables
 
     internal func reloadTableView(animated: Bool) {
         let availableCentres: [VaccinationCentre]
@@ -175,7 +179,7 @@ class CentresListViewModel {
 
         // Merge arrays and make sure there is no centre with duplicate ids
         let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
-        vaccinationCentresList = getVaccinationCentres(for: allCentres, sortOption: userDefaults.centresListSortOption, searchResult: searchResult)
+        vaccinationCentresList = getVaccinationCentres(for: allCentres)
 
         let headingCells = createHeadingCells(
             appointmentsCount: allCentres.allAppointmentsCount,
@@ -186,8 +190,10 @@ class CentresListViewModel {
         let footerText = locationVaccinationCentres.first?.formattedLastUpdated
 
         trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
-        self.delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
-        self.delegate?.reloadTableViewFooter(with: self.shouldFooterText ? footerText : nil)
+        DispatchQueue.main.async {
+            self.delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
+            self.delegate?.reloadTableViewFooter(with: self.shouldFooterText ? footerText : nil)
+        }
     }
 
     /// Creates a list of vaccination centre sorted by distance
@@ -195,11 +201,7 @@ class CentresListViewModel {
     /// The maximum distance value is set in our remote config file
     /// - Parameter centres: a list of vaccination centres returned by the API
     /// - Returns: array of filtered and sorted centres
-    internal func getVaccinationCentres(
-        for centres: [VaccinationCentre],
-        sortOption: CentresListSortOption,
-        searchResult: LocationSearchResult?
-    ) -> [VaccinationCentre] {
+    internal func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
         // If search result has no coordinates (department), sort options are not displayed and
         // centres are ordered by appointment time
         guard searchResult?.coordinates != nil else {
@@ -238,7 +240,7 @@ class CentresListViewModel {
             appointmentsCount: availableCentres.allAppointmentsCount,
             availableCentresCount: availableCentres.count,
             unAvailableCentresCount: unavailableCentres.count,
-            sortOption: userDefaults.centresListSortOption
+            sortOption: sortOption
         )
     }
 
@@ -293,11 +295,14 @@ extension CentresListViewModel: CentresListViewModelProvider {
         else {
             return
         }
-        let followedCentre = FollowedCentre(id: internalId, notificationsType: notificationsType)
+        let followedCentre = FollowedCentre(
+            id: internalId,
+            notificationsType: notificationsType
+        )
 
         if case .none = followedCentre.notificationsType {
             userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
-            reloadTableView(animated: true)
+            reloadTableView(animated: shouldAnimateReload)
             return
         }
 
@@ -315,7 +320,8 @@ extension CentresListViewModel: CentresListViewModelProvider {
             switch result {
             case .success:
                 self.userDefaults.addFollowedCentre(followedCentre, forDepartment: departmentCode)
-                self.reloadTableView(animated: true)
+                self.reloadTableView(animated: self.shouldAnimateReload)
+                Haptic.notification(.success).generate()
             case let .failure(error):
                 self.delegate?.presentLoadError(error)
             }
@@ -337,7 +343,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
 
         if case .none = followedCentre.notificationsType {
             userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
-            reloadTableView(animated: true)
+            reloadTableView(animated: shouldAnimateReload)
             return
         }
 
@@ -355,7 +361,8 @@ extension CentresListViewModel: CentresListViewModelProvider {
             switch result {
             case .success:
                 self.userDefaults.removedFollowedCentre(internalId, forDepartment: departmentCode)
-                self.reloadTableView(animated: true)
+                self.reloadTableView(animated: self.shouldAnimateReload)
+                Haptic.impact(.medium).generate()
             case let .failure(error):
                 self.delegate?.presentLoadError(error)
             }

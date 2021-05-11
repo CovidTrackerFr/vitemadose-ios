@@ -147,11 +147,6 @@ extension CentresListViewController: CentresListViewModelDelegate {
 
         dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: animated)
-
-        // FIXME: Find out why the reload is broken when list contains only one centre
-        if centresCells.count == 1 {
-            tableView.reloadData()
-        }
     }
 
     func reloadTableViewFooter(with text: String?) {
@@ -306,14 +301,12 @@ extension CentresListViewController: UITableViewDelegate {
             self?.viewModel.requestNotificationsAuthorizationIfNeeded {
                 self?.viewModel.followCentre(at: indexPath, notificationsType: .all)
             }
-            Haptic.notification(.success).generate()
         }
 
         let chronoDosesNotificationsAction = UIAlertAction(title: "Chronodoses uniquement", style: .default) { [weak self] _ in
             self?.viewModel.requestNotificationsAuthorizationIfNeeded {
                 self?.viewModel.followCentre(at: indexPath, notificationsType: .chronodoses)
             }
-            Haptic.notification(.success).generate()
         }
 
         let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
@@ -335,7 +328,6 @@ extension CentresListViewController: UITableViewDelegate {
 
         let unfollowAction = UIAlertAction(title: Localization.Location.stop_following_button, style: .destructive) { [weak self] _ in
             self?.viewModel.unfollowCentre(at: indexPath)
-            Haptic.impact(.medium).generate()
         }
 
         let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)

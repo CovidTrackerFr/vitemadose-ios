@@ -9,6 +9,10 @@ import Foundation
 
 final class FollowedCentresViewModel: CentresListViewModel {
 
+    override var shouldAnimateReload: Bool {
+        return false
+    }
+
     override var shouldFooterText: Bool {
         return false
     }
@@ -17,15 +21,22 @@ final class FollowedCentresViewModel: CentresListViewModel {
         return .fastest
     }
 
+    private var followedCentresIds: [String] {
+        return super.userDefaults.followedCentres.flatMap({ $0.value.map(\.id) })
+    }
+
     init() {
         super.init(searchResult: nil)
     }
 
     override func reloadTableView(animated: Bool) {
-        super.reloadTableView(animated: animated)
-        if vaccinationCentresList.isEmpty {
+        let shouldDismiss = vaccinationCentresList.isEmpty && followedCentresIds.isEmpty
+        if shouldDismiss {
             delegate?.dismissViewController()
+            return
         }
+
+        super.reloadTableView(animated: animated)
     }
 
     override internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
@@ -37,14 +48,7 @@ final class FollowedCentresViewModel: CentresListViewModel {
         return [.title(mainTitleViewData)]
     }
 
-    override internal func getVaccinationCentres(
-        for centres: [VaccinationCentre],
-        sortOption: CentresListSortOption,
-        searchResult: LocationSearchResult?
-    ) -> [VaccinationCentre] {
-        let followedCentresIds = userDefaults.followedCentres.flatMap({ (element) in
-            return element.value.map(\.id)
-        })
+    override internal func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
         return centres
             .filter({ followedCentresIds.contains($0.id) })
             .sorted(by: VaccinationCentre.sortedByAppointment)
