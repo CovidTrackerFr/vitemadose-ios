@@ -11,7 +11,7 @@ extension UserDefaults {
 
     // MARK: - Setup
 
-    static let userDefaultSuiteName = "app.vitemadose"
+    static let userDefaultSuiteName = "app.vitemadose.userdefaults"
     static let encoder = JSONEncoder()
 
     static let shared: UserDefaults = {
@@ -68,7 +68,7 @@ extension UserDefaults {
     var centresListSortOption: CentresListSortOption {
         get {
             guard let savedIndex = value(forKey: Key.centresListSortOption.rawValue) as? Int else {
-                return .closest
+                return .fastest
             }
             return CentresListSortOption(savedIndex)
         }
