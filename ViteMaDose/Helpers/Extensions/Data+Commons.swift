@@ -12,7 +12,6 @@ extension Data {
     /// - Parameter type: Object type
     func decode<T: Codable>(_ type: T.Type) -> Result<T, Error> {
         let jsonDecoder = JSONDecoder()
-        
         do {
             let decoded = try jsonDecoder.decode(T.self, from: self)
             return .success(decoded)

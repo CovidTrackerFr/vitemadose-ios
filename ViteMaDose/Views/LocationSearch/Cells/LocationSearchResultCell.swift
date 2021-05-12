@@ -10,13 +10,13 @@ import UIKit
 protocol LocationSearchResultCellViewDataProvider {
     var name: String { get }
     var postCode: String? { get }
-    var departmentCode: String { get }
+    var departmentCode: String? { get }
 }
 
 struct LocationSearchResultCellViewData: LocationSearchResultCellViewDataProvider, Hashable {
     let name: String
     let postCode: String?
-    let departmentCode: String
+    let departmentCode: String?
 }
 
 class LocationSearchResultCell: UITableViewCell {

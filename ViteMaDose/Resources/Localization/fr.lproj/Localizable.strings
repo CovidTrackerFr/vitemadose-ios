@@ -24,9 +24,10 @@
 "location_search.search_placeholder" = "Commune, Code Postal, Département...";
 // Locations
 "locations.list_title" = "Liste des lieux";
+"locations.followed_list_title" = "Liste de vos lieux suivis";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
-"locations.sort_option.fastest" = "Disponible au plus vite";
+"locations.sort_option.fastest" = "Au plus vite";
 // Location
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";
@@ -37,6 +38,17 @@
 "location.unavailable_date" = "Date indisponible";
 "location.unavailable_name" = "Nom du centre indisponible";
 "location.unavailable_address" = "Adresse indisponible";
+// Location start following
+"location.start_following_title" = "Recevoir les notifications ?";
+"location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilité ou seulement lorsque des Chronodoses sont disponibles pour ce centre.";
+"location.follow_action_title" = "Suivre";
+"location.notify_button" = "Être notifié";
+"location.follow_button" = "Suivre sans notifications";
+// Location stop following
+"location.stop_following_title" = "Ne plus suivre ce centre ?";
+"location.stop_following_message" = "Si vous avez activé les notifications pour ce centre, elles seront désactivées.";
+"location.unfollow_action_title" = "Ne plus suivre";
+"location.stop_following_button" = "Ne plus suivre";
 // Error
 "error.generic.title" = "Oups! Nous avons des difficultés techniques...";
 "error.generic.retry_button" = "Réessayer";

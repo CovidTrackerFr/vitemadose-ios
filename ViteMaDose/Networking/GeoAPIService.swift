@@ -78,7 +78,7 @@ protocol GeoAPIServiceProvider: AnyObject {
     func fetchCities(byName name: String, completion: @escaping (Cities) -> Void)
 }
 
-class GeoAPIService: GeoAPIServiceProvider {
+final class GeoAPIService: GeoAPIServiceProvider {
     let provider: MoyaProvider<GeoAPI>
 
     init(provider: MoyaProvider<GeoAPI> = MoyaProvider<GeoAPI>()) {
