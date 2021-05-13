@@ -111,15 +111,18 @@ extension VaccinationCentre {
     }
 
     var nextAppointmentDate: Date? {
-        return prochainRdv?.toDate(nil, region: AppConstant.franceRegion)?.date ?? prochainRdv?.toISODate(nil, region: AppConstant.franceRegion)?.date
+        return prochainRdv?.toDate(nil, region: Region.current)?.date ?? prochainRdv?.toISODate(nil, region: Region.current)?.date
     }
 
     var nextAppointmentDay: String? {
-        return prochainRdv?.toString(with: .date(.long), region: AppConstant.franceRegion)
+        // Don't display year
+        // [TODO] Technically an en_US locale should do "MMM dd" instead
+        return prochainRdv?.toString(with: .custom("dd MMM"), region: Region.current)
     }
 
     var nextAppointmentTime: String? {
-        return prochainRdv?.toString(with: .time(.short), region: AppConstant.franceRegion)
+        // Avoid AM/PM in English locale
+        return prochainRdv?.toString(with: .custom("HH:mm"), region: Region.current)
     }
 
     var appointmentUrl: URL? {
@@ -230,7 +233,7 @@ struct VaccinationCentres: Codable, Hashable {
     }
 
     var formattedLastUpdated: String? {
-        guard let lastUpdateDate = lastUpdated?.toDate(nil, region: AppConstant.franceRegion) else {
+        guard let lastUpdateDate = lastUpdated?.toDate(nil, region: Region.current) else {
             return nil
         }
 

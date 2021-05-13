@@ -31,7 +31,7 @@ enum Localization {
     }
 
     enum LocationSearch {
-        static let search_placeholder = "Commune, Code Postal, Département...".localized
+        static let search_placeholder = "location_search.search_placeholder".localized
 
         enum MainTitle {
             static let title = "location_search.main_title".localized
