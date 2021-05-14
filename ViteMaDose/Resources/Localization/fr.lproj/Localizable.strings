@@ -56,7 +56,14 @@
 
 // MARK: - Accessibility (Voice Over)
 
-"a11y.home_screen.search_field" = "Tappez deux fois pour sélectionner ou rechercher un lieux en France.";
-"a11y.home_screen.recent_searches" = "Recherches récentes.";
-"a11y.home_screen.see_department_results" = "Voir les lieux dans le département ";
-"a11y.home_screen.display_places_on_map" = "Tappez deux fois pour afficher la carte via le site web de Covid Tracker";
+"a11y.voiceover.home_screen.search_field" = "Tappez deux fois pour sélectionner ou rechercher un lieux en France.";
+"a11y.voiceover.home_screen.recent_searches" = "Recherches récentes.";
+"a11y.voiceover.home_screen.see_department_results" = "Voir les lieux dans le département ";
+"a11y.voiceover.home_screen.display_places_on_map" = "Tappez deux fois pour afficher la carte via le site web de Covid Tracker";
+"a11y.voiceover.navigation.back_button" = "Retour à l'écran principal";
+"a11y.voiceover.actions.call_button" = "Tappez deux fois pour appeler à ce numéro";
+"a11y.voiceover.actions.booking_button" = "Tappez deux fois pour prendre rendez-vous par site web";
+"a11y.voiceover.datetime.hour" = "heure";
+"a11y.voiceover.details.call" = "Appeler au ";
+"a11y.voiceover.details.vaccine" = "Vaccin de modèle ";
+"a11y.voiceover.details.to_use_with_platform" = "à utiliser avec la plateforme ";

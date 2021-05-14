@@ -36,6 +36,7 @@ struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
+    let partnerName: String?
 }
 
 // MARK: - CentreCell
@@ -107,11 +108,13 @@ final class CentreCell: UITableViewCell {
         configureBookButton(viewData)
         configurePhoneNumberView(viewData)
 
-        dateLabel.attributedText = createDateText(
+        let dateText = createDateText(
             dayText: viewData.dayText,
             timeText: viewData.timeText,
             isAvailable: viewData.isAvailable
         )
+        dateLabel.attributedText = dateText
+        dateLabel.accessibilityLabel = dateText.string + " " + Localization.A11y.VoiceOver.DateTime.hour
 
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
@@ -130,9 +133,14 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
-
+        if let vaccineName = viewData.vaccineTypesText {
+            vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine + " " + vaccineName
+        }
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo)
+        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
+        self.accessibilityElements = [
+            dateLabel, nameLabel, phoneButton, vaccineTypesLabel, bookingButton, appointmentsLabel
+        ]
     }
 
     override func prepareForReuse() {
@@ -200,7 +208,8 @@ final class CentreCell: UITableViewCell {
 
     private func configureAppointmentsLabel(
         appointmentsCount: Int?,
-        partnerLogo: UIImage?
+        partnerLogo: UIImage?,
+        partnerName: String?
     ) {
         let attributes = [
             NSAttributedString.Key.font: Constant.appointmentsLabelFont,
@@ -226,6 +235,9 @@ final class CentreCell: UITableViewCell {
         appointmentsAndLogoString.append(logoString)
 
         appointmentsLabel.attributedText = appointmentsAndLogoString
+        appointmentsLabel.isAccessibilityElement = true
+        appointmentsLabel.accessibilityLabel = appointmentsText + Localization.A11y.VoiceOver.Details.to_use_with_platform + " " + (partnerName ?? "")
+        
     }
 
     private func configurePhoneNumberView(_ viewData: CentreViewData) {
@@ -252,6 +264,8 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapPhoneNumber),
             for: .touchUpInside
         )
+        phoneButton.accessibilityLabel = Localization.A11y.VoiceOver.Details.call + " " + phoneButtonAttributedText.string
+        phoneButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.call_button
     }
 
     private func configureBookButton(_ viewData: CentreViewData) {
@@ -260,6 +274,7 @@ final class CentreCell: UITableViewCell {
             systemName: "arrow.up.right",
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
         )
+        iconImage?.isAccessibilityElement = false
         imageAttachment.image = iconImage?.withTintColor(.white, renderingMode: .alwaysOriginal)
 
         let bookingButtonAttributedText = NSMutableAttributedString(
@@ -280,6 +295,8 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapBookButton),
             for: .touchUpInside
         )
+        bookingButton.accessibilityLabel = viewData.bookingButtonText
+        bookingButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.booking_button
     }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {

@@ -86,10 +86,25 @@ enum Localization {
     enum A11y {
         enum VoiceOver {
             enum HomeScreen {
-                static let search_field = "a11y.home_screen.search_field".localized
-                static let recent_searches = "a11y.home_screen.recent_searches".localized
-                static let see_department_results = "a11y.home_screen.see_department_results".localized
-                static let display_places_on_map = "a11y.home_screen.display_places_on_map".localized
+                static let search_field = "a11y.voiceover.home_screen.search_field".localized
+                static let recent_searches = "a11y.voiceover.home_screen.recent_searches".localized
+                static let see_department_results = "a11y.voiceover.home_screen.see_department_results".localized
+                static let display_places_on_map = "a11y.voiceover.home_screen.display_places_on_map".localized
+            }
+            enum Navigation {
+                static let back_button = "a11y.voiceover.navigation.back_button".localized
+            }
+            enum Actions {
+                static let call_button = "a11y.voiceover.actions.call_button".localized
+                static let booking_button = "a11y.voiceover.actions.booking_button".localized
+            }
+            enum DateTime {
+                static let hour = "a11y.voiceover.datetime.hour".localized
+            }
+            enum Details {
+                static let call = "a11y.voiceover.details.call".localized
+                static let vaccine = "a11y.voiceover.details.vaccine".localized
+                static let to_use_with_platform = "a11y.voiceover.details.to_use_with_platform".localized
             }
         }
     }
