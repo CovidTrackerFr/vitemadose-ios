@@ -24,10 +24,13 @@
 "location_search.search_placeholder" = "Commune, Postal Code, Department...";
 // Locations
 "locations.list_title" = "List of locations";
+"locations.followed_list_button" = "My locations";
+"locations.followed_list_title" = "My followed locations";
 "locations.no_results" = "We have not found any appointments for %@";
 "locations.sort_option.closest" = "Closest";
 "locations.sort_option.fastest" = "Available soonest";
 // Location
+"location.chronodoses_available" = "Chronodoses Available";
 "location.date" = "On %@ at %@";
 "location.book_button" = "Book an appointment";
 "location.verify_button" = "Check with this location";
@@ -37,6 +40,19 @@
 "location.unavailable_date" = "Date unavailable";
 "location.unavailable_name" = "Name of location unavailable";
 "location.unavailable_address" = "Address unavailable";
+// Location start following
+"location.start_following_title" = "Start following?";
+"location.start_following_message" = "You can choose to be notified for each change in availability or only when Chronodoses become available at this center.";
+"location.start_following_button_all" = "All notifications";
+"location.start_following_button_chronodoses" = "Chronodoses only";
+"location.follow_action_title" = "Follow";
+"location.notify_button" = "Be Notified";
+"location.follow_button" = "Follow without notifications";
+// Location stop following
+"location.stop_following_title" = "Stop following this center?";
+"location.stop_following_message" = "If you have activated notifications for this center, they will be deactivated.";
+"location.unfollow_action_title" = "Stop Following?";
+"location.stop_following_button" = "Unfollow";
 // Error
 "error.generic.title" = "Oops! We're having some technical difficulties...";
 "error.generic.retry_button" = "Retry";
@@ -44,3 +60,13 @@
 "error.generic.default_message" = "If the problem persists, please contact the team at https://covidtracker.fr/contact";
 "error.network.server_error" = "We've encountered a server error. Please try again later.";
 "error.network.offline" = "You appear to be offline.";
+// Onboarding
+"onboarding.page_1.title" = "Vite Ma Dose has many new features!";
+"onboarding.page_1.description" = "Notifications allow you to never miss a new dose, and Chronodoses allow anyone to find an appointment in the next 24 hours without any restrictions.";
+"onboarding.page_1.button" = "Next";
+"onboarding.page_2.title" = "Notifications";
+"onboarding.page_2.description" = "To never miss a vaccination availability, we have added a notification system! To follow a center, it's as simple as pressing the bell icon. You will recieve an alert if we detect any openings.";
+"onboarding.page_2.button" = "Next";
+"onboarding.page_3.title" = "Chronodoses";
+"onboarding.page_3.description" = "Starting 12 May, you can reserve a vaccination appointment the same day or the next day, without restrictions. We call these Chronodoses, and they are denoted by lightning and a red band.";
+"onboarding.page_3.button" = "Thank You!";

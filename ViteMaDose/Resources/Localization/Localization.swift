@@ -42,6 +42,7 @@ enum Localization {
     enum Locations {
         static let list_title = "locations.list_title".localized
         static let followed_list_title = "locations.followed_list_title".localized
+        static let followed_list_button = "locations.followed_list_button".localized
         static let no_results = "locations.no_results".localized
         static let available_locations = "locations.available_locations".localized
         static let all_locations = "locations.all_locations".localized
@@ -59,6 +60,7 @@ enum Localization {
     }
 
     enum Location {
+        static let chronodoses_available = "location.chronodoses_available".localized
         static let date = "location.date".localized
         static let book_button = "location.book_button".localized
         static let verify_button = "location.verify_button".localized
@@ -70,6 +72,8 @@ enum Localization {
         static let unavailable_address = "location.unavailable_address".localized
         static let start_following_title = "location.start_following_title".localized
         static let start_following_message = "location.start_following_message".localized
+        static let start_following_button_all = "location.start_following_button_all".localized
+        static let start_following_button_chronodoses = "location.start_following_button_chronodoses".localized
         static let follow_action_title = "location.follow_action_title".localized
         static let notify_button = "location.notify_button".localized
         static let follow_button = "location.follow_button".localized
@@ -90,6 +94,26 @@ enum Localization {
         enum Network {
             static let server_error = "error.network.server_error".localized
             static let offline = "error.network.offline".localized
+        }
+    }
+    
+    enum Onboarding {
+        enum Page1 {
+            static let title = "onboarding.page_1.title".localized
+            static let description = "onboarding.page_1.description".localized
+            static let button = "onboarding.page_1.button".localized
+        }
+        
+        enum Page2 {
+            static let title = "onboarding.page_2.title".localized
+            static let description = "onboarding.page_2.description".localized
+            static let button = "onboarding.page_2.button".localized
+        }
+        
+        enum Page3 {
+            static let title = "onboarding.page_3.title".localized
+            static let description = "onboarding.page_3.description".localized
+            static let button = "onboarding.page_3.button".localized
         }
     }
 }
