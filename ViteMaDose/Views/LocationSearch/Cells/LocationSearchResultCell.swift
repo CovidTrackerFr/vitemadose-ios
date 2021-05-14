@@ -51,6 +51,9 @@ class LocationSearchResultCell: UITableViewCell {
 
         codeLabel.font = Constant.labelsFont
         nameLabel.font = Constant.labelsFont
+        
+        self.accessibilityTraits = .button
+        self.accessibilityLabel = Localization.A11y.VoiceOver.Locations.see_places.format(viewData.name)
     }
 
     override func prepareForReuse() {

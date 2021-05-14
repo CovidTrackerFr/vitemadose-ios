@@ -90,8 +90,6 @@
 	</dict>
 	<key>home.recent_search</key>
 	<dict>
-		<key>New item</key>
-		<string></string>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@count@</string>
 		<key>count</key>

@@ -11,10 +11,14 @@ import PhoneNumberKit
 import PromiseKit
 import MapKit
 
+// MARK: - Centres List Section
+
 enum CentresListSection: CaseIterable {
     case heading
     case centres
 }
+
+// MARK: - Centre List Cell
 
 enum CentresListCell: Hashable {
     case title(HomeTitleCellViewData)
@@ -22,6 +26,8 @@ enum CentresListCell: Hashable {
     case centre(CentreViewData)
     case sort(CentresSortOptionsCellViewData)
 }
+
+// MARK: - Centres List Sort Option
 
 enum CentresListSortOption: Equatable {
     case closest
@@ -49,6 +55,8 @@ enum CentresListSortOption: Equatable {
     }
 }
 
+// MARK: - Centres List View Model Provier
+
 protocol CentresListViewModelProvider {
     var searchResult: LocationSearchResult { get }
     func load(animated: Bool)
@@ -57,6 +65,8 @@ protocol CentresListViewModelProvider {
     func phoneNumberLink(at indexPath: IndexPath) -> URL?
     func bookingLink(at indexPath: IndexPath) -> URL?
 }
+
+// MARK: - Centres List View Model Delegate
 
 protocol CentresListViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
@@ -70,7 +80,7 @@ protocol CentresListViewModelDelegate: AnyObject {
     func reloadTableViewFooter(with text: String?)
 }
 
-// MARK: - Centres List ViewModel
+// MARK: - Centres List View Model
 
 class CentresListViewModel {
     private let apiService: BaseAPIServiceProvider
@@ -223,7 +233,8 @@ class CentresListViewModel {
             vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
             appointmentsCount: centre.appointmentCount,
             isAvailable: centre.isAvailable,
-            partnerLogo: partnerLogo
+            partnerLogo: partnerLogo,
+            partnerName: centre.plateforme
         )
     }
 
@@ -232,7 +243,7 @@ class CentresListViewModel {
     }
 }
 
-// MARK: - Centres List ViewModelProvider
+// MARK: - Centres List View Model Provider
 
 extension CentresListViewModel: CentresListViewModelProvider {
 

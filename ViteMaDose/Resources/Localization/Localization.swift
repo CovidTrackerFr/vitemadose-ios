@@ -85,15 +85,6 @@ enum Localization {
 
     enum A11y {
         enum VoiceOver {
-            enum HomeScreen {
-                static let display_places_on_map = "a11y.voiceover.home_screen.display_places_on_map".localized
-                static let recent_searches = "a11y.voiceover.home_screen.recent_searches".localized
-                static let search_field = "a11y.voiceover.home_screen.search_field".localized
-                static let see_department_results = "a11y.voiceover.home_screen.see_department_results".localized
-            }
-            enum Navigation {
-                static let back_button = "a11y.voiceover.navigation.back_button".localized
-            }
             enum Actions {
                 static let booking_button = "a11y.voiceover.actions.booking_button".localized
                 static let call_button = "a11y.voiceover.actions.call_button".localized
@@ -103,6 +94,19 @@ enum Localization {
                 static let from = "a11y.voiceover.details.from".localized
                 static let to_use_with_platform = "a11y.voiceover.details.to_use_with_platform".localized
                 static let vaccine = "a11y.voiceover.details.vaccine".localized
+            }
+            enum HomeScreen {
+                static let display_places_on_map = "a11y.voiceover.home_screen.display_places_on_map".localized
+                static let recent_searches = "a11y.voiceover.home_screen.recent_searches".localized
+                static let search_field = "a11y.voiceover.home_screen.search_field".localized
+                static let see_department_results = "a11y.voiceover.home_screen.see_department_results".localized
+            }
+            enum Locations {
+                static let search = "a11y.voiceover.locations.search".localized
+                static let see_places = "a11y.voiceover.locations.see_places".localized
+            }
+            enum Navigation {
+                static let back_button = "a11y.voiceover.navigation.back_button".localized
             }
         }
     }

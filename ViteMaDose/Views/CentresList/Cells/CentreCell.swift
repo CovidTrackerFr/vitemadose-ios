@@ -140,7 +140,7 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
         if let vaccineName = viewData.vaccineTypesText {
-            vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine + " " + vaccineName
+            vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
         }
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
