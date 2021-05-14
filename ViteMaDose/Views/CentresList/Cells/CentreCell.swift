@@ -114,8 +114,14 @@ final class CentreCell: UITableViewCell {
             isAvailable: viewData.isAvailable
         )
         dateLabel.attributedText = dateText
-        dateLabel.accessibilityLabel = dateText.string + " " + Localization.A11y.VoiceOver.DateTime.hour
 
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let date = dateFormatter.date(from: viewData.timeText!)
+        if let dayText = viewData.dayText, let dayDate = date {
+            let hourComponents = Calendar.current.dateComponents([.hour, .minute], from: dayDate)
+            dateLabel.accessibilityLabel = dayText + " " + Localization.A11y.VoiceOver.Details.from + DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut)!
+        }
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor

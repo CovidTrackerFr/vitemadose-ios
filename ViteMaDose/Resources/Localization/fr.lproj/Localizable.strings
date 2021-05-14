@@ -63,7 +63,7 @@
 "a11y.voiceover.navigation.back_button" = "Retour à l'écran principal";
 "a11y.voiceover.actions.call_button" = "Tappez deux fois pour appeler à ce numéro";
 "a11y.voiceover.actions.booking_button" = "Tappez deux fois pour prendre rendez-vous par site web";
-"a11y.voiceover.datetime.hour" = "heure";
+"a11y.voiceover.details.from" = "à partir de";
 "a11y.voiceover.details.call" = "Appeler au ";
 "a11y.voiceover.details.vaccine" = "Vaccin de modèle ";
 "a11y.voiceover.details.to_use_with_platform" = "à utiliser avec la plateforme ";
