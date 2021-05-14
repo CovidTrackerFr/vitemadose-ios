@@ -23,12 +23,17 @@ class HomeSearchResultCell: LocationSearchResultCell {
 
      func configure(with viewData: HomeSearchResultCellViewDataProvider) {
         super.configure(with: viewData)
-
         titleLabel.isHidden = viewData.titleText == nil
         titleLabel.text = viewData.titleText
         titleLabel.font = .rounded(ofSize: 14, weight: .semibold)
         titleLabel.textColor = .secondaryLabel
-
+        if viewData.titleText != nil {
+            self.accessibilityLabel = Localization.A11y.VoiceOver.HomeScreen.recent_searches
+                + " "
+                + Localization.A11y.VoiceOver.HomeScreen.see_department_results
+                + " "
+                + viewData.name
+        }
     }
 
     override func prepareForReuse() {

@@ -56,4 +56,6 @@
 
 // MARK: - Accessibility (Voice Over)
 
-"a11y.home_screen.search_field" = "Tappez deux fois pour sélectionner ou rechercher un lieux en France";
+"a11y.home_screen.search_field" = "Tappez deux fois pour sélectionner ou rechercher un lieux en France.";
+"a11y.home_screen.recent_searches" = "Recherches récentes.";
+"a11y.home_screen.see_department_results" =  "Voir les lieux dans le département ";
