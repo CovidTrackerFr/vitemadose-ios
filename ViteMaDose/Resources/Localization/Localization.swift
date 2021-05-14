@@ -89,6 +89,7 @@ enum Localization {
                 static let search_field = "a11y.home_screen.search_field".localized
                 static let recent_searches = "a11y.home_screen.recent_searches".localized
                 static let see_department_results = "a11y.home_screen.see_department_results".localized
+                static let display_places_on_map = "a11y.home_screen.display_places_on_map".localized
             }
         }
     }
