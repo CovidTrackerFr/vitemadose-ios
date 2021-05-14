@@ -6,7 +6,8 @@
   
 */
 
-// Home
+// MARK: - Home
+
 "home.main_title" = "Trouvez une dose de vaccin facilement et rapidement";
 "home.main_title.first_highlighted_text" = "facilement";
 "home.main_title.second_highlighted_text" = "rapidement";
@@ -18,16 +19,22 @@
 "home.stats.all_availabilities" = "Créneaux disponibles";
 "home.stats.locations_with_availabilities" = "Lieux avec rendez-vous disponibles";
 "home.stats.available_locations_percentage" = "De lieux avec des disponibilités";
-// Department Selection
+
+// MARK: - Department Selection
+
 "location_search.main_title" = "Sélectionnez ou recherchez un lieu en France";
 "location_search.main_title.highlighted_text" = "France";
 "location_search.search_placeholder" = "Commune, Code Postal, Département...";
-// Locations
+
+// MARK: - Locations
+
 "locations.list_title" = "Liste des lieux";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
 "locations.sort_option.fastest" = "Disponible au plus vite";
-// Location
+
+// MARK: - Location
+
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";
 "location.verify_button" = "Vérifier ce lieu";
@@ -37,10 +44,16 @@
 "location.unavailable_date" = "Date indisponible";
 "location.unavailable_name" = "Nom du centre indisponible";
 "location.unavailable_address" = "Adresse indisponible";
-// Error
+
+// MARK: - Error
+
 "error.generic.title" = "Oups! Nous avons des difficultés techniques...";
 "error.generic.retry_button" = "Réessayer";
 "error.generic.cancel_button" = "Annuler";
 "error.generic.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
 "error.network.server_error" = "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard.";
 "error.network.offline" = "Il semblerait que vous soyez hors ligne.";
+
+// MARK: - Accessibility (Voice Over)
+
+"a11y.home_screen.search_field" = "Tappez deux fois pour sélectionner ou rechercher un lieux en France";

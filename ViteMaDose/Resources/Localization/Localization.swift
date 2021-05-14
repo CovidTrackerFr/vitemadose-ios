@@ -82,4 +82,12 @@ enum Localization {
             static let offline = "error.network.offline".localized
         }
     }
+    
+    enum A11y {
+        enum VoiceOver {
+            enum HomeScreen {
+                static let search_field = "a11y.home_screen.search_field".localized
+            }
+        }
+    }
 }
