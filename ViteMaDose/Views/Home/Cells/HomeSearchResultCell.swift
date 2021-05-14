@@ -15,10 +15,10 @@ struct HomeSearchResultCellViewData: HomeSearchResultCellViewDataProvider, Hasha
     let titleText: String?
     let name: String
     let postCode: String?
-    let departmentCode: String
+    let departmentCode: String?
 }
 
-class HomeSearchResultCell: LocationSearchResultCell {
+final class HomeSearchResultCell: LocationSearchResultCell {
     @IBOutlet var titleLabel: UILabel!
 
      func configure(with viewData: HomeSearchResultCellViewDataProvider) {

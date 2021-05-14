@@ -11,14 +11,14 @@ extension UserDefaults {
 
     // MARK: - Setup
 
-    static let userDefaultSuiteName = "app.vitemadose"
+    static let userDefaultSuiteName = "app.vitemadose.userdefaults"
     static let encoder = JSONEncoder()
 
-    static var shared: UserDefaults {
+    static let shared: UserDefaults = {
         let combined = UserDefaults.standard
         combined.addSuite(named: userDefaultSuiteName)
         return combined
-    }
+    }()
 
     /// Testing purposes only
     /// - Returns: Cleared UserDefault instance
@@ -35,14 +35,16 @@ extension UserDefaults {
         return defaults
     }
 
-    // MARK: Keys
+    // MARK: - Keys
 
     private enum Key: String {
         case lastSearchResults
         case centresListSortOption
+        case followedCentres
+        case didPresentAppOnboarding
     }
 
-    // MARK: Last Selected Search Results
+    // MARK: - Last Selected Search Results
 
     var lastSearchResults: [LocationSearchResult] {
         get {
@@ -61,10 +63,12 @@ extension UserDefaults {
         }
     }
 
+    // MARK: - Centres List Sort Option
+
     var centresListSortOption: CentresListSortOption {
         get {
             guard let savedIndex = value(forKey: Key.centresListSortOption.rawValue) as? Int else {
-                return .closest
+                return .fastest
             }
             return CentresListSortOption(savedIndex)
         }
@@ -73,4 +77,62 @@ extension UserDefaults {
         }
     }
 
+    // MARK: - Followed Centres
+
+    var followedCentres: [String: Set<FollowedCentre>] {
+        get {
+            let followedCentresData = object(forKey: Key.followedCentres.rawValue) as? Data
+            guard case let .success(followedCentres) = followedCentresData?.decode([String: Set<FollowedCentre>].self) else {
+                return [:]
+            }
+            return followedCentres
+        }
+        set {
+            guard let encoded = try? Self.encoder.encode(newValue) else {
+                return
+            }
+            setValue(encoded, forKey: Key.followedCentres.rawValue)
+        }
+    }
+
+    // MARK: - Did Present App Onboarding
+
+    var didPresentAppOnboarding: Bool {
+        get {
+            let rawValue = bool(forKey: Key.didPresentAppOnboarding.rawValue)
+            return rawValue
+        }
+        set {
+            setValue(newValue, forKey: Key.didPresentAppOnboarding.rawValue)
+        }
+    }
+
+    // MARK: - Helpers
+
+    var hasFollowedCentres: Bool {
+        return !followedCentres.values.map(\.isEmpty).allSatisfy({ $0 == true })
+    }
+
+    func followedCentre(forDepartment departmentCode: String, id: String) -> FollowedCentre? {
+        return followedCentres[departmentCode]?.first(where: { $0.id == id })
+    }
+
+    func addFollowedCentre(_ centre: FollowedCentre, forDepartment departmentCode: String) {
+        var updatedCentres = followedCentres
+        let centresForCode = updatedCentres[departmentCode] ?? []
+        updatedCentres[departmentCode] = centresForCode.union([centre])
+        followedCentres = updatedCentres
+    }
+
+    func removedFollowedCentre(_ centreId: String, forDepartment departmentCode: String) {
+        var updatedCentres = followedCentres
+        if let centre = updatedCentres[departmentCode]?.first(where: { $0.id == centreId }) {
+            updatedCentres[departmentCode]?.remove(centre)
+        }
+        followedCentres = updatedCentres
+    }
+
+    func isCentreFollowed(_ centreId: String, forDepartment departmentCode: String) -> Bool {
+        return followedCentres[departmentCode]?.first(where: { $0.id == centreId }) != nil
+    }
 }

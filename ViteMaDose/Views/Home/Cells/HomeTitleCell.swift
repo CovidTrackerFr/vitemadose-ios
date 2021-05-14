@@ -14,7 +14,7 @@ protocol HomeTitleCellViewDataProvider {
     var bottomMargin: CGFloat { get }
 }
 
-struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable {
+public struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable {
 
     let titleText: NSMutableAttributedString
     let subTitleText: NSMutableAttributedString?

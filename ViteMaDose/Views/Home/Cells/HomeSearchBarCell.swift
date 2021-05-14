@@ -15,7 +15,7 @@ struct HomeSearchBarCellViewData: HomeSearchBarCellViewDataProvider, Hashable {
     let searchBarText = Localization.Home.search_placeholder
 }
 
-class HomeSearchBarCell: UITableViewCell {
+final class HomeSearchBarCell: UITableViewCell {
 
     @IBOutlet private var searchBarView: UIView!
     @IBOutlet private var searchBarTitle: UILabel!

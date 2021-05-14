@@ -11,10 +11,9 @@ import MapKit
 import Haptica
 
 class CentresListViewController: UIViewController, Storyboarded {
-
     @IBOutlet private var tableView: UITableView!
-    var viewModel: CentresListViewModel!
 
+    var viewModel: CentresListViewModelProvider!
     private typealias Snapshot = NSDiffableDataSourceSnapshot<CentresListSection, CentresListCell>
 
     private lazy var refreshControl: UIRefreshControl = {
@@ -27,6 +26,14 @@ class CentresListViewController: UIViewController, Storyboarded {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.startAnimating()
         return activityIndicator
+    }()
+
+    private let footerView: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .tertiaryLabel
+        label.textAlignment = .center
+        return label
     }()
 
     private lazy var dataSource = makeDataSource()
@@ -111,12 +118,13 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.backgroundColor = .athensGray
         tableView.contentInset.top = -10
 
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableView.automaticDimension
 
         tableView.refreshControl = refreshControl
         tableView.backgroundView = activityIndicator
         tableView.contentInset.bottom = 10
+        tableView.tableFooterView = footerView
 
         tableView.register(cellType: CentresTitleCell.self)
         tableView.register(cellType: CentreCell.self)
@@ -138,24 +146,17 @@ extension CentresListViewController: CentresListViewModelDelegate {
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(centresCells, toSection: .centres)
 
-        dataSource.defaultRowAnimation = animated ? .fade : .none
+        dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
     func reloadTableViewFooter(with text: String?) {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textColor = .tertiaryLabel
-        label.textAlignment = .center
-        label.text = text
-        label.sizeToFit()
-
-        tableView.tableFooterView = label
+        footerView.text = text
+        footerView.sizeToFit()
+        tableView.tableFooterView = footerView
     }
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
-        tableView.tableFooterView?.isHidden = isLoading
-
         if !isLoading {
             activityIndicator.stopAnimating()
             refreshControl.endRefreshing()
@@ -179,19 +180,14 @@ extension CentresListViewController: CentresListViewModelDelegate {
         )
     }
 
-}
-
-extension CentresListViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Show details
+    func dismissViewController() {
+        navigationController?.popToRootViewController(animated: true)
     }
-
 }
 
 // MARK: - DataSource
 
-extension CentresListViewController {
+extension CentresListViewController: UITableViewDelegate {
 
     private func makeDataSource() -> UITableViewDiffableDataSource<CentresListSection, CentresListCell> {
         return UITableViewDiffableDataSource(
@@ -254,6 +250,15 @@ extension CentresListViewController {
             let bookingURL = self?.viewModel.bookingLink(at: indexPath)
             self?.openBookingUrl(bookingURL)
         }
+        // Follow/Unfollow button tap
+        cell.followButtonTapHandler = { [weak self] in
+            guard let isFollowing = self?.viewModel.isCentreFollowed(at: indexPath) else { return }
+            if isFollowing {
+                self?.presentUnfollowCentreBottomSheet(forCell: cell, atIndexPath: indexPath)
+            } else {
+                self?.presentFollowCentreBottomSheet(forCell: cell, atIndexPath: indexPath)
+            }
+        }
     }
 
     private func presentOpenMapAlert(
@@ -285,13 +290,63 @@ extension CentresListViewController {
 
         present(actionSheet, animated: true)
     }
+
+    private func presentFollowCentreBottomSheet(forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        let bottomSheet = UIAlertController(
+            title: Localization.Location.start_following_title,
+            message: Localization.Location.start_following_message,
+            preferredStyle: .actionSheet
+        )
+
+        let allNotificationsAction = UIAlertAction(title: "Toutes les notifications", style: .default) { [weak self] _ in
+            self?.viewModel.requestNotificationsAuthorizationIfNeeded {
+                self?.viewModel.followCentre(at: indexPath, notificationsType: .all)
+            }
+        }
+
+        let chronoDosesNotificationsAction = UIAlertAction(title: "Chronodoses uniquement", style: .default) { [weak self] _ in
+            self?.viewModel.requestNotificationsAuthorizationIfNeeded {
+                self?.viewModel.followCentre(at: indexPath, notificationsType: .chronodoses)
+            }
+        }
+
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
+
+        bottomSheet.addAction(allNotificationsAction)
+        bottomSheet.addAction(chronoDosesNotificationsAction)
+        bottomSheet.addAction(cancelAction)
+        bottomSheet.popoverPresentationController?.sourceView = cell
+
+        present(bottomSheet, animated: true)
+    }
+
+    private func presentUnfollowCentreBottomSheet(forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        let bottomSheet = UIAlertController(
+            title: Localization.Location.stop_following_title,
+            message: Localization.Location.stop_following_message,
+            preferredStyle: .actionSheet
+        )
+
+        let unfollowAction = UIAlertAction(title: Localization.Location.stop_following_button, style: .destructive) { [weak self] _ in
+            self?.viewModel.unfollowCentre(at: indexPath)
+        }
+
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
+
+        bottomSheet.addAction(unfollowAction)
+        bottomSheet.addAction(cancelAction)
+        bottomSheet.popoverPresentationController?.sourceView = view
+
+        self.present(bottomSheet, animated: true)
+    }
 }
 
 extension CentresListViewController: UIGestureRecognizerDelegate {
-
     /// Enable swipe to go back
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
         return true
     }
-
 }

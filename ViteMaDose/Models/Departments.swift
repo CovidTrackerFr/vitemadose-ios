@@ -38,8 +38,8 @@ extension Department {
         return LocationSearchResult(
             name: name,
             postCode: nil,
-            departmentCode: code,
-            nearDepartmentCodes: [],
+            selectedDepartmentCode: code,
+            departmentCodes: [],
             coordinates: nil
         )
     }

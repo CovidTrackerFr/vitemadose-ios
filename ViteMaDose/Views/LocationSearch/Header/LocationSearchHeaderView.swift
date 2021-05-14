@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationSearchHeaderView: UIView {
+final class LocationSearchHeaderView: UIView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private(set) weak var searchBar: UISearchBar!
 

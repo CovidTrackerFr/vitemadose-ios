@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePartnersFooterView: UIView {
+final class HomePartnersFooterView: UIView {
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var logo1ImageView: UIImageView!
