@@ -9,9 +9,4 @@ import Foundation
 import SwiftDate
 
 enum AppConstant {
-    static let franceRegion = Region(
-        calendar: Calendar.current,
-        zone: Zones.current,
-        locale: Locale(identifier: "fr_FR")
-    )
 }

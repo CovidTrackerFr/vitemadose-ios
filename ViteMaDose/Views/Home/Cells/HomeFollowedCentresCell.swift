@@ -31,7 +31,7 @@ final class HomeFollowedCentresCell: UITableViewCell {
         iconContainerView.setCornerRadius(15)
         cellContainerView.setCornerRadius(15)
 
-        titleLabel.text = "Mes centres suivis"
+        titleLabel.text = Localization.Locations.followed_list_button
         titleLabel.textColor = .label
         titleLabel.font = .rounded(ofSize: 18, weight: .bold)
     }

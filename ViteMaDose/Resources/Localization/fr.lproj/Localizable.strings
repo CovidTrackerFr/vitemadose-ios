@@ -24,11 +24,13 @@
 "location_search.search_placeholder" = "Commune, Code Postal, Département...";
 // Locations
 "locations.list_title" = "Liste des lieux";
+"locations.followed_list_button" = "Mes centres suivis";
 "locations.followed_list_title" = "Liste de vos lieux suivis";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
 "locations.sort_option.fastest" = "Au plus vite";
 // Location
+"location.chronodoses_available" = "Chronodoses disponibles";
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";
 "location.verify_button" = "Vérifier ce lieu";
@@ -41,6 +43,9 @@
 // Location start following
 "location.start_following_title" = "Recevoir les notifications ?";
 "location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilité ou seulement lorsque des Chronodoses sont disponibles pour ce centre.";
+// Alerts
+"location.start_following_button_all" = "Toutes les notifications";
+"location.start_following_button_chronodoses" = "Chronodoses uniquement";
 "location.follow_action_title" = "Suivre";
 "location.notify_button" = "Être notifié";
 "location.follow_button" = "Suivre sans notifications";
@@ -56,3 +61,13 @@
 "error.generic.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
 "error.network.server_error" = "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard.";
 "error.network.offline" = "Il semblerait que vous soyez hors ligne.";
+// Onboarding
+"onboarding.page_1.title" = "Vite Ma Dose fait le plein de nouveautés !";
+"onboarding.page_1.description" = "Découvrez les notifications pour ne rater aucune dose, et les chronodoses permettant à chacun de trouver un rendez-vous en 24h sans restriction.";
+"onboarding.page_1.button" = "Suivant";
+"onboarding.page_2.title" = "Notifications";
+"onboarding.page_2.description" = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités.";
+"onboarding.page_2.button" = "Suivant";
+"onboarding.page_3.title" = "Chronodoses";
+"onboarding.page_3.description" = "À partir du mercredi 12 mai, vous pourrez réserver les rendez-vous de vaccination vacants du jour même et du lendemain, sans restriction. Nous les appelons les “Chronodoses”, et sont matérialisées par des éclairs et un bandeau rouge.";
+"onboarding.page_3.button" = "Merci !";

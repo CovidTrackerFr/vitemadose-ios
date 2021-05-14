@@ -315,7 +315,7 @@ final class CentreCell: UITableViewCell {
         chronoDoseViewContainer.clipsToBounds = false
         chronoDoseViewContainer.layer.cornerRadius = 15.0
         chronoDoseViewContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        chronoDoseLabel.text = "Chronodoses disponibles"
+        chronoDoseLabel.text = Localization.Location.chronodoses_available
     }
 
     private func configureFollowCentreButton(_ viewData: CentreViewData) {

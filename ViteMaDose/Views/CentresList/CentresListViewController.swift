@@ -297,13 +297,13 @@ extension CentresListViewController: UITableViewDelegate {
             preferredStyle: .actionSheet
         )
 
-        let allNotificationsAction = UIAlertAction(title: "Toutes les notifications", style: .default) { [weak self] _ in
+        let allNotificationsAction = UIAlertAction(title: Localization.Location.start_following_button_all, style: .default) { [weak self] _ in
             self?.viewModel.requestNotificationsAuthorizationIfNeeded {
                 self?.viewModel.followCentre(at: indexPath, notificationsType: .all)
             }
         }
 
-        let chronoDosesNotificationsAction = UIAlertAction(title: "Chronodoses uniquement", style: .default) { [weak self] _ in
+        let chronoDosesNotificationsAction = UIAlertAction(title: Localization.Location.start_following_button_chronodoses, style: .default) { [weak self] _ in
             self?.viewModel.requestNotificationsAuthorizationIfNeeded {
                 self?.viewModel.followCentre(at: indexPath, notificationsType: .chronodoses)
             }
