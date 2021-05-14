@@ -117,8 +117,7 @@ final class CentreCell: UITableViewCell {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        let date = dateFormatter.date(from: viewData.timeText!)
-        if let dayText = viewData.dayText, let dayDate = date {
+        if let dayText = viewData.dayText, let timeText = viewData.timeText, let dayDate = dateFormatter.date(from: timeText) {
             let hourComponents = Calendar.current.dateComponents([.hour, .minute], from: dayDate)
             dateLabel.accessibilityLabel = dayText + " " + Localization.A11y.VoiceOver.Details.from + DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut)!
         }
