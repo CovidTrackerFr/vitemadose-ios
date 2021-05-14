@@ -31,17 +31,17 @@ enum AppAnalytics {
 
     static func didSelectLocation(_ location: LocationSearchResult) {
         Analytics.logEvent("county_selected", parameters: [
-            "codeDepartement": (location.departmentCode.lowercased()) as NSString
+            "codeDepartement": (location.selectedDepartmentCode?.lowercased()).emptyIfNil as NSString
         ])
     }
 
     static func didSelectVaccinationCentre(_ vaccinationCentre: VaccinationCentre) {
         let eventName = (vaccinationCentre.appointmentCount ?? 0) > 0 ? "rdv_click" : "rdv_verify"
-        let department = vaccinationCentre.departement?.lowercased() ?? ""
-        let name = vaccinationCentre.nom?.lowercased() ?? ""
-        let type = vaccinationCentre.type?.lowercased() ?? ""
-        let platform = vaccinationCentre.plateforme?.lowercased() ?? ""
-        let vaccine = vaccinationCentre.vaccineType?.joined(separator: ",").lowercased() ?? ""
+        let department = vaccinationCentre.departement.emptyIfNil.lowercased()
+        let name = vaccinationCentre.nom.emptyIfNil.lowercased()
+        let type = vaccinationCentre.type.emptyIfNil.lowercased()
+        let platform = vaccinationCentre.plateforme.emptyIfNil.lowercased()
+        let vaccine = (vaccinationCentre.vaccineType?.joined(separator: ",").lowercased()).emptyIfNil
 
         Analytics.logEvent(eventName, parameters: [
             "rdv_departement": department,
@@ -61,7 +61,7 @@ enum AppAnalytics {
     ) {
         let eventName = searchResult.coordinates == nil ? "search_by_departement" : "search_by_commune"
         Analytics.logEvent(eventName, parameters: [
-            "search_departement": "\(searchResult.departmentCode) - \(searchResult.name)",
+            "search_departement": "\(searchResult.selectedDepartmentCode.emptyIfNil) - \(searchResult.name)",
             "search_nb_doses": appointmentsCount as NSNumber,
             "search_nb_lieu_vaccination": availableCentresCount as NSNumber,
             "search_nb_lieu_vaccination_inactive": unAvailableCentresCount as NSNumber,
@@ -77,6 +77,8 @@ private extension CentresListSortOption {
             return "au plus proche"
         case .fastest:
             return "au plus tot"
+        case .chronoDoses:
+            return "chronodoses"
         }
     }
 }

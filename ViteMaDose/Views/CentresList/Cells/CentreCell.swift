@@ -20,12 +20,14 @@ protocol CentreViewDataProvider {
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var partnerLogo: UIImage? { get }
+    var isChronoDose: Bool { get }
+    var notificationsType: FollowedCentre.NotificationsType? { get }
 }
 
 // MARK: - CentreViewData
 
-struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
-    let id: String
+public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
+    public let id: String
     let dayText: String?
     let timeText: String?
     let addressNameText: String?
@@ -36,13 +38,14 @@ struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
+    let isChronoDose: Bool
+    let notificationsType: FollowedCentre.NotificationsType?
 }
 
 // MARK: - CentreCell
 
 final class CentreCell: UITableViewCell {
 
-    // MARK: - iVars
     @IBOutlet weak private var dateContainer: UIStackView!
     @IBOutlet weak private var dateIconContainer: UIView!
     @IBOutlet weak private var dateLabel: UILabel!
@@ -65,7 +68,12 @@ final class CentreCell: UITableViewCell {
     @IBOutlet weak private var bookingButton: UIButton!
     @IBOutlet weak private var cellContentView: UIView!
 
-    @IBOutlet weak private var vacineTypeImageView: UIImageView!
+    @IBOutlet weak private var vaccineTypeImageView: UIImageView!
+
+    @IBOutlet weak var chronoDoseViewContainer: UIView!
+    @IBOutlet weak var chronoDoseLabel: UILabel!
+
+    @IBOutlet weak var followCentreButton: UIButton!
 
     private lazy var iconContainers: [UIView] = [
         dateIconContainer,
@@ -77,6 +85,7 @@ final class CentreCell: UITableViewCell {
     var addressTapHandler: (() -> Void)?
     var phoneNumberTapHandler: (() -> Void)?
     var bookingButtonTapHandler: (() -> Void)?
+    var followButtonTapHandler: (() -> Void)?
 
     private enum Constant {
         static let cellContentViewCornerRadius: CGFloat = 15
@@ -92,6 +101,7 @@ final class CentreCell: UITableViewCell {
     }
 
     // MARK: - View lifecycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -100,12 +110,14 @@ final class CentreCell: UITableViewCell {
         bookingButton.backgroundColor = .royalBlue
         bookingButton.setCornerRadius(Constant.bookingButtonCornerRadius)
         cellContentView.setCornerRadius(Constant.cellContentViewCornerRadius)
-        vacineTypeImageView.image = UIImage(systemName: "cube.box.fill")
+        vaccineTypeImageView.image = UIImage(systemName: "cube.box.fill")
     }
 
     func configure(with viewData: CentreViewData) {
         configureBookButton(viewData)
         configurePhoneNumberView(viewData)
+        configureChronoDoseView(viewData)
+        configureFollowCentreButton(viewData)
 
         dateLabel.attributedText = createDateText(
             dayText: viewData.dayText,
@@ -146,9 +158,11 @@ final class CentreCell: UITableViewCell {
         ])
         phoneButton.setTitle(nil, for: .normal)
         bookingButton.setTitle(nil, for: .normal)
+        followCentreButton.setImage(nil, for: .normal)
     }
 
     // MARK: - Actions
+
     @objc private func didTapAddress() {
         addressTapHandler?()
     }
@@ -161,7 +175,12 @@ final class CentreCell: UITableViewCell {
         bookingButtonTapHandler?()
     }
 
+    @objc private func didTapFollowCentreButton() {
+        followButtonTapHandler?()
+    }
+
     // MARK: - Helpers
+
     private func createDateText(
         dayText: String?,
         timeText: String?,
@@ -171,12 +190,15 @@ final class CentreCell: UITableViewCell {
             NSAttributedString.Key.foregroundColor: Constant.labelPrimaryColor,
             NSAttributedString.Key.font: Constant.labelPrimaryFont
         ]
-
+        let boldFont: UIFont = .systemFont(ofSize: 16, weight: .heavy)
         guard isAvailable else {
-            return NSMutableAttributedString(
-                string: Localization.Location.no_appointment,
+            let titleString = Localization.Location.no_appointment
+            let unavailableAttributedString = NSMutableAttributedString(
+                string: titleString,
                 attributes: attributes
             )
+            unavailableAttributedString.setFontForText(textForAttribute: titleString, withFont: boldFont)
+            return unavailableAttributedString
         }
 
         guard let dayText = dayText, let timeText = timeText else {
@@ -192,8 +214,8 @@ final class CentreCell: UITableViewCell {
             attributes: attributes
         )
 
-        dateText.setFontForText(textForAttribute: dayText, withFont: .systemFont(ofSize: 16, weight: .heavy))
-        dateText.setFontForText(textForAttribute: timeText, withFont: .systemFont(ofSize: 16, weight: .heavy))
+        dateText.setFontForText(textForAttribute: dayText, withFont: boldFont)
+        dateText.setFontForText(textForAttribute: timeText, withFont: boldFont)
 
         return dateText
     }
@@ -272,12 +294,52 @@ final class CentreCell: UITableViewCell {
 
         bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
-        bookingButton.backgroundColor = viewData.isAvailable ? .royalBlue : .darkGray
+        let availableButtonColor: UIColor = viewData.isChronoDose ? .mandy : .royalBlue
+        bookingButton.backgroundColor = viewData.isAvailable ? availableButtonColor : .darkGray
         bookingButton.setTitleColor(.white, for: .normal)
         bookingButton.setAttributedTitle(bookingButtonAttributedText, for: .normal)
         bookingButton.addTarget(
             self,
             action: #selector(didTapBookButton),
+            for: .touchUpInside
+        )
+    }
+
+    private func configureChronoDoseView(_ viewData: CentreViewData) {
+        guard viewData.isChronoDose else {
+            chronoDoseViewContainer.isHidden = true
+            return
+        }
+
+        chronoDoseViewContainer.isHidden = false
+        chronoDoseViewContainer.clipsToBounds = false
+        chronoDoseViewContainer.layer.cornerRadius = 15.0
+        chronoDoseViewContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        chronoDoseLabel.text = "Chronodoses disponibles"
+    }
+
+    private func configureFollowCentreButton(_ viewData: CentreViewData) {
+        followCentreButton.isHidden = viewData.notificationsType == nil
+        guard let notificationsType = viewData.notificationsType else {
+            return
+        }
+
+        switch notificationsType {
+        case .all:
+            followCentreButton.setImage(UIImage(systemName: "bell.fill"), for: .normal)
+            followCentreButton.backgroundColor = .royalBlue
+        case .chronodoses:
+            followCentreButton.setImage(UIImage(systemName: "bell.fill"), for: .normal)
+            followCentreButton.backgroundColor = .mandy
+        case .none:
+            followCentreButton.setImage(UIImage(systemName: "bell.slash.fill"), for: .normal)
+            followCentreButton.backgroundColor = .darkGray
+        }
+
+        followCentreButton.setCornerRadius(8.0)
+        followCentreButton.addTarget(
+            self,
+            action: #selector(didTapFollowCentreButton),
             for: .touchUpInside
         )
     }

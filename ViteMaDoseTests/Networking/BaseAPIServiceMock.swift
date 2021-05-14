@@ -13,7 +13,7 @@ enum BaseAPIErrorMock: Error {
     case unknown
 }
 
-class BaseAPIServiceMock: BaseAPIServiceProvider {
+final class BaseAPIServiceMock: BaseAPIServiceProvider {
     var provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>()
 
     var fetchVaccinationCentresResult: Result<VaccinationCentres, Error>?

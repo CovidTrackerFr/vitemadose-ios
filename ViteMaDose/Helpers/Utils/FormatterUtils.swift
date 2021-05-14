@@ -26,9 +26,9 @@ extension Formatter {
 }
 
 extension Numeric {
-    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
+    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self).emptyIfNil }
 }
 
 extension Numeric where Self == Double {
-    var formattedWithPercentage: String { Formatter.withPercentage.string(for: (self / 100)) ?? "" }
+    var formattedWithPercentage: String { Formatter.withPercentage.string(for: (self / 100)).emptyIfNil }
 }

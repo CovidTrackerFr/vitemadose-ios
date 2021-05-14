@@ -23,7 +23,7 @@ protocol HomeStatsCellViewDataProvider {
     var dataType: StatsDataType { get }
 }
 
-class HomeStatsCell: UITableViewCell {
+final class HomeStatsCell: UITableViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet var iconContainerView: UIView!

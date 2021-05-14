@@ -20,32 +20,36 @@ enum HomeCell: Hashable {
     case searchBar(HomeSearchBarCellViewData)
     case searchResult(HomeSearchResultCellViewData)
     case stats(HomeCellStatsViewData)
+    case followedCentre
 }
 
 // MARK: - Home ViewModel
 
 protocol HomeViewModelProvider {
+    var stats: Stats? { get }
+    var delegate: HomeViewModelDelegate? { get }
+
     func load()
+    func reloadHeadingCellsIfNeeded()
     func didSelectSavedSearchResult(withName name: String)
     func didSelect(_ location: LocationSearchResult)
-
-    var stats: Stats? { get }
+    func displayAppOnboardingIfNeeded()
 }
 
 protocol HomeViewModelDelegate: AnyObject {
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
-
     func presentVaccinationCentres(for location: LocationSearchResult)
     func presentFetchStatsError(_ error: Error)
-
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell])
+    func presentOnboarding()
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell], animated: Bool)
 }
 
-class HomeViewModel {
+final class HomeViewModel {
     private let apiService: BaseAPIServiceProvider
     private let userDefaults: UserDefaults
-    weak var delegate: HomeViewModelDelegate?
+    private let notificationCenter: UNUserNotificationCenter
 
+    weak var delegate: HomeViewModelDelegate?
     var stats: Stats?
 
     private var isLoading = false {
@@ -57,15 +61,18 @@ class HomeViewModel {
 
     private var headingCells: [HomeCell] = []
     private var statsCell: [HomeCell] = []
+    private lazy var hasFollowedCentresLastSate = userDefaults.hasFollowedCentres
 
     // MARK: init
 
     required init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        userDefaults: UserDefaults = .shared
+        userDefaults: UserDefaults = .shared,
+        notificationCenter: UNUserNotificationCenter = .current()
     ) {
         self.apiService = apiService
         self.userDefaults = userDefaults
+        self.notificationCenter = notificationCenter
     }
 
     // MARK: Handle API result
@@ -76,12 +83,12 @@ class HomeViewModel {
         updateHeadingCells()
         updateStatsCells()
 
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell, animated: false)
     }
 
     private func handleLastSelectedSearchResult() {
         updateHeadingCells()
-        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell)
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell, animated: true)
     }
 
     private func updateHeadingCells() {
@@ -93,6 +100,10 @@ class HomeViewModel {
             .title(titleCellViewData),
             .searchBar(departmentSelectionViewData)
         ]
+        if userDefaults.hasFollowedCentres {
+            headingCells.append(.followedCentre)
+        }
+
         headingCells.append(contentsOf: lastSelectedDepartmentViewData.map(HomeCell.searchResult))
     }
 
@@ -125,7 +136,7 @@ class HomeViewModel {
                 titleText: index == 0 ? Localization.Home.recent_search.format(lastSearchResults.count) : nil,
                 name: location.formattedName,
                 postCode: location.postCode,
-                departmentCode: location.departmentCode
+                departmentCode: location.selectedDepartmentCode
             )
         }
     }
@@ -155,6 +166,19 @@ extension HomeViewModel: HomeViewModelProvider {
         }
     }
 
+    func reloadHeadingCellsIfNeeded() {
+        let hasFollowedCentres = userDefaults.hasFollowedCentres
+        if hasFollowedCentresLastSate == hasFollowedCentres {
+            hasFollowedCentresLastSate = hasFollowedCentres
+            return
+        }
+
+        updateHeadingCells()
+        hasFollowedCentresLastSate = hasFollowedCentres
+
+        delegate?.reloadTableView(with: headingCells, andStatsCells: statsCell, animated: true)
+    }
+
     func didSelectSavedSearchResult(withName name: String) {
         let predicate: (LocationSearchResult) -> Bool = { $0.formattedName == name }
         let foundSearchResult = userDefaults.lastSearchResults.first(where: predicate)
@@ -168,5 +192,13 @@ extension HomeViewModel: HomeViewModelProvider {
     func didSelect(_ location: LocationSearchResult) {
         handleLastSelectedSearchResult()
         delegate?.presentVaccinationCentres(for: location)
+    }
+
+    func displayAppOnboardingIfNeeded() {
+        guard !userDefaults.didPresentAppOnboarding else {
+            return
+        }
+        userDefaults.didPresentAppOnboarding = true
+        delegate?.presentOnboarding()
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class MaintenanceViewController: UIViewController {
+final class MaintenanceViewController: UIViewController {
     let maintenanceUrl: URL?
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: view.bounds)

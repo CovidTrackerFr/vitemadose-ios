@@ -70,7 +70,7 @@ protocol BaseAPIServiceProvider: AnyObject {
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
 }
 
-class BaseAPIService: BaseAPIServiceProvider {
+final class BaseAPIService: BaseAPIServiceProvider {
     let provider: MoyaProvider<BaseAPI>
 
     init(provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>(plugins: [CachePolicyPlugin()])) {
