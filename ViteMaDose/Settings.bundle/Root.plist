@@ -2,15 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>StringsTable</key>
-    <string>Root</string>
-    <key>PreferenceSpecifiers</key>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>PreferenceSpecifiers</key>
     <array>
         <dict>
             <key>Type</key>
             <string>PSChildPaneSpecifier</string>
             <key>Title</key>
-            <string>Librairies tierces</string>
+            <string>Licenses</string>
             <key>File</key>
             <string>com.mono0926.LicensePlist</string>
         </dict>
@@ -21,7 +21,5 @@
             <string>Copyright (c) 2021 - CovidTracker (covidtracker.fr)</string>
         </dict>
     </array>
-    <key>StringsTable</key>
-    <string>Root</string>
 </dict>
 </plist>
