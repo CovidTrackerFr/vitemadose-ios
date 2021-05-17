@@ -639,6 +639,7 @@
 				DA68646626276624005B2AC2 /* Crashlytics */,
 				577A7F2B262B8AB600B1D03C /* Firebase SPM  */,
 				57B7CD53262E36A60065DD80 /* Build Number */,
+				51637E462652B8FF004096A0 /* License Plist - update list of third party components */,
 			);
 			buildRules = (
 			);
@@ -779,6 +780,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		51637E462652B8FF004096A0 /* License Plist - update list of third party components */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "License Plist - update list of third party components";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# In Settings.bundle, update third-party list using LicensePlist tool\n# See: https://github.com/mono0926/LicensePlist\n\nif [ $CONFIGURATION = \"Debug\" ]; then\n    echo \"Updating list of third-party\"\n    /usr/local/bin/license-plist --output-path $PRODUCT_NAME/Settings.bundle #--github-token YOUR_GITHUB_TOKEN\nfi\n";
+		};
 		577A7F2B262B8AB600B1D03C /* Firebase SPM  */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
