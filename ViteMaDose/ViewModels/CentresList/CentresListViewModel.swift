@@ -78,6 +78,7 @@ class CentresListViewModel {
     private(set) var searchResult: LocationSearchResult
     private let phoneNumberKit: PhoneNumberKit
     private let userDefaults: UserDefaults
+    private let remoteConfig: RemoteConfiguration
 
     private var isLoading = false {
         didSet {
@@ -95,12 +96,14 @@ class CentresListViewModel {
         apiService: BaseAPIServiceProvider = BaseAPIService(),
         searchResult: LocationSearchResult,
         phoneNumberKit: PhoneNumberKit = PhoneNumberKit(),
-        userDefaults: UserDefaults = .shared
+        userDefaults: UserDefaults = .shared,
+        remoteConfig: RemoteConfiguration = .shared
     ) {
         self.apiService = apiService
         self.searchResult = searchResult
         self.phoneNumberKit = phoneNumberKit
         self.userDefaults = userDefaults
+        self.remoteConfig = remoteConfig
     }
 
     private func reloadTableView(animated: Bool) {
@@ -167,17 +170,17 @@ class CentresListViewModel {
         )
         cells.append(.title(centresListTitleViewData))
 
-        if RemoteConfiguration.shared.dataDisclaimerEnabled {
-            /// Pop-up Disclaimer
-            let centreDataDisclaimerCellViewData = CentreDataDisclaimerCellViewData(
-                contentText: RemoteConfiguration.shared.dataDisclaimerMessage
-            )
-            cells.append(.disclaimer(centreDataDisclaimerCellViewData))
-        }
-
         if searchResult.coordinates != nil {
             let viewData = CentresSortOptionsCellViewData(sortOption: userDefaults.centresListSortOption)
             cells.append(.sort(viewData))
+        }
+
+        if remoteConfig.dataDisclaimerEnabled, let disclaimerMessage = remoteConfig.dataDisclaimerMessage {
+            // Disclaimer cell
+            let centreDataDisclaimerCellViewData = CentreDataDisclaimerCellViewData(
+                contentText: disclaimerMessage
+            )
+            cells.append(.disclaimer(centreDataDisclaimerCellViewData))
         }
 
         return cells

@@ -64,8 +64,13 @@ extension RemoteConfiguration {
         return configuration.configValue(forKey: "data_disclaimer_enabled").boolValue
     }
 
-    var dataDisclaimerMessage: String {
-        return configuration.configValue(forKey: "data_disclaimer_message").stringValue!
+    var dataDisclaimerMessage: String? {
+        let configValue = configuration.configValue(forKey: "data_disclaimer_message").stringValue
+        if let value = configValue, !value.isEmpty {
+            return value
+        } else {
+            return nil
+        }
     }
 
     var vaccinationCentresListRadiusInKm: NSNumber {

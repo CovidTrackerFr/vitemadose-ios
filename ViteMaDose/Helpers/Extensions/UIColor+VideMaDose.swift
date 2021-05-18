@@ -11,7 +11,7 @@ private enum AssetsColor: String {
     case royalBlue
     case mandy
     case athensGray
-    case salomie
+    case creamBrulee
     case horsesNeck
 }
 
@@ -37,8 +37,8 @@ extension UIColor {
         return color
     }
 
-    class var salomie: UIColor {
-        guard let color = UIColor(named: AssetsColor.salomie.rawValue) else {
+    class var creamBrulee: UIColor {
+        guard let color = UIColor(named: AssetsColor.creamBrulee.rawValue) else {
             fatalError("Could not find color")
         }
         return color

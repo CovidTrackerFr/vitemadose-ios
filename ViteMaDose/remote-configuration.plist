@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>data_disclaimer_message</key>
-	<string>Les plateformes sont très sollicitées, les données affichées par Vite Ma Dose peuvent avoir jusqu&apos;à 30 minutes de retard pour Doctolib.</string>
+	<string></string>
 	<key>data_disclaimer_enabled</key>
 	<false/>
 	<key>ios_maintenance_mode_url</key>

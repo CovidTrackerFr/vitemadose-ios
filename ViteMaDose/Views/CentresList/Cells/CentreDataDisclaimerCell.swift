@@ -16,14 +16,13 @@ struct CentreDataDisclaimerCellViewData: CentreDataDisclaimerCellViewDataProvide
 }
 
 final class CentreDataDisclaimerCell: UITableViewCell {
-    @IBOutlet weak var infoLabel: UIButton!
+    @IBOutlet weak var infoIconImageView: UIImageView!
     @IBOutlet var contentTextTitleLabel: UILabel!
     @IBOutlet weak var disclaimerView: UIView!
 
     private enum Constant {
         static let disclaimerTextFont: UIFont = .rounded(ofSize: 14, weight: .regular)
         static let disclaimerTextColor: UIColor = .horsesNeck
-
         static let detailViewsCornerRadius: CGFloat = 15
     }
 
@@ -40,10 +39,10 @@ final class CentreDataDisclaimerCell: UITableViewCell {
     }
 
     func configureView() {
-        infoLabel.tintColor = .horsesNeck
+        infoIconImageView.image = UIImage(systemName: "info.circle.fill")?.tint(with: .horsesNeck)
         contentTextTitleLabel.font = Constant.disclaimerTextFont
         contentTextTitleLabel.textColor = Constant.disclaimerTextColor
         disclaimerView.setCornerRadius(Constant.detailViewsCornerRadius)
-        disclaimerView.backgroundColor = .salomie
+        disclaimerView.backgroundColor = .creamBrulee
     }
 }
