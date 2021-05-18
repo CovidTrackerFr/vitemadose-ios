@@ -14,14 +14,16 @@ final class HomePartnersFooterView: UIView {
     @IBOutlet private var logo2ImageView: UIImageView!
     @IBOutlet private var logo3ImageView: UIImageView!
     @IBOutlet private var logo4ImageView: UIImageView!
-    @IBOutlet var logoImageView5: UIImageView!
+    @IBOutlet private var logoImageView5: UIImageView!
+    @IBOutlet private var logo6ImageView: UIImageView!
 
     private lazy var allLogos: [UIImageView] = [
         logo1ImageView,
         logo2ImageView,
         logo3ImageView,
         logo4ImageView,
-        logoImageView5
+        logoImageView5,
+        logo6ImageView
     ]
 
     override func awakeFromNib() {
