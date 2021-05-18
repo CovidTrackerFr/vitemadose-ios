@@ -263,7 +263,7 @@ final class CentreCell: UITableViewCell {
 
         appointmentsLabel.attributedText = appointmentsAndLogoString
         appointmentsLabel.isAccessibilityElement = true
-        appointmentsLabel.accessibilityLabel = appointmentsText + Localization.A11y.VoiceOver.Details.to_use_with_platform + " " + (partnerName ?? "")
+        appointmentsLabel.accessibilityLabel = appointmentsText + Localization.A11y.VoiceOver.Details.to_use_with_platform + String.space  + partnerName.emptyIfNil
         
     }
 
