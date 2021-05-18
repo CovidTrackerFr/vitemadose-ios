@@ -6,6 +6,16 @@
   
 */
 
+// MARK: - Onboarding
+"onboarding.welcome_page.title" = "Vite Ma Dose fait le plein de nouveautés !";
+"onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose, et les chronodoses permettant à chacun de trouver un rendez-vous en 24h sans restriction.";
+"onboarding.notifications_page.title" = "Notifications";
+"onboarding.notifications_page.description" = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités.";
+"onboarding.chronodoses_page.title" = "Chronodoses";
+"onboarding.chronodoses_page.description" = "À partir du mercredi 12 mai, vous pourrez réserver les rendez-vous de vaccination vacants du jour même et du lendemain, sans restriction. Nous les appelons les “Chronodoses”, et sont matérialisées par des éclairs et un bandeau rouge.";
+"onboarding.next_button" = "Suivant";
+"onboarding.done_button" = "Merci !";
+
 // MARK: - Home
 
 "home.main_title" = "Trouvez une dose de vaccin facilement et rapidement";
@@ -43,20 +53,23 @@
 "location.unavailable_name" = "Nom du centre indisponible";
 "location.unavailable_address" = "Adresse indisponible";
 
-// Location start following
+// MARK: - Location start following
+
 "location.start_following_title" = "Recevoir les notifications ?";
 "location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilité ou seulement lorsque des Chronodoses sont disponibles pour ce centre.";
 "location.follow_action_title" = "Suivre";
 "location.notify_button" = "Être notifié";
 "location.follow_button" = "Suivre sans notifications";
 
-// Location stop following
+// MARK: - Location stop following
+
 "location.stop_following_title" = "Ne plus suivre ce centre ?";
 "location.stop_following_message" = "Si vous avez activé les notifications pour ce centre, elles seront désactivées.";
 "location.unfollow_action_title" = "Ne plus suivre";
 "location.stop_following_button" = "Ne plus suivre";
 
-// Error
+// MARK: - Error
+
 "error.generic.title" = "Oups! Nous avons des difficultés techniques...";
 "error.generic.retry_button" = "Réessayer";
 "error.generic.cancel_button" = "Annuler";

@@ -13,7 +13,7 @@ enum OnboardingManager {
     private static let descriptionFontSize: CGFloat = 18.0
 
     static func makeFirstPage() -> BLTNPageItem {
-        let page = BLTNPageItem(title: "Vite Ma Dose fait le plein de nouveautés !")
+        let page = BLTNPageItem(title: Localization.Onboarding.WelcomePage.title)
         page.image = "🎉".toImage(ofSize: 60)
 
         let appearance = BLTNItemAppearance()
@@ -22,8 +22,8 @@ enum OnboardingManager {
         appearance.actionButtonColor = .royalBlue
 
         page.appearance = appearance
-        page.descriptionText = "Découvrez les notifications pour ne rater aucune dose, et les chronodoses permettant à chacun de trouver un rendez-vous en 24h sans restriction."
-        page.actionButtonTitle = "Suivant"
+        page.descriptionText = Localization.Onboarding.WelcomePage.description
+        page.actionButtonTitle = Localization.Onboarding.next_button
         page.alternativeButton?.isHidden = true
         page.isDismissable = false
         page.actionHandler = { item in
@@ -34,7 +34,7 @@ enum OnboardingManager {
     }
 
     static func makeNotificationsPage() -> BLTNPageItem {
-        let page = BLTNPageItem(title: "Notifications")
+        let page = BLTNPageItem(title: Localization.Onboarding.NotificationsPage.title)
         page.image = "🔔".toImage(ofSize: 60)
 
         let appearance = BLTNItemAppearance()
@@ -43,8 +43,8 @@ enum OnboardingManager {
         appearance.actionButtonColor = .royalBlue
 
         page.appearance = appearance
-        page.descriptionText = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités."
-        page.actionButtonTitle = "Suivant"
+        page.descriptionText = Localization.Onboarding.NotificationsPage.description
+        page.actionButtonTitle = Localization.Onboarding.next_button
         page.alternativeButton?.isHidden = true
         page.isDismissable = false
         page.actionHandler = { item in
@@ -56,7 +56,7 @@ enum OnboardingManager {
     }
 
     static func makeChronoDosesPage() -> BLTNPageItem {
-        let page = BLTNPageItem(title: "Chronodoses")
+        let page = BLTNPageItem(title: Localization.Onboarding.ChronodosesPage.title)
         page.image = "⚡️".toImage(ofSize: 60)
 
         let appearance = BLTNItemAppearance()
@@ -65,8 +65,8 @@ enum OnboardingManager {
         appearance.actionButtonColor = .mandy
 
         page.appearance = appearance
-        page.descriptionText = "À partir du mercredi 12 mai, vous pourrez réserver les rendez-vous de vaccination vacants du jour même et du lendemain, sans restriction. Nous les appelons les “Chronodoses”, et sont matérialisées par des éclairs et un bandeau rouge."
-        page.actionButtonTitle = "Merci !"
+        page.descriptionText = Localization.Onboarding.WelcomePage.description
+        page.actionButtonTitle = Localization.Onboarding.done_button
         page.alternativeButton?.isHidden = true
         page.isDismissable = false
         page.actionHandler = { item in
