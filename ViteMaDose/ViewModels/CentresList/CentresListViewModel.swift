@@ -11,7 +11,6 @@ import PhoneNumberKit
 import PromiseKit
 import MapKit
 import Haptica
-
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
@@ -138,6 +137,7 @@ class CentresListViewModel {
             appointmentsCount: centre.appointmentCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
+            partnerName: centre.plateforme,
             isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
         )
@@ -250,7 +250,7 @@ class CentresListViewModel {
     }
 }
 
-// MARK: - Centres List ViewModelProvider
+// MARK: - Centres List View Model Provider
 
 extension CentresListViewModel: CentresListViewModelProvider {
 
