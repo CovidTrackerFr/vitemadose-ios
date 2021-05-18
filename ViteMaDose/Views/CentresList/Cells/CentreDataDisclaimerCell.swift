@@ -11,7 +11,7 @@ protocol CentreDataDisclaimerCellViewDataProvider {
     var contentText: String { get }
 }
 
-struct CentreDataDisclaimerCellViewData: CentreDataDisclaimerCellViewDataProvider, Hashable {
+public struct CentreDataDisclaimerCellViewData: CentreDataDisclaimerCellViewDataProvider, Hashable {
     let contentText: String
 }
 

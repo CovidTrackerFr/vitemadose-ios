@@ -6,7 +6,8 @@
   
 */
 
-// Home
+// MARK: - Home
+
 "home.main_title" = "Trouvez une dose de vaccin facilement et rapidement";
 "home.main_title.first_highlighted_text" = "facilement";
 "home.main_title.second_highlighted_text" = "rapidement";
@@ -18,16 +19,20 @@
 "home.stats.all_availabilities" = "Créneaux disponibles";
 "home.stats.locations_with_availabilities" = "Lieux avec rendez-vous disponibles";
 "home.stats.available_locations_percentage" = "De lieux avec des disponibilités";
-// Department Selection
+
+// MARK: - Department Selection
+
 "location_search.main_title" = "Sélectionnez ou recherchez un lieu en France";
 "location_search.main_title.highlighted_text" = "France";
 "location_search.search_placeholder" = "Commune, Code Postal, Département...";
-// Locations
+
+// MARK: - Locations
+
 "locations.list_title" = "Liste des lieux";
+"locations.followed_list_title" = "Liste de vos lieux suivis";
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
-"locations.sort_option.fastest" = "Disponible au plus vite";
-// Location
+"locations.sort_option.fastest" = "Au plus vite";
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";
 "location.verify_button" = "Vérifier ce lieu";
@@ -37,6 +42,20 @@
 "location.unavailable_date" = "Date indisponible";
 "location.unavailable_name" = "Nom du centre indisponible";
 "location.unavailable_address" = "Adresse indisponible";
+
+// Location start following
+"location.start_following_title" = "Recevoir les notifications ?";
+"location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilité ou seulement lorsque des Chronodoses sont disponibles pour ce centre.";
+"location.follow_action_title" = "Suivre";
+"location.notify_button" = "Être notifié";
+"location.follow_button" = "Suivre sans notifications";
+
+// Location stop following
+"location.stop_following_title" = "Ne plus suivre ce centre ?";
+"location.stop_following_message" = "Si vous avez activé les notifications pour ce centre, elles seront désactivées.";
+"location.unfollow_action_title" = "Ne plus suivre";
+"location.stop_following_button" = "Ne plus suivre";
+
 // Error
 "error.generic.title" = "Oups! Nous avons des difficultés techniques...";
 "error.generic.retry_button" = "Réessayer";
@@ -44,3 +63,19 @@
 "error.generic.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
 "error.network.server_error" = "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard.";
 "error.network.offline" = "Il semblerait que vous soyez hors ligne.";
+
+// MARK: - Accessibility (Voice Over)
+
+"a11y.voiceover.home_screen.search_field" = "Tappez deux fois pour sélectionner ou rechercher un lieu en France.";
+"a11y.voiceover.home_screen.recent_searches" = "Recherches récentes.";
+"a11y.voiceover.home_screen.see_department_results" = "Voir les lieux dans le département ";
+"a11y.voiceover.home_screen.display_places_on_map" = "Tappez deux fois pour afficher la carte via le site web de Covid Tracker";
+"a11y.voiceover.navigation.back_button" = "Retour à l'écran principal";
+"a11y.voiceover.actions.call_button" = "Tappez deux fois pour appeler à ce numéro";
+"a11y.voiceover.actions.booking_button" = "Tappez deux fois pour prendre rendez-vous par site web";
+"a11y.voiceover.locations.see_places" = "Voir les lieux pour %@";
+"a11y.voiceover.locations.search" = "Ecrivez la commune, le code postal, le département, la ville ou toute autre indication pour trouver un lieu";
+"a11y.voiceover.details.from" = "à partir de";
+"a11y.voiceover.details.call" = "Appeler au ";
+"a11y.voiceover.details.vaccine" = "Vaccin de type %@";
+"a11y.voiceover.details.to_use_with_platform" = "à utiliser avec la plateforme ";

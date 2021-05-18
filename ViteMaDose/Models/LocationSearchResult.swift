@@ -11,8 +11,8 @@ import MapKit
 struct LocationSearchResult: Codable, Hashable {
     let name: String
     let postCode: String?
-    let departmentCode: String
-    let nearDepartmentCodes: [String]
+    let selectedDepartmentCode: String?
+    let departmentCodes: [String]
     let coordinates: Coordinates?
 
     struct Coordinates: Codable, Hashable {
@@ -47,7 +47,9 @@ extension LocationSearchResult {
     static var filterDepartmentsByQuery: (_ query: String, Self) -> Bool = {
         let query = $0.stripped
         let name = $1.name.stripped
-        let departmentCode = $1.departmentCode
+        guard let departmentCode = $1.selectedDepartmentCode else {
+            return false
+        }
         let departmentNameContainsQuery = name.range(of: query) != nil
         let departmentCodeContainsQuery = departmentCode.contains(query)
         return departmentNameContainsQuery || departmentCodeContainsQuery
@@ -72,17 +74,5 @@ extension LocationSearchResult {
             return false
         }
         return lhsLocation.distance(from: baseLocation) < rhsLocation.distance(from: baseLocation)
-    }
-
-    func sortVaccinationCentresByAppointment(_ lhs: VaccinationCentre, _ rhs: VaccinationCentre) -> Bool {
-        guard
-            let lhsDate = lhs.nextAppointmentDate,
-            let rhsDate = rhs.nextAppointmentDate,
-            lhs.isAvailable,
-            rhs.isAvailable
-        else {
-            return false
-        }
-        return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
     }
 }

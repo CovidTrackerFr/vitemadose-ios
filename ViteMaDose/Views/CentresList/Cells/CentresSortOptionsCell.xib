@@ -24,6 +24,7 @@
                         <segments>
                             <segment title="First"/>
                             <segment title="Second"/>
+                            <segment title="Third"/>
                         </segments>
                         <connections>
                             <action selector="sortingSegmentChanged:" destination="COK-wL-rGc" eventType="primaryActionTriggered" id="P0L-9v-zPo"/>

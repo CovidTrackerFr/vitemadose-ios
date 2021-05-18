@@ -15,20 +15,28 @@ struct HomeSearchResultCellViewData: HomeSearchResultCellViewDataProvider, Hasha
     let titleText: String?
     let name: String
     let postCode: String?
-    let departmentCode: String
+    let departmentCode: String?
 }
 
-class HomeSearchResultCell: LocationSearchResultCell {
+final class HomeSearchResultCell: LocationSearchResultCell {
     @IBOutlet var titleLabel: UILabel!
 
      func configure(with viewData: HomeSearchResultCellViewDataProvider) {
         super.configure(with: viewData)
-
         titleLabel.isHidden = viewData.titleText == nil
         titleLabel.text = viewData.titleText
         titleLabel.font = .rounded(ofSize: 14, weight: .semibold)
         titleLabel.textColor = .secondaryLabel
-
+        accessibilityLabel = {
+            guard viewData.titleText != nil else {
+                return nil
+            }
+            return Localization.A11y.VoiceOver.HomeScreen.recent_searches
+                .appending(String.space)
+                .appending(Localization.A11y.VoiceOver.HomeScreen.see_department_results)
+                .appending(String.space)
+                .appending(viewData.name)
+        }()
     }
 
     override func prepareForReuse() {
