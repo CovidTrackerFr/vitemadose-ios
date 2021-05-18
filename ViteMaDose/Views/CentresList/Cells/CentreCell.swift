@@ -48,22 +48,18 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
 final class CentreCell: UITableViewCell {
 
     @IBOutlet weak private var dateContainer: UIStackView!
-    @IBOutlet weak private var dateIconContainer: UIView!
     @IBOutlet weak private var dateLabel: UILabel!
 
     @IBOutlet weak private(set) var addressNameContainer: UIStackView!
-    @IBOutlet weak private var addressNameIconContainer: UIView!
     @IBOutlet weak private var nameLabel: UILabel!
     @IBOutlet weak private var addressLabel: UILabel!
 
     @IBOutlet weak private var phoneNumberContainer: UIStackView!
-    @IBOutlet weak private var phoneNumberIconContainer: UIView!
     @IBOutlet weak private var phoneButton: UIButton!
 
     @IBOutlet weak private var vaccineTypesContainer: UIStackView!
     @IBOutlet weak private var vaccineTypesLabel: UILabel!
 
-    @IBOutlet weak private var vaccineTypesIconContainer: UIView!
     @IBOutlet weak private var appointmentsLabel: UILabel!
 
     @IBOutlet weak private var bookingButton: UIButton!
@@ -76,13 +72,6 @@ final class CentreCell: UITableViewCell {
 
     @IBOutlet weak var followCentreButton: UIButton!
 
-    private lazy var iconContainers: [UIView] = [
-        dateIconContainer,
-        addressNameIconContainer,
-        phoneNumberIconContainer,
-        vaccineTypesIconContainer
-    ]
-
     var addressTapHandler: (() -> Void)?
     var phoneNumberTapHandler: (() -> Void)?
     var bookingButtonTapHandler: (() -> Void)?
@@ -91,7 +80,6 @@ final class CentreCell: UITableViewCell {
     private enum Constant {
         static let cellContentViewCornerRadius: CGFloat = 15
         static let bookingButtonCornerRadius: CGFloat = 8
-        static let iconContainersCornerRadius: CGFloat = 5
 
         static let dateFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
         static let dateHighlightedFont: UIFont = .systemFont(ofSize: 16, weight: .heavy)
@@ -145,7 +133,6 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
-        setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
     }
 
