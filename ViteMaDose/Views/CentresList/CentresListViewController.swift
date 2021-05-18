@@ -121,6 +121,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.register(cellType: CentreCell.self)
         tableView.register(cellType: CentresStatsCell.self)
         tableView.register(cellType: CentresSortOptionsCell.self)
+        tableView.register(cellType: CentreDataDisclaimerCell.self)
     }
 
 }
@@ -222,6 +223,10 @@ extension CentresListViewController {
                 Haptic.impact(.light).generate()
                 self?.viewModel.sortList(by: CentresListSortOption(option))
             }
+            cell.configure(with: cellViewData)
+            return cell
+        case let .disclaimer(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentreDataDisclaimerCell.self, for: indexPath)
             cell.configure(with: cellViewData)
             return cell
         }

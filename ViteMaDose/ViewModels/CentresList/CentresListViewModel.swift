@@ -21,6 +21,7 @@ enum CentresListCell: Hashable {
     case stats(CentresStatsCellViewData)
     case centre(CentreViewData)
     case sort(CentresSortOptionsCellViewData)
+    case disclaimer(CentreDataDisclaimerCellViewData)
 }
 
 enum CentresListSortOption: Equatable {
@@ -165,6 +166,14 @@ class CentresListViewModel {
             bottomMargin: 0
         )
         cells.append(.title(centresListTitleViewData))
+
+        if RemoteConfiguration.shared.dataDisclaimerEnabled {
+            /// Pop-up Disclaimer
+            let centreDataDisclaimerCellViewData = CentreDataDisclaimerCellViewData(
+                contentText: RemoteConfiguration.shared.dataDisclaimerMessage
+            )
+            cells.append(.disclaimer(centreDataDisclaimerCellViewData))
+        }
 
         if searchResult.coordinates != nil {
             let viewData = CentresSortOptionsCellViewData(sortOption: userDefaults.centresListSortOption)
