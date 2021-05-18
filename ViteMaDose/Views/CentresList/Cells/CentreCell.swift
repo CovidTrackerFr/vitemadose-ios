@@ -119,6 +119,7 @@ final class CentreCell: UITableViewCell {
         configurePhoneNumberView(viewData)
         configureChronoDoseView(viewData)
         configureFollowCentreButton(viewData)
+        configureAccessibility(viewData)
 
         let dateText = createDateText(
             dayText: viewData.dayText,
@@ -127,16 +128,6 @@ final class CentreCell: UITableViewCell {
         )
         dateLabel.attributedText = dateText
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        if let dayText = viewData.dayText, let timeText = viewData.timeText, let dayDate = dateFormatter.date(from: timeText) {
-            let hourComponents = Calendar.current.dateComponents([.hour, .minute], from: dayDate)
-            if let localizedHours = DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut) {
-                dateLabel.accessibilityLabel = dayText + String.space + Localization.A11y.VoiceOver.Details.from + localizedHours
-            } else {
-                dateLabel.accessibilityLabel = dayText
-            }
-        }
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor
@@ -154,14 +145,8 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
-        if let vaccineName = viewData.vaccineTypesText {
-            vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
-        }
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
-        accessibilityElements = [
-            dateLabel, nameLabel, phoneButton, vaccineTypesLabel, bookingButton, appointmentsLabel
-        ]
     }
 
     override func prepareForReuse() {
@@ -367,6 +352,36 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapFollowCentreButton),
             for: .touchUpInside
         )
+    }
+
+    private func configureAccessibility(_ viewData: CentreViewData) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        if
+            let dayText = viewData.dayText,
+            let timeText = viewData.timeText,
+            let dayDate = dateFormatter.date(from: timeText)
+        {
+            let hourComponents = Calendar.current.dateComponents([.hour, .minute], from: dayDate)
+            if let localizedHours = DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut) {
+                dateLabel.accessibilityLabel = dayText + String.space + Localization.A11y.VoiceOver.Details.from + localizedHours
+            } else {
+                dateLabel.accessibilityLabel = dayText
+            }
+        }
+
+        if let vaccineName = viewData.vaccineTypesText {
+            vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
+        }
+
+        accessibilityElements = [
+            dateLabel,
+            nameLabel,
+            phoneButton,
+            vaccineTypesLabel,
+            bookingButton,
+            appointmentsLabel
+        ].compacted
     }
 
     private func setCornerRadius(to radius: CGFloat, for views: [UIView]) {
