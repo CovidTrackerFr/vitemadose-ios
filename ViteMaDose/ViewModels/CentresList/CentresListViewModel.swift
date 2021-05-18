@@ -19,6 +19,7 @@ class CentresListViewModel {
     private let searchResult: LocationSearchResult?
     private(set) var userDefaults: UserDefaults
     private let notificationCenter: UNUserNotificationCenter
+    private let remoteConfig: RemoteConfiguration
 
     internal var sortOption: CentresListSortOption {
         return userDefaults.centresListSortOption
@@ -49,13 +50,15 @@ class CentresListViewModel {
         searchResult: LocationSearchResult?,
         phoneNumberKit: PhoneNumberKit = PhoneNumberKit(),
         userDefaults: UserDefaults = .shared,
-        notificationCenter: UNUserNotificationCenter = .current()
+        notificationCenter: UNUserNotificationCenter = .current(),
+        remoteConfig: RemoteConfiguration = .shared
     ) {
         self.apiService = apiService
         self.searchResult = searchResult
         self.phoneNumberKit = phoneNumberKit
         self.userDefaults = userDefaults
         self.notificationCenter = notificationCenter
+        self.remoteConfig = remoteConfig
     }
 
     internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
@@ -92,6 +95,14 @@ class CentresListViewModel {
         if searchResult?.coordinates != nil {
             let viewData = CentresSortOptionsCellViewData(sortOption: sortOption)
             cells.append(.sort(viewData))
+        }
+
+        if remoteConfig.dataDisclaimerEnabled, let disclaimerMessage = remoteConfig.dataDisclaimerMessage {
+            // Disclaimer cell
+            let centreDataDisclaimerCellViewData = CentreDataDisclaimerCellViewData(
+                contentText: disclaimerMessage
+            )
+            cells.append(.disclaimer(centreDataDisclaimerCellViewData))
         }
 
         return cells

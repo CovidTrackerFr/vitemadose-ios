@@ -60,6 +60,19 @@ extension RemoteConfiguration {
         }
     }
 
+    var dataDisclaimerEnabled: Bool {
+        return configuration.configValue(forKey: "data_disclaimer_enabled").boolValue
+    }
+
+    var dataDisclaimerMessage: String? {
+        let configValue = configuration.configValue(forKey: "data_disclaimer_message").stringValue
+        if let value = configValue, !value.isEmpty {
+            return value
+        } else {
+            return nil
+        }
+    }
+
     var vaccinationCentresListRadiusInKm: NSNumber {
         return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
     }
