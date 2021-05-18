@@ -99,6 +99,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         backButton.setImage(backButtonImage, for: .normal)
         backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        backButton.accessibilityLabel = Localization.A11y.VoiceOver.Navigation.back_button
 
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
 

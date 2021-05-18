@@ -33,6 +33,7 @@ final class HomePartnersFooterView: UIView {
         titleLabel.text = Localization.Home.partners
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel
+        titleLabel.isAccessibilityElement = false
 
         for logoImageView in allLogos {
             logoImageView.image = logoImageView.image?.tint(with: .systemGray)
