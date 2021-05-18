@@ -377,8 +377,10 @@ final class CentreCell: UITableViewCell {
         accessibilityElements = [
             dateLabel,
             nameLabel,
+            addressLabel,
             phoneButton,
             vaccineTypesLabel,
+            followCentreButton,
             bookingButton,
             appointmentsLabel
         ].compacted
