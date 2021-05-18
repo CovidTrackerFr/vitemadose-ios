@@ -27,13 +27,16 @@ final class HomeSearchResultCell: LocationSearchResultCell {
         titleLabel.text = viewData.titleText
         titleLabel.font = .rounded(ofSize: 14, weight: .semibold)
         titleLabel.textColor = .secondaryLabel
-        if viewData.titleText != nil {
-            self.accessibilityLabel = Localization.A11y.VoiceOver.HomeScreen.recent_searches
-                + " "
-                + Localization.A11y.VoiceOver.HomeScreen.see_department_results
-                + " "
-                + viewData.name
-        }
+        accessibilityLabel = {
+            guard viewData.titleText != nil else {
+                return nil
+            }
+            return Localization.A11y.VoiceOver.HomeScreen.recent_searches
+                .appending(String.space)
+                .appending(Localization.A11y.VoiceOver.HomeScreen.see_department_results)
+                .appending(String.space)
+                .appending(viewData.name)
+        }()
     }
 
     override func prepareForReuse() {

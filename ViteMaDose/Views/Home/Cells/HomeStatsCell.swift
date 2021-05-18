@@ -50,11 +50,11 @@ final class HomeStatsCell: UITableViewCell {
         if let integerTitleValue = Int(viewData.title.string.replacingOccurrences(of: " ", with: "")) {
             titleLabel.accessibilityLabel = NumberFormatter.localizedString(from: NSNumber(value: integerTitleValue), number: .spellOut)
         }
-        
-        if viewData.dataType == .externalMap {
-            self.accessibilityLabel = viewData.title.string
-            self.accessibilityTraits = .button
-            self.accessibilityHint = Localization.A11y.VoiceOver.HomeScreen.display_places_on_map
+
+        if case .externalMap = viewData.dataType {
+            accessibilityLabel = viewData.title.string
+            accessibilityTraits = .button
+            accessibilityHint = Localization.A11y.VoiceOver.HomeScreen.display_places_on_map
         }
 
         descriptionLabel.text = viewData.description

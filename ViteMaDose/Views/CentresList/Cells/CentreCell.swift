@@ -131,7 +131,11 @@ final class CentreCell: UITableViewCell {
         dateFormatter.dateFormat = "HH:mm"
         if let dayText = viewData.dayText, let timeText = viewData.timeText, let dayDate = dateFormatter.date(from: timeText) {
             let hourComponents = Calendar.current.dateComponents([.hour, .minute], from: dayDate)
-            dateLabel.accessibilityLabel = dayText + " " + Localization.A11y.VoiceOver.Details.from + DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut)!
+            if let localizedHours = DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut) {
+                dateLabel.accessibilityLabel = dayText + String.space + Localization.A11y.VoiceOver.Details.from + localizedHours
+            } else {
+                dateLabel.accessibilityLabel = dayText
+            }
         }
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
@@ -155,7 +159,7 @@ final class CentreCell: UITableViewCell {
         }
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
-        self.accessibilityElements = [
+        accessibilityElements = [
             dateLabel, nameLabel, phoneButton, vaccineTypesLabel, bookingButton, appointmentsLabel
         ]
     }
@@ -264,7 +268,6 @@ final class CentreCell: UITableViewCell {
         appointmentsLabel.attributedText = appointmentsAndLogoString
         appointmentsLabel.isAccessibilityElement = true
         appointmentsLabel.accessibilityLabel = appointmentsText + Localization.A11y.VoiceOver.Details.to_use_with_platform + String.space  + partnerName.emptyIfNil
-        
     }
 
     private func configurePhoneNumberView(_ viewData: CentreViewData) {
@@ -291,7 +294,7 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapPhoneNumber),
             for: .touchUpInside
         )
-        phoneButton.accessibilityLabel = Localization.A11y.VoiceOver.Details.call + " " + phoneButtonAttributedText.string
+        phoneButton.accessibilityLabel = Localization.A11y.VoiceOver.Details.call + String.space + phoneButtonAttributedText.string
         phoneButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.call_button
     }
 
