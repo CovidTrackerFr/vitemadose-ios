@@ -9,8 +9,9 @@ import UIKit
 import SafariServices
 import FirebaseAnalytics
 import Haptica
+import BLTNBoard
 
-class HomeViewController: UIViewController, Storyboarded {
+final class HomeViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
 
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
@@ -40,19 +41,25 @@ class HomeViewController: UIViewController, Storyboarded {
         return view
     }()
 
+    // TODO: Full onboarding
+    private lazy var bulletinManager: BLTNItemManager = {
+        let rootItem = OnboardingManager.makeFirstPage()
+        let manager = BLTNItemManager(rootItem: rootItem)
+        manager.backgroundColor = .tertiarySystemBackground
+        manager.backgroundViewStyle = .dimmed
+        return manager
+    }()
+
     private lazy var dataSource = makeDataSource()
     private let remoteConfiguration: RemoteConfiguration = .shared
+
     // MARK: - Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
 
-        remoteConfiguration.synchronize { [unowned self] _ in
-            if let maintenanceUrlString = self.remoteConfiguration.maintenanceModeUrl {
-                self.presentMaintenancePage(with: maintenanceUrlString)
-                return
-            }
+        remoteConfiguration.synchronize { _ in
             self.viewModel.load()
         }
     }
@@ -65,6 +72,8 @@ class HomeViewController: UIViewController, Storyboarded {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AppAnalytics.logScreen(.home, screenClass: Self.className)
+        viewModel.displayAppOnboardingIfNeeded()
+        viewModel.reloadHeadingCellsIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,6 +100,7 @@ class HomeViewController: UIViewController, Storyboarded {
         tableView.register(cellType: HomeSearchBarCell.self)
         tableView.register(cellType: HomeSearchResultCell.self)
         tableView.register(cellType: HomeStatsCell.self)
+        tableView.register(cellType: HomeFollowedCentresCell.self)
     }
 
     @objc func didPullToRefresh() {
@@ -120,6 +130,12 @@ class HomeViewController: UIViewController, Storyboarded {
         let maintenanceViewController = MaintenanceViewController(urlString: urlString)
         present(maintenanceViewController, animated: true)
     }
+
+    private func presentFollowedCentres() {
+        let followedCentresViewController = CentresListViewController.instantiate()
+        followedCentresViewController.viewModel = FollowedCentresViewModel()
+        navigationController?.pushViewController(followedCentresViewController, animated: true)
+    }
 }
 
 // MARK: - HomeViewModelDelegate
@@ -128,14 +144,14 @@ extension HomeViewController: HomeViewModelDelegate {
 
     // MARK: Table View Updates
 
-    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell]) {
+    func reloadTableView(with headingCells: [HomeCell], andStatsCells statsCells: [HomeCell], animated: Bool) {
         var snapshot = Snapshot()
         snapshot.appendSections(HomeSection.allCases)
         snapshot.appendItems(headingCells, toSection: .heading)
         snapshot.appendItems(statsCells, toSection: .stats)
 
         dataSource.defaultRowAnimation = .fade
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
     // MARK: Present
@@ -157,6 +173,10 @@ extension HomeViewController: HomeViewModelDelegate {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         }
+    }
+
+    func presentOnboarding() {
+        bulletinManager.showBulletin(above: self)
     }
 
     func presentFetchStatsError(_ error: Error) {
@@ -186,13 +206,16 @@ extension HomeViewController: UITableViewDelegate {
         case let .searchResult(viewData):
             viewModel.didSelectSavedSearchResult(withName: viewData.name)
             Haptic.impact(.light).generate()
+        case .followedCentre:
+            presentFollowedCentres()
+            Haptic.impact(.light).generate()
         case let .stats(viewData):
             guard viewData.dataType == .externalMap else {
                 return
             }
             presentVaccinationCentresMap()
-        default:
-            return
+        case .title:
+            break
         }
     }
 }
@@ -219,6 +242,10 @@ extension HomeViewController {
         case let .searchBar(cellViewModel):
             let cell = tableView.dequeueReusableCell(with: HomeSearchBarCell.self, for: indexPath)
             cell.configure(with: cellViewModel)
+            return cell
+        case .followedCentre:
+            let cell = tableView.dequeueReusableCell(with: HomeFollowedCentresCell.self, for: indexPath)
+            cell.configure()
             return cell
         case let .searchResult(cellViewModel):
             let cell = tableView.dequeueReusableCell(with: HomeSearchResultCell.self, for: indexPath)

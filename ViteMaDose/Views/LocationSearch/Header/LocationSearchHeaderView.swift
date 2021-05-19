@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationSearchHeaderView: UIView {
+final class LocationSearchHeaderView: UIView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private(set) weak var searchBar: UISearchBar!
 
@@ -22,6 +22,9 @@ class LocationSearchHeaderView: UIView {
         super.awakeFromNib()
         backgroundColor = .athensGray
         searchBar.placeholder = Localization.LocationSearch.search_placeholder
+        searchBar.isAccessibilityElement = true
+        searchBar.accessibilityTraits = .searchField
+        searchBar.accessibilityLabel = Localization.A11y.VoiceOver.Locations.search
         configureTitle()
     }
 

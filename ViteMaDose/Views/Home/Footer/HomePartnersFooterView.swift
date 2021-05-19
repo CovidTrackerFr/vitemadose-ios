@@ -7,21 +7,23 @@
 
 import UIKit
 
-class HomePartnersFooterView: UIView {
+final class HomePartnersFooterView: UIView {
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var logo1ImageView: UIImageView!
     @IBOutlet private var logo2ImageView: UIImageView!
     @IBOutlet private var logo3ImageView: UIImageView!
     @IBOutlet private var logo4ImageView: UIImageView!
-    @IBOutlet var logoImageView5: UIImageView!
+    @IBOutlet private var logoImageView5: UIImageView!
+    @IBOutlet private var logo6ImageView: UIImageView!
 
     private lazy var allLogos: [UIImageView] = [
         logo1ImageView,
         logo2ImageView,
         logo3ImageView,
         logo4ImageView,
-        logoImageView5
+        logoImageView5,
+        logo6ImageView
     ]
 
     override func awakeFromNib() {
@@ -31,6 +33,7 @@ class HomePartnersFooterView: UIView {
         titleLabel.text = Localization.Home.partners
         titleLabel.font = .systemFont(ofSize: 13, weight: .light)
         titleLabel.textColor = .secondaryLabel
+        titleLabel.isAccessibilityElement = false
 
         for logoImageView in allLogos {
             logoImageView.image = logoImageView.image?.tint(with: .systemGray)
