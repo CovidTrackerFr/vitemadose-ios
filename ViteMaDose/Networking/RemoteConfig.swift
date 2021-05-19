@@ -64,6 +64,10 @@ extension RemoteConfiguration {
         return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
     }
 
+    var chronodoseMinCount: NSNumber {
+        return configuration.configValue(forKey: "chronodose_min_count").numberValue
+    }
+
     var vaccinationCentresListRadiusInMeters: Double {
         return vaccinationCentresListRadiusInKm.doubleValue * 1000
     }
