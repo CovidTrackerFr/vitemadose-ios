@@ -126,6 +126,14 @@ class CentresListViewModel {
             }
         }
 
+        let appointmentsCount: Int? = {
+            if centre.hasChronoDose {
+                return centre.chronoDosesCount
+            } else {
+                return centre.appointmentCount
+            }
+        }()
+
         return CentreViewData(
             id: centre.id,
             dayText: centre.nextAppointmentDay,
@@ -135,11 +143,12 @@ class CentresListViewModel {
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
-            appointmentsCount: centre.appointmentCount,
+            appointmentsCount: appointmentsCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
             isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
+
         )
     }
 
