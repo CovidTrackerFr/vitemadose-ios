@@ -159,7 +159,6 @@ class CentresListViewModel {
             partnerName: centre.plateforme,
             isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
-
         )
     }
 
