@@ -144,7 +144,7 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, isChronodose: viewData.isChronoDose)
+        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo)
     }
 
     override func prepareForReuse() {
@@ -222,8 +222,7 @@ final class CentreCell: UITableViewCell {
 
     private func configureAppointmentsLabel(
         appointmentsCount: Int?,
-        partnerLogo: UIImage?,
-        isChronodose: Bool
+        partnerLogo: UIImage?
     ) {
         let attributes = [
             NSAttributedString.Key.font: Constant.appointmentsLabelFont,
@@ -237,12 +236,7 @@ final class CentreCell: UITableViewCell {
 
         appointmentsLabel.isHidden = false
 
-        var appointmentsText: String = Localization.Locations.appointments.format(appointmentsCount) + String.space
-
-        //Remove information about Chronodose to clarify more
-        if isChronodose {
-            appointmentsText = ""
-        }
+        let appointmentsText: String = Localization.Locations.appointments.format(appointmentsCount) + String.space
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
             appointmentsLabel.attributedText = NSAttributedString(string: appointmentsText, attributes: attributes)
