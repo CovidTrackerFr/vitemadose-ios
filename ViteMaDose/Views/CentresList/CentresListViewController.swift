@@ -99,6 +99,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         backButton.setImage(backButtonImage, for: .normal)
         backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        backButton.accessibilityLabel = Localization.A11y.VoiceOver.Navigation.back_button
 
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
 
@@ -129,6 +130,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.register(cellType: CentreCell.self)
         tableView.register(cellType: CentresStatsCell.self)
         tableView.register(cellType: CentresSortOptionsCell.self)
+        tableView.register(cellType: CentreDataDisclaimerCell.self)
     }
 
 }
@@ -218,6 +220,10 @@ extension CentresListViewController: UITableViewDelegate {
                 Haptic.impact(.light).generate()
                 self?.viewModel.sortList(by: CentresListSortOption(option))
             }
+            cell.configure(with: cellViewData)
+            return cell
+        case let .disclaimer(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentreDataDisclaimerCell.self, for: indexPath)
             cell.configure(with: cellViewData)
             return cell
         }

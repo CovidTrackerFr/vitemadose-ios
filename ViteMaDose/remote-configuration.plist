@@ -4,6 +4,11 @@
 <dict>
 	<key>chronodose_min_count</key>
 	<string></string>
+	<key>data_disclaimer_message</key>
+	<string></string>
+	<key>data_disclaimer_enabled</key>
+	<false/>
+
 	<key>ios_maintenance_mode_url</key>
 	<string></string>
 	<key>url_base</key>

@@ -45,6 +45,18 @@ final class HomeStatsCell: UITableViewCell {
         titleLabel.textColor = Constant.titleColor
         titleLabel.font = Constant.titleFont
 
+        // Some values returned by backend are not vocalized as numbers, like "226 095".
+        // In this case we need to remove white spaces from text value, try to cast to Int and define the label
+        if let integerTitleValue = Int(viewData.title.string.replacingOccurrences(of: " ", with: "")) {
+            titleLabel.accessibilityLabel = NumberFormatter.localizedString(from: NSNumber(value: integerTitleValue), number: .spellOut)
+        }
+
+        if case .externalMap = viewData.dataType {
+            accessibilityLabel = viewData.title.string
+            accessibilityTraits = .button
+            accessibilityHint = Localization.A11y.VoiceOver.HomeScreen.display_places_on_map
+        }
+
         descriptionLabel.text = viewData.description
         descriptionLabel.textColor = Constant.descriptionColor
         descriptionLabel.font = Constant.descriptionFont

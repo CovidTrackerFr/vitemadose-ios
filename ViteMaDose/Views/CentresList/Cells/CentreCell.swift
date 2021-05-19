@@ -38,6 +38,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
+    let partnerName: String?
     let isChronoDose: Bool
     let notificationsType: FollowedCentre.NotificationsType?
 }
@@ -119,12 +120,23 @@ final class CentreCell: UITableViewCell {
         configureChronoDoseView(viewData)
         configureFollowCentreButton(viewData)
 
-        dateLabel.attributedText = createDateText(
+        let dateText = createDateText(
             dayText: viewData.dayText,
             timeText: viewData.timeText,
             isAvailable: viewData.isAvailable
         )
+        dateLabel.attributedText = dateText
 
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        if let dayText = viewData.dayText, let timeText = viewData.timeText, let dayDate = dateFormatter.date(from: timeText) {
+            let hourComponents = Calendar.current.dateComponents([.hour, .minute], from: dayDate)
+            if let localizedHours = DateComponentsFormatter.localizedString(from: hourComponents, unitsStyle: .spellOut) {
+                dateLabel.accessibilityLabel = dayText + String.space + Localization.A11y.VoiceOver.Details.from + localizedHours
+            } else {
+                dateLabel.accessibilityLabel = dayText
+            }
+        }
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor
@@ -142,9 +154,14 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
-
+        if let vaccineName = viewData.vaccineTypesText {
+            vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
+        }
         setCornerRadius(to: Constant.iconContainersCornerRadius, for: iconContainers)
-        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo)
+        configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
+        accessibilityElements = [
+            dateLabel, nameLabel, phoneButton, vaccineTypesLabel, bookingButton, appointmentsLabel
+        ]
     }
 
     override func prepareForReuse() {
@@ -222,7 +239,8 @@ final class CentreCell: UITableViewCell {
 
     private func configureAppointmentsLabel(
         appointmentsCount: Int?,
-        partnerLogo: UIImage?
+        partnerLogo: UIImage?,
+        partnerName: String?
     ) {
         let attributes = [
             NSAttributedString.Key.font: Constant.appointmentsLabelFont,
@@ -249,6 +267,8 @@ final class CentreCell: UITableViewCell {
         appointmentsAndLogoString.append(logoString)
 
         appointmentsLabel.attributedText = appointmentsAndLogoString
+        appointmentsLabel.isAccessibilityElement = true
+        appointmentsLabel.accessibilityLabel = appointmentsText + Localization.A11y.VoiceOver.Details.to_use_with_platform + String.space  + partnerName.emptyIfNil
     }
 
     private func configurePhoneNumberView(_ viewData: CentreViewData) {
@@ -275,6 +295,8 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapPhoneNumber),
             for: .touchUpInside
         )
+        phoneButton.accessibilityLabel = Localization.A11y.VoiceOver.Details.call + String.space + phoneButtonAttributedText.string
+        phoneButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.call_button
     }
 
     private func configureBookButton(_ viewData: CentreViewData) {
@@ -283,6 +305,7 @@ final class CentreCell: UITableViewCell {
             systemName: "arrow.up.right",
             withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
         )
+        iconImage?.isAccessibilityElement = false
         imageAttachment.image = iconImage?.withTintColor(.white, renderingMode: .alwaysOriginal)
 
         let bookingButtonAttributedText = NSMutableAttributedString(
@@ -304,6 +327,8 @@ final class CentreCell: UITableViewCell {
             action: #selector(didTapBookButton),
             for: .touchUpInside
         )
+        bookingButton.accessibilityLabel = viewData.bookingButtonText
+        bookingButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.booking_button
     }
 
     private func configureChronoDoseView(_ viewData: CentreViewData) {

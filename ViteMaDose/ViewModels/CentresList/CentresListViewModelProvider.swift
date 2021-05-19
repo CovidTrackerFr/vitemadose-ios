@@ -19,6 +19,7 @@ public enum CentresListCell: Hashable {
     case stats(CentresStatsCellViewData)
     case centre(CentreViewData)
     case sort(CentresSortOptionsCellViewData)
+    case disclaimer(CentreDataDisclaimerCellViewData)
 }
 
 public protocol CentresListViewModelProvider: AnyObject {
