@@ -144,7 +144,7 @@ class CentresListViewModel {
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
-            vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
+            vaccineTypesText: centre.vaccinesTypeText,
             appointmentsCount: centre.appointmentCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,

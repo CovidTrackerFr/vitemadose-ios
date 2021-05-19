@@ -168,6 +168,13 @@ extension VaccinationCentre {
         return chronoDosesCount > 0
     }
 
+    var vaccinesTypeText: String? {
+        guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
+            return nil
+        }
+        return vaccineType.joined(separator: String.commaWithSpace)
+    }
+
     static var sortedByAppointment: (Self, Self) -> Bool = {
         guard
             let lhsDate = $0.nextAppointmentDate,
