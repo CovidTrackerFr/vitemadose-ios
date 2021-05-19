@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>chronodose_min_count</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>data_disclaimer_message</key>
 	<string></string>
 	<key>data_disclaimer_enabled</key>

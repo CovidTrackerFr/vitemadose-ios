@@ -161,12 +161,13 @@ extension VaccinationCentre {
         let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
         guard
             let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total
+            let chronoDosesCount = chronoDose?.total,
+            chronoDosesCount > 0
         else {
             return false
         }
 
-        return chronoDosesCount > RemoteConfiguration.shared.chronodoseMinCount
+        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
     }
 
     var vaccinesTypeText: String? {
