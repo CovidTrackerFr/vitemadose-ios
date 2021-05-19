@@ -20,3 +20,25 @@ extension RangeReplaceableCollection {
         return filter { unique.insert($0[keyPath: keyPath]).inserted }
     }
 }
+
+public protocol OptionalProtocol {
+    associatedtype Wrapped
+    var value: Wrapped? { get }
+}
+
+extension Sequence where Element: OptionalProtocol {
+    var compacted: [Element.Wrapped] {
+        return compactMap(\.value)
+    }
+}
+
+extension Optional: OptionalProtocol {
+    public var value: Wrapped? {
+        switch self {
+        case .none:
+            return nil
+        case let .some(value):
+            return value
+        }
+    }
+}

@@ -9,6 +9,26 @@
 import Foundation
 
 enum Localization {
+    enum Onboarding {
+        static let next_button = "onboarding.next_button".localized
+        static let done_button = "onboarding.done_button".localized
+
+        enum WelcomePage {
+            static let title = "onboarding.welcome_page.title".localized
+            static let description = "onboarding.welcome_page.description".localized
+        }
+
+        enum NotificationsPage {
+            static let title = "onboarding.notifications_page.title".localized
+            static let description = "onboarding.notifications_page.description".localized
+        }
+
+        enum ChronodosesPage {
+            static let title = "onboarding.chronodoses_page.title".localized
+            static let description = "onboarding.chronodoses_page.description".localized
+        }
+    }
+
     enum Home {
         static let search_placeholder = "home.search_placeholder".localized
         static let recent_search = "home.recent_search".localized
