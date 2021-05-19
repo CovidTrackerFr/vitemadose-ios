@@ -225,6 +225,7 @@ final class CentreCell: UITableViewCell {
         }
 
         appointmentsLabel.isHidden = false
+
         let appointmentsText: String = Localization.Locations.appointments.format(appointmentsCount) + String.space
 
         guard let logo = partnerLogo?.tint(with: .systemGray) else {
