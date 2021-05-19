@@ -165,8 +165,8 @@ extension VaccinationCentre {
         else {
             return false
         }
-        
-        return chronoDosesCount > Int(truncating: RemoteConfiguration.shared.chronodoseMinCount)
+
+        return chronoDosesCount > RemoteConfiguration.shared.chronodoseMinCount
     }
 
     var vaccinesTypeText: String? {
