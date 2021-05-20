@@ -1,8 +1,8 @@
 ## Description
-_A clear and concise description of what the PR fixes_
+_A clear and concise description of what the PR is about_
 
 ## Changes
-_A summary of your changes_
+- _A summary of your changes_
 
 ## Related issue
 _**Please make sure an issue exists before creating a new PR**_
