@@ -5,12 +5,15 @@ _A clear and concise description of what the PR fixes_
 _A summary of your changes_
 
 ## Related issue
-_Link to the [Github issue](https://github.com/CovidTrackerFr/vitemadose-ios/issues)_
-
 _**Please make sure an issue exists before creating a new PR**_
 
+_Link to the [Github issue](https://github.com/CovidTrackerFr/vitemadose-ios/issues)_
+
 ## What I tested
-_Explain what & how you tested your fix and list any regression risk_
+_Explain what & how you tested your changes_
+
+## Regression risks
+- _List any regression risk if applicable_
 
 ## Screenshots
 _If applicable, add screenshots to help explain the fix. Otherwise please remove this section_
