@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1991AB412653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1991AB3F2653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift */; };
+		1991AB422653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1991AB402653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib */; };
 		51C367CC2653AB9400ABB203 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 51C367CB2653AB9400ABB203 /* Settings.bundle */; };
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
@@ -135,6 +137,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1991AB3F2653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreDataDisclaimerCell.swift; sourceTree = "<group>"; };
+		1991AB402653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentreDataDisclaimerCell.xib; sourceTree = "<group>"; };
 		51C367CB2653AB9400ABB203 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ViteMaDose/Settings.bundle; sourceTree = "<group>"; };
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
 		5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceMock.swift; sourceTree = "<group>"; };
@@ -575,6 +579,8 @@
 				57C401A9262426B100EFFCA3 /* CentreCell.xib */,
 				5785314D26441A64005302DB /* CentresSortOptionsCell.swift */,
 				5785315126441B07005302DB /* CentresSortOptionsCell.xib */,
+				1991AB3F2653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift */,
+				1991AB402653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 				DA234DC32626494600D6F71C /* remote-configuration.plist in Resources */,
 				57C401972623929800EFFCA3 /* HomeSearchResultCell.xib in Resources */,
 				57C401AB262426B100EFFCA3 /* CentreCell.xib in Resources */,
+				1991AB422653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib in Resources */,
 				5785315226441B07005302DB /* CentresSortOptionsCell.xib in Resources */,
 				577A7F6C262CA3D000B1D03C /* GoogleService-Info-prod.plist in Resources */,
 				57AF5055262CE28E0085E3C1 /* CentresTitleCell.xib in Resources */,
@@ -917,6 +924,7 @@
 				DA4D9953261E6B6A00D28AD0 /* LocationSearchViewController.swift in Sources */,
 				572B064C264811BE00BB04DB /* FCMHelper.swift in Sources */,
 				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
+				1991AB412653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift in Sources */,
 				5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */,
 				5747142A262B6BA300535DF1 /* LocationSearchResultCell.swift in Sources */,
 				DA4D995E261E6D6300D28AD0 /* LocationSearchViewModel.swift in Sources */,
@@ -1154,18 +1162,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDoseDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 841539;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = ZL9396WK65;
+				DEVELOPMENT_TEAM = MG2LSJNJB6;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = pylapp.app.vitemadose.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1177,17 +1187,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 841539;
-				DEVELOPMENT_TEAM = ZL9396WK65;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose;
+				PRODUCT_BUNDLE_IDENTIFIER = pylapp.app.vitemadose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

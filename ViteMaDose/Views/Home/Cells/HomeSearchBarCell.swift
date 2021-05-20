@@ -42,6 +42,9 @@ final class HomeSearchBarCell: UITableViewCell {
             radius: 5
         )
         searchBarView.setCornerRadius(Constant.searchBarViewCornerRadius, withShadow: shadow)
+        isAccessibilityElement = true
+        accessibilityTraits = .searchField
+        accessibilityHint = Localization.A11y.VoiceOver.HomeScreen.search_field
     }
 
     func configure(with viewData: HomeSearchBarCellViewDataProvider = HomeSearchBarCellViewData()) {

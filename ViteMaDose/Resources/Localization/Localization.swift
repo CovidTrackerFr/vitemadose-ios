@@ -9,6 +9,26 @@
 import Foundation
 
 enum Localization {
+    enum Onboarding {
+        static let next_button = "onboarding.next_button".localized
+        static let done_button = "onboarding.done_button".localized
+
+        enum WelcomePage {
+            static let title = "onboarding.welcome_page.title".localized
+            static let description = "onboarding.welcome_page.description".localized
+        }
+
+        enum NotificationsPage {
+            static let title = "onboarding.notifications_page.title".localized
+            static let description = "onboarding.notifications_page.description".localized
+        }
+
+        enum ChronodosesPage {
+            static let title = "onboarding.chronodoses_page.title".localized
+            static let description = "onboarding.chronodoses_page.description".localized
+        }
+    }
+
     enum Home {
         static let search_placeholder = "home.search_placeholder".localized
         static let recent_search = "home.recent_search".localized
@@ -90,6 +110,34 @@ enum Localization {
         enum Network {
             static let server_error = "error.network.server_error".localized
             static let offline = "error.network.offline".localized
+        }
+    }
+
+    enum A11y {
+        enum VoiceOver {
+            enum Actions {
+                static let booking_button = "a11y.voiceover.actions.booking_button".localized
+                static let call_button = "a11y.voiceover.actions.call_button".localized
+            }
+            enum Details {
+                static let call = "a11y.voiceover.details.call".localized
+                static let from = "a11y.voiceover.details.from".localized
+                static let to_use_with_platform = "a11y.voiceover.details.to_use_with_platform".localized
+                static let vaccine = "a11y.voiceover.details.vaccine".localized
+            }
+            enum HomeScreen {
+                static let display_places_on_map = "a11y.voiceover.home_screen.display_places_on_map".localized
+                static let recent_searches = "a11y.voiceover.home_screen.recent_searches".localized
+                static let search_field = "a11y.voiceover.home_screen.search_field".localized
+                static let see_department_results = "a11y.voiceover.home_screen.see_department_results".localized
+            }
+            enum Locations {
+                static let search = "a11y.voiceover.locations.search".localized
+                static let see_places = "a11y.voiceover.locations.see_places".localized
+            }
+            enum Navigation {
+                static let back_button = "a11y.voiceover.navigation.back_button".localized
+            }
         }
     }
 }
