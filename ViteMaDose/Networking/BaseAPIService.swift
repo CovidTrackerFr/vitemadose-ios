@@ -76,7 +76,7 @@ protocol BaseAPIServiceProvider: AnyObject {
     func fetchCredits(completion: @escaping (Result<Credits, Error>) -> Void)
 }
 
-class BaseAPIService: BaseAPIServiceProvider {
+final class BaseAPIService: BaseAPIServiceProvider {
     let provider: MoyaProvider<BaseAPI>
 
     init(provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>(plugins: [CachePolicyPlugin()])) {

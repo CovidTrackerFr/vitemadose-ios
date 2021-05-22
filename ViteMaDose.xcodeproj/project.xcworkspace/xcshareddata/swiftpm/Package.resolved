@@ -29,12 +29,21 @@
         }
       },
       {
+        "package": "BLTNBoard",
+        "repositoryURL": "https://github.com/alexisakers/BulletinBoard",
+        "state": {
+          "branch": null,
+          "revision": "e8ba81d25e41e5d24d6a4f404ed28443d728723b",
+          "version": "5.0.0"
+        }
+      },
+      {
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "e73fdb6b83b489d3b037085e04a8381f14d7f009",
-          "version": "7.10.0"
+          "revision": "b97bfcd2e5eecc7aa7e1aeb27d097d610876cf93",
+          "version": "7.11.1"
         }
       },
       {
@@ -42,8 +51,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "184d93b7790caa8b8368794c030c3aeb10d42e25",
-          "version": "7.10.0"
+          "revision": "22cb3ab5588200b210ae01e42665f52ac4e8ad28",
+          "version": "7.11.1"
         }
       },
       {
