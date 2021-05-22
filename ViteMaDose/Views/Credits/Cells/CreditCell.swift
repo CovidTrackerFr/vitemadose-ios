@@ -11,13 +11,13 @@ import Kingfisher
 protocol CreditCellViewDataProvider {
     var creditName: String { get }
     var creditRole: String { get }
-    var creditImage: String { get }
+    var creditImage: String? { get }
 }
 
 struct CreditCellViewData: CreditCellViewDataProvider, Hashable {
     var creditName: String
     var creditRole: String
-    var creditImage: String
+    var creditImage: String?
 }
 
 class CreditCell: UITableViewCell {
@@ -44,7 +44,7 @@ class CreditCell: UITableViewCell {
         creditImageView.setCornerRadius(Constant.viewsCornerRadius)
         creditContainerView.setCornerRadius(Constant.viewsCornerRadius)
 
-        creditImageView.kf.setImage(with: URL(string: viewData.creditImage))
+        creditImageView.kf.setImage(with: URL(string: viewData.creditImage ?? ""))
         creditNameLabel.text = viewData.creditName
         creditRoleLabel.text = viewData.creditRole
 

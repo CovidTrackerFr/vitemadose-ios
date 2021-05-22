@@ -15,7 +15,7 @@ protocol CreditViewModelProvider {
 }
 
 protocol CreditViewModelDelegate: AnyObject {
-    func reloadTableView(with credits: Credits)
+    func reloadTableView(with credits: [Credit])
     func openURL(url: URL)
 
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
@@ -26,7 +26,7 @@ class CreditViewModel: CreditViewModelProvider {
     private let apiService: BaseAPIServiceProvider
     weak var delegate: CreditViewModelDelegate?
 
-    private var allCredits: Credits = []
+    private var allCredits: [Credit] = []
     private var isLoading = false {
         didSet {
             let isEmpty = allCredits.count == 0
@@ -35,18 +35,18 @@ class CreditViewModel: CreditViewModelProvider {
     }
 
     var numberOfSections: Int {
-        allCredits.count
+        1
     }
 
     func numberOfRows(in section: Int) -> Int {
-        (allCredits[section].users?.count ?? 0) + 1
+        allCredits.count
     }
 
     // MARK: init
 
     required init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
-        credits: Credits
+        credits: [Credit]
     ) {
         self.apiService = apiService
         self.allCredits = credits
@@ -54,54 +54,31 @@ class CreditViewModel: CreditViewModelProvider {
         delegate?.reloadTableView(with: credits)
     }
 
-    func sectionViewModel(at section: Int) -> CreditSectionViewDataProvider? {
-        guard let sectionModel = allCredits[safe: section] else {
-            assertionFailure("No section found at section \(section)")
-            return nil
-        }
-
-        guard let title = sectionModel.section
-        else {
-            return nil
-        }
-
-        return CreditSectionViewData(
-            title: title
-        )
-    }
-
     func cellViewModel(at indexPath: IndexPath) -> CreditCellViewDataProvider? {
-        guard let credit = allCredits[safe: indexPath.section]?.users?[safe: indexPath.row - 1] else {
+        guard let credit = allCredits[safe: indexPath.row] else {
             assertionFailure("No credit found at IndexPath \(indexPath)")
             return nil
         }
 
-        guard let nom = credit.nom,
-              let role = credit.role,
-              let image = credit.image
-        else {
-            return nil
-        }
-
         return CreditCellViewData(
-            creditName: nom,
-            creditRole: role,
-            creditImage: image
+            creditName: credit.shownName,
+            creditRole: credit.shownRole,
+            creditImage: credit.photo
         )
     }
 
     func didSelectCell(at indexPath: IndexPath) {
-        guard let credit = allCredits[safe: indexPath.section]?.users?[safe: indexPath.row - 1] else {
+        guard let credit = allCredits[safe: indexPath.row] else {
             assertionFailure("Credit not found at indexPath \(indexPath)")
             return
         }
 
-        if let detailsURL = credit.detailsURL, let url = URL(string: detailsURL) {
+        if let detailsURL = credit.site_web ?? credit.links?.first?.url, let url = URL(string: detailsURL) {
             delegate?.openURL(url: url)
         }
     }
 
-    private func handleLoad(with credits: Credits) {
+    private func handleLoad(with credits: [Credit]) {
         self.allCredits = credits
 
         delegate?.reloadTableView(with: credits)
@@ -121,7 +98,7 @@ class CreditViewModel: CreditViewModelProvider {
 
             switch result {
             case let .success(credits):
-                self.handleLoad(with: credits)
+                self.handleLoad(with: credits.contributors ?? [])
             case let .failure(status):
                 self.handleError(status)
             }

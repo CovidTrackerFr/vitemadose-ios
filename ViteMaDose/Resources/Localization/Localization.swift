@@ -40,6 +40,9 @@ enum Localization {
     }
 
     enum Credits {
+        static let noName = "credits.no_name".localized
+        static let noRole = "credits.no_role".localized
+
         enum MainTitle {
             static let title = "credits.main_title.title".localized
             static let subtitle = "credits.main_title.subtitle".localized

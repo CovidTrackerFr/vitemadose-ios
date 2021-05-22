@@ -76,18 +76,6 @@ extension CreditViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Case of title
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(with: CreditSectionView.self, for: indexPath)
-            guard let cellViewModel = viewModel.sectionViewModel(at: indexPath.section) else {
-                assertionFailure("Cell view model missing at \(indexPath)")
-                return UITableViewCell()
-            }
-
-            cell.configure(with: cellViewModel)
-            return cell
-        }
-
         // Case of user
         let cell = tableView.dequeueReusableCell(with: CreditCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
@@ -110,7 +98,7 @@ extension CreditViewController: UITableViewDelegate {
 }
 
 extension CreditViewController: CreditViewModelDelegate {
-    func reloadTableView(with credits: Credits) {
+    func reloadTableView(with credits: [Credit]) {
         tableView.reloadData()
     }
 

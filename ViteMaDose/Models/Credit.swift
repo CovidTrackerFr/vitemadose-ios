@@ -10,19 +10,36 @@ import Foundation
 // MARK: - Credit
 
 struct Credit: Codable {
+    let id: String?
     let nom: String?
-    let image: String?
-    let role: String?
-    let detailsURL: String?
+    let pseudo: String?
+    let photo: String?
+    let site_web: String?
+    let job: String?
+    let localisation: String?
+    let company: String?
+    let teams: [String]?
+    let links: [CreditLink]?
+
+    var shownName: String {
+        nom ?? pseudo ?? id ?? Localization.Credits.noName
+    }
+    var shownRole: String {
+        teams.map({ team in
+            team
+        })?.joined(separator: ", ") ?? Localization.Credits.noRole
+    }
 }
 
-// MARK: - CreditSection
+// MARK: - CreditLink
 
-struct CreditSection: Codable {
-    let section: String?
-    let users: [Credit]?
+struct CreditLink: Codable {
+    let site: String?
+    let url: String?
 }
 
 // MARK: - Credits
 
-typealias Credits = [CreditSection]
+struct Credits: Codable {
+    let contributors: [Credit]?
+}

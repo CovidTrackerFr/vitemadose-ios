@@ -23,6 +23,8 @@
 "credits.main_title.subtitle" = "ViteMaDose est un projet open source, construit par l'ensemble de ses généreux contributeurs :";
 "credits.main_title.highlightedText1" = "open source";
 "credits.main_title.highlightedText2" = "généreux contributeurs";
+"credits.no_name" = "Nom inconnu";
+"credits.no_role" = "Rôle inconnu";
 // Department Selection
 "location_search.main_title" = "Sélectionnez ou recherchez un lieu en France";
 "location_search.main_title.highlighted_text" = "France";
