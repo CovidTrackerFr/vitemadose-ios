@@ -17,13 +17,18 @@ extension UIFont {
     static var accessibleFootnoteLight: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.footnote).pointSize, weight: .light)
     }
+
+    /// Regular text with headline text style, thus a size point of 15
+    static var accessibleSubheadRegular: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .regular)
+    }
     
-    /// Medium text with headline text style, thus a size point of 15
+    /// Semibold text with headline text style, thus a size point of 15
     static var accessibleSubheadSemiBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .semibold)
     }
 
-    /// Medium text with headline text style, thus a size point of 15
+    /// Bold text with headline text style, thus a size point of 15
     static var accessibleSubheadBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .bold)
     }
