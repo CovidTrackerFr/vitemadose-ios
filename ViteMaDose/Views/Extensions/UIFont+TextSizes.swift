@@ -22,12 +22,12 @@ extension UIFont {
     static var accessibleSubheadRegular: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .regular)
     }
-    
+
     /// Medium text with headline text style, thus a size point of 15
     static var accessibleSubheadMedium: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .medium)
     }
-    
+
     /// Semibold text with headline text style, thus a size point of 15
     static var accessibleSubheadSemiBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .semibold)
@@ -37,7 +37,7 @@ extension UIFont {
     static var accessibleSubheadBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .bold)
     }
-    
+
     /// Medium text with _callout_ text style, thus a size point of 16
     static var accessibleCalloutMedium: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.callout).pointSize, weight: .medium)
@@ -47,17 +47,17 @@ extension UIFont {
     static var accessibleCalloutBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.callout).pointSize, weight: .bold)
     }
-    
+
     /// Heavy text with _body_ text style, thus a size point of 17
     static var accessibleBodyHeavy: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.body).pointSize, weight: .heavy)
     }
-    
+
     /// Bold text with _body_ text style, thus a size point of 17
     static var accessibleBodyBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.body).pointSize, weight: .bold)
     }
-    
+
     /// Bold text with _title2_ text style, thus a size point of 22
     static var accessibleTitle2Bold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.title2).pointSize, weight: .bold)

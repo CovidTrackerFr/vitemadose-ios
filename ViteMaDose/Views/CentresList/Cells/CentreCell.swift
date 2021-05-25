@@ -116,7 +116,7 @@ final class CentreCell: UITableViewCell {
         )
         dateLabel.attributedText = dateText
         dateLabel.adjustsFontForContentSizeCategory = false
-        
+
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor
