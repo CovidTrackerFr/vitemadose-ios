@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1991AB412653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1991AB3F2653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift */; };
 		1991AB422653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1991AB402653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib */; };
+		51B7DF09265D651F00DDEB56 /* UIFont+TextSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B7DF08265D651F00DDEB56 /* UIFont+TextSizes.swift */; };
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
 		57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57044415263F0D1000F802F2 /* LocationSearchResult.swift */; };
@@ -138,6 +139,7 @@
 /* Begin PBXFileReference section */
 		1991AB3F2653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreDataDisclaimerCell.swift; sourceTree = "<group>"; };
 		1991AB402653AE1E00FA4E1F /* CentreDataDisclaimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CentreDataDisclaimerCell.xib; sourceTree = "<group>"; };
+		51B7DF08265D651F00DDEB56 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
 		5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceMock.swift; sourceTree = "<group>"; };
 		57044415263F0D1000F802F2 /* LocationSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResult.swift; sourceTree = "<group>"; };
@@ -267,6 +269,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51B7DF06265D64FC00DDEB56 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				51B7DF08265D651F00DDEB56 /* UIFont+TextSizes.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5702B5D92635963100C51F47 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +386,7 @@
 		5767392A261E3B99004A700D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				51B7DF06265D64FC00DDEB56 /* Extensions */,
 				5767392E261E3BB2004A700D /* Home */,
 				57AD21E22621067D00ED2B95 /* LocationSearch */,
 				57AD21D4262103F000ED2B95 /* CentresList */,
@@ -912,6 +923,7 @@
 				57AD21C8261FD47B00ED2B95 /* NSMutableAttributedString+Commons.swift in Sources */,
 				57FE5C0F261FA84D0012B66D /* UIColor+VideMaDose.swift in Sources */,
 				57673903261E3783004A700D /* Data+Commons.swift in Sources */,
+				51B7DF09265D651F00DDEB56 /* UIFont+TextSizes.swift in Sources */,
 				572B0654264813DE00BB04DB /* CentresListSortOption.swift in Sources */,
 				DA234DD12626506600D6F71C /* RemoteConfig.swift in Sources */,
 				576738C0261E329C004A700D /* AppDelegate.swift in Sources */,
@@ -1161,7 +1173,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 841539;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = ZL9396WK65;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1183,7 +1195,7 @@
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 841539;
-				DEVELOPMENT_TEAM = ZL9396WK65;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
