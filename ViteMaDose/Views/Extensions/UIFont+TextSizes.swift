@@ -33,6 +33,11 @@ extension UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.callout).pointSize, weight: .bold)
     }
     
+    /// Bold text with _body_ text style, thus a size point of 17
+    static var accessibleBodyBold: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.body).pointSize, weight: .bold)
+    }
+    
     /// Bold text with _title2_ text style, thus a size point of 22
     static var accessibleTitle2Bold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.title2).pointSize, weight: .bold)

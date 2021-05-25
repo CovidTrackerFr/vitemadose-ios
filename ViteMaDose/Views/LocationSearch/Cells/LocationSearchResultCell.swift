@@ -30,7 +30,7 @@ class LocationSearchResultCell: UITableViewCell {
         static let nameTextColor: UIColor = .label
         static let codeBackgroundColor: UIColor = .royalBlue
         static let cellBackgroundColor: UIColor = .tertiarySystemBackground
-        static let labelsFont: UIFont = .rounded(ofSize: 18, weight: .bold)
+        static let labelsFont: UIFont = .accessibleBodyBold
         static let viewsCornerRadius: CGFloat = 15
     }
 
@@ -51,6 +51,9 @@ class LocationSearchResultCell: UITableViewCell {
 
         codeLabel.font = Constant.labelsFont
         nameLabel.font = Constant.labelsFont
+
+        codeLabel.adjustsFontForContentSizeCategory = true
+        nameLabel.adjustsFontForContentSizeCategory = true
 
         accessibilityTraits = .button
         accessibilityLabel = Localization.A11y.VoiceOver.Locations.see_places.format(viewData.name)
