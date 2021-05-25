@@ -13,6 +13,11 @@ import UIKit
 /// More details about size points values here: //https://sarunw.com/posts/scaling-custom-fonts-automatically-with-dynamic-type/
 extension UIFont {
 
+    /// Medium text with headline text style, thus a size point of 13
+    static var accessibleFootnoteLight: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.footnote).pointSize, weight: .light)
+    }
+    
     /// Medium text with headline text style, thus a size point of 15
     static var accessibleSubheadSemiBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .semibold)
