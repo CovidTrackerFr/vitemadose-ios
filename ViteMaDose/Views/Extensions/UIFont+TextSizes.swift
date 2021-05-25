@@ -23,6 +23,11 @@ extension UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .regular)
     }
     
+    /// Medium text with headline text style, thus a size point of 15
+    static var accessibleSubheadMedium: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .medium)
+    }
+    
     /// Semibold text with headline text style, thus a size point of 15
     static var accessibleSubheadSemiBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .semibold)
@@ -41,6 +46,11 @@ extension UIFont {
     /// Bold text with _callout_ text style, thus a size point of 16
     static var accessibleCalloutBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.callout).pointSize, weight: .bold)
+    }
+    
+    /// Heavy text with _body_ text style, thus a size point of 17
+    static var accessibleBodyHeavy: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.body).pointSize, weight: .heavy)
     }
     
     /// Bold text with _body_ text style, thus a size point of 17
