@@ -13,6 +13,11 @@ import UIKit
 /// More details about size points values here: //https://sarunw.com/posts/scaling-custom-fonts-automatically-with-dynamic-type/
 extension UIFont {
 
+    /// Medium text with _callout_ text style, thus a size point of 16
+    static var accessibleCalloutMedium: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.callout).pointSize, weight: .medium)
+    }
+
     /// Bold text with _title2_ text style, thus a size point of 22
     static var accessibleTitle2Bold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.title2).pointSize, weight: .bold)

@@ -13,7 +13,7 @@ final class LocationSearchHeaderView: UIView {
 
     private enum Constant {
         static let highlightedTextColor = UIColor.mandy
-        static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
+        static let titleFont: UIFont = UIFont.accessibleTitle2Bold
         static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
         static let searchBarViewCornerRadius: CGFloat = 10.0
     }
