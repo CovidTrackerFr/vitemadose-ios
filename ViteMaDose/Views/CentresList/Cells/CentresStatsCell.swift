@@ -34,10 +34,10 @@ final class CentresStatsCell: UITableViewCell {
     @IBOutlet var allCentresCountView: UIView!
 
     private enum Constant {
-        static let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
+        static let titleFont: UIFont = .accessibleTitle1Bold
         static let titleColor: UIColor = .label
 
-        static let descriptionFont: UIFont = .rounded(ofSize: 14, weight: .bold)
+        static let descriptionFont: UIFont = .accessibleSubheadBold
         static let descriptionColor: UIColor = .secondaryLabel
 
         static let detailViewsCornerRadius: CGFloat = 15
@@ -69,12 +69,13 @@ final class CentresStatsCell: UITableViewCell {
 
         availableCentresCountLabel.text = viewData.availableCentresCount.formattedWithSeparator
         availableCentresDescriptionLabel.text = Localization.Locations.available_locations.format(viewData.availableCentresCount)
-
         availableCentresCountLabel.font = Constant.titleFont
         availableCentresCountLabel.textColor = Constant.titleColor
+        availableCentresCountLabel.adjustsFontForContentSizeCategory = true
 
         availableCentresDescriptionLabel.font = Constant.descriptionFont
         availableCentresDescriptionLabel.textColor = Constant.descriptionColor
+        availableCentresDescriptionLabel.adjustsFontForContentSizeCategory = true
     }
 
     private func configureAllCentresView(_ viewData: CentresStatsCellViewData) {

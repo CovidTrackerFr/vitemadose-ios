@@ -23,6 +23,11 @@ extension UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .semibold)
     }
 
+    /// Medium text with headline text style, thus a size point of 15
+    static var accessibleSubheadBold: UIFont {
+        .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.subheadline).pointSize, weight: .bold)
+    }
+    
     /// Medium text with _callout_ text style, thus a size point of 16
     static var accessibleCalloutMedium: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.callout).pointSize, weight: .medium)
