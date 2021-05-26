@@ -7,8 +7,9 @@
 // Author: Pierre-Yves LAPERSONNE <dev(at)pylapersonne(dot)info> et al.
 
 import Foundation
-import UIKit
 import Haptica
+import SafariServices
+import UIKit
 
 /// `UIViewController` dedicated to the settings screen.
 final class SettingsViewController: UIViewController, Storyboarded {
@@ -41,20 +42,6 @@ final class SettingsViewController: UIViewController, Storyboarded {
     }
 }
 
-// MARK: - UI Table View Delegate
-
-extension SettingsViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Haptic.impact(.light).generate()
-        // TODO: Analytics?
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return cellsTypes.count
-    }
-}
-
 // MARK: - UI Table View Data Source
 
 extension SettingsViewController: UITableViewDataSource {
@@ -77,5 +64,46 @@ extension SettingsViewController: UITableViewDataSource {
             cell.accessibilityHint = data.voiceOverHint
             return cell
         }
+    }
+}
+
+// MARK: - UI Table View Delegate
+
+extension SettingsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Analytics?
+        Haptic.impact(.light).generate()
+        switch SettingsDataType.init(rawValue: indexPath.item) {
+        case .website:
+            openUrl("https://covidtracker.fr/")
+        case .contact:
+            openUrl("https://covidtracker.fr/contact/")
+        case .twitter:
+            openUrl("https://twitter.com/covidtracker_fr")
+        case .appSourceCode:
+            openUrl("https://github.com/CovidTrackerFr/vitemadose-ios")
+        case .systemSettings:
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        case .header, .none:
+            break
+        }
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return cellsTypes.count
+    }
+}
+
+// MARK: - Actions
+
+extension SettingsViewController {
+
+    private func openUrl(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        let config = SFSafariViewController.Configuration()
+        let safariViewController = SFSafariViewController(url: url, configuration: config)
+        Haptic.impact(.light).generate()
+        present(safariViewController, animated: true)
     }
 }

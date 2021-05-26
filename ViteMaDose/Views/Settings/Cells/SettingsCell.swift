@@ -11,19 +11,19 @@ import UIKit
 // MARK: - Settings Data Type
 
 /// Types of cells to display in the settings screen
-enum SettingsDataType: Hashable {
-    case header
+enum SettingsDataType: Int, Hashable {
+    case header = 0
     /// Cell dedicated to the project website
-    case website
+    case website = 1
     /// Cell dedicated to contact the team
-    case contact
+    case contact = 2
     /// Cell dedicated to the Twitter profile
-    case twitter
+    case twitter = 3
     /// Cell dedicated to the GitHub repository
-    case appSourceCode
+    case appSourceCode = 4
     /// Celle which redirects to the systems ettings to get details
-    case systemSettings
-    // TODO: Cell for contributors
+    case systemSettings = 5
+    // TODO: Cell for contributors (see #122, #37)
 }
 
 private extension SettingsDataType {

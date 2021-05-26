@@ -130,7 +130,7 @@ final class HomeViewController: UIViewController, Storyboarded {
     }
 
     private func presentSettingsViewController() {
-        // TODO: Analytics call if needed
+        // TODO: Analytics?
         let settingsViewController = SettingsViewController.instantiate()
         DispatchQueue.main.async { [weak self] in
             self?.present(settingsViewController, animated: true)
