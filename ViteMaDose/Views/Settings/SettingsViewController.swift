@@ -17,7 +17,7 @@ final class SettingsViewController: UIViewController, Storyboarded {
 
     /// Cells to add in the embeded `tableView`
     private lazy var cellsTypes: [SettingsDataType] = [
-        .website, .contact, .twitter, .appSourceCode, .systemSettings
+        .header, .website, .contact, .twitter, .appSourceCode, .systemSettings
     ]
 
     override func viewDidLoad() {
@@ -72,8 +72,9 @@ extension SettingsViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-            let data = SettingsCellViewData(cellsTypes[indexPath.item])
+            let data = SettingsCellViewData(cellsTypes[indexPath.item])!
             cell.configure(with: data)
+            cell.accessibilityHint = data.voiceOverHint
             return cell
         }
     }

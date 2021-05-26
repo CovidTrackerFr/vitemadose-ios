@@ -38,9 +38,13 @@
                                                             <constraint firstAttribute="width" secondItem="twr-cU-Myc" secondAttribute="height" multiplier="83:25" id="VT8-jX-5XF"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFI-U8-bf3">
-                                                        <rect key="frame" x="334" y="13" width="21" height="22"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFI-U8-bf3">
+                                                        <rect key="frame" x="325" y="-1" width="50" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="M9d-0f-NRC"/>
+                                                            <constraint firstAttribute="height" constant="50" id="RH2-Kc-8cR"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <state key="normal" image="gearshape.fill" catalog="system"/>
                                                         <connections>
                                                             <action selector="goToSettings:" destination="u8L-Ja-9UJ" eventType="touchUpInside" id="FVJ-wQ-y3K"/>
@@ -49,8 +53,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="zFI-U8-bf3" firstAttribute="top" secondItem="twr-cU-Myc" secondAttribute="top" constant="-1" id="4g7-n0-UzN" userLabel="Settings Button.top = logo.top "/>
                                                     <constraint firstAttribute="bottom" secondItem="twr-cU-Myc" secondAttribute="bottom" id="cH1-H9-o7Q"/>
                                                     <constraint firstItem="twr-cU-Myc" firstAttribute="leading" secondItem="LX7-dM-o8Y" secondAttribute="leading" id="hAs-P5-Cqx"/>
+                                                    <constraint firstItem="zFI-U8-bf3" firstAttribute="trailing" secondItem="LX7-dM-o8Y" secondAttribute="trailingMargin" constant="17" id="hiO-G5-zrw" userLabel="Settings Button.trailing = trailing"/>
                                                     <constraint firstItem="twr-cU-Myc" firstAttribute="top" secondItem="LX7-dM-o8Y" secondAttribute="top" id="urm-9R-7Rc"/>
                                                 </constraints>
                                             </view>

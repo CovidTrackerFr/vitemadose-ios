@@ -12,6 +12,7 @@ import UIKit
 
 /// Types of cells to display in the settings screen
 enum SettingsDataType: Hashable {
+    case header
     /// Cell dedicated to the project website
     case website
     /// Cell dedicated to contact the team
@@ -32,6 +33,8 @@ private extension SettingsDataType {
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium)
 
         switch self {
+        case .header:
+            imageName = nil
         case .website:
             imageName = "safari.fill"
         case .contact:
@@ -60,6 +63,7 @@ protocol SettingsCellViewDataProvider {
     var icon: UIImage? { get }
     var iconContainerColor: UIColor { get }
     var dataType: SettingsDataType { get }
+    var voiceOverHint: String? { get }
 }
 
 // MARK: - Settings Cell View Data
@@ -71,8 +75,9 @@ struct SettingsCellViewData: SettingsCellViewDataProvider, Hashable {
     let icon: UIImage?
     let iconContainerColor: UIColor
     let dataType: SettingsDataType
+    let voiceOverHint: String?
 
-    init(_ dataType: SettingsDataType) {
+    init?(_ dataType: SettingsDataType) {
         self.dataType = dataType
         icon = dataType.iconImage
 
@@ -81,22 +86,29 @@ struct SettingsCellViewData: SettingsCellViewDataProvider, Hashable {
             title = NSMutableAttributedString(string: Localization.Settings.WebSite.title)
             description = Localization.Settings.WebSite.subtitle
             iconContainerColor = .systemOrange
+            voiceOverHint = Localization.A11y.VoiceOver.Settings.action_website
         case .contact:
             title = NSMutableAttributedString(string: Localization.Settings.Contact.title)
             description = Localization.Settings.Contact.subtitle
             iconContainerColor = .systemGreen
+            voiceOverHint = Localization.A11y.VoiceOver.Settings.action_contact
         case .twitter:
             title = NSMutableAttributedString(string: Localization.Settings.Twitter.title)
             description = Localization.Settings.Twitter.subtitle
             iconContainerColor = .royalBlue
+            voiceOverHint = Localization.A11y.VoiceOver.Settings.action_twitter
         case .appSourceCode:
             title = NSMutableAttributedString(string: Localization.Settings.SourceCode.title)
             description = Localization.Settings.SourceCode.subtitle
             iconContainerColor = .systemBlue
+            voiceOverHint = Localization.A11y.VoiceOver.Settings.action_sourcecode
         case .systemSettings:
             title = NSMutableAttributedString(string: Localization.Settings.System.title)
             description = Localization.Settings.System.subtitle
             iconContainerColor = .systemRed
+            voiceOverHint = Localization.A11y.VoiceOver.Settings.action_advanced
+        default:
+            return nil
         }
     }
 }

@@ -14,7 +14,7 @@ import BLTNBoard
 final class HomeViewController: UIViewController, Storyboarded {
 
     @IBOutlet private var tableView: UITableView!
-    
+
     @IBOutlet weak var settingsButton: UIButton!
     @IBAction func goToSettings(_ sender: Any) {
         presentSettingsViewController()
@@ -68,7 +68,10 @@ final class HomeViewController: UIViewController, Storyboarded {
         remoteConfiguration.synchronize { _ in
             self.viewModel.load()
         }
-        
+
+        settingsButton.isAccessibilityElement = true
+        settingsButton.accessibilityLabel = Localization.A11y.VoiceOver.Settings.button_label
+        settingsButton.accessibilityHint = Localization.A11y.VoiceOver.Settings.button_hint
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -127,13 +130,8 @@ final class HomeViewController: UIViewController, Storyboarded {
     }
 
     private func presentSettingsViewController() {
-
         // TODO: Analytics call if needed
-        
         let settingsViewController = SettingsViewController.instantiate()
-//        settingsViewController.delegate = self
-//        settingsViewController.viewModel = SettingsViewModel()
-
         DispatchQueue.main.async { [weak self] in
             self?.present(settingsViewController, animated: true)
         }
