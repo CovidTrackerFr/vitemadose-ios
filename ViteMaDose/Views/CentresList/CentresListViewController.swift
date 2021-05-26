@@ -296,7 +296,7 @@ extension CentresListViewController: UITableViewDelegate {
         present(actionSheet, animated: true)
     }
 
-    private func presentFollowCentreBottomSheet(forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+    private func presentFollowCentreBottomSheet(forCell cell: CentreCell, atIndexPath indexPath: IndexPath) {
         let bottomSheet = UIAlertController(
             title: Localization.Location.start_following_title,
             message: Localization.Location.start_following_message,
@@ -320,12 +320,12 @@ extension CentresListViewController: UITableViewDelegate {
         bottomSheet.addAction(allNotificationsAction)
         bottomSheet.addAction(chronoDosesNotificationsAction)
         bottomSheet.addAction(cancelAction)
-        bottomSheet.popoverPresentationController?.sourceView = cell
+        bottomSheet.popoverPresentationController?.sourceView = cell.followCentreButton
 
         present(bottomSheet, animated: true)
     }
 
-    private func presentUnfollowCentreBottomSheet(forCell cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+    private func presentUnfollowCentreBottomSheet(forCell cell: CentreCell, atIndexPath indexPath: IndexPath) {
         let bottomSheet = UIAlertController(
             title: Localization.Location.stop_following_title,
             message: Localization.Location.stop_following_message,
@@ -340,7 +340,7 @@ extension CentresListViewController: UITableViewDelegate {
 
         bottomSheet.addAction(unfollowAction)
         bottomSheet.addAction(cancelAction)
-        bottomSheet.popoverPresentationController?.sourceView = view
+        bottomSheet.popoverPresentationController?.sourceView = cell.followCentreButton
 
         self.present(bottomSheet, animated: true)
     }
