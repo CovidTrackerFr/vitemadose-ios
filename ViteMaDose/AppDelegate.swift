@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SafariServices
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -84,7 +85,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Analytics
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        completionHandler()
+
+        // If push contains an URL, open it in a SFSafariViewController
+        guard
+            let urlString = userInfo["url"] as? String,
+            let url = URL(string: urlString),
+            url.isValid
+        else {
+            completionHandler()
+            return
+        }
+
+        open(url: url, completion: completionHandler)
     }
 
     func application(
@@ -95,6 +107,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
+    }
+
+    private func open(url: URL, completion: @escaping () -> Void) {
+        let window = UIApplication.shared.windows.filter(\.isKeyWindow)
+        guard let rootViewController = window.first?.rootViewController else {
+            return
+        }
+
+        let config = SFSafariViewController.Configuration()
+        let safariViewController = SFSafariViewController(url: url, configuration: config)
+        safariViewController.modalPresentationStyle = .pageSheet
+
+        DispatchQueue.main.async {
+            rootViewController.present(safariViewController, animated: true, completion: completion)
+        }
     }
 }
 

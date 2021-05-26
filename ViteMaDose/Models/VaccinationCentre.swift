@@ -95,7 +95,7 @@ extension VaccinationCentre {
 
 extension Sequence where Element == VaccinationCentre {
     var allAppointmentsCount: Int {
-       return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
     }
 
     var allAvailableCentresCount: Int {
@@ -161,11 +161,31 @@ extension VaccinationCentre {
         let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
         guard
             let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total
+            let chronoDosesCount = chronoDose?.total,
+            chronoDosesCount > 0
         else {
             return false
         }
-        return chronoDosesCount > 0
+
+        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
+    }
+
+    var vaccinesTypeText: String? {
+        guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
+            return nil
+        }
+        return vaccineType.joined(separator: String.commaWithSpace)
+    }
+
+    var chronoDosesCount: Int? {
+        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
+        guard
+            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
+            let total = chronoDose?.total
+        else {
+            return nil
+        }
+        return total
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {

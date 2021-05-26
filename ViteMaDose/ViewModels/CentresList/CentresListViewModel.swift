@@ -11,7 +11,6 @@ import PhoneNumberKit
 import PromiseKit
 import MapKit
 import Haptica
-
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
@@ -20,6 +19,7 @@ class CentresListViewModel {
     private let searchResult: LocationSearchResult?
     private(set) var userDefaults: UserDefaults
     private let notificationCenter: UNUserNotificationCenter
+    private let remoteConfig: RemoteConfiguration
 
     internal var sortOption: CentresListSortOption {
         return userDefaults.centresListSortOption
@@ -50,13 +50,15 @@ class CentresListViewModel {
         searchResult: LocationSearchResult?,
         phoneNumberKit: PhoneNumberKit = PhoneNumberKit(),
         userDefaults: UserDefaults = .shared,
-        notificationCenter: UNUserNotificationCenter = .current()
+        notificationCenter: UNUserNotificationCenter = .current(),
+        remoteConfig: RemoteConfiguration = .shared
     ) {
         self.apiService = apiService
         self.searchResult = searchResult
         self.phoneNumberKit = phoneNumberKit
         self.userDefaults = userDefaults
         self.notificationCenter = notificationCenter
+        self.remoteConfig = remoteConfig
     }
 
     internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
@@ -95,6 +97,14 @@ class CentresListViewModel {
             cells.append(.sort(viewData))
         }
 
+        if remoteConfig.dataDisclaimerEnabled, let disclaimerMessage = remoteConfig.dataDisclaimerMessage {
+            // Disclaimer cell
+            let centreDataDisclaimerCellViewData = CentreDataDisclaimerCellViewData(
+                contentText: disclaimerMessage
+            )
+            cells.append(.disclaimer(centreDataDisclaimerCellViewData))
+        }
+
         return cells
     }
 
@@ -126,6 +136,14 @@ class CentresListViewModel {
             }
         }
 
+        let appointmentsCount: Int? = {
+            if centre.hasChronoDose {
+                return centre.chronoDosesCount
+            } else {
+                return centre.appointmentCount
+            }
+        }()
+
         return CentreViewData(
             id: centre.id,
             dayText: centre.nextAppointmentDay,
@@ -134,10 +152,11 @@ class CentresListViewModel {
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
-            vaccineTypesText: centre.vaccineType?.joined(separator: String.commaWithSpace),
-            appointmentsCount: centre.appointmentCount,
+            vaccineTypesText: centre.vaccinesTypeText,
+            appointmentsCount: appointmentsCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
+            partnerName: centre.plateforme,
             isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
         )
@@ -250,7 +269,7 @@ class CentresListViewModel {
     }
 }
 
-// MARK: - Centres List ViewModelProvider
+// MARK: - Centres List View Model Provider
 
 extension CentresListViewModel: CentresListViewModelProvider {
 

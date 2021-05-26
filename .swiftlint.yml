@@ -9,3 +9,5 @@ disabled_rules:
     - nesting
     - identifier_name
 line_length: 200
+file_length: 800
+type_body_length: 500

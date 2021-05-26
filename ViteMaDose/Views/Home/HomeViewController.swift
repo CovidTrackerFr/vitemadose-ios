@@ -65,11 +65,7 @@ final class HomeViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         configureViewController()
 
-        remoteConfiguration.synchronize { [unowned self] _ in
-            if let maintenanceUrlString = self.remoteConfiguration.maintenanceModeUrl {
-                self.presentMaintenancePage(with: maintenanceUrlString)
-                return
-            }
+        remoteConfiguration.synchronize { _ in
             self.viewModel.load()
         }
         
