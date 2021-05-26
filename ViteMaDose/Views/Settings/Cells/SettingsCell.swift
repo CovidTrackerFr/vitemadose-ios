@@ -117,16 +117,16 @@ struct SettingsCellViewData: SettingsCellViewDataProvider, Hashable {
 
 final class SettingsCell: UITableViewCell {
 
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet private weak var iconContainerView: UIView!
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var cellContentView: UIView!
 
     private enum Constant {
-        static let titleFont = UIFont.rounded(ofSize: 26, weight: .bold) // FIXME: A11Y
+        static let titleFont = UIFont.accessibleTitle2Bold
         static let titleColor = UIColor.label
-        static let descriptionFont = UIFont.systemFont(ofSize: 16, weight: .bold) // FIXME: A11Y
+        static let descriptionFont = UIFont.accessibleCalloutBold
         static let descriptionColor = UIColor.secondaryLabel
         static let searchBarViewCornerRadius: CGFloat = 15
     }
@@ -145,11 +145,13 @@ final class SettingsCell: UITableViewCell {
         titleLabel.attributedText = viewData.title
         titleLabel.textColor = Constant.titleColor
         titleLabel.font = Constant.titleFont
+        titleLabel.adjustsFontForContentSizeCategory = true
 
         descriptionLabel.text = viewData.description
         descriptionLabel.textColor = Constant.descriptionColor
         descriptionLabel.font = Constant.descriptionFont
         descriptionLabel.isHidden = viewData.description == nil
+        descriptionLabel.adjustsFontForContentSizeCategory = true
 
         iconContainerView.setCornerRadius(iconContainerView.bounds.width / 2)
         iconImageView.image = viewData.icon

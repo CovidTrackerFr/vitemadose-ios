@@ -10,7 +10,7 @@ import UIKit
 
 final class SettingsTitleCell: HomeTitleCell {
     private enum Constant {
-        static let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold) // FIXME: A11Y
+        static let titleFont: UIFont = .accessibleTitle2Bold
         static let titleColor: UIColor = .label
     }
 }

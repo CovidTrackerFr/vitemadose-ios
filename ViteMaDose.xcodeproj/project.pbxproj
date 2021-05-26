@@ -15,6 +15,7 @@
 		516C10E3265E8EE70056CBB0 /* SettingsTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516C10DD265E8EE70056CBB0 /* SettingsTitleCell.xib */; };
 		516C10E4265E8EE70056CBB0 /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516C10DE265E8EE70056CBB0 /* SettingsViewController.storyboard */; };
 		516C10E5265E8EE70056CBB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */; };
+		516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */; };
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
 		57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57044415263F0D1000F802F2 /* LocationSearchResult.swift */; };
@@ -150,6 +151,7 @@
 		516C10DD265E8EE70056CBB0 /* SettingsTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTitleCell.xib; sourceTree = "<group>"; };
 		516C10DE265E8EE70056CBB0 /* SettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
 		516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
 		5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceMock.swift; sourceTree = "<group>"; };
 		57044415263F0D1000F802F2 /* LocationSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResult.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				57AD21CC262102F700ED2B95 /* UIViewControllerController+Commons.swift */,
 				57C4017B262383D900EFFCA3 /* UIImage+Commons.swift */,
 				57C4018026238ABC00EFFCA3 /* UIFont+Commons.swift */,
+				516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */,
 				57C38B5F2627826B00FE63B0 /* NSTextAttachment+Commons.swift */,
 				577A7F61262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift */,
 				5795BE0F2633540C00A44849 /* String+Commons.swift */,
@@ -922,6 +925,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57B6BEA42636060200D9AAC1 /* MaintenanceViewController.swift in Sources */,
+				516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */,
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,
 				57613F03262510D700AB6F2F /* PartnerLogo.swift in Sources */,
 				575CC22F262AF4E1008D1869 /* HomeSearchBarCell.swift in Sources */,
