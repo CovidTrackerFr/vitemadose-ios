@@ -12,7 +12,13 @@ import Haptica
 import BLTNBoard
 
 final class HomeViewController: UIViewController, Storyboarded {
+
     @IBOutlet private var tableView: UITableView!
+    
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBAction func goToSettings(_ sender: Any) {
+        presentSettingsViewController()
+    }
 
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
@@ -66,6 +72,7 @@ final class HomeViewController: UIViewController, Storyboarded {
             }
             self.viewModel.load()
         }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +127,19 @@ final class HomeViewController: UIViewController, Storyboarded {
 
         DispatchQueue.main.async { [weak self] in
             self?.present(departmentSelectionViewController, animated: true)
+        }
+    }
+
+    private func presentSettingsViewController() {
+
+        // TODO: Analytics call if needed
+        
+        let settingsViewController = SettingsViewController.instantiate()
+//        settingsViewController.delegate = self
+//        settingsViewController.viewModel = SettingsViewModel()
+
+        DispatchQueue.main.async { [weak self] in
+            self?.present(settingsViewController, animated: true)
         }
     }
 

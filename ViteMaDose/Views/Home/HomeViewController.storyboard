@@ -38,6 +38,14 @@
                                                             <constraint firstAttribute="width" secondItem="twr-cU-Myc" secondAttribute="height" multiplier="83:25" id="VT8-jX-5XF"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFI-U8-bf3">
+                                                        <rect key="frame" x="334" y="13" width="21" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="gearshape.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="goToSettings:" destination="u8L-Ja-9UJ" eventType="touchUpInside" id="FVJ-wQ-y3K"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -72,10 +80,13 @@
                             <constraint firstItem="N2e-qd-M9x" firstAttribute="leading" secondItem="WAy-Cw-2dh" secondAttribute="leading" id="z8x-Jg-7hF"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Wul-zc-aQM">
                         <nil key="title"/>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="settingsButton" destination="zFI-U8-bf3" id="W7w-KU-5ZV"/>
                         <outlet property="tableView" destination="cr4-N6-zzO" id="Mms-SD-Iuw"/>
                     </connections>
                 </viewController>
@@ -103,6 +114,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="logo" width="166" height="44"/>
         <namedColor name="royalBlue">
             <color red="0.33300000429153442" green="0.37999999523162842" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

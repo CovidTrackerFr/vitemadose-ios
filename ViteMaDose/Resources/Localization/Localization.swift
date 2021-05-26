@@ -79,6 +79,35 @@ enum Localization {
         static let stop_following_button = "location.stop_following_button".localized
     }
 
+    enum Settings {
+        static let title = "settings.title".localized
+
+        enum WebSite {
+            static let title = "settings.website.title".localized
+            static let subtitle = "settings.website.subtitle".localized
+        }
+
+        enum Contact {
+            static let title = "settings.contact.title".localized
+            static let subtitle = "settings.contact.subtitle".localized
+        }
+
+        enum Twitter {
+            static let title = "settings.twitter.title".localized
+            static let subtitle = "settings.twitter.subtitle".localized
+        }
+
+        enum SourceCode {
+            static let title = "settings.sourcecode.title".localized
+            static let subtitle = "settings.sourcecode.subtitle".localized
+        }
+
+        enum System {
+            static let title = "settings.system.title".localized
+            static let subtitle = "settings.system.subtitle".localized
+        }
+    }
+
     enum Error {
         enum Generic {
             static let title = "error.generic.title".localized
