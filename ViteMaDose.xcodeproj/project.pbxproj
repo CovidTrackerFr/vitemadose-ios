@@ -16,6 +16,7 @@
 		516C10E4265E8EE70056CBB0 /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516C10DE265E8EE70056CBB0 /* SettingsViewController.storyboard */; };
 		516C10E5265E8EE70056CBB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */; };
 		516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */; };
+		51C367CC2653AB9400ABB203 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 51C367CB2653AB9400ABB203 /* Settings.bundle */; };
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
 		57044416263F0D1000F802F2 /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57044415263F0D1000F802F2 /* LocationSearchResult.swift */; };
@@ -152,6 +153,7 @@
 		516C10DE265E8EE70056CBB0 /* SettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
 		516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
+		51C367CB2653AB9400ABB203 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ViteMaDose/Settings.bundle; sourceTree = "<group>"; };
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
 		5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIServiceMock.swift; sourceTree = "<group>"; };
 		57044415263F0D1000F802F2 /* LocationSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResult.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		576738B3261E329C004A700D = {
 			isa = PBXGroup;
 			children = (
+				51C367CB2653AB9400ABB203 /* Settings.bundle */,
 				889B9A49263307EC00175E24 /* .swiftlint.yml */,
 				576738BE261E329C004A700D /* ViteMaDose */,
 				576738D5261E32A3004A700D /* ViteMaDoseTests */,
@@ -786,6 +789,7 @@
 			files = (
 				57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */,
 				5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */,
+				51C367CC2653AB9400ABB203 /* Settings.bundle in Resources */,
 				5793E6E3264891E80042F64F /* HomeFollowedCentresCell.xib in Resources */,
 				516C10E1265E8EE70056CBB0 /* SettingsCell.xib in Resources */,
 				57B6BEAA2636153000D9AAC1 /* maintenance.html in Resources */,
@@ -1202,10 +1206,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDoseDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 841539;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "ZL9396WK65";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,6 +1219,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1225,9 +1231,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ViteMaDose/ViteMaDose.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 841539;
-				DEVELOPMENT_TEAM = "ZL9396WK65";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1236,6 +1242,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.vitemadose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
