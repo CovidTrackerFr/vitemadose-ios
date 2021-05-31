@@ -67,10 +67,10 @@ final class CentreCell: UITableViewCell {
 
     @IBOutlet weak private var vaccineTypeImageView: UIImageView!
 
-    @IBOutlet weak var chronoDoseViewContainer: UIView!
-    @IBOutlet weak var chronoDoseLabel: UILabel!
+    @IBOutlet weak private var chronoDoseViewContainer: UIView!
+    @IBOutlet weak private var chronoDoseLabel: UILabel!
 
-    @IBOutlet weak var followCentreButton: UIButton!
+    @IBOutlet weak private(set) var followCentreButton: UIButton!
 
     var addressTapHandler: (() -> Void)?
     var phoneNumberTapHandler: (() -> Void)?
