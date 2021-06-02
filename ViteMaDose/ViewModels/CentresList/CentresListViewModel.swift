@@ -136,14 +136,6 @@ class CentresListViewModel {
             }
         }
 
-        let appointmentsCount: Int? = {
-            if centre.hasChronoDose {
-                return centre.chronoDosesCount
-            } else {
-                return centre.appointmentCount
-            }
-        }()
-
         return CentreViewData(
             id: centre.id,
             dayText: centre.nextAppointmentDay,
@@ -153,11 +145,12 @@ class CentresListViewModel {
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccinesTypeText,
-            appointmentsCount: appointmentsCount,
+            appointmentsCount: centre.appointmentCount,
+            chronodosesCount: centre.chronoDosesCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
             partnerName: centre.plateforme,
-            isChronoDose: centre.hasChronoDose,
+            isChronoDose: centre.vaccinesTypeText?.contains("ARNm") ?? false || centre.vaccinesTypeText?.contains("Pfizer-BioNTech") ?? false || centre.vaccinesTypeText?.contains("Moderna") ?? false,
             notificationsType: notificationsType
         )
     }

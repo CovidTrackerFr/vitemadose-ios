@@ -158,14 +158,12 @@ extension VaccinationCentre {
     }
 
     var hasChronoDose: Bool {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total,
-            chronoDosesCount > 0
-        else {
-            return false
-        }
+
+        let chronoDose = vaccineType?.filter({ dose in
+            return dose.contains("ARNm") || dose.contains("Pfizer-BioNTech") || dose.contains("Moderna")
+        })
+
+        let chronoDosesCount = chronoDose?.count ?? 0
 
         return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
     }
@@ -178,14 +176,12 @@ extension VaccinationCentre {
     }
 
     var chronoDosesCount: Int? {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let total = chronoDose?.total
-        else {
-            return nil
-        }
-        return total
+        let chronoDose = vaccineType?.filter({ dose in
+            return dose.contains("ARNm") || dose.contains("Pfizer-BioNTech") || dose.contains("Moderna")
+        })
+        let chronoDosesCount = chronoDose?.count
+
+        return chronoDosesCount
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {

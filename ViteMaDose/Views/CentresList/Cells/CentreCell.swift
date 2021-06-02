@@ -18,6 +18,7 @@ protocol CentreViewDataProvider {
     var bookingButtonText: String { get }
     var vaccineTypesText: String? { get }
     var appointmentsCount: Int? { get }
+    var chronodosesCount: Int? { get }
     var isAvailable: Bool { get }
     var partnerLogo: UIImage? { get }
     var isChronoDose: Bool { get }
@@ -36,6 +37,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let bookingButtonText: String
     let vaccineTypesText: String?
     let appointmentsCount: Int?
+    let chronodosesCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
     let partnerName: String?
@@ -313,7 +315,7 @@ final class CentreCell: UITableViewCell {
         chronoDoseViewContainer.clipsToBounds = false
         chronoDoseViewContainer.layer.cornerRadius = 15.0
         chronoDoseViewContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        chronoDoseLabel.text = "Chronodoses disponibles"
+        chronoDoseLabel.text = "\(viewData.chronodosesCount ?? 0) doses éligibles aux 18+ ans"
     }
 
     private func configureFollowCentreButton(_ viewData: CentreViewData) {
