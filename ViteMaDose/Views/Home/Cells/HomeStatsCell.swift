@@ -31,9 +31,9 @@ final class HomeStatsCell: UITableViewCell {
     @IBOutlet var cellContentView: UIView!
 
     private enum Constant {
-        static let titleFont = UIFont.rounded(ofSize: 26, weight: .bold)
+        static let titleFont = UIFont.accessibleTitle1Bold
         static let titleColor = UIColor.label
-        static let descriptionFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let descriptionFont = UIFont.accessibleCalloutBold
         static let descriptionColor = UIColor.secondaryLabel
         static let searchBarViewCornerRadius: CGFloat = 15
     }
@@ -44,6 +44,7 @@ final class HomeStatsCell: UITableViewCell {
         titleLabel.attributedText = viewData.title
         titleLabel.textColor = Constant.titleColor
         titleLabel.font = Constant.titleFont
+        titleLabel.adjustsFontForContentSizeCategory = true
 
         // Some values returned by backend are not vocalized as numbers, like "226 095".
         // In this case we need to remove white spaces from text value, try to cast to Int and define the label
@@ -61,6 +62,7 @@ final class HomeStatsCell: UITableViewCell {
         descriptionLabel.textColor = Constant.descriptionColor
         descriptionLabel.font = Constant.descriptionFont
         descriptionLabel.isHidden = viewData.description == nil
+        descriptionLabel.adjustsFontForContentSizeCategory = true
 
         iconContainerView.setCornerRadius(iconContainerView.bounds.width / 2)
         iconImageView.image = viewData.icon

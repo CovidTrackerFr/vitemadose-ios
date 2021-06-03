@@ -9,7 +9,7 @@ import UIKit
 
 final class CentresTitleCell: HomeTitleCell {
     private enum Constant {
-        static let titleFont: UIFont = .rounded(ofSize: 26, weight: .bold)
+        static let titleFont: UIFont = .accessibleTitle1Bold
         static let titleColor: UIColor = .label
     }
 }
