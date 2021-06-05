@@ -7,14 +7,14 @@
 
 import UIKit
 
-class LocationSearchHeaderView: UIView {
+final class LocationSearchHeaderView: UIView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private(set) weak var searchBar: UISearchBar!
 
     private enum Constant {
         static let highlightedTextColor = UIColor.mandy
-        static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
-        static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
+        static let titleFont: UIFont = .accessibleTitle2Bold
+        static let searchBarFont: UIFont = .accessibleCalloutMedium
         static let searchBarViewCornerRadius: CGFloat = 10.0
     }
 
@@ -22,6 +22,9 @@ class LocationSearchHeaderView: UIView {
         super.awakeFromNib()
         backgroundColor = .athensGray
         searchBar.placeholder = Localization.LocationSearch.search_placeholder
+        searchBar.isAccessibilityElement = true
+        searchBar.accessibilityTraits = .searchField
+        searchBar.accessibilityLabel = Localization.A11y.VoiceOver.Locations.search
         configureTitle()
     }
 

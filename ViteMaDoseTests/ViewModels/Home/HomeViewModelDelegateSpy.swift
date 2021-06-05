@@ -8,7 +8,7 @@
 import Foundation
 @testable import ViteMaDose
 
-class HomeViewModelDelegateSpy: HomeViewModelDelegate {
+final class HomeViewModelDelegateSpy: HomeViewModelDelegate {
     var updateLoadingState: (isLoading: Bool, isEmpty: Bool)?
     func updateLoadingState(isLoading: Bool, isEmpty: Bool) {
         updateLoadingState = (isLoading, isEmpty)

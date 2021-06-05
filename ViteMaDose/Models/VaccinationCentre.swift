@@ -13,8 +13,8 @@ import SwiftDate
 // MARK: - VaccinationCentre
 
 struct VaccinationCentre: Codable, Hashable, Identifiable {
-    private let internalId: String?
     private let gid: String?
+    public let internalId: String?
     let departement: String?
     let nom: String?
     let url: String?
@@ -25,6 +25,7 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
     let type: String?
     let appointmentCount: Int?
     let vaccineType: [String]?
+    let appointmentSchedules: [AppointmentSchedule?]?
 
     var id: String {
         return internalId ?? gid ?? UUID().uuidString
@@ -43,6 +44,7 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
         case type
         case appointmentCount = "appointment_count"
         case vaccineType = "vaccine_type"
+        case appointmentSchedules = "appointment_schedules"
     }
 }
 
@@ -70,11 +72,36 @@ extension VaccinationCentre {
             case businessHours = "business_hours"
         }
     }
+
+    struct AppointmentSchedule: Codable, Hashable {
+        let name: String?
+        let from: String?
+        let to: String?
+        let total: Int?
+
+        enum CodingKeys: String, CodingKey {
+            case name
+            case from
+            case to
+            case total
+        }
+
+        enum AppointmentScheduleKey {
+            static let chronoDose = "chronodose"
+        }
+    }
+
 }
 
 extension Sequence where Element == VaccinationCentre {
     var allAppointmentsCount: Int {
-       return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+        return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
+    }
+
+    var allAvailableCentresCount: Int {
+        return reduce(0) { (previous, current) in
+            previous + (current.isAvailable ? 1 : 0)
+        }
     }
 }
 
@@ -128,6 +155,53 @@ extension VaccinationCentre {
             latitude: latitude,
             longitude: longitude
         )
+    }
+
+    var hasChronoDose: Bool {
+        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
+        guard
+            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
+            let chronoDosesCount = chronoDose?.total,
+            chronoDosesCount > 0
+        else {
+            return false
+        }
+
+        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
+    }
+
+    var vaccinesTypeText: String? {
+        guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
+            return nil
+        }
+        return vaccineType.joined(separator: String.commaWithSpace)
+    }
+
+    var chronoDosesCount: Int? {
+        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
+        guard
+            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
+            let total = chronoDose?.total
+        else {
+            return nil
+        }
+        return total
+    }
+
+    static var sortedByAppointment: (Self, Self) -> Bool = {
+        guard
+            let lhsDate = $0.nextAppointmentDate,
+            let rhsDate = $1.nextAppointmentDate,
+            $0.isAvailable,
+            $1.isAvailable
+        else {
+            return false
+        }
+        return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
+    }
+
+    static var filteredByChronoDoses: (Self) -> Bool = {
+        return $0.hasChronoDose
     }
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {

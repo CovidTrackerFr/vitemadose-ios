@@ -10,13 +10,13 @@ import UIKit
 protocol LocationSearchResultCellViewDataProvider {
     var name: String { get }
     var postCode: String? { get }
-    var departmentCode: String { get }
+    var departmentCode: String? { get }
 }
 
 struct LocationSearchResultCellViewData: LocationSearchResultCellViewDataProvider, Hashable {
     let name: String
     let postCode: String?
-    let departmentCode: String
+    let departmentCode: String?
 }
 
 class LocationSearchResultCell: UITableViewCell {
@@ -30,7 +30,7 @@ class LocationSearchResultCell: UITableViewCell {
         static let nameTextColor: UIColor = .label
         static let codeBackgroundColor: UIColor = .royalBlue
         static let cellBackgroundColor: UIColor = .tertiarySystemBackground
-        static let labelsFont: UIFont = .rounded(ofSize: 18, weight: .bold)
+        static let labelsFont: UIFont = .accessibleBodyBold
         static let viewsCornerRadius: CGFloat = 15
     }
 
@@ -51,6 +51,12 @@ class LocationSearchResultCell: UITableViewCell {
 
         codeLabel.font = Constant.labelsFont
         nameLabel.font = Constant.labelsFont
+
+        codeLabel.adjustsFontForContentSizeCategory = true
+        nameLabel.adjustsFontForContentSizeCategory = true
+
+        accessibilityTraits = .button
+        accessibilityLabel = Localization.A11y.VoiceOver.Locations.see_places.format(viewData.name)
     }
 
     override func prepareForReuse() {

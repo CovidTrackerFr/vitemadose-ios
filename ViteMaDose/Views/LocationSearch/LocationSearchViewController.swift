@@ -13,7 +13,7 @@ protocol LocationSearchViewControllerDelegate: AnyObject {
     func didSelect(location: LocationSearchResult)
 }
 
-class LocationSearchViewController: UIViewController, Storyboarded {
+final class LocationSearchViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
     weak var delegate: LocationSearchViewControllerDelegate?
 
@@ -126,7 +126,7 @@ extension LocationSearchViewController: UISearchBarDelegate {
     }
 
     @objc func reload(_ searchBar: UISearchBar) {
-        viewModel.search(query: searchBar.text ?? "")
+        viewModel.search(query: searchBar.text.emptyIfNil)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

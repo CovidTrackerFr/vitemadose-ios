@@ -78,3 +78,9 @@ extension String {
             .replacingOccurrences(of: String.hyphen, with: String.space)
     }
 }
+
+extension Optional where Wrapped: StringProtocol {
+    var emptyIfNil: Wrapped {
+        return self ?? ""
+    }
+}
