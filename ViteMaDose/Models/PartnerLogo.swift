@@ -14,7 +14,7 @@ enum PartnerLogo: String, CaseIterable, Equatable {
     case keldoc = "Keldoc"
     case maPharma = "Mapharma"
     case avecMonDoc = "AvecMonDoc"
-    case meSoigner = "MeSoigner"
+    case meSoigner = "mesoigner"
 
     var image: UIImage? {
         switch self {
