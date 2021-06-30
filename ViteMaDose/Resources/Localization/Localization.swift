@@ -82,4 +82,24 @@ enum Localization {
             static let offline = "error.network.offline".localized
         }
     }
+    enum Settings {
+        enum Main {
+            static let title = "settings.main.title".localized
+        }
+        enum SectionTitle {
+            static let appareance = "settings.sectiontitle.appareance".localized
+            static let contributors = "settings.sectiontitle.contributors".localized
+            static let useful_links = "settings.sectiontitle.usefulllinks".localized
+            static let help = "settings.sectiontitle.help".localized
+
+        }
+        enum CellTitle {
+            static let darkmode = "settings.celltitle.darkmode".localized
+            static let contributors = "settings.celltitle.contributors".localized
+            static let faq = "settings.celltitle.faq".localized
+            static let vaccin_tracker = "settings.celltitle.vaccintracker".localized
+            static let contact_us = "settings.celltitle.contactus".localized
+            static let bug_report = "settings.celltitle.bugreport".localized
+        }
+    }
 }

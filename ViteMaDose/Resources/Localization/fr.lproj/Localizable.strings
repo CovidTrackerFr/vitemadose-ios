@@ -44,3 +44,15 @@
 "error.generic.default_message" = "Si le problème persiste, merci de contacter l'équipe sur https://covidtracker.fr/contact";
 "error.network.server_error" = "Nous rencontrons des problèmes avec le serveur, veuillez réessayer plus tard.";
 "error.network.offline" = "Il semblerait que vous soyez hors ligne.";
+// Settings
+"settings.main.title" = "Paramètres";
+"settings.sectiontitle.appareance" = "Apparence";
+"settings.sectiontitle.contributors" = "Contributeurs";
+"settings.sectiontitle.usefulllinks" = "Liens Utiles";
+"settings.sectiontitle.help" = "Aide";
+"settings.celltitle.darkmode" = "Dark Mode";
+"settings.celltitle.contributors" = "Voir les contributeurs";
+"settings.celltitle.faq" = "FAQ";
+"settings.celltitle.vaccintracker" = "Vaccin Tracker";
+"settings.celltitle.contactus" = "Contactez nous";
+"settings.celltitle.bugreport" = "Signaler un bug";
