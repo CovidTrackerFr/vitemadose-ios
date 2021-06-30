@@ -25,8 +25,9 @@ final class HomeSearchResultCell: LocationSearchResultCell {
         super.configure(with: viewData)
         titleLabel.isHidden = viewData.titleText == nil
         titleLabel.text = viewData.titleText
-        titleLabel.font = .rounded(ofSize: 14, weight: .semibold)
+        titleLabel.font = .accessibleSubheadSemiBold
         titleLabel.textColor = .secondaryLabel
+        titleLabel.adjustsFontForContentSizeCategory = true
         accessibilityLabel = {
             guard viewData.titleText != nil else {
                 return nil
