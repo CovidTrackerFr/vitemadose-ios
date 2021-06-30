@@ -32,7 +32,6 @@ enum PartnerLogo: String, CaseIterable, Equatable {
             return UIImage(named: PartnerLogo.avecMonDoc.rawValue)
         case .meSoigner:
             return UIImage(named: PartnerLogo.meSoigner.rawValue)
-
         }
     }
 

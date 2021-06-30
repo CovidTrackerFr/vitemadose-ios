@@ -88,7 +88,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qq6-k3-Otm">
                             <rect key="frame" x="123" y="150.5" width="120" height="30"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MeSoigner" translatesAutoresizingMaskIntoConstraints="NO" id="h93-g7-6p2">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mesoigner" translatesAutoresizingMaskIntoConstraints="NO" id="h93-g7-6p2">
                                     <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="120" id="4RK-8r-uKD"/>
@@ -128,8 +128,8 @@
         <image name="Keldoc" width="889" height="282"/>
         <image name="Maiia" width="1021" height="371"/>
         <image name="Mapharma" width="1120" height="234"/>
-        <image name="MeSoigner" width="380" height="99"/>
         <image name="Ordoclic" width="805" height="185"/>
+        <image name="mesoigner" width="380" height="99"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
