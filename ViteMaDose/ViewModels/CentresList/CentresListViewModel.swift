@@ -120,7 +120,7 @@ class CentresListViewModel {
     private func getVaccinationCentreCellViewData(_ centre: VaccinationCentre) -> CentreViewData {
         var partnerLogo: UIImage?
         if let platform = centre.plateforme {
-            partnerLogo =  PartnerLogo(rawValue: platform)?.image
+            partnerLogo = PartnerLogo(rawValue: platform)?.image
         }
 
         let bookingButtonText = centre.isAvailable
