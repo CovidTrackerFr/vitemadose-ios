@@ -57,9 +57,12 @@ class HomeTitleCell: UITableViewCell {
         titleLabel.adjustsFontForContentSizeCategory = true
         descriptionLabel.adjustsFontForContentSizeCategory = true
 
+        titleLabel?.accessibilityLabel = viewData.titleText.string.forgeVocalizableText()
+
         topConstraint.constant = viewData.topMargin
         bottomConstraint.constant = viewData.bottomMargin
     }
+
 }
 
 extension HomeTitleCell {
