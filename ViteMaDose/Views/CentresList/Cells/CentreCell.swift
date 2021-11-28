@@ -81,12 +81,12 @@ final class CentreCell: UITableViewCell {
         static let cellContentViewCornerRadius: CGFloat = 15
         static let bookingButtonCornerRadius: CGFloat = 8
 
-        static let dateFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
-        static let dateHighlightedFont: UIFont = .systemFont(ofSize: 16, weight: .heavy)
-        static let labelPrimaryFont: UIFont = .systemFont(ofSize: 16, weight: .medium)
+        static let dateFont: UIFont = .accessibleSubheadMedium
+        static let dateHighlightedFont: UIFont = .accessibleBodyHeavy
+        static let labelPrimaryFont: UIFont = .accessibleCalloutMedium
         static let labelPrimaryColor: UIColor = .label
         static let labelSecondaryColor: UIColor = .secondaryLabel
-        static let appointmentsLabelFont: UIFont = .systemFont(ofSize: 14, weight: .medium)
+        static let appointmentsLabelFont: UIFont = .accessibleSubheadMedium
     }
 
     // MARK: - View lifecycle
@@ -115,13 +115,17 @@ final class CentreCell: UITableViewCell {
             isAvailable: viewData.isAvailable
         )
         dateLabel.attributedText = dateText
+        dateLabel.adjustsFontForContentSizeCategory = false
 
         nameLabel.text = viewData.addressNameText
         nameLabel.font = Constant.labelPrimaryFont
         nameLabel.textColor = Constant.labelPrimaryColor
+        nameLabel.adjustsFontForContentSizeCategory = true
 
         addressLabel.text = viewData.addressText
         addressLabel.textColor = Constant.labelSecondaryColor
+        addressLabel.font = .accessibleSubheadRegular
+        addressLabel.adjustsFontForContentSizeCategory = true
 
         let addressTapGesture = UITapGestureRecognizer(
             target: self,
@@ -241,6 +245,7 @@ final class CentreCell: UITableViewCell {
         appointmentsLabel.attributedText = appointmentsAndLogoString
         appointmentsLabel.isAccessibilityElement = true
         appointmentsLabel.accessibilityLabel = appointmentsText + Localization.A11y.VoiceOver.Details.to_use_with_platform + String.space  + partnerName.emptyIfNil
+        appointmentsLabel.adjustsFontForContentSizeCategory = true
     }
 
     private func configurePhoneNumberView(_ viewData: CentreViewData) {

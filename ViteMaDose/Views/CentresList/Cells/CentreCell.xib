@@ -124,7 +124,7 @@
                                                                     <constraint firstAttribute="bottom" secondItem="mM0-Y8-bXz" secondAttribute="bottom" constant="2" id="t76-MF-Xc7"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Date Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vca-O5-a2x">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Date Label" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vca-O5-a2x">
                                                                 <rect key="frame" x="35" y="0.0" width="291" height="25"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="highlightedColor"/>
@@ -209,7 +209,7 @@
                                                                     <constraint firstAttribute="bottom" secondItem="5iI-6Q-2E2" secondAttribute="bottom" constant="2" id="rzZ-U1-sI7"/>
                                                                 </constraints>
                                                             </view>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0x-2N-C1e">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="headTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0x-2N-C1e">
                                                                 <rect key="frame" x="35" y="0.0" width="231" height="25"/>
                                                                 <state key="normal" title="Phone Button">
                                                                     <color key="titleColor" systemColor="labelColor"/>

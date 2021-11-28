@@ -21,7 +21,7 @@ final class CentreDataDisclaimerCell: UITableViewCell {
     @IBOutlet weak var disclaimerView: UIView!
 
     private enum Constant {
-        static let disclaimerTextFont: UIFont = .rounded(ofSize: 14, weight: .regular)
+        static let disclaimerTextFont: UIFont = .accessibleSubheadRegular
         static let disclaimerTextColor: UIColor = .horsesNeck
         static let detailViewsCornerRadius: CGFloat = 15
     }
@@ -42,6 +42,7 @@ final class CentreDataDisclaimerCell: UITableViewCell {
         infoIconImageView.image = UIImage(systemName: "info.circle.fill")?.tint(with: .horsesNeck)
         contentTextTitleLabel.font = Constant.disclaimerTextFont
         contentTextTitleLabel.textColor = Constant.disclaimerTextColor
+        contentTextTitleLabel.adjustsFontForContentSizeCategory = true
         disclaimerView.setCornerRadius(Constant.detailViewsCornerRadius)
         disclaimerView.backgroundColor = .creamBrulee
     }
