@@ -92,3 +92,24 @@
 "a11y.voiceover.details.call" = "Appeler au ";
 "a11y.voiceover.details.vaccine" = "Vaccin de type %@";
 "a11y.voiceover.details.to_use_with_platform" = "à utiliser avec la plateforme ";
+"a11y.voiceover.settings.button.label" = "Réglages";
+"a11y.voiceover.settings.button.hint" = "Tappez deux fois pour accéder aux réglages de l'application";
+"a11y.voiceover.settings.action.website" = "Tappez deux fois pour aller sur le site CovidTracker.fr";
+"a11y.voiceover.settings.action.contact" = "Tappez deux fois pour afficher le formulaire de contact du site CovidTracker.fr";
+"a11y.voiceover.settings.action.twitter" = "Tappez deux fois pour aller sur le profil Twitter de CovidTracker.";
+"a11y.voiceover.settings.action.sourcecode" = "Tappez deux fois pour accéder au dépot GitHub de l'application pour avoir son code source.";
+"a11y.voiceover.settings.action.advanced" = "Tappez deux fois pour accéer aux réglages systèmes de l'application.";
+
+// MARK: - Settings
+
+"settings.title" = "Réglages";
+"settings.website.title" = "CovidTracker.fr";
+"settings.website.subtitle" = "Retrouvez nous sur notre site web";
+"settings.contact.title" = "Contact";
+"settings.contact.subtitle" = "Accédez à notre formulaire de contact";
+"settings.twitter.title" = "Twitter";
+"settings.twitter.subtitle" = "Suivez nos tweets !";
+"settings.sourcecode.title" = "Code source";
+"settings.sourcecode.subtitle" = "Retrouvez le code source de l'application sur GitHub";
+"settings.system.title" = "Avancé";
+"settings.system.subtitle" = "Accédez aux réglages avancés de l'app";

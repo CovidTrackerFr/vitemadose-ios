@@ -35,7 +35,7 @@ public struct HomeTitleCellViewData: HomeTitleCellViewDataProvider, Hashable {
 }
 
 class HomeTitleCell: UITableViewCell {
-    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!

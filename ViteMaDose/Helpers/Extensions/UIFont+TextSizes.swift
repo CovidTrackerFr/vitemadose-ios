@@ -72,4 +72,5 @@ extension UIFont {
     static var accessibleLargeTitleBold: UIFont {
         .rounded(ofSize: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFont.TextStyle.largeTitle).pointSize, weight: .bold)
     }
+
 }
