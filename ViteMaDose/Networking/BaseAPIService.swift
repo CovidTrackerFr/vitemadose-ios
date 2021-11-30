@@ -1,9 +1,10 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  BaseAPIService.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Victor Sarda on 01/05/2021.
-//
+// Author: Victor SARDA et al.
 
 import Foundation
 import Moya
@@ -13,6 +14,7 @@ import Moya
 enum BaseAPI {
     case stats
     case vaccinationCentres(departmentCode: String)
+    case dailySlots(departmentCode: String)
 }
 
 extension BaseAPI: TargetType {
@@ -29,13 +31,16 @@ extension BaseAPI: TargetType {
             return Self.remoteConfig.statsPath
         case let .vaccinationCentres(code):
             return Self.remoteConfig.departmentPath(withCode: code)
+        case let .dailySlots(code):
+            return Self.remoteConfig.dailySlots(withCode: code)
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .stats,
-             .vaccinationCentres:
+             .vaccinationCentres,
+             .dailySlots:
             return .get
         }
     }
@@ -51,7 +56,8 @@ extension BaseAPI: TargetType {
     var task: Task {
         switch self {
         case .stats,
-             .vaccinationCentres:
+             .vaccinationCentres,
+             .dailySlots:
             return .requestPlain
         }
     }
@@ -67,10 +73,12 @@ protocol BaseAPIServiceProvider: AnyObject {
     var provider: MoyaProvider<BaseAPI> { get }
 
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void)
+    func fetchDailySlots(departmentCode: String, completion: @escaping (Result<DailySlotsForDistrict, Error>) -> Void)
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
 }
 
 final class BaseAPIService: BaseAPIServiceProvider {
+
     let provider: MoyaProvider<BaseAPI>
 
     init(provider: MoyaProvider<BaseAPI> = MoyaProvider<BaseAPI>(plugins: [CachePolicyPlugin()])) {
@@ -83,6 +91,10 @@ final class BaseAPIService: BaseAPIServiceProvider {
 
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void) {
         request(target: .vaccinationCentres(departmentCode: departmentCode), completion: completion)
+    }
+
+    func fetchDailySlots(departmentCode: String, completion: @escaping (Result<DailySlotsForDistrict, Error>) -> Void) {
+        request(target: .dailySlots(departmentCode: departmentCode), completion: completion)
     }
 }
 
@@ -107,7 +119,8 @@ extension BaseAPI: CachePolicyGettable {
     var cachePolicy: URLRequest.CachePolicy {
         switch self {
         case .stats,
-             .vaccinationCentres:
+             .vaccinationCentres,
+             .dailySlots:
             return .reloadIgnoringLocalCacheData
         }
     }

@@ -1,12 +1,15 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  RemoteConfig.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Paul on 14/04/2021.
-//
+// Author: Paul JEANNOT et al.
 
 import Foundation
 import FirebaseRemoteConfig
+
+// MARK: - Remote Configuration
 
 struct RemoteConfiguration {
 
@@ -25,7 +28,7 @@ struct RemoteConfiguration {
     func synchronize(completion: @escaping (Result<Void, Error>) -> Void) {
         configuration.fetch(withExpirationDuration: 0) { _, error in
             if let error = error {
-                print("Error while fetching remote configuration (\(error.localizedDescription)).")
+                print("[RemoteConfiguration] Error while fetching remote configuration (\(error.localizedDescription)).")
                 completion(.failure(error))
             } else {
                 configuration.activate()
@@ -39,8 +42,10 @@ struct RemoteConfiguration {
 // MARK: - Defaults values
 
 extension RemoteConfiguration {
+
     var baseUrl: String {
         return configuration.configValue(forKey: "url_base").stringValue!
+        //return "http://192.168.1.13:8888/"
     }
 
     var statsPath: String {
@@ -77,12 +82,17 @@ extension RemoteConfiguration {
         return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
     }
 
-    var chronodoseMinCount: Int {
-        return configuration.configValue(forKey: "chronodose_min_count").numberValue.intValue
+    var boostershotMinCount: Int {
+        return configuration.configValue(forKey: "boostershot_min_count").numberValue.intValue
     }
 
     var vaccinationCentresListRadiusInMeters: Double {
         return vaccinationCentresListRadiusInKm.doubleValue * 1000
+    }
+
+    func dailySlots(withCode code: String) -> String {
+        let path = configuration.configValue(forKey: "path_daily_slots").stringValue!
+        return path.replacingOccurrences(of: "{code}", with: code)
     }
 
     func departmentPath(withCode code: String) -> String {

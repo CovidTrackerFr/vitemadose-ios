@@ -32,7 +32,7 @@ final class FollowedCentresViewModel: CentresListViewModel {
     override func reloadTableView(animated: Bool) {
         super.reloadTableView(animated: animated)
 
-        let shouldDismiss = vaccinationCentresList.isEmpty && followedCentresIds.isEmpty
+        let shouldDismiss = filteredVaccinationCentresList.isEmpty && followedCentresIds.isEmpty
         if shouldDismiss {
             delegate?.dismissViewController()
             return

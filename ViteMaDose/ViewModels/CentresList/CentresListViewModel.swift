@@ -1,9 +1,10 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  CentresListViewModel.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Victor Sarda on 09/04/2021.
-//
+// Author: Victor SARDA et al.
 
 import Foundation
 import UIKit
@@ -11,9 +12,13 @@ import PhoneNumberKit
 import PromiseKit
 import MapKit
 import Haptica
+
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
+
+    // MARK: Properties
+    
     private let apiService: BaseAPIServiceProvider
     private let phoneNumberKit: PhoneNumberKit
     private let searchResult: LocationSearchResult?
@@ -35,12 +40,18 @@ class CentresListViewModel {
 
     private var isLoading = false {
         didSet {
-            delegate?.updateLoadingState(isLoading: isLoading, isEmpty: vaccinationCentresList.isEmpty)
+            delegate?.updateLoadingState(isLoading: isLoading, isEmpty: filteredVaccinationCentresList.isEmpty)
         }
     }
 
+    /// The pure vaccination centres sent by the backend
     private var locationVaccinationCentres: LocationVaccinationCentres = []
-    private(set) var vaccinationCentresList: [VaccinationCentre] = []
+    /// An internal list of vaccination centres which is filtered (e.g. for booster shots, closest centers, etc).
+    private(set) var filteredVaccinationCentresList: [VaccinationCentre] = []
+    /// The pure daily slots for each district sent by the backend
+    private var dailySlots: [DailySlotsForDistrict] = []
+    /// Permits to gather in one data structure all the slots for specific days for all vaccination centres.
+    private var datedSlotsForVaccinationCentres: DatedSlotsForCentres = [:]
 
     private var footerText: String?
     weak var delegate: CentresListViewModelDelegate?
@@ -61,6 +72,8 @@ class CentresListViewModel {
         self.remoteConfig = remoteConfig
     }
 
+    // MARK: Table View And Cells
+    
     internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
@@ -113,7 +126,8 @@ class CentresListViewModel {
             return []
         }
 
-        let vaccinationCentreCellsViewData = vaccinationCentres.map(getVaccinationCentreCellViewData)
+        var vaccinationCentreCellsViewData = vaccinationCentres.map(getVaccinationCentreCellViewData)
+        vaccinationCentreCellsViewData = vaccinationCentreCellsViewData.filter({ $0.appointmentsCount ?? 0 > 0 })
         return vaccinationCentreCellsViewData.map(CentresListCell.centre)
     }
 
@@ -137,10 +151,10 @@ class CentresListViewModel {
         }
 
         let appointmentsCount: Int? = {
-            if centre.hasChronoDose {
-                return centre.chronoDosesCount
+            if userDefaults.centresListSortOption == .boosterShot {
+                return datedSlotsForVaccinationCentres.boosterShotsCount(for: centre, at: centre.nextAppointmentDay ?? "")
             } else {
-                return centre.appointmentCount
+                return datedSlotsForVaccinationCentres.appointmentsCount(for: centre, at: centre.nextAppointmentDay ?? "")
             }
         }()
 
@@ -157,7 +171,6 @@ class CentresListViewModel {
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
             partnerName: centre.plateforme,
-            isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
         )
     }
@@ -166,6 +179,29 @@ class CentresListViewModel {
         delegate?.presentLoadError(error)
     }
 
+    internal func reloadTableView(animated: Bool) {
+
+        let (availableCentres, unavailableCentres) = updateFilteredVaccinationCentres()
+        let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
+        
+        let headingCells = createHeadingCells(
+            appointmentsCount: datedSlotsForVaccinationCentres.allAppointmentsCount(),
+            availableCentresCount: datedSlotsForVaccinationCentres.allAvailableCentresCount(),
+            centresCount: allCentres.count
+        )
+
+        let centresCells = createVaccinationCentreCellsFor(for: filteredVaccinationCentresList)
+        let footerText = locationVaccinationCentres.first?.formattedLastUpdated
+
+        trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
+        DispatchQueue.main.async {
+            self.delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
+            self.delegate?.reloadTableViewFooter(with: self.shouldFooterText ? footerText : nil)
+        }
+    }
+    
+    // MARK: Promises
+    
     private func createDepartmentsPromises(_ codes: [String]) -> [Promise<VaccinationCentres>] {
         return codes.map { code in
             return Promise { seal in
@@ -181,39 +217,22 @@ class CentresListViewModel {
         }
     }
 
-    // MARK: - Overridables
-
-    internal func reloadTableView(animated: Bool) {
-        let availableCentres: [VaccinationCentre]
-        let unavailableCentres: [VaccinationCentre]
-
-        // If search result, filter by maximum distance
-        if let searchResult = self.searchResult {
-            availableCentres = locationVaccinationCentres.allAvailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
-            unavailableCentres = locationVaccinationCentres.allUnavailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
-        } else {
-            availableCentres = locationVaccinationCentres.allAvailableCentres
-            unavailableCentres = locationVaccinationCentres.allUnavailableCentres
-        }
-
-        // Merge arrays and make sure there is no centre with duplicate ids
-        let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
-        vaccinationCentresList = getVaccinationCentres(for: allCentres)
-
-        let headingCells = createHeadingCells(
-            appointmentsCount: allCentres.allAppointmentsCount,
-            availableCentresCount: allCentres.allAvailableCentresCount,
-            centresCount: allCentres.count
-        )
-        let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
-        let footerText = locationVaccinationCentres.first?.formattedLastUpdated
-
-        trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
-        DispatchQueue.main.async {
-            self.delegate?.reloadTableView(with: headingCells, andCentresCells: centresCells, animated: animated)
-            self.delegate?.reloadTableViewFooter(with: self.shouldFooterText ? footerText : nil)
+    private func createDailySlotsPromises(_ codes: [String]) -> [Promise<DailySlotsForDistrict>] {
+        return codes.map { code in
+            return Promise { seal in
+                apiService.fetchDailySlots(departmentCode: code) { result in
+                    switch result {
+                    case let .success(slots):
+                        seal.fulfill(slots)
+                    case let .failure(error):
+                        seal.reject(error)
+                    }
+                }
+            }
         }
     }
+
+    // MARK: - Misc.
 
     /// Creates a list of vaccination centre sorted by distance
     /// Centres are also filtered by maximum distance from the selected location
@@ -238,17 +257,18 @@ class CentresListViewModel {
             }
         case .fastest:
             return centres.sorted(by: VaccinationCentre.sortedByAppointment)
-        case .chronoDoses:
-            return centres
-                .filter(VaccinationCentre.filteredByChronoDoses)
-                .sorted(by: VaccinationCentre.sortedByAppointment)
+        case .boosterShot:
+            if self.dailySlots.count == 0 {
+                return []
+            } else {
+                return centres.filter { centre in
+                    self.datedSlotsForVaccinationCentres.hasBoosterShot(for: centre)
+                }.sorted(by: VaccinationCentre.sortedByAppointment)
+            }
         }
     }
 
-    internal func trackSearchResult(
-        availableCentres: [VaccinationCentre],
-        unavailableCentres: [VaccinationCentre]
-    ) {
+    internal func trackSearchResult(availableCentres: [VaccinationCentre], unavailableCentres: [VaccinationCentre]) {
         guard let searchResult = self.searchResult else {
             assertionFailure("Search result should not be nil")
             return
@@ -256,7 +276,7 @@ class CentresListViewModel {
 
         AppAnalytics.trackSearchEvent(
             searchResult: searchResult,
-            appointmentsCount: availableCentres.allAppointmentsCount,
+            appointmentsCount: datedSlotsForVaccinationCentres.availableCentresAppointmentsCount(),
             availableCentresCount: availableCentres.count,
             unAvailableCentresCount: unavailableCentres.count,
             sortOption: sortOption
@@ -273,14 +293,18 @@ class CentresListViewModel {
 
 extension CentresListViewModel: CentresListViewModelProvider {
 
+    // MARK: Data Loading
+    
     func load(animated: Bool) {
         guard !isLoading else { return }
         isLoading = true
+        loadDepartments(animated: animated)
+    }
 
+    private func loadDepartments(animated: Bool) {
         let departmentsToLoadPromises: [Promise<VaccinationCentres>] = createDepartmentsPromises(departmentsToLoad())
 
         when(resolved: departmentsToLoadPromises).done { [weak self] results in
-            self?.isLoading = false
             var errors: [Error] = []
 
             let vaccinationCentres = results.compactMap { result -> VaccinationCentres? in
@@ -294,10 +318,99 @@ extension CentresListViewModel: CentresListViewModelProvider {
             }
 
             if let error = errors.first {
+                self?.isLoading = false
                 self?.handleError(error)
             } else {
                 self?.locationVaccinationCentres = vaccinationCentres
+                self?.loadDailySlots(animated: animated)
+            }
+        }
+    }
+
+    private func loadDailySlots(animated: Bool) {
+        let dailySlotsPromises: [Promise<DailySlotsForDistrict>] = createDailySlotsPromises(departmentsToLoad())
+
+        when(resolved: dailySlotsPromises).done { [weak self] results in
+            self?.isLoading = false
+            var errors: [Error] = []
+
+            let dailySlots = results.compactMap { result -> DailySlotsForDistrict? in
+                switch result {
+                case let .fulfilled(slots):
+                    return slots
+                case let .rejected(error):
+                    errors.append(error)
+                    return nil
+                }
+            }
+
+            if let error = errors.first {
+                self?.handleError(error)
+            } else {
+                self?.dailySlots = dailySlots
+                self?.mergeSlotsIntoCentres()
                 self?.reloadTableView(animated: animated)
+            }
+        }
+    }
+
+    // MARK: Filtering And Merging
+    
+    /// Using if defined the `searchResult` value, prepares the filtered lsit fo centers using the the raw list of vaccination centres (`locationVaccinationCentres`).
+    /// - Returns: a tuple with the avaialble and unavaialble centers (if needed to reuse them)
+    private func updateFilteredVaccinationCentres() -> (available: [VaccinationCentre], unavailable: [VaccinationCentre]) {
+
+        var availableCentres: [VaccinationCentre]
+        var unavailableCentres: [VaccinationCentre]
+
+        // If search result, filter by maximum distance
+        if let searchResult = self.searchResult {
+            availableCentres = locationVaccinationCentres.allAvailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
+            unavailableCentres = locationVaccinationCentres.allUnavailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
+        } else {
+            availableCentres = locationVaccinationCentres.allAvailableCentres
+            unavailableCentres = locationVaccinationCentres.allUnavailableCentres
+        }
+
+        // Merge arrays and make sure there is no centre with duplicate ids
+        let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
+        filteredVaccinationCentresList = getVaccinationCentres(for: allCentres)
+
+        return (available: availableCentres, unavailable: unavailableCentres)
+    }
+
+    /// To prevent too numerous and heavy operations, processes all daily slots to merge them with the corresponding centres.
+    /// First, updates the internal array of filtered centres.
+    /// Uses the `VaccinationCentre` `departement` property to load from `DailySlotsForDistrict` the data for this district.
+    /// Uses also the `VaccinationCentre` `internalId` property to get slots for each day.
+    /// Finaly populates the `datedSlotsForVaccinationCentres` property of this `CentresListViewModel` to get, for each center, the daily slots.
+    private func mergeSlotsIntoCentres() {
+
+        let (_, _) = updateFilteredVaccinationCentres()
+
+        // For each vaccination centre: get its daily slots
+        for vaccinationCentre in filteredVaccinationCentresList {
+            let districtOfCentre = vaccinationCentre.departement
+
+            // Keep only the daily slots for the district of the current centre ; no need to look in other districts, less loops
+            if
+                let dailySlotsInVaccinationCentreDistrict = dailySlots.first(where: { d in d.locationCode == districtOfCentre }),
+                let dailySlots = dailySlotsInVaccinationCentreDistrict.dailySlots {
+
+                var slotsForCentre = [DatedSlot]()
+                let vaccinationCentreIdentifier = vaccinationCentre.internalId
+
+                for dailySlot in dailySlots {
+
+                    // Get the daily slots for the current centre
+                    if let slotForLocation = dailySlot.slotsPerLocation?
+                        .first(where: { $0.location == vaccinationCentreIdentifier }) {
+                        let datedSlot = (date: dailySlot.formalizedDay, slot: slotForLocation)
+                        slotsForCentre.append(datedSlot)
+                    }
+                }
+
+                datedSlotsForVaccinationCentres[vaccinationCentre] = slotsForCentre
             }
         }
     }
@@ -307,8 +420,10 @@ extension CentresListViewModel: CentresListViewModelProvider {
         reloadTableView(animated: false)
     }
 
+    // MARK: At Index Path
+    
     func followCentre(at indexPath: IndexPath, notificationsType: FollowedCentre.NotificationsType) {
-        guard let centre = vaccinationCentresList[safe: indexPath.row],
+        guard let centre = filteredVaccinationCentresList[safe: indexPath.row],
               let departmentCode = centre.departement,
               let internalId = centre.internalId
         else {
@@ -325,15 +440,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        var chronoDosesOnly = false
-        if case .chronodoses = followedCentre.notificationsType {
-            chronoDosesOnly = true
-        }
-
         FCMHelper.shared.subscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId,
-            chronoDosesOnly: chronoDosesOnly
+            andCentreId: internalId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -348,7 +457,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
     }
 
     func unfollowCentre(at indexPath: IndexPath) {
-        guard let centre = vaccinationCentresList[safe: indexPath.row],
+        guard let centre = filteredVaccinationCentresList[safe: indexPath.row],
               let departmentCode = centre.departement,
               let internalId = centre.internalId
         else {
@@ -366,15 +475,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        var chronoDosesOnly = false
-        if case .chronodoses = followedCentre.notificationsType {
-            chronoDosesOnly = true
-        }
-
         FCMHelper.shared.unsubscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId,
-            chronoDosesOnly: chronoDosesOnly
+            andCentreId: internalId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -389,7 +492,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
     }
 
     func isCentreFollowed(at indexPath: IndexPath) -> Bool? {
-        guard let centre = vaccinationCentresList[safe: indexPath.row],
+        guard let centre = filteredVaccinationCentresList[safe: indexPath.row],
               let departmentCode = centre.departement
         else {
             return nil
@@ -406,7 +509,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
 
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)? {
         guard
-            let centre = vaccinationCentresList[safe: indexPath.row],
+            let centre = filteredVaccinationCentresList[safe: indexPath.row],
             let name = centre.nom,
             let location = centre.locationAsCLLocation
         else {
@@ -416,11 +519,11 @@ extension CentresListViewModel: CentresListViewModelProvider {
     }
 
     func phoneNumberLink(at indexPath: IndexPath) -> URL? {
-        return vaccinationCentresList[safe: indexPath.row]?.phoneUrl
+        return filteredVaccinationCentresList[safe: indexPath.row]?.phoneUrl
     }
 
     func bookingLink(at indexPath: IndexPath) -> URL? {
-        guard let vaccinationCentre = vaccinationCentresList[safe: indexPath.row] else {
+        guard let vaccinationCentre = filteredVaccinationCentresList[safe: indexPath.row] else {
             return nil
         }
         AppAnalytics.didSelectVaccinationCentre(vaccinationCentre)

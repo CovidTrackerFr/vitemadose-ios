@@ -1,9 +1,10 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  CentresSortOptionCell.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Victor Sarda on 06/05/2021.
-//
+// Author: Victor SARDA et al.
 
 import UIKit
 
@@ -33,8 +34,8 @@ final class CentresSortOptionsCell: UITableViewCell {
             Localization.Locations.SortOption.fastest,
             forSegmentAt: CentresListSortOption.fastest.index)
         sortSegmentedControl.setTitle(
-            "Chronodoses",
-            forSegmentAt: CentresListSortOption.chronoDoses.index)
+            Localization.Locations.SortOption.booster,
+            forSegmentAt: CentresListSortOption.boosterShot.index)
     }
 
     func configure(with viewData: CentresSortOptionsCellViewData) {

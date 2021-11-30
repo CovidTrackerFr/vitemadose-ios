@@ -1,18 +1,19 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  VaccinationCentre.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Victor Sarda on 07/04/2021.
-//
+// Author: Victor SARDA et al.
 
 import Foundation
 import MapKit
 import PhoneNumberKit
 import SwiftDate
 
-// MARK: - VaccinationCentre
+// MARK: - Vaccination Centre
 
-struct VaccinationCentre: Codable, Hashable, Identifiable {
+public struct VaccinationCentre: Codable, Hashable, Identifiable {
     private let gid: String?
     public let internalId: String?
     let departement: String?
@@ -23,11 +24,9 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
     let prochainRdv: String?
     let plateforme: String?
     let type: String?
-    let appointmentCount: Int?
     let vaccineType: [String]?
-    let appointmentSchedules: [AppointmentSchedule?]?
 
-    var id: String {
+    public var id: String {
         return internalId ?? gid ?? UUID().uuidString
     }
 
@@ -42,11 +41,11 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
         case prochainRdv = "prochain_rdv"
         case plateforme
         case type
-        case appointmentCount = "appointment_count"
         case vaccineType = "vaccine_type"
-        case appointmentSchedules = "appointment_schedules"
     }
 }
+
+// MARK: - Vaccination Centre (location and metadata)
 
 extension VaccinationCentre {
     struct Location: Codable, Hashable {
@@ -72,38 +71,9 @@ extension VaccinationCentre {
             case businessHours = "business_hours"
         }
     }
-
-    struct AppointmentSchedule: Codable, Hashable {
-        let name: String?
-        let from: String?
-        let to: String?
-        let total: Int?
-
-        enum CodingKeys: String, CodingKey {
-            case name
-            case from
-            case to
-            case total
-        }
-
-        enum AppointmentScheduleKey {
-            static let chronoDose = "chronodose"
-        }
-    }
-
 }
 
-extension Sequence where Element == VaccinationCentre {
-    var allAppointmentsCount: Int {
-        return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
-    }
-
-    var allAvailableCentresCount: Int {
-        return reduce(0) { (previous, current) in
-            previous + (current.isAvailable ? 1 : 0)
-        }
-    }
-}
+// MARK: - Vaccination Centre (utilities)
 
 extension VaccinationCentre {
     var isAvailable: Bool {
@@ -157,35 +127,11 @@ extension VaccinationCentre {
         )
     }
 
-    var hasChronoDose: Bool {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total,
-            chronoDosesCount > 0
-        else {
-            return false
-        }
-
-        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
-    }
-
     var vaccinesTypeText: String? {
         guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
             return nil
         }
         return vaccineType.joined(separator: String.commaWithSpace)
-    }
-
-    var chronoDosesCount: Int? {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let total = chronoDose?.total
-        else {
-            return nil
-        }
-        return total
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -200,19 +146,14 @@ extension VaccinationCentre {
         return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
     }
 
-    static var filteredByChronoDoses: (Self) -> Bool = {
-        return $0.hasChronoDose
-    }
+    // MARK: Formatted
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {
         guard var name = nom else {
             return Localization.Location.unavailable_name
         }
 
-        if
-            let location = locationAsCLLocation,
-            let selectedLocation = selectedLocation
-        {
+        if let location = locationAsCLLocation, let selectedLocation = selectedLocation {
             // Add distance in kilometres
             let distanceInKm = location.distance(from: selectedLocation) / 1000
             let formattedDistance = String(format: "%.1f", distanceInKm)
@@ -234,7 +175,7 @@ extension VaccinationCentre {
     }
 }
 
-// MARK: - VaccinationCentres
+// MARK: - Vaccination Centres
 
 struct VaccinationCentres: Codable, Hashable {
     let lastUpdated: String?
@@ -266,6 +207,8 @@ struct VaccinationCentres: Codable, Hashable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
+
+// MARK: - LocationVaccination Centres
 
 typealias LocationVaccinationCentres = [VaccinationCentres]
 

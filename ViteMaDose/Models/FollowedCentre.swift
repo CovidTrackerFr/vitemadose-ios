@@ -1,9 +1,10 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  FollowedCentre.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Victor Sarda on 08/05/2021.
-//
+// Author: Victor SARDA et al.
 
 import Foundation
 
@@ -16,6 +17,5 @@ public extension FollowedCentre {
     enum NotificationsType: String, Codable, Hashable {
         case none
         case all
-        case chronodoses
     }
 }

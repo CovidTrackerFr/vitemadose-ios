@@ -36,7 +36,7 @@ enum AppAnalytics {
     }
 
     static func didSelectVaccinationCentre(_ vaccinationCentre: VaccinationCentre) {
-        let eventName = (vaccinationCentre.appointmentCount ?? 0) > 0 ? "rdv_click" : "rdv_verify"
+        let eventName = "rdv_click" // Note the "rdv_verify" has been remove since we don't display the centers without appointments anymore. Maybe we should make a rollback about that.
         let department = vaccinationCentre.departement.emptyIfNil.lowercased()
         let name = vaccinationCentre.nom.emptyIfNil.lowercased()
         let type = vaccinationCentre.type.emptyIfNil.lowercased()
@@ -77,8 +77,8 @@ private extension CentresListSortOption {
             return "au plus proche"
         case .fastest:
             return "au plus tot"
-        case .chronoDoses:
-            return "chronodoses"
+        case .boosterShot:
+            return "dose de rappel"
         }
     }
 }

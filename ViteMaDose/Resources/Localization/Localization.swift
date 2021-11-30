@@ -1,9 +1,10 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GPL-3.0-or-later
 //
-//  Localization.swift
-//  ViteMaDose
+// This software is distributed under the GNU General Public License v3.0 or later license.
 //
-//  Created by Victor Sarda on 24/04/2021.
-//
+// Author: Victor SARDA et al.
 // swiftlint:disable identifier_name
 
 import Foundation
@@ -21,11 +22,6 @@ enum Localization {
         enum NotificationsPage {
             static let title = "onboarding.notifications_page.title".localized
             static let description = "onboarding.notifications_page.description".localized
-        }
-
-        enum ChronodosesPage {
-            static let title = "onboarding.chronodoses_page.title".localized
-            static let description = "onboarding.chronodoses_page.description".localized
         }
     }
 
@@ -75,6 +71,7 @@ enum Localization {
         enum SortOption {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
+            static let booster = "locations.sort_option.booster".localized
         }
     }
 

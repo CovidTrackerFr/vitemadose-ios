@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>chronodose_min_count</key>
+	<key>boostershot_min_count</key>
 	<integer>1</integer>
 	<key>data_disclaimer_message</key>
 	<string></string>
@@ -18,6 +18,8 @@
 	<string>/vitemadose/departements.json</string>
 	<key>path_data_department</key>
 	<string>/vitemadose/{code}.json</string>
+	<key>path_daily_slots</key>
+	<string>/vitemadose/{code}/creneaux-quotidiens.json</string>
 	<key>vaccination_centres_list_radius_in_km</key>
 	<string>50</string>
 </dict>
