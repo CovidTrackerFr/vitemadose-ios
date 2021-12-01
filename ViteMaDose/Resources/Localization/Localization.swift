@@ -118,6 +118,11 @@ enum Localization {
             static let title = "settings.website.title".localized
             static let subtitle = "settings.website.subtitle".localized
         }
+        
+        enum Contributors {
+            static let title = "settings.contributors.title".localized
+            static let subtitle = "settings.contributors.subtitle".localized
+        }
 
         enum Contact {
             static let title = "settings.contact.title".localized
@@ -188,6 +193,7 @@ enum Localization {
                 static let button_label = "a11y.voiceover.settings.button.label".localized
                 static let button_hint = "a11y.voiceover.settings.button.hint".localized
                 static let action_website = "a11y.voiceover.settings.action.website".localized
+                static let action_contributors = "a11y.voiceover.settings.action.contributors".localized
                 static let action_contact = "a11y.voiceover.settings.action.contact".localized
                 static let action_twitter = "a11y.voiceover.settings.action.twitter".localized
                 static let action_sourcecode = "a11y.voiceover.settings.action.sourcecode".localized

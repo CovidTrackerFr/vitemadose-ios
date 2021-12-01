@@ -144,16 +144,6 @@ final class HomeViewController: UIViewController, Storyboarded {
         present(safariViewController, animated: true)
     }
 
-    // TODO: Move this to settings to open contributors
-    private func presentCreditViewController() {
-        let creditViewController = CreditViewController.instantiate()
-        creditViewController.viewModel = CreditViewModel(credits: [])
-
-        DispatchQueue.main.async { [weak self] in
-            self?.present(creditViewController, animated: true)
-        }
-    }
-
     private func presentMaintenancePage(with urlString: String) {
         let maintenanceViewController = MaintenanceViewController(urlString: urlString)
         present(maintenanceViewController, animated: true)

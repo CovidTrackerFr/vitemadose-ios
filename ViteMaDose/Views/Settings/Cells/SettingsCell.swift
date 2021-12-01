@@ -15,15 +15,16 @@ enum SettingsDataType: Int, Hashable {
     case header = 0
     /// Cell dedicated to the project website
     case website = 1
+    /// Cell dedicated to show contributors
+    case contributors = 2
     /// Cell dedicated to contact the team
-    case contact = 2
+    case contact = 3
     /// Cell dedicated to the Twitter profile
-    case twitter = 3
+    case twitter = 4
     /// Cell dedicated to the GitHub repository
-    case appSourceCode = 4
+    case appSourceCode = 5
     /// Celle which redirects to the systems ettings to get details
-    case systemSettings = 5
-    // TODO: Cell for contributors (see #122, #37)
+    case systemSettings = 6
 }
 
 private extension SettingsDataType {
@@ -37,6 +38,8 @@ private extension SettingsDataType {
             imageName = nil
         case .website:
             imageName = "safari.fill"
+        case .contributors:
+            imageName = "person.fill"
         case .contact:
             imageName = "message.fill"
         case .twitter:
@@ -87,6 +90,11 @@ struct SettingsCellViewData: SettingsCellViewDataProvider, Hashable {
             description = Localization.Settings.WebSite.subtitle
             iconContainerColor = .systemOrange
             voiceOverHint = Localization.A11y.VoiceOver.Settings.action_website
+        case .contributors:
+            title = NSMutableAttributedString(string: Localization.Settings.Contributors.title)
+            description = Localization.Settings.Contributors.subtitle
+            iconContainerColor = .systemPink
+            voiceOverHint = Localization.A11y.VoiceOver.Settings.action_contributors
         case .contact:
             title = NSMutableAttributedString(string: Localization.Settings.Contact.title)
             description = Localization.Settings.Contact.subtitle
