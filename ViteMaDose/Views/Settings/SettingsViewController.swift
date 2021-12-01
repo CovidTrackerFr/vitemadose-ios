@@ -16,7 +16,7 @@ final class SettingsViewController: UIViewController, Storyboarded {
 
     @IBOutlet private var tableView: UITableView!
 
-    /// Cells to add in the embeded `tableView`
+    /// Cells to add in the embedded `tableView`
     private lazy var cellsTypes: [SettingsDataType] = [
         .header, .website, .contact, .twitter, .appSourceCode, .systemSettings
     ]
@@ -80,11 +80,11 @@ extension SettingsViewController: UITableViewDelegate {
         case .contact:
             openUrl("https://covidtracker.fr/contact/")
         case .twitter:
-            openUrl("https://twitter.com/covidtracker_fr")
+            openUrl("https://twitter.com/ViteMaDose_off")
         case .appSourceCode:
             openUrl("https://github.com/CovidTrackerFr/vitemadose-ios")
         case .systemSettings:
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            UIApplication.shared.open(URL(staticString: UIApplication.openSettingsURLString))
         case .header, .none:
             break
         }
