@@ -19,6 +19,7 @@ final class HomePartnersFooterView: UIView {
     @IBOutlet private var logo7ImageView: UIImageView!
     @IBOutlet private var logo8ImageView: UIImageView!
     @IBOutlet private var logo9ImageView: UIImageView!
+    
     private lazy var allLogos: [UIImageView] = [
         logo1ImageView,
         logo2ImageView,
