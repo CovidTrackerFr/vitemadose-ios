@@ -31,6 +31,7 @@
 		5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */; };
 		57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57493FDC26403F5100F7E662 /* AppConstant.swift */; };
 		5752DC63263F33D2004BA4BC /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5752DC62263F33D2004BA4BC /* PromiseKit */; };
+		5753E6BA275BFB6B00C386EC /* Bool+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5753E6B9275BFB6B00C386EC /* Bool+Commons.swift */; };
 		575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC210262AD8F7008D1869 /* PhoneNumberKit */; };
 		575CC224262AECA7008D1869 /* HomeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC223262AECA7008D1869 /* HomeTitleCell.swift */; };
 		575CC22F262AF4E1008D1869 /* HomeSearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */; };
@@ -169,6 +170,7 @@
 		57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultCell.swift; sourceTree = "<group>"; };
 		57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchResultCell.xib; sourceTree = "<group>"; };
 		57493FDC26403F5100F7E662 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		5753E6B9275BFB6B00C386EC /* Bool+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Commons.swift"; sourceTree = "<group>"; };
 		575CC223262AECA7008D1869 /* HomeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleCell.swift; sourceTree = "<group>"; };
 		575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchBarCell.swift; sourceTree = "<group>"; };
 		575CC22E262AF4E1008D1869 /* HomeSearchBarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSearchBarCell.xib; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				576738FA261E374A004A700D /* URL+Commons.swift */,
+				5753E6B9275BFB6B00C386EC /* Bool+Commons.swift */,
 				57673902261E3783004A700D /* Data+Commons.swift */,
 				57673916261E3B1A004A700D /* UITableView+Commons.swift */,
 				579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */,
@@ -931,6 +934,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5753E6BA275BFB6B00C386EC /* Bool+Commons.swift in Sources */,
 				57B6BEA42636060200D9AAC1 /* MaintenanceViewController.swift in Sources */,
 				516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */,
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,

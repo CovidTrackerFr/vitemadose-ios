@@ -137,11 +137,7 @@ class CentresListViewModel {
         }
 
         let appointmentsCount: Int? = {
-            if centre.hasChronoDose {
-                return centre.chronoDosesCount
-            } else {
-                return centre.appointmentCount
-            }
+            return .zero // TODO: Count logic
         }()
 
         return CentreViewData(
@@ -201,7 +197,7 @@ class CentresListViewModel {
         vaccinationCentresList = getVaccinationCentres(for: allCentres)
 
         let headingCells = createHeadingCells(
-            appointmentsCount: allCentres.allAppointmentsCount,
+            appointmentsCount: .zero, // TODO: Count logic
             availableCentresCount: allCentres.allAvailableCentresCount,
             centresCount: allCentres.count
         )
@@ -256,7 +252,7 @@ class CentresListViewModel {
 
         AppAnalytics.trackSearchEvent(
             searchResult: searchResult,
-            appointmentsCount: availableCentres.allAppointmentsCount,
+            appointmentsCount: .zero, // TODO: Count logic
             availableCentresCount: availableCentres.count,
             unAvailableCentresCount: unavailableCentres.count,
             sortOption: sortOption

@@ -23,7 +23,6 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
     let prochainRdv: String?
     let plateforme: String?
     let type: String?
-    let appointmentCount: Int?
     let vaccineType: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
@@ -42,7 +41,6 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
         case prochainRdv = "prochain_rdv"
         case plateforme
         case type
-        case appointmentCount = "appointment_count"
         case vaccineType = "vaccine_type"
         case appointmentSchedules = "appointment_schedules"
     }
@@ -94,14 +92,8 @@ extension VaccinationCentre {
 }
 
 extension Sequence where Element == VaccinationCentre {
-    var allAppointmentsCount: Int {
-        return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
-    }
-
     var allAvailableCentresCount: Int {
-        return reduce(0) { (previous, current) in
-            previous + (current.isAvailable ? 1 : 0)
-        }
+        return reduce(0) { $0 + $1.isAvailable.intValue }
     }
 }
 
