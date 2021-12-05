@@ -10,7 +10,6 @@ import Foundation
 // MARK: - Daily Slots
 
 public struct DepartmentSlots: Codable {
-
     let departmentNumber: String?
     let dailySlots: [DailySlot]?
 
@@ -20,3 +19,17 @@ public struct DepartmentSlots: Codable {
     }
 }
 
+extension DepartmentSlots {
+    var allSlotsCount: Int {
+        guard let dailySlots = dailySlots else {
+            return .zero
+        }
+        return dailySlots.reduce(0) { $0 + ($1.total ?? .zero) }
+    }
+}
+
+extension Array where Element == DepartmentSlots {
+    var allSlotsCount: Int {
+        return reduce(0) { $0 + $1.allSlotsCount }
+    }
+}

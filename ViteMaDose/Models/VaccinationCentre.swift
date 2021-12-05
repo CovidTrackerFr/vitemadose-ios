@@ -12,7 +12,7 @@ import SwiftDate
 
 // MARK: - VaccinationCentre
 
-struct VaccinationCentre: Codable, Hashable, Identifiable {
+public struct VaccinationCentre: Codable, Hashable, Identifiable {
     private let gid: String?
     public let internalId: String?
     let departement: String?
@@ -26,7 +26,7 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
     let vaccineType: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
-    var id: String {
+    public var id: String {
         return internalId ?? gid ?? UUID().uuidString
     }
 
@@ -259,9 +259,9 @@ struct VaccinationCentres: Codable, Hashable {
     }
 }
 
-typealias LocationVaccinationCentres = [VaccinationCentres]
+typealias DepartmentVaccinationCentres = [VaccinationCentres]
 
-extension LocationVaccinationCentres {
+extension DepartmentVaccinationCentres {
     var allAvailableCentres: [VaccinationCentre] {
         return flatMap(\.availableCentres).unique(by: \.id)
     }

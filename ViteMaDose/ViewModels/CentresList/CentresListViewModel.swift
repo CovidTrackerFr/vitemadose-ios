@@ -11,6 +11,10 @@ import PhoneNumberKit
 import PromiseKit
 import MapKit
 import Haptica
+
+public typealias DatedSlot = (date: String, slot: Slot)
+public typealias VaccinationCentresWithDatedSlot = [VaccinationCentre: [DatedSlot]]
+
 // MARK: - Centres List ViewModel
 
 class CentresListViewModel {
@@ -39,8 +43,10 @@ class CentresListViewModel {
         }
     }
 
-    private var locationVaccinationCentres: LocationVaccinationCentres = []
+    private var vaccinationCentresForDepartments: DepartmentVaccinationCentres = []
+    private var departmentSlots: [DepartmentSlots] = []
     private(set) var vaccinationCentresList: [VaccinationCentre] = []
+    private var vaccinationCentresWithDatedSlots: VaccinationCentresWithDatedSlot = [:]
 
     private var footerText: String?
     weak var delegate: CentresListViewModelDelegate?
@@ -137,7 +143,20 @@ class CentresListViewModel {
         }
 
         let appointmentsCount: Int? = {
-            return .zero // TODO: Count logic
+            guard let datedSlots = vaccinationCentresWithDatedSlots[centre] else {
+                return nil
+            }
+
+            let count = datedSlots.reduce(0) { partialResult, datedSlot in
+                switch sortOption {
+                case .closest, .fastest:
+                    return partialResult + datedSlot.slot.dosesCount(for: .all)
+                case .chronoDoses: // TODO: Change with booster jab
+                    return partialResult + datedSlot.slot.dosesCount(for: .thirdDose)
+                }
+            }
+
+            return count
         }()
 
         return CentreViewData(
@@ -177,32 +196,35 @@ class CentresListViewModel {
         }
     }
 
-    // MARK: - Overridables
+    private func createDepartmentSlotsPromises(_ codes: [String]) -> [Promise<DepartmentSlots>] {
+        return codes.map { code in
+            return Promise { seal in
+                apiService.fetchDepartmentSlots(departmentCode: code) { result in
+                    switch result {
+                    case let .success(centres):
+                        seal.fulfill(centres)
+                    case let .failure(error):
+                        seal.reject(error)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Overridable
 
     internal func reloadTableView(animated: Bool) {
-        let availableCentres: [VaccinationCentre]
-        let unavailableCentres: [VaccinationCentre]
-
-        // If search result, filter by maximum distance
-        if let searchResult = self.searchResult {
-            availableCentres = locationVaccinationCentres.allAvailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
-            unavailableCentres = locationVaccinationCentres.allUnavailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
-        } else {
-            availableCentres = locationVaccinationCentres.allAvailableCentres
-            unavailableCentres = locationVaccinationCentres.allUnavailableCentres
-        }
-
-        // Merge arrays and make sure there is no centre with duplicate ids
+        let (availableCentres, unavailableCentres) = createVaccinationCentresList()
         let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
-        vaccinationCentresList = getVaccinationCentres(for: allCentres)
 
         let headingCells = createHeadingCells(
-            appointmentsCount: .zero, // TODO: Count logic
-            availableCentresCount: allCentres.allAvailableCentresCount,
+            appointmentsCount: departmentSlots.allSlotsCount,
+            availableCentresCount: availableCentres.allAvailableCentresCount,
             centresCount: allCentres.count
         )
+
         let centresCells = createVaccinationCentreCellsFor(for: vaccinationCentresList)
-        let footerText = locationVaccinationCentres.first?.formattedLastUpdated
+        let footerText = vaccinationCentresForDepartments.first?.formattedLastUpdated
 
         trackSearchResult(availableCentres: availableCentres, unavailableCentres: unavailableCentres)
         DispatchQueue.main.async {
@@ -252,16 +274,16 @@ class CentresListViewModel {
 
         AppAnalytics.trackSearchEvent(
             searchResult: searchResult,
-            appointmentsCount: .zero, // TODO: Count logic
+            appointmentsCount: departmentSlots.allSlotsCount,
             availableCentresCount: availableCentres.count,
             unAvailableCentresCount: unavailableCentres.count,
             sortOption: sortOption
         )
     }
 
-    internal func departmentsToLoad() -> [String] {
+    internal var departmentsToLoad: [String] {
         let departmentCodes: [String?] = [searchResult?.selectedDepartmentCode] + (searchResult?.departmentCodes ?? [])
-        return departmentCodes.compactMap({ $0 })
+        return departmentCodes.compacted
     }
 }
 
@@ -273,29 +295,66 @@ extension CentresListViewModel: CentresListViewModelProvider {
         guard !isLoading else { return }
         isLoading = true
 
-        let departmentsToLoadPromises: [Promise<VaccinationCentres>] = createDepartmentsPromises(departmentsToLoad())
+        let departmentsToLoad = departmentsToLoad
+        let departmentsToLoadPromises: [Promise<VaccinationCentres>] = createDepartmentsPromises(departmentsToLoad)
+        let departmentsSlotsToLoadPromises: [Promise<DepartmentSlots>] = createDepartmentSlotsPromises(departmentsToLoad)
 
-        when(resolved: departmentsToLoadPromises).done { [weak self] results in
-            self?.isLoading = false
-            var errors: [Error] = []
+        when(fulfilled: departmentsToLoadPromises).then { foundVaccinationCentres in
+            when(fulfilled: departmentsSlotsToLoadPromises).map({ ($0, foundVaccinationCentres) })
+        }.done { [weak self] departmentSlots, foundVaccinationCentres in
+            guard let self = self else { return }
 
-            let vaccinationCentres = results.compactMap { result -> VaccinationCentres? in
-                switch result {
-                case let .fulfilled(centres):
-                    return centres
-                case let .rejected(error):
-                    errors.append(error)
-                    return nil
+            self.isLoading = false
+            self.vaccinationCentresForDepartments = foundVaccinationCentres
+            self.departmentSlots = departmentSlots
+
+            self.createVaccinationCentresList()
+
+            for vaccinationCentre in self.vaccinationCentresList {
+                let departmentCode = vaccinationCentre.departement
+                guard
+                    let dailySlotsInVaccinationCentre = departmentSlots.first(where: { $0.departmentNumber == departmentCode }),
+                    let dailySlots = dailySlotsInVaccinationCentre.dailySlots
+                else {
+                    return
                 }
+
+                let slots: [DatedSlot] = dailySlots.compactMap { slot in
+                    guard let slotForDepartment = slot.slotsPerLocation?.first(where: { $0.locationID == vaccinationCentre.internalId }) else {
+                        return nil
+                    }
+                    return (date: slot.date.emptyIfNil, slot: slotForDepartment)
+                }
+
+                self.vaccinationCentresWithDatedSlots[vaccinationCentre] = slots
             }
 
-            if let error = errors.first {
-                self?.handleError(error)
-            } else {
-                self?.locationVaccinationCentres = vaccinationCentres
-                self?.reloadTableView(animated: animated)
-            }
+            self.reloadTableView(animated: animated)
+        }.catch { [weak self] error in
+            self?.isLoading = false
+            self?.handleError(error)
         }
+    }
+
+    @discardableResult
+    private func createVaccinationCentresList() -> (available: [VaccinationCentre], unavailable: [VaccinationCentre]) {
+        let availableCentres: [VaccinationCentre]
+        let unavailableCentres: [VaccinationCentre]
+
+            // If search result, filter by maximum distance
+        if let searchResult = self.searchResult {
+            availableCentres = vaccinationCentresForDepartments.allAvailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
+            unavailableCentres = vaccinationCentresForDepartments.allUnavailableCentres.filter(searchResult.filterVaccinationCentreByDistance)
+        } else {
+            availableCentres = vaccinationCentresForDepartments.allAvailableCentres
+            unavailableCentres = vaccinationCentresForDepartments.allUnavailableCentres
+        }
+
+        // Merge arrays and make sure there is no centre with duplicate ids
+        let allCentres = (availableCentres + unavailableCentres).unique(by: \.id)
+        vaccinationCentresList = getVaccinationCentres(for: allCentres)
+
+        return (available: availableCentres, unavailable: unavailableCentres)
     }
 
     func sortList(by order: CentresListSortOption) {

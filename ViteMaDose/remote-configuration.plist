@@ -20,5 +20,7 @@
 	<string>/vitemadose/{code}.json</string>
 	<key>vaccination_centres_list_radius_in_km</key>
 	<string>50</string>
+	<key>path_departement_slots</key>
+	<string>/vitemadose/{code}/creneaux-quotidiens.json</string>
 </dict>
 </plist>
