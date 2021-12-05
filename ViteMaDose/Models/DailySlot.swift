@@ -65,12 +65,6 @@ extension Slot {
         return dosesCount(for: .thirdDose) > 0
     }
 
-    /// - Returns: The number of third shot / booster shot this slot have
-    var thirdDosesCount: Int {
-        let thirdDoseCategory = slotsPerCategory?.first(where: { $0.category == .thirdDose })
-        return thirdDoseCategory?.slotsCount ?? .zero
-    }
-
     func dosesCount(for category: SlotsPerCategory.Category) -> Int {
         let category = slotsPerCategory?.first(where: { $0.category == category })
         return category?.slotsCount ?? .zero

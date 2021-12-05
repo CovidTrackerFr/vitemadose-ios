@@ -33,8 +33,8 @@ final class CentresSortOptionsCell: UITableViewCell {
             Localization.Locations.SortOption.fastest,
             forSegmentAt: CentresListSortOption.fastest.index)
         sortSegmentedControl.setTitle(
-            "Chronodoses",
-            forSegmentAt: CentresListSortOption.chronoDoses.index)
+            Localization.Locations.SortOption.third_dose,
+            forSegmentAt: CentresListSortOption.thirdDose.index)
     }
 
     func configure(with viewData: CentresSortOptionsCellViewData) {

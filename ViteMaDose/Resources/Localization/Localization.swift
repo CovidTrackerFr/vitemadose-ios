@@ -75,6 +75,7 @@ enum Localization {
         enum SortOption {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
+            static let third_dose = "locations.sort_option.third_dose".localized
         }
     }
 

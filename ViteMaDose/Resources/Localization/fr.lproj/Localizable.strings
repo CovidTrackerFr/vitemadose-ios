@@ -43,6 +43,7 @@
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
 "locations.sort_option.fastest" = "Au plus vite";
+"locations.sort_option.third_dose" = "Dose de rappel";
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";
 "location.verify_button" = "Vérifier ce lieu";
