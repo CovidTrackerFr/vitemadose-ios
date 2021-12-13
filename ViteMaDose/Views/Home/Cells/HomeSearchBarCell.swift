@@ -15,7 +15,7 @@ struct HomeSearchBarCellViewData: HomeSearchBarCellViewDataProvider, Hashable {
     let searchBarText = Localization.Home.search_placeholder
 }
 
-class HomeSearchBarCell: UITableViewCell {
+final class HomeSearchBarCell: UITableViewCell {
 
     @IBOutlet private var searchBarView: UIView!
     @IBOutlet private var searchBarTitle: UILabel!
@@ -42,6 +42,9 @@ class HomeSearchBarCell: UITableViewCell {
             radius: 5
         )
         searchBarView.setCornerRadius(Constant.searchBarViewCornerRadius, withShadow: shadow)
+        isAccessibilityElement = true
+        accessibilityTraits = .searchField
+        accessibilityHint = Localization.A11y.VoiceOver.HomeScreen.search_field
     }
 
     func configure(with viewData: HomeSearchBarCellViewDataProvider = HomeSearchBarCellViewData()) {

@@ -11,11 +11,11 @@ protocol CentresSortOptionsCellViewDataProvider {
     var sortOption: CentresListSortOption { get }
 }
 
-struct CentresSortOptionsCellViewData: CentresSortOptionsCellViewDataProvider, Hashable {
+public struct CentresSortOptionsCellViewData: CentresSortOptionsCellViewDataProvider, Hashable {
     let sortOption: CentresListSortOption
 }
 
-class CentresSortOptionsCell: UITableViewCell {
+final class CentresSortOptionsCell: UITableViewCell {
     @IBOutlet private var sortSegmentedControl: UISegmentedControl!
     var sortSegmentedControlHandler: ((Int) -> Void)?
 
@@ -32,6 +32,9 @@ class CentresSortOptionsCell: UITableViewCell {
         sortSegmentedControl.setTitle(
             Localization.Locations.SortOption.fastest,
             forSegmentAt: CentresListSortOption.fastest.index)
+        sortSegmentedControl.setTitle(
+            "Chronodoses",
+            forSegmentAt: CentresListSortOption.chronoDoses.index)
     }
 
     func configure(with viewData: CentresSortOptionsCellViewData) {
