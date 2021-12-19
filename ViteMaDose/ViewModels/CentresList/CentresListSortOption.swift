@@ -10,7 +10,7 @@ import Foundation
 public enum CentresListSortOption: Equatable {
     case closest
     case fastest
-    case chronoDoses
+    case thirdDose
 
     init(_ value: Int) {
         switch value {
@@ -19,7 +19,7 @@ public enum CentresListSortOption: Equatable {
         case 1:
             self = .fastest
         case 2:
-            self = .chronoDoses
+            self = .thirdDose
         default:
             assertionFailure("Value should either be 0, 1 or 2")
             self = .closest
@@ -32,7 +32,7 @@ public enum CentresListSortOption: Equatable {
             return 0
         case .fastest:
             return 1
-        case .chronoDoses:
+        case .thirdDose:
             return 2
         }
     }

@@ -54,7 +54,7 @@ final class FollowedCentresViewModel: CentresListViewModel {
             .sorted(by: VaccinationCentre.sortedByAppointment)
     }
 
-    override internal func departmentsToLoad() -> [String] {
+    override internal var departmentsToLoad: [String] {
        return userDefaults.followedCentres.map(\.key)
     }
 
