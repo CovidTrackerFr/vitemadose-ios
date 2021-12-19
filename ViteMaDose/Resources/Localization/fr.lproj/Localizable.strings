@@ -8,11 +8,11 @@
 
 // MARK: - Onboarding
 "onboarding.welcome_page.title" = "Vite Ma Dose fait le plein de nouveautés !";
-"onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose, et les chronodoses permettant à chacun de trouver un rendez-vous en 24h sans restriction.";
+"onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose.";
 "onboarding.notifications_page.title" = "Notifications";
 "onboarding.notifications_page.description" = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités.";
-"onboarding.chronodoses_page.title" = "Chronodoses";
-"onboarding.chronodoses_page.description" = "À partir du mercredi 12 mai, vous pourrez réserver les rendez-vous de vaccination vacants du jour même et du lendemain, sans restriction. Nous les appelons les “Chronodoses”, et sont matérialisées par des éclairs et un bandeau rouge.";
+"onboarding.thirddose_page.title" = "Dose de rappel";
+"onboarding.thirddose_page.description" = "Vous pouvez désormais afficher les lieux de vaccination ayant des doses de rappel disponible.";
 "onboarding.next_button" = "Suivant";
 "onboarding.done_button" = "Merci !";
 
@@ -43,6 +43,7 @@
 "locations.no_results" = "Nous n'avons pas trouvé de créneau pour %@";
 "locations.sort_option.closest" = "Au plus proche";
 "locations.sort_option.fastest" = "Au plus vite";
+"locations.sort_option.third_dose" = "Dose de rappel";
 "location.date" = "Le %@ à partir de %@";
 "location.book_button" = "Prendre rendez-vous";
 "location.verify_button" = "Vérifier ce lieu";
@@ -92,3 +93,24 @@
 "a11y.voiceover.details.call" = "Appeler au ";
 "a11y.voiceover.details.vaccine" = "Vaccin de type %@";
 "a11y.voiceover.details.to_use_with_platform" = "à utiliser avec la plateforme ";
+"a11y.voiceover.settings.button.label" = "Réglages";
+"a11y.voiceover.settings.button.hint" = "Tappez deux fois pour accéder aux réglages de l'application";
+"a11y.voiceover.settings.action.website" = "Tappez deux fois pour aller sur le site CovidTracker.fr";
+"a11y.voiceover.settings.action.contact" = "Tappez deux fois pour afficher le formulaire de contact du site CovidTracker.fr";
+"a11y.voiceover.settings.action.twitter" = "Tappez deux fois pour aller sur le profil Twitter de CovidTracker.";
+"a11y.voiceover.settings.action.sourcecode" = "Tappez deux fois pour accéder au dépot GitHub de l'application pour avoir son code source.";
+"a11y.voiceover.settings.action.advanced" = "Tappez deux fois pour accéer aux réglages systèmes de l'application.";
+
+// MARK: - Settings
+
+"settings.title" = "Réglages";
+"settings.website.title" = "CovidTracker.fr";
+"settings.website.subtitle" = "Retrouvez nous sur notre site web";
+"settings.contact.title" = "Contact";
+"settings.contact.subtitle" = "Accédez à notre formulaire de contact";
+"settings.twitter.title" = "Twitter";
+"settings.twitter.subtitle" = "Suivez nos tweets !";
+"settings.sourcecode.title" = "Code source";
+"settings.sourcecode.subtitle" = "Retrouvez le code source de l'application sur GitHub";
+"settings.system.title" = "Avancé";
+"settings.system.subtitle" = "Accédez aux réglages avancés de l'app";

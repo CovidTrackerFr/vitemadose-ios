@@ -23,9 +23,9 @@ enum Localization {
             static let description = "onboarding.notifications_page.description".localized
         }
 
-        enum ChronodosesPage {
-            static let title = "onboarding.chronodoses_page.title".localized
-            static let description = "onboarding.chronodoses_page.description".localized
+        enum ThirdDosePage {
+            static let title = "onboarding.thirddose_page.title".localized
+            static let description = "onboarding.thirddose_page.description".localized
         }
     }
 
@@ -75,6 +75,7 @@ enum Localization {
         enum SortOption {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
+            static let third_dose = "locations.sort_option.third_dose".localized
         }
     }
 
@@ -99,6 +100,35 @@ enum Localization {
         static let stop_following_button = "location.stop_following_button".localized
     }
 
+    enum Settings {
+        static let title = "settings.title".localized
+
+        enum WebSite {
+            static let title = "settings.website.title".localized
+            static let subtitle = "settings.website.subtitle".localized
+        }
+
+        enum Contact {
+            static let title = "settings.contact.title".localized
+            static let subtitle = "settings.contact.subtitle".localized
+        }
+
+        enum Twitter {
+            static let title = "settings.twitter.title".localized
+            static let subtitle = "settings.twitter.subtitle".localized
+        }
+
+        enum SourceCode {
+            static let title = "settings.sourcecode.title".localized
+            static let subtitle = "settings.sourcecode.subtitle".localized
+        }
+
+        enum System {
+            static let title = "settings.system.title".localized
+            static let subtitle = "settings.system.subtitle".localized
+        }
+    }
+
     enum Error {
         enum Generic {
             static let title = "error.generic.title".localized
@@ -119,24 +149,38 @@ enum Localization {
                 static let booking_button = "a11y.voiceover.actions.booking_button".localized
                 static let call_button = "a11y.voiceover.actions.call_button".localized
             }
+
             enum Details {
                 static let call = "a11y.voiceover.details.call".localized
                 static let from = "a11y.voiceover.details.from".localized
                 static let to_use_with_platform = "a11y.voiceover.details.to_use_with_platform".localized
                 static let vaccine = "a11y.voiceover.details.vaccine".localized
             }
+
             enum HomeScreen {
                 static let display_places_on_map = "a11y.voiceover.home_screen.display_places_on_map".localized
                 static let recent_searches = "a11y.voiceover.home_screen.recent_searches".localized
                 static let search_field = "a11y.voiceover.home_screen.search_field".localized
                 static let see_department_results = "a11y.voiceover.home_screen.see_department_results".localized
             }
+
             enum Locations {
                 static let search = "a11y.voiceover.locations.search".localized
                 static let see_places = "a11y.voiceover.locations.see_places".localized
             }
+
             enum Navigation {
                 static let back_button = "a11y.voiceover.navigation.back_button".localized
+            }
+
+            enum Settings {
+                static let button_label = "a11y.voiceover.settings.button.label".localized
+                static let button_hint = "a11y.voiceover.settings.button.hint".localized
+                static let action_website = "a11y.voiceover.settings.action.website".localized
+                static let action_contact = "a11y.voiceover.settings.action.contact".localized
+                static let action_twitter = "a11y.voiceover.settings.action.twitter".localized
+                static let action_sourcecode = "a11y.voiceover.settings.action.sourcecode".localized
+                static let action_advanced = "a11y.voiceover.settings.action.advanced".localized
             }
         }
     }

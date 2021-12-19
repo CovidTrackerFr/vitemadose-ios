@@ -18,6 +18,7 @@ final class HomeFollowedCentresCell: UITableViewCell {
         static let nameTextColor: UIColor = .label
         static let codeBackgroundColor: UIColor = .royalBlue
         static let cellBackgroundColor: UIColor = .tertiarySystemBackground
+        static let titleFont: UIFont = .accessibleBodyBold
         static let labelsFont: UIFont = .rounded(ofSize: 18, weight: .bold)
         static let viewsCornerRadius: CGFloat = 15
     }
@@ -33,7 +34,7 @@ final class HomeFollowedCentresCell: UITableViewCell {
 
         titleLabel.text = "Mes centres suivis"
         titleLabel.textColor = .label
-        titleLabel.font = .rounded(ofSize: 18, weight: .bold)
+        titleLabel.font = Constant.titleFont
     }
 
     override func prepareForReuse() {

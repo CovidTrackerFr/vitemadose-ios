@@ -13,6 +13,7 @@ import Moya
 enum BaseAPI {
     case stats
     case vaccinationCentres(departmentCode: String)
+    case departmentSlots(departmentCode: String)
 }
 
 extension BaseAPI: TargetType {
@@ -29,13 +30,16 @@ extension BaseAPI: TargetType {
             return Self.remoteConfig.statsPath
         case let .vaccinationCentres(code):
             return Self.remoteConfig.departmentPath(withCode: code)
+        case let .departmentSlots(code):
+            return Self.remoteConfig.departmentSlotsPath(withCode: code)
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .stats,
-             .vaccinationCentres:
+            .vaccinationCentres,
+            .departmentSlots:
             return .get
         }
     }
@@ -51,7 +55,8 @@ extension BaseAPI: TargetType {
     var task: Task {
         switch self {
         case .stats,
-             .vaccinationCentres:
+             .vaccinationCentres,
+             .departmentSlots:
             return .requestPlain
         }
     }
@@ -68,6 +73,7 @@ protocol BaseAPIServiceProvider: AnyObject {
 
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void)
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
+    func fetchDepartmentSlots(departmentCode: String, completion: @escaping (Result<DepartmentSlots, Error>) -> Void)
 }
 
 final class BaseAPIService: BaseAPIServiceProvider {
@@ -83,6 +89,10 @@ final class BaseAPIService: BaseAPIServiceProvider {
 
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void) {
         request(target: .vaccinationCentres(departmentCode: departmentCode), completion: completion)
+    }
+
+    func fetchDepartmentSlots(departmentCode: String, completion: @escaping (Result<DepartmentSlots, Error>) -> Void) {
+        request(target: .departmentSlots(departmentCode: departmentCode), completion: completion)
     }
 }
 
@@ -107,7 +117,8 @@ extension BaseAPI: CachePolicyGettable {
     var cachePolicy: URLRequest.CachePolicy {
         switch self {
         case .stats,
-             .vaccinationCentres:
+                .vaccinationCentres,
+                .departmentSlots:
             return .reloadIgnoringLocalCacheData
         }
     }

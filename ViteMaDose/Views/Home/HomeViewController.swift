@@ -12,7 +12,13 @@ import Haptica
 import BLTNBoard
 
 final class HomeViewController: UIViewController, Storyboarded {
+
     @IBOutlet private var tableView: UITableView!
+
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBAction func goToSettings(_ sender: Any) {
+        presentSettingsViewController()
+    }
 
     private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, HomeCell>
 
@@ -43,7 +49,7 @@ final class HomeViewController: UIViewController, Storyboarded {
 
     // TODO: Full onboarding
     private lazy var bulletinManager: BLTNItemManager = {
-        let rootItem = OnboardingManager.makeFirstPage()
+        let rootItem = OnboardingManager.welcomePage
         let manager = BLTNItemManager(rootItem: rootItem)
         manager.backgroundColor = .tertiarySystemBackground
         manager.backgroundViewStyle = .dimmed
@@ -62,6 +68,10 @@ final class HomeViewController: UIViewController, Storyboarded {
         remoteConfiguration.synchronize { _ in
             self.viewModel.load()
         }
+
+        settingsButton.isAccessibilityElement = true
+        settingsButton.accessibilityLabel = Localization.A11y.VoiceOver.Settings.button_label
+        settingsButton.accessibilityHint = Localization.A11y.VoiceOver.Settings.button_hint
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +126,14 @@ final class HomeViewController: UIViewController, Storyboarded {
 
         DispatchQueue.main.async { [weak self] in
             self?.present(departmentSelectionViewController, animated: true)
+        }
+    }
+
+    private func presentSettingsViewController() {
+        // TODO: Analytics?
+        let settingsViewController = SettingsViewController.instantiate()
+        DispatchQueue.main.async { [weak self] in
+            self?.present(settingsViewController, animated: true)
         }
     }
 
