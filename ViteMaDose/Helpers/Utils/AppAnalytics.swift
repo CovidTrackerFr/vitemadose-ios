@@ -36,7 +36,7 @@ enum AppAnalytics {
     }
 
     static func didSelectVaccinationCentre(_ vaccinationCentre: VaccinationCentre) {
-        let eventName = "rdv_click" // TODO: Re-implement `rdv_verify`
+        let eventName = "rdv_click" // TODO 1.4.1: Re-implement `rdv_verify`
         let department = vaccinationCentre.departement.emptyIfNil.lowercased()
         let name = vaccinationCentre.nom.emptyIfNil.lowercased()
         let type = vaccinationCentre.type.emptyIfNil.lowercased()

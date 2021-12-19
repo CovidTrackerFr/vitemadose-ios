@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
 
 extension Sequence where Element: Hashable {
     func uniqued() -> [Element] {
