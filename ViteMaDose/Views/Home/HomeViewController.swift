@@ -49,7 +49,7 @@ final class HomeViewController: UIViewController, Storyboarded {
 
     // TODO: Full onboarding
     private lazy var bulletinManager: BLTNItemManager = {
-        let rootItem = OnboardingManager.makeFirstPage()
+        let rootItem = OnboardingManager.welcomePage
         let manager = BLTNItemManager(rootItem: rootItem)
         manager.backgroundColor = .tertiarySystemBackground
         manager.backgroundViewStyle = .dimmed

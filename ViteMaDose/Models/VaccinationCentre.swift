@@ -12,7 +12,7 @@ import SwiftDate
 
 // MARK: - VaccinationCentre
 
-struct VaccinationCentre: Codable, Hashable, Identifiable {
+public struct VaccinationCentre: Codable, Hashable, Identifiable {
     private let gid: String?
     public let internalId: String?
     let departement: String?
@@ -23,11 +23,10 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
     let prochainRdv: String?
     let plateforme: String?
     let type: String?
-    let appointmentCount: Int?
     let vaccineType: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
-    var id: String {
+    public var id: String {
         return internalId ?? gid ?? UUID().uuidString
     }
 
@@ -42,7 +41,6 @@ struct VaccinationCentre: Codable, Hashable, Identifiable {
         case prochainRdv = "prochain_rdv"
         case plateforme
         case type
-        case appointmentCount = "appointment_count"
         case vaccineType = "vaccine_type"
         case appointmentSchedules = "appointment_schedules"
     }
@@ -94,14 +92,8 @@ extension VaccinationCentre {
 }
 
 extension Sequence where Element == VaccinationCentre {
-    var allAppointmentsCount: Int {
-        return reduce(0) { $0 + ($1.appointmentCount ?? 0) }
-    }
-
     var allAvailableCentresCount: Int {
-        return reduce(0) { (previous, current) in
-            previous + (current.isAvailable ? 1 : 0)
-        }
+        return reduce(0) { $0 + $1.isAvailable.intValue }
     }
 }
 
@@ -267,9 +259,9 @@ struct VaccinationCentres: Codable, Hashable {
     }
 }
 
-typealias LocationVaccinationCentres = [VaccinationCentres]
+typealias DepartmentVaccinationCentres = [VaccinationCentres]
 
-extension LocationVaccinationCentres {
+extension DepartmentVaccinationCentres {
     var allAvailableCentres: [VaccinationCentre] {
         return flatMap(\.availableCentres).unique(by: \.id)
     }

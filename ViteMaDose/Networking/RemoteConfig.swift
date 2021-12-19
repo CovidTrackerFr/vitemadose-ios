@@ -89,4 +89,9 @@ extension RemoteConfiguration {
         let path = configuration.configValue(forKey: "path_data_department").stringValue!
         return path.replacingOccurrences(of: "{code}", with: code)
     }
+
+    func departmentSlotsPath(withCode code: String) -> String {
+        let path = configuration.configValue(forKey: "path_departement_slots").stringValue!
+        return path.replacingOccurrences(of: "{code}", with: code)
+    }
 }

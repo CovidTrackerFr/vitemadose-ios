@@ -23,9 +23,9 @@ enum Localization {
             static let description = "onboarding.notifications_page.description".localized
         }
 
-        enum ChronodosesPage {
-            static let title = "onboarding.chronodoses_page.title".localized
-            static let description = "onboarding.chronodoses_page.description".localized
+        enum ThirdDosePage {
+            static let title = "onboarding.thirddose_page.title".localized
+            static let description = "onboarding.thirddose_page.description".localized
         }
     }
 
@@ -75,6 +75,7 @@ enum Localization {
         enum SortOption {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
+            static let third_dose = "locations.sort_option.third_dose".localized
         }
     }
 

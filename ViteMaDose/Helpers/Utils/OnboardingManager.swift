@@ -12,7 +12,7 @@ enum OnboardingManager {
     private static let titleFontSize: CGFloat = 24.0
     private static let descriptionFontSize: CGFloat = 18.0
 
-    static func makeFirstPage() -> BLTNPageItem {
+    static let welcomePage: BLTNPageItem = {
         let page = BLTNPageItem(title: Localization.Onboarding.WelcomePage.title)
         page.image = "🎉".toImage(ofSize: 60)
 
@@ -29,11 +29,11 @@ enum OnboardingManager {
         page.actionHandler = { item in
             item.manager?.displayNextItem()
         }
-        page.next = makeNotificationsPage()
+        page.next = notificationsPage
         return page
-    }
+    }()
 
-    static func makeNotificationsPage() -> BLTNPageItem {
+    static let notificationsPage: BLTNPageItem = {
         let page = BLTNPageItem(title: Localization.Onboarding.NotificationsPage.title)
         page.image = "🔔".toImage(ofSize: 60)
 
@@ -50,22 +50,22 @@ enum OnboardingManager {
         page.actionHandler = { item in
             item.manager?.displayNextItem()
         }
-        page.next = makeChronoDosesPage()
+        page.next = thirdDosePage
 
         return page
-    }
+    }()
 
-    static func makeChronoDosesPage() -> BLTNPageItem {
-        let page = BLTNPageItem(title: Localization.Onboarding.ChronodosesPage.title)
-        page.image = "⚡️".toImage(ofSize: 60)
+    static let thirdDosePage: BLTNPageItem = {
+        let page = BLTNPageItem(title: Localization.Onboarding.ThirdDosePage.title)
+        page.image = "✅".toImage(ofSize: 60)
 
         let appearance = BLTNItemAppearance()
         appearance.titleFontSize = Self.titleFontSize
         appearance.descriptionFontSize = Self.descriptionFontSize
-        appearance.actionButtonColor = .mandy
+        appearance.actionButtonColor = .royalBlue
 
         page.appearance = appearance
-        page.descriptionText = Localization.Onboarding.WelcomePage.description
+        page.descriptionText = Localization.Onboarding.ThirdDosePage.description
         page.actionButtonTitle = Localization.Onboarding.done_button
         page.alternativeButton?.isHidden = true
         page.isDismissable = false
@@ -74,7 +74,7 @@ enum OnboardingManager {
         }
 
         return page
-    }
+    }()
 }
 
 extension String {

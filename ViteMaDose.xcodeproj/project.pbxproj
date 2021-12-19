@@ -31,6 +31,9 @@
 		5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */; };
 		57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57493FDC26403F5100F7E662 /* AppConstant.swift */; };
 		5752DC63263F33D2004BA4BC /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5752DC62263F33D2004BA4BC /* PromiseKit */; };
+		5753E6BA275BFB6B00C386EC /* Bool+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5753E6B9275BFB6B00C386EC /* Bool+Commons.swift */; };
+		5753E6BC275BFD4B00C386EC /* DepartmentSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5753E6BB275BFD4B00C386EC /* DepartmentSlots.swift */; };
+		5753E6BE275BFE0C00C386EC /* DailySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5753E6BD275BFE0C00C386EC /* DailySlot.swift */; };
 		575CC211262AD8F7008D1869 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 575CC210262AD8F7008D1869 /* PhoneNumberKit */; };
 		575CC224262AECA7008D1869 /* HomeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC223262AECA7008D1869 /* HomeTitleCell.swift */; };
 		575CC22F262AF4E1008D1869 /* HomeSearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */; };
@@ -169,6 +172,9 @@
 		57471428262B6BA300535DF1 /* LocationSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultCell.swift; sourceTree = "<group>"; };
 		57471429262B6BA300535DF1 /* LocationSearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchResultCell.xib; sourceTree = "<group>"; };
 		57493FDC26403F5100F7E662 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
+		5753E6B9275BFB6B00C386EC /* Bool+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Commons.swift"; sourceTree = "<group>"; };
+		5753E6BB275BFD4B00C386EC /* DepartmentSlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSlots.swift; sourceTree = "<group>"; };
+		5753E6BD275BFE0C00C386EC /* DailySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySlot.swift; sourceTree = "<group>"; };
 		575CC223262AECA7008D1869 /* HomeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleCell.swift; sourceTree = "<group>"; };
 		575CC22D262AF4E0008D1869 /* HomeSearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchBarCell.swift; sourceTree = "<group>"; };
 		575CC22E262AF4E1008D1869 /* HomeSearchBarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSearchBarCell.xib; sourceTree = "<group>"; };
@@ -409,6 +415,8 @@
 				5795476C263E1C1B00AD5DFD /* City.swift */,
 				57044415263F0D1000F802F2 /* LocationSearchResult.swift */,
 				57CB253326460501004776CA /* FollowedCentre.swift */,
+				5753E6BB275BFD4B00C386EC /* DepartmentSlots.swift */,
+				5753E6BD275BFE0C00C386EC /* DailySlot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				576738FA261E374A004A700D /* URL+Commons.swift */,
+				5753E6B9275BFB6B00C386EC /* Bool+Commons.swift */,
 				57673902261E3783004A700D /* Data+Commons.swift */,
 				57673916261E3B1A004A700D /* UITableView+Commons.swift */,
 				579348462621E41400F8A4A0 /* UICollectionView+Commons.swift */,
@@ -745,7 +754,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					576738BB261E329C004A700D = {
 						CreatedOnToolsVersion = 12.4;
@@ -931,6 +940,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5753E6BA275BFB6B00C386EC /* Bool+Commons.swift in Sources */,
 				57B6BEA42636060200D9AAC1 /* MaintenanceViewController.swift in Sources */,
 				516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */,
 				576738FB261E374A004A700D /* URL+Commons.swift in Sources */,
@@ -971,6 +981,7 @@
 				516C10E5265E8EE70056CBB0 /* SettingsViewController.swift in Sources */,
 				DA4D9953261E6B6A00D28AD0 /* LocationSearchViewController.swift in Sources */,
 				572B064C264811BE00BB04DB /* FCMHelper.swift in Sources */,
+				5753E6BC275BFD4B00C386EC /* DepartmentSlots.swift in Sources */,
 				57B2BCA02633AC5B001B3D61 /* Localization.swift in Sources */,
 				1991AB412653AE1E00FA4E1F /* CentreDataDisclaimerCell.swift in Sources */,
 				5785E60F263F3F7200E655FF /* NearDepartments.swift in Sources */,
@@ -995,6 +1006,7 @@
 				5785314E26441A64005302DB /* CentresSortOptionsCell.swift in Sources */,
 				57ECA227262B031F001B368F /* UserDefaultsUtils.swift in Sources */,
 				579348472621E41400F8A4A0 /* UICollectionView+Commons.swift in Sources */,
+				5753E6BE275BFE0C00C386EC /* DailySlot.swift in Sources */,
 				57673930261E3BC5004A700D /* HomeViewController.swift in Sources */,
 				577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */,
 				57AF504F262CDD5A0085E3C1 /* CentresTitleCell.swift in Sources */,
@@ -1214,7 +1226,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 841539;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZL9396WK65;
 				INFOPLIST_FILE = ViteMaDose/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
