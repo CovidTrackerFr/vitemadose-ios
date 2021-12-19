@@ -48,31 +48,8 @@ enum OnboardingManager {
         page.alternativeButton?.isHidden = true
         page.isDismissable = false
         page.actionHandler = { item in
-            item.manager?.displayNextItem()
-        }
-        page.next = makeChronoDosesPage()
-
-        return page
-    }
-
-    static func makeChronoDosesPage() -> BLTNPageItem {
-        let page = BLTNPageItem(title: Localization.Onboarding.ChronodosesPage.title)
-        page.image = "⚡️".toImage(ofSize: 60)
-
-        let appearance = BLTNItemAppearance()
-        appearance.titleFontSize = Self.titleFontSize
-        appearance.descriptionFontSize = Self.descriptionFontSize
-        appearance.actionButtonColor = .mandy
-
-        page.appearance = appearance
-        page.descriptionText = Localization.Onboarding.WelcomePage.description
-        page.actionButtonTitle = Localization.Onboarding.done_button
-        page.alternativeButton?.isHidden = true
-        page.isDismissable = false
-        page.actionHandler = { item in
             item.manager?.dismissBulletin()
         }
-
         return page
     }
 }

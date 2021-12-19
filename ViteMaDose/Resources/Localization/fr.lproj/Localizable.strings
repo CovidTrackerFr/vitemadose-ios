@@ -8,11 +8,9 @@
 
 // MARK: - Onboarding
 "onboarding.welcome_page.title" = "Vite Ma Dose fait le plein de nouveautés !";
-"onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose, et les chronodoses permettant à chacun de trouver un rendez-vous en 24h sans restriction.";
+"onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose.";
 "onboarding.notifications_page.title" = "Notifications";
 "onboarding.notifications_page.description" = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités.";
-"onboarding.chronodoses_page.title" = "Chronodoses";
-"onboarding.chronodoses_page.description" = "À partir du mercredi 12 mai, vous pourrez réserver les rendez-vous de vaccination vacants du jour même et du lendemain, sans restriction. Nous les appelons les “Chronodoses”, et sont matérialisées par des éclairs et un bandeau rouge.";
 "onboarding.next_button" = "Suivant";
 "onboarding.done_button" = "Merci !";
 
