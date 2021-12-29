@@ -1,9 +1,5 @@
 // Software Name: vitemadose-ios
-<<<<<<< HEAD
 // SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
-=======
-// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
->>>>>>> b35d6be (Align with develop)
 // SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
 // This software is distributed under the GPL-3.0-or-later license.
@@ -92,6 +88,29 @@ enum OnboardingManager {
 
         page.appearance = appearance
         page.descriptionText = Localization.Onboarding.SettingsPage.description
+        page.descriptionText = Localization.Onboarding.SettingsPage.description
+        page.actionButtonTitle = Localization.Onboarding.next_button
+        page.alternativeButton?.isHidden = true
+        page.isDismissable = false
+        page.actionHandler = { item in
+            item.manager?.displayNextItem()
+        }
+        page.next = kidsFirstDosePage
+
+        return page
+    }()
+
+    static let kidsFirstDosePage: BLTNPageItem = {
+        let page = BLTNPageItem(title: Localization.Onboarding.KidsFirstDoses.title)
+        page.image = "🧸".toImage(ofSize: 60)
+
+        let appearance = BLTNItemAppearance()
+        appearance.titleFontSize = Self.titleFontSize
+        appearance.descriptionFontSize = Self.descriptionFontSize
+        appearance.actionButtonColor = .royalBlue
+
+        page.appearance = appearance
+        page.descriptionText = Localization.Onboarding.KidsFirstDoses.description
         page.actionButtonTitle = Localization.Onboarding.done_button
         page.alternativeButton?.isHidden = true
         page.isDismissable = false

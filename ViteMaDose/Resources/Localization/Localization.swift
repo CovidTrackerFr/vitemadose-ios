@@ -33,6 +33,11 @@ enum Localization {
             static let title = "onboarding.settingspage.title".localized
             static let description = "onboarding.settingspage.description".localized
         }
+
+        enum KidsFirstDoses {
+            static let title = "onboarding.kids_first_doses.title".localized
+            static let description = "onboarding.kids_first_doses.description".localized
+        }
     }
 
     enum Home {
@@ -94,6 +99,13 @@ enum Localization {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
             static let third_dose = "locations.sort_option.third_dose".localized
+        }
+
+        enum Filtering {
+            static let title = "location.filtering.title".localized
+            static let messagge = "location.filtering.messagge".localized
+            static let action_kids_doses = "location.filtering.action.kids_doses".localized
+            static let action_all_doses = "location.filtering.action.all_doses".localized
         }
     }
 
@@ -171,6 +183,8 @@ enum Localization {
             enum Actions {
                 static let booking_button = "a11y.voiceover.actions.booking_button".localized
                 static let call_button = "a11y.voiceover.actions.call_button".localized
+                static let filter_button_label = "Filtrer les centres".localized
+                static let filter_button_hint = "Tappez deux fois pour filtrer les centres selon différents critères".localized
             }
 
             enum Details {

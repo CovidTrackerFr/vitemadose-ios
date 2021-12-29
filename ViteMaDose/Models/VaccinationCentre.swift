@@ -10,7 +10,7 @@ import MapKit
 import PhoneNumberKit
 import SwiftDate
 
-// MARK: - VaccinationCentre
+// MARK: - Vaccination Centre
 
 public struct VaccinationCentre: Codable, Hashable, Identifiable {
     private let gid: String?
@@ -91,11 +91,15 @@ extension VaccinationCentre {
 
 }
 
+// MARK: - Sequence of Vaccination Centre
+
 extension Sequence where Element == VaccinationCentre {
     var allAvailableCentresCount: Int {
         return reduce(0) { $0 + $1.isAvailable.intValue }
     }
 }
+
+// MARK: - Utility properties
 
 extension VaccinationCentre {
     var isAvailable: Bool {
@@ -226,7 +230,7 @@ extension VaccinationCentre {
     }
 }
 
-// MARK: - VaccinationCentres
+// MARK: - Vaccination Centres
 
 struct VaccinationCentres: Codable, Hashable {
     let lastUpdated: String?
@@ -258,6 +262,7 @@ struct VaccinationCentres: Codable, Hashable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
+// MARK: - Department Vaccination Centres
 
 typealias DepartmentVaccinationCentres = [VaccinationCentres]
 

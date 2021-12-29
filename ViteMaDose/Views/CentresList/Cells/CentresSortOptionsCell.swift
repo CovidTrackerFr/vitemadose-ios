@@ -7,13 +7,23 @@
 
 import UIKit
 
+// MARK: - Centres Sort Options Cell View Data Provider
+
 protocol CentresSortOptionsCellViewDataProvider {
+    /// Matched to each segment of the `CentresSortOptionsCell` segmented control.
     var sortOption: CentresListSortOption { get }
+    /// Use to deal with specific cases where some segments are not relevant
+    var filterOption: CentresListFilterOption { get }
 }
+
+// MARK: - Centres Sort Options Cell View Data
 
 public struct CentresSortOptionsCellViewData: CentresSortOptionsCellViewDataProvider, Hashable {
     let sortOption: CentresListSortOption
+    let filterOption: CentresListFilterOption
 }
+
+// MARK: - Centres Sort Options Cell
 
 final class CentresSortOptionsCell: UITableViewCell {
     @IBOutlet private var sortSegmentedControl: UISegmentedControl!
@@ -27,8 +37,7 @@ final class CentresSortOptionsCell: UITableViewCell {
 
         sortSegmentedControl.setTitle(
             Localization.Locations.SortOption.closest,
-            forSegmentAt: CentresListSortOption.closest.index
-        )
+            forSegmentAt: CentresListSortOption.closest.index)
         sortSegmentedControl.setTitle(
             Localization.Locations.SortOption.fastest,
             forSegmentAt: CentresListSortOption.fastest.index)
@@ -37,8 +46,28 @@ final class CentresSortOptionsCell: UITableViewCell {
             forSegmentAt: CentresListSortOption.thirdDose.index)
     }
 
+    /// Configures the `sortSegmentedControl` using the given `CentresSortOptionsCellViewData`.
+    /// The configuration to apply epens also to the "kids first doses" filtering option.
+    /// Indeed, there aren't any "third dose" for kids, that is the reason why the dedicated segment must be diabled.
+    /// - Parameter viewData: The configuration to apply
     func configure(with viewData: CentresSortOptionsCellViewData) {
-        sortSegmentedControl.selectedSegmentIndex = viewData.sortOption.index
+
+        // If the user ha chosen the "kids first doses" fitler option, move the use to another segmend if it was on the "third dose"
+        // and disable the third segment.
+        if viewData.filterOption == .kidsFirstDoses {
+            if sortSegmentedControl.selectedSegmentIndex == CentresListSortOption.thirdDose.index {
+                sortSegmentedControl.selectedSegmentIndex = CentresListSortOption.fastest.index
+            } else {
+                sortSegmentedControl.selectedSegmentIndex = viewData.sortOption.index
+            }
+            sortSegmentedControl.setEnabled(false, forSegmentAt: CentresListSortOption.thirdDose.index)
+
+        // Select the suitable egment and ensure to have alwats the "third dose" segment enabled.
+        } else {
+            sortSegmentedControl.selectedSegmentIndex = viewData.sortOption.index
+            sortSegmentedControl.setEnabled(true, forSegmentAt: CentresListSortOption.thirdDose.index)
+        }
+        sortSegmentedControl.sendActions(for: UIControl.Event.valueChanged)
     }
 
     @IBAction private func sortingSegmentChanged(_ sender: UISegmentedControl) {

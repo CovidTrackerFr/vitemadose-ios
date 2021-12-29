@@ -6,6 +6,7 @@
 //
 
 // MARK: - Onboarding
+
 "onboarding.welcome_page.title" = "Vite Ma Dose fait le plein de nouveautés !";
 "onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose.";
 "onboarding.notifications_page.title" = "Notifications";
@@ -14,6 +15,8 @@
 "onboarding.thirddose_page.description" = "Vous pouvez désormais afficher les lieux de vaccination ayant des doses de rappel disponible.";
 "onboarding.settingspage.title" = "Envie d'en savoir plus ?";
 "onboarding.settingspage.description" = "Retrouvez différentes infos sur le projet via le menu des réglages. Contributeurs, site web, réseaux sociaux, code source... les curieuses et curieux seront ravis !";
+"onboarding.kids_first_doses.title" = "Dose pour enfants";
+"onboarding.kids_first_doses.description" = "Il est possible aussi de filtrer les lieux de vaccination pour trouver ceux proposant des doses pour les enfants.";
 "onboarding.next_button" = "Suivant";
 "onboarding.done_button" = "Merci !";
 
@@ -81,6 +84,14 @@
 "location.unfollow_action_title" = "Ne plus suivre";
 "location.stop_following_button" = "Ne plus suivre";
 
+// MARK: - Location filtering
+
+"location.filtering.title" = "Filtrage";
+"location.filtering.messagge" = "Sélectionnez les centres que vous voulez afficher";
+"location.filtering.action.kids_doses" = "Premières doses pour les enfants";
+"location.filtering.action.all_doses" = "Toutes les doses";
+
+
 // MARK: - Error
 
 "error.generic.title" = "Oups! Nous avons des difficultés techniques...";
@@ -99,6 +110,8 @@
 "a11y.voiceover.navigation.back_button" = "Retour à l'écran principal";
 "a11y.voiceover.actions.call_button" = "Tappez deux fois pour appeler à ce numéro";
 "a11y.voiceover.actions.booking_button" = "Tappez deux fois pour prendre rendez-vous par site web";
+"a11y.voiceover.actions.filter_button.label" = "Filtrer les centres";
+"a11y.voiceover.actions.filter_button.hint" = "Tappez deux fois pour filtrer les centres selon différents critères";
 "a11y.voiceover.locations.see_places" = "Voir les lieux pour %@";
 "a11y.voiceover.locations.search" = "Ecrivez la commune, le code postal, le département, la ville ou toute autre indication pour trouver un lieu";
 "a11y.voiceover.details.from" = "à partir de";

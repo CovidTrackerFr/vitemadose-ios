@@ -1,13 +1,9 @@
 // Software Name: vitemadose-ios
-<<<<<<< HEAD
 // SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
-=======
-// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
->>>>>>> b35d6be (Align with develop)
 // SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
 // This software is distributed under the GPL-3.0-or-later license.
-//s
+//
 
 import Foundation
 
@@ -44,6 +40,7 @@ extension UserDefaults {
     private enum Key: String {
         case lastSearchResults
         case centresListSortOption
+        case centresListFilterOption
         case followedCentres
         case didPresentAppOnboarding
     }
@@ -78,6 +75,20 @@ extension UserDefaults {
         }
         set {
             setValue(newValue.index, forKey: Key.centresListSortOption.rawValue)
+        }
+    }
+
+    // MARK: - Centres List Filteer Option
+
+    var centresListFilterOption: CentresListFilterOption {
+        get {
+            guard let savedIndex = value(forKey: Key.centresListFilterOption.rawValue) as? Int else {
+                return .allDoses
+            }
+            return CentresListFilterOption(savedIndex)
+        }
+        set {
+            setValue(newValue.index, forKey: Key.centresListFilterOption.rawValue)
         }
     }
 
