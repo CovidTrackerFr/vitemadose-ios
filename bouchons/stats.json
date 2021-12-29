@@ -1,0 +1,625 @@
+{
+  "tout_departement": {
+    "disponibles": 2548,
+    "total": 6665,
+    "creneaux": 2648401
+  },
+  "59": {
+    "disponibles": 109,
+    "indisponibles": 210,
+    "creneaux": 12850228,
+    "total": 319
+  },
+  "15": {
+    "disponibles": 5,
+    "indisponibles": 3,
+    "creneaux": 24130,
+    "total": 8
+  },
+  "974": {
+    "disponibles": 9,
+    "indisponibles": 43,
+    "creneaux": 492948,
+    "total": 52
+  },
+  "972": {
+    "disponibles": 9,
+    "indisponibles": 19,
+    "creneaux": 183051,
+    "total": 28
+  },
+  "06": {
+    "disponibles": 61,
+    "indisponibles": 64,
+    "creneaux": 4022584,
+    "total": 125
+  },
+  "38": {
+    "disponibles": 36,
+    "indisponibles": 61,
+    "creneaux": 1707444,
+    "total": 97
+  },
+  "10": {
+    "disponibles": 20,
+    "indisponibles": 9,
+    "creneaux": 525640,
+    "total": 29
+  },
+  "2A": {
+    "disponibles": 14,
+    "indisponibles": 6,
+    "creneaux": 817404,
+    "total": 20
+  },
+  "68": {
+    "disponibles": 27,
+    "indisponibles": 34,
+    "creneaux": 225261,
+    "total": 61
+  },
+  "94": {
+    "disponibles": 53,
+    "indisponibles": 109,
+    "creneaux": 3289551,
+    "total": 162
+  },
+  "75": {
+    "disponibles": 117,
+    "indisponibles": 310,
+    "creneaux": 8964072,
+    "total": 427
+  },
+  "16": {
+    "disponibles": 19,
+    "indisponibles": 16,
+    "creneaux": 438311,
+    "total": 35
+  },
+  "65": {
+    "disponibles": 6,
+    "indisponibles": 6,
+    "creneaux": 116880,
+    "total": 12
+  },
+  "63": {
+    "disponibles": 26,
+    "indisponibles": 19,
+    "creneaux": 654368,
+    "total": 45
+  },
+  "90": {
+    "disponibles": 6,
+    "indisponibles": 1,
+    "creneaux": 80730,
+    "total": 7
+  },
+  "89": {
+    "disponibles": 23,
+    "indisponibles": 9,
+    "creneaux": 464416,
+    "total": 32
+  },
+  "93": {
+    "disponibles": 68,
+    "indisponibles": 95,
+    "creneaux": 5374584,
+    "total": 163
+  },
+  "92": {
+    "disponibles": 73,
+    "indisponibles": 149,
+    "creneaux": 3206598,
+    "total": 222
+  },
+  "971": {
+    "disponibles": 4,
+    "indisponibles": 24,
+    "creneaux": 15444,
+    "total": 28
+  },
+  "11": {
+    "disponibles": 16,
+    "indisponibles": 16,
+    "creneaux": 365536,
+    "total": 32
+  },
+  "13": {
+    "disponibles": 84,
+    "indisponibles": 150,
+    "creneaux": 6217008,
+    "total": 234
+  },
+  "19": {
+    "disponibles": 13,
+    "indisponibles": 9,
+    "creneaux": 95433,
+    "total": 22
+  },
+  "47": {
+    "disponibles": 6,
+    "indisponibles": 11,
+    "creneaux": 106236,
+    "total": 17
+  },
+  "80": {
+    "disponibles": 40,
+    "indisponibles": 60,
+    "creneaux": 1191520,
+    "total": 100
+  },
+  "66": {
+    "disponibles": 19,
+    "indisponibles": 25,
+    "creneaux": 265145,
+    "total": 44
+  },
+  "57": {
+    "disponibles": 35,
+    "indisponibles": 51,
+    "creneaux": 1406055,
+    "total": 86
+  },
+  "01": {
+    "disponibles": 28,
+    "indisponibles": 35,
+    "creneaux": 403032,
+    "total": 63
+  },
+  "52": {
+    "disponibles": 3,
+    "indisponibles": 2,
+    "creneaux": 17661,
+    "total": 5
+  },
+  "83": {
+    "disponibles": 43,
+    "indisponibles": 57,
+    "creneaux": 1735222,
+    "total": 100
+  },
+  "70": {
+    "disponibles": 17,
+    "indisponibles": 6,
+    "creneaux": 1175363,
+    "total": 23
+  },
+  "71": {
+    "disponibles": 20,
+    "indisponibles": 27,
+    "creneaux": 1321160,
+    "total": 47
+  },
+  "09": {
+    "disponibles": 12,
+    "indisponibles": 9,
+    "creneaux": 63240,
+    "total": 21
+  },
+  "86": {
+    "disponibles": 13,
+    "indisponibles": 13,
+    "creneaux": 73515,
+    "total": 26
+  },
+  "33": {
+    "disponibles": 56,
+    "indisponibles": 164,
+    "creneaux": 3915184,
+    "total": 220
+  },
+  "88": {
+    "disponibles": 12,
+    "indisponibles": 4,
+    "creneaux": 217476,
+    "total": 16
+  },
+  "40": {
+    "disponibles": 21,
+    "indisponibles": 21,
+    "creneaux": 256263,
+    "total": 42
+  },
+  "76": {
+    "disponibles": 52,
+    "indisponibles": 97,
+    "creneaux": 4953208,
+    "total": 149
+  },
+  "44": {
+    "disponibles": 23,
+    "indisponibles": 109,
+    "creneaux": 438035,
+    "total": 132
+  },
+  "56": {
+    "disponibles": 14,
+    "indisponibles": 40,
+    "creneaux": 479276,
+    "total": 54
+  },
+  "32": {
+    "disponibles": 17,
+    "indisponibles": 9,
+    "creneaux": 61489,
+    "total": 26
+  },
+  "2B": {
+    "disponibles": 16,
+    "indisponibles": 5,
+    "creneaux": 569584,
+    "total": 21
+  },
+  "53": {
+    "disponibles": 10,
+    "indisponibles": 11,
+    "creneaux": 63240,
+    "total": 21
+  },
+  "64": {
+    "disponibles": 35,
+    "indisponibles": 45,
+    "creneaux": 511595,
+    "total": 80
+  },
+  "77": {
+    "disponibles": 38,
+    "indisponibles": 90,
+    "creneaux": 2195830,
+    "total": 128
+  },
+  "78": {
+    "disponibles": 51,
+    "indisponibles": 106,
+    "creneaux": 1807134,
+    "total": 157
+  },
+  "25": {
+    "disponibles": 23,
+    "indisponibles": 17,
+    "creneaux": 548228,
+    "total": 40
+  },
+  "50": {
+    "disponibles": 22,
+    "indisponibles": 17,
+    "creneaux": 1028324,
+    "total": 39
+  },
+  "72": {
+    "disponibles": 15,
+    "indisponibles": 12,
+    "creneaux": 270435,
+    "total": 27
+  },
+  "34": {
+    "disponibles": 55,
+    "indisponibles": 63,
+    "creneaux": 1661990,
+    "total": 118
+  },
+  "95": {
+    "disponibles": 36,
+    "indisponibles": 83,
+    "creneaux": 2351304,
+    "total": 119
+  },
+  "69": {
+    "disponibles": 63,
+    "indisponibles": 205,
+    "creneaux": 1180683,
+    "total": 268
+  },
+  "05": {
+    "disponibles": 13,
+    "indisponibles": 4,
+    "creneaux": 164840,
+    "total": 17
+  },
+  "73": {
+    "disponibles": 15,
+    "indisponibles": 26,
+    "creneaux": 91140,
+    "total": 41
+  },
+  "17": {
+    "disponibles": 17,
+    "indisponibles": 33,
+    "creneaux": 214659,
+    "total": 50
+  },
+  "81": {
+    "disponibles": 10,
+    "indisponibles": 10,
+    "creneaux": 149680,
+    "total": 20
+  },
+  "62": {
+    "disponibles": 73,
+    "indisponibles": 88,
+    "creneaux": 3912289,
+    "total": 161
+  },
+  "39": {
+    "disponibles": 16,
+    "indisponibles": 13,
+    "creneaux": 374384,
+    "total": 29
+  },
+  "60": {
+    "disponibles": 22,
+    "indisponibles": 28,
+    "creneaux": 446974,
+    "total": 50
+  },
+  "91": {
+    "disponibles": 37,
+    "indisponibles": 74,
+    "creneaux": 1087615,
+    "total": 111
+  },
+  "41": {
+    "disponibles": 8,
+    "indisponibles": 12,
+    "creneaux": 14200,
+    "total": 20
+  },
+  "30": {
+    "disponibles": 30,
+    "indisponibles": 50,
+    "creneaux": 599760,
+    "total": 80
+  },
+  "27": {
+    "disponibles": 19,
+    "indisponibles": 31,
+    "creneaux": 333051,
+    "total": 50
+  },
+  "42": {
+    "disponibles": 25,
+    "indisponibles": 23,
+    "creneaux": 637350,
+    "total": 48
+  },
+  "02": {
+    "disponibles": 23,
+    "indisponibles": 21,
+    "creneaux": 326646,
+    "total": 44
+  },
+  "84": {
+    "disponibles": 24,
+    "indisponibles": 28,
+    "creneaux": 359232,
+    "total": 52
+  },
+  "58": {
+    "disponibles": 8,
+    "indisponibles": 6,
+    "creneaux": 50960,
+    "total": 14
+  },
+  "26": {
+    "disponibles": 25,
+    "indisponibles": 26,
+    "creneaux": 1326775,
+    "total": 51
+  },
+  "29": {
+    "disponibles": 30,
+    "indisponibles": 50,
+    "creneaux": 727560,
+    "total": 80
+  },
+  "28": {
+    "disponibles": 9,
+    "indisponibles": 11,
+    "creneaux": 43002,
+    "total": 20
+  },
+  "973": {
+    "disponibles": 9,
+    "indisponibles": 20,
+    "creneaux": 103653,
+    "total": 29
+  },
+  "74": {
+    "disponibles": 22,
+    "indisponibles": 51,
+    "creneaux": 672408,
+    "total": 73
+  },
+  "22": {
+    "disponibles": 19,
+    "indisponibles": 28,
+    "creneaux": 1023948,
+    "total": 47
+  },
+  "35": {
+    "disponibles": 21,
+    "indisponibles": 70,
+    "creneaux": 565635,
+    "total": 91
+  },
+  "08": {
+    "disponibles": 15,
+    "indisponibles": 7,
+    "creneaux": 94950,
+    "total": 22
+  },
+  "79": {
+    "disponibles": 16,
+    "indisponibles": 4,
+    "creneaux": 352208,
+    "total": 20
+  },
+  "61": {
+    "disponibles": 11,
+    "indisponibles": 8,
+    "creneaux": 263912,
+    "total": 19
+  },
+  "21": {
+    "disponibles": 28,
+    "indisponibles": 23,
+    "creneaux": 535164,
+    "total": 51
+  },
+  "51": {
+    "disponibles": 22,
+    "indisponibles": 21,
+    "creneaux": 290334,
+    "total": 43
+  },
+  "31": {
+    "disponibles": 26,
+    "indisponibles": 157,
+    "creneaux": 869986,
+    "total": 183
+  },
+  "37": {
+    "disponibles": 16,
+    "indisponibles": 42,
+    "creneaux": 192064,
+    "total": 58
+  },
+  "85": {
+    "disponibles": 18,
+    "indisponibles": 17,
+    "creneaux": 284688,
+    "total": 35
+  },
+  "14": {
+    "disponibles": 55,
+    "indisponibles": 45,
+    "creneaux": 2101935,
+    "total": 100
+  },
+  "46": {
+    "disponibles": 10,
+    "indisponibles": 9,
+    "creneaux": 82180,
+    "total": 19
+  },
+  "24": {
+    "disponibles": 16,
+    "indisponibles": 18,
+    "creneaux": 145792,
+    "total": 34
+  },
+  "03": {
+    "disponibles": 27,
+    "indisponibles": 13,
+    "creneaux": 291465,
+    "total": 40
+  },
+  "43": {
+    "disponibles": 8,
+    "indisponibles": 2,
+    "creneaux": 61472,
+    "total": 10
+  },
+  "54": {
+    "disponibles": 30,
+    "indisponibles": 25,
+    "creneaux": 819210,
+    "total": 55
+  },
+  "87": {
+    "disponibles": 10,
+    "indisponibles": 7,
+    "creneaux": 28580,
+    "total": 17
+  },
+  "07": {
+    "disponibles": 15,
+    "indisponibles": 17,
+    "creneaux": 360030,
+    "total": 32
+  },
+  "49": {
+    "disponibles": 17,
+    "indisponibles": 24,
+    "creneaux": 207315,
+    "total": 41
+  },
+  "48": {
+    "disponibles": 5,
+    "indisponibles": 1,
+    "creneaux": 30595,
+    "total": 6
+  },
+  "04": {
+    "disponibles": 6,
+    "indisponibles": 6,
+    "creneaux": 29346,
+    "total": 12
+  },
+  "67": {
+    "disponibles": 61,
+    "indisponibles": 90,
+    "creneaux": 2813381,
+    "total": 151
+  },
+  "82": {
+    "disponibles": 15,
+    "indisponibles": 19,
+    "creneaux": 83055,
+    "total": 34
+  },
+  "12": {
+    "disponibles": 13,
+    "indisponibles": 2,
+    "creneaux": 89973,
+    "total": 15
+  },
+  "45": {
+    "disponibles": 12,
+    "indisponibles": 51,
+    "creneaux": 11820,
+    "total": 63
+  },
+  "55": {
+    "disponibles": 5,
+    "indisponibles": 4,
+    "creneaux": 7785,
+    "total": 9
+  },
+  "18": {
+    "disponibles": 8,
+    "indisponibles": 13,
+    "creneaux": 63752,
+    "total": 21
+  },
+  "36": {
+    "disponibles": 11,
+    "indisponibles": 3,
+    "creneaux": 161392,
+    "total": 14
+  },
+  "": {
+    "disponibles": 3,
+    "indisponibles": 24,
+    "creneaux": 399,
+    "total": 27
+  },
+  "23": {
+    "disponibles": 1,
+    "indisponibles": 2,
+    "creneaux": 96,
+    "total": 3
+  },
+  "null": {
+    "disponibles": 0,
+    "indisponibles": 3,
+    "creneaux": 0,
+    "total": 3
+  },
+  "98": {
+    "disponibles": 0,
+    "indisponibles": 1,
+    "creneaux": 0,
+    "total": 1
+  }
+}

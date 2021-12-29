@@ -1,0 +1,1338 @@
+{
+  "version": 1,
+  "last_updated": "2021-12-29T22:32:13+01:00",
+  "centres_disponibles": [
+    {
+      "departement": "50",
+      "nom": "Centre de vaccination Covid-19 de Carentan-Les-Marais",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/carentan-les-marais/centre-de-vaccination-covid-19-de-carentan-les-marais?pid=practice-179197",
+      "location": {
+        "longitude": -1.2423684,
+        "latitude": 49.3048932,
+        "city": "Carentan les Marais",
+        "cp": "50500"
+      },
+      "metadata": {
+        "address": "Rue de la Halle, 50500 Carentan les Marais",
+        "business_hours": {
+          "lundi": "08:00-18:00",
+          "mardi": "08:00-18:00",
+          "mercredi": "08:00-18:00",
+          "jeudi": "08:00-18:00",
+          "vendredi": "08:00-18:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2021-12-30T09:10:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 6368,
+      "internal_id": "doctolib262130pid179197",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 2139
+    },
+    {
+      "departement": "50",
+      "nom": "Centre de Vaccination Covid-19 SDIS 50 - Manche",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/saint-lo/centre-de-vaccination-covid-19-sdis-50-saint-lo?pid=practice-232144",
+      "location": {
+        "longitude": -1.5958694,
+        "latitude": 49.6202886,
+        "city": "Cherbourg-en-Cotentin",
+        "cp": "50470"
+      },
+      "metadata": {
+        "address": "Rue Michel Petrucciani, 50470 Cherbourg-en-Cotentin",
+        "business_hours": {
+          "lundi": null,
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": "2021-12-30T10:25:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 1131,
+      "internal_id": "doctolib284327pid232144",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 3004
+    },
+    {
+      "departement": "50",
+      "nom": "Centre de Vaccination Covid-19 - Ville de Saint-L\u00f4",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/saint-lo/centre-de-vaccination-covid-19-ville-de-saint-lo?pid=practice-175175",
+      "location": {
+        "longitude": -1.09106251525216,
+        "latitude": 49.1142642538719,
+        "city": "Saint-L\u00f4",
+        "cp": "50000"
+      },
+      "metadata": {
+        "address": "2 Bis Rue Saint-Thomas, 50000 Saint-L\u00f4",
+        "business_hours": {
+          "lundi": "06:00-22:00",
+          "mardi": "06:00-22:00",
+          "mercredi": "06:00-22:00",
+          "jeudi": "06:00-22:00",
+          "vendredi": "06:00-22:00",
+          "samedi": "06:00-22:00",
+          "dimanche": "06:00-22:00"
+        },
+        "phone_number": "+33800009110"
+      },
+      "prochain_rdv": "2021-12-30T12:05:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 9882,
+      "internal_id": "doctolib255959pid175175",
+      "vaccine_type": [
+        "Moderna",
+        "Pfizer-BioNTech"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 19
+    },
+    {
+      "departement": "50",
+      "nom": "CHAG - Centre de vaccination COVID-19",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/avranches-granville/ch-d-avranches-granville-centre-de-vaccination-covid?pid=practice-213394",
+      "location": {
+        "longitude": -1.3459071,
+        "latitude": 48.7020301,
+        "city": "Ponts",
+        "cp": "50300"
+      },
+      "metadata": {
+        "address": "2 La Chauss\u00e9e, 50300 Ponts",
+        "business_hours": {
+          "lundi": "09:00-17:00",
+          "mardi": "09:00-17:00",
+          "mercredi": "09:00-17:00",
+          "jeudi": "09:00-17:00",
+          "vendredi": "09:00-17:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-02T10:45:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 998,
+      "internal_id": "doctolib240706pid213394",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 94
+    },
+    {
+      "departement": "50",
+      "nom": "CHAG - Centre de vaccination COVID-19",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/avranches-granville/ch-d-avranches-granville-centre-de-vaccination-covid?pid=practice-208530",
+      "location": {
+        "longitude": -1.5774214,
+        "latitude": 48.8349702,
+        "city": "Granville",
+        "cp": "50400"
+      },
+      "metadata": {
+        "address": "Rue Marine Dunkerque, 50400 Granville",
+        "business_hours": {
+          "lundi": "09:00-17:00",
+          "mardi": "09:00-17:00",
+          "mercredi": "09:00-17:00",
+          "jeudi": "09:00-17:00",
+          "vendredi": "09:00-17:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-03T12:45:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 1384,
+      "internal_id": "doctolib240706pid208530",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Cabinet infirmier Besseli\u00e8vre-Adam-Lacotte",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/valognes/cabinet-infirmier-besselievre-adam-lacoste?pid=practice-223143",
+      "location": {
+        "longitude": -1.4699417,
+        "latitude": 49.5080489,
+        "city": "Valognes",
+        "cp": "50700"
+      },
+      "metadata": {
+        "address": "10 Rue de l'\u00c9glise, 50700 Valognes",
+        "business_hours": {
+          "lundi": null,
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233789094"
+      },
+      "prochain_rdv": "2022-01-03T13:38:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 43,
+      "internal_id": "doctolib321575pid223143",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "CHPC Centre d\u00e9localis\u00e9 Salle du ch\u00e2teau VALOGNES",
+      "url": "https://vaccination-covid.keldoc.com/cabinet-medical/valognes-50700/centre-hospitalier-public-de-cotentin-valognes-hopital-simone-veil/centre-hospitalier-public-de-cotentin-hopital-simone-veil-valognes?cabinet=16821&specialty=496",
+      "location": {
+        "longitude": -1.472375,
+        "latitude": 49.507154,
+        "city": "VALOGNES",
+        "cp": "50700"
+      },
+      "metadata": {
+        "address": "Salle du Ch\u00e2teau, place du ch\u00e2teau, 50700 VALOGNES",
+        "business_hours": null,
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-03T13:45:00+01:00",
+      "plateforme": "Keldoc",
+      "type": "vaccination-center",
+      "appointment_count": 3569,
+      "internal_id": "keldoc2622pid16821",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie de La Bucaille",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/cherbourg-en-cotentin/pharmacie-de-la-bucaille?pid=practice-206658",
+      "location": {
+        "longitude": -1.6324295,
+        "latitude": 49.6413651,
+        "city": "Cherbourg-en-Cotentin",
+        "cp": "50100"
+      },
+      "metadata": {
+        "address": "13 Rue de la Bucaille, 50100 Cherbourg-en-Cotentin",
+        "business_hours": {
+          "lundi": "09:15-12:00, 14:15-19:00",
+          "mardi": "09:15-12:00, 14:15-19:00",
+          "mercredi": "09:15-12:00, 14:15-19:00",
+          "jeudi": "09:15-12:00, 14:15-19:00",
+          "vendredi": "09:15-12:00, 14:15-19:00",
+          "samedi": "09:15-12:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233530238"
+      },
+      "prochain_rdv": "2022-01-03T14:35:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 2295,
+      "internal_id": "doctolib294339pid206658",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Salle des F\u00eates CHERBOURG-EN-COTENTIN",
+      "url": "https://vaccination-covid.keldoc.com/cabinet-medical/cherbourg-octeville-50100/cpts-nord-cotentin/cpts-nord-cotentin?cabinet=16689&specialty=496",
+      "location": {
+        "longitude": -1.623597,
+        "latitude": 49.640105,
+        "city": null,
+        "cp": "50100"
+      },
+      "metadata": {
+        "address": "Salle des f\u00eates Place Centrale, 50100, Cherbourg-en-Cotentin",
+        "business_hours": null,
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-03T14:55:00+01:00",
+      "plateforme": "Keldoc",
+      "type": "vaccination-center",
+      "appointment_count": 3974,
+      "internal_id": "keldoc2650pid16689",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 576
+    },
+    {
+      "departement": "50",
+      "nom": "Vaccination COVID-19 - Site de Coutances",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/coutances/vaccination-site-des-unelles-coutances?pid=practice-204572",
+      "location": {
+        "longitude": -1.4473282,
+        "latitude": 49.0485491,
+        "city": "Coutances",
+        "cp": "50200"
+      },
+      "metadata": {
+        "address": "2 Rue Daniel, 50200 Coutances",
+        "business_hours": {
+          "lundi": "08:45-12:45, 14:00-18:00",
+          "mardi": "08:45-12:45, 14:00-18:00",
+          "mercredi": "08:45-12:45, 14:00-18:00",
+          "jeudi": "08:45-12:45, 14:00-18:00",
+          "vendredi": "08:45-12:45, 14:00-18:00",
+          "samedi": "08:45-12:45",
+          "dimanche": null
+        },
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-03T15:24:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 6565,
+      "internal_id": "doctolib242650pid204572",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 569
+    },
+    {
+      "departement": "50",
+      "nom": "Centre de vaccination Covid-19 - St Hilaire du Harcouet",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/saint-hilaire-du-harcouet/centre-de-vaccination-covid-19-du-ch-de-st-hilaire-du-harcouet?pid=practice-164594",
+      "location": {
+        "longitude": -1.0938073,
+        "latitude": 48.5759207,
+        "city": "Saint-Hilaire-du-Harcou\u00ebt",
+        "cp": "50600"
+      },
+      "metadata": {
+        "address": "Rue Waldeck Rousseau, 50600 Saint-Hilaire-du-Harcou\u00ebt",
+        "business_hours": {
+          "lundi": "10:00-12:30, 13:30-17:30",
+          "mardi": "10:00-12:30, 13:30-17:30",
+          "mercredi": "10:00-12:30, 13:30-17:30",
+          "jeudi": "10:00-12:30, 13:30-17:30",
+          "vendredi": "10:00-12:30, 13:30-17:30",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233794448"
+      },
+      "prochain_rdv": "2022-01-04T10:50:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 9084,
+      "internal_id": "doctolib242624pid164594",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 561
+    },
+    {
+      "departement": "50",
+      "nom": "Cabinet infirmier Guegan - Sanson",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/valognes/cabinet-infirmier-guegan-sanson?pid=practice-221760",
+      "location": {
+        "longitude": -1.4679996,
+        "latitude": 49.5113744,
+        "city": "Valognes",
+        "cp": "50700"
+      },
+      "metadata": {
+        "address": "42 Rue de Poterie, 50700 Valognes",
+        "business_hours": {
+          "lundi": null,
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": "2022-01-06T14:10:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 119,
+      "internal_id": "doctolib320156pid221760",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Centre vaccination \u00e9ph\u00e9m\u00e8re LA HAGUE",
+      "url": "https://vaccination-covid.keldoc.com/cabinet-medical/la-hague-50440/centre-vaccination-ephemere-la-hague/centre-vaccination-ephemere-la-hague?cabinet=26809&specialty=496",
+      "location": {
+        "longitude": -1.837353,
+        "latitude": 49.662287,
+        "city": "La Hague",
+        "cp": "50440"
+      },
+      "metadata": {
+        "address": "11 le vieux chemin, 50440 La Hague",
+        "business_hours": null,
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-06T15:20:00+01:00",
+      "plateforme": "Keldoc",
+      "type": "vaccination-center",
+      "appointment_count": 276,
+      "internal_id": "keldoc5182pid26809",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Dr Pascal CAILLE",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/brehal/pascal-caille?pid=practice-224789",
+      "location": {
+        "longitude": -1.5127796,
+        "latitude": 48.9017235,
+        "city": "Br\u00e9hal",
+        "cp": "50290"
+      },
+      "metadata": {
+        "address": "18 Rue de la Lib\u00e9ration, 50290 Br\u00e9hal",
+        "business_hours": {
+          "lundi": null,
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": "2022-01-07T20:40:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "general-practitioner",
+      "appointment_count": 274,
+      "internal_id": "doctolib323331pid224789",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Karam",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/grandparigny/pharmacie-karam-dr-karam-groupe-gipharm?pid=practice-176072",
+      "location": {
+        "longitude": -1.0907841,
+        "latitude": 48.5826582,
+        "city": "Grandparigny",
+        "cp": "50600"
+      },
+      "metadata": {
+        "address": "1 Zone Artisanale de la Rivi\u00e8re, 50600 Grandparigny",
+        "business_hours": {
+          "lundi": "09:00-12:30, 14:00-19:15",
+          "mardi": "09:00-12:30, 14:00-19:15",
+          "mercredi": "09:00-12:30, 14:00-19:15",
+          "jeudi": "09:00-12:30, 14:00-19:15",
+          "vendredi": "09:00-12:30, 14:00-19:15",
+          "samedi": "09:00-12:30, 14:00-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233491162"
+      },
+      "prochain_rdv": "2022-01-11T12:05:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 107,
+      "internal_id": "doctolib257189pid176072",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Centre de vaccination COVID-19 Eph\u00e9m\u00e8re Port-Bail-sur-Mer",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/port-bail-sur-mer/centre-de-vaccination-covid-19-ephemere-port-bail-sur-mer?pid=practice-228259",
+      "location": {
+        "longitude": -1.659701,
+        "latitude": 49.313026,
+        "city": "Port-Bail-sur-Mer",
+        "cp": "50580"
+      },
+      "metadata": {
+        "address": "Place Saint-Marcouf, 50580 Port-Bail-sur-Mer",
+        "business_hours": {
+          "lundi": null,
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": "2022-01-11T14:05:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 281,
+      "internal_id": "doctolib327263pid228259",
+      "vaccine_type": [
+        "Moderna",
+        "Pfizer-BioNTech"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie des Couplets",
+      "url": "https://www.maiia.com/pharmacie/50120-equeurdreville-hainneville/pharmacie-des-couplets?centerid=602cf2f837219034c307a79a",
+      "location": {
+        "longitude": -1.664912,
+        "latitude": 49.648983,
+        "city": "EQUEURDREVILLE HAINNEVILLE",
+        "cp": "50120"
+      },
+      "metadata": {
+        "address": "48 Rue du Rideret 50120 EQUEURDREVILLE HAINNEVILLE",
+        "business_hours": {
+          "Mardi": "08:00-12:00 14:00-18:00",
+          "Mercredi": "08:00-12:00 14:00-18:00",
+          "Jeudi": "08:00-12:00 14:00-18:00",
+          "Vendredi": "08:00-12:00 14:00-18:00",
+          "Samedi": "08:00-12:00 14:00-18:00",
+          "Dimanche": "08:00-12:00 14:00-18:00"
+        },
+        "phone_number": "+33233932206"
+      },
+      "prochain_rdv": "2022-01-11T15:00:00+00:00",
+      "plateforme": "Maiia",
+      "type": "drugstore",
+      "appointment_count": 72,
+      "internal_id": "maiia602cf2f8",
+      "vaccine_type": [
+        "Moderna",
+        "Pfizer-BioNTech"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie du Senequet",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/gouville-sur-mer/pharmacie-senequet?pid=practice-173135",
+      "location": {
+        "longitude": -1.5820477,
+        "latitude": 49.0964521,
+        "city": "Gouville-sur-Mer",
+        "cp": "50560"
+      },
+      "metadata": {
+        "address": "16 Rue des Fr\u00e8res Lacolley, 50560 Gouville-sur-Mer",
+        "business_hours": {
+          "lundi": "09:00-12:30, 14:00-19:00",
+          "mardi": "09:00-12:30, 14:00-19:00",
+          "mercredi": "09:00-12:30, 14:00-19:00",
+          "jeudi": "09:00-12:30, 14:00-19:00",
+          "vendredi": "09:00-12:30, 14:00-19:00",
+          "samedi": "09:00-12:30, 14:00-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233478567"
+      },
+      "prochain_rdv": "2022-01-13T15:20:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 10,
+      "internal_id": "doctolib254394pid173135",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "SCP infirmiers Saint-Malo",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/valognes/scp-infirmiers-saint-malo?pid=practice-205495",
+      "location": {
+        "longitude": -1.4707768,
+        "latitude": 49.5071634,
+        "city": "Valognes",
+        "cp": "50700"
+      },
+      "metadata": {
+        "address": "18 Rue de l'\u00c9glise, 50700 Valognes",
+        "business_hours": {
+          "lundi": "06:30-20:30",
+          "mardi": "06:30-20:30",
+          "mercredi": "06:30-20:30",
+          "jeudi": "06:30-20:30",
+          "vendredi": "06:30-20:30",
+          "samedi": "06:30-20:30",
+          "dimanche": "06:30-20:30"
+        }
+      },
+      "prochain_rdv": "2022-01-17T15:40:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 21,
+      "internal_id": "doctolib292941pid205495",
+      "vaccine_type": [
+        "Pfizer-BioNTech"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Centre vaccination \u00e9ph\u00e9m\u00e8re SAINT SAUVEUR",
+      "url": "https://vaccination-covid.keldoc.com/cabinet-medical/st-sauveur-le-vicomte-50390/centre-vaccination-ephemere-saint-sauveur/centre-vaccination-ephemere-saint-sauveur?cabinet=26808&specialty=496",
+      "location": {
+        "longitude": -1.529727,
+        "latitude": 49.386908,
+        "city": "St Sauveur Le VIcomte",
+        "cp": "50390"
+      },
+      "metadata": {
+        "address": "Mairie, place Auguste Cousin, 50390 St Sauveur Le VIcomte",
+        "business_hours": null,
+        "phone_number": "+33279461156"
+      },
+      "prochain_rdv": "2022-01-18T10:45:00+01:00",
+      "plateforme": "Keldoc",
+      "type": "vaccination-center",
+      "appointment_count": 136,
+      "internal_id": "keldoc5181pid26808",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Littoral",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/jullouville/pharmacie-littoral?pid=practice-212694",
+      "location": {
+        "longitude": -1.5666623,
+        "latitude": 48.7777231,
+        "city": "Jullouville",
+        "cp": "50610"
+      },
+      "metadata": {
+        "address": "2 Av. Dr Lemonnier, 50610 Jullouville",
+        "business_hours": {
+          "lundi": "08:30-12:30, 14:00-19:30",
+          "mardi": "08:30-12:30, 14:00-19:30",
+          "mercredi": "08:30-12:30, 14:00-19:30",
+          "jeudi": "08:30-12:30, 14:00-19:30",
+          "vendredi": "08:30-12:30, 14:00-19:30",
+          "samedi": "08:30-12:30, 14:00-19:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233618363"
+      },
+      "prochain_rdv": "2022-01-18T11:55:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 9,
+      "internal_id": "doctolib306247pid212694",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie de l'h\u00f4tel de ville - Travert",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/cherbourg-en-cotentin/pharmacie-de-l-hotel-de-ville-travert?pid=practice-220635",
+      "location": {
+        "longitude": -1.5805698,
+        "latitude": 49.6407076,
+        "city": "Cherbourg-en-Cotentin",
+        "cp": "50110"
+      },
+      "metadata": {
+        "address": "98 Av. des Prairies, 50110 Cherbourg-en-Cotentin",
+        "business_hours": {
+          "lundi": "08:45-12:15, 14:00-19:15",
+          "mardi": "08:45-12:15, 14:00-19:15",
+          "mercredi": "08:45-12:15, 14:00-19:15",
+          "jeudi": "08:45-12:15, 14:00-19:15",
+          "vendredi": "08:45-12:15, 14:00-19:15",
+          "samedi": "08:45-12:15",
+          "dimanche": null
+        },
+        "phone_number": "+33233205840"
+      },
+      "prochain_rdv": "2022-01-18T16:00:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 144,
+      "internal_id": "doctolib319048pid220635",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    }
+  ],
+  "centres_indisponibles": [
+    {
+      "departement": "50",
+      "nom": "Pharmacie des M",
+      "url": "https://pharmaciedesm.epharmacie.pro",
+      "location": {
+        "longitude": -1.35559,
+        "latitude": 48.67761,
+        "city": "Saint-Martin-des-Champs",
+        "cp": "50300"
+      },
+      "metadata": {
+        "address": "8, boulevard du Luxembourg, 50300 Saint-Martin-des-Champs",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinnp27-m-avranches",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie des Caps",
+      "url": "https://pharmaciedescaps.pharmabest.com",
+      "location": {
+        "longitude": -1.814722,
+        "latitude": 49.509011,
+        "city": "Les Pieux",
+        "cp": "50340"
+      },
+      "metadata": {
+        "address": "5, rue des Bouvreuils, 50340 Les Pieux",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinpharmabest85-caps-pieux",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Saint-Sauveuraise",
+      "url": "https://pharmacie-saint-sauveuraise.epharmacie.pro",
+      "location": {
+        "longitude": -1.41269,
+        "latitude": 49.13067,
+        "city": "Saint-Sauveur-Lendelin",
+        "cp": "50490"
+      },
+      "metadata": {
+        "address": "1, rue G\u00e9n\u00e9ral Bradley, 50490 Saint-Sauveur-Lendelin",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinnp25-saint-sauveuraise-saint-sauveur-lendelin",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Val Saint Jean",
+      "url": "https://www.maiia.com/pharmacie/50000-saint-lo/pharmacie-val-saint-jean?centerid=60269d8d14e3173a0cf0894b",
+      "location": {
+        "longitude": -1.071199,
+        "latitude": 49.111044,
+        "city": "Saint-L\u00f4",
+        "cp": "50000"
+      },
+      "metadata": {
+        "address": "Avenue des Tilleuls 50000 Saint-L\u00f4",
+        "business_hours": {
+          "Lundi": "09:00-20:00",
+          "Mardi": "09:00-20:00",
+          "Mercredi": "09:00-20:00",
+          "Jeudi": "09:00-20:00",
+          "Vendredi": "09:00-20:00",
+          "Samedi": "09:00-20:00",
+          "Dimanche": "09:00-20:00"
+        },
+        "phone_number": "+33233572227"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Maiia",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "maiia60269d8d",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie du S\u00e9n\u00e9quet",
+      "url": "https://pharmacie-du-senequet.epharmacie.pro",
+      "location": {
+        "longitude": -1.58204,
+        "latitude": 49.096474,
+        "city": "Gouville-sur-Mer",
+        "cp": "50560"
+      },
+      "metadata": {
+        "address": "Rue du littoral, 50560 Gouville-sur-Mer",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinnp24-senequet-gouville-sur-mer",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie de la S\u00e9lune",
+      "url": "https://pharmaciedelaselune.pharmavie.fr/rendez-vous/vaccination/274-vaccination-covid-19/pre-inscription?origin=vmd",
+      "location": {
+        "longitude": -1.2939101,
+        "latitude": 48.6194831,
+        "city": "Ducey-les-Ch\u00e9ris",
+        "cp": "50220"
+      },
+      "metadata": {
+        "address": "25 Grande Rue, 50220 Ducey-les-Ch\u00e9ris",
+        "business_hours": {
+          "lundi": "08:30-12:45, 13:45-19:30",
+          "mardi": "08:30-19:30",
+          "mercredi": "08:30-12:45, 13:45-19:30",
+          "jeudi": "08:30-12:45, 13:45-19:30",
+          "vendredi": "08:30-17:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233485148"
+      },
+      "prochain_rdv": null,
+      "plateforme": "mesoigner",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "mesoigner2880",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Hautemani\u00e8re",
+      "url": "https://pharma-hautemaniere.com",
+      "location": {
+        "longitude": -1.46985,
+        "latitude": 49.50703,
+        "city": "Valognes",
+        "cp": "50700"
+      },
+      "metadata": {
+        "address": "19, rue de l'\u00c9glise, 50700 Valognes",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinnp22-hautemaniere-valognes",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Saint-Nicolas Granville",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/granville/centre-de-depistage-covid19-tests-antigeniques-granville?pid=practice-175184",
+      "location": {
+        "longitude": -1.5684603,
+        "latitude": 48.8331439,
+        "city": "Granville",
+        "cp": "50400"
+      },
+      "metadata": {
+        "address": "425 Rue Saint-Nicolas, 50400 Granville",
+        "business_hours": {
+          "lundi": null,
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233500450"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib230349pid175184",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie de la Gare",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/granville/pharmacie-de-la-gare-granville?pid=practice-188397",
+      "location": {
+        "longitude": -1.5894192,
+        "latitude": 48.8376103,
+        "city": "Granville",
+        "cp": "50400"
+      },
+      "metadata": {
+        "address": "2 Avenue du Mar\u00e9chal Leclerc, 50400 Granville",
+        "business_hours": {
+          "lundi": "09:00-12:30, 14:00-19:15",
+          "mardi": "09:00-12:30, 14:00-19:15",
+          "mercredi": "09:00-12:30, 14:00-19:15",
+          "jeudi": "09:00-12:30, 14:00-19:15",
+          "vendredi": "09:00-12:30, 14:00-19:15",
+          "samedi": "09:00-12:30, 14:00-18:30",
+          "dimanche": null
+        },
+        "phone_number": "+33233500110"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib272985pid188397",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "ADN Sant\u00e9 Granville",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/granville/adn-sante-granville?pid=practice-231245",
+      "location": {
+        "longitude": -1.5936671,
+        "latitude": 48.8372065,
+        "city": "Granville",
+        "cp": "50400"
+      },
+      "metadata": {
+        "address": "72 Rue Couraye, 50400 Granville",
+        "business_hours": {
+          "lundi": "09:30-13:30, 14:30-17:30",
+          "mardi": "09:30-13:30, 14:30-17:30",
+          "mercredi": "09:30-13:30, 14:30-17:30",
+          "jeudi": "09:30-13:30, 14:30-17:30",
+          "vendredi": "09:30-13:30, 14:30-17:30",
+          "samedi": "09:30-13:30, 14:30-17:30",
+          "dimanche": "09:30-13:30, 14:30-17:30"
+        },
+        "phone_number": "+33778927630"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib339730pid231245",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie des M",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/avranches/pharamcie-des-m?pid=practice-183751",
+      "location": {
+        "longitude": -1.3552671,
+        "latitude": 48.6773611,
+        "city": "Avranches",
+        "cp": "50300"
+      },
+      "metadata": {
+        "address": "8 Boulevard du Luxembourg, 50300 Avranches",
+        "business_hours": {
+          "lundi": "08:45-19:45",
+          "mardi": "08:45-19:45",
+          "mercredi": "08:45-19:45",
+          "jeudi": "08:45-19:45",
+          "vendredi": "08:45-19:45",
+          "samedi": "09:00-13:00, 14:00-19:30",
+          "dimanche": null
+        },
+        "phone_number": "+33233683255"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib267917pid183751",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Saint Sauveuraise",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/saint-sauveur-villages/pharmacie-saint-sauveuraise?pid=practice-180193",
+      "location": {
+        "longitude": -1.4128059,
+        "latitude": 49.1306851,
+        "city": "Saint-Sauveur-Villages",
+        "cp": "50490"
+      },
+      "metadata": {
+        "address": "1 Rue G\u00e9n\u00e9ral Bradley, 50490 Saint-Sauveur-Villages",
+        "business_hours": {
+          "lundi": "08:30-13:00, 14:30-19:00",
+          "mardi": "08:30-13:00, 14:30-19:00",
+          "mercredi": "08:30-13:00, 14:30-19:00",
+          "jeudi": "08:30-13:00, 14:30-19:00",
+          "vendredi": "08:30-13:00, 14:30-19:00",
+          "samedi": "08:30-13:00, 14:30-19:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233076039"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib263387pid180193",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie du Centre",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/avranches/pharmacie-des-m?pid=practice-193200",
+      "location": {
+        "longitude": -1.3612846,
+        "latitude": 48.6865994,
+        "city": "Avranches",
+        "cp": "50300"
+      },
+      "metadata": {
+        "address": "8 Place Littr\u00e9, 50300 Avranches",
+        "business_hours": {
+          "lundi": "09:00-19:30",
+          "mardi": "09:00-19:30",
+          "mercredi": "09:00-19:30",
+          "jeudi": "09:00-19:30",
+          "vendredi": "09:00-19:30",
+          "samedi": "09:00-19:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233790630"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib277420pid193200",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie des Manuscrits",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/avranches/pharmacie-des-manuscrits?pid=practice-209523",
+      "location": {
+        "longitude": -1.3480307,
+        "latitude": 48.6805562,
+        "city": "Avranches",
+        "cp": "50300"
+      },
+      "metadata": {
+        "address": "41B Rue de la Division Leclerc, 50300 Avranches",
+        "business_hours": {
+          "lundi": "08:45-19:30",
+          "mardi": "08:45-19:30",
+          "mercredi": "08:45-19:30",
+          "jeudi": "08:45-19:30",
+          "vendredi": "08:45-19:30",
+          "samedi": "09:00-13:00, 14:00-19:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233581504"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib297963pid209523",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie de la S\u00e9e",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/brecey/pharmacie-de-la-see?pid=practice-230828",
+      "location": {
+        "longitude": -1.1692992,
+        "latitude": 48.7249334,
+        "city": "Br\u00e9cey",
+        "cp": "50370"
+      },
+      "metadata": {
+        "address": "10 Rue des P\u00e8lerins, 50370 Br\u00e9cey",
+        "business_hours": {
+          "lundi": "08:45-12:30, 14:00-19:30",
+          "mardi": "08:45-12:30, 14:00-19:30",
+          "mercredi": "08:45-12:30, 14:00-19:30",
+          "jeudi": "08:45-12:30, 14:00-19:30",
+          "vendredi": "08:45-12:30, 14:00-19:30",
+          "samedi": "09:00-12:30, 14:00-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233487240"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib337124pid230828",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Pharmacie Lamoureux",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/villedieu-les-poeles-rouffigny/pharmacie-lamoureux?pid=practice-178921",
+      "location": {
+        "longitude": -1.2224425,
+        "latitude": 48.8381384,
+        "city": "Villedieu-les-Po\u00eales-Rouffigny",
+        "cp": "50800"
+      },
+      "metadata": {
+        "address": "1 Place de la R\u00e9publique, 50800 Villedieu-les-Po\u00eales-Rouffigny",
+        "business_hours": {
+          "lundi": "08:30-12:30, 14:00-19:30",
+          "mardi": "08:30-13:00, 14:00-19:30",
+          "mercredi": "08:30-12:30, 14:00-19:30",
+          "jeudi": "08:30-12:30, 14:00-19:30",
+          "vendredi": "08:30-12:30, 14:00-19:30",
+          "samedi": "08:30-12:30, 14:00-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233610013"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib261779pid178921",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "50",
+      "nom": "Cabinet infirmier Isabelle DARDOIZE",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/carolles/cabinet-infirmier-isabelle-dardoize?pid=practice-229709",
+      "location": {
+        "longitude": -1.5584292,
+        "latitude": 48.749335,
+        "city": "Carolles",
+        "cp": "50740"
+      },
+      "metadata": {
+        "address": "33 Rue de la Poste, 50740 Carolles",
+        "business_hours": {
+          "lundi": "08:00-20:00",
+          "mardi": "08:00-20:00",
+          "mercredi": "08:00-20:00",
+          "jeudi": "08:00-20:00",
+          "vendredi": "08:00-20:00",
+          "samedi": "08:00-20:00",
+          "dimanche": "08:00-20:00"
+        },
+        "phone_number": "+33684626689"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib335830pid229709",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    }
+  ]
+}
