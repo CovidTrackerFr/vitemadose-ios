@@ -41,6 +41,7 @@ extension SlotsPerCategory {
         case all
         case firstOfSecondDose = "first_or_second_dose"
         case thirdDose = "third_dose"
+        case kidsFirstDose = "kids_first_dose"
         case unknown = "unknown_dose"
     }
 }
