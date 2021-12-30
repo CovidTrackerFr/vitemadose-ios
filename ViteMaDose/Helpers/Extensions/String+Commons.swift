@@ -17,8 +17,10 @@ extension String {
     /// This function will try to parse the `String` as a Date
     /// using `SwiftDate`.
     /// If parsing fails, it will try to parse as an `ISO` date as a fallback
-    /// - Parameter region: custom option `Region`
-    /// - Returns: optional `Date`
+    /// - Parameters:
+    ///   - style: custom `DateToStringStyles`
+    ///   - region: custom option `Region`
+    /// - Returns: optional `String`
     func toString(with style: DateToStringStyles, region: Region) -> String? {
         // Fix #102: If it is a timezoned date and the timezone is not specified
         if contains("T") && !contains("+") {
