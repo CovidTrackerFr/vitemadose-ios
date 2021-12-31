@@ -14,10 +14,8 @@ class CreditHeaderView: UIView {
     private enum Constant {
         static let highlightedTextColor1 = UIColor.royalBlue
         static let highlightedTextColor2 = UIColor.mandy
-        static let titleFont = UIFont.rounded(ofSize: 24, weight: .bold)
-        static let descriptionFont = UIFont.rounded(ofSize: 18, weight: .regular)
-        static let searchBarFont = UIFont.rounded(ofSize: 16, weight: .medium)
-        static let searchBarViewCornerRadius: CGFloat = 10.0
+        static let titleFont = UIFont.accessibleTitle2Bold
+        static let descriptionFont = UIFont.accessibleCalloutMedium
     }
 
     override func awakeFromNib() {

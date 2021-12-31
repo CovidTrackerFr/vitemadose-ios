@@ -30,8 +30,8 @@ class CreditCell: UITableViewCell {
         static let creditNameTextColor: UIColor = .label
         static let creditImageBackgroundColor: UIColor = .royalBlue
         static let cellBackgrounColor: UIColor = .tertiarySystemBackground
-        static let labelMainFont: UIFont = .rounded(ofSize: 18, weight: .bold)
-        static let labelSecondFont: UIFont = .rounded(ofSize: 15, weight: .regular)
+        static let labelMainFont: UIFont = .accessibleCalloutBold
+        static let labelSecondFont: UIFont = .accessibleSubheadMedium
         static let viewsCornerRadius: CGFloat = 15
     }
 

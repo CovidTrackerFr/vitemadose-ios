@@ -17,7 +17,6 @@ protocol CreditViewModelProvider {
 protocol CreditViewModelDelegate: AnyObject {
     func reloadTableView(with credits: [Credit])
     func openURL(url: URL)
-
     func updateLoadingState(isLoading: Bool, isEmpty: Bool)
     func presentLoadError(_ error: Error)
 }
@@ -34,9 +33,7 @@ class CreditViewModel: CreditViewModelProvider {
         }
     }
 
-    var numberOfSections: Int {
-        1
-    }
+    var numberOfSections = 1
 
     func numberOfRows(in section: Int) -> Int {
         allCredits.count

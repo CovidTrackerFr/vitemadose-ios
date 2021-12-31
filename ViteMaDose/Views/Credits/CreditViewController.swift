@@ -60,7 +60,6 @@ class CreditViewController: UIViewController, Storyboarded {
         tableView.backgroundView = activityIndicator
 
         tableView.register(cellType: CreditCell.self)
-        tableView.register(cellType: CreditSectionView.self)
     }
 }
 
@@ -76,7 +75,6 @@ extension CreditViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Case of user
         let cell = tableView.dequeueReusableCell(with: CreditCell.self, for: indexPath)
         guard let cellViewModel = viewModel.cellViewModel(at: indexPath) else {
             assertionFailure("Cell view model missing at \(indexPath)")

@@ -105,7 +105,7 @@
 "a11y.voiceover.settings.button.label" = "Réglages";
 "a11y.voiceover.settings.button.hint" = "Tappez deux fois pour accéder aux réglages de l'application";
 "a11y.voiceover.settings.action.website" = "Tappez deux fois pour aller sur le site CovidTracker.fr";
-"a11y.voiceover.settings.action.contact" = "Tappez deux fois pour afficher la liste des contributeurs du projet";
+"a11y.voiceover.settings.action.contributors" = "Tappez deux fois pour afficher la liste des contributeurs du projet";
 "a11y.voiceover.settings.action.contact" = "Tappez deux fois pour afficher le formulaire de contact du site CovidTracker.fr";
 "a11y.voiceover.settings.action.twitter" = "Tappez deux fois pour aller sur le profil Twitter de CovidTracker.";
 "a11y.voiceover.settings.action.sourcecode" = "Tappez deux fois pour accéder au dépot GitHub de l'application pour avoir son code source.";

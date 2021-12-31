@@ -123,8 +123,6 @@
 		6AD0CC3E262EC8D0001F8807 /* CreditHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AD0CC3D262EC8D0001F8807 /* CreditHeaderView.xib */; };
 		6AD0CC42262EC957001F8807 /* CreditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD0CC41262EC957001F8807 /* CreditViewController.storyboard */; };
 		6AD0CC47262EC9B2001F8807 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CC46262EC9B2001F8807 /* CreditViewModel.swift */; };
-		6AD0CC53262EDF67001F8807 /* CreditSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD0CC52262EDF67001F8807 /* CreditSectionView.swift */; };
-		6AD0CC57262EDF74001F8807 /* CreditSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AD0CC56262EDF74001F8807 /* CreditSectionView.xib */; };
 		6AF7D48C2647062F000E8042 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767392F261E3BC5004A700D /* HomeViewController.swift */; };
 		6AF7D48E26470677000E8042 /* LocationSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C4018626238E4900EFFCA3 /* LocationSearchHeaderView.swift */; };
 		6AF7D48F2647068A000E8042 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 577A7F6B262CA3D000B1D03C /* GoogleService-Info-prod.plist */; };
@@ -272,8 +270,6 @@
 		6AD0CC3D262EC8D0001F8807 /* CreditHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditHeaderView.xib; sourceTree = "<group>"; };
 		6AD0CC41262EC957001F8807 /* CreditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreditViewController.storyboard; sourceTree = "<group>"; };
 		6AD0CC46262EC9B2001F8807 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
-		6AD0CC52262EDF67001F8807 /* CreditSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditSectionView.swift; sourceTree = "<group>"; };
-		6AD0CC56262EDF74001F8807 /* CreditSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditSectionView.xib; sourceTree = "<group>"; };
 		889B9A49263307EC00175E24 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DA234DC22626494600D6F71C /* remote-configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "remote-configuration.plist"; sourceTree = "<group>"; };
 		DA234DD02626506600D6F71C /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
@@ -718,8 +714,6 @@
 			children = (
 				6AD0CC39262EC82F001F8807 /* CreditHeaderView.swift */,
 				6AD0CC3D262EC8D0001F8807 /* CreditHeaderView.xib */,
-				6AD0CC52262EDF67001F8807 /* CreditSectionView.swift */,
-				6AD0CC56262EDF74001F8807 /* CreditSectionView.xib */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -864,7 +858,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AD0CC57262EDF74001F8807 /* CreditSectionView.xib in Resources */,
 				6AD0CC42262EC957001F8807 /* CreditViewController.storyboard in Resources */,
 				57AD21DE2621042700ED2B95 /* CentresListViewController.storyboard in Resources */,
 				5747142B262B6BA300535DF1 /* LocationSearchResultCell.xib in Resources */,
@@ -1082,7 +1075,6 @@
 				5753E6BE275BFE0C00C386EC /* DailySlot.swift in Sources */,
 				577A7F62262C6D7E00B1D03C /* UIViewController+ErrorDisplayable.swift in Sources */,
 				57AF504F262CDD5A0085E3C1 /* CentresTitleCell.swift in Sources */,
-				6AD0CC53262EDF67001F8807 /* CreditSectionView.swift in Sources */,
 				57673926261E3B6C004A700D /* UIView+Common.swift in Sources */,
 				6AD0CC30262EC535001F8807 /* CreditViewController.swift in Sources */,
 			);
