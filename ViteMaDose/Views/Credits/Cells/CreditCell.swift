@@ -63,7 +63,12 @@ class CreditCell: UITableViewCell {
         creditImageView.kf.setImage(with: URL(string: viewData.creditImage ?? ""))
         creditNameLabel.text = viewData.creditName
         creditRoleLabel.text = viewData.creditRole
-        creditLinkButton.isHidden = buttonURL == nil
+        
+        if let url = buttonURL, UIApplication.shared.canOpenURL(url) {
+            creditLinkButton.isHidden = false
+        } else {
+            creditLinkButton.isHidden = true
+        }
 
         creditNameLabel.textColor = Constant.creditNameTextColor
         creditRoleLabel.textColor = Constant.creditNameTextColor

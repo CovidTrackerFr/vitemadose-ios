@@ -29,12 +29,14 @@ struct Credit: Codable {
     }
 }
 
-// MARK: - CreditLink
+// MARK: - Credit Link
 
 struct CreditLink: Codable {
     let site: String?
     let url: String?
 }
+
+extension CreditLink: Hashable {}
 
 // MARK: - Credits
 

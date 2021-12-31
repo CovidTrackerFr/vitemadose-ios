@@ -51,7 +51,7 @@ class CreditViewController: UIViewController, Storyboarded {
 
     private func configureTableView() {
         tableView.dataSource = self
-
+        
         tableView.backgroundColor = .athensGray
         tableView.tableHeaderView = countySelectionHeaderView
         tableView.estimatedRowHeight = 80

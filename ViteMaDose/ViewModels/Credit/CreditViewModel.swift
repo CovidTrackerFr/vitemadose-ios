@@ -64,10 +64,30 @@ class CreditViewModel: CreditViewModelProvider {
         )
     }
 
-    private func handleLoad(with credits: [Credit]) {
-        self.allCredits = credits.sorted(by: { $0.shownName < $1.shownName })
+    /// Keep unique `Credit` by filtering the givene `values` by `nom` properties
+    /// - Parameter values: The data set to filter
+    /// - Returns: The filtered credits
+    private func keepUnique(within values: [Credit]) -> [Credit] {
+        var unique = [Credit]()
+        values.forEach { item in
+            let isAlradyStored = unique.contains { element in
+                if let itemName = item.nom?.uppercased(), let elementName = element.nom?.uppercased(), itemName == elementName {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            if !isAlradyStored {
+                unique.append(item)
+            }
+        }
+        return unique
+    }
 
-        delegate?.reloadTableView(with: credits)
+    private func handleLoad(with credits: [Credit]) {
+        let uniqueCredits = keepUnique(within: credits)
+        self.allCredits = uniqueCredits.sorted(by: { $0.shownName < $1.shownName })
+        delegate?.reloadTableView(with: uniqueCredits)
     }
 
     private func handleError(_ error: Error) {
