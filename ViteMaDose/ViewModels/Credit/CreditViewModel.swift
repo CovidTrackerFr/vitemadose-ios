@@ -11,7 +11,6 @@ protocol CreditViewModelProvider {
     var numberOfSections: Int { get }
     func numberOfRows(in section: Int) -> Int
     func cellViewModel(at indexPath: IndexPath) -> CreditCellViewDataProvider?
-    func didSelectCell(at indexPath: IndexPath)
 }
 
 protocol CreditViewModelDelegate: AnyObject {
@@ -60,23 +59,13 @@ class CreditViewModel: CreditViewModelProvider {
         return CreditCellViewData(
             creditName: credit.shownName,
             creditRole: credit.shownRole,
+            creditLink: URL(string: credit.site_web ?? credit.links?.first?.url ?? ""),
             creditImage: credit.photo
         )
     }
 
-    func didSelectCell(at indexPath: IndexPath) {
-        guard let credit = allCredits[safe: indexPath.row] else {
-            assertionFailure("Credit not found at indexPath \(indexPath)")
-            return
-        }
-
-        if let detailsURL = credit.site_web ?? credit.links?.first?.url, let url = URL(string: detailsURL) {
-            delegate?.openURL(url: url)
-        }
-    }
-
     private func handleLoad(with credits: [Credit]) {
-        self.allCredits = credits
+        self.allCredits = credits.sorted(by: { $0.shownName < $1.shownName })
 
         delegate?.reloadTableView(with: credits)
     }

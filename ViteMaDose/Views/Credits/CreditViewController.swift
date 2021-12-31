@@ -50,7 +50,6 @@ class CreditViewController: UIViewController, Storyboarded {
     }
 
     private func configureTableView() {
-        tableView.delegate = self
         tableView.dataSource = self
 
         tableView.backgroundColor = .athensGray
@@ -81,19 +80,12 @@ extension CreditViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.configure(with: cellViewModel)
+        cell.configure(with: cellViewModel, delegate: self)
         return cell
     }
 }
 
-// MARK: - UITableViewDelegate
-
-extension CreditViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectCell(at: indexPath)
-        Haptic.impact(.light).generate()
-    }
-}
+// MARK: - CreditViewModelDelegate
 
 extension CreditViewController: CreditViewModelDelegate {
     func reloadTableView(with credits: [Credit]) {
