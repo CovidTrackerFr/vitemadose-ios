@@ -14,6 +14,7 @@ enum AppAnalytics {
         case home = "home"
         case searchResults = "search_results"
         case departmentSelect = "departement_select"
+        case credit = "credit"
     }
 
     static func logScreen(_ screenName: ScreenName, screenClass: String) {

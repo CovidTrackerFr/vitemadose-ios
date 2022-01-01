@@ -30,6 +30,17 @@
 "home.stats.locations_with_availabilities" = "Lieux avec rendez-vous disponibles";
 "home.stats.available_locations_percentage" = "De lieux avec des disponibilités";
 
+// MARK: - Credits
+
+"credits.main_title.title" = "Contributeurs";
+"credits.main_title.subtitle" = "ViteMaDose est un projet open source, construit par l'ensemble de nos généreux contributeurs";
+"credits.main_title.highlightedText1" = "open source";
+"credits.main_title.highlightedText2" = "généreux contributeurs";
+"credits.no_name" = "Nom inconnu";
+"credits.no_role" = "Rôle inconnu";
+"a11y.voiceover.credits.credit_button.label" = "Profil";
+"a11y.voiceover.credits.credit_button.hint" = "Tappez deux fois pour accéder à son site web";
+
 // MARK: - Department Selection
 
 "location_search.main_title" = "Sélectionnez ou recherchez un lieu en France";
@@ -96,6 +107,7 @@
 "a11y.voiceover.settings.button.label" = "Réglages";
 "a11y.voiceover.settings.button.hint" = "Tappez deux fois pour accéder aux réglages de l'application";
 "a11y.voiceover.settings.action.website" = "Tappez deux fois pour aller sur le site CovidTracker.fr";
+"a11y.voiceover.settings.action.contributors" = "Tappez deux fois pour afficher la liste des contributeurs du projet";
 "a11y.voiceover.settings.action.contact" = "Tappez deux fois pour afficher le formulaire de contact du site CovidTracker.fr";
 "a11y.voiceover.settings.action.twitter" = "Tappez deux fois pour aller sur le profil Twitter de CovidTracker.";
 "a11y.voiceover.settings.action.sourcecode" = "Tappez deux fois pour accéder au dépot GitHub de l'application pour avoir son code source.";
@@ -106,6 +118,8 @@
 "settings.title" = "Réglages";
 "settings.website.title" = "CovidTracker.fr";
 "settings.website.subtitle" = "Retrouvez nous sur notre site web";
+"settings.contributors.title" = "Contributeurs";
+"settings.contributors.subtitle" = "Découvrez l'équipe derrière le projet";
 "settings.contact.title" = "Contact";
 "settings.contact.subtitle" = "Accédez à notre formulaire de contact";
 "settings.twitter.title" = "Twitter";

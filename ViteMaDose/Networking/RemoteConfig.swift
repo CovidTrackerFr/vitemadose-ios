@@ -85,6 +85,10 @@ extension RemoteConfiguration {
         return vaccinationCentresListRadiusInKm.doubleValue * 1000
     }
 
+    var contributorsPath: String {
+        return configuration.configValue(forKey: "path_contributors").stringValue!
+    }
+
     func departmentPath(withCode code: String) -> String {
         let path = configuration.configValue(forKey: "path_data_department").stringValue!
         return path.replacingOccurrences(of: "{code}", with: code)

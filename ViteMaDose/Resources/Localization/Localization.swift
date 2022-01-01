@@ -59,6 +59,18 @@ enum Localization {
         }
     }
 
+    enum Credits {
+        static let noName = "credits.no_name".localized
+        static let noRole = "credits.no_role".localized
+
+        enum MainTitle {
+            static let title = "credits.main_title.title".localized
+            static let subtitle = "credits.main_title.subtitle".localized
+            static let highlightedText1 = "credits.main_title.highlightedText1".localized
+            static let highlightedText2 = "credits.main_title.highlightedText2".localized
+        }
+    }
+
     enum Locations {
         static let list_title = "locations.list_title".localized
         static let followed_list_title = "locations.followed_list_title".localized
@@ -106,6 +118,11 @@ enum Localization {
         enum WebSite {
             static let title = "settings.website.title".localized
             static let subtitle = "settings.website.subtitle".localized
+        }
+
+        enum Contributors {
+            static let title = "settings.contributors.title".localized
+            static let subtitle = "settings.contributors.subtitle".localized
         }
 
         enum Contact {
@@ -177,10 +194,16 @@ enum Localization {
                 static let button_label = "a11y.voiceover.settings.button.label".localized
                 static let button_hint = "a11y.voiceover.settings.button.hint".localized
                 static let action_website = "a11y.voiceover.settings.action.website".localized
+                static let action_contributors = "a11y.voiceover.settings.action.contributors".localized
                 static let action_contact = "a11y.voiceover.settings.action.contact".localized
                 static let action_twitter = "a11y.voiceover.settings.action.twitter".localized
                 static let action_sourcecode = "a11y.voiceover.settings.action.sourcecode".localized
                 static let action_advanced = "a11y.voiceover.settings.action.advanced".localized
+            }
+
+            enum Credits {
+                static let credit_button_label = "a11y.voiceover.credits.credit_button.label".localized
+                static let credit_button_hint = "a11y.voiceover.credits.credit_button.hint".localized
             }
         }
     }
