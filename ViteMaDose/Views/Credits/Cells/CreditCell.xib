@@ -63,6 +63,7 @@
                                         <rect key="frame" x="343" y="0.0" width="25" height="80.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="8fD-T2-b4K"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="FcV-4K-0xg"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="person.text.rectangle" catalog="system"/>

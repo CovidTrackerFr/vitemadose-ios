@@ -62,9 +62,15 @@ class CreditCell: UITableViewCell {
 
         creditImageView.kf.setImage(with: URL(string: viewData.creditImage ?? ""))
         creditNameLabel.text = viewData.creditName
-        creditRoleLabel.text = viewData.creditRole.toDisplay
-        creditRoleLabel.accessibilityLabel = viewData.creditRole.toVocalize
-
+        
+        // Need to be refactored: if too big a11y sizes, diplay is dirty (sometimes role or name)
+        if UIApplication.shared.preferredContentSizeCategory.isAccessibleLargeTextSize {
+            creditRoleLabel.isHidden = true
+        } else {
+            creditRoleLabel.text = viewData.creditRole.toDisplay
+            creditRoleLabel.accessibilityLabel = viewData.creditRole.toVocalize
+        }
+        
         if let url = buttonURL, UIApplication.shared.canOpenURL(url) {
             creditLinkButton.isHidden = false
             creditLinkButton.accessibilityLabel = Localization.A11y.VoiceOver.Credits.credit_button_label
