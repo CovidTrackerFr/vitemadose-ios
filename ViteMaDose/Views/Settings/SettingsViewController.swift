@@ -1,10 +1,8 @@
 // Software Name: vitemadose-ios
-// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-// This software is distributed under the GNU General Public License v3.0 only.
-//
-// Author: Pierre-Yves LAPERSONNE <dev(at)pylapersonne(dot)info> et al.
+// This software is distributed under the GPL-3.0-or-later license.
 
 import Foundation
 import Haptica
@@ -108,7 +106,7 @@ extension SettingsViewController {
         Haptic.impact(.light).generate()
         present(safariViewController, animated: true)
     }
-    
+
     private func presentCreditViewController() {
         let creditViewController = CreditViewController.instantiate()
         creditViewController.viewModel = CreditViewModel(credits: [])
@@ -117,5 +115,5 @@ extension SettingsViewController {
             self?.present(creditViewController, animated: true)
         }
     }
-    
+
 }

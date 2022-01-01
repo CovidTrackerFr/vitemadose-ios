@@ -1,17 +1,20 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  CreditViewModel.swift
-//  ViteMaDose
-//
-//  Created by Nathan FALLET on 20/04/2021.
-//
+// This software is distributed under the GPL-3.0-or-later license.
 
 import Foundation
+
+// MARK: - Credit View Model Provider
 
 protocol CreditViewModelProvider {
     var numberOfSections: Int { get }
     func numberOfRows(in section: Int) -> Int
     func cellViewModel(at indexPath: IndexPath) -> CreditCellViewDataProvider?
 }
+
+// MARK: - Credit View Model Delegate
 
 protocol CreditViewModelDelegate: AnyObject {
     func reloadTableView(with credits: [Credit])
@@ -20,7 +23,10 @@ protocol CreditViewModelDelegate: AnyObject {
     func presentLoadError(_ error: Error)
 }
 
+// MARK: - Credit View Model
+
 class CreditViewModel: CreditViewModelProvider {
+
     private let apiService: BaseAPIServiceProvider
     weak var delegate: CreditViewModelDelegate?
 
@@ -38,7 +44,7 @@ class CreditViewModel: CreditViewModelProvider {
         allCredits.count
     }
 
-    // MARK: init
+    // MARK: Init
 
     required init(
         apiService: BaseAPIServiceProvider = BaseAPIService(),
@@ -63,6 +69,8 @@ class CreditViewModel: CreditViewModelProvider {
             creditImage: credit.photo
         )
     }
+
+    // MARK: - Utilities
 
     /// Improves the role to have something with correct syntaxes
     /// - Parameter role: The string to improve
@@ -105,6 +113,8 @@ class CreditViewModel: CreditViewModelProvider {
         return unique
     }
 
+    // MARK: Load of data
+
     func load() {
         guard !isLoading else { return }
         isLoading = true
@@ -121,7 +131,7 @@ class CreditViewModel: CreditViewModelProvider {
             }
         }
     }
-    
+
     private func handleLoad(with credits: [Credit]) {
         let uniqueCredits = keepUnique(within: credits)
         self.allCredits = uniqueCredits.sorted(by: { $0.shownName < $1.shownName })

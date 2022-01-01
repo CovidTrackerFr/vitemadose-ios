@@ -200,7 +200,7 @@ enum Localization {
                 static let action_sourcecode = "a11y.voiceover.settings.action.sourcecode".localized
                 static let action_advanced = "a11y.voiceover.settings.action.advanced".localized
             }
-            
+
             enum Credits {
                 static let credit_button_label = "a11y.voiceover.credits.credit_button.label".localized
                 static let credit_button_hint = "a11y.voiceover.credits.credit_button.hint".localized

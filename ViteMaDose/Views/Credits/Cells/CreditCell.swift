@@ -1,12 +1,13 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  CreditCell.swift
-//  ViteMaDose
-//
-//  Created by Nathan FALLET on 20/04/2021.
-//
+// This software is distributed under the GPL-3.0-or-later license.
 
 import UIKit
 import Kingfisher
+
+// MARK: - Credit Cell View Data Provider
 
 protocol CreditCellViewDataProvider {
     var creditName: String { get }
@@ -15,6 +16,8 @@ protocol CreditCellViewDataProvider {
     var creditImage: String? { get }
 }
 
+// MARK: - Credit Ceell View Data
+
 struct CreditCellViewData: CreditCellViewDataProvider, Hashable {
     var creditName: String
     var creditRole: DoubledString
@@ -22,13 +25,14 @@ struct CreditCellViewData: CreditCellViewDataProvider, Hashable {
     var creditImage: String?
 }
 
+// MARK: - Credit Cell
 class CreditCell: UITableViewCell {
     @IBOutlet private var creditImageView: UIImageView!
     @IBOutlet private var creditNameLabel: UILabel!
     @IBOutlet private var creditRoleLabel: UILabel!
     @IBOutlet private var creditLinkButton: UIButton!
     @IBOutlet private var creditContainerView: UIView!
-    
+
     private var buttonURL: URL?
     private weak var delegate: CreditViewModelDelegate?
 
@@ -37,7 +41,7 @@ class CreditCell: UITableViewCell {
             delegate?.openURL(url: buttonURL)
         }
     }
-    
+
     private enum Constant {
         static let creditNameTextColor: UIColor = .label
         static let creditImageBackgroundColor: UIColor = .royalBlue
@@ -62,7 +66,7 @@ class CreditCell: UITableViewCell {
 
         creditImageView.kf.setImage(with: URL(string: viewData.creditImage ?? ""))
         creditNameLabel.text = viewData.creditName
-        
+
         // Need to be refactored: if too big a11y sizes, diplay is dirty (sometimes role or name)
         if UIApplication.shared.preferredContentSizeCategory.isAccessibleLargeTextSize {
             creditRoleLabel.isHidden = true
@@ -70,7 +74,7 @@ class CreditCell: UITableViewCell {
             creditRoleLabel.text = viewData.creditRole.toDisplay
             creditRoleLabel.accessibilityLabel = viewData.creditRole.toVocalize
         }
-        
+
         if let url = buttonURL, UIApplication.shared.canOpenURL(url) {
             creditLinkButton.isHidden = false
             creditLinkButton.accessibilityLabel = Localization.A11y.VoiceOver.Credits.credit_button_label
