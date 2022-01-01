@@ -10,14 +10,14 @@ import Kingfisher
 
 protocol CreditCellViewDataProvider {
     var creditName: String { get }
-    var creditRole: String { get }
+    var creditRole: DoubledString { get }
     var creditLink: URL? { get }
     var creditImage: String? { get }
 }
 
 struct CreditCellViewData: CreditCellViewDataProvider, Hashable {
     var creditName: String
-    var creditRole: String
+    var creditRole: DoubledString
     var creditLink: URL?
     var creditImage: String?
 }
@@ -51,7 +51,7 @@ class CreditCell: UITableViewCell {
     func configure(with viewData: CreditCellViewDataProvider, delegate: CreditViewModelDelegate?) {
         self.buttonURL = viewData.creditLink
         self.delegate = delegate
-        
+
         contentView.backgroundColor = .athensGray
 
         creditImageView.backgroundColor = Constant.creditImageBackgroundColor
@@ -62,10 +62,13 @@ class CreditCell: UITableViewCell {
 
         creditImageView.kf.setImage(with: URL(string: viewData.creditImage ?? ""))
         creditNameLabel.text = viewData.creditName
-        creditRoleLabel.text = viewData.creditRole
-        
+        creditRoleLabel.text = viewData.creditRole.toDisplay
+        creditRoleLabel.accessibilityLabel = viewData.creditRole.toVocalize
+
         if let url = buttonURL, UIApplication.shared.canOpenURL(url) {
             creditLinkButton.isHidden = false
+            creditLinkButton.accessibilityLabel = Localization.A11y.VoiceOver.Credits.credit_button_label
+            creditLinkButton.accessibilityHint = Localization.A11y.VoiceOver.Credits.credit_button_hint
         } else {
             creditLinkButton.isHidden = true
         }

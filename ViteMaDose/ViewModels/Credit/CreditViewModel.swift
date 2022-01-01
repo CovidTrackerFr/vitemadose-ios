@@ -58,10 +58,31 @@ class CreditViewModel: CreditViewModelProvider {
 
         return CreditCellViewData(
             creditName: credit.shownName,
-            creditRole: credit.shownRole,
+            creditRole: DoubledString(toDisplay: pretty(toDiplay: credit.shownRole), toVocalize: pretty(toVocalize: credit.shownRole)),
             creditLink: URL(string: credit.site_web ?? credit.links?.first?.url ?? ""),
             creditImage: credit.photo
         )
+    }
+
+    /// Improves the role to have something with correct syntaxes
+    /// - Parameter role: The string to improve
+    /// - Returns: String
+    private func pretty(toDiplay role: String) -> String {
+        return role
+            .replacingOccurrences(of: "ios", with: "iOS")
+            .replacingOccurrences(of: "android", with: "Android")
+    }
+
+    /// Improves the role to have something with better vocalization with Voice Over
+    /// - Parameter role: The string to improve
+    /// - Returns: String
+    private func pretty(toVocalize role: String) -> String {
+        return role
+            .replacingOccurrences(of: "ios", with: "application iOS")
+            .replacingOccurrences(of: "android", with: "application Androïd") // Vocalization (╯°□°)╯︵ ┻━┻
+            .replacingOccurrences(of: "scrap", with: "analyse et traitement des données")
+            .replacingOccurrences(of: "infra", with: "infrastructure")
+            .replacingOccurrences(of: "web", with: "application web")
     }
 
     /// Keep unique `Credit` by filtering the givene `values` by `nom` properties
@@ -84,16 +105,6 @@ class CreditViewModel: CreditViewModelProvider {
         return unique
     }
 
-    private func handleLoad(with credits: [Credit]) {
-        let uniqueCredits = keepUnique(within: credits)
-        self.allCredits = uniqueCredits.sorted(by: { $0.shownName < $1.shownName })
-        delegate?.reloadTableView(with: uniqueCredits)
-    }
-
-    private func handleError(_ error: Error) {
-        delegate?.presentLoadError(error)
-    }
-
     func load() {
         guard !isLoading else { return }
         isLoading = true
@@ -109,5 +120,15 @@ class CreditViewModel: CreditViewModelProvider {
                 self.handleError(status)
             }
         }
+    }
+    
+    private func handleLoad(with credits: [Credit]) {
+        let uniqueCredits = keepUnique(within: credits)
+        self.allCredits = uniqueCredits.sorted(by: { $0.shownName < $1.shownName })
+        delegate?.reloadTableView(with: uniqueCredits)
+    }
+
+    private func handleError(_ error: Error) {
+        delegate?.presentLoadError(error)
     }
 }

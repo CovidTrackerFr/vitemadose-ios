@@ -24,6 +24,7 @@ struct Credit: Codable {
     var shownName: String {
         nom ?? pseudo ?? id ?? Localization.Credits.noName
     }
+
     var shownRole: String {
         teams?.joined(separator: ", ") ?? Localization.Credits.noRole
     }

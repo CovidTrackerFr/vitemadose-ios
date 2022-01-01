@@ -38,6 +38,8 @@
 "credits.main_title.highlightedText2" = "généreux contributeurs";
 "credits.no_name" = "Nom inconnu";
 "credits.no_role" = "Rôle inconnu";
+"a11y.voiceover.credits.credit_button.label" = "Profil";
+"a11y.voiceover.credits.credit_button.hint" = "Tappez deux fois pour accéder à son site web";
 
 // MARK: - Department Selection
 

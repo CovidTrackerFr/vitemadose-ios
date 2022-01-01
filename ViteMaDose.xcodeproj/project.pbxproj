@@ -16,6 +16,7 @@
 		516C10E4265E8EE70056CBB0 /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516C10DE265E8EE70056CBB0 /* SettingsViewController.storyboard */; };
 		516C10E5265E8EE70056CBB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */; };
 		516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */; };
+		51B778882780B6700064CC94 /* DoubledString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B778872780B6700064CC94 /* DoubledString.swift */; };
 		51C367CC2653AB9400ABB203 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 51C367CB2653AB9400ABB203 /* Settings.bundle */; };
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
@@ -165,6 +166,7 @@
 		516C10DE265E8EE70056CBB0 /* SettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
 		516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
+		51B778872780B6700064CC94 /* DoubledString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubledString.swift; sourceTree = "<group>"; };
 		51C367CB2653AB9400ABB203 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ViteMaDose/Settings.bundle; sourceTree = "<group>"; };
 		51FA546C2664D6EB0023CDD1 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				572B06482648107900BB04DB /* Logger.swift */,
+				51B778872780B6700064CC94 /* DoubledString.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1062,6 +1065,7 @@
 				DA68647B2627A1CA005B2AC2 /* AppAnalytics.swift in Sources */,
 				57C4017626235B6200EFFCA3 /* HomePartnersFooterView.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
+				51B778882780B6700064CC94 /* DoubledString.swift in Sources */,
 				57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */,
 				57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */,
 				57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */,
