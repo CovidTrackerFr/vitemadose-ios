@@ -1,0 +1,4237 @@
+{
+  "departement": "61",
+  "creneaux_quotidiens": [
+    {
+      "date": "2021-12-29",
+      "total": 0,
+      "creneaux_par_lieu": []
+    },
+    {
+      "date": "2021-12-30",
+      "total": 139,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 62
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 42
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 20
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 39
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 26
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 13
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 38
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 38
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2021-12-31",
+      "total": 0,
+      "creneaux_par_lieu": []
+    },
+    {
+      "date": "2022-01-01",
+      "total": 0,
+      "creneaux_par_lieu": []
+    },
+    {
+      "date": "2022-01-02",
+      "total": 0,
+      "creneaux_par_lieu": []
+    },
+    {
+      "date": "2022-01-03",
+      "total": 229,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib191735pid126904",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 16
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 102
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 68
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 34
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 48
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 32
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 63
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 42
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 21
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-04",
+      "total": 693,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 135
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 90
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 45
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 132
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 82
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 50
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 276
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 184
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 92
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 150
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 100
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 50
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-05",
+      "total": 729,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib2057pid167910",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 8
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 8
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 1
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 17
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 12
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 5
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 141
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 94
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 47
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 164
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 98
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 66
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 204
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 136
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 68
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 144
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 96
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 50
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 34
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-06",
+      "total": 1264,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 85
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 52
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 33
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib191735pid126904",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 8
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 8
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 114
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 76
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 38
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 144
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 96
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 190
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 102
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 88
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 423
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 282
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 141
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 174
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 116
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 58
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 126
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 84
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 42
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-07",
+      "total": 813,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 96
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 60
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 36
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 6
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 4
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib2057pid167910",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 2
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 51
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 34
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 17
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 132
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 88
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 44
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 145
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 67
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 135
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 90
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 45
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 153
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 102
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 51
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 93
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 62
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 31
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-08",
+      "total": 15,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib2057pid167910",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 6
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 3
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 3
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 3
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-09",
+      "total": 168,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 51
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 34
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 17
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 117
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 39
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-10",
+      "total": 603,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 2
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 10
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 10
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 96
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 131
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 52
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 79
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 216
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 108
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 108
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 114
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 57
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 57
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 34
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 17
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 17
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-11",
+      "total": 1001,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 68
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 68
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 118
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 59
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 59
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 142
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 71
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 71
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 165
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 60
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 105
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 304
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 152
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 152
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 116
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 58
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 58
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 88
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 44
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 44
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-12",
+      "total": 1255,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 3
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 70
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 70
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 139
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 70
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 69
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 168
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 112
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 56
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 254
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 136
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 10
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 108
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 474
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 316
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 158
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 147
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 98
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 49
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-13",
+      "total": 1606,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 18
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 12
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 67
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 67
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 232
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 116
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 116
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 174
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 116
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 58
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 218
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 133
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 85
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 267
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 148
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 119
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 474
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 316
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 158
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 156
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 104
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 52
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-14",
+      "total": 1234,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 9
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 3
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 61
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 61
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 142
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 71
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 71
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 171
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 114
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 57
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 179
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 113
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 66
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 213
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 120
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 93
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 354
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 236
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 118
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 105
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 70
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 35
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-15",
+      "total": 171,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 84
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 56
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 28
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 84
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 42
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 42
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 3
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 1
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-16",
+      "total": 501,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 153
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 102
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 51
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 348
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 232
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 116
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-17",
+      "total": 917,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 83
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 54
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 29
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 6
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 4
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 156
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 144
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 96
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 81
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 54
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 27
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 438
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 292
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 146
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 9
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 3
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-18",
+      "total": 990,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 220
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 144
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 76
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 9
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 3
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 218
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 109
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 109
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 159
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 106
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 53
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 87
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 58
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 29
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 270
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 180
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 90
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 27
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 18
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 9
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-19",
+      "total": 1068,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 218
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 144
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 74
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 18
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 12
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 200
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 100
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 100
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 75
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 50
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 25
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 132
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 60
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 42
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 30
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 375
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 250
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 125
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 2
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 2
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 48
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 32
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-20",
+      "total": 1151,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 215
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 142
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 73
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 24
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 8
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 240
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 120
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 120
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 144
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 96
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 234
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 156
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 246
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 164
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 82
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 48
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 32
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-21",
+      "total": 957,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 18
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 12
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 209
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 136
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 73
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 190
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 95
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 95
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 144
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 96
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 234
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 156
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 123
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 82
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 41
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 39
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 26
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 13
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-22",
+      "total": 102,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 102
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 51
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 51
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-23",
+      "total": 223,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 223
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 130
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 93
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-24",
+      "total": 880,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 12
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 76
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 38
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 38
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 198
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 99
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 99
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 156
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 96
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 310
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 155
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 155
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 32
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 16
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-25",
+      "total": 1252,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 161
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 82
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 79
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 86
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 43
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 43
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 9
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 3
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 226
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 113
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 113
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 200
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 100
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 100
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 112
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 56
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 56
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 338
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 169
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 169
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 120
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 60
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 60
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-26",
+      "total": 1279,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 234
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 156
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 78
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 78
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 52
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 26
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 9
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 6
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 3
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 210
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 105
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 105
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 258
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 172
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 86
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 72
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 24
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid179245",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 10
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 10
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 270
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 180
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 90
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 138
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 92
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 46
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-27",
+      "total": 1630,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 273
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 182
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 91
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 162
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 108
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 54
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 42
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 28
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 14
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 244
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 122
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 122
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 144
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 96
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 48
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 294
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 196
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 98
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 270
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 180
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 90
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 201
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 134
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 67
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2022-01-28",
+      "total": 1223,
+      "creneaux_par_lieu": [
+        {
+          "lieu": "doctolib242606pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 219
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 146
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 73
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 54
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 36
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 18
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib127110pid164580",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 12
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 8
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 4
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid163785",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 212
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 106
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 106
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164092",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 138
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 92
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 46
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164101",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 204
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 136
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 68
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib241635pid164122",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 270
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 180
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 90
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        },
+        {
+          "lieu": "doctolib240567pid214284",
+          "creneaux_par_tag": [
+            {
+              "tag": "all",
+              "creneaux": 114
+            },
+            {
+              "tag": "first_or_second_dose",
+              "creneaux": 76
+            },
+            {
+              "tag": "kids_first_dose",
+              "creneaux": 0
+            },
+            {
+              "tag": "third_dose",
+              "creneaux": 38
+            },
+            {
+              "tag": "unknown_dose",
+              "creneaux": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

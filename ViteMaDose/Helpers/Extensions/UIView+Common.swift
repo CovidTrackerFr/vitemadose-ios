@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  UIView+Common.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 07/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import UIKit
