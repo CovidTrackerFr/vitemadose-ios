@@ -46,7 +46,7 @@ private extension SettingsDataType {
         case .appSourceCode:
             imageName = "wand.and.stars"
         case .systemSettings:
-            imageName = "wrench.and.screwdriver.fill"
+            imageName = "wrench"
         }
 
         if let imageName = imageName, let image = UIImage(systemName: imageName, withConfiguration: configuration) {
