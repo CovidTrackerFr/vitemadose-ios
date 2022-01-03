@@ -66,6 +66,28 @@ enum OnboardingManager {
 
         page.appearance = appearance
         page.descriptionText = Localization.Onboarding.ThirdDosePage.description
+        page.actionButtonTitle = Localization.Onboarding.next_button
+        page.alternativeButton?.isHidden = true
+        page.isDismissable = false
+        page.actionHandler = { item in
+            item.manager?.displayNextItem()
+        }
+        page.next = settingsPage
+
+        return page
+    }()
+
+    static let settingsPage: BLTNPageItem = {
+        let page = BLTNPageItem(title: Localization.Onboarding.SettingsPage.title)
+        page.image = "📚".toImage(ofSize: 60)
+
+        let appearance = BLTNItemAppearance()
+        appearance.titleFontSize = Self.titleFontSize
+        appearance.descriptionFontSize = Self.descriptionFontSize
+        appearance.actionButtonColor = .royalBlue
+
+        page.appearance = appearance
+        page.descriptionText = Localization.Onboarding.SettingsPage.description
         page.actionButtonTitle = Localization.Onboarding.done_button
         page.alternativeButton?.isHidden = true
         page.isDismissable = false
