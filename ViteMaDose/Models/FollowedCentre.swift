@@ -16,6 +16,5 @@ public extension FollowedCentre {
     enum NotificationsType: String, Codable, Hashable {
         case none
         case all
-        case chronodoses
     }
 }

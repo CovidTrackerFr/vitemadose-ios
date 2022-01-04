@@ -83,10 +83,6 @@ extension VaccinationCentre {
             case to
             case total
         }
-
-        enum AppointmentScheduleKey {
-            static let chronoDose = "chronodose"
-        }
     }
 
 }
@@ -149,35 +145,11 @@ extension VaccinationCentre {
         )
     }
 
-    var hasChronoDose: Bool {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total,
-            chronoDosesCount > 0
-        else {
-            return false
-        }
-
-        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
-    }
-
     var vaccinesTypeText: String? {
         guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
             return nil
         }
         return vaccineType.joined(separator: String.commaWithSpace)
-    }
-
-    var chronoDosesCount: Int? {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let total = chronoDose?.total
-        else {
-            return nil
-        }
-        return total
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -190,10 +162,6 @@ extension VaccinationCentre {
             return false
         }
         return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
-    }
-
-    static var filteredByChronoDoses: (Self) -> Bool = {
-        return $0.hasChronoDose
     }
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {
