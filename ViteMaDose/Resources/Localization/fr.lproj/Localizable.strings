@@ -66,6 +66,13 @@
 "location.unavailable_name" = "Nom du centre indisponible";
 "location.unavailable_address" = "Adresse indisponible";
 
+// MARK: - Location Types
+
+"location.types.vaccination_center" = "Centre de vaccination";
+"location.types.drugstore" = "Pharmacie";
+"location.types.general_practicioner" = "Médecin généraliste";
+"location.types.medecin" = "Médecin";
+
 // MARK: - Location start following
 
 "location.start_following_title" = "Recevoir les notifications ?";

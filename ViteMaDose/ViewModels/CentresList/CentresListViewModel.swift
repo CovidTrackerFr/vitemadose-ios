@@ -171,6 +171,7 @@ class CentresListViewModel {
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
             vaccineTypesText: centre.vaccinesTypeText,
+            centerTypeText: centre.type?.localized,
             appointmentsCount: appointmentsCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,

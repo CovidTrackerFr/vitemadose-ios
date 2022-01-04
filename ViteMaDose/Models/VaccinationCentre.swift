@@ -10,7 +10,7 @@ import MapKit
 import PhoneNumberKit
 import SwiftDate
 
-// MARK: - VaccinationCentre
+// MARK: - Vaccination Centre
 
 public struct VaccinationCentre: Codable, Hashable, Identifiable {
     private let gid: String?
@@ -22,7 +22,7 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
     let metadata: Metadata?
     let prochainRdv: String?
     let plateforme: String?
-    let type: String?
+    let type: CentreType?
     let vaccineType: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
@@ -47,6 +47,9 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
 }
 
 extension VaccinationCentre {
+
+    // MARK: Location
+
     struct Location: Codable, Hashable {
         let longitude: Double?
         let latitude: Double?
@@ -59,6 +62,8 @@ extension VaccinationCentre {
         }
     }
 
+    // MARK: Metadata
+
     struct Metadata: Codable, Hashable {
         let address: String?
         let phoneNumber: String?
@@ -70,6 +75,8 @@ extension VaccinationCentre {
             case businessHours = "business_hours"
         }
     }
+
+    // MARK: Appointment Schedule
 
     struct AppointmentSchedule: Codable, Hashable {
         let name: String?
@@ -85,13 +92,54 @@ extension VaccinationCentre {
         }
     }
 
+    // MARK: Centre Type
+
+    public enum CentreType: String, Codable, Hashable {
+        case vaccinationCenter = "vaccination-center"
+        case drugstore = "drugstore"
+        case generalPractitioner = "general-practitioner"
+        case medecin = "medecin"
+
+        public init?(rawValue: String) {
+            switch rawValue {
+            case "vaccination-center":
+                self = .vaccinationCenter
+            case "drugstore":
+                self = .drugstore
+            case "general-practitioner":
+                self = .generalPractitioner
+            case "medecin":
+                self = .medecin
+            default:
+                assertionFailure("Received value '\(rawValue) but it's not managed")
+                return nil
+            }
+        }
+
+        var localized: String {
+            switch self {
+            case .vaccinationCenter:
+                return Localization.Location.Types.vaccination_center
+            case .drugstore:
+                return Localization.Location.Types.drugstore
+            case .generalPractitioner:
+                return Localization.Location.Types.general_practicioner
+            case .medecin:
+                return Localization.Location.Types.medecin
+            }
+        }
+    }
 }
+
+// MARK: Sequence of Vaccination Centre
 
 extension Sequence where Element == VaccinationCentre {
     var allAvailableCentresCount: Int {
         return reduce(0) { $0 + $1.isAvailable.intValue }
     }
 }
+
+// MARK: - Vaccination Centre - computed properties
 
 extension VaccinationCentre {
     var isAvailable: Bool {
@@ -194,7 +242,7 @@ extension VaccinationCentre {
     }
 }
 
-// MARK: - VaccinationCentres
+// MARK: - Vaccination Centres
 
 struct VaccinationCentres: Codable, Hashable {
     let lastUpdated: String?
@@ -226,6 +274,8 @@ struct VaccinationCentres: Codable, Hashable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
+
+// MARK: - Department Vaccination Centres
 
 typealias DepartmentVaccinationCentres = [VaccinationCentres]
 

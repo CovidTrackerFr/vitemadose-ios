@@ -17,6 +17,7 @@ protocol CentreViewDataProvider {
     var phoneText: String? { get }
     var bookingButtonText: String { get }
     var vaccineTypesText: String? { get }
+    var centerTypeText: String? { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var partnerLogo: UIImage? { get }
@@ -34,6 +35,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let phoneText: String?
     let bookingButtonText: String
     let vaccineTypesText: String?
+    let centerTypeText: String?
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
@@ -57,6 +59,9 @@ final class CentreCell: UITableViewCell {
 
     @IBOutlet weak private var vaccineTypesContainer: UIStackView!
     @IBOutlet weak private var vaccineTypesLabel: UILabel!
+
+    @IBOutlet weak private var centerTypeContainer: UIStackView!
+    @IBOutlet weak private var centerTypeLabel: UILabel!
 
     @IBOutlet weak private var appointmentsLabel: UILabel!
 
@@ -131,6 +136,12 @@ final class CentreCell: UITableViewCell {
         vaccineTypesLabel.text = viewData.vaccineTypesText
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
+
+        centerTypeContainer.isHidden = viewData.centerTypeText == nil
+        centerTypeLabel.text = viewData.centerTypeText
+        centerTypeLabel.font = Constant.labelPrimaryFont
+        centerTypeLabel.textColor = Constant.labelPrimaryColor
+
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
     }
 
@@ -351,6 +362,7 @@ final class CentreCell: UITableViewCell {
             addressLabel,
             phoneButton,
             vaccineTypesLabel,
+            centerTypeLabel,
             followCentreButton,
             bookingButton,
             appointmentsLabel
