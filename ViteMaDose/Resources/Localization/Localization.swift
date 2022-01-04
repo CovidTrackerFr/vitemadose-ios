@@ -28,6 +28,11 @@ enum Localization {
             static let title = "onboarding.thirddose_page.title".localized
             static let description = "onboarding.thirddose_page.description".localized
         }
+
+        enum SettingsPage {
+            static let title = "onboarding.settingspage.title".localized
+            static let description = "onboarding.settingspage.description".localized
+        }
     }
 
     enum Home {

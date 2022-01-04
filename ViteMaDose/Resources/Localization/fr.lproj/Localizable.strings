@@ -12,6 +12,8 @@
 "onboarding.notifications_page.description" = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités.";
 "onboarding.thirddose_page.title" = "Dose de rappel";
 "onboarding.thirddose_page.description" = "Vous pouvez désormais afficher les lieux de vaccination ayant des doses de rappel disponible.";
+"onboarding.settingspage.title" = "Envie d'en savoir plus ?";
+"onboarding.settingspage.description" = "Retrouvez différentes infos sur le projet via le menu des réglages. Contributeurs, site web, réseaux sociaux, code source... les curieuses et curieux seront ravis !";
 "onboarding.next_button" = "Suivant";
 "onboarding.done_button" = "Merci !";
 
