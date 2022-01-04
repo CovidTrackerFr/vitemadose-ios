@@ -371,7 +371,9 @@ extension CentresListViewController: UITableViewDelegate {
         }
     }
 
-    /// Prsentss an action sheet with filtering actions
+    /// Presents an action sheet with filtering actions for the given cell
+    /// - Parameter cell: The  `CentreActionCell` to use ffor the action button
+    // swiftlint:disable function_body_length
     private func presentFilterCentresBottomSheet(from cell: CentreActionCell) {
         let bottomSheet = UIAlertController(
             title: Localization.Locations.Filtering.title,
@@ -379,23 +381,57 @@ extension CentresListViewController: UITableViewDelegate {
             preferredStyle: .actionSheet
         )
 
+        // Actions about doses
         let kidsFirstDoseAction = UIAlertAction(title: Localization.Locations.Filtering.action_kids_doses, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .kidsFirstDoses)
         }
-
+        kidsFirstDoseAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_kids_doses
         let allDosesAction = UIAlertAction(title: Localization.Locations.Filtering.action_all_doses, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .allDoses)
         }
+        allDosesAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_all_doses
 
+        // Actions about vaccin types
+        let vaccineTypeModernaAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_moderna, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeModerna)
+        }
+        vaccineTypeModernaAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_moderna
+        let vaccineTypePfizerAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_pfizerbiontech, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypePfizer)
+        }
+        vaccineTypePfizerAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_pfizer
+        let vaccineTypeARNmAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_arnm, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeARNm)
+        }
+        vaccineTypeARNmAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_arnm
+        let vaccineTypeJanssenAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_janssen, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeJanssen)
+        }
+        vaccineTypeJanssenAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_janssen
+
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
+
+        // Add checkmark if previously selected
         switch viewModel.filterOption {
         case .allDoses:
             allDosesAction.setValue(true, forKey: "checked")
         case .kidsFirstDoses:
             kidsFirstDoseAction.setValue(true, forKey: "checked")
+        case .vaccineTypeModerna:
+            vaccineTypeModernaAction.setValue(true, forKey: "checked")
+        case .vaccineTypePfizer:
+            vaccineTypePfizerAction.setValue(true, forKey: "checked")
+        case .vaccineTypeARNm:
+            vaccineTypeARNmAction.setValue(true, forKey: "checked")
+        case .vaccineTypeJanssen:
+            vaccineTypeJanssenAction.setValue(true, forKey: "checked")
         }
 
-        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
-
+        // Bottom sheet definition
+        bottomSheet.addAction(vaccineTypeARNmAction)
+        bottomSheet.addAction(vaccineTypeJanssenAction)
+        bottomSheet.addAction(vaccineTypePfizerAction)
+        bottomSheet.addAction(vaccineTypeModernaAction)
         bottomSheet.addAction(kidsFirstDoseAction)
         bottomSheet.addAction(allDosesAction)
         bottomSheet.addAction(cancelAction)

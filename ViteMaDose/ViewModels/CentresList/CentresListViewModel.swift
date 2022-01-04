@@ -249,7 +249,7 @@ class CentresListViewModel {
         }
     }
 
-    // MARK: Get centres
+    // MARK: Get and ffitler vaccination centres and filter them
 
     /// Creates a list of vaccination centre sorted by distance
     /// Centres are also filtered by maximum distance from the selected location
@@ -258,19 +258,35 @@ class CentresListViewModel {
     /// - Returns: array of filtered and sorted centres
     internal func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
 
-        var resultCentres = [VaccinationCentre]()
-
         // If search result has no coordinates (department), sort options are not displayed and
         // centres are ordered by appointment time, with a filter for kids first doses if needed
         if searchResult?.coordinates == nil {
-            if filterOption == .kidsFirstDoses {
-                return filterWithDatedSlots(forAll: centres, andApply: { $0.slot.hasKidsFirstDoses })
-            } else {
+            switch filterOption {
+            case .kidsFirstDoses:
+                return filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasKidsFirstDoses })
+            case .vaccineTypeJanssen:
+                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.janssen.rawValue) })
+            case .vaccineTypeARNm:
+                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.arnm.rawValue) })
+            case .vaccineTypeModerna:
+                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.moderna.rawValue) })
+            case .vaccineTypePfizer:
+                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.pfizerBioNTech.rawValue) })
+            case .allDoses:
                 return centres.sorted(by: VaccinationCentre.sortedByAppointment)
             }
         }
 
-        // Sort centres (closest, fastests, with third dosse / booster shot)
+        // Sort and filter using the selected options
+        return filter(centres: sort(centres: centres))
+    }
+
+    /// Sorts and returns the  vaccination centres (closest, fastests, with third dose / booster shot) using the `sortOption`.
+    /// Is focused on the centre itself, i.e. closest, fasests or providing third doses.
+    /// - Parameter centres: The array of items to sort using the selected option
+    /// - Returns: The centres sorted by this option.
+    private func sort(centres: [VaccinationCentre]) -> [VaccinationCentre] {
+        var resultCentres = [VaccinationCentre]()
         switch sortOption {
         case .closest:
             if let searchResult = searchResult {
@@ -283,15 +299,29 @@ class CentresListViewModel {
         case .fastest:
             resultCentres = centres.sorted(by: VaccinationCentre.sortedByAppointment)
         case .thirdDose:
-            resultCentres = filterWithDatedSlots(forAll: centres, andApply: { $0.slot.hasThirdDoses })
+            resultCentres = filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasThirdDoses })
         }
+        return resultCentres
+    }
 
-        // Filter centres
+    /// Filters the given `centres` and return them using the defined `filterOption`.
+    /// Is focused on the type of doses (all oses of first kids doses) and also the vaccin types (e.g. Moderna)
+    /// - Parameter centres: The array of items to fitler using the selected option
+    /// - Returns: The centres filtered by this option.
+    private func filter(centres: [VaccinationCentre]) -> [VaccinationCentre] {
         switch filterOption {
         case .kidsFirstDoses:
-            return filterWithDatedSlots(forAll: resultCentres, andApply: { $0.slot.hasKidsFirstDoses })
+            return filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasKidsFirstDoses })
+        case .vaccineTypeModerna:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.moderna.rawValue) })
+        case .vaccineTypePfizer:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.pfizerBioNTech.rawValue) })
+        case .vaccineTypeARNm:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.arnm.rawValue) })
+        case .vaccineTypeJanssen:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.janssen.rawValue) })
         case .allDoses:
-            return resultCentres
+            return centres
         }
     }
 
@@ -299,19 +329,35 @@ class CentresListViewModel {
     /// the `condition` closure. Finaly sorts by appointment the centres.
     /// - Parameters:
     ///     - forAll: The centres to filter
-    ///     - andApply: The condition to apply to filter
+    ///     - onDatedSlots: The condition to apply to filter
     /// - Returns: The centres with existing dated slots matching the condition.
-    private func filterWithDatedSlots(forAll centres: [VaccinationCentre], andApply condition: ((DatedSlot) -> Bool)) -> [VaccinationCentre] {
+    private func filterWithDatedSlots(forAll centres: [VaccinationCentre], onDatedSlots applyCondition: ((DatedSlot) -> Bool)) -> [VaccinationCentre] {
         return centres.filter { centre in
             guard let datedSlotsForCentre = vaccinationCentresWithDatedSlots[centre] else {
                 return false
             }
-            return datedSlotsForCentre.contains(where: condition)
+            return datedSlotsForCentre.contains(where: applyCondition)
         }
         .sorted(by: VaccinationCentre.sortedByAppointment)
     }
 
-    // MARK: - Filter
+    /// Filters the given `centres` checking if there are ome wich fullfill the given `condition`.
+    /// Finaly sorts by appointment the centres.
+    /// - Parameters:
+    ///     - forAll: The centres to filter
+    ///     - onCentres: The condition to apply to filter
+    /// - Returns: The centres with existing dated slots matching the condition.
+    private func filterWithDatedSlots(forAll centres: [VaccinationCentre], onCentres applyCondition: ((VaccinationCentre) -> Bool)) -> [VaccinationCentre] {
+        return centres.filter { centre in
+            guard vaccinationCentresWithDatedSlots[centre] != nil else {
+                return false
+            }
+            return applyCondition(centre)
+        }
+        .sorted(by: VaccinationCentre.sortedByAppointment)
+    }
+
+    // MARK: - Filter List
 
     /// Filter the actual centres list by `type`
     /// - Parameter type: The filtering type
@@ -407,7 +453,7 @@ extension CentresListViewModel: CentresListViewModelProvider {
         vaccinationCentresList = getVaccinationCentres(for: allCentres)
     }
 
-    // MARK: Sort
+    // MARK: Sort Lists
 
     func sortList(by order: CentresListSortOption) {
         userDefaults.centresListSortOption = order

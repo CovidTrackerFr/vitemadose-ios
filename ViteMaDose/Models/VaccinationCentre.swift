@@ -23,7 +23,7 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
     let prochainRdv: String?
     let plateforme: String?
     let type: String?
-    let vaccineType: [String]?
+    let vaccineTypes: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
     public var id: String {
@@ -41,7 +41,7 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
         case prochainRdv = "prochain_rdv"
         case plateforme
         case type
-        case vaccineType = "vaccine_type"
+        case vaccineTypes = "vaccine_type"
         case appointmentSchedules = "appointment_schedules"
     }
 }
@@ -167,10 +167,10 @@ extension VaccinationCentre {
     }
 
     var vaccinesTypeText: String? {
-        guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
+        guard let vaccineTypes = vaccineTypes, !vaccineTypes.isEmpty else {
             return nil
         }
-        return vaccineType.joined(separator: String.commaWithSpace)
+        return vaccineTypes.joined(separator: String.commaWithSpace)
     }
 
     var chronoDosesCount: Int? {
@@ -227,6 +227,10 @@ extension VaccinationCentre {
         )
         guard let phoneNumber = parsedPhoneNumber else { return nil }
         return phoneNumberKit.format(phoneNumber, toType: .national)
+    }
+
+    func provideVaccine(type named: String) -> Bool {
+        return vaccineTypes?.contains(named) ?? false
     }
 }
 

@@ -12,9 +12,17 @@ public enum CentresListFilterOption {
 
     /// FIlter nothing, keep all centers
     case allDoses
-
-    /// Keep only ceentrs with kids first doses
+    /// Keep only centres with kids first doses
     case kidsFirstDoses
+
+    /// Vaccine type "Moderna"
+    case vaccineTypeModerna
+    /// Vaccine type "Pfizer"
+    case vaccineTypePfizer
+    /// Vaccine type "ARN-m"
+    case vaccineTypeARNm
+    /// Vaccine type "Janssen"
+    case vaccineTypeJanssen
 
     init(_ value: Int) {
         switch value {
@@ -22,8 +30,15 @@ public enum CentresListFilterOption {
             self = .allDoses
         case 1:
             self = .kidsFirstDoses
+        case 2:
+            self = .vaccineTypeModerna
+        case 3:
+            self = .vaccineTypePfizer
+        case 4:
+            self = .vaccineTypeARNm
+        case 5:
+            self = .vaccineTypeJanssen
         default:
-            assertionFailure("Value should either be 0 or 1")
             self = .allDoses
         }
     }
@@ -34,6 +49,14 @@ public enum CentresListFilterOption {
             return 0
         case .kidsFirstDoses:
             return 1
+        case .vaccineTypeModerna:
+            return 2
+        case .vaccineTypePfizer:
+            return 3
+        case .vaccineTypeARNm:
+            return 4
+        case .vaccineTypeJanssen:
+            return 5
         }
     }
 }

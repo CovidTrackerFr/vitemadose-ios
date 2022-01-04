@@ -42,7 +42,7 @@ enum AppAnalytics {
         let name = vaccinationCentre.nom.emptyIfNil.lowercased()
         let type = vaccinationCentre.type.emptyIfNil.lowercased()
         let platform = vaccinationCentre.plateforme.emptyIfNil.lowercased()
-        let vaccine = (vaccinationCentre.vaccineType?.joined(separator: ",").lowercased()).emptyIfNil
+        let vaccine = (vaccinationCentre.vaccineTypes?.joined(separator: ",").lowercased()).emptyIfNil
 
         Analytics.logEvent(eventName, parameters: [
             "rdv_departement": department,

@@ -21,6 +21,7 @@
 		51C367CC2653AB9400ABB203 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 51C367CB2653AB9400ABB203 /* Settings.bundle */; };
 		51C9791D278220450054A2EB /* CentreActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C9791B278220450054A2EB /* CentreActionCell.xib */; };
 		51C9791E278220450054A2EB /* CentreActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C9791C278220450054A2EB /* CentreActionCell.swift */; };
+		51E0CA472783CAC7004E0AF7 /* VaccineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0CA462783CAC7004E0AF7 /* VaccineType.swift */; };
 		51F7BFCF2780BFA50028BC89 /* UIContentSizeCategory+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F7BFCE2780BFA50028BC89 /* UIContentSizeCategory+Commons.swift */; };
 		5702B5D7263595FF00C51F47 /* HomeViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */; };
 		5702B5DB2635965C00C51F47 /* BaseAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702B5DA2635965C00C51F47 /* BaseAPIServiceMock.swift */; };
@@ -175,6 +176,7 @@
 		51C367CB2653AB9400ABB203 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ViteMaDose/Settings.bundle; sourceTree = "<group>"; };
 		51C9791B278220450054A2EB /* CentreActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CentreActionCell.xib; sourceTree = "<group>"; };
 		51C9791C278220450054A2EB /* CentreActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentreActionCell.swift; sourceTree = "<group>"; };
+		51E0CA462783CAC7004E0AF7 /* VaccineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineType.swift; sourceTree = "<group>"; };
 		51F7BFCE2780BFA50028BC89 /* UIContentSizeCategory+Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContentSizeCategory+Commons.swift"; sourceTree = "<group>"; };
 		51FA546C2664D6EB0023CDD1 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
 		5702B5D6263595FF00C51F47 /* HomeViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegateSpy.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				57CB253326460501004776CA /* FollowedCentre.swift */,
 				5753E6BB275BFD4B00C386EC /* DepartmentSlots.swift */,
 				5753E6BD275BFE0C00C386EC /* DailySlot.swift */,
+				51E0CA462783CAC7004E0AF7 /* VaccineType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				57954766263E1B2600AD5DFD /* GeoAPIService.swift in Sources */,
 				57673955261E4145004A700D /* ClassNameProtocol.swift in Sources */,
 				57C38B602627826B00FE63B0 /* NSTextAttachment+Commons.swift in Sources */,
+				51E0CA472783CAC7004E0AF7 /* VaccineType.swift in Sources */,
 				6AF7D48E26470677000E8042 /* LocationSearchHeaderView.swift in Sources */,
 				5793484C262241B900F8A4A0 /* Stats.swift in Sources */,
 				6AD0CC3A262EC82F001F8807 /* CreditHeaderView.swift in Sources */,
