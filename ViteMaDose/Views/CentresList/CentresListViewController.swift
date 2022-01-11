@@ -309,16 +309,9 @@ extension CentresListViewController: UITableViewDelegate {
             }
         }
 
-        let chronoDosesNotificationsAction = UIAlertAction(title: "Chronodoses uniquement", style: .default) { [weak self] _ in
-            self?.viewModel.requestNotificationsAuthorizationIfNeeded {
-                self?.viewModel.followCentre(at: indexPath, notificationsType: .chronodoses)
-            }
-        }
-
         let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
 
         bottomSheet.addAction(allNotificationsAction)
-        bottomSheet.addAction(chronoDosesNotificationsAction)
         bottomSheet.addAction(cancelAction)
         bottomSheet.popoverPresentationController?.sourceView = cell.followCentreButton
 
