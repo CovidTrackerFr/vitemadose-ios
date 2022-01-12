@@ -27,22 +27,9 @@ public enum CentresListFilterOption: Int, CaseIterable {
     case vaccineTypeNovavax
 
     public init?(rawValue: Int) {
-        switch rawValue {
-        case CentresListFilterOption.allDoses.rawValue:
-            self = .allDoses
-        case CentresListFilterOption.kidsFirstDoses.rawValue:
-            self = .kidsFirstDoses
-        case CentresListFilterOption.vaccineTypeModerna.rawValue:
-            self = .vaccineTypeModerna
-        case CentresListFilterOption.vaccineTypePfizer.rawValue:
-            self = .vaccineTypePfizer
-        case CentresListFilterOption.vaccineTypeARNm.rawValue:
-            self = .vaccineTypeARNm
-        case CentresListFilterOption.vaccineTypeJanssen.rawValue:
-            self = .vaccineTypeJanssen
-        case CentresListFilterOption.vaccineTypeNovavax.rawValue:
-            self = .vaccineTypeNovavax
-        default:
+        if let value = CentresListFilterOption.allCases.first(where: { $0.rawValue == rawValue }) {
+            self = value
+        } else {
             return nil
         }
     }
