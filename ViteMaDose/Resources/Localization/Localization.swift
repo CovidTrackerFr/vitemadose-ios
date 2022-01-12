@@ -139,6 +139,13 @@ enum Localization {
         static let stop_following_title = "location.stop_following_title".localized
         static let stop_following_message = "location.stop_following_message".localized
         static let stop_following_button = "location.stop_following_button".localized
+
+        enum Types {
+            static let vaccination_center = "location.types.vaccination_center".localized
+            static let drugstore = "location.types.drugstore".localized
+            static let general_practicioner = "location.types.general_practicioner".localized
+            static let medecin = "location.types.medecin".localized
+        }
     }
 
     enum Settings {

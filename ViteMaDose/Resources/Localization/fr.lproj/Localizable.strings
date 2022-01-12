@@ -71,10 +71,17 @@
 "location.unavailable_name" = "Nom du centre indisponible";
 "location.unavailable_address" = "Adresse indisponible";
 
+// MARK: - Location Types
+
+"location.types.vaccination_center" = "Centre de vaccination";
+"location.types.drugstore" = "Pharmacie";
+"location.types.general_practicioner" = "Médecin généraliste";
+"location.types.medecin" = "Médecin";
+
 // MARK: - Location start following
 
 "location.start_following_title" = "Recevoir les notifications ?";
-"location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilité ou seulement lorsque des Chronodoses sont disponibles pour ce centre.";
+"location.start_following_message" = "Vous pouvez choisir d'être notifié pour chaque changement de disponibilité";
 "location.follow_action_title" = "Suivre";
 "location.notify_button" = "Être notifié";
 "location.follow_button" = "Suivre sans notifications";

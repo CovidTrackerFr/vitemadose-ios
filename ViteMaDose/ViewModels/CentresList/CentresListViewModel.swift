@@ -180,11 +180,11 @@ class CentresListViewModel {
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
             vaccineTypesTexts: centre.vaccinesTypeTexts,
+            centerTypeText: centre.type?.localized,
             appointmentsCount: appointmentsCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
             partnerName: centre.plateforme,
-            isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
         )
     }
@@ -485,15 +485,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        var chronoDosesOnly = false
-        if case .chronodoses = followedCentre.notificationsType {
-            chronoDosesOnly = true
-        }
-
         FCMHelper.shared.subscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId,
-            chronoDosesOnly: chronoDosesOnly
+            andCentreId: internalId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -526,15 +520,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        var chronoDosesOnly = false
-        if case .chronodoses = followedCentre.notificationsType {
-            chronoDosesOnly = true
-        }
-
         FCMHelper.shared.unsubscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId,
-            chronoDosesOnly: chronoDosesOnly
+            andCentreId: internalId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {

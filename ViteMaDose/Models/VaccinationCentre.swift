@@ -22,7 +22,7 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
     let metadata: Metadata?
     let prochainRdv: String?
     let plateforme: String?
-    let type: String?
+    let type: CentreType?
     let vaccineTypes: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
@@ -47,6 +47,9 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
 }
 
 extension VaccinationCentre {
+
+    // MARK: Location
+
     struct Location: Codable, Hashable {
         let longitude: Double?
         let latitude: Double?
@@ -58,6 +61,8 @@ extension VaccinationCentre {
             case city
         }
     }
+
+    // MARK: Metadata
 
     struct Metadata: Codable, Hashable {
         let address: String?
@@ -71,6 +76,8 @@ extension VaccinationCentre {
         }
     }
 
+    // MARK: Appointment Schedule
+
     struct AppointmentSchedule: Codable, Hashable {
         let name: String?
         let from: String?
@@ -83,12 +90,45 @@ extension VaccinationCentre {
             case to
             case total
         }
-
-        enum AppointmentScheduleKey {
-            static let chronoDose = "chronodose"
-        }
     }
 
+    // MARK: Centre Type
+
+    public enum CentreType: String, Codable, Hashable {
+        case vaccinationCenter = "vaccination-center"
+        case drugstore = "drugstore"
+        case generalPractitioner = "general-practitioner"
+        case medecin = "medecin"
+
+        public init?(rawValue: String) {
+            switch rawValue {
+            case "vaccination-center":
+                self = .vaccinationCenter
+            case "drugstore":
+                self = .drugstore
+            case "general-practitioner":
+                self = .generalPractitioner
+            case "medecin":
+                self = .medecin
+            default:
+                assertionFailure("Received value '\(rawValue) but it's not managed")
+                return nil
+            }
+        }
+
+        var localized: String {
+            switch self {
+            case .vaccinationCenter:
+                return Localization.Location.Types.vaccination_center
+            case .drugstore:
+                return Localization.Location.Types.drugstore
+            case .generalPractitioner:
+                return Localization.Location.Types.general_practicioner
+            case .medecin:
+                return Localization.Location.Types.medecin
+            }
+        }
+    }
 }
 
 // MARK: - Sequence of Vaccination Centre
@@ -153,19 +193,6 @@ extension VaccinationCentre {
         )
     }
 
-    var hasChronoDose: Bool {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total,
-            chronoDosesCount > 0
-        else {
-            return false
-        }
-
-        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
-    }
-
     var vaccinesTypeTexts: DoubledString {
         guard let vaccineTypes = vaccineTypes, !vaccineTypes.isEmpty else {
             return DoubledString(toDisplay: nil, toVocalize: nil)
@@ -175,17 +202,6 @@ extension VaccinationCentre {
             VaccineType.init(rawValue: vaccineType)?.vocalizable ?? vaccineType
         }.joined(separator: String.commaWithSpace)
         return DoubledString(toDisplay: toDisplay, toVocalize: toVocalize)
-    }
-
-    var chronoDosesCount: Int? {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let total = chronoDose?.total
-        else {
-            return nil
-        }
-        return total
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -198,10 +214,6 @@ extension VaccinationCentre {
             return false
         }
         return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
-    }
-
-    static var filteredByChronoDoses: (Self) -> Bool = {
-        return $0.hasChronoDose
     }
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {
@@ -270,6 +282,8 @@ struct VaccinationCentres: Codable, Hashable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
+// MARK: - Department Vaccination Centres
+
 // MARK: - Department Vaccination Centres
 
 typealias DepartmentVaccinationCentres = [VaccinationCentres]

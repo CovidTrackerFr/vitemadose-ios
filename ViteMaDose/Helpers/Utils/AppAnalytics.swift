@@ -40,7 +40,7 @@ enum AppAnalytics {
         let eventName = "rdv_click" // TODO 1.4.1: Re-implement `rdv_verify`
         let department = vaccinationCentre.departement.emptyIfNil.lowercased()
         let name = vaccinationCentre.nom.emptyIfNil.lowercased()
-        let type = vaccinationCentre.type.emptyIfNil.lowercased()
+        let type = vaccinationCentre.type?.rawValue.lowercased() ?? ""
         let platform = vaccinationCentre.plateforme.emptyIfNil.lowercased()
         let vaccine = (vaccinationCentre.vaccineTypes?.joined(separator: ",").lowercased()).emptyIfNil
 
