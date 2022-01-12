@@ -95,23 +95,23 @@ extension VaccinationCentre {
     // MARK: Centre Type
 
     public enum CentreType: String, Codable, Hashable {
-        case vaccinationCenter = "vaccination-center"
-        case drugstore = "drugstore"
-        case generalPractitioner = "general-practitioner"
-        case medecin = "medecin"
+        case vaccinationCenter
+        case drugstore
+        case generalPractitioner
+        case medecin
 
         public init?(rawValue: String) {
             switch rawValue {
             case "vaccination-center":
                 self = .vaccinationCenter
-            case "drugstore":
+            case "drugstore", "pharmacie":
                 self = .drugstore
             case "general-practitioner":
                 self = .generalPractitioner
             case "medecin":
                 self = .medecin
             default:
-                assertionFailure("Received value '\(rawValue) but it's not managed")
+                Log.w("Received value '\(rawValue) but it's not managed")
                 return nil
             }
         }
