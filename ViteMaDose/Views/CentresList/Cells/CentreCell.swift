@@ -141,6 +141,7 @@ final class CentreCell: UITableViewCell {
         centerTypeLabel.text = viewData.centerTypeText
         centerTypeLabel.font = Constant.labelPrimaryFont
         centerTypeLabel.textColor = Constant.labelPrimaryColor
+        centerTypeLabel.numberOfLines = .zero
 
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
     }
