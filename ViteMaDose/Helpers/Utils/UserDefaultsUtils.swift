@@ -78,17 +78,17 @@ extension UserDefaults {
         }
     }
 
-    // MARK: - Centres List Filteer Option
+    // MARK: - Centres List Filter Option
 
     var centresListFilterOption: CentresListFilterOption {
         get {
             guard let savedIndex = value(forKey: Key.centresListFilterOption.rawValue) as? Int else {
                 return .allDoses
             }
-            return CentresListFilterOption(savedIndex)
+            return CentresListFilterOption(rawValue: savedIndex) ?? .allDoses
         }
         set {
-            setValue(newValue.index, forKey: Key.centresListFilterOption.rawValue)
+            setValue(newValue.rawValue, forKey: Key.centresListFilterOption.rawValue)
         }
     }
 

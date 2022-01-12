@@ -40,7 +40,7 @@ class CentresListViewController: UIViewController, Storyboarded {
 
     private lazy var dataSource = makeDataSource()
 
-    // MARK: View Did
+    // MARK: View Did Load and Appear
 
     override func viewDidLoad() {
         super.viewDidLoad()

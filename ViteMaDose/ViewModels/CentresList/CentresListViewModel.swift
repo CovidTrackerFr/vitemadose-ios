@@ -249,7 +249,7 @@ class CentresListViewModel {
         }
     }
 
-    // MARK: Get and ffitler vaccination centres and filter them
+    // MARK: Get vaccination centres and filter them
 
     /// Creates a list of vaccination centre sorted by distance
     /// Centres are also filtered by maximum distance from the selected location

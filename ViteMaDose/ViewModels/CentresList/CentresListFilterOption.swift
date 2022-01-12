@@ -8,7 +8,7 @@
 import Foundation
 
 /// Available filtering options for centres list
-public enum CentresListFilterOption {
+public enum CentresListFilterOption: Int, CaseIterable {
 
     /// FIlter nothing, keep all centers
     case allDoses
@@ -26,43 +26,24 @@ public enum CentresListFilterOption {
     /// Vaccine type "Novavax"
     case vaccineTypeNovavax
 
-    init(_ value: Int) {
-        switch value {
-        case 0:
+    public init?(rawValue: Int) {
+        switch rawValue {
+        case CentresListFilterOption.allDoses.rawValue:
             self = .allDoses
-        case 1:
+        case CentresListFilterOption.kidsFirstDoses.rawValue:
             self = .kidsFirstDoses
-        case 2:
+        case CentresListFilterOption.vaccineTypeModerna.rawValue:
             self = .vaccineTypeModerna
-        case 3:
+        case CentresListFilterOption.vaccineTypePfizer.rawValue:
             self = .vaccineTypePfizer
-        case 4:
+        case CentresListFilterOption.vaccineTypeARNm.rawValue:
             self = .vaccineTypeARNm
-        case 5:
+        case CentresListFilterOption.vaccineTypeJanssen.rawValue:
             self = .vaccineTypeJanssen
-        case 6:
+        case CentresListFilterOption.vaccineTypeNovavax.rawValue:
             self = .vaccineTypeNovavax
         default:
-            self = .allDoses
-        }
-    }
-
-    var index: Int {
-        switch self {
-        case .allDoses:
-            return 0
-        case .kidsFirstDoses:
-            return 1
-        case .vaccineTypeModerna:
-            return 2
-        case .vaccineTypePfizer:
-            return 3
-        case .vaccineTypeARNm:
-            return 4
-        case .vaccineTypeJanssen:
-            return 5
-        case .vaccineTypeNovavax:
-            return 6
+            return nil
         }
     }
 }
