@@ -116,6 +116,7 @@ enum Localization {
             static let vaccine_type_janssen = "location.filtering.action.vaccine_type_janssen".localized
             static let vaccine_type_arnm = "location.filtering.action.vaccine_type_arnm".localized
             static let vaccine_type_novavax = "location.filtering.action.vaccine_type_novavax".localized
+            static let vaccine_type = "location.filtering.action.vaccine_type".localized
         }
     }
 
@@ -214,11 +215,7 @@ enum Localization {
             enum Locations {
                 static let search = "a11y.voiceover.locations.search".localized
                 static let see_places = "a11y.voiceover.locations.see_places".localized
-                static let filtering_action_vaccine_type_novavax = "a11y.voiceover.locations.filtering.action.vaccine_type_novavax".localized
-                static let filtering_action_vaccine_type_moderna = "a11y.voiceover.locations.filtering.action.vaccine_type_moderna".localized
-                static let filtering_action_vaccine_type_pfizer = "a11y.voiceover.locations.filtering.action.vaccine_type_pfizerbiontech".localized
-                static let filtering_action_vaccine_type_janssen = "a11y.voiceover.locations.filtering.action.vaccine_type_janssen".localized
-                static let filtering_action_vaccine_type_arnm = "a11y.voiceover.locations.filtering.action.vaccine_type_arnm".localized
+                static let filtering_action_vaccine_type = "a11y.voiceover.locations.filtering.action.vaccine_type".localized
                 static let filtering_action_vaccine_type_kids_doses = "a11y.voiceover.locations.filtering.action.kids_doses".localized
                 static let filtering_action_vaccine_type_all_doses = "a11y.voiceover.locations.filtering.action.all_doses".localized
             }

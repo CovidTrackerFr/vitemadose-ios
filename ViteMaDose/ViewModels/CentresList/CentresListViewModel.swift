@@ -179,7 +179,7 @@ class CentresListViewModel {
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
-            vaccineTypesText: centre.vaccinesTypeText,
+            vaccineTypesTexts: centre.vaccinesTypeTexts,
             appointmentsCount: appointmentsCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,

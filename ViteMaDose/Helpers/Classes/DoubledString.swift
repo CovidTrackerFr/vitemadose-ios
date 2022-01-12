@@ -10,7 +10,7 @@ import Foundation
 /// Allows to gather two strings in one `Hashable` object
 struct DoubledString: Hashable {
     /// The string which can be displayed in the GUI
-    let toDisplay: String
+    let toDisplay: String?
     /// The string which can be vocalized with VoiceOver
-    let toVocalize: String
+    let toVocalize: String?
 }

@@ -395,27 +395,27 @@ extension CentresListViewController: UITableViewDelegate {
         let vaccineTypeModernaAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_moderna, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypeModerna)
         }
-        vaccineTypeModernaAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_moderna
+        vaccineTypeModernaAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.moderna.vocalizable)
 
         let vaccineTypePfizerAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_pfizerbiontech, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypePfizer)
         }
-        vaccineTypePfizerAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_pfizer
+        vaccineTypePfizerAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.pfizerBioNTech.vocalizable)
 
         let vaccineTypeARNmAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_arnm, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypeARNm)
         }
-        vaccineTypeARNmAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_arnm
+        vaccineTypeARNmAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.arnm.vocalizable)
 
         let vaccineTypeJanssenAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_janssen, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypeJanssen)
         }
-        vaccineTypeJanssenAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_janssen
+        vaccineTypeJanssenAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.janssen.vocalizable)
 
         let vaccineTypeNovavaxAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_novavax, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypeNovavax)
         }
-        vaccineTypeNovavaxAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_novavax
+        vaccineTypeNovavaxAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.novavax.vocalizable)
 
         let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
 

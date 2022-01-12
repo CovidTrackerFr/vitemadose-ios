@@ -16,7 +16,7 @@ protocol CentreViewDataProvider {
     var addressText: String? { get }
     var phoneText: String? { get }
     var bookingButtonText: String { get }
-    var vaccineTypesText: String? { get }
+    var vaccineTypesTexts: DoubledString { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var partnerLogo: UIImage? { get }
@@ -34,7 +34,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let addressText: String?
     let phoneText: String?
     let bookingButtonText: String
-    let vaccineTypesText: String?
+    let vaccineTypesTexts: DoubledString
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
@@ -133,8 +133,8 @@ final class CentreCell: UITableViewCell {
         )
         addressNameContainer.addGestureRecognizer(addressTapGesture)
 
-        vaccineTypesContainer.isHidden = viewData.vaccineTypesText == nil
-        vaccineTypesLabel.text = viewData.vaccineTypesText
+        vaccineTypesContainer.isHidden = viewData.vaccineTypesTexts.toDisplay == nil
+        vaccineTypesLabel.text = viewData.vaccineTypesTexts.toDisplay
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
@@ -363,7 +363,7 @@ final class CentreCell: UITableViewCell {
             }
         }
 
-        if let vaccineName = viewData.vaccineTypesText {
+        if let vaccineName = viewData.vaccineTypesTexts.toVocalize {
             vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
         }
 

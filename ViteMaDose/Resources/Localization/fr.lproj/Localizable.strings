@@ -125,12 +125,7 @@
 "a11y.voiceover.locations.filtering.action.vaccine_type_moderna" = "Lieux de vaccination proposant des vaccins Moderna";
 "a11y.voiceover.locations.filtering.action.kids_doses" = "Lieux de vaccination proposant des doses spécifiques pour les enfants";
 "a11y.voiceover.locations.filtering.action.all_doses" = "Pas de critère particulier, peu importe les vaccins et les doses";
-
-// (ﾉಥ益ಥ）ﾉ﻿ ┻━┻  (yes, it works)
-"a11y.voiceover.locations.filtering.action.vaccine_type_pfizerbiontech" = "Lieux de vaccination proposant des vaccins p'faille zeure bio haine teck";
-"a11y.voiceover.locations.filtering.action.vaccine_type_janssen" = "Lieux de vaccination proposant des vaccins géne saine";
-"a11y.voiceover.locations.filtering.action.vaccine_type_arnm" = "Lieux de vaccination proposant des vaccins a-r-n-m";
-"a11y.voiceover.locations.filtering.action.vaccine_type_novavax" = "Lieux de vaccination proposant des vaccins Novavax";
+"a11y.voiceover.locations.filtering.action.vaccine_type" = "Lieux de vaccination proposant des vaccins %@";
 
 "a11y.voiceover.details.from" = "à partir de";
 "a11y.voiceover.details.call" = "Appeler au ";

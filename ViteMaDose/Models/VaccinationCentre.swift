@@ -166,11 +166,15 @@ extension VaccinationCentre {
         return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
     }
 
-    var vaccinesTypeText: String? {
+    var vaccinesTypeTexts: DoubledString {
         guard let vaccineTypes = vaccineTypes, !vaccineTypes.isEmpty else {
-            return nil
+            return DoubledString(toDisplay: nil, toVocalize: nil)
         }
-        return vaccineTypes.joined(separator: String.commaWithSpace)
+        let toDisplay = vaccineTypes.joined(separator: String.commaWithSpace)
+        let toVocalize = vaccineTypes.map { vaccineType in
+            VaccineType.init(rawValue: vaccineType)?.vocalizable ?? vaccineType
+        }.joined(separator: String.commaWithSpace)
+        return DoubledString(toDisplay: toDisplay, toVocalize: toVocalize)
     }
 
     var chronoDosesCount: Int? {

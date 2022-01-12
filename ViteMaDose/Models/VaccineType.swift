@@ -14,3 +14,22 @@ public enum VaccineType: String, Codable {
     case pfizerBioNTech = "Pfizer-BioNTech"
     case moderna = "Moderna"
 }
+
+extension VaccineType {
+
+    /// Content which can be vocalized in french with the expected prosody
+    var vocalizable: String { // (ﾉಥ益ಥ）ﾉ﻿ ┻━┻  (yes, it works)
+        switch self {
+        case .arnm:
+            return "a-r-n-m"
+        case .novavax:
+            return "Novavax"
+        case .janssen:
+            return "géne saine"
+        case .pfizerBioNTech:
+            return "p'faille zeure bio haine teck"
+        case .moderna:
+            return "Moderna"
+        }
+    }
+}
