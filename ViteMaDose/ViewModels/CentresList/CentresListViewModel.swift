@@ -251,36 +251,12 @@ class CentresListViewModel {
 
     // MARK: Get vaccination centres and filter them
 
-    /// Creates a list of vaccination centre sorted by distance
-    /// Centres are also filtered by maximum distance from the selected location
-    /// The maximum distance value is set in our remote config file
+    /// Sorts then filters the centres using sort and filteer options and ddated slots.
+    /// The maximum distance value is set in our remote config file.
     /// - Parameter centres: a list of vaccination centres returned by the API
     /// - Returns: array of filtered and sorted centres
     internal func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
-
-        // If search result has no coordinates (department), sort options are not displayed and
-        // centres are ordered by appointment time, with a filter for kids first doses if needed
-        if searchResult?.coordinates == nil {
-            switch filterOption {
-            case .kidsFirstDoses:
-                return filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasKidsFirstDoses })
-            case .vaccineTypeNovavax:
-                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.novavax.rawValue) })
-            case .vaccineTypeJanssen:
-                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.janssen.rawValue) })
-            case .vaccineTypeARNm:
-                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.arnm.rawValue) })
-            case .vaccineTypeModerna:
-                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.moderna.rawValue) })
-            case .vaccineTypePfizer:
-                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.pfizerBioNTech.rawValue) })
-            case .allDoses:
-                return centres.sorted(by: VaccinationCentre.sortedByAppointment)
-            }
-        }
-
-        // Sort and filter using the selected options
-        return filter(centres: sort(centres: centres))
+        return sort(centres: filter(centres: centres))
     }
 
     /// Sorts and returns the  vaccination centres (closest, fastests, with third dose / booster shot) using the `sortOption`.

@@ -62,7 +62,7 @@ final class CentresSortOptionsCell: UITableViewCell {
             }
             sortSegmentedControl.setEnabled(false, forSegmentAt: CentresListSortOption.thirdDose.index)
 
-        // Select the suitable segment and ensure to have alwats the "third dose" segment enabled.
+        // Select the suitable segment and ensure to have always the "third dose" segment enabled.
         } else {
             sortSegmentedControl.selectedSegmentIndex = viewData.sortOption.index
             sortSegmentedControl.setEnabled(true, forSegmentAt: CentresListSortOption.thirdDose.index)
