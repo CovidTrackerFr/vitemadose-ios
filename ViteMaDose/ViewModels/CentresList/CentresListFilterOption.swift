@@ -23,6 +23,8 @@ public enum CentresListFilterOption {
     case vaccineTypeARNm
     /// Vaccine type "Janssen"
     case vaccineTypeJanssen
+    /// Vaccine type "Novavax"
+    case vaccineTypeNovavax
 
     init(_ value: Int) {
         switch value {
@@ -38,6 +40,8 @@ public enum CentresListFilterOption {
             self = .vaccineTypeARNm
         case 5:
             self = .vaccineTypeJanssen
+        case 6:
+            self = .vaccineTypeNovavax
         default:
             self = .allDoses
         }
@@ -57,6 +61,8 @@ public enum CentresListFilterOption {
             return 4
         case .vaccineTypeJanssen:
             return 5
+        case .vaccineTypeNovavax:
+            return 6
         }
     }
 }

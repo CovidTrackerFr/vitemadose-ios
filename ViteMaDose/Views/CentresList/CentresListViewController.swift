@@ -396,18 +396,26 @@ extension CentresListViewController: UITableViewDelegate {
             self?.viewModel.filterList(by: .vaccineTypeModerna)
         }
         vaccineTypeModernaAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_moderna
+
         let vaccineTypePfizerAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_pfizerbiontech, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypePfizer)
         }
         vaccineTypePfizerAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_pfizer
+
         let vaccineTypeARNmAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_arnm, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypeARNm)
         }
         vaccineTypeARNmAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_arnm
+
         let vaccineTypeJanssenAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_janssen, style: .default) { [weak self] _ in
             self?.viewModel.filterList(by: .vaccineTypeJanssen)
         }
         vaccineTypeJanssenAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_janssen
+
+        let vaccineTypeNovavaxAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_novavax, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeNovavax)
+        }
+        vaccineTypeNovavaxAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_novavax
 
         let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
 
@@ -425,10 +433,13 @@ extension CentresListViewController: UITableViewDelegate {
             vaccineTypeARNmAction.setValue(true, forKey: "checked")
         case .vaccineTypeJanssen:
             vaccineTypeJanssenAction.setValue(true, forKey: "checked")
+        case .vaccineTypeNovavax:
+            vaccineTypeNovavaxAction.setValue(true, forKey: "checked")
         }
 
         // Bottom sheet definition
         bottomSheet.addAction(vaccineTypeARNmAction)
+        bottomSheet.addAction(vaccineTypeNovavaxAction)
         bottomSheet.addAction(vaccineTypeJanssenAction)
         bottomSheet.addAction(vaccineTypePfizerAction)
         bottomSheet.addAction(vaccineTypeModernaAction)

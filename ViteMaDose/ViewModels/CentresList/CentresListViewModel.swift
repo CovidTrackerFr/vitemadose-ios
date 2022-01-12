@@ -264,6 +264,8 @@ class CentresListViewModel {
             switch filterOption {
             case .kidsFirstDoses:
                 return filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasKidsFirstDoses })
+            case .vaccineTypeNovavax:
+                return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.novavax.rawValue) })
             case .vaccineTypeJanssen:
                 return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.janssen.rawValue) })
             case .vaccineTypeARNm:
@@ -320,6 +322,8 @@ class CentresListViewModel {
             return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.arnm.rawValue) })
         case .vaccineTypeJanssen:
             return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.janssen.rawValue) })
+        case .vaccineTypeNovavax:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.novavax.rawValue) })
         case .allDoses:
             return centres
         }

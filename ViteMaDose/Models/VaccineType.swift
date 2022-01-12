@@ -9,6 +9,7 @@ import Foundation
 
 public enum VaccineType: String, Codable {
     case arnm = "ARNm"
+    case novavax = "Novavax"
     case janssen = "Janssen"
     case pfizerBioNTech = "Pfizer-BioNTech"
     case moderna = "Moderna"
