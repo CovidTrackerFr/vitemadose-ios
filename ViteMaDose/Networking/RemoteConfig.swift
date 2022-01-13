@@ -73,8 +73,14 @@ extension RemoteConfiguration {
         }
     }
 
+    /// If the user has defined a maximal radius in the app settings, returns it.
+    /// Otherwise returns the value from the remote configuration.
     var vaccinationCentresListRadiusInKm: NSNumber {
-        return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
+        guard case let maxDistanceInAppSettings = UserDefaults.shared.maxDistanceToVaccinationCentre,
+              maxDistanceInAppSettings > 0 else {
+            return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
+        }
+        return NSNumber(value: maxDistanceInAppSettings)
     }
 
     var vaccinationCentresListRadiusInMeters: Double {
