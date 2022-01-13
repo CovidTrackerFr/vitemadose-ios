@@ -64,7 +64,7 @@ class CreditViewModel: CreditViewModelProvider {
 
         return CreditCellViewData(
             creditName: credit.shownName,
-            creditRole: DoubledString(toDisplay: pretty(toDiplay: credit.shownRole), toVocalize: pretty(toVocalize: credit.shownRole)),
+            creditRole: AccessibilityString(rawValue: pretty(toDiplay: credit.shownRole), vocalizedValue: pretty(toVocalize: credit.shownRole)),
             creditLink: URL(string: credit.site_web ?? credit.links?.first?.url ?? ""),
             creditImage: credit.photo
         )

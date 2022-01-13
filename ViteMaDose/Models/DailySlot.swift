@@ -10,7 +10,6 @@ import Foundation
 // MARK: - Daily Slot
 
 public struct DailySlot: Codable {
-
     // Date in yyyy-mm-dd format when there are daily slots
     let date: String?
     /// Total count of available slots
@@ -24,7 +23,7 @@ public struct DailySlot: Codable {
     }
 }
 
-// MARK: - SlotsPerCategory
+// MARK: - Slots Per Category
 
 public struct SlotsPerCategory: Codable {
     let category: Category?
@@ -64,6 +63,11 @@ extension Slot {
     /// - Returns Bool: True if this `Slot` contains a booster shot tag with a positive number of slots ; false otherwise
     var hasThirdDoses: Bool {
         return dosesCount(for: .thirdDose) > 0
+    }
+
+    /// - Returns Bool: True if this `Slot` contains a first dose for kids tag with a positive number of slots ; false otherwise
+    var hasKidsFirstDoses: Bool {
+        return dosesCount(for: .kidsFirstDose) > 0
     }
 
     func dosesCount(for category: SlotsPerCategory.Category) -> Int {

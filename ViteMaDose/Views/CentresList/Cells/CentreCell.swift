@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - CentreViewDataProvider
+// MARK: - Centre View Data Provider
 
 protocol CentreViewDataProvider {
     var dayText: String? { get }
@@ -16,7 +16,7 @@ protocol CentreViewDataProvider {
     var addressText: String? { get }
     var phoneText: String? { get }
     var bookingButtonText: String { get }
-    var vaccineTypesText: String? { get }
+    var vaccineTypesTexts: AccessibilityString { get }
     var centerTypeText: String? { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
@@ -24,7 +24,7 @@ protocol CentreViewDataProvider {
     var notificationsType: FollowedCentre.NotificationsType? { get }
 }
 
-// MARK: - CentreViewData
+// MARK: - Centre View Data
 
 public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     public let id: String
@@ -34,7 +34,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let addressText: String?
     let phoneText: String?
     let bookingButtonText: String
-    let vaccineTypesText: String?
+    let vaccineTypesTexts: AccessibilityString
     let centerTypeText: String?
     let appointmentsCount: Int?
     let isAvailable: Bool
@@ -43,7 +43,7 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let notificationsType: FollowedCentre.NotificationsType?
 }
 
-// MARK: - CentreCell
+// MARK: - Centre Cell
 
 final class CentreCell: UITableViewCell {
 
@@ -132,8 +132,8 @@ final class CentreCell: UITableViewCell {
         )
         addressNameContainer.addGestureRecognizer(addressTapGesture)
 
-        vaccineTypesContainer.isHidden = viewData.vaccineTypesText == nil
-        vaccineTypesLabel.text = viewData.vaccineTypesText
+        vaccineTypesContainer.isHidden = viewData.vaccineTypesTexts.rawValue.isEmpty
+        vaccineTypesLabel.text = viewData.vaccineTypesTexts.rawValue
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
 
@@ -353,7 +353,7 @@ final class CentreCell: UITableViewCell {
             }
         }
 
-        if let vaccineName = viewData.vaccineTypesText {
+        if let vaccineName = viewData.vaccineTypesTexts.vocalizedValue {
             vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
         }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+///  All the sort options for vaccination centres, used only in `CentresSortOptionCell` for segmented controls.
 public enum CentresListSortOption: Equatable {
     case closest
     case fastest
@@ -21,8 +22,7 @@ public enum CentresListSortOption: Equatable {
         case 2:
             self = .thirdDose
         default:
-            assertionFailure("Value should either be 0, 1 or 2")
-            self = .closest
+            self = .fastest // We assume to fallback always in the 2nd segment
         }
     }
 

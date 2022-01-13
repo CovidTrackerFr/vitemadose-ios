@@ -23,7 +23,7 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
     let prochainRdv: String?
     let plateforme: String?
     let type: CentreType?
-    let vaccineType: [String]?
+    let vaccineTypes: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
     public var id: String {
@@ -41,7 +41,7 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
         case prochainRdv = "prochain_rdv"
         case plateforme
         case type
-        case vaccineType = "vaccine_type"
+        case vaccineTypes = "vaccine_type"
         case appointmentSchedules = "appointment_schedules"
     }
 }
@@ -131,7 +131,7 @@ extension VaccinationCentre {
     }
 }
 
-// MARK: Sequence of Vaccination Centre
+// MARK: - Sequence of Vaccination Centre
 
 extension Sequence where Element == VaccinationCentre {
     var allAvailableCentresCount: Int {
@@ -139,7 +139,7 @@ extension Sequence where Element == VaccinationCentre {
     }
 }
 
-// MARK: - Vaccination Centre - computed properties
+// MARK: - Utility properties
 
 extension VaccinationCentre {
     var isAvailable: Bool {
@@ -193,11 +193,15 @@ extension VaccinationCentre {
         )
     }
 
-    var vaccinesTypeText: String? {
-        guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
-            return nil
+    var vaccinesTypeTexts: AccessibilityString {
+        guard let vaccineTypes = vaccineTypes, !vaccineTypes.isEmpty else {
+            return AccessibilityString(rawValue: "", vocalizedValue: "")
         }
-        return vaccineType.joined(separator: String.commaWithSpace)
+        let toDisplay = vaccineTypes.joined(separator: String.commaWithSpace)
+        let toVocalize = vaccineTypes.map { vaccineType in
+            VaccineType.init(rawValue: vaccineType)?.vocalizable ?? vaccineType
+        }.joined(separator: String.commaWithSpace)
+        return AccessibilityString(rawValue: toDisplay, vocalizedValue: toVocalize)
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -239,6 +243,10 @@ extension VaccinationCentre {
         )
         guard let phoneNumber = parsedPhoneNumber else { return nil }
         return phoneNumberKit.format(phoneNumber, toType: .national)
+    }
+
+    func provideVaccine(type named: String) -> Bool {
+        return vaccineTypes?.contains(named) ?? false
     }
 }
 

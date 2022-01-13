@@ -6,14 +6,19 @@
 //
 
 // MARK: - Onboarding
+
 "onboarding.welcome_page.title" = "Vite Ma Dose fait le plein de nouveautés !";
-"onboarding.welcome_page.description" = "Découvrez les notifications pour ne rater aucune dose.";
+"onboarding.welcome_page.description" = "Il est désormais possible d'afficher les doses de rappel ainsi que de filtrer les résultats par type de vaccin.";
 "onboarding.notifications_page.title" = "Notifications";
 "onboarding.notifications_page.description" = "Pour ne rater aucun créneau de vaccination, nous avons ajouté un système de notifications ! Pour vous abonner à un centre, rien de plus simple, il suffit de toucher la cloche. Vous recevrez une alerte si nous détectons des disponibilités.";
 "onboarding.thirddose_page.title" = "Dose de rappel";
 "onboarding.thirddose_page.description" = "Vous pouvez désormais afficher les lieux de vaccination ayant des doses de rappel disponible.";
 "onboarding.settingspage.title" = "Envie d'en savoir plus ?";
 "onboarding.settingspage.description" = "Retrouvez différentes infos sur le projet via le menu des réglages. Contributeurs, site web, réseaux sociaux, code source... les curieuses et curieux seront ravis !";
+"onboarding.kids_first_doses.title" = "Doses pour enfants";
+"onboarding.kids_first_doses.description" = "Il est possible de filtrer les lieux de vaccination pour trouver ceux proposant des doses pour les enfants.";
+"onboarding.vaccine_types_filtering.title" = "Filtrer par type de vaccins";
+"onboarding.vaccine_types_filtering.description" = "Les types de vaccins peuvent servir également de critères de recherche afin de filtrer les lieux de vaccination pour trouver ceux qui vous conviennent le mieux.";
 "onboarding.next_button" = "Suivant";
 "onboarding.done_button" = "Merci !";
 
@@ -88,6 +93,18 @@
 "location.unfollow_action_title" = "Ne plus suivre";
 "location.stop_following_button" = "Ne plus suivre";
 
+// MARK: - Location filtering
+
+"location.filtering.title" = "Filtrage";
+"location.filtering.messagge" = "Sélectionnez un critère pour filtrer les centres à afficher";
+"location.filtering.action.vaccine_type_moderna" = "Vaccin Moderna";
+"location.filtering.action.vaccine_type_pfizerbiontech" = "Vaccin Pfizer-BioNTech";
+"location.filtering.action.vaccine_type_janssen" = "Vaccin Janssen";
+"location.filtering.action.vaccine_type_arnm" = "Vaccin ARNm";
+"location.filtering.action.vaccine_type_novavax" = "Vaccin Novavax";
+"location.filtering.action.kids_doses" = "Premières doses pour les enfants";
+"location.filtering.action.all_doses" = "Toutes les doses";
+
 // MARK: - Error
 
 "error.generic.title" = "Oups! Nous avons des difficultés techniques...";
@@ -103,15 +120,25 @@
 "a11y.voiceover.home_screen.recent_searches" = "Recherches récentes.";
 "a11y.voiceover.home_screen.see_department_results" = "Voir les lieux dans le département ";
 "a11y.voiceover.home_screen.display_places_on_map" = "Tappez deux fois pour afficher la carte via le site web de Covid Tracker";
+
 "a11y.voiceover.navigation.back_button" = "Retour à l'écran principal";
 "a11y.voiceover.actions.call_button" = "Tappez deux fois pour appeler à ce numéro";
 "a11y.voiceover.actions.booking_button" = "Tappez deux fois pour prendre rendez-vous par site web";
+"a11y.voiceover.actions.filter_button.label" = "Filtrer les centres";
+"a11y.voiceover.actions.filter_button.hint" = "Tappez deux fois pour filtrer les centres selon différents critères";
 "a11y.voiceover.locations.see_places" = "Voir les lieux pour %@";
 "a11y.voiceover.locations.search" = "Ecrivez la commune, le code postal, le département, la ville ou toute autre indication pour trouver un lieu";
+
+"a11y.voiceover.locations.filtering.action.vaccine_type_moderna" = "Lieux de vaccination proposant des vaccins Moderna";
+"a11y.voiceover.locations.filtering.action.kids_doses" = "Lieux de vaccination proposant des doses spécifiques pour les enfants";
+"a11y.voiceover.locations.filtering.action.all_doses" = "Pas de critère particulier, peu importe les vaccins et les doses";
+"a11y.voiceover.locations.filtering.action.vaccine_type" = "Lieux de vaccination proposant des vaccins %@";
+
 "a11y.voiceover.details.from" = "à partir de";
 "a11y.voiceover.details.call" = "Appeler au ";
 "a11y.voiceover.details.vaccine" = "Vaccin de type %@";
 "a11y.voiceover.details.to_use_with_platform" = "à utiliser avec la plateforme ";
+
 "a11y.voiceover.settings.button.label" = "Réglages";
 "a11y.voiceover.settings.button.hint" = "Tappez deux fois pour accéder aux réglages de l'application";
 "a11y.voiceover.settings.action.website" = "Tappez deux fois pour aller sur le site CovidTracker.fr";

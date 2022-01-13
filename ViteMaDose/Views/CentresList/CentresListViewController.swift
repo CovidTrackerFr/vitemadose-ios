@@ -10,6 +10,8 @@ import SafariServices
 import MapKit
 import Haptica
 
+// MARK: - Centres List View Controller
+
 class CentresListViewController: UIViewController, Storyboarded {
     @IBOutlet private var tableView: UITableView!
 
@@ -38,6 +40,8 @@ class CentresListViewController: UIViewController, Storyboarded {
 
     private lazy var dataSource = makeDataSource()
 
+    // MARK: View Did Load and Appear
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard viewModel != nil else {
@@ -65,6 +69,8 @@ class CentresListViewController: UIViewController, Storyboarded {
         navigationController?.popViewController(animated: true)
     }
 
+    // MARK: Open Actions
+
     private func openBookingUrl(_ url: URL?) {
         guard let url = url else { return }
         let config = SFSafariViewController.Configuration()
@@ -83,6 +89,8 @@ class CentresListViewController: UIViewController, Storyboarded {
 
         UIApplication.shared.open(url)
     }
+
+    // MARK: Configurations
 
     private func configureNavigationBar() {
         let backButtonImageConfiguration = UIImage.SymbolConfiguration.init(
@@ -127,6 +135,7 @@ class CentresListViewController: UIViewController, Storyboarded {
         tableView.tableFooterView = footerView
 
         tableView.register(cellType: CentresTitleCell.self)
+        tableView.register(cellType: CentreActionCell.self)
         tableView.register(cellType: CentreCell.self)
         tableView.register(cellType: CentresStatsCell.self)
         tableView.register(cellType: CentresSortOptionsCell.self)
@@ -134,6 +143,8 @@ class CentresListViewController: UIViewController, Storyboarded {
     }
 
 }
+
+// MARK: - Centres List View Model Delegate
 
 extension CentresListViewController: CentresListViewModelDelegate {
 
@@ -186,9 +197,11 @@ extension CentresListViewController: CentresListViewModelDelegate {
     }
 }
 
-// MARK: - DataSource
+// MARK: - UI Table View Delegate
 
 extension CentresListViewController: UITableViewDelegate {
+
+    // MARK: Dequeue and Configure
 
     private func makeDataSource() -> UITableViewDiffableDataSource<CentresListSection, CentresListCell> {
         return UITableViewDiffableDataSource(
@@ -203,6 +216,11 @@ extension CentresListViewController: UITableViewDelegate {
         switch cell {
         case let .title(cellViewData):
             let cell = tableView.dequeueReusableCell(with: CentresTitleCell.self, for: indexPath)
+            cell.configure(with: cellViewData)
+            return cell
+        case let .titleWithButton(cellViewData):
+            let cell = tableView.dequeueReusableCell(with: CentreActionCell.self, for: indexPath)
+            configureHandlers(for: cell)
             cell.configure(with: cellViewData)
             return cell
         case let .stats(cellViewData):
@@ -228,6 +246,8 @@ extension CentresListViewController: UITableViewDelegate {
             return cell
         }
     }
+
+    // MARK: Configuration for CentreCell
 
     private func configureHandlers(for cell: CentreCell, at indexPath: IndexPath) {
         // Address button tap
@@ -266,11 +286,7 @@ extension CentresListViewController: UITableViewDelegate {
         }
     }
 
-    private func presentOpenMapAlert(
-        sourceView: UIView,
-        address: String?,
-        mapItem: MKMapItem
-    ) {
+    private func presentOpenMapAlert(sourceView: UIView, address: String?, mapItem: MKMapItem) {
         let actionSheet = UIAlertController(
             title: mapItem.name,
             message: address,
@@ -337,7 +353,99 @@ extension CentresListViewController: UITableViewDelegate {
 
         self.present(bottomSheet, animated: true)
     }
+
+    // MARK: Configuration for CentreActionCell
+
+    /// Configures the `actionButtonTapHandler`  for the given `cell` to present a bottom sheet with filtering actions.
+    /// - Parameter cell: The cell which will have the callback
+    private func configureHandlers(for cell: CentreActionCell) {
+        cell.actionButtonTapHandler = { [weak self] in
+            self?.presentFilterCentresBottomSheet(from: cell)
+        }
+    }
+
+    /// Presents an action sheet with filtering actions for the given cell
+    /// - Parameter cell: The `CentreActionCell` to use for the action button
+    // swiftlint:disable function_body_length
+    private func presentFilterCentresBottomSheet(from cell: CentreActionCell) {
+        let bottomSheet = UIAlertController(
+            title: Localization.Locations.Filtering.title,
+            message: Localization.Locations.Filtering.messagge,
+            preferredStyle: .actionSheet
+        )
+
+        // Actions about doses
+        let kidsFirstDoseAction = UIAlertAction(title: Localization.Locations.Filtering.action_kids_doses, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .kidsFirstDoses)
+        }
+        kidsFirstDoseAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_kids_doses
+        let allDosesAction = UIAlertAction(title: Localization.Locations.Filtering.action_all_doses, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .allDoses)
+        }
+        allDosesAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type_all_doses
+
+        // Actions about vaccin types
+        let vaccineTypeModernaAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_moderna, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeModerna)
+        }
+        vaccineTypeModernaAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.moderna.vocalizable)
+
+        let vaccineTypePfizerAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_pfizerbiontech, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypePfizer)
+        }
+        vaccineTypePfizerAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.pfizerBioNTech.vocalizable)
+
+        let vaccineTypeARNmAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_arnm, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeARNm)
+        }
+        vaccineTypeARNmAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.arnm.vocalizable)
+
+        let vaccineTypeJanssenAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_janssen, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeJanssen)
+        }
+        vaccineTypeJanssenAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.janssen.vocalizable)
+
+        let vaccineTypeNovavaxAction = UIAlertAction(title: Localization.Locations.Filtering.vaccine_type_novavax, style: .default) { [weak self] _ in
+            self?.viewModel.filterList(by: .vaccineTypeNovavax)
+        }
+        vaccineTypeNovavaxAction.accessibilityLabel = Localization.A11y.VoiceOver.Locations.filtering_action_vaccine_type.format(VaccineType.novavax.vocalizable)
+
+        let cancelAction = UIAlertAction(title: Localization.Error.Generic.cancel_button, style: .cancel)
+
+        // Add checkmark if previously selected
+        switch viewModel.filterOption {
+        case .allDoses:
+            allDosesAction.setValue(true, forKey: "checked")
+        case .kidsFirstDoses:
+            kidsFirstDoseAction.setValue(true, forKey: "checked")
+        case .vaccineTypeModerna:
+            vaccineTypeModernaAction.setValue(true, forKey: "checked")
+        case .vaccineTypePfizer:
+            vaccineTypePfizerAction.setValue(true, forKey: "checked")
+        case .vaccineTypeARNm:
+            vaccineTypeARNmAction.setValue(true, forKey: "checked")
+        case .vaccineTypeJanssen:
+            vaccineTypeJanssenAction.setValue(true, forKey: "checked")
+        case .vaccineTypeNovavax:
+            vaccineTypeNovavaxAction.setValue(true, forKey: "checked")
+        }
+
+        // Bottom sheet definition
+        bottomSheet.addAction(vaccineTypeARNmAction)
+        bottomSheet.addAction(vaccineTypeNovavaxAction)
+        bottomSheet.addAction(vaccineTypeJanssenAction)
+        bottomSheet.addAction(vaccineTypePfizerAction)
+        bottomSheet.addAction(vaccineTypeModernaAction)
+        bottomSheet.addAction(kidsFirstDoseAction)
+        bottomSheet.addAction(allDosesAction)
+        bottomSheet.addAction(cancelAction)
+        bottomSheet.popoverPresentationController?.sourceView = cell.actionButton
+
+        present(bottomSheet, animated: true)
+    }
 }
+
+// MARK: - UI Gesture Recognizer Delegate
 
 extension CentresListViewController: UIGestureRecognizerDelegate {
     /// Enable swipe to go back

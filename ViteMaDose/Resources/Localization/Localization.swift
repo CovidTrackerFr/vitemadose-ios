@@ -33,6 +33,16 @@ enum Localization {
             static let title = "onboarding.settingspage.title".localized
             static let description = "onboarding.settingspage.description".localized
         }
+
+        enum KidsFirstDoses {
+            static let title = "onboarding.kids_first_doses.title".localized
+            static let description = "onboarding.kids_first_doses.description".localized
+        }
+
+        enum VaccineTypesFiltering {
+            static let title = "onboarding.vaccine_types_filtering.title".localized
+            static let description = "onboarding.vaccine_types_filtering.description".localized
+        }
     }
 
     enum Home {
@@ -94,6 +104,19 @@ enum Localization {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
             static let third_dose = "locations.sort_option.third_dose".localized
+        }
+
+        enum Filtering {
+            static let title = "location.filtering.title".localized
+            static let messagge = "location.filtering.messagge".localized
+            static let action_kids_doses = "location.filtering.action.kids_doses".localized
+            static let action_all_doses = "location.filtering.action.all_doses".localized
+            static let vaccine_type_moderna = "location.filtering.action.vaccine_type_moderna".localized
+            static let vaccine_type_pfizerbiontech = "location.filtering.action.vaccine_type_pfizerbiontech".localized
+            static let vaccine_type_janssen = "location.filtering.action.vaccine_type_janssen".localized
+            static let vaccine_type_arnm = "location.filtering.action.vaccine_type_arnm".localized
+            static let vaccine_type_novavax = "location.filtering.action.vaccine_type_novavax".localized
+            static let vaccine_type = "location.filtering.action.vaccine_type".localized
         }
     }
 
@@ -178,6 +201,8 @@ enum Localization {
             enum Actions {
                 static let booking_button = "a11y.voiceover.actions.booking_button".localized
                 static let call_button = "a11y.voiceover.actions.call_button".localized
+                static let filter_button_label = "Filtrer les centres".localized
+                static let filter_button_hint = "Tappez deux fois pour filtrer les centres selon différents critères".localized
             }
 
             enum Details {
@@ -197,6 +222,9 @@ enum Localization {
             enum Locations {
                 static let search = "a11y.voiceover.locations.search".localized
                 static let see_places = "a11y.voiceover.locations.see_places".localized
+                static let filtering_action_vaccine_type = "a11y.voiceover.locations.filtering.action.vaccine_type".localized
+                static let filtering_action_vaccine_type_kids_doses = "a11y.voiceover.locations.filtering.action.kids_doses".localized
+                static let filtering_action_vaccine_type_all_doses = "a11y.voiceover.locations.filtering.action.all_doses".localized
             }
 
             enum Navigation {
