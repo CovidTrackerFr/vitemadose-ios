@@ -30,9 +30,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ej-ox-E3h" userLabel="Filter Button">
-                                        <rect key="frame" x="307" y="0.0" width="47" height="78"/>
+                                        <rect key="frame" x="309" y="0.0" width="45" height="78"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="list.dash" catalog="system" title=""/>
+                                        <buttonConfiguration key="configuration" style="plain" image="line.3.horizontal.decrease.circle.fill" catalog="system" title=""/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -58,7 +58,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="line.3.horizontal.decrease.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
