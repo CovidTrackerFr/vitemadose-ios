@@ -10,11 +10,10 @@ import Foundation
 /// Available filtering options for centres list
 public enum CentresListFilterOption: Int, CaseIterable {
 
-    /// FIlter nothing, keep all centers
+    /// Filter nothing, keep all centres
     case allDoses
     /// Keep only centres with kids first doses
     case kidsFirstDoses
-
     /// Vaccine type "Moderna"
     case vaccineTypeModerna
     /// Vaccine type "Pfizer"

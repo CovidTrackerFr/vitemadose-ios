@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
-/// Allows to gather two strings in one `Hashable` object
-struct DoubledString: Hashable {
-    /// The string which can be displayed in the GUI
-    let toDisplay: String?
-    /// The string which can be vocalized with VoiceOver
-    let toVocalize: String?
+extension UIDevice {
+
+    var isUnderiOS15: Bool {
+        guard let version = Float(self.systemVersion) else {
+            return false
+        }
+        return version < 15.0
+    }
 }

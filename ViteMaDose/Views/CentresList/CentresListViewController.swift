@@ -356,7 +356,7 @@ extension CentresListViewController: UITableViewDelegate {
 
     // MARK: Configuration for CentreActionCell
 
-    /// For the given `cell`, defines its `actionButtonTapHandler` so as to preent a bottom sheet with filtering actions.
+    /// Configures the `actionButtonTapHandler`  for the given `cell` to present a bottom sheet with filtering actions.
     /// - Parameter cell: The cell which will have the callback
     private func configureHandlers(for cell: CentreActionCell) {
         cell.actionButtonTapHandler = { [weak self] in
@@ -365,7 +365,7 @@ extension CentresListViewController: UITableViewDelegate {
     }
 
     /// Presents an action sheet with filtering actions for the given cell
-    /// - Parameter cell: The  `CentreActionCell` to use ffor the action button
+    /// - Parameter cell: The `CentreActionCell` to use for the action button
     // swiftlint:disable function_body_length
     private func presentFilterCentresBottomSheet(from cell: CentreActionCell) {
         let bottomSheet = UIAlertController(

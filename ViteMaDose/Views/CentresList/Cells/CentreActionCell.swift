@@ -53,9 +53,9 @@ class CentreActionCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
-        titleLabel?.backgroundColor = .clear
-        titleLabel?.attributedText = viewData.titleText
-        titleLabel?.numberOfLines = 0
+        titleLabel.backgroundColor = .clear
+        titleLabel.attributedText = viewData.titleText
+        titleLabel.numberOfLines = 0
         titleLabel.adjustsFontForContentSizeCategory = true
 
         topConstraint.constant = viewData.topMargin
@@ -68,6 +68,9 @@ class CentreActionCell: UITableViewCell {
         )
         actionButton.accessibilityLabel = Localization.A11y.VoiceOver.Actions.filter_button_label
         actionButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.filter_button_hint
+        if UIDevice.current.isUnderiOS15 {
+            actionButton.setImage(UIImage(systemName: "list.dash"), for: .normal)
+        }
     }
 
     @objc private func didTapActionButton() {
