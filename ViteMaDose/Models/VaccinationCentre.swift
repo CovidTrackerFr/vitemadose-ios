@@ -193,15 +193,15 @@ extension VaccinationCentre {
         )
     }
 
-    var vaccinesTypeTexts: DoubledString {
+    var vaccinesTypeTexts: AccessibilityString {
         guard let vaccineTypes = vaccineTypes, !vaccineTypes.isEmpty else {
-            return DoubledString(toDisplay: nil, toVocalize: nil)
+            return AccessibilityString(rawValue: "", vocalizedValue: "")
         }
         let toDisplay = vaccineTypes.joined(separator: String.commaWithSpace)
         let toVocalize = vaccineTypes.map { vaccineType in
             VaccineType.init(rawValue: vaccineType)?.vocalizable ?? vaccineType
         }.joined(separator: String.commaWithSpace)
-        return DoubledString(toDisplay: toDisplay, toVocalize: toVocalize)
+        return AccessibilityString(rawValue: toDisplay, vocalizedValue: toVocalize)
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -282,7 +282,6 @@ struct VaccinationCentres: Codable, Hashable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
-// MARK: - Department Vaccination Centres
 
 // MARK: - Department Vaccination Centres
 

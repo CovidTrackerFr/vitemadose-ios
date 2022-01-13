@@ -17,7 +17,7 @@
 		516C10E5265E8EE70056CBB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */; };
 		516C10EE265E967C0056CBB0 /* UIFont+TextSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */; };
 		518CD6962782360E001768FE /* CentresListFilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518CD6952782360E001768FE /* CentresListFilterOption.swift */; };
-		51B778882780B6700064CC94 /* DoubledString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B778872780B6700064CC94 /* DoubledString.swift */; };
+		51B778882780B6700064CC94 /* AccessibilityString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B778872780B6700064CC94 /* AccessibilityString.swift */; };
 		51C367CC2653AB9400ABB203 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 51C367CB2653AB9400ABB203 /* Settings.bundle */; };
 		51C9791D278220450054A2EB /* CentreActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C9791B278220450054A2EB /* CentreActionCell.xib */; };
 		51C9791E278220450054A2EB /* CentreActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C9791C278220450054A2EB /* CentreActionCell.swift */; };
@@ -172,7 +172,7 @@
 		516C10DF265E8EE70056CBB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		516C10ED265E967C0056CBB0 /* UIFont+TextSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+TextSizes.swift"; sourceTree = "<group>"; };
 		518CD6952782360E001768FE /* CentresListFilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentresListFilterOption.swift; sourceTree = "<group>"; };
-		51B778872780B6700064CC94 /* DoubledString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubledString.swift; sourceTree = "<group>"; };
+		51B778872780B6700064CC94 /* AccessibilityString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityString.swift; sourceTree = "<group>"; };
 		51C367CB2653AB9400ABB203 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ViteMaDose/Settings.bundle; sourceTree = "<group>"; };
 		51C9791B278220450054A2EB /* CentreActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CentreActionCell.xib; sourceTree = "<group>"; };
 		51C9791C278220450054A2EB /* CentreActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentreActionCell.swift; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				572B06482648107900BB04DB /* Logger.swift */,
-				51B778872780B6700064CC94 /* DoubledString.swift */,
+				51B778872780B6700064CC94 /* AccessibilityString.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1085,7 +1085,7 @@
 				51F7BFCF2780BFA50028BC89 /* UIContentSizeCategory+Commons.swift in Sources */,
 				57C4017626235B6200EFFCA3 /* HomePartnersFooterView.swift in Sources */,
 				576738C2261E329C004A700D /* SceneDelegate.swift in Sources */,
-				51B778882780B6700064CC94 /* DoubledString.swift in Sources */,
+				51B778882780B6700064CC94 /* AccessibilityString.swift in Sources */,
 				57AD21D62621041200ED2B95 /* CentresListViewController.swift in Sources */,
 				57493FDD26403F5100F7E662 /* AppConstant.swift in Sources */,
 				57C401AA262426B100EFFCA3 /* CentreCell.swift in Sources */,

@@ -53,9 +53,9 @@ class CentreActionCell: UITableViewCell {
         contentView.backgroundColor = .clear
         selectionStyle = .none
 
-        titleLabel?.backgroundColor = .clear
-        titleLabel?.attributedText = viewData.titleText
-        titleLabel?.numberOfLines = 0
+        titleLabel.backgroundColor = .clear
+        titleLabel.attributedText = viewData.titleText
+        titleLabel.numberOfLines = 0
         titleLabel.adjustsFontForContentSizeCategory = true
 
         topConstraint.constant = viewData.topMargin

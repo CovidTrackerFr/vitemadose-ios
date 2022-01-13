@@ -8,9 +8,9 @@
 import Foundation
 
 /// Allows to gather two strings in one `Hashable` object
-struct DoubledString: Hashable {
+struct AccessibilityString: Hashable {
     /// The string which can be displayed in the GUI
-    let toDisplay: String?
+    let rawValue: String
     /// The string which can be vocalized with VoiceOver
-    let toVocalize: String?
+    let vocalizedValue: String?
 }

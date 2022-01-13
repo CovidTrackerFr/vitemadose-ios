@@ -12,7 +12,7 @@ import Kingfisher
 
 protocol CreditCellViewDataProvider {
     var creditName: String { get }
-    var creditRole: DoubledString { get }
+    var creditRole: AccessibilityString { get }
     var creditLink: URL? { get }
     var creditImage: String? { get }
 }
@@ -21,7 +21,7 @@ protocol CreditCellViewDataProvider {
 
 struct CreditCellViewData: CreditCellViewDataProvider, Hashable {
     var creditName: String
-    var creditRole: DoubledString
+    var creditRole: AccessibilityString
     var creditLink: URL?
     var creditImage: String?
 }
@@ -72,8 +72,8 @@ class CreditCell: UITableViewCell {
         if UIApplication.shared.preferredContentSizeCategory.isAccessibleLargeTextSize {
             creditRoleLabel.isHidden = true
         } else {
-            creditRoleLabel.text = viewData.creditRole.toDisplay
-            creditRoleLabel.accessibilityLabel = viewData.creditRole.toVocalize
+            creditRoleLabel.text = viewData.creditRole.rawValue
+            creditRoleLabel.accessibilityLabel = viewData.creditRole.vocalizedValue
         }
 
         if let url = buttonURL, UIApplication.shared.canOpenURL(url) {

@@ -251,7 +251,7 @@ class CentresListViewModel {
 
     // MARK: Get vaccination centres and filter them
 
-    /// Sorts then filters the centres using sort and filteer options and ddated slots.
+    /// Sorts then filters the centres using sort and filter options and dated slots.
     /// The maximum distance value is set in our remote config file.
     /// - Parameter centres: a list of vaccination centres returned by the API
     /// - Returns: array of filtered and sorted centres
@@ -283,8 +283,8 @@ class CentresListViewModel {
     }
 
     /// Filters the given `centres` and return them using the defined `filterOption`.
-    /// Is focused on the type of doses (all oses of first kids doses) and also the vaccin types (e.g. Moderna)
-    /// - Parameter centres: The array of items to fitler using the selected option
+    /// Filtering is based on both dose type (all dose or kids first dose) and vaccin type (e.g. Moderna).
+    /// - Parameter centres: The array of items to filter using the selected option
     /// - Returns: The centres filtered by this option.
     private func filter(centres: [VaccinationCentre]) -> [VaccinationCentre] {
         switch filterOption {
@@ -321,7 +321,7 @@ class CentresListViewModel {
         .sorted(by: VaccinationCentre.sortedByAppointment)
     }
 
-    /// Filters the given `centres` checking if there are ome wich fullfill the given `condition`.
+    /// Filters the given `centres` checking if there are some which fulfill the given `condition`.
     /// Finaly sorts by appointment the centres.
     /// - Parameters:
     ///     - forAll: The centres to filter
@@ -339,7 +339,7 @@ class CentresListViewModel {
 
     // MARK: - Filter List
 
-    /// Filter the actual centres list by `type`
+    /// Filters the actual centres list by `type`
     /// - Parameter type: The filtering type
     func filterList(by type: CentresListFilterOption) {
         userDefaults.centresListFilterOption = type
