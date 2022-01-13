@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  BaseAPIService.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 01/05/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
@@ -12,6 +12,7 @@ import Moya
 
 enum BaseAPI {
     case stats
+    case credits
     case vaccinationCentres(departmentCode: String)
     case departmentSlots(departmentCode: String)
 }
@@ -28,6 +29,8 @@ extension BaseAPI: TargetType {
         switch self {
         case .stats:
             return Self.remoteConfig.statsPath
+        case .credits:
+            return Self.remoteConfig.contributorsPath
         case let .vaccinationCentres(code):
             return Self.remoteConfig.departmentPath(withCode: code)
         case let .departmentSlots(code):
@@ -38,8 +41,9 @@ extension BaseAPI: TargetType {
     var method: Moya.Method {
         switch self {
         case .stats,
-            .vaccinationCentres,
-            .departmentSlots:
+             .credits,
+             .vaccinationCentres,
+             .departmentSlots:
             return .get
         }
     }
@@ -55,6 +59,7 @@ extension BaseAPI: TargetType {
     var task: Task {
         switch self {
         case .stats,
+             .credits,
              .vaccinationCentres,
              .departmentSlots:
             return .requestPlain
@@ -73,6 +78,7 @@ protocol BaseAPIServiceProvider: AnyObject {
 
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void)
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void)
+    func fetchCredits(completion: @escaping (Result<Credits, Error>) -> Void)
     func fetchDepartmentSlots(departmentCode: String, completion: @escaping (Result<DepartmentSlots, Error>) -> Void)
 }
 
@@ -85,6 +91,10 @@ final class BaseAPIService: BaseAPIServiceProvider {
 
     func fetchStats(completion: @escaping (Result<Stats, Error>) -> Void) {
         request(target: .stats, completion: completion)
+    }
+
+    func fetchCredits(completion: @escaping (Result<Credits, Error>) -> Void) {
+        request(target: .credits, completion: completion)
     }
 
     func fetchVaccinationCentres(departmentCode: String, completion: @escaping (Result<VaccinationCentres, Error>) -> Void) {
@@ -117,8 +127,9 @@ extension BaseAPI: CachePolicyGettable {
     var cachePolicy: URLRequest.CachePolicy {
         switch self {
         case .stats,
-                .vaccinationCentres,
-                .departmentSlots:
+             .credits,
+             .vaccinationCentres,
+             .departmentSlots:
             return .reloadIgnoringLocalCacheData
         }
     }

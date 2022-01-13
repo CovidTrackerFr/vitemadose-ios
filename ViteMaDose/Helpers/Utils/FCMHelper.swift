@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  FCMHelper.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 09/05/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Firebase
@@ -16,10 +16,9 @@ struct FCMHelper {
     func subscribeToCentreTopic(
         withDepartmentCode departmentCode: String,
         andCentreId centreId: String,
-        chronoDosesOnly: Bool,
         completion: @escaping (Swift.Result<Void, Error>) -> Void
     ) {
-        let topicName = centreTopicName(departmentCode: departmentCode, centreId: centreId, chronoDosesOnly: chronoDosesOnly)
+        let topicName = centreTopicName(departmentCode: departmentCode, centreId: centreId)
         Messaging.messaging().subscribe(toTopic: topicName) { error in
             if let error = error {
                 Log.e("SUBSCRIBE ERROR: \(error.localizedDescription)")
@@ -34,10 +33,9 @@ struct FCMHelper {
     func unsubscribeToCentreTopic(
         withDepartmentCode departmentCode: String,
         andCentreId centreId: String,
-        chronoDosesOnly: Bool,
         completion: @escaping (Swift.Result<Void, Error>) -> Void
     ) {
-        let topicName = centreTopicName(departmentCode: departmentCode, centreId: centreId, chronoDosesOnly: chronoDosesOnly)
+        let topicName = centreTopicName(departmentCode: departmentCode, centreId: centreId)
         Messaging.messaging().unsubscribe(fromTopic: topicName) { error in
             if let error = error {
                 Log.e("UNSUBSCRIBE ERROR: \(error.localizedDescription)")
@@ -49,12 +47,8 @@ struct FCMHelper {
         }
     }
 
-    private func centreTopicName(departmentCode: String, centreId: String, chronoDosesOnly: Bool) -> String {
-        let topicName = "department_\(departmentCode)_center_\(centreId)"
-        if chronoDosesOnly {
-            return topicName.appending("_chronodoses")
-        }
-        return topicName
+    private func centreTopicName(departmentCode: String, centreId: String) -> String {
+        return "department_\(departmentCode)_center_\(centreId)"
     }
 
     func requestNotificationsAuthorizationIfNeeded(

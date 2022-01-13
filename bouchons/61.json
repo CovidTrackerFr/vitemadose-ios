@@ -1,0 +1,681 @@
+{
+  "version": 1,
+  "last_updated": "2021-12-29T22:32:13+01:00",
+  "centres_disponibles": [
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination COVID-19 de l'Orne et du Saosnois",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/alencon/centres-de-vaccination-covid-departement-orne-saonois?pid=practice-164122",
+      "location": {
+        "longitude": -0.423155,
+        "latitude": 48.553638,
+        "city": "Bagnoles de l'Orne Normandie",
+        "cp": "61140"
+      },
+      "metadata": {
+        "address": "All\u00e9e Alo\u00efs Monnet, 61140 Bagnoles de l'Orne Normandie",
+        "business_hours": {
+          "lundi": "09:00-13:00, 14:00-17:30",
+          "mardi": "09:00-13:00, 14:00-17:30",
+          "mercredi": "09:00-13:00, 14:00-17:30",
+          "jeudi": "09:00-13:00, 14:00-17:30",
+          "vendredi": "09:00-13:00, 14:00-17:30",
+          "samedi": "09:00-13:00, 14:00-17:30",
+          "dimanche": null
+        },
+        "phone_number": "+33233388761"
+      },
+      "prochain_rdv": "2021-12-30T10:25:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 6178,
+      "internal_id": "doctolib241635pid164122",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination COVID-19 de l'Orne et du Saosnois",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/alencon/centres-de-vaccination-covid-departement-orne-saonois?pid=practice-179245",
+      "location": {
+        "longitude": -0.012683,
+        "latitude": 48.743437,
+        "city": "Argentan",
+        "cp": "61200"
+      },
+      "metadata": {
+        "address": "Rue du 104E Rgt d'Infanterie, 61200 Argentan",
+        "business_hours": {
+          "lundi": "09:00-13:00, 14:00-18:00",
+          "mardi": "09:00-13:00, 14:00-18:00",
+          "mercredi": "09:00-13:00, 14:00-18:00",
+          "jeudi": "09:00-13:00, 14:00-18:00",
+          "vendredi": "09:00-13:00, 14:00-18:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33800009110"
+      },
+      "prochain_rdv": "2021-12-30T10:30:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 1600,
+      "internal_id": "doctolib241635pid179245",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination COVID-19 de l'Orne et du Saosnois",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/alencon/centres-de-vaccination-covid-departement-orne-saonois?pid=practice-164101",
+      "location": {
+        "longitude": 0.5409074,
+        "latitude": 48.521129,
+        "city": "Mortagne-au-Perche",
+        "cp": "61400"
+      },
+      "metadata": {
+        "address": "23 Rue Ferdinand de Boyeres, 61400 Mortagne-au-Perche",
+        "business_hours": {
+          "lundi": "08:50-13:20, 14:00-18:30",
+          "mardi": "08:50-13:20, 14:00-18:30",
+          "mercredi": "08:50-13:20, 14:00-18:30",
+          "jeudi": "08:50-13:20, 14:00-18:30",
+          "vendredi": "08:50-13:20, 14:00-18:30",
+          "samedi": null,
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": "2021-12-30T11:20:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 4673,
+      "internal_id": "doctolib241635pid164101",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination COVID-19 de l'Orne et du Saosnois",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/alencon/centres-de-vaccination-covid-departement-orne-saonois?pid=practice-164092",
+      "location": {
+        "longitude": 0.6175902,
+        "latitude": 48.7647658,
+        "city": "L'Aigle",
+        "cp": "61300"
+      },
+      "metadata": {
+        "address": "Avenue Comtesse de S\u00e9gur, 61300 L'Aigle",
+        "business_hours": {
+          "lundi": "09:00-13:00, 14:00-18:00",
+          "mardi": "09:00-13:00, 14:00-18:00",
+          "mercredi": "09:00-13:00, 14:00-18:00",
+          "jeudi": "09:00-13:00, 14:00-18:00",
+          "vendredi": "09:00-13:00, 14:00-18:00",
+          "samedi": "09:00-13:00, 14:00-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33800009110"
+      },
+      "prochain_rdv": "2022-01-03T09:50:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 2517,
+      "internal_id": "doctolib241635pid164092",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Dr Jacques VIARD",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/remalard/jacques-viard?pid=practice-126904",
+      "location": {
+        "longitude": 0.7717036,
+        "latitude": 48.4277702,
+        "city": "R\u00e9malard",
+        "cp": "61110"
+      },
+      "metadata": {
+        "address": "1 place St Roch, 61110 R\u00e9malard",
+        "business_hours": {
+          "lundi": "08:30-12:30",
+          "mardi": "08:30-12:30",
+          "mercredi": "08:30-12:30",
+          "jeudi": "08:30-12:30",
+          "vendredi": "08:30-12:30",
+          "samedi": "09:00-12:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233836172"
+      },
+      "prochain_rdv": "2022-01-03T16:50:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "general-practitioner",
+      "appointment_count": 24,
+      "internal_id": "doctolib191735pid126904",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centre de vaccination Covid-19 - Flers",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/flers/ch-de-flers-centre-de-vaccination-covid-19?pid=practice-214284",
+      "location": {
+        "longitude": -0.562414,
+        "latitude": 48.7463689,
+        "city": "Flers",
+        "cp": "61100"
+      },
+      "metadata": {
+        "address": "99 Rue de Messei, 61100 Flers",
+        "business_hours": {
+          "lundi": null,
+          "mardi": "09:00-12:00, 13:30-17:00",
+          "mercredi": "09:00-12:00, 13:30-17:00",
+          "jeudi": "09:00-12:00, 13:30-17:00",
+          "vendredi": "09:00-12:00, 13:30-17:00",
+          "samedi": "09:00-12:00",
+          "dimanche": null
+        },
+        "phone_number": "+33675580556"
+      },
+      "prochain_rdv": "2022-01-05T09:20:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 2581,
+      "internal_id": "doctolib240567pid214284",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 106
+    },
+    {
+      "departement": "61",
+      "nom": "Dr Yves Hervouet des Forges",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/alencon/yves-hervouet-des-forges?pid=practice-167910",
+      "location": {
+        "longitude": 0.07762,
+        "latitude": 48.431761,
+        "city": "Alen\u00e7on",
+        "cp": "61000"
+      },
+      "metadata": {
+        "address": "88 Rue Jullien, 61000 Alen\u00e7on",
+        "business_hours": {
+          "lundi": "08:30-17:00",
+          "mardi": "08:30-17:00",
+          "mercredi": "08:30-17:00",
+          "jeudi": "08:30-17:00",
+          "vendredi": "08:30-14:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233263790"
+      },
+      "prochain_rdv": "2022-01-05T11:30:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 16,
+      "internal_id": "doctolib2057pid167910",
+      "vaccine_type": [
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centre de vaccination Covid-19 - CHIC des Andaines",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/domfront-en-poiraie/centre-de-vaccination-covid-19-chic-des-andaines?pid=practice-164580",
+      "location": {
+        "longitude": -0.6582461,
+        "latitude": 48.5906303,
+        "city": "Domfront en Poiraie",
+        "cp": "61700"
+      },
+      "metadata": {
+        "address": "28 Rue de la Gare, 61700 Domfront en Poiraie",
+        "business_hours": {
+          "lundi": "09:00-12:30, 14:00-17:00",
+          "mardi": "09:00-12:30, 14:00-17:00",
+          "mercredi": "09:00-12:30, 14:00-17:00",
+          "jeudi": "09:00-12:30, 14:00-17:00",
+          "vendredi": "09:00-12:30, 14:00-17:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233307037"
+      },
+      "prochain_rdv": "2022-01-05T15:20:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 2366,
+      "internal_id": "doctolib242606pid164580",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": 847
+    },
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination COVID-19 de l'Orne et du Saosnois",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/alencon/centres-de-vaccination-covid-departement-orne-saonois?pid=practice-163785",
+      "location": {
+        "longitude": 0.0877739,
+        "latitude": 48.4320679,
+        "city": "Alen\u00e7on",
+        "cp": "61000"
+      },
+      "metadata": {
+        "address": "Cours Cl\u00e9menceau, 61000 Alen\u00e7on",
+        "business_hours": {
+          "lundi": "09:00-13:00, 14:00-18:00",
+          "mardi": "09:00-13:00, 14:00-18:00",
+          "mercredi": "09:00-13:00, 14:00-18:00",
+          "jeudi": "09:00-13:00, 14:00-18:00",
+          "vendredi": "09:00-13:00, 14:00-18:00",
+          "samedi": "09:00-13:00, 14:00-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33800009110"
+      },
+      "prochain_rdv": "2022-01-05T18:30:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 3238,
+      "internal_id": "doctolib241635pid163785",
+      "vaccine_type": [
+        "Pfizer-BioNTech",
+        "Moderna"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination de l'Orne, la Manche et du Calvados",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/normandie/centres-de-vaccination-orne-manche-calvados?pid=practice-214284",
+      "location": {
+        "longitude": -0.562414,
+        "latitude": 48.7463689,
+        "city": "Flers",
+        "cp": "61100"
+      },
+      "metadata": {
+        "address": "99 Rue de Messei, 61100 Flers",
+        "business_hours": {
+          "lundi": null,
+          "mardi": "09:00-12:00, 13:30-17:00",
+          "mercredi": "09:00-12:00, 13:30-17:00",
+          "jeudi": "09:00-12:00, 13:30-17:00",
+          "vendredi": "09:00-12:00, 13:30-17:00",
+          "samedi": "09:00-12:00",
+          "dimanche": null
+        },
+        "phone_number": "+33675580556"
+      },
+      "prochain_rdv": "2022-01-07T14:00:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 727,
+      "internal_id": "doctolib127110pid214284",
+      "vaccine_type": [
+        "Pfizer-BioNTech"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centres de vaccination de l'Orne, la Manche et du Calvados",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/normandie/centres-de-vaccination-orne-manche-calvados?pid=practice-164580",
+      "location": {
+        "longitude": -0.6582461,
+        "latitude": 48.5906303,
+        "city": "Domfront en Poiraie",
+        "cp": "61700"
+      },
+      "metadata": {
+        "address": "28 Rue de la Gare, 61700 Domfront en Poiraie",
+        "business_hours": {
+          "lundi": "09:00-12:30, 14:00-17:00",
+          "mardi": "09:00-12:30, 14:00-17:00",
+          "mercredi": "09:00-12:30, 14:00-17:00",
+          "jeudi": "09:00-12:30, 14:00-17:00",
+          "vendredi": "09:00-12:30, 14:00-17:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33233307037"
+      },
+      "prochain_rdv": "2022-01-25T09:30:00+01:00",
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 72,
+      "internal_id": "doctolib127110pid164580",
+      "vaccine_type": [
+        "Pfizer-BioNTech"
+      ],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    }
+  ],
+  "centres_indisponibles": [
+    {
+      "departement": "61",
+      "nom": "Pharmacie de Cond\u00e9",
+      "url": "https://pharmacie-de-conde.fr",
+      "location": {
+        "longitude": 0.06192,
+        "latitude": 48.43357,
+        "city": "Cond\u00e9-sur-Sarthe",
+        "cp": "61250"
+      },
+      "metadata": {
+        "address": "50, rue d'Alen\u00e7on, 61250 Cond\u00e9-sur-Sarthe",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinnp30-conde-sarthe",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Pharmacie du Forum",
+      "url": "https://pharmacieduforumargentan.fr",
+      "location": {
+        "longitude": -0.027144,
+        "latitude": 48.750086,
+        "city": "Argentan",
+        "cp": "61200"
+      },
+      "metadata": {
+        "address": "Ens Centre Commercial, 3 Rue de Champagne, 61200 Argentan",
+        "business_hours": null
+      },
+      "prochain_rdv": null,
+      "plateforme": "Valwin",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "Valwinest04-forum-argentan",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centre de vaccination COVID-19 - Ville de S\u00e9es",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/sees/centre-de-vaccination-covid-19-ville-de-sees?pid=practice-199121",
+      "location": {
+        "longitude": 0.1710231,
+        "latitude": 48.6069883,
+        "city": "S\u00e9es",
+        "cp": "61500"
+      },
+      "metadata": {
+        "address": "Rue Charles Forget, 61500 S\u00e9es",
+        "business_hours": {
+          "lundi": "09:00-11:00, 14:00-16:00",
+          "mardi": "09:00-11:00, 14:00-16:00",
+          "mercredi": "09:00-11:00, 14:00-16:00",
+          "jeudi": "09:00-11:00, 14:00-16:00",
+          "vendredi": "09:00-11:00",
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33757085314"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib285123pid199121",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Pharmacie de la Vall\u00e9e d'Auge",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/vimoutiers/pharmacie-de-la-vallee-d-auge?pid=practice-223856",
+      "location": {
+        "longitude": 0.1985284,
+        "latitude": 48.9275435,
+        "city": "Vimoutiers",
+        "cp": "61120"
+      },
+      "metadata": {
+        "address": "10 Place de Mackau, 61120 Vimoutiers",
+        "business_hours": {
+          "lundi": "09:00-12:15, 14:30-19:15",
+          "mardi": "09:00-12:15, 14:30-19:15",
+          "mercredi": "09:00-12:15, 14:30-19:15",
+          "jeudi": "09:00-12:15, 14:30-19:15",
+          "vendredi": "09:00-12:15, 14:30-19:15",
+          "samedi": "09:00-12:15, 14:30-18:00",
+          "dimanche": null
+        },
+        "phone_number": "+33233390089"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib322350pid223856",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Pharmacie de Cond\u00e9-sur-Sarthe",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/conde-sur-sarthe/pharmacie-de-conde-sur-sarthe?pid=practice-199350",
+      "location": {
+        "longitude": 0.0613026,
+        "latitude": 48.4335961,
+        "city": "Cond\u00e9-sur-Sarthe",
+        "cp": "61250"
+      },
+      "metadata": {
+        "address": "50 Rue d'Alen\u00e7on, 61250 Cond\u00e9-sur-Sarthe",
+        "business_hours": {
+          "lundi": "09:00-19:30",
+          "mardi": "09:00-19:30",
+          "mercredi": "09:00-19:30",
+          "jeudi": "09:00-19:30",
+          "vendredi": "09:00-19:30",
+          "samedi": "09:00-19:30",
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib286461pid199350",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Pharmacie de la Basilique",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/la-chapelle-montligeon/pharmacie-de-la-basilique-la-chapelle-montligeon?pid=practice-226157",
+      "location": {
+        "longitude": 0.6538114,
+        "latitude": 48.4838043,
+        "city": "La Chapelle-Montligeon",
+        "cp": "61400"
+      },
+      "metadata": {
+        "address": "16 Rue Principale, 61400 La Chapelle-Montligeon",
+        "business_hours": {
+          "lundi": "10:45-12:15, 15:00-18:30",
+          "mardi": "09:30-12:15, 15:00-18:30",
+          "mercredi": "09:30-12:15, 15:00-18:30",
+          "jeudi": "09:30-12:15, 15:00-18:30",
+          "vendredi": "09:30-12:15, 16:00-18:30",
+          "samedi": null,
+          "dimanche": null
+        }
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "drugstore",
+      "appointment_count": 0,
+      "internal_id": "doctolib324763pid226157",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Cabinet infirmier - Maison de sant\u00e9 Le M\u00eale-sur-Sarthe",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/le-mele-sur-sarthe/cabinet-infirmier-le-mele-sur-sarthe?pid=practice-227066",
+      "location": {
+        "longitude": 0.3532022,
+        "latitude": 48.5131781,
+        "city": "Le M\u00eale-sur-Sarthe",
+        "cp": "61170"
+      },
+      "metadata": {
+        "address": "1 Place du 11 Ao\u00fbt 1944, 61170 Le M\u00eale-sur-Sarthe",
+        "business_hours": {
+          "lundi": "06:30-19:30",
+          "mardi": "06:30-19:30",
+          "mercredi": "06:30-19:30",
+          "jeudi": "06:30-19:30",
+          "vendredi": "06:30-19:30",
+          "samedi": "06:30-19:30",
+          "dimanche": null
+        },
+        "phone_number": "+33233276238"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib325830pid227066",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    },
+    {
+      "departement": "61",
+      "nom": "Centre de vaccination COVID-19 Val au Perche",
+      "url": "https://www.doctolib.fr/vaccination-covid-19/theil-sur-huisne/centre-de-vaccination-covid-19-val-au-perche?pid=practice-190775",
+      "location": {
+        "longitude": 0.683299,
+        "latitude": 48.26681,
+        "city": "Val-au-Perche",
+        "cp": "61260"
+      },
+      "metadata": {
+        "address": "Rue de la Taille, 61260 Val-au-Perche",
+        "business_hours": {
+          "lundi": "09:00-13:00",
+          "mardi": null,
+          "mercredi": null,
+          "jeudi": null,
+          "vendredi": null,
+          "samedi": null,
+          "dimanche": null
+        },
+        "phone_number": "+33800130000"
+      },
+      "prochain_rdv": null,
+      "plateforme": "Doctolib",
+      "type": "vaccination-center",
+      "appointment_count": 0,
+      "internal_id": "doctolib273901pid190775",
+      "vaccine_type": [],
+      "appointment_by_phone_only": false,
+      "erreur": null,
+      "last_scan_with_availabilities": null,
+      "request_counts": null,
+      "atlas_gid": null
+    }
+  ]
+}

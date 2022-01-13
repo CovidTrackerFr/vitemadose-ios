@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  HomeTitleCell.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 17/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import UIKit
@@ -57,9 +57,12 @@ class HomeTitleCell: UITableViewCell {
         titleLabel.adjustsFontForContentSizeCategory = true
         descriptionLabel.adjustsFontForContentSizeCategory = true
 
+        titleLabel?.accessibilityLabel = viewData.titleText.string.forgeVocalizableText()
+
         topConstraint.constant = viewData.topMargin
         bottomConstraint.constant = viewData.bottomMargin
     }
+
 }
 
 extension HomeTitleCell {

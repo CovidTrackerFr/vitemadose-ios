@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  CentresListViewModel.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 09/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
@@ -12,10 +12,12 @@ import PromiseKit
 import MapKit
 import Haptica
 
+// MARK: - Type aliases
+
 public typealias DatedSlot = (date: String, slot: Slot)
 public typealias VaccinationCentresWithDatedSlot = [VaccinationCentre: [DatedSlot]]
 
-// MARK: - Centres List ViewModel
+// MARK: - Centres List View Model
 
 class CentresListViewModel {
     private let apiService: BaseAPIServiceProvider
@@ -41,6 +43,11 @@ class CentresListViewModel {
         didSet {
             delegate?.updateLoadingState(isLoading: isLoading, isEmpty: vaccinationCentresList.isEmpty)
         }
+    }
+
+    internal var departmentsToLoad: [String] {
+        let departmentCodes: [String?] = [searchResult?.selectedDepartmentCode] + (searchResult?.departmentCodes ?? [])
+        return departmentCodes.compacted
     }
 
     private var vaccinationCentresForDepartments: DepartmentVaccinationCentres = []
@@ -70,6 +77,8 @@ class CentresListViewModel {
         self.remoteConfig = remoteConfig
     }
 
+    // MARK: Cells
+
     internal func createHeadingCells(appointmentsCount: Int, availableCentresCount: Int, centresCount: Int) -> [CentresListCell] {
         let mainTitleViewData = HomeTitleCellViewData(
             titleText: CentresTitleCell.mainTitleAttributedText(
@@ -95,14 +104,14 @@ class CentresListViewModel {
             return cells
         }
 
-        let centresListTitleViewData = HomeTitleCellViewData(
+        let centresListTitleViewData = CentreActionCellViewData(
             titleText: CentresTitleCell.centresListTitle,
             bottomMargin: 0
         )
-        cells.append(.title(centresListTitleViewData))
+        cells.append(.titleWithButton(centresListTitleViewData))
 
         if searchResult?.coordinates != nil {
-            let viewData = CentresSortOptionsCellViewData(sortOption: sortOption)
+            let viewData = CentresSortOptionsCellViewData(sortOption: sortOption, filterOption: filterOption)
             cells.append(.sort(viewData))
         }
 
@@ -170,12 +179,12 @@ class CentresListViewModel {
             addressText: centre.metadata?.address ?? Localization.Location.unavailable_address,
             phoneText: centre.formattedPhoneNumber(phoneNumberKit),
             bookingButtonText: bookingButtonText,
-            vaccineTypesText: centre.vaccinesTypeText,
+            vaccineTypesTexts: centre.vaccinesTypeTexts,
+            centerTypeText: centre.type?.localized,
             appointmentsCount: appointmentsCount,
             isAvailable: centre.isAvailable,
             partnerLogo: partnerLogo,
             partnerName: centre.plateforme,
-            isChronoDose: centre.hasChronoDose,
             notificationsType: notificationsType
         )
     }
@@ -183,6 +192,8 @@ class CentresListViewModel {
     private func handleError(_ error: Error) {
         delegate?.presentLoadError(error)
     }
+
+    // MARK: Promises
 
     private func createDepartmentsPromises(_ codes: [String]) -> [Promise<VaccinationCentres>] {
         return codes.map { code in
@@ -219,7 +230,7 @@ class CentresListViewModel {
         self.reloadTableView(animated: animated)
     }
 
-    // MARK: - Overridable
+    // MARK: - Table View
 
     internal func reloadTableView(animated: Bool) {
         let headingCells = createHeadingCells(
@@ -238,46 +249,106 @@ class CentresListViewModel {
         }
     }
 
-    /// Creates a list of vaccination centre sorted by distance
-    /// Centres are also filtered by maximum distance from the selected location
-    /// The maximum distance value is set in our remote config file
+    // MARK: Get vaccination centres and filter them
+
+    /// Sorts then filters the centres using sort and filter options and dated slots.
+    /// The maximum distance value is set in our remote config file.
     /// - Parameter centres: a list of vaccination centres returned by the API
     /// - Returns: array of filtered and sorted centres
     internal func getVaccinationCentres(for centres: [VaccinationCentre]) -> [VaccinationCentre] {
-        // If search result has no coordinates (department), sort options are not displayed and
-        // centres are ordered by appointment time
-        guard searchResult?.coordinates != nil else {
-            return centres.sorted(by: VaccinationCentre.sortedByAppointment)
-        }
+        return sort(centres: filter(centres: centres))
+    }
 
+    /// Sorts and returns the vaccination centres (closest, fastest, with third dose / booster shot) using the `sortOption`.
+    /// - Parameter centres: The array of items to sort using the selected option
+    /// - Returns: The centres sorted by this option.
+    private func sort(centres: [VaccinationCentre]) -> [VaccinationCentre] {
+        var resultCentres = [VaccinationCentre]()
         switch sortOption {
         case .closest:
             if let searchResult = searchResult {
-                return centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
+                resultCentres = centres.sorted(by: searchResult.sortVaccinationCentresByLocation)
             } else {
                 // Fall back if search result is missing
                 assertionFailure("Tried to sort by distance with invalid search result")
-                return centres.sorted(by: VaccinationCentre.sortedByAppointment)
+                resultCentres = centres.sorted(by: VaccinationCentre.sortedByAppointment)
             }
         case .fastest:
-            return centres
-                .sorted(by: VaccinationCentre.sortedByAppointment)
+            resultCentres = centres.sorted(by: VaccinationCentre.sortedByAppointment)
         case .thirdDose:
+            resultCentres = filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasThirdDoses })
+        }
+        return resultCentres
+    }
+
+    /// Filters the given `centres` and return them using the defined `filterOption`.
+    /// Filtering is based on both dose type (all dose or kids first dose) and vaccin type (e.g. Moderna).
+    /// - Parameter centres: The array of items to filter using the selected option
+    /// - Returns: The centres filtered by this option.
+    private func filter(centres: [VaccinationCentre]) -> [VaccinationCentre] {
+        switch filterOption {
+        case .kidsFirstDoses:
+            return filterWithDatedSlots(forAll: centres, onDatedSlots: { $0.slot.hasKidsFirstDoses })
+        case .vaccineTypeModerna:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.moderna.rawValue) })
+        case .vaccineTypePfizer:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.pfizerBioNTech.rawValue) })
+        case .vaccineTypeARNm:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.arnm.rawValue) })
+        case .vaccineTypeJanssen:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.janssen.rawValue) })
+        case .vaccineTypeNovavax:
+            return filterWithDatedSlots(forAll: centres, onCentres: { $0.provideVaccine(type: VaccineType.novavax.rawValue) })
+        case .allDoses:
             return centres
-                .filter { centre in
-                    guard let datedSlotsForCentre = vaccinationCentresWithDatedSlots[centre] else {
-                        return false
-                    }
-                    return datedSlotsForCentre.contains(where: { $0.slot.hasThirdDoses })
-                }
-                .sorted(by: VaccinationCentre.sortedByAppointment)
         }
     }
 
-    internal func trackSearchResult(
-        availableCentres: [VaccinationCentre],
-        unavailableCentres: [VaccinationCentre]
-    ) {
+    /// Filters the given `centres` by checking whether they have a defined `DateSlot`. If so, the `condition` closure will be applied.
+    /// Finally, the filtered centres are sorted by appointment
+    /// - Parameters:
+    ///     - forAll: The centres to filter
+    ///     - onDatedSlots: The condition to apply to filter
+    /// - Returns: The centres with existing dated slots matching the condition.
+    private func filterWithDatedSlots(forAll centres: [VaccinationCentre], onDatedSlots applyCondition: ((DatedSlot) -> Bool)) -> [VaccinationCentre] {
+        return centres.filter { centre in
+            guard let datedSlotsForCentre = vaccinationCentresWithDatedSlots[centre] else {
+                return false
+            }
+            return datedSlotsForCentre.contains(where: applyCondition)
+        }
+        .sorted(by: VaccinationCentre.sortedByAppointment)
+    }
+
+    /// Filters the given `centres` checking if there are some which fulfill the given `condition`.
+    /// Finaly sorts by appointment the centres.
+    /// - Parameters:
+    ///     - forAll: The centres to filter
+    ///     - onCentres: The condition to apply to filter
+    /// - Returns: The centres with existing dated slots matching the condition.
+    private func filterWithDatedSlots(forAll centres: [VaccinationCentre], onCentres applyCondition: ((VaccinationCentre) -> Bool)) -> [VaccinationCentre] {
+        return centres.filter { centre in
+            guard vaccinationCentresWithDatedSlots[centre] != nil else {
+                return false
+            }
+            return applyCondition(centre)
+        }
+        .sorted(by: VaccinationCentre.sortedByAppointment)
+    }
+
+    // MARK: - Filter List
+
+    /// Filters the actual centres list by `type`
+    /// - Parameter type: The filtering type
+    func filterList(by type: CentresListFilterOption) {
+        userDefaults.centresListFilterOption = type
+        createVaccinationCentresList()
+        reloadTableView(animated: false)
+    }
+
+    // MARK: Analytics
+
+    internal func trackSearchResult(availableCentres: [VaccinationCentre], unavailableCentres: [VaccinationCentre]) {
         guard let searchResult = self.searchResult else {
             assertionFailure("Search result should not be nil")
             return
@@ -291,16 +362,17 @@ class CentresListViewModel {
             sortOption: sortOption
         )
     }
-
-    internal var departmentsToLoad: [String] {
-        let departmentCodes: [String?] = [searchResult?.selectedDepartmentCode] + (searchResult?.departmentCodes ?? [])
-        return departmentCodes.compacted
-    }
 }
 
 // MARK: - Centres List View Model Provider
 
 extension CentresListViewModel: CentresListViewModelProvider {
+
+    public var filterOption: CentresListFilterOption {
+        return userDefaults.centresListFilterOption
+    }
+
+    // MARK: Load
 
     func load(animated: Bool) {
         guard !isLoading else { return }
@@ -360,11 +432,15 @@ extension CentresListViewModel: CentresListViewModelProvider {
         vaccinationCentresList = getVaccinationCentres(for: allCentres)
     }
 
+    // MARK: Sort Lists
+
     func sortList(by order: CentresListSortOption) {
         userDefaults.centresListSortOption = order
         createVaccinationCentresList()
         reloadTableView(animated: false)
     }
+
+    // MARK: Follow
 
     func followCentre(at indexPath: IndexPath, notificationsType: FollowedCentre.NotificationsType) {
         guard let centre = vaccinationCentresList[safe: indexPath.row],
@@ -384,15 +460,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        var chronoDosesOnly = false
-        if case .chronodoses = followedCentre.notificationsType {
-            chronoDosesOnly = true
-        }
-
         FCMHelper.shared.subscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId,
-            chronoDosesOnly: chronoDosesOnly
+            andCentreId: internalId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -425,15 +495,9 @@ extension CentresListViewModel: CentresListViewModelProvider {
             return
         }
 
-        var chronoDosesOnly = false
-        if case .chronodoses = followedCentre.notificationsType {
-            chronoDosesOnly = true
-        }
-
         FCMHelper.shared.unsubscribeToCentreTopic(
             withDepartmentCode: departmentCode,
-            andCentreId: internalId,
-            chronoDosesOnly: chronoDosesOnly
+            andCentreId: internalId
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -456,12 +520,16 @@ extension CentresListViewModel: CentresListViewModelProvider {
         return userDefaults.isCentreFollowed(centre.id, forDepartment: departmentCode)
     }
 
+    // MARK: Notifications
+
     func requestNotificationsAuthorizationIfNeeded(completion: @escaping () -> Void) {
         FCMHelper.shared.requestNotificationsAuthorizationIfNeeded(
             notificationCenter,
             completion: completion
         )
     }
+
+    // MARK: Miscellaneous
 
     func centreLocation(at indexPath: IndexPath) -> (name: String, address: String?, location: CLLocation)? {
         guard

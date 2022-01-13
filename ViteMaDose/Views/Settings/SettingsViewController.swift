@@ -1,10 +1,9 @@
 // Software Name: vitemadose-ios
 // SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-// This software is distributed under the GNU General Public License v3.0 only.
+// This software is distributed under the GPL-3.0-or-later license.
 //
-// Author: Pierre-Yves LAPERSONNE <dev(at)pylapersonne(dot)info> et al.
 
 import Foundation
 import Haptica
@@ -18,7 +17,7 @@ final class SettingsViewController: UIViewController, Storyboarded {
 
     /// Cells to add in the embedded `tableView`
     private lazy var cellsTypes: [SettingsDataType] = [
-        .header, .website, .contact, .twitter, .appSourceCode, .systemSettings
+        .header, .website, .contributors, .contact, .twitter, .appSourceCode, .systemSettings
     ]
 
     override func viewDidLoad() {
@@ -77,6 +76,8 @@ extension SettingsViewController: UITableViewDelegate {
         switch SettingsDataType.init(rawValue: indexPath.item) {
         case .website:
             openUrl("https://covidtracker.fr/")
+        case .contributors:
+            presentCreditViewController()
         case .contact:
             openUrl("https://covidtracker.fr/contact/")
         case .twitter:
@@ -106,4 +107,14 @@ extension SettingsViewController {
         Haptic.impact(.light).generate()
         present(safariViewController, animated: true)
     }
+
+    private func presentCreditViewController() {
+        let creditViewController = CreditViewController.instantiate()
+        creditViewController.viewModel = CreditViewModel(credits: [])
+
+        DispatchQueue.main.async { [weak self] in
+            self?.present(creditViewController, animated: true)
+        }
+    }
+
 }

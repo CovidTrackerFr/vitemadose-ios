@@ -1,12 +1,13 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  CentresListSortOption.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 09/05/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
 
+///  All the sort options for vaccination centres, used only in `CentresSortOptionCell` for segmented controls.
 public enum CentresListSortOption: Equatable {
     case closest
     case fastest
@@ -21,8 +22,7 @@ public enum CentresListSortOption: Equatable {
         case 2:
             self = .thirdDose
         default:
-            assertionFailure("Value should either be 0, 1 or 2")
-            self = .closest
+            self = .fastest // We assume to fallback always in the 2nd segment
         }
     }
 

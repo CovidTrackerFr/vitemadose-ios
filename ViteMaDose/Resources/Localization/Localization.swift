@@ -1,9 +1,10 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  Localization.swift
-//  ViteMaDose
+// This software is distributed under the GPL-3.0-or-later license.
 //
-//  Created by Victor Sarda on 24/04/2021.
-//
+
 // swiftlint:disable identifier_name
 
 import Foundation
@@ -26,6 +27,21 @@ enum Localization {
         enum ThirdDosePage {
             static let title = "onboarding.thirddose_page.title".localized
             static let description = "onboarding.thirddose_page.description".localized
+        }
+
+        enum SettingsPage {
+            static let title = "onboarding.settingspage.title".localized
+            static let description = "onboarding.settingspage.description".localized
+        }
+
+        enum KidsFirstDoses {
+            static let title = "onboarding.kids_first_doses.title".localized
+            static let description = "onboarding.kids_first_doses.description".localized
+        }
+
+        enum VaccineTypesFiltering {
+            static let title = "onboarding.vaccine_types_filtering.title".localized
+            static let description = "onboarding.vaccine_types_filtering.description".localized
         }
     }
 
@@ -59,6 +75,18 @@ enum Localization {
         }
     }
 
+    enum Credits {
+        static let noName = "credits.no_name".localized
+        static let noRole = "credits.no_role".localized
+
+        enum MainTitle {
+            static let title = "credits.main_title.title".localized
+            static let subtitle = "credits.main_title.subtitle".localized
+            static let highlightedText1 = "credits.main_title.highlightedText1".localized
+            static let highlightedText2 = "credits.main_title.highlightedText2".localized
+        }
+    }
+
     enum Locations {
         static let list_title = "locations.list_title".localized
         static let followed_list_title = "locations.followed_list_title".localized
@@ -76,6 +104,19 @@ enum Localization {
             static let closest = "locations.sort_option.closest".localized
             static let fastest = "locations.sort_option.fastest".localized
             static let third_dose = "locations.sort_option.third_dose".localized
+        }
+
+        enum Filtering {
+            static let title = "location.filtering.title".localized
+            static let messagge = "location.filtering.messagge".localized
+            static let action_kids_doses = "location.filtering.action.kids_doses".localized
+            static let action_all_doses = "location.filtering.action.all_doses".localized
+            static let vaccine_type_moderna = "location.filtering.action.vaccine_type_moderna".localized
+            static let vaccine_type_pfizerbiontech = "location.filtering.action.vaccine_type_pfizerbiontech".localized
+            static let vaccine_type_janssen = "location.filtering.action.vaccine_type_janssen".localized
+            static let vaccine_type_arnm = "location.filtering.action.vaccine_type_arnm".localized
+            static let vaccine_type_novavax = "location.filtering.action.vaccine_type_novavax".localized
+            static let vaccine_type = "location.filtering.action.vaccine_type".localized
         }
     }
 
@@ -98,6 +139,13 @@ enum Localization {
         static let stop_following_title = "location.stop_following_title".localized
         static let stop_following_message = "location.stop_following_message".localized
         static let stop_following_button = "location.stop_following_button".localized
+
+        enum Types {
+            static let vaccination_center = "location.types.vaccination_center".localized
+            static let drugstore = "location.types.drugstore".localized
+            static let general_practicioner = "location.types.general_practicioner".localized
+            static let medecin = "location.types.medecin".localized
+        }
     }
 
     enum Settings {
@@ -106,6 +154,11 @@ enum Localization {
         enum WebSite {
             static let title = "settings.website.title".localized
             static let subtitle = "settings.website.subtitle".localized
+        }
+
+        enum Contributors {
+            static let title = "settings.contributors.title".localized
+            static let subtitle = "settings.contributors.subtitle".localized
         }
 
         enum Contact {
@@ -148,6 +201,8 @@ enum Localization {
             enum Actions {
                 static let booking_button = "a11y.voiceover.actions.booking_button".localized
                 static let call_button = "a11y.voiceover.actions.call_button".localized
+                static let filter_button_label = "Filtrer les centres".localized
+                static let filter_button_hint = "Tappez deux fois pour filtrer les centres selon différents critères".localized
             }
 
             enum Details {
@@ -167,6 +222,9 @@ enum Localization {
             enum Locations {
                 static let search = "a11y.voiceover.locations.search".localized
                 static let see_places = "a11y.voiceover.locations.see_places".localized
+                static let filtering_action_vaccine_type = "a11y.voiceover.locations.filtering.action.vaccine_type".localized
+                static let filtering_action_vaccine_type_kids_doses = "a11y.voiceover.locations.filtering.action.kids_doses".localized
+                static let filtering_action_vaccine_type_all_doses = "a11y.voiceover.locations.filtering.action.all_doses".localized
             }
 
             enum Navigation {
@@ -177,10 +235,16 @@ enum Localization {
                 static let button_label = "a11y.voiceover.settings.button.label".localized
                 static let button_hint = "a11y.voiceover.settings.button.hint".localized
                 static let action_website = "a11y.voiceover.settings.action.website".localized
+                static let action_contributors = "a11y.voiceover.settings.action.contributors".localized
                 static let action_contact = "a11y.voiceover.settings.action.contact".localized
                 static let action_twitter = "a11y.voiceover.settings.action.twitter".localized
                 static let action_sourcecode = "a11y.voiceover.settings.action.sourcecode".localized
                 static let action_advanced = "a11y.voiceover.settings.action.advanced".localized
+            }
+
+            enum Credits {
+                static let credit_button_label = "a11y.voiceover.credits.credit_button.label".localized
+                static let credit_button_hint = "a11y.voiceover.credits.credit_button.hint".localized
             }
         }
     }

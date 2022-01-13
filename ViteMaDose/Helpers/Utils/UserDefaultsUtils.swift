@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  UserDefaultsUtils.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 15/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
@@ -40,6 +40,7 @@ extension UserDefaults {
     private enum Key: String {
         case lastSearchResults
         case centresListSortOption
+        case centresListFilterOption
         case followedCentres
         case didPresentAppOnboarding
     }
@@ -77,6 +78,20 @@ extension UserDefaults {
         }
     }
 
+    // MARK: - Centres List Filter Option
+
+    var centresListFilterOption: CentresListFilterOption {
+        get {
+            guard let savedIndex = value(forKey: Key.centresListFilterOption.rawValue) as? Int else {
+                return .allDoses
+            }
+            return CentresListFilterOption(rawValue: savedIndex) ?? .allDoses
+        }
+        set {
+            setValue(newValue.rawValue, forKey: Key.centresListFilterOption.rawValue)
+        }
+    }
+
     // MARK: - Followed Centres
 
     var followedCentres: [String: Set<FollowedCentre>] {
@@ -105,6 +120,14 @@ extension UserDefaults {
         set {
             setValue(newValue, forKey: Key.didPresentAppOnboarding.rawValue)
         }
+    }
+
+    // MARK: - Max Distance To Vaccination Centre
+
+    /// The value defined in the Setting.bundle. Can be 0 if nothing was defined.
+    /// Used thee key **vaccination_centres_list_radius_in_km** defined in the Root.plist.
+    var maxDistanceToVaccinationCentre: Int {
+        return integer(forKey: "vaccination_centres_list_radius_in_km")
     }
 
     // MARK: - Helpers

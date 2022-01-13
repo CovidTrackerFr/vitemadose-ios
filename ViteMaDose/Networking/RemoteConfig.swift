@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  RemoteConfig.swift
-//  ViteMaDose
-//
-//  Created by Paul on 14/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
@@ -73,16 +73,22 @@ extension RemoteConfiguration {
         }
     }
 
+    /// If the user has defined a maximal radius in the app settings, returns it.
+    /// Otherwise returns the value from the remote configuration.
     var vaccinationCentresListRadiusInKm: NSNumber {
-        return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
-    }
-
-    var chronodoseMinCount: Int {
-        return configuration.configValue(forKey: "chronodose_min_count").numberValue.intValue
+        guard case let maxDistanceInAppSettings = UserDefaults.shared.maxDistanceToVaccinationCentre,
+              maxDistanceInAppSettings > 0 else {
+            return configuration.configValue(forKey: "vaccination_centres_list_radius_in_km").numberValue
+        }
+        return NSNumber(value: maxDistanceInAppSettings)
     }
 
     var vaccinationCentresListRadiusInMeters: Double {
         return vaccinationCentresListRadiusInKm.doubleValue * 1000
+    }
+
+    var contributorsPath: String {
+        return configuration.configValue(forKey: "path_contributors").stringValue!
     }
 
     func departmentPath(withCode code: String) -> String {

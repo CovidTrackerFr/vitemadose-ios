@@ -1,13 +1,13 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  CentreCell.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 12/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import UIKit
 
-// MARK: - CentreViewDataProvider
+// MARK: - Centre View Data Provider
 
 protocol CentreViewDataProvider {
     var dayText: String? { get }
@@ -16,15 +16,15 @@ protocol CentreViewDataProvider {
     var addressText: String? { get }
     var phoneText: String? { get }
     var bookingButtonText: String { get }
-    var vaccineTypesText: String? { get }
+    var vaccineTypesTexts: AccessibilityString { get }
+    var centerTypeText: String? { get }
     var appointmentsCount: Int? { get }
     var isAvailable: Bool { get }
     var partnerLogo: UIImage? { get }
-    var isChronoDose: Bool { get }
     var notificationsType: FollowedCentre.NotificationsType? { get }
 }
 
-// MARK: - CentreViewData
+// MARK: - Centre View Data
 
 public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     public let id: String
@@ -34,16 +34,16 @@ public struct CentreViewData: CentreViewDataProvider, Hashable, Identifiable {
     let addressText: String?
     let phoneText: String?
     let bookingButtonText: String
-    let vaccineTypesText: String?
+    let vaccineTypesTexts: AccessibilityString
+    let centerTypeText: String?
     let appointmentsCount: Int?
     let isAvailable: Bool
     let partnerLogo: UIImage?
     let partnerName: String?
-    let isChronoDose: Bool
     let notificationsType: FollowedCentre.NotificationsType?
 }
 
-// MARK: - CentreCell
+// MARK: - Centre Cell
 
 final class CentreCell: UITableViewCell {
 
@@ -60,15 +60,15 @@ final class CentreCell: UITableViewCell {
     @IBOutlet weak private var vaccineTypesContainer: UIStackView!
     @IBOutlet weak private var vaccineTypesLabel: UILabel!
 
+    @IBOutlet weak private var centerTypeContainer: UIStackView!
+    @IBOutlet weak private var centerTypeLabel: UILabel!
+
     @IBOutlet weak private var appointmentsLabel: UILabel!
 
     @IBOutlet weak private var bookingButton: UIButton!
     @IBOutlet weak private var cellContentView: UIView!
 
     @IBOutlet weak private var vaccineTypeImageView: UIImageView!
-
-    @IBOutlet weak private var chronoDoseViewContainer: UIView!
-    @IBOutlet weak private var chronoDoseLabel: UILabel!
 
     @IBOutlet weak private(set) var followCentreButton: UIButton!
 
@@ -105,7 +105,6 @@ final class CentreCell: UITableViewCell {
     func configure(with viewData: CentreViewData) {
         configureBookButton(viewData)
         configurePhoneNumberView(viewData)
-        configureChronoDoseView(viewData)
         configureFollowCentreButton(viewData)
         configureAccessibility(viewData)
 
@@ -133,10 +132,17 @@ final class CentreCell: UITableViewCell {
         )
         addressNameContainer.addGestureRecognizer(addressTapGesture)
 
-        vaccineTypesContainer.isHidden = viewData.vaccineTypesText == nil
-        vaccineTypesLabel.text = viewData.vaccineTypesText
+        vaccineTypesContainer.isHidden = viewData.vaccineTypesTexts.rawValue.isEmpty
+        vaccineTypesLabel.text = viewData.vaccineTypesTexts.rawValue
         vaccineTypesLabel.font = Constant.labelPrimaryFont
         vaccineTypesLabel.textColor = Constant.labelPrimaryColor
+
+        centerTypeContainer.isHidden = viewData.centerTypeText == nil
+        centerTypeLabel.text = viewData.centerTypeText
+        centerTypeLabel.font = Constant.labelPrimaryFont
+        centerTypeLabel.textColor = Constant.labelPrimaryColor
+        centerTypeLabel.numberOfLines = .zero
+
         configureAppointmentsLabel(appointmentsCount: viewData.appointmentsCount, partnerLogo: viewData.partnerLogo, partnerName: viewData.partnerName)
     }
 
@@ -295,7 +301,7 @@ final class CentreCell: UITableViewCell {
 
         bookingButtonAttributedText.append(NSAttributedString(attachment: imageAttachment))
 
-        let availableButtonColor: UIColor = viewData.isChronoDose ? .mandy : .royalBlue
+        let availableButtonColor: UIColor = .royalBlue
         bookingButton.backgroundColor = viewData.isAvailable ? availableButtonColor : .darkGray
         bookingButton.setTitleColor(.white, for: .normal)
         bookingButton.setAttributedTitle(bookingButtonAttributedText, for: .normal)
@@ -308,19 +314,6 @@ final class CentreCell: UITableViewCell {
         bookingButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.booking_button
     }
 
-    private func configureChronoDoseView(_ viewData: CentreViewData) {
-        guard viewData.isChronoDose else {
-            chronoDoseViewContainer.isHidden = true
-            return
-        }
-
-        chronoDoseViewContainer.isHidden = false
-        chronoDoseViewContainer.clipsToBounds = false
-        chronoDoseViewContainer.layer.cornerRadius = 15.0
-        chronoDoseViewContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        chronoDoseLabel.text = "Chronodoses disponibles"
-    }
-
     private func configureFollowCentreButton(_ viewData: CentreViewData) {
         followCentreButton.isHidden = viewData.notificationsType == nil
         guard let notificationsType = viewData.notificationsType else {
@@ -331,9 +324,6 @@ final class CentreCell: UITableViewCell {
         case .all:
             followCentreButton.setImage(UIImage(systemName: "bell.fill"), for: .normal)
             followCentreButton.backgroundColor = .royalBlue
-        case .chronodoses:
-            followCentreButton.setImage(UIImage(systemName: "bell.fill"), for: .normal)
-            followCentreButton.backgroundColor = .mandy
         case .none:
             followCentreButton.setImage(UIImage(systemName: "bell.slash.fill"), for: .normal)
             followCentreButton.backgroundColor = .darkGray
@@ -363,7 +353,7 @@ final class CentreCell: UITableViewCell {
             }
         }
 
-        if let vaccineName = viewData.vaccineTypesText {
+        if let vaccineName = viewData.vaccineTypesTexts.vocalizedValue {
             vaccineTypesLabel.accessibilityLabel = Localization.A11y.VoiceOver.Details.vaccine.format(vaccineName)
         }
 
@@ -373,6 +363,7 @@ final class CentreCell: UITableViewCell {
             addressLabel,
             phoneButton,
             vaccineTypesLabel,
+            centerTypeLabel,
             followCentreButton,
             bookingButton,
             appointmentsLabel

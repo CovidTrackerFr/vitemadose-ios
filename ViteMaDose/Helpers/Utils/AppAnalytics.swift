@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  Logger.swift
-//  ViteMaDose
-//
-//  Created by Paul on 15/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
@@ -14,6 +14,7 @@ enum AppAnalytics {
         case home = "home"
         case searchResults = "search_results"
         case departmentSelect = "departement_select"
+        case credit = "credit"
     }
 
     static func logScreen(_ screenName: ScreenName, screenClass: String) {
@@ -39,9 +40,9 @@ enum AppAnalytics {
         let eventName = "rdv_click" // TODO 1.4.1: Re-implement `rdv_verify`
         let department = vaccinationCentre.departement.emptyIfNil.lowercased()
         let name = vaccinationCentre.nom.emptyIfNil.lowercased()
-        let type = vaccinationCentre.type.emptyIfNil.lowercased()
+        let type = vaccinationCentre.type?.rawValue.lowercased() ?? ""
         let platform = vaccinationCentre.plateforme.emptyIfNil.lowercased()
-        let vaccine = (vaccinationCentre.vaccineType?.joined(separator: ",").lowercased()).emptyIfNil
+        let vaccine = (vaccinationCentre.vaccineTypes?.joined(separator: ",").lowercased()).emptyIfNil
 
         Analytics.logEvent(eventName, parameters: [
             "rdv_departement": department,

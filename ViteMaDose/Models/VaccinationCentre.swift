@@ -1,8 +1,8 @@
+// Software Name: vitemadose-ios
+// SPDX-FileCopyrightText: Copyright (c) 2021 CovidTracker.fr
+// SPDX-License-Identifier: GNU General Public License v3.0 or later
 //
-//  VaccinationCentre.swift
-//  ViteMaDose
-//
-//  Created by Victor Sarda on 07/04/2021.
+// This software is distributed under the GPL-3.0-or-later license.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import MapKit
 import PhoneNumberKit
 import SwiftDate
 
-// MARK: - VaccinationCentre
+// MARK: - Vaccination Centre
 
 public struct VaccinationCentre: Codable, Hashable, Identifiable {
     private let gid: String?
@@ -22,8 +22,8 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
     let metadata: Metadata?
     let prochainRdv: String?
     let plateforme: String?
-    let type: String?
-    let vaccineType: [String]?
+    let type: CentreType?
+    let vaccineTypes: [String]?
     let appointmentSchedules: [AppointmentSchedule?]?
 
     public var id: String {
@@ -41,12 +41,15 @@ public struct VaccinationCentre: Codable, Hashable, Identifiable {
         case prochainRdv = "prochain_rdv"
         case plateforme
         case type
-        case vaccineType = "vaccine_type"
+        case vaccineTypes = "vaccine_type"
         case appointmentSchedules = "appointment_schedules"
     }
 }
 
 extension VaccinationCentre {
+
+    // MARK: Location
+
     struct Location: Codable, Hashable {
         let longitude: Double?
         let latitude: Double?
@@ -58,6 +61,8 @@ extension VaccinationCentre {
             case city
         }
     }
+
+    // MARK: Metadata
 
     struct Metadata: Codable, Hashable {
         let address: String?
@@ -71,6 +76,8 @@ extension VaccinationCentre {
         }
     }
 
+    // MARK: Appointment Schedule
+
     struct AppointmentSchedule: Codable, Hashable {
         let name: String?
         let from: String?
@@ -83,19 +90,56 @@ extension VaccinationCentre {
             case to
             case total
         }
-
-        enum AppointmentScheduleKey {
-            static let chronoDose = "chronodose"
-        }
     }
 
+    // MARK: Centre Type
+
+    public enum CentreType: String, Codable, Hashable {
+        case vaccinationCenter
+        case drugstore
+        case generalPractitioner
+        case medecin
+
+        public init?(rawValue: String) {
+            switch rawValue {
+            case "vaccination-center":
+                self = .vaccinationCenter
+            case "drugstore", "pharmacie":
+                self = .drugstore
+            case "general-practitioner":
+                self = .generalPractitioner
+            case "medecin":
+                self = .medecin
+            default:
+                Log.w("Received value '\(rawValue) but it's not managed")
+                return nil
+            }
+        }
+
+        var localized: String {
+            switch self {
+            case .vaccinationCenter:
+                return Localization.Location.Types.vaccination_center
+            case .drugstore:
+                return Localization.Location.Types.drugstore
+            case .generalPractitioner:
+                return Localization.Location.Types.general_practicioner
+            case .medecin:
+                return Localization.Location.Types.medecin
+            }
+        }
+    }
 }
+
+// MARK: - Sequence of Vaccination Centre
 
 extension Sequence where Element == VaccinationCentre {
     var allAvailableCentresCount: Int {
         return reduce(0) { $0 + $1.isAvailable.intValue }
     }
 }
+
+// MARK: - Utility properties
 
 extension VaccinationCentre {
     var isAvailable: Bool {
@@ -149,35 +193,15 @@ extension VaccinationCentre {
         )
     }
 
-    var hasChronoDose: Bool {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let chronoDosesCount = chronoDose?.total,
-            chronoDosesCount > 0
-        else {
-            return false
+    var vaccinesTypeTexts: AccessibilityString {
+        guard let vaccineTypes = vaccineTypes, !vaccineTypes.isEmpty else {
+            return AccessibilityString(rawValue: "", vocalizedValue: "")
         }
-
-        return chronoDosesCount >= RemoteConfiguration.shared.chronodoseMinCount
-    }
-
-    var vaccinesTypeText: String? {
-        guard let vaccineType = vaccineType, !vaccineType.isEmpty else {
-            return nil
-        }
-        return vaccineType.joined(separator: String.commaWithSpace)
-    }
-
-    var chronoDosesCount: Int? {
-        let chronoDoseKey = AppointmentSchedule.AppointmentScheduleKey.chronoDose
-        guard
-            let chronoDose = appointmentSchedules?.first(where: { $0?.name == chronoDoseKey }),
-            let total = chronoDose?.total
-        else {
-            return nil
-        }
-        return total
+        let toDisplay = vaccineTypes.joined(separator: String.commaWithSpace)
+        let toVocalize = vaccineTypes.map { vaccineType in
+            VaccineType.init(rawValue: vaccineType)?.vocalizable ?? vaccineType
+        }.joined(separator: String.commaWithSpace)
+        return AccessibilityString(rawValue: toDisplay, vocalizedValue: toVocalize)
     }
 
     static var sortedByAppointment: (Self, Self) -> Bool = {
@@ -190,10 +214,6 @@ extension VaccinationCentre {
             return false
         }
         return lhsDate.isBeforeDate(rhsDate, granularity: .minute)
-    }
-
-    static var filteredByChronoDoses: (Self) -> Bool = {
-        return $0.hasChronoDose
     }
 
     func formattedCentreName(selectedLocation: CLLocation?) -> String {
@@ -224,9 +244,13 @@ extension VaccinationCentre {
         guard let phoneNumber = parsedPhoneNumber else { return nil }
         return phoneNumberKit.format(phoneNumber, toType: .national)
     }
+
+    func provideVaccine(type named: String) -> Bool {
+        return vaccineTypes?.contains(named) ?? false
+    }
 }
 
-// MARK: - VaccinationCentres
+// MARK: - Vaccination Centres
 
 struct VaccinationCentres: Codable, Hashable {
     let lastUpdated: String?
@@ -258,6 +282,8 @@ struct VaccinationCentres: Codable, Hashable {
         case centresIndisponibles = "centres_indisponibles"
     }
 }
+
+// MARK: - Department Vaccination Centres
 
 typealias DepartmentVaccinationCentres = [VaccinationCentres]
 
