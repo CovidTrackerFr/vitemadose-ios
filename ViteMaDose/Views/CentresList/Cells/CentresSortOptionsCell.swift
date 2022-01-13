@@ -48,7 +48,7 @@ final class CentresSortOptionsCell: UITableViewCell {
 
     /// Configures the `sortSegmentedControl` using the given `CentresSortOptionsCellViewData`.
     /// The configuration to apply depends also to the "kids first doses" filtering option.
-    /// Indeed, there aren't any "third dose" for kids, that is the reason why the dedicated segment must be diabled.
+    /// Indeed, there aren't any "third dose" for kids, that is the reason why the dedicated segment must be disabled.
     /// - Parameter viewData: The configuration to apply
     func configure(with viewData: CentresSortOptionsCellViewData) {
 

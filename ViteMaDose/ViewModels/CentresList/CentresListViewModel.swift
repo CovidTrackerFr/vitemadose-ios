@@ -259,8 +259,7 @@ class CentresListViewModel {
         return sort(centres: filter(centres: centres))
     }
 
-    /// Sorts and returns the  vaccination centres (closest, fastests, with third dose / booster shot) using the `sortOption`.
-    /// Is focused on the centre itself, i.e. closest, fasests or providing third doses.
+    /// Sorts and returns the vaccination centres (closest, fastest, with third dose / booster shot) using the `sortOption`.
     /// - Parameter centres: The array of items to sort using the selected option
     /// - Returns: The centres sorted by this option.
     private func sort(centres: [VaccinationCentre]) -> [VaccinationCentre] {
@@ -305,8 +304,8 @@ class CentresListViewModel {
         }
     }
 
-    /// Filters the given `centres` checking if there are defined `DateSlot` for each item and apply on each item of the result
-    /// the `condition` closure. Finaly sorts by appointment the centres.
+    /// Filters the given `centres` by checking whether they have a defined `DateSlot`. If so, the `condition` closure will be applied.
+    /// Finally, the filtered centres are sorted by appointment
     /// - Parameters:
     ///     - forAll: The centres to filter
     ///     - onDatedSlots: The condition to apply to filter

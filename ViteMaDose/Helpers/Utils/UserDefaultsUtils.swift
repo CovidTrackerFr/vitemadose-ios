@@ -122,6 +122,14 @@ extension UserDefaults {
         }
     }
 
+    // MARK: - Max Distance To Vaccination Centre
+
+    /// The value defined in the Setting.bundle. Can be 0 if nothing was defined.
+    /// Used thee key **vaccination_centres_list_radius_in_km** defined in the Root.plist.
+    var maxDistanceToVaccinationCentre: Int {
+        return integer(forKey: "vaccination_centres_list_radius_in_km")
+    }
+
     // MARK: - Helpers
 
     var hasFollowedCentres: Bool {

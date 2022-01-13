@@ -365,7 +365,7 @@ extension CentresListViewController: UITableViewDelegate {
     }
 
     /// Presents an action sheet with filtering actions for the given cell
-    /// - Parameter cell: The  `CentreActionCell` to use ffor the action button
+    /// - Parameter cell: The `CentreActionCell` to use for the action button
     // swiftlint:disable function_body_length
     private func presentFilterCentresBottomSheet(from cell: CentreActionCell) {
         let bottomSheet = UIAlertController(
