@@ -1443,7 +1443,7 @@
 			repositoryURL = "https://github.com/mxcl/PromiseKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.13.3;
+				minimumVersion = 6.16.2;
 			};
 		};
 		575CC20F262AD8F6008D1869 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
@@ -1483,7 +1483,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.9.1;
+				minimumVersion = 8.10.0;
 			};
 		};
 		57954761263E1A1600AD5DFD /* XCRemoteSwiftPackageReference "Moya" */ = {
@@ -1499,7 +1499,7 @@
 			repositoryURL = "https://github.com/efremidze/Haptica.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.2;
+				minimumVersion = 3.0.3;
 			};
 		};
 		6AD0CC16262EC128001F8807 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -1507,7 +1507,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.2.1;
+				minimumVersion = 7.1.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
