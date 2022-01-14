@@ -68,9 +68,8 @@ class CentreActionCell: UITableViewCell {
         )
         actionButton.accessibilityLabel = Localization.A11y.VoiceOver.Actions.filter_button_label
         actionButton.accessibilityHint = Localization.A11y.VoiceOver.Actions.filter_button_hint
-        if UIDevice.current.isUnderiOS15 {
-            actionButton.setImage(UIImage(systemName: "list.dash"), for: .normal)
-        }
+        let actionButtonIconName = UIDevice.current.isUnderiOS15 ? "list.dash" : "line.3.horizontal.decrease.circle.fill"
+        actionButton.setImage(UIImage(systemName: actionButtonIconName), for: .normal)
     }
 
     @objc private func didTapActionButton() {

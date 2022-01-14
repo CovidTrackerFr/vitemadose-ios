@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,24 +29,22 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="fz7-2R-OIk">
                                         <rect key="frame" x="24" y="20" width="366" height="49"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LX7-dM-o8Y">
-                                                <rect key="frame" x="0.0" y="0.0" width="366" height="49"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="twr-cU-Myc">
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="49"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="twr-cU-Myc" secondAttribute="height" multiplier="83:25" id="VT8-jX-5XF"/>
+                                                </constraints>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT0-Bz-4DC">
+                                                <rect key="frame" x="202.5" y="0.0" width="163.5" height="49"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="twr-cU-Myc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="49"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="twr-cU-Myc" secondAttribute="height" multiplier="83:25" id="VT8-jX-5XF"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFI-U8-bf3">
-                                                        <rect key="frame" x="325" y="-1" width="50" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="M9d-0f-NRC"/>
-                                                            <constraint firstAttribute="height" constant="50" id="RH2-Kc-8cR"/>
-                                                        </constraints>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFI-U8-bf3">
+                                                        <rect key="frame" x="135.5" y="0.0" width="28" height="49"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                        <state key="normal" image="gear" catalog="system"/>
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="goToSettings:" destination="u8L-Ja-9UJ" eventType="touchUpInside" id="FVJ-wQ-y3K"/>
                                                         </connections>
@@ -53,14 +52,13 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="zFI-U8-bf3" firstAttribute="top" secondItem="twr-cU-Myc" secondAttribute="top" constant="-1" id="4g7-n0-UzN" userLabel="Settings Button.top = logo.top "/>
-                                                    <constraint firstAttribute="bottom" secondItem="twr-cU-Myc" secondAttribute="bottom" id="cH1-H9-o7Q"/>
-                                                    <constraint firstItem="twr-cU-Myc" firstAttribute="leading" secondItem="LX7-dM-o8Y" secondAttribute="leading" id="hAs-P5-Cqx"/>
-                                                    <constraint firstItem="zFI-U8-bf3" firstAttribute="trailing" secondItem="LX7-dM-o8Y" secondAttribute="trailingMargin" constant="17" id="hiO-G5-zrw" userLabel="Settings Button.trailing = trailing"/>
-                                                    <constraint firstItem="twr-cU-Myc" firstAttribute="top" secondItem="LX7-dM-o8Y" secondAttribute="top" id="urm-9R-7Rc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zFI-U8-bf3" secondAttribute="bottom" id="eG1-lD-JuX"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zFI-U8-bf3" secondAttribute="trailing" id="ees-kd-eap"/>
+                                                    <constraint firstItem="zFI-U8-bf3" firstAttribute="top" secondItem="pT0-Bz-4DC" secondAttribute="top" id="vQJ-4O-EUo"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

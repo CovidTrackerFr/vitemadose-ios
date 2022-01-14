@@ -72,6 +72,8 @@ final class HomeViewController: UIViewController, Storyboarded {
         settingsButton.isAccessibilityElement = true
         settingsButton.accessibilityLabel = Localization.A11y.VoiceOver.Settings.button_label
         settingsButton.accessibilityHint = Localization.A11y.VoiceOver.Settings.button_hint
+        let settingsButtonIconName = UIDevice.current.isUnderiOS14 ? "gear" : "gearshape.fill"
+        settingsButton.setImage(UIImage(systemName: settingsButtonIconName), for: .normal)
     }
 
     override func viewWillAppear(_ animated: Bool) {
