@@ -65,7 +65,9 @@ class CreditCell: UITableViewCell {
         creditImageView.setCornerRadius(Constant.viewsCornerRadius)
         creditContainerView.setCornerRadius(Constant.viewsCornerRadius)
 
-        creditImageView.kf.setImage(with: URL(string: viewData.creditImage ?? ""))
+        if let imageURL = URL(string: viewData.creditImage.emptyIfNil) {
+            creditImageView.kf.setImage(with: imageURL)
+        }
         creditNameLabel.text = viewData.creditName
 
         // Need to be refactored: if too big a11y sizes, diplay is dirty (sometimes role or name)
@@ -76,7 +78,7 @@ class CreditCell: UITableViewCell {
             creditRoleLabel.accessibilityLabel = viewData.creditRole.vocalizedValue
         }
 
-        if let url = buttonURL, UIApplication.shared.canOpenURL(url) {
+        if let url = buttonURL, url.isValid {
             creditLinkButton.isHidden = false
             creditLinkButton.accessibilityLabel = Localization.A11y.VoiceOver.Credits.credit_button_label
             creditLinkButton.accessibilityHint = Localization.A11y.VoiceOver.Credits.credit_button_hint

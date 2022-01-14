@@ -43,30 +43,30 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZXs-sh-754">
-                                        <rect key="frame" x="55" y="0.0" width="288" height="80.5"/>
+                                        <rect key="frame" x="55" y="0.0" width="223" height="80.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Arf-tf-NyD">
-                                                <rect key="frame" x="0.0" y="0.0" width="288" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="223" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zb-J9-cLa">
-                                                <rect key="frame" x="0.0" y="60" width="288" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="60" width="223" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpD-fC-YN7">
-                                        <rect key="frame" x="343" y="0.0" width="25" height="80.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpD-fC-YN7">
+                                        <rect key="frame" x="293" y="0.0" width="50" height="80.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="8fD-T2-b4K"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="FcV-4K-0xg"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="person.text.rectangle" catalog="system"/>
+                                        <state key="normal" image="arrow.up.right" catalog="system"/>
                                         <connections>
                                             <action selector="creditLinkButtonClicked:" destination="6oK-Dz-Q8T" eventType="touchUpInside" id="V6C-rI-0TD"/>
                                         </connections>
@@ -102,7 +102,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="person.text.rectangle" catalog="system" width="128" height="93"/>
+        <image name="arrow.up.right" catalog="system" width="128" height="112"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
