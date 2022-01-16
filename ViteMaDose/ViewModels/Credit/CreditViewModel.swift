@@ -62,10 +62,19 @@ class CreditViewModel: CreditViewModelProvider {
             return nil
         }
 
+        let creditLink: URL? = {
+            if let url = URL(string: credit.site_web.emptyIfNil) {
+                return url
+            } else if let url = URL(string: (credit.links?.first?.url).emptyIfNil) {
+                return url
+            }
+            return nil
+        }()
+
         return CreditCellViewData(
             creditName: credit.shownName,
             creditRole: AccessibilityString(rawValue: pretty(toDiplay: credit.shownRole), vocalizedValue: pretty(toVocalize: credit.shownRole)),
-            creditLink: URL(string: credit.site_web ?? credit.links?.first?.url ?? ""),
+            creditLink: creditLink,
             creditImage: credit.photo
         )
     }
@@ -93,26 +102,6 @@ class CreditViewModel: CreditViewModelProvider {
             .replacingOccurrences(of: "web", with: "application web")
     }
 
-    /// Keep unique `Credit` by filtering the givene `values` by `nom` properties
-    /// - Parameter values: The data set to filter
-    /// - Returns: The filtered credits
-    private func keepUnique(within values: [Credit]) -> [Credit] {
-        var unique = [Credit]()
-        values.forEach { item in
-            let isAlradyStored = unique.contains { element in
-                if let itemName = item.nom?.uppercased(), let elementName = element.nom?.uppercased(), itemName == elementName {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            if !isAlradyStored {
-                unique.append(item)
-            }
-        }
-        return unique
-    }
-
     // MARK: Load of data
 
     func load() {
@@ -133,9 +122,10 @@ class CreditViewModel: CreditViewModelProvider {
     }
 
     private func handleLoad(with credits: [Credit]) {
-        let uniqueCredits = keepUnique(within: credits)
-        self.allCredits = uniqueCredits.sorted(by: { $0.shownName < $1.shownName })
-        delegate?.reloadTableView(with: uniqueCredits)
+        self.allCredits = credits
+            .unique(by: \.pseudo)
+            .sorted(by: { $0.shownName < $1.shownName })
+        delegate?.reloadTableView(with: self.allCredits)
     }
 
     private func handleError(_ error: Error) {

@@ -10,7 +10,6 @@ import Foundation
 // MARK: - Credit
 
 struct Credit: Codable {
-    let id: String?
     let nom: String?
     let pseudo: String?
     let photo: String?
@@ -22,11 +21,11 @@ struct Credit: Codable {
     let links: [CreditLink]?
 
     var shownName: String {
-        nom ?? pseudo ?? id ?? Localization.Credits.noName
+        nom ?? pseudo ?? Localization.Credits.noName
     }
 
     var shownRole: String {
-        teams?.joined(separator: ", ") ?? Localization.Credits.noRole
+        teams?.joined(separator: .commaWithSpace) ?? Localization.Credits.noRole
     }
 }
 
