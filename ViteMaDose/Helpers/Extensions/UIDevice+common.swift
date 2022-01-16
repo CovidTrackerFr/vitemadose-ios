@@ -16,4 +16,11 @@ extension UIDevice {
         }
         return version < 15.0
     }
+
+    var isUnderiOS14: Bool {
+        guard let version = Float(self.systemVersion) else {
+            return false
+        }
+        return version < 14.0
+    }
 }
